@@ -1,0 +1,12 @@
+construct_id,construct,repos_using,pct_of_sample,total_calls,median_per_repo_using,q1_per_repo_using,q3_per_repo_using,max,source
+C1,Depends,75,75.0,3779,17,8.0,67.0,469,aggregate
+C2,Security,12,12.0,26,1.0,1.0,3.8,6,aggregate
+C3,Annotated dependency,24,24.0,830,7.5,2.0,15.2,534,aggregate
+C4,Generator/yield dependency,37,37.0,43,1,1.0,1.0,3,aggregate
+C5,Router-level dependency,17,17.0,90,4,2.0,7.0,17,aggregate
+C6,App-level dependency,2,2.0,2,1.0,1.0,1.0,1,aggregate
+C7,Dependency override,1,1.0,1,1,1.0,1.0,1,aggregate
+C8,Callable class dependency,2,2.0,3,1.5,0.8,2.2,2,aggregate
+EX1,Dynamic framework wrappers,82,82.0,5706,,,,,file_details
+EX2,Non-FastAPI Depends sources,2,2.0,2,,,,,file_details
+Z,Repos using ZERO core DI constructs (no Depends/Security/Annotated),25,25.0,,,,,,derived

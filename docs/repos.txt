@@ -1,0 +1,9 @@
+First few Repos:
+----------------
+- https://github.com/mealie-recipes/mealie
+- https://github.com/Netflix/dispatch
+- https://github.com/apache/airflow/blob/main/airflow-core/src/airflow/api_fastapi/app.py
+- https://github.com/open-webui/open-webui/blob/main/backend/open_webui/main.py
+- https://github.com/deepset-ai/hayhooks/blob/main/src/hayhooks/server/app.py
+- https://github.com/PrefectHQ/prefect/blob/main/src/prefect/server/api/server.py
+- https://github.com/Amon20044/jobscraper-actor

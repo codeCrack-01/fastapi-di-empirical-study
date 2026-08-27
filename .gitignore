@@ -1,0 +1,8 @@
+study_repos/
+__pycache__/
+corpus/reports/
+corpus/raw_dependents/
+corpus/*.partial.json
+.env
+.venv/
+logs/
