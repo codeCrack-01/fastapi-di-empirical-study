@@ -228,14 +228,10 @@ All artifacts are schema-versioned, byte-stable (sorted order), and fully reprod
 ### 11.6 Small sample design
 - Pool N=351, sample N=100 (seed=42). The sample is not stratified by app size, stars, or any other covariate — pure random sample. If the paper reports stratified statistics in a later phase, the stratification must be defined and registered before the sample is drawn.
 
-### 11.7 Reproducibility
-- Repo has **zero git commits to date** as of 2026-08-21. All work exists only on the local filesystem. Committing all artifacts and scripts is a prerequisite for any external review or paper submission.
-
 ---
 
-## 12. Suggested next steps
+## 12. Planned Up Ahead
 
-1. **Commit all artifacts** to git. The repo has zero commits despite having gone through two reboots; the next machine failure risks full data loss.
 2. **Tutorial flag decision:** choose one of sample-only review / bulk dismiss / full review (Section 9).
 3. **Dynamic framework wrapper validation:** manually inspect what `dynamic_framework_wrappers` are counting (82% prevalence is suspiciously high).
 4. **RQ3 git-history script:** implement per-repo temporal analysis, building on the existing extractor.
