@@ -1,7 +1,7 @@
 # Result Draft 01: FastAPI Dependency Injection Corpus Study
 
 **Date:** 2026-08-21
-**Status:** Corpus finalized. RQ1/RQ4 results from seed-42 sample. Pre-paper draft.
+**Status:** Corpus finalized. RQ1/RQ2 results from seed-42 sample. Pre-paper draft.
 
 ---
 
@@ -11,12 +11,21 @@ This study characterises how FastAPI's dependency injection (DI) constructs are 
 
 ### Research questions
 
+> The study originally proposed four RQs. The standalone application-class question
+> (originally RQ2) was **dropped** and folded into RQ1 as a covariate axis (see §5.4).
+> The remaining three questions are renumbered RQ1–RQ3 (graph complexity moved from RQ4 → RQ2).
+
 | RQ | Question |
 |----|----------|
-| RQ1 | Which FastAPI DI constructs are used, and how frequently, across open-source projects? |
-| RQ2 | Do DI patterns vary across application classes? *(deferred — post-hoc from collected data)* |
+| RQ1 | Which FastAPI DI constructs are used, and how frequently, across open-source projects? *(includes a covariate axis by stars and age — see §5.4)* |
+| RQ2 | How complex are the resulting dependency graphs? *(renumbered from RQ4)* |
 | RQ3 | How has DI usage evolved over time? *(deferred — requires git-history analysis)* |
-| RQ4 | How complex are the resulting dependency graphs? |
+
+> **Note (supervisor direction):** the originally-proposed application-class question
+> ("Do DI patterns vary across application classes?") is **dropped as a standalone
+> question** and folded into RQ1 as a covariate axis. Its goal — understanding who uses DI —
+> is served by disaggregating RQ1 by repo covariates (stars, age) rather than an arbitrary
+> application-class taxonomy, which would be methodologically weak without a priori labels.
 
 ---
 
@@ -81,11 +90,28 @@ This study characterises how FastAPI's dependency injection (DI) constructs are 
 
 - **Pool N = 351** (> 100) → random sample of **100 repos** drawn with `random.Random(42).sample(sorted_names, 100)`.
 - **Superset property:** sorted before drawing ensures the sample for any smaller pool is always a subset of the sample for any larger pool with the same seed. Later corpus expansions never invalidate earlier manual work.
-- Sample drawn: `analysis/sample.json`. All downstream tables (RQ1/RQ4) report on this sample.
+- Sample drawn: `analysis/sample.json`. All downstream tables (RQ1/RQ2) report on this sample.
 
 ---
 
 ## 5. RQ1 — Construct prevalence
+
+### 5.0 Construct catalogue reconciliation
+
+> The design catalogue (`docs/construct_catalogue.md`) originally defined ten
+> candidate constructs. **Eight (C1–C8) are operationalized** as per-repo
+> prevalence counters and reported below. The catalogue has been renumbered so its
+> C1–C8 match this section exactly (and its C9/C10 are explicitly marked
+> *not operationalized*). Two constructs are intentionally not measured:
+>
+> - **Nested dependency (C9)** — not a distinct syntactic construct but a
+>   graph-topological property (a dependency that is itself the target of another
+>   dependency, i.e. a node with both incoming and outgoing edges). It is captured
+>   by the RQ2 dependency-graph analysis (median depth, fan-out) rather than as a
+>   C-series prevalence counter.
+> - **Parameterized dependency (C10)** — marked "Maybe detectable" in the
+>   catalogue; factory-generated dependencies are not statically decidable from a
+>   call site, so counting them would risk false positives. Deferred.
 
 ### 5.1 Primary constructs (C1–C8)
 
@@ -116,22 +142,58 @@ This study characterises how FastAPI's dependency injection (DI) constructs are 
 4. **Advanced constructs are nearly absent.** Overrides (1%), callable classes (2%), app-level deps (2%) are almost never seen in production code. Overrides may be test-only (not captured by production-scope extraction).
 5. **The zero-DI cohort (25%) is a key finding.** These are real, substantial FastAPI applications (≥ 4 importing files, ≥ 1 app) that bypass the DI system entirely, using direct function calls or other patterns. This finding challenges the assumption that DI is the primary architectural pattern in the FastAPI ecosystem.
 
+### 5.4 RQ1 covariate axis (folded application-class question) — DI prevalence by covariates
+
+Folded from the (dropped) application-class question: who uses DI? Disaggregated by repo **stars** and **age** (no arbitrary application-class taxonomy).
+
+**By stars** (`analysis/out/rq1_by_stars.csv`):
+
+| Stars | Repos | % using core DI | Median core calls |
+|-------|-------|-----------------|-------------------|
+| 0 | 64 | 73.4% | 10 |
+| 1–9 | 28 | 75.0% | 16 |
+| 10–99 | 5 | 100.0% | 15 |
+| 100+ | 3 | 66.7% | 5 |
+
+**By age** (`analysis/out/rq1_by_age.csv`):
+
+| Age | Repos | % using core DI | Median core calls |
+|-----|-------|-----------------|-------------------|
+| <12mo | 92 | 73.9% | 11 |
+| 12–36mo | 7 | 85.7% | 59 |
+| 36mo+ | 1 | 100.0% | 22 |
+
+**Interpretation:**
+- **DI prevalence is essentially flat across stars** (73–75% for small/zero-star repos, with the small-volume higher buckets driven by few repos). Popularity does not predict DI adoption.
+- **The corpus skews very young:** 92/100 sample repos are under a year old. This is a direct consequence of the E4 recency gate (pushed within 60 months) combined with the fast-growing, largely new-repo GitHub GitHub dependency-graph population.
+- **Age bucket bin counts are too small (1–7 repos) for stable conclusions** — reported for completeness, not as a primary finding. The age axis would need RQ3's git history or a larger sample to be conclusive.
+- Net: the covariate view supports the central finding that **DI use (and its absence) is a stable property across the population**, not skewed by popularity.
+
 ---
 
-## 6. RQ4 — Dependency-graph complexity
+## 6. RQ2 — Dependency-graph complexity
 
-Filtered to the **71/100 repos with non-empty dependency graphs** (16 repos had zero resolved nodes — all `depends_total = 0`).
+Filtered to the **71/100 repos with non-empty **clean** dependency graphs** (after dropping resolver-emitted junk nodes; see below). The remaining 29 repos have zero graph nodes — all `depends_total = 0` and use no DI.
 
 | Metric | Median | IQR | Max |
 |--------|--------|-----|-----|
-| Nodes | 24 | 9–53 | 259 |
-| Edges | 21 | 7–65 | 265 |
+| Nodes (clean) | 19 | 7–53 | 259 |
 | Max depth | 2 | 2–3 | 5 |
 | Unresolved % | 0.0 | 0.0–0.0 | 75.0 |
 
 - **46/71 (65%)** of graph-bearing repos have a 0% unresolved rate — the resolver handles them cleanly.
 - **1 repo has 75% unresolved** — an outlier case, likely relying on non-standard patterns the resolver cannot follow.
 - **Graphs are shallow:** median depth 2, max 5. FastAPI DI in practice forms flat dependency trees, not deep chains. This aligns with the API's design philosophy of explicit, inspectable dependencies.
+
+### 6.1 Data-quality fix: resolver-emitted junk nodes
+
+The dependency graph construction had a genuine contamination bug. In `resolver.build_dependency_graph`, when a `Depends` call occurs **outside any function context** — module-scope declarations such as `FastAPI(dependencies=[...])` or router defaults — `context_function` is `None` and the resolver falls back to a `"{file_path}:{line}"` placeholder as the source node id (resolver.py line 112). These filesystem-path ids are not callable names.
+
+- **Measures:** On the full corpus, **105/255** graph-bearing repos contain such junk nodes — **619 junk nodes of 15,776 total (3.9%)**. In the 100-sample, **197 junk nodes across 33 repos**.
+- **Effect:** Inflates node counts (median 24 → **19** clean for graph-bearing repos) and can add spurious edge/density values. All 71 in-sample repos retain a non-empty clean graph; the junk was additive, never the sole content.
+- **Fix:** `analysis/aggregate.py` now filters any node id containing a path separator or `file:line` anchor before computing RQ2 (both raw and clean columns are retained in `rq4_graphs.csv` for transparency).
+- **Reporting sentence:** *"We filtered resolver-emitted non-callable artifact nodes (file:line placeholders from module-scope dependency declarations) from the dependency graphs before computing complexity metrics."*
+- **RQ1 note:** RQ1 construct counts (C1–C8) come from `file_details`/aggregate call counts, not graph nodes, so RQ1 is unaffected by this bug.
 
 ---
 
@@ -221,12 +283,14 @@ All artifacts are schema-versioned, byte-stable (sorted order), and fully reprod
 - A manual review conclusion drawn from the 35 repos reviewed so far should be explicitly scoped to that sample, not assumed general.
 
 ### 11.5 Extractor limitations
-- **R3 (evolution over time) not yet measured.** Requires per-repo git-history analysis; planned as a later phase once RQ1/RQ4 tables are complete.
+- **Resolver junk nodes (mitigated):** module-scope `Depends` declarations produced `file:line` placeholder nodes (619 across 105/255 repos). Filtered at aggregation time; see §6.1. The resolver *output*, not the extraction of construct counts, is affected — RQ1 is clean.
+- **R3 (evolution over time) not yet measured.** Requires per-repo git-history analysis; planned as a later phase once RQ1/RQ2 tables are complete.
 - **Resolver coverage:** 25% of accepted repos have empty dependency graphs despite nonzero `depends_total` — in some cases the resolver cannot follow cross-file patterns. The resolver also marks 75% unresolved in one extreme outlier. Resolver quality should be reported as a coverage metric, not treated as a failure.
 - **Dynamic framework wrappers** are counted at 82% prevalence — a suspiciously high rate. Manual validation of what constructs are being counted is recommended before paper inclusion.
 
 ### 11.6 Small sample design
-- Pool N=351, sample N=100 (seed=42). The sample is not stratified by app size, stars, or any other covariate — pure random sample. If the paper reports stratified statistics in a later phase, the stratification must be defined and registered before the sample is drawn.
+- Pool N=351, sample N=100 (seed=42). The sample is not stratified — a pure random sample. The RQ1 covariate axis (§5.4) is disaggregated from this same sample, so high-stars and high-age buckets contain very few repos (1–5) and must not be over-read.
+- If the paper reports stratified statistics in a later phase, the stratification must be defined and registered before the sample is drawn.
 
 ---
 
@@ -235,5 +299,5 @@ All artifacts are schema-versioned, byte-stable (sorted order), and fully reprod
 2. **Tutorial flag decision:** choose one of sample-only review / bulk dismiss / full review (Section 9).
 3. **Dynamic framework wrapper validation:** manually inspect what `dynamic_framework_wrappers` are counting (82% prevalence is suspiciously high).
 4. **RQ3 git-history script:** implement per-repo temporal analysis, building on the existing extractor.
-5. **Paper write-up:** methodology section and RQ1/RQ4 results are ready for first draft. Overlap benchmark (0%) is a strong methodological contribution.
+5. **Paper write-up:** methodology section and RQ1/RQ2 results are ready for first draft. Overlap benchmark (0%) is a strong methodological contribution.
 6. **Threats section:** document all items from Section 11, particularly the E5 sensitivity caveat and the E6 false-positive rate.

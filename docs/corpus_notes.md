@@ -27,7 +27,7 @@ Primary backend / Auxiliary / AI API / MCP-only / Developer tool
 - E1 runtime fastapi dep:
 - E2 python ratio:
 - E3 not fork/archived:
-- E4 active (36mo, >=10 commits):
+- E4 active (60mo, >=10 commits):
 - E5 >=4 files import fastapi, >=1 app:
 - E6 tutorial flag (manual review):
 

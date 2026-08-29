@@ -1,0 +1,5 @@
+stars_bucket,repos,repos_using_core_di,pct_using_core_di,repos_using_depends,pct_using_depends,median_core_calls
+0,64,47,73.4,47,73.4,10.0
+1-9,28,21,75.0,21,75.0,16.0
+10-99,5,5,100.0,5,100.0,15
+100+,3,2,66.7,2,66.7,5

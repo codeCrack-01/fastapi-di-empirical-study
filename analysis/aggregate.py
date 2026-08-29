@@ -26,6 +26,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import re
 import statistics as st
 import sys
 from pathlib import Path
@@ -128,21 +129,124 @@ def rq1_rows(reports: dict) -> list[dict]:
     return rows
 
 
+JUNK_NODE_RE = re.compile(r"[:/\\]")
+
+
+def split_edges(nodes: list[dict], edges: list[dict]) -> tuple[list[dict], list[dict]]:
+    """Drop resolver-emitted junk nodes and any edge referencing them.
+
+    Junk nodes are anonymous ``{file_path}:{line}`` placeholders produced by
+    the resolver when a Depends call has no ``context_function`` (module-scope
+    declarations such as ``FastAPI(dependencies=[...])`` or router defaults).
+    They are identified by containing a path separator or a ``file:line``
+    anchor that no clean callable name carries.
+    """
+    clean_ids = {n["id"] for n in nodes if not JUNK_NODE_RE.search(n["id"])}
+    clean_nodes = [n for n in nodes if n["id"] in clean_ids]
+    clean_edges = [
+        e for e in edges
+        if e["source"] in clean_ids and e["target"] in clean_ids
+    ]
+    return clean_nodes, clean_edges
+
+
+def _stars_bucket(stars) -> str:
+    stars = stars or 0
+    if stars == 0:
+        return "0"
+    if stars < 10:
+        return "1-9"
+    if stars < 100:
+        return "10-99"
+    return "100+"
+
+
+def _age_bucket(created_at) -> str:
+    from datetime import datetime
+    if not created_at:
+        return "unknown"
+    ref = datetime(2026, 8, 17)
+    try:
+        created = datetime.fromisoformat(created_at.replace("Z", "+00:00")).replace(tzinfo=None)
+        months = (ref.year - created.year) * 12 + (ref.month - created.month)
+    except (ValueError, TypeError):
+        return "unknown"
+    if months < 12:
+        return "<12mo"
+    if months < 36:
+        return "12-36mo"
+    return "36mo+"
+
+
+CORE_KEYS = ("depends_total", "security_total", "annotated_depends_total")
+
+
+def disaggregate_rows(sample: list[str], reports: dict, manifest: dict, axis: str) -> list[dict]:
+    """RQ1 covariate axis (folded application-class question): core-DI prevalence per covariate bucket.
+
+    ``axis`` is "age" (created_at months) or "stars".
+    """
+    from datetime import datetime
+    by_name = {a["full_name"]: a for a in manifest["accepted"]}
+    bucket_fn = _stars_bucket if axis == "stars" else _age_bucket
+    bucket_field = "stars_gh" if axis == "stars" else "created_at"
+
+    buckets: dict[str, list[str]] = {}
+    for name in sorted(sample):
+        meta = by_name.get(name, {})
+        buckets.setdefault(bucket_fn(meta.get(bucket_field)), []).append(name)
+
+    def _total(r, keys):
+        return sum(r["aggregate"].get(k, 0) for k in keys)
+
+    rows = []
+    for bucket in sorted(buckets, key=lambda b: (b not in ("0", "<12mo"), b)):
+        names = buckets[bucket]
+        reps = {n: reports[n] for n in names if n in reports}
+        n = len(names)
+        core_users = sum(1 for r in reps.values() if _total(r, CORE_KEYS) > 0)
+        depends_users = sum(1 for r in reps.values() if r["aggregate"].get("depends_total", 0) > 0)
+        med = st.median([_total(r, CORE_KEYS) for r in reps.values()]) if reps else 0
+        rows.append(
+            {
+                f"{axis}_bucket": bucket,
+                "repos": n,
+                "repos_using_core_di": core_users,
+                "pct_using_core_di": round(100 * core_users / max(n, 1), 1),
+                "repos_using_depends": depends_users,
+                "pct_using_depends": round(100 * depends_users / max(n, 1), 1),
+                "median_core_calls": round(med, 1),
+            }
+        )
+    return rows
+
+
 def rq4_rows(reports: dict) -> list[dict]:
     rows = []
     for name in sorted(reports):
         g = reports[name]["dependency_graph"]
-        nodes, edges = len(g["nodes"]), len(g["edges"])
-        dens = edges / (nodes * (nodes - 1)) if nodes > 1 else 0.0
+        raw_nodes = g["nodes"]
+        raw_edges = g["edges"]
+        clean_nodes, clean_edges = split_edges(raw_nodes, raw_edges)
+        raw_n, clean_n = len(raw_nodes), len(clean_nodes)
+        raw_e, clean_e = len(raw_edges), len(clean_edges)
+
+        # Unresolved is reported against edges that point at resolvable targets;
+        # keep the raw figure but flag repos with no clean nodes.
+        unresolved = g["unresolved_depends"]
+        denom = clean_e + unresolved
         rows.append(
             {
                 "repo": name,
-                "nodes": nodes,
-                "edges": edges,
+                "nodes_raw": raw_n,
+                "nodes_clean": clean_n,
+                "junk_nodes": raw_n - clean_n,
+                "edges_raw": raw_e,
+                "edges_clean": clean_e,
                 "max_depth": g["max_depth"],
-                "unresolved_depends": g["unresolved_depends"],
-                "unresolved_pct": round(100 * g["unresolved_depends"] / max(edges + g["unresolved_depends"], 1), 1),
-                "density": round(dens, 4),
+                "unresolved_depends": unresolved,
+                "unresolved_pct": round(100 * unresolved / max(denom, 1), 1),
+                "density": round(clean_e / (clean_n * (clean_n - 1)), 4) if clean_n > 1 else 0.0,
             }
         )
     return rows
@@ -211,7 +315,7 @@ def write_csv(path: Path, rows: list[dict]):
 
 
 def write_summary(out: Path, sample_meta: dict, reports: dict, missing: list[str], rq1: list[dict], rq4: list[dict]):
-    nonempty = [r for r in rq4 if r["nodes"] > 0]
+    nonempty = [r for r in rq4 if r["nodes_clean"] > 0]
     lines = [
         "# Extraction summary",
         "",
@@ -233,18 +337,23 @@ def write_summary(out: Path, sample_meta: dict, reports: dict, missing: list[str
         lines += ["", f"**Zero-DI cohort:** {z['repos_using']} repos ({z['pct_of_sample']}%) use no Depends/Security/Annotated at all."]
     lines += [
         "",
-        "## RQ4 — dependency-graph complexity (repos with non-empty graphs)",
+        "## RQ2 — dependency-graph complexity (clean nodes, non-empty graphs)",
         "",
-        f"- Graph-bearing repos: {len(nonempty)} / {len(rq4)}",
+        f"- Graph-bearing repos (clean): {len(nonempty)} / {len(rq4)}",
     ]
     if nonempty:
-        nodes = [r["nodes"] for r in nonempty]
+        nodes = [r["nodes_clean"] for r in nonempty]
         depth = [r["max_depth"] for r in nonempty]
         unres = [r["unresolved_pct"] for r in nonempty]
+        junk_total = sum(r["junk_nodes"] for r in rq4)
+        junk_repos = sum(1 for r in rq4 if r["junk_nodes"] > 0)
         lines += [
-            f"- Nodes: median {st.median(nodes)}, IQR {iqr(nodes)}, max {max(nodes)}",
+            f"- Nodes (clean): median {st.median(nodes)}, IQR {iqr(nodes)}, max {max(nodes)}",
             f"- Max depth: median {st.median(depth)}, max {max(depth)}",
             f"- Unresolved %: median {st.median(unres):.1f}",
+            "",
+            f"- Junk nodes filtered: {junk_total} across {junk_repos}/{len(rq4)} repos "
+            "(module-scope file:line placeholders from the resolver)",
         ]
     out.write_text("\n".join(lines) + "\n")
 
@@ -272,10 +381,13 @@ def main():
     write_csv(OUT_DIR / "covariates.csv", covariate_rows(sampled, manifest))
     sens = sensitivity_rows(manifest)
     write_csv(OUT_DIR / "sensitivity.csv", sens)
+    write_csv(OUT_DIR / "rq1_by_stars.csv", disaggregate_rows(sampled, reports, manifest, "stars"))
+    write_csv(OUT_DIR / "rq1_by_age.csv", disaggregate_rows(sampled, reports, manifest, "age"))
     write_summary(OUT_DIR / "summary.md", sample_payload, reports, missing, rq1, rq4)
 
     print(f"[aggregate] {len(reports)} reports aggregated -> {OUT_DIR}/")
-    for f in ("rq1_constructs.csv", "rq4_graphs.csv", "covariates.csv", "sensitivity.csv", "summary.md"):
+    for f in ("rq1_constructs.csv", "rq4_graphs.csv", "covariates.csv", "sensitivity.csv",
+              "rq1_by_stars.csv", "rq1_by_age.csv", "summary.md"):
         print(f"  - {f}")
 
 

@@ -1,0 +1,22 @@
+```mermaid
+flowchart TD
+    subgraph API["Route handlers (dependents)"]
+        A1["list_users → GET /users"]
+        A2["create_user → POST /users"]
+        A3["list_items → GET /items"]
+        A4["list_orders → GET /orders"]
+        A5["update_user → PUT /users"]
+        A6["delete_item → DELETE /items"]
+    end
+
+    HUB["get_db (shared dependency per-request injection)"]
+
+    A1 -->|"Depends(get_db)"| HUB
+    A2 -->|"Depends(get_db)"| HUB
+    A3 -->|"Depends(get_db)"| HUB
+    A4 -->|"Depends(get_db)"| HUB
+    A5 -->|"Depends(get_db)"| HUB
+    A6 -->|"Depends(get_db)"| HUB
+
+    HUB --> R["Resolved & injected once per request by FastAPI"]
+```

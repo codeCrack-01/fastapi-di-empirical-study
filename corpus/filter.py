@@ -10,7 +10,7 @@ E1  fastapi is a runtime dependency (pyproject.toml [project] / [tool.poetry.dep
     requirements*.txt runtime files, Pipfile [packages], setup.cfg / setup.py).
 E2  Python is the dominant language (py_ratio >= 0.5, from GitHub languages bytes).
 E3  Not a fork and not archived.
-E4  pushed_at within the last 36 months AND >= 10 commits.
+E4  pushed_at within the last 60 months AND >= 10 commits.
 E5  Real FastAPI usage: >= 4 files import fastapi AND >= 1 FastAPI() call (extractor).
 E6  No tutorial/demo markers in description or README — FLAGS for manual review,
     never auto-excludes.

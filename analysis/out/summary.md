@@ -19,9 +19,11 @@
 
 **Zero-DI cohort:** 25 repos (25.0%) use no Depends/Security/Annotated at all.
 
-## RQ4 — dependency-graph complexity (repos with non-empty graphs)
+## RQ2 — dependency-graph complexity (clean nodes, non-empty graphs)
 
-- Graph-bearing repos: 71 / 100
-- Nodes: median 24, IQR (9.0, 53.0), max 259
+- Graph-bearing repos (clean): 71 / 100
+- Nodes (clean): median 19, IQR (7.0, 53.0), max 259
 - Max depth: median 2, max 5
 - Unresolved %: median 0.0
+
+- Junk nodes filtered: 197 across 33/100 repos (module-scope file:line placeholders from the resolver)

@@ -1,11 +1,24 @@
 # Corpus Methodology (FINALIZED 2026-08-06)
 
+> **Correction (2026-08-29):** E4 applies a **60-month** recency gate, matching
+> `corpus/settings.py` (`E4_MAX_AGE_MONTHS = 60`) and the reported results
+> (709 E4 exclusions). An earlier draft here stated 36 months; 60 is what was
+> actually run.
+
 ## Research Questions
+
+**Origin:** The study originally proposed four RQs. The standalone application-class
+question (originally RQ2) was **dropped** and folded into RQ1 as a covariate axis
+(supervisor direction): no a priori application-class taxonomy is imposed, and the
+covariate view (stars, age) answers "who uses DI" without arbitrary class labels.
+The remaining three questions are renumbered RQ1–RQ3 (graph complexity moved from
+RQ4 to RQ2).
+
 - RQ1: Which FastAPI DI constructs are used, and how frequently, across open-source projects?
-- RQ2: (deferred) Do DI patterns vary across application classes? — no a priori taxonomy;
-      discovered post-hoc from the collected data.
-- RQ3: How has DI usage evolved over time (repo history)?
-- RQ4: How complex are the resulting dependency graphs?
+  - DI prevalence is additionally disaggregated by repo covariates (stars, age) as a
+    second axis of RQ1 (the folded application-class question).
+- RQ2: How complex are the resulting dependency graphs? *(renumbered from RQ4)*
+- RQ3: How has DI usage evolved over time (repo history)? *(deferred)*
 
 ## Population
 Open-source GitHub repositories that use FastAPI (import `fastapi`, expose >= 1 FastAPI app).
@@ -44,7 +57,7 @@ Open-source GitHub repositories that use FastAPI (import `fastapi`, expose >= 1 
 | E1   | `fastapi` in RUNTIME dependencies (pyproject.toml `[project]`/`[tool.poetry.dependencies]`, runtime requirements*.txt, Pipfile `[packages]`, setup.cfg/setup.py). Dev/optional deps do not count. |
 | E2   | Python dominant language: Python byte ratio >= 0.5 (GitHub languages API). |
 | E3   | Not a fork and not archived. |
-| E4   | `pushed_at` within the last 36 months AND >= 10 commits. |
+| E4   | `pushed_at` within the last 60 months AND >= 10 commits. |
 | E5   | Real FastAPI usage: >= 4 files importing `fastapi` AND >= 1 `FastAPI()` call (extractor, production files only). |
 | E6   | No tutorial/demo markers in description or README (regex `tutorial|example|demo|sample|boilerplate|template|playground|starter|course|learn|getting started|walkthrough`). FLAGS for manual review — never auto-excludes. |
 
