@@ -204,8 +204,7 @@ nodes. The bug only polluted the graph node set.
 
 Presented plainly: source substitution, dependency-graph population limits,
 attrition (42, 0.9%), E5 degeneracy, **tutorial flags as an open count**,
-resolver coverage, high wrapper-count flag, non-stratified sample, and the
-**zero-git-commit** caveat.
+resolver coverage, non-stratified sample, and the late-first-commit caveat.
 
 **On tutorial flags (E6, 46%):** all flags reviewed so far (35 repos) are false
 positives — real apps whose descriptions happen to contain words like
@@ -227,11 +226,9 @@ genuine applications (backed by 0% topic overlap + E1–E5 pass).
 ---
 
 ## Open items before publication (be transparent in the talk)
-1. **Commit the repository** — currently ZERO git commits; required before any
-   external review or submission. (Highest priority.)
+1. **Keep the repository committed** — artifacts were first committed 2026-08-31
+   (previously zero commits); keep history clean and push before external review.
 2. **Resolve the 162 tutorial flags** (or explicitly scope as open).
-3. **Validate the 82% dynamic-framework-wrapper count** — almost certainly
-   over-counted; needs a manual spot-check.
-4. **RQ3 git-history** enrichment for temporal DI analysis.
-5. **Overall picture: what DI does (not) deliver** — the 25% zero-DI + 91%
+3. **RQ3 git-history** enrichment for temporal DI analysis.
+4. **Overall picture: what DI does (not) deliver** — the 25% zero-DI + 91%
    fan-out combo is the crispest "so what" to lead or close with.

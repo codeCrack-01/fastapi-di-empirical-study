@@ -479,9 +479,8 @@ def main():
         (0, "Attrition: 42 repos (0.9%) deleted/private after discovery.", False, INK),
         (0, "E6 tutorial flags: 162 of 351 (46%) carry markers; all 35 reviewed so far are false positives (real apps). We PRESENT THIS AS AN OPEN COUNT — not yet resolved, stated honestly.", True, WARN),
         (0, "Resolver coverage: 25% of accepted repos have empty graphs despite nonzero depends_total (resolver cannot follow some cross-file patterns).", False, INK),
-        (0, "Dynamic framework wrappers counted at 82% — suspiciously high; flagged for manual validation before publication.", False, WARN),
         (0, "Non-stratified sample; high-star / high-age buckets have only 1–5 repos.", False, INK),
-        (0, "The repo currently has ZERO git commits — artifacts must be committed before any external review or submission.", False, WARN),
+        (0, "Artifacts were only first committed to git on 2026-08-31 (previously zero commits) — review the commit history before any external submission.", False, WARN),
     ])
 
     # ---- 19. So what / significance ----

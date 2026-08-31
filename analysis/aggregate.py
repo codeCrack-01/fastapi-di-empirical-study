@@ -88,21 +88,16 @@ def rq1_rows(reports: dict) -> list[dict]:
             }
         )
 
-    wrap_repos = wrap_total = 0
     nfapi_repos = nfapi_sources = 0
     di_any = []
     for r in reports.values():
-        wraps = [w for f in r.get("file_details", []) for w in f.get("dynamic_framework_wrappers", [])]
         nfs = [s for f in r.get("file_details", []) for s in f.get("non_fastapi_depends_sources", {})]
-        wrap_repos += bool(wraps)
-        wrap_total += len(wraps)
         nfapi_repos += bool(nfs)
         nfapi_sources += len(nfs)
         a = r["aggregate"]
         di_any.append(a.get("depends_total", 0) + a.get("security_total", 0) + a.get("annotated_depends_total", 0))
 
     extra = [
-        ("EX1", "Dynamic framework wrappers", wrap_repos, wrap_total),
         ("EX2", "Non-FastAPI Depends sources", nfapi_repos, nfapi_sources),
         (
             "Z",

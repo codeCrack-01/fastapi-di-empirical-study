@@ -130,7 +130,6 @@ This study characterises how FastAPI's dependency injection (DI) constructs are 
 
 | Observation | Count | Notes |
 |-------------|-------|-------|
-| Dynamic framework wrappers | 82 repos (82%), 5,706 occurrences | Constructs wrapping non-DI web frameworks (e.g., Flask-to-FastAPI adapters). High prevalence warrants further manual validation of what is being counted. |
 | Non-FastAPI Depends sources | 2 repos (2%), 2 calls | Depends on non-FastAPI callables (external middleware, etc.) — rare. |
 | **Zero-DI cohort** | **25 repos (25%)** | Repos where `depends_total + security_total + annotated_depends_total = 0`. These pass E5 (≥ 4 files import fastapi, ≥ 1 app) but use no core DI constructs at all. A genuine population of real FastAPI apps without DI. |
 
@@ -286,7 +285,6 @@ All artifacts are schema-versioned, byte-stable (sorted order), and fully reprod
 - **Resolver junk nodes (mitigated):** module-scope `Depends` declarations produced `file:line` placeholder nodes (619 across 105/255 repos). Filtered at aggregation time; see §6.1. The resolver *output*, not the extraction of construct counts, is affected — RQ1 is clean.
 - **R3 (evolution over time) not yet measured.** Requires per-repo git-history analysis; planned as a later phase once RQ1/RQ2 tables are complete.
 - **Resolver coverage:** 25% of accepted repos have empty dependency graphs despite nonzero `depends_total` — in some cases the resolver cannot follow cross-file patterns. The resolver also marks 75% unresolved in one extreme outlier. Resolver quality should be reported as a coverage metric, not treated as a failure.
-- **Dynamic framework wrappers** are counted at 82% prevalence — a suspiciously high rate. Manual validation of what constructs are being counted is recommended before paper inclusion.
 
 ### 11.6 Small sample design
 - Pool N=351, sample N=100 (seed=42). The sample is not stratified — a pure random sample. The RQ1 covariate axis (§5.4) is disaggregated from this same sample, so high-stars and high-age buckets contain very few repos (1–5) and must not be over-read.
@@ -297,7 +295,6 @@ All artifacts are schema-versioned, byte-stable (sorted order), and fully reprod
 ## 12. Planned Up Ahead
 
 2. **Tutorial flag decision:** choose one of sample-only review / bulk dismiss / full review (Section 9).
-3. **Dynamic framework wrapper validation:** manually inspect what `dynamic_framework_wrappers` are counting (82% prevalence is suspiciously high).
-4. **RQ3 git-history script:** implement per-repo temporal analysis, building on the existing extractor.
-5. **Paper write-up:** methodology section and RQ1/RQ2 results are ready for first draft. Overlap benchmark (0%) is a strong methodological contribution.
-6. **Threats section:** document all items from Section 11, particularly the E5 sensitivity caveat and the E6 false-positive rate.
+3. **RQ3 git-history script:** implement per-repo temporal analysis, building on the existing extractor.
+4. **Paper write-up:** methodology section and RQ1/RQ2 results are ready for first draft. Overlap benchmark (0%) is a strong methodological contribution.
+5. **Threats section:** document all items from Section 11, particularly the E5 sensitivity caveat and the E6 false-positive rate.

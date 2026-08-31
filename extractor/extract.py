@@ -129,30 +129,17 @@ def analyze_repo(repo_path: pathlib.Path) -> RepoReport:
                     if yf2.name == yf.name and yf2.line == yf.line:
                         yf2.used_as_dependency = True
     class_dep_results = resolver.collect_callable_class_deps(production_reports)
-    all_wrappers: set[str] = set()
     non_fastapi_depends: dict[str, set[str]] = {}
     for fr in production_reports:
-        for wrapper in fr.dynamic_framework_wrappers:
-            all_wrappers.add(wrapper)
         for asname, module in fr.non_fastapi_depends_sources.items():
             if module not in non_fastapi_depends:
                 non_fastapi_depends[module] = set()
             non_fastapi_depends[module].add(asname)
-    report.dynamic_framework_wrappers = sorted(all_wrappers)
     aggregate = _compute_aggregate(production_reports, used_yield_names)
     report.aggregate = aggregate
     if test_reports:
         report.test_aggregate = _compute_aggregate(test_reports, set())
-    dynamic_wrappers: set[str] = set()
-    for fr in production_reports:
-        for wrapper in fr.dynamic_framework_wrappers:
-            dynamic_wrappers.add(wrapper)
-    report.dynamic_framework_wrappers = sorted(dynamic_wrappers)
     observations: list[str] = []
-    if dynamic_wrappers:
-        observations.append(
-            f"Dynamic framework wrappers detected: {', '.join(sorted(dynamic_wrappers))}"
-        )
     if report.aggregate.annotated_depends_total == 0 and report.aggregate.depends_total > 10:
         observations.append(
             "Uses traditional Depends() pattern extensively but no Annotated[..., Depends(...)]"

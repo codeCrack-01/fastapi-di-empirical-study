@@ -15,7 +15,7 @@
 | App-level dependency | 2 | 2.0% | 2 | 1.0 |
 | Dependency override | 1 | 1.0% | 1 | 1 |
 | Callable class dependency | 2 | 2.0% | 3 | 1.5 |
-| Dynamic framework wrappers | 82 | 82.0% | 5706 |  |
+| Non-FastAPI Depends sources | 2 | 2.0% | 2 |  |
 
 **Zero-DI cohort:** 25 repos (25.0%) use no Depends/Security/Annotated at all.
 

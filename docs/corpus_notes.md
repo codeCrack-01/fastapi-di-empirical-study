@@ -15,7 +15,6 @@ Primary backend / Auxiliary / AI API / MCP-only / Developer tool
 - App-level deps:
 - Overrides:
 - Callable class deps:
-- Dynamic framework wrappers:
 - Non-fastapi Depends sources:
 
 ### Dependency graph:

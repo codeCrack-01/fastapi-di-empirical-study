@@ -410,10 +410,6 @@ class FastAPIVisitor(ast.NodeVisitor):
         old_class = self._current_class
         self._current_class = node.name
         self._local_defs[node.name] = node
-        for deco in node.decorator_list:
-            name = self._resolve_callable(deco)
-            if name and name not in {"router", "self"}:
-                self.report.dynamic_framework_wrappers.append(name)
         self.generic_visit(node)
         self._current_class = old_class
 

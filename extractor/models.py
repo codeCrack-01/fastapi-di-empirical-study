@@ -76,7 +76,6 @@ class FileReport(BaseModel):
     app_dep_calls: list[AppDepCall] = Field(default_factory=list)
     override_calls: list[OverrideCall] = Field(default_factory=list)
     callable_class_deps: list[CallableClassDep] = Field(default_factory=list)
-    dynamic_framework_wrappers: list[str] = Field(default_factory=list)
     function_defs_with_depends: list[str] = Field(default_factory=list)
     non_fastapi_depends_sources: dict[str, str] = Field(default_factory=dict)
     fastapi_app_count: int = 0
@@ -138,5 +137,4 @@ class RepoReport(BaseModel):
     test_aggregate: Optional[RepoAggregate] = None
     file_details: list[FileReport] = Field(default_factory=list)
     dependency_graph: DependencyGraph = Field(default_factory=DependencyGraph)
-    dynamic_framework_wrappers: list[str] = Field(default_factory=list)
     observations: list[str] = Field(default_factory=list)
