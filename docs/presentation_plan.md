@@ -94,9 +94,9 @@ that the two sources are disjoint.
 
 ## 5. RQ1 — construct prevalence
 
-**Numbers (100-sample):** Depends 75% (median 17), Annotated 24% (7.5),
-Generator/yield 37% (1), Security 12% (1), Router 17% (4), App 2%, Override 1%,
-Callable-class 2%.
+**Numbers (full-corpus census of 351):** Depends 74.6% (median 22), Annotated 25.1% (8.0),
+Generator/yield 39.9% (1), Security 9.4% (1), Router 13.1% (3), App 2.8%, Override 1.7%,
+Callable-class 0.6%.
 
 **Significance:** the empirical DI usage distribution in real production code —
 something the ecosystem lacks hard numbers for.
@@ -114,9 +114,9 @@ necessary (see 0-overlap evidence).
 
 ---
 
-## 6. Zero-DI cohort (25%)
+## 6. Zero-DI cohort (25.1%)
 
-**Numbers:** 25 of 100 sampled repos use no Depends/Security/Annotated.
+**Numbers:** 88 of 351 repos use no Depends/Security/Annotated.
 
 **Significance:** the counter-intuitive headline. A quarter of real FastAPI
 applications with ≥4 importing files and ≥1 app use *no* DI constructs. FastAPI
@@ -132,8 +132,8 @@ work / RQ3 clutches).
 
 ## 7. RQ1 axis (folded application-class question) — by stars & age
 
-**Numbers:** DI prevalence ≈73–75% across 0-star and 1–9-star buckets; corpus
-92/100 repos <12 months old; high-star/age buckets have 1–5 repos.
+**Numbers:** DI prevalence ≈70–76% across 0-star and 1–9-star buckets; corpus
+316/351 repos <12 months old; 100+-star bucket has 7 repos, 36mo+ has 9.
 
 **Significance:** DI adoption is **flat** across popularity — it is a stable
 property of the population, not skewed by stars. The youth of the corpus is a
@@ -148,8 +148,8 @@ the well-populated 0/1–9 star buckets (64 and 28 repos).
 
 ## 8. RQ2 — graph complexity
 
-**Numbers (clean, 71/100 non-empty):** median nodes 19, IQR 7–53, max 259;
-median depth 2, max 5; median unresolved 0.0%.
+**Numbers (clean, 253/351 non-empty):** median nodes 21, IQR 8–55, max 1,444;
+median depth 2, max 7; median unresolved 0.0%.
 
 **Significance:** real FastAPI DI dependency graphs are **broad and shallow** —
 a small set of shared dependencies reused across many handlers (fan-out), not
@@ -186,9 +186,9 @@ t ≥ 5, exactly where the monotone rise is observed.
 
 ## 11. Data-quality handling — resolver junk nodes
 
-**Numbers:** 619 junk nodes across 105/255 graph-bearing repos (3.9% of all).
-Median node count 24 → 19 after filtering. All 71 sample repos keep a clean
-non-empty graph.
+**Numbers:** 610 junk nodes across 103/253 graph-bearing repos (3.9% of all).
+Median node count 23 → 21 after filtering. All 253 graph-bearing repos keep a
+clean non-empty graph.
 
 **Significance:** showing our own data QA is a *credibility asset* with this
 reviewer. A real bug (module-scope `Depends` → `file:line` placeholder node id)

@@ -1,11 +1,11 @@
 construct_id,construct,repos_using,pct_of_sample,total_calls,median_per_repo_using,q1_per_repo_using,q3_per_repo_using,max,source
-C1,Depends,75,75.0,3779,17,8.0,67.0,469,aggregate
-C2,Security,12,12.0,26,1.0,1.0,3.8,6,aggregate
-C3,Annotated dependency,24,24.0,830,7.5,2.0,15.2,534,aggregate
-C4,Generator/yield dependency,37,37.0,43,1,1.0,1.0,3,aggregate
-C5,Router-level dependency,17,17.0,90,4,2.0,7.0,17,aggregate
-C6,App-level dependency,2,2.0,2,1.0,1.0,1.0,1,aggregate
-C7,Dependency override,1,1.0,1,1,1.0,1.0,1,aggregate
-C8,Callable class dependency,2,2.0,3,1.5,0.8,2.2,2,aggregate
-EX2,Non-FastAPI Depends sources,2,2.0,2,,,,,file_details
-Z,Repos using ZERO core DI constructs (no Depends/Security/Annotated),25,25.0,,,,,,derived
+C1,Depends,262,74.6,22711,22.0,8.0,68.5,1732,aggregate
+C2,Security,33,9.4,143,1,1.0,2.5,69,aggregate
+C3,Annotated dependency,88,25.1,4688,8.0,4.0,28.2,1264,aggregate
+C4,Generator/yield dependency,140,39.9,192,1.0,1.0,1.0,13,aggregate
+C5,Router-level dependency,46,13.1,271,3.0,1.0,7.0,35,aggregate
+C6,App-level dependency,10,2.8,10,1.0,1.0,1.0,1,aggregate
+C7,Dependency override,6,1.7,34,1.0,1.0,9.5,26,aggregate
+C8,Callable class dependency,2,0.6,3,1.5,0.8,2.2,2,aggregate
+EX2,Non-FastAPI Depends sources,2,0.6,2,,,,,file_details
+Z,Repos using ZERO core DI constructs (no Depends/Security/Annotated),88,25.1,,,,,,derived

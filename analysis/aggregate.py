@@ -354,18 +354,34 @@ def write_summary(out: Path, sample_meta: dict, reports: dict, missing: list[str
 
 
 def main():
-    ap = argparse.ArgumentParser(description="Aggregate sample reports into paper tables")
+    ap = argparse.ArgumentParser(description="Aggregate reports into paper tables")
     ap.add_argument("--sample", default=str(OUT_DIR / "sample.json"))
     ap.add_argument("--manifest", default=str(ROOT.parent / "corpus" / "manifest.json"))
     ap.add_argument("--reports", default=str(ROOT.parent / "corpus" / "reports"))
+    ap.add_argument(
+        "--scope", choices=("sample", "all"), default="sample",
+        help="'sample' restricts to the seed-42 drawn sample; 'all' aggregates the "
+             "entire accepted corpus (census). Denominator for pct columns is always "
+             "the number of repos actually aggregated.",
+    )
     args = ap.parse_args()
 
     sample_payload = json.loads(Path(args.sample).read_text())
-    sampled = sorted(sample_payload["sampled"])
     manifest = json.loads(Path(args.manifest).read_text())
-    reports, missing = load_reports(sampled, Path(args.reports))
+
+    if args.scope == "all":
+        names = sorted(a["full_name"] for a in manifest["accepted"])
+        sample_payload = dict(sample_payload)
+        sample_payload["sample_size"] = len(names)
+        sample_payload["pool_size"] = len(names)
+        sample_payload["method"] = "full-corpus census (not a sample)"
+        sample_payload["seed"] = None
+    else:
+        names = sorted(sample_payload["sampled"])
+
+    reports, missing = load_reports(names, Path(args.reports))
     if missing:
-        print(f"[aggregate] WARNING: {len(missing)} sampled repos have no report: {missing}")
+        print(f"[aggregate] WARNING: {len(missing)} repos have no report: {missing}")
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     rq1 = rq1_rows(reports)
@@ -373,14 +389,14 @@ def main():
 
     write_csv(OUT_DIR / "rq1_constructs.csv", rq1)
     write_csv(OUT_DIR / "rq4_graphs.csv", rq4)
-    write_csv(OUT_DIR / "covariates.csv", covariate_rows(sampled, manifest))
+    write_csv(OUT_DIR / "covariates.csv", covariate_rows(names, manifest))
     sens = sensitivity_rows(manifest)
     write_csv(OUT_DIR / "sensitivity.csv", sens)
-    write_csv(OUT_DIR / "rq1_by_stars.csv", disaggregate_rows(sampled, reports, manifest, "stars"))
-    write_csv(OUT_DIR / "rq1_by_age.csv", disaggregate_rows(sampled, reports, manifest, "age"))
+    write_csv(OUT_DIR / "rq1_by_stars.csv", disaggregate_rows(names, reports, manifest, "stars"))
+    write_csv(OUT_DIR / "rq1_by_age.csv", disaggregate_rows(names, reports, manifest, "age"))
     write_summary(OUT_DIR / "summary.md", sample_payload, reports, missing, rq1, rq4)
 
-    print(f"[aggregate] {len(reports)} reports aggregated -> {OUT_DIR}/")
+    print(f"[aggregate] scope={args.scope} {len(reports)} reports aggregated -> {OUT_DIR}/")
     for f in ("rq1_constructs.csv", "rq4_graphs.csv", "covariates.csv", "sensitivity.csv",
               "rq1_by_stars.csv", "rq1_by_age.csv", "summary.md"):
         print(f"  - {f}")

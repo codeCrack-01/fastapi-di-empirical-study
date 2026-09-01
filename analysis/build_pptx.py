@@ -47,6 +47,58 @@ def _csv(path: str) -> list[dict]:
     return list(csv.DictReader((OUT_DIR / path).open()))
 
 
+# Per-repo construct presence, derived from the frozen extractor reports.
+# The deck aggregates the FULL accepted corpus (census, n=351) — many of the
+# numbers below are deliberately computed here rather than hard-coded so the
+# deck stays correct if the corpus or threshold ever changes.
+_CORE_KEYS = (
+    "depends_total", "security_total", "annotated_depends_total", "yield_dep_total",
+    "router_dep_total", "app_dep_total", "override_total", "callable_class_dep_total",
+)
+_CONSTRUCT_LABELS = {
+    "depends_total": "Depends",
+    "security_total": "Security",
+    "annotated_depends_total": "Annotated",
+    "yield_dep_total": "Generator",
+    "router_dep_total": "Router",
+    "app_dep_total": "App-level",
+    "override_total": "Override",
+    "callable_class_dep_total": "Callable",
+}
+
+
+def _load_reports() -> dict[str, dict]:
+    manifest = json.loads((ROOT.parent / "corpus" / "manifest.json").read_text())
+    out = {}
+    for a in manifest["accepted"]:
+        p = ROOT.parent / "corpus" / "reports" / f"{a['full_name'].replace('/', '__')}.json"
+        if p.exists():
+            out[a["full_name"]] = json.loads(p.read_text())
+    return out
+
+
+def _multiplicity(reports: dict[str, dict]) -> list[tuple[int, int]]:
+    counts = [0] * (len(_CORE_KEYS) + 1)
+    for r in reports.values():
+        agg = r.get("aggregate", {})
+        n = sum(1 for k in _CORE_KEYS if agg.get(k, 0) > 0)
+        counts[n] += 1
+    return [(i, counts[i]) for i in range(len(counts))]
+
+
+def _pairings(reports: dict[str, dict], top: int = 6) -> list[tuple[str, str, int]]:
+    counter: dict[tuple[str, str], int] = {}
+    for r in reports.values():
+        agg = r.get("aggregate", {})
+        present = sorted(_CONSTRUCT_LABELS[k] for k in _CORE_KEYS if agg.get(k, 0) > 0)
+        for i in range(len(present)):
+            for j in range(i + 1, len(present)):
+                key = tuple(sorted((present[i], present[j])))
+                counter[key] = counter.get(key, 0) + 1
+    ranked = sorted(counter.items(), key=lambda kv: (-kv[1], kv[0]))
+    return [(a, b, n) for (a, b), n in ranked[:top]]
+
+
 def set_bg(slide, color=WHITE):
     slide.background.fill.solid()
     slide.background.fill.fore_color.rgb = color
@@ -273,76 +325,72 @@ def main():
         (0, "The topic signal is used only as a measurement — never as a pool member or an eligibility criterion.", False, MUTED),
     ])
 
-    # ---- 7. Sampling ----
-    s = slide_title(prs, "Sampling — seed-42 random sample of 100")
+    # ---- 7. Sampling / corpus ----
+    reports = _load_reports()
+    n_total = len(reports)
+    s = slide_title(prs, "Corpus — full census of 351 accepted repos")
     bullet_box(s, Inches(0.6), Inches(1.6), Inches(12.3), Inches(2.6), [
-        (0, "Registered sampling rule: exhaustive if pool N ≤ 100; otherwise a random sample of 100 drawn with random.Random(42) over the SORTED accepted names.", False, INK),
-        (0, "N = 351 → sample of 100 (seed 42).", True, ACCENT),
-        (0, "Superset property: sorting before drawing guarantees the sample for a smaller pool is a subset of any larger pool's sample with the same seed — later corpus expansion never invalidates earlier manual work.", True, ACCENT),
-        (0, "The sample is non-stratified (pure random); RQ1 as a whole is reported on this same 100.", False, MUTED),
+        (0, "4,500 GitHub dependents of fastapi/fastapi (dependency graph) → 351 accepted under E1–E6.", False, INK),
+        (0, "This analysis reports the FULL accepted corpus (census, n = 351), not a random sample.", True, ACCENT),
+        (0, "An earlier n = 100 seed-42 sample was used for pilot analyses; the final RQ1/RQ2 numbers here are the census.", True, ACCENT),
+        (0, "So the '%' denominators throughout are out of 351 repos (per-construct rows overlap by design).", False, MUTED),
     ])
     add_bigstat(s, Inches(4.0), Inches(4.4), Inches(5.3), Inches(1.8),
-                "100 / 351", "seed-42 sample · n = 100", ACCENT)
+                f"{n_total} / 351", "accepted corpus · full census", ACCENT)
 
     # ---- 8. RQ1 prevalence ----
-    s = slide_title(prs, "RQ1 — which DI constructs do real projects use?", "100-repo sample, n=100")
+    s = slide_title(prs, "RQ1 — which DI constructs do real projects use?", "full-corpus census, n=351")
     rows = _csv("rq1_constructs.csv")
     clean = [r for r in rows if r["construct_id"] in ("C1","C2","C3","C4","C5","C6","C7","C8")]
     table_rows = [[r["construct"], r["repos_using"], r["pct_of_sample"]+"%", r["total_calls"], r["median_per_repo_using"]] for r in clean]
     add_table(s,
-              ["Construct", "Repos", "% of sample", "Total calls", "Median (users)"],
+              ["Construct", "Repos", "% of corpus", "Total calls", "Median (users)"],
               table_rows,
               top=Inches(1.4), col_widths=[Inches(4.4), Inches(1.7), Inches(1.7), Inches(2.2), Inches(2.2)])
+    mult = _multiplicity(reports)
+    zero, one, two = mult[0][1], mult[1][1], sum(n for i, n in mult if i >= 2)
     bullet_box(s, Inches(0.6), Inches(5.1), Inches(12.3), Inches(2.1), [
-        (0, "The \"% of sample\" column is per-construct and does NOT sum to 100%. Each cell is the share of the 100 repos that use that construct at least once.", True, INK),
+        (0, "The \"% of corpus\" column is per-construct and does NOT sum to 100%. Each cell is the share of the 351 repos that use that construct at least once.", True, INK),
         (0, "A repo can appear in many rows because one project often mixes several DI constructs (e.g. Depends + generator/yield + Security together).", False, INK),
-        (0, "In this sample: 25% use no core construct, 19% use exactly one, and 56% use two or more (29% use 2, 16% use 3, 10% use 4, 1% use 5). The columns overlap by design — see the next slide for the full breakdown.", True, ACCENT2),
+        (0, f"In the census: {100*zero/n_total:.0f}% use no core construct, {100*one/n_total:.0f}% exactly one, and {100*two/n_total:.0f}% two or more. The columns overlap by design — see the next slide for the full breakdown.", True, ACCENT2),
     ])
 
     # ---- 9. RQ1 construct-overlap breakdown ----
     s = slide_title(prs, "RQ1 — how the constructs overlap in the same repos", "the multiplicity and pairings behind the per-construct percentages")
+    mult_rows = [[f"{i}" if i else "0 (no core DI)", n, f"{100*n/n_total:.1f}%"] for i, n in mult]
     add_table(s,
-              ["Constructs per repo", "Repos (of 100)", "% of sample"],
-              [["0 (no core DI)", 25, "25.0%"],
-               ["1", 19, "19.0%"],
-               ["2", 29, "29.0%"],
-               ["3", 16, "16.0%"],
-               ["4", 10, "10.0%"],
-               ["5 or more", 1, "1.0%"]],
+              ["Constructs per repo", f"Repos (of {n_total})", "% of corpus"],
+              mult_rows,
               top=Inches(1.5), left=Inches(0.55), width=Inches(4.7),
               col_widths=[Inches(2.6), Inches(1.2), Inches(1.2)])
+    prs_rows = [[f"{a} + {b}", n] for a, b, n in _pairings(reports, top=6)]
     add_table(s,
-              ["Most common pairings", "Repos"],
-              [["Depends + Generator/yield", 37],
-               ["Depends + Annotated", 24],
-               ["Depends + Router-level", 17],
-               ["Annotated + Generator/yield", 13],
-               ["Generator/yield + Router-level", 13],
-               ["Depends + Security", 12]],
+              ["Most common pairings", f"Repos (of {n_total})"],
+              prs_rows,
               top=Inches(1.5), left=Inches(6.35), width=Inches(6.1),
               col_widths=[Inches(4.8), Inches(1.3)])
     bullet_box(s, Inches(0.6), Inches(4.75), Inches(12.3), Inches(2.4), [
-        (0, "Over half (56%) of repos mix two or more DI constructs — the per-construct rows on the previous slide are NOT mutually exclusive.", True, ACCENT2),
-        (0, "Depends (C1) is the 'host' construct: every user of Security (12), Annotated (24), Generator/yield (37) or Router-level (17) also uses Depends.", False, INK),
-        (0, "The dominant pairing is Depends + Generator/yield (37 repos) — the classic session-scope pattern `def foo(yield db)`; advanced constructs (Override 1, App-level 2) are essentially never combined.", False, WARN),
+        (0, f"{100*two/n_total:.0f}% of repos mix two or more DI constructs — the per-construct rows on the previous slide are NOT mutually exclusive.", True, ACCENT2),
+        (0, "Depends (C1) is the 'host' construct: every user of Security, Annotated, Generator/yield or Router-level also uses Depends.", False, INK),
+        (0, "The dominant pairing is Depends + Generator/yield (140 repos) — the classic session-scope pattern `def foo(yield db)`; advanced constructs (Override, App-level, Callable-class) are essentially never combined.", False, WARN),
     ])
 
     # ---- 10. RQ1 interpretation + zero-DI ----
     s = slide_title(prs, "RQ1 — what the numbers mean")
     bullet_box(s, Inches(0.6), Inches(1.5), Inches(12.3), Inches(3.0), [
-        (0, "Depends (C1) is dominant but not universal: 75% of real apps use it; a quarter use none.", True, INK),
-        (0, "Generator/yield deps (C4, 37%) outnumber the modern Annotated style (C3, 24%) — the 'recommended' style is not the most common in the wild.", False, INK),
-        (0, "Security (C2, 12%) is under-used despite being a headline auth feature; median just 1 call among users.", False, INK),
-        (0, "Advanced constructs are rare in production: overrides 1%, callable classes 2%, app-level deps 2%.", False, INK),
-        (0, "Zero-DI cohort = 25%: substantial FastAPI apps (≥ 4 files, ≥ 1 app) that use no core DI construct at all.", True, ACCENT2),
+        (0, "Depends (C1) is dominant but not universal: 74.6% of real apps use it; a quarter use none.", True, INK),
+        (0, "Generator/yield deps (C4, 39.9%) outnumber the modern Annotated style (C3, 25.1%) — the 'recommended' style is not the most common in the wild.", False, INK),
+        (0, "Security (C2, 9.4%) is under-used despite being a headline auth feature; median just 1 call among users.", False, INK),
+        (0, "Advanced constructs are rare in production: overrides 1.7%, app-level deps 2.8%, callable classes 0.6%.", False, INK),
+        (0, "Zero-DI cohort = 25.1%: substantial FastAPI apps (≥ 4 files, ≥ 1 app) that use no core DI construct at all.", True, ACCENT2),
     ])
     add_bigstat(s, Inches(0.9), Inches(5.0), Inches(5.6), Inches(1.8),
-                "25%", "zero-DI cohort — real apps bypassing the DI system", ACCENT2)
+                "25.1%", "zero-DI cohort — real apps bypassing the DI system", ACCENT2)
     add_bigstat(s, Inches(6.9), Inches(5.0), Inches(5.6), Inches(1.8),
-                "75%", "use Depends at least once in production files", ACCENT)
+                "74.6%", "use Depends at least once in production files", ACCENT)
 
     # ---- 10. RQ1 by covariate (the dropped application-class question) ----
-    s = slide_title(prs, "RQ1 axis — who uses DI? (the dropped 'application classes' question)", "disaggregated by stars and age from the same sample")
+    s = slide_title(prs, "RQ1 axis — who uses DI? (the dropped 'application classes' question)", "disaggregated by stars and age across the census")
     bs = _csv("rq1_by_stars.csv")
     ba = _csv("rq1_by_age.csv")
     add_table(s,
@@ -356,15 +404,16 @@ def main():
               top=Inches(1.4), left=Inches(7.0), width=Inches(6.0),
               col_widths=[Inches(1.5), Inches(1.3), Inches(1.9), Inches(1.9)])
     bullet_box(s, Inches(0.6), Inches(4.2), Inches(12.3), Inches(3.0), [
-        (0, "DI adoption is essentially flat across popularity (≈74–75% in the well-populated star buckets) — DI use is not a popularity artefact.", True, ACCENT),
-        (0, "The corpus skews very young: 92/100 sample repos are under 12 months old — a product of the E4 recency gate and a fast-growing dependency-graph population.", False, INK),
-        (0, "High-star and high-age buckets hold only 1–5 repos each — too few for stable conclusions. Reported for completeness, not over-read.", False, WARN),
+        (0, "DI adoption is essentially flat across popularity (≈70–76%) in the well-populated star buckets — DI use is not a popularity artefact.", True, ACCENT),
+        (0, "The corpus skews very young: 316/351 repos are under 12 months old — a product of the E4 recency gate and a fast-growing dependency-graph population.", False, INK),
+        (0, "Ages 12–36mo and 36mo+ show slightly higher adoption (81%, 89%) but hold only 26 and 9 repos — too few for stable conclusions. Reported for completeness, not over-read.", False, WARN),
+        (0, "High-star buckets (10–99, 100+) hold 11 and 7 repos — reported for completeness, not over-read.", False, WARN),
         (0, "This covariate view is how the dropped 'application classes' question is answered without an arbitrary taxonomy.", False, MUTED),
     ])
 
     # ---- 11. RQ2 graphs ----
-    s = slide_title(prs, "RQ2 — how complex are the dependency graphs?", "clean nodes; 71 of 100 repos have a non-empty graph")
     g = [r for r in _csv("rq4_graphs.csv") if int(r["nodes_clean"]) > 0]
+    s = slide_title(prs, "RQ2 — how complex are the dependency graphs?", f"{len(g)} of {n_total} repos have a non-empty graph")
     add_table(s,
               ["Metric", "Median", "IQR", "Max"],
               [[ "Nodes (clean)", st.median(int(r["nodes_clean"]) for r in g),
@@ -378,7 +427,7 @@ def main():
         (0, "Complexity is measured on the dependency graph the resolver builds from Depends calls.", False, INK),
         (0, "Graphs are shallow: median depth 2, max 5 — flat dependency trees, not deep chains.", True, INK),
         (0, "This is the empirical signature of FastAPI DI: a small set of shared dependencies reused across many handlers (fan-out), not deep inheritance-like nesting.", False, ACCENT),
-        (0, "65% of graph-bearing repos resolve at 0% unresolved — the resolver is reliable at corpus scale.", False, ACCENT2),
+        (0, f"{round(100*sum(1 for r_ in g if float(r_['unresolved_pct']) == 0)/len(g))}% of graph-bearing repos resolve at 0% unresolved — the resolver is reliable at corpus scale.", False, ACCENT2),
     ])
 
     # ---- 12. RQ2 DATA-QUALITY BUG (PART 1: origin & diagnosis) ----
@@ -391,20 +440,31 @@ def main():
                ["How diagnosed", "While inspecting graphs for the presentation, node ids containing '/' stood out — not valid function names."]],
               top=Inches(1.5), font_size=11,
               col_widths=[Inches(2.3), Inches(10.0)])
+    db_g = [r for r in g]
+    junk_bear = [r for r in db_g if int(r["junk_nodes"]) > 0]
+    junk_total = sum(int(r["junk_nodes"]) for r in db_g)
     add_bigstat(s, Inches(0.9), Inches(5.1), Inches(5.9), Inches(1.8),
-                "619", "junk 'file:line' nodes across 105 of 255 graph-bearing repos (3.9% of all nodes)", WARN)
+                f"{junk_total}", f"junk 'file:line' nodes across {len(junk_bear)} of {len(db_g)} graph-bearing repos"
+                f" ({round(100*junk_total/max(1,sum(int(r['nodes_raw']) for r in db_g)),1)}% of all raw nodes)", WARN)
     add_bigstat(s, Inches(7.0), Inches(5.1), Inches(5.9), Inches(1.8),
-                "41%", "of graph-bearing repos were contaminated (105 / 255)", WARN)
+                f"{round(100*len(junk_bear)/max(1,len(db_g)))}%", f"of graph-bearing repos were contaminated ({len(junk_bear)} / {len(db_g)})", WARN)
 
     # ---- 13. RQ2 DATA-QUALITY BUG (PART 2: impact) ----
+    rq4all = [r for r in _csv("rq4_graphs.csv")]
+    gb_all = [r for r in rq4all if int(r["nodes_clean"]) > 0]
+    clean_med = st.median(int(r["nodes_clean"]) for r in gb_all)
+    raw_med = st.median(int(r["nodes_raw"]) for r in gb_all)
+    junk_bear_all = [r for r in gb_all if int(r["junk_nodes"]) > 0]
+    junk_share_med = st.median(int(r["junk_nodes"]) / (int(r["nodes_raw"]) or 1) for r in junk_bear_all)
+    raw_max = max(int(r["nodes_raw"]) for r in rq4all)
     s = slide_title(prs, "RQ2 data-quality bug — Part 2: how much it distorted the numbers")
     add_table(s,
               ["Effect of the bug", "Value"],
-              [["Median node count (in-sample, graph-bearing)", "inflated 19 → 24 (with junk)"],
-               ["Per-repo junk share (dirty repos)", "median ~22% of that repo's nodes were junk"],
-               ["Max node count seen in a sample repo", "inflated by the junk (one raw repo reached 1,445 nodes)"],
-               ["Did it change whether a repo had a graph?", "No — all 71 in-sample repos still had a clean non-empty graph after filtering"]],
-              top=Inches(1.5), font_size=11, col_widths=[Inches(6.0), Inches(6.3)])
+              [["Median node count (graph-bearing)", f"inflated {clean_med} → {raw_med} (with junk)"],
+               ["Per-repo junk share (dirty repos)", f"median ~{round(100*junk_share_med)}% of that repo's nodes were junk"],
+               ["Max node count seen in a repo", f"inflated by the junk (one raw repo reached {raw_max} nodes)"],
+               ["Did it change whether a repo had a graph?", f"No — all {len(gb_all)} repos still had a clean non-empty graph after filtering"]],
+              top=Inches(1.5), font_size=11, col_widths=[Inches(6.2), Inches(6.1)])
     bullet_box(s, Inches(0.6), Inches(4.6), Inches(12.3), Inches(2.4), [
         (0, "The bug inflated node counts and could add spurious edges/density — it did not fabricate graphs where none existed.", False, INK),
         (0, "Important: RQ1 construct counts (C1–C8) are read from call sites, not from graph nodes, so RQ1 was NOT affected by this bug.", True, ACCENT2),
@@ -425,13 +485,13 @@ def main():
     # ---- 15. RQ2 DATA-QUALITY BUG (PART 4: what the clean data enabled) ----
     s = slide_title(prs, "RQ2 data-quality bug — Part 4: what the fix enabled")
     bullet_box(s, Inches(0.6), Inches(1.5), Inches(12.3), Inches(3.2), [
-        (0, "After the fix the RQ2 picture is trustworthy: median 19 clean nodes, IQR 7–53, max 259; median depth 2, max 5; median unresolved 0.0%.", True, ACCENT2),
+        (0, f"After the fix the RQ2 picture is trustworthy: median {clean_med} clean nodes, IQR {_q(int(r['nodes_clean']) for r in gb_all)}, max {max(int(r['nodes_clean']) for r in gb_all)}; median depth 2, max 7; median unresolved 0.0%.", True, ACCENT2),
         (0, "It let us establish the fan-out signature with confidence (next slide).", False, INK),
         (0, "It exposed that the 'lost' module-scope dependency declarations are exactly where real DI hubs live (e.g. mealie's base_controllers.py) — a limitation worth reporting.", False, INK),
         (0, "It set a precedent for data QA in the paper: we surface the bug, its measure, and the fix instead of hiding it — a credibility asset.", False, WARN),
     ])
     add_bigstat(s, Inches(0.9), Inches(5.1), Inches(5.9), Inches(1.8),
-                "255 → 255", "graph-bearing repos retained clean graphs after filtering", ACCENT2)
+                f"{len(gb_all)} → {len(gb_all)}", "graph-bearing repos retained clean graphs after filtering", ACCENT2)
     add_bigstat(s, Inches(7.0), Inches(5.1), Inches(5.9), Inches(1.8),
                 "0.0%", "median unresolved rate on clean graphs", ACCENT2)
 

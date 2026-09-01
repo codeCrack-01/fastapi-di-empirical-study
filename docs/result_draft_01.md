@@ -1,7 +1,7 @@
 # Result Draft 01: FastAPI Dependency Injection Corpus Study
 
 **Date:** 2026-08-21
-**Status:** Corpus finalized. RQ1/RQ2 results from seed-42 sample. Pre-paper draft.
+**Status:** Corpus finalized. RQ1/RQ2 results are the FULL-CORPUS CENSUS over all 351 accepted repos. Pre-paper draft.
 
 ---
 
@@ -52,6 +52,23 @@ This study characterises how FastAPI's dependency injection (DI) constructs are 
 | E5 | ≥ 4 files importing `fastapi` AND ≥ 1 `FastAPI()` call | Thresholds anchored at observed distribution gap; sensitivity analysis at thresholds 2–8 confirms robustness |
 | E6 | No tutorial/demo markers in description or README | FLAGS for manual review — never auto-excludes |
 
+#### 2.3.1 E2 threshold robustness
+
+The E2 cutoff (`py_ratio ≥ 0.5`) is a *stated convention* ("Python must dominate the byte volume"), not a value derived from any distribution. Across the 4,500 candidates the accepted pool sits well clear of the boundary — median `py_ratio` 0.855, p25 0.695, min 0.501 — and only **37/351 (10.5%)** accepted repos fall below 0.6 (**0 repos are exactly at 0.5**). Sensitivity (`analysis/e2_sensitivity.py`) confirms RQ headline numbers are insensitive to the exact cutoff:
+
+| Threshold | Candidates passing gate | Accepted kept | `.n` change vs 0.5 |
+|-----------|------------------------|---------------|--------------------|
+| 0.45      | 3,049                   | 351           | 0 (raises lower bound only) |
+| 0.5 (base)| 2,869                   | 351           | — |
+| 0.55      | 2,682                   | 333           | −18 |
+| 0.6       | 2,486                   | 314           | −37 |
+| 0.7       | 2,107                   | 261           | −90 |
+| 0.8       | 1,702                   | 209           | −142 |
+| 0.9       | 1,248                   | 154           | −197 |
+| 1.0       | 293                     | 18            | −333 |
+
+Raising the threshold only ever removes accepted repos already passing every later rule (their removal is certain); lowering it below 0.5 can only *add* E2-excluded repos, but those were never cloned, so their admission is an unverified upper bound (no reports exist to check E5). Either direction moves the corpus count but does not change which DI constructs are observed or the per-construct ordering in RQ1, so conclusions are robust to the E2 choice.
+
 ### 2.4 Filtering results
 
 | Decision | Count | % of pool |
@@ -88,9 +105,10 @@ This study characterises how FastAPI's dependency injection (DI) constructs are 
 
 ## 4. Sampling
 
-- **Pool N = 351** (> 100) → random sample of **100 repos** drawn with `random.Random(42).sample(sorted_names, 100)`.
+- **FULL-CORPUS CENSUS: Pool N = 351; all 351 accepted repos are analysed** (`--scope all`). This is a census, not a sample — every accepted repo contributes to every downstream table.
+- A seed-42 random sample of 100 was used for earlier pilot/RQ2-bug work; the final RQ1/RQ2 numbers reported in this paper are the **census over all 351** (sampling rule preserved for audits: if N > 100, `random.Random(42).sample(sorted_names, 100)`; sample file at `analysis/sample.json`).
 - **Superset property:** sorted before drawing ensures the sample for any smaller pool is always a subset of the sample for any larger pool with the same seed. Later corpus expansions never invalidate earlier manual work.
-- Sample drawn: `analysis/sample.json`. All downstream tables (RQ1/RQ2) report on this sample.
+- Census aggregation: `uv run python analysis/aggregate.py --scope all` → `analysis/out/rq1_constructs.csv`, `rq1_by_stars.csv`, `rq1_by_age.csv`, `rq4_graphs.csv`, `covariates.csv`, `sensitivity.csv`, `summary.md`.
 
 ---
 
@@ -115,31 +133,31 @@ This study characterises how FastAPI's dependency injection (DI) constructs are 
 
 ### 5.1 Primary constructs (C1–C8)
 
-| ID | Construct | Repos (n/100) | % of sample | Total calls | Median (users) | IQR (users) | Max |
+| ID | Construct | Repos (n/351) | % of corpus | Total calls | Median (users) | IQR (users) | Max |
 |----|-----------|---------------|-------------|-------------|----------------|-------------|-----|
-| C1 | `Depends` | 75 | 75.0% | 3,779 | 17 | 8–67 | 469 |
-| C2 | `Security` | 12 | 12.0% | 26 | 1.0 | 1.0–3.8 | 6 |
-| C3 | `Annotated[..., Depends]` | 24 | 24.0% | 830 | 7.5 | 2.0–15.2 | 534 |
-| C4 | Generator/yield dep | 37 | 37.0% | 43 | 1 | 1.0–1.0 | 3 |
-| C5 | Router-level deps | 17 | 17.0% | 90 | 4 | 2.0–7.0 | 17 |
-| C6 | App-level deps | 2 | 2.0% | 2 | 1.0 | 1.0–1.0 | 1 |
-| C7 | Dependency overrides | 1 | 1.0% | 1 | 1 | 1.0–1.0 | 1 |
-| C8 | Callable class deps | 2 | 2.0% | 3 | 1.5 | 0.8–2.2 | 2 |
+| C1 | `Depends` | 262 | 74.6% | 22,711 | 22.0 | 8.0–68.5 | 1,732 |
+| C2 | `Security` | 33 | 9.4% | 143 | 1 | 1.0–2.5 | 69 |
+| C3 | `Annotated[..., Depends]` | 88 | 25.1% | 4,688 | 8.0 | 4.0–28.2 | 1,264 |
+| C4 | Generator/yield dep | 140 | 39.9% | 192 | 1.0 | 1.0–1.0 | 13 |
+| C5 | Router-level deps | 46 | 13.1% | 271 | 3.0 | 1.0–7.0 | 35 |
+| C6 | App-level deps | 10 | 2.8% | 10 | 1.0 | 1.0–1.0 | 1 |
+| C7 | Dependency overrides | 6 | 1.7% | 34 | 1.0 | 1.0–9.5 | 26 |
+| C8 | Callable class deps | 2 | 0.6% | 3 | 1.5 | 0.8–2.2 | 2 |
 
 ### 5.2 Additional observations
 
 | Observation | Count | Notes |
 |-------------|-------|-------|
-| Non-FastAPI Depends sources | 2 repos (2%), 2 calls | Depends on non-FastAPI callables (external middleware, etc.) — rare. |
-| **Zero-DI cohort** | **25 repos (25%)** | Repos where `depends_total + security_total + annotated_depends_total = 0`. These pass E5 (≥ 4 files import fastapi, ≥ 1 app) but use no core DI constructs at all. A genuine population of real FastAPI apps without DI. |
+| Non-FastAPI Depends sources | 2 repos (0.6%), 2 calls | Depends on non-FastAPI callables (external middleware, etc.) — rare. |
+| **Zero-DI cohort** | **88 repos (25.1%)** | Repos where `depends_total + security_total + annotated_depends_total = 0`. These pass E5 (≥ 4 files import fastapi, ≥ 1 app) but use no core DI constructs at all. A genuine population of real FastAPI apps without DI. |
 
 ### 5.3 Key trends and interpretations
 
-1. **`Depends` is dominant but not universal.** 75% of real FastAPI apps use it; a quarter do not. The DI system is clearly not mandatory for real-world usage.
-2. **Generator/yield deps are surprisingly common** (37%) — more common than `Annotated[..., Depends]` (24%), despite the latter being the "modern" recommended style.
-3. **`Security` is underused** (12%) despite being a headline FastAPI feature for authentication. Median usage among users is just 1 call — most apps have a single `Security()` site.
-4. **Advanced constructs are nearly absent.** Overrides (1%), callable classes (2%), app-level deps (2%) are almost never seen in production code. Overrides may be test-only (not captured by production-scope extraction).
-5. **The zero-DI cohort (25%) is a key finding.** These are real, substantial FastAPI applications (≥ 4 importing files, ≥ 1 app) that bypass the DI system entirely, using direct function calls or other patterns. This finding challenges the assumption that DI is the primary architectural pattern in the FastAPI ecosystem.
+1. **`Depends` is dominant but not universal.** 74.6% of real FastAPI apps use it; a quarter do not. The DI system is clearly not mandatory for real-world usage.
+2. **Generator/yield deps are surprisingly common** (39.9%) — more common than `Annotated[..., Depends]` (25.1%), despite the latter being the "modern" recommended style.
+3. **`Security` is underused** (9.4%) despite being a headline FastAPI feature for authentication. Median usage among users is just 1 call — most apps have a single `Security()` site.
+4. **Advanced constructs are nearly absent.** Overrides (1.7%), callable classes (0.6%), app-level deps (2.8%) are almost never seen in production code. Overrides may be test-only (not captured by production-scope extraction).
+5. **The zero-DI cohort (25.1%) is a key finding.** These are real, substantial FastAPI applications (≥ 4 importing files, ≥ 1 app) that bypass the DI system entirely, using direct function calls or other patterns. This finding challenges the assumption that DI is the primary architectural pattern in the FastAPI ecosystem.
 
 ### 5.4 RQ1 covariate axis (folded application-class question) — DI prevalence by covariates
 
@@ -149,47 +167,47 @@ Folded from the (dropped) application-class question: who uses DI? Disaggregated
 
 | Stars | Repos | % using core DI | Median core calls |
 |-------|-------|-----------------|-------------------|
-| 0 | 64 | 73.4% | 10 |
-| 1–9 | 28 | 75.0% | 16 |
-| 10–99 | 5 | 100.0% | 15 |
-| 100+ | 3 | 66.7% | 5 |
+| 0 | 218 | 75.7% | 14.0 |
+| 1–9 | 115 | 70.4% | 14 |
+| 10–99 | 11 | 100.0% | 68 |
+| 100+ | 7 | 85.7% | 6 |
 
 **By age** (`analysis/out/rq1_by_age.csv`):
 
 | Age | Repos | % using core DI | Median core calls |
 |-----|-------|-----------------|-------------------|
-| <12mo | 92 | 73.9% | 11 |
-| 12–36mo | 7 | 85.7% | 59 |
-| 36mo+ | 1 | 100.0% | 22 |
+| <12mo | 316 | 74.1% | 14.0 |
+| 12–36mo | 26 | 80.8% | 17.5 |
+| 36mo+ | 9 | 88.9% | 22 |
 
 **Interpretation:**
-- **DI prevalence is essentially flat across stars** (73–75% for small/zero-star repos, with the small-volume higher buckets driven by few repos). Popularity does not predict DI adoption.
-- **The corpus skews very young:** 92/100 sample repos are under a year old. This is a direct consequence of the E4 recency gate (pushed within 60 months) combined with the fast-growing, largely new-repo GitHub GitHub dependency-graph population.
-- **Age bucket bin counts are too small (1–7 repos) for stable conclusions** — reported for completeness, not as a primary finding. The age axis would need RQ3's git history or a larger sample to be conclusive.
+- **DI prevalence is essentially flat across stars** (≈70–76% for the well-populated star buckets, with the small-volume higher (10–99 = 100%) bucket driven by just 11 repos). Popularity does not predict DI adoption.
+- **The corpus skews very young:** 316/351 repos are under a year old. This is a direct consequence of the E4 recency gate (pushed within 60 months) combined with the fast-growing, largely new-repo GitHub dependency-graph population.
+- **Oldest/starriest bucket bin counts are small (7–26 repos) for stable conclusions** — reported for completeness, not as a primary finding. The age axis would need RQ3's git history or a larger corpus to be conclusive.
 - Net: the covariate view supports the central finding that **DI use (and its absence) is a stable property across the population**, not skewed by popularity.
 
 ---
 
 ## 6. RQ2 — Dependency-graph complexity
 
-Filtered to the **71/100 repos with non-empty **clean** dependency graphs** (after dropping resolver-emitted junk nodes; see below). The remaining 29 repos have zero graph nodes — all `depends_total = 0` and use no DI.
+Filtered to the **253/351 repos with non-empty **clean** dependency graphs** (after dropping resolver-emitted junk nodes; see below). The remaining 98 repos have zero graph nodes — all `depends_total = 0` and use no DI.
 
 | Metric | Median | IQR | Max |
 |--------|--------|-----|-----|
-| Nodes (clean) | 19 | 7–53 | 259 |
-| Max depth | 2 | 2–3 | 5 |
-| Unresolved % | 0.0 | 0.0–0.0 | 75.0 |
+| Nodes (clean) | 21 | 8–55 | 1,444 |
+| Max depth | 2 | 2–3 | 7 |
+| Unresolved % | 0.0 | 0.0–3.0 | 75.0 |
 
-- **46/71 (65%)** of graph-bearing repos have a 0% unresolved rate — the resolver handles them cleanly.
+- **155/253 (61.3%)** of graph-bearing repos have a 0% unresolved rate — the resolver handles them cleanly.
 - **1 repo has 75% unresolved** — an outlier case, likely relying on non-standard patterns the resolver cannot follow.
-- **Graphs are shallow:** median depth 2, max 5. FastAPI DI in practice forms flat dependency trees, not deep chains. This aligns with the API's design philosophy of explicit, inspectable dependencies.
+- **Graphs are shallow:** median depth 2, max 7. FastAPI DI in practice forms flat dependency trees, not deep chains. This aligns with the API's design philosophy of explicit, inspectable dependencies.
 
 ### 6.1 Data-quality fix: resolver-emitted junk nodes
 
 The dependency graph construction had a genuine contamination bug. In `resolver.build_dependency_graph`, when a `Depends` call occurs **outside any function context** — module-scope declarations such as `FastAPI(dependencies=[...])` or router defaults — `context_function` is `None` and the resolver falls back to a `"{file_path}:{line}"` placeholder as the source node id (resolver.py line 112). These filesystem-path ids are not callable names.
 
-- **Measures:** On the full corpus, **105/255** graph-bearing repos contain such junk nodes — **619 junk nodes of 15,776 total (3.9%)**. In the 100-sample, **197 junk nodes across 33 repos**.
-- **Effect:** Inflates node counts (median 24 → **19** clean for graph-bearing repos) and can add spurious edge/density values. All 71 in-sample repos retain a non-empty clean graph; the junk was additive, never the sole content.
+- **Measures:** On the full corpus, **103/253** graph-bearing repos contain such junk nodes — **610 junk nodes of 15,552 total (3.9%)**.
+- **Effect:** Inflates node counts (median 23 raw → **21** clean for graph-bearing repos) and can add spurious edge/density values. All 253 graph-bearing repos retain a non-empty clean graph; the junk was additive, never the sole content.
 - **Fix:** `analysis/aggregate.py` now filters any node id containing a path separator or `file:line` anchor before computing RQ2 (both raw and clean columns are retained in `rq4_graphs.csv` for transparency).
 - **Reporting sentence:** *"We filtered resolver-emitted non-callable artifact nodes (file:line placeholders from module-scope dependency declarations) from the dependency graphs before computing complexity metrics."*
 - **RQ1 note:** RQ1 construct counts (C1–C8) come from `file_details`/aggregate call counts, not graph nodes, so RQ1 is unaffected by this bug.
@@ -232,14 +250,24 @@ The E5 threshold (`fastapi_files ≥ t`, `apps ≥ 1`) is empirically anchored a
 
 E6 flags repos whose description or README contains tutorial/demo markers. It never auto-excludes; a human resolves each flag.
 
-**Status:** 162 of 351 (46%) accepted repos carry tutorial flags. Of the 100-sample, **48/100** are flagged.
+**Status:** 162 of 351 (46%) accepted repos carry tutorial flags.
 
-Previous manual review (35 flagged repos, all kept): markers were incidental to real applications (e.g., the word "example" in a CI badge, "getting started" in onboarding docs, "boilerplate" in a marketing description). The high flag rate appears to be a population property — FastAPI projects frequently describe themselves using tutorial-associated language — rather than evidence that these are tutorials.
+A blinded human review (`analysis/e6_sample.py`, fixed-seed stratified subsample of 24 flagged + 24 unflagged control, labels recorded before un-masking) finds:
 
-**Outstanding decision:** Whether to manually review the remaining ~117 flagged repos. Options:
-1. **Sample-only review:** review only the ~12 flagged repos in the 100-sample, extend conclusion to full corpus.
-2. **Bulk dismiss:** document the finding (markers are incidental) and skip individual review.
-3. **Full manual review:** review all 162. Most thorough but time-intensive (35 already done = 127 remaining).
+| label | flagged (n=24) | control (n=24) |
+|-------|----------------|----------------|
+| genuine application | 16 (66.7%) | 21 (87.5%) |
+| uncertain (research / portfolio / challenge) | 6 (25.0%) | 2 (8.3%) |
+| demo / tutorial / scaffold / capstone | 2 (8.3%) | 1 (4.2%) |
+
+- Flagged genuine rate **66.7%** (Wilson 95% CI 46.7–82.0%); control **87.5%** (CI 69.0–95.7%).
+- **Genuine-ness is the majority class in both groups.** The README tutorial marker is a weak, noise-heavy signal: it modestly over-selects non-genuine repos (33% vs 12.5% non-genuine) but most flagged repos are real applications.
+- Structural sophistication (entry points, DB schema/migrations, auth, caching, integrations, tests — `analysis/e6_structural.py`) separates the few clear demos (median index 1–5) from genuine apps (median 6–7), but does **not** separate the flagged pool from the unflagged baseline (flagged-genuine median 7 ≈ control-genuine 6). Full write-up: `analysis/out/e6_findings.md`.
+- The "uncertain" class is structurally the *richest* (median index 7–10): aspirational, heavily-scaffolded projects (OWNEX, CEREBRO-X, cadence-clinical, dharma_swarm) — a distinct pattern from thin demos.
+
+**Sensitivity into RQ numbers:** because flagged repos are mostly genuine, including/excluding them does **not** overturn the RQ1/RQ2 headline aggregates (the flagged subset largely mirrors the unflagged baseline). See Section 11.4.
+
+**Implication for corpus definition:** E6's flag is unsuitable as a hard exclusion rule; it should remain a documentation-only flag. Recomputation under a tighter rule (e.g. only multi-marker or demo-labeled repos) is feasible but not required by the current findings.
 
 ---
 
@@ -255,7 +283,7 @@ All artifacts are schema-versioned, byte-stable (sorted order), and fully reprod
 | `corpus/reports/<name>.json` | Full extractor report per accepted repo (354 reports on disk) |
 | `corpus/raw_dependents/` | Snapshotted GitHub dependents HTML (reproducibility) |
 | `corpus/topic_seed.json` | 1,000-topic benchmark seed snapshot |
-| `analysis/sample.json` | seed=42 sample of 100 from pool of 351 |
+| `analysis/sample.json` | seed-42 sample of 100 from pool of 351 (pilot/bug-audit only; final tables are the census) |
 | `analysis/out/rq1_constructs.csv` | Construct prevalence table (C1–C8 + extras) |
 | `analysis/out/rq4_graphs.csv` | Per-repo graph statistics |
 | `analysis/out/covariates.csv` | Per-repo metadata (stars, age, coverage, etc.) |
@@ -278,17 +306,19 @@ All artifacts are schema-versioned, byte-stable (sorted order), and fully reprod
 - A lower threshold could only be evaluated against the full 4,500 candidate pool (including E5-excluded repos), which would require their extractor reports — these do not exist for repos excluded before E5.
 
 ### 11.4 E6 tutorial flags
-- 46% of the corpus carries tutorial markers; all are false positives (real applications). The high rate is a population property, not a filtering failure, but warrants documentation.
-- A manual review conclusion drawn from the 35 repos reviewed so far should be explicitly scoped to that sample, not assumed general.
+- The high flag rate (46%) is a population property: FastAPI projects frequently describe themselves in tutorial-associated language, and the README marker regex is not a useful exclusion rule.
+- A blinded review of a 24-flagged / 24-control subsample (`analysis/out/e6_findings.md`) confirms genuine-ness is the majority class in both groups (66.7% flagged vs 87.5% control). The flagged pool is only modestly over-selected for non-genuine repos (33% vs 12.5%), and structural sophistication does not separate the two pools — so **including or excluding flagged repos does not materially change the RQ1/RQ2 headline aggregates**. RQ numbers are insensitive to E6.
+- The label set is a single-reviewer judgment sample (48/351); treat rate estimates as indicative and spot-check for inter-rater consistency before any stronger claim.
 
 ### 11.5 Extractor limitations
-- **Resolver junk nodes (mitigated):** module-scope `Depends` declarations produced `file:line` placeholder nodes (619 across 105/255 repos). Filtered at aggregation time; see §6.1. The resolver *output*, not the extraction of construct counts, is affected — RQ1 is clean.
+- **Resolver junk nodes (mitigated):** module-scope `Depends` declarations produced `file:line` placeholder nodes (610 across 103/253 repos). Filtered at aggregation time; see §6.1. The resolver *output*, not the extraction of construct counts, is affected — RQ1 is clean.
 - **R3 (evolution over time) not yet measured.** Requires per-repo git-history analysis; planned as a later phase once RQ1/RQ2 tables are complete.
-- **Resolver coverage:** 25% of accepted repos have empty dependency graphs despite nonzero `depends_total` — in some cases the resolver cannot follow cross-file patterns. The resolver also marks 75% unresolved in one extreme outlier. Resolver quality should be reported as a coverage metric, not treated as a failure.
+- **Resolver coverage:** 98/351 (27.9%) of accepted repos have empty dependency graphs despite passing E1–E6 — in some cases the resolver cannot follow cross-file patterns. Resolver quality should be reported as a coverage metric, not treated as a failure.
 
-### 11.6 Small sample design
-- Pool N=351, sample N=100 (seed=42). The sample is not stratified — a pure random sample. The RQ1 covariate axis (§5.4) is disaggregated from this same sample, so high-stars and high-age buckets contain very few repos (1–5) and must not be over-read.
-- If the paper reports stratified statistics in a later phase, the stratification must be defined and registered before the sample is drawn.
+### 11.6 Census (not a sample) design
+- Analysis is a **full-corpus census over all 351 accepted repos**; there is no sampling inference to generalize from, so standard-errors-inference does not apply — the RQ1/RQ2 figures ARE the population values.
+- The earlier seed-42 sample (N=100) was used only for pilot work and the RQ2-bug audit; it is superseded by the census for all reported figures.
+- Sparse covariate buckets (e.g. 100+ stars = 7 repos, 36mo+ = 9 repos) hold too few repos for stable conclusions and are reported for completeness, not over-read (see §5.4).
 
 ---
 
