@@ -1,0 +1,352 @@
+repo,tutorial_flag,marker_count,markers,stars_gh,py_ratio,has_scripts,has_setup_py,has_dockerfile,has_compose,has_ci,has_makefile,has_helm,has_migrations,uses_orm,has_sql_schema,uses_custom_auth,uses_cache,uses_workers,has_tests,has_precommit,integration_count,py_files,py_loc,packages,sophistication_index
+0x0021/Linkora,False,0,,1,0.7676,False,False,True,True,True,False,False,False,False,False,True,True,False,True,True,3,438,102330,16,7
+1semptify-arch/Semptify,False,0,,0,0.7166,False,False,True,True,True,True,False,True,True,False,True,True,False,True,True,4,1218,290007,154,10
+34LiuNian/OopsNote,False,0,,2,0.5244,False,False,True,True,False,False,False,False,False,False,True,True,False,True,False,0,106,24769,18,5
+4alvit/energy-data-rag-pipeline,True,6,"markers=['example', 'sample', 'template']",0,0.9557,True,False,True,True,True,False,False,False,True,True,False,True,False,True,True,0,26,2257,7,9
+4ch1m/pixoo-rest,True,4,"markers=['example', 'getting started']",331,0.9651,False,False,True,True,False,False,True,False,False,False,True,True,False,False,False,1,21,1010,4,5
+59psi/headroom,False,0,,2,0.5397,False,False,True,True,True,False,False,False,True,False,False,True,False,True,False,0,94,10683,8,6
+88866888/MoviePilot,False,0,,0,0.994,False,True,True,False,True,False,False,False,True,False,True,True,False,True,False,5,258,48992,37,7
+8fqycwdt8v-oss/Chemclaw3,True,4,"markers=['example', 'template']",0,0.982,True,False,False,True,True,True,True,False,False,False,True,True,False,True,True,0,591,125587,47,9
+AdenChenCoder/trade-compass-agent,False,0,,1,0.8892,True,False,False,False,True,False,False,False,False,False,False,True,False,True,False,0,296,64668,25,4
+AdriDob/rastrohunteralpha,True,2,markers=['learn'],1,0.8129,False,False,False,False,True,True,False,True,True,False,False,True,False,True,True,4,2098,417715,313,7
+Alaa-Eldeen-Essam/Nile-Connect-Support-AI,True,4,"markers=['demo', 'example']",0,0.7012,False,False,True,True,True,False,False,False,True,False,False,False,False,True,False,0,22,780,5,5
+Alajmah/NodeChain,True,2,markers=['demo'],0,0.9973,True,False,True,True,True,True,False,False,False,False,False,True,False,True,False,0,612,233582,24,7
+AlbanAndrieu/fastapi-sample,True,6,"markers=['demo', 'getting started', 'sample']",0,0.7664,True,True,True,True,True,True,True,True,True,False,True,True,False,True,True,0,139,16529,12,13
+Alg0rix/tomo,True,4,"markers=['getting started', 'learn']",0,0.6919,True,False,True,True,True,False,False,False,False,False,False,True,False,True,False,0,360,55482,38,6
+AlphaHorizon-AI/Shogun,False,0,,7,0.6376,True,False,True,True,True,False,False,True,True,False,True,True,False,True,False,0,558,119049,41,9
+AmitabhainArunachala/dharma_swarm,True,2,markers=['demo'],1,0.878,True,False,True,True,True,True,False,True,False,False,False,True,False,True,True,1,2477,799178,100,9
+Anmolnoor/skep,True,2,markers=['demo'],1,0.9297,True,False,True,True,True,True,False,False,False,False,False,True,False,True,False,0,386,122874,20,7
+AristaLabs/smeme,True,4,"markers=['example', 'template']",0,0.8192,False,False,True,False,True,False,False,True,True,False,True,True,False,True,False,0,293,62336,20,7
+AtaCanYmc/robo-market-search,False,0,,0,0.98,True,False,True,True,True,False,False,False,False,False,True,True,False,True,True,1,108,6238,28,8
+AugmentumHQ/Augmentum,False,0,,0,0.6697,True,False,True,True,True,False,False,False,False,True,True,True,False,True,False,1,2792,1001423,154,8
+Avadis7860/forgemaster,False,0,,0,0.738,True,False,True,True,False,False,False,False,False,False,False,False,False,True,False,0,198,43851,19,4
+Axellum/vromvrom-engine,True,2,markers=['learn'],0,0.7255,False,False,True,True,True,False,False,False,False,False,False,True,False,True,True,5,402,97498,12,6
+Azure-Samples/chat-with-your-data-solution-accelerator,True,6,"markers=['learn', 'sample', 'template']",1172,0.6486,False,False,True,False,True,True,False,False,False,False,False,True,False,True,True,1,246,49879,30,6
+BernydotJar/OS-Electoral,True,2,markers=['demo'],0,0.7068,True,False,True,True,True,True,False,False,True,False,True,True,False,True,False,1,254,70461,19,9
+BlessedRebuS/Krawl,True,4,"markers=['demo', 'template']",556,0.7511,False,False,True,True,True,False,True,False,True,False,False,True,False,True,False,5,56,15590,5,7
+Bmowville/dataops-observability-api,True,4,"markers=['example', 'sample']",0,0.5702,False,False,True,True,True,False,False,True,True,False,False,True,False,True,False,0,47,3925,8,7
+Bobbyjsx/cognito-chat-api,True,2,markers=['example'],0,0.992,False,False,True,True,False,True,False,False,False,False,True,True,False,True,False,1,63,6301,3,6
+BoriskaGlebov/vpn_bot,False,0,,2,0.9718,False,False,True,False,True,False,False,False,True,False,True,True,False,False,True,7,341,42499,70,6
+BramAlkema/svg2pptx,False,0,,1,0.9569,True,False,False,False,True,False,False,False,False,False,True,True,True,True,True,2,946,274654,122,7
+Braydenh563/MemoryMap-AI,False,0,,1,0.5834,True,False,False,False,True,True,False,False,True,False,True,True,False,True,True,3,185,55212,6,8
+CaspianG/wavemind,True,2,markers=['learn'],6,0.9881,True,False,True,True,True,False,True,False,False,False,False,True,False,True,False,3,343,159875,2,7
+CatholicOS/martyrology-api,True,2,markers=['sample'],0,0.8512,False,False,True,True,True,False,False,True,True,False,False,False,False,True,False,0,60,10970,3,6
+Christie-Scientific-Computing/HERMES,True,4,"markers=['example', 'getting started']",0,0.9961,False,False,True,True,True,False,False,False,True,False,False,True,False,False,False,4,107,12971,12,5
+Ciiceronee/Ciiceronee,True,2,markers=['template'],544,0.997,True,False,True,True,True,True,False,True,True,False,True,True,False,True,True,10,163,76402,25,11
+CuevazaArt/Pecunator-AccuMonetas,False,0,,0,0.7255,False,False,False,False,True,False,False,False,False,False,False,True,False,True,False,0,180,31050,15,3
+DICKY1987/eafix-modular,True,2,markers=['example'],1,0.957,True,False,False,False,True,False,True,False,True,False,True,True,False,True,True,4,453,92809,51,8
+Dadowatt/smarthelp-support-api,False,0,,0,1.0,False,False,False,False,False,False,False,False,False,False,True,True,False,True,False,2,24,1004,9,3
+DansiDanutz/MoneyPrint,False,0,,0,0.9743,False,False,True,True,True,False,False,False,False,False,True,True,False,True,False,4,80,29018,6,6
+DansiDanutz/SemeClaw,True,4,"markers=['demo', 'template']",0,0.5809,True,False,True,True,True,True,False,True,False,True,True,True,False,True,True,0,277,50994,33,11
+Danush-Aries/OpenJarvis,True,2,markers=['learn'],0,0.8354,True,False,True,True,True,False,False,False,False,False,True,True,True,True,True,1,1326,268459,112,9
+Dezodemius/dndshing,False,0,,0,0.5693,False,False,True,True,True,False,False,True,True,False,True,True,False,True,False,2,88,12162,8,8
+Dhruv716-stack/-MyMed-Medical-RAG-System-,True,2,markers=['demo'],1,0.7971,False,False,False,True,False,False,False,False,True,False,True,True,False,False,False,3,118,11482,18,4
+Dilip-Bhakadiwal/AI-Projects,True,2,markers=['learn'],0,0.8055,False,False,True,True,True,False,False,False,True,False,False,True,False,False,False,7,66,6318,13,5
+DockVault/vault,False,0,,4,0.7495,False,False,True,True,True,False,False,False,True,False,True,True,False,True,False,3,280,91974,7,7
+Dr-Opara/VictoriaOS,False,0,,0,0.6326,False,False,False,True,True,False,False,False,True,False,True,True,False,True,False,8,137,7322,26,6
+DrDonoso/Finlytics,True,2,markers=['demo'],1,0.5789,False,False,True,True,True,False,False,True,True,False,True,True,False,True,False,0,188,51138,20,8
+ENNEADLABS/xais-vault,True,2,markers=['learn'],0,0.5793,False,False,True,True,True,False,False,False,False,True,True,True,False,True,False,7,211,33914,29,7
+EarthSpark/thundercloud,True,2,markers=['example'],4,0.6532,False,True,True,False,True,False,False,False,True,False,True,True,False,False,True,0,520,66918,39,7
+Endika/feedback-form-api,True,2,markers=['example'],0,0.9769,False,False,True,True,False,True,False,False,False,False,False,False,False,True,True,1,89,3273,25,5
+Endkind/Music-Roulette-Backend,False,0,,0,0.8471,False,False,True,False,True,False,False,False,False,False,True,True,False,False,True,2,32,369,17,5
+F4TB0Yz/kirospan,False,0,,0,0.997,True,False,False,False,True,False,False,False,False,False,False,False,False,True,False,0,77,9870,13,3
+Feberdin/local-multi-agent-company,False,0,,1,0.872,False,False,True,True,True,False,False,False,True,False,False,True,False,True,False,0,122,40935,22,6
+Feberdin/security-watchdog,False,0,,2,0.8926,False,False,True,True,True,False,False,False,True,False,False,True,False,True,False,0,72,19238,10,6
+FlowElement-xinliuyuansu/m_flow,True,2,markers=['example'],4440,0.7291,True,False,True,True,True,True,True,True,True,False,False,True,False,False,True,7,1061,149142,242,10
+FlowWhite/course-agent,True,2,markers=['course'],2,0.6438,False,False,True,True,True,False,False,False,False,True,True,False,False,False,False,1,47,6050,6,5
+Foshati/codefa,False,0,,5,0.9471,True,False,False,False,True,False,False,False,False,False,False,True,False,True,False,0,436,93283,40,4
+GIScience/cachet-alertmanager-webhook-adapter,True,4,"markers=['example', 'template']",0,0.9977,True,False,True,True,False,False,False,False,True,False,False,False,False,True,True,0,37,4493,8,6
+Ganesh-403/semantic-plagiarism-detector,True,2,markers=['demo'],15,0.9992,False,False,True,True,True,True,False,False,False,True,True,True,True,True,True,6,443,119759,29,10
+Garrettc123/client-onboarding-platform,True,4,"markers=['example', 'template']",0,0.9768,False,False,True,True,True,False,False,False,True,False,False,True,True,False,False,3,19,654,5,6
+GautamChaudhri/Marquee,True,4,"markers=['getting started', 'learn']",0,0.7788,False,False,True,True,True,False,False,True,True,False,False,True,False,True,False,0,334,108007,15,7
+GiftlyKSA/giftly_backend,False,0,,0,0.967,False,False,True,True,True,False,False,False,True,False,True,True,False,True,False,0,174,22881,19,7
+GiraffeTechnology/aivan,True,4,"markers=['demo', 'example']",2,0.9489,True,False,False,False,True,False,False,False,True,False,False,True,False,True,False,0,257,31738,28,5
+GlacierEQ/ECHO,True,2,markers=['demo'],0,0.9645,True,False,True,True,True,False,False,False,True,False,True,True,False,True,False,1,25,3491,1,8
+Glitchedpixel-io/media-api,False,0,,1,0.9903,False,False,True,True,True,False,False,True,True,False,True,True,False,True,False,0,228,34644,15,8
+GoLukeEnviro/numerology-analyst-agent,False,0,,0,0.6918,True,False,False,True,True,True,False,False,False,False,False,True,False,True,False,0,124,15373,20,6
+GolubchikovKirill/InfraScope,False,0,,1,0.6204,False,False,True,True,True,False,False,True,True,False,True,True,True,True,False,0,266,31491,26,9
+GuilhermeLossio/Tech-Challange-FIAP-5,True,8,"markers=['demo', 'example', 'getting started', 'learn']",0,0.7297,False,False,True,False,True,False,False,False,True,True,True,True,False,True,False,0,88,10039,13,7
+Hemang0710/Cinach,False,0,,0,0.9901,False,False,True,True,True,False,False,True,True,False,False,True,False,True,True,0,108,10897,13,8
+Hitesh709/titan-x,True,2,markers=['example'],0,0.9192,True,False,True,True,True,False,False,True,True,False,True,True,False,True,False,3,513,107078,22,9
+I-ivan-x/agent-reliability-lab,False,0,,1,0.9477,False,False,True,True,True,True,False,False,False,False,False,True,False,True,False,0,391,78401,22,6
+IBM/docling-pipelines,True,2,markers=['template'],10,0.9944,True,False,True,True,True,False,False,False,True,False,True,True,False,True,True,16,818,202469,251,9
+ISEU-Cloud-Dev/Team-Delta-,False,0,,0,0.6682,False,False,False,True,True,False,False,True,True,False,True,False,False,True,False,1,37,1730,1,6
+ItsWanheda/Auth-API,False,0,,0,0.982,False,False,True,True,True,True,False,True,True,False,True,True,False,False,False,3,52,2803,12,8
+JINXia-hz/LLMSafetyTester,False,0,,0,0.87,True,False,True,True,True,False,False,False,False,False,False,True,False,True,True,0,178,41687,21,7
+JakobAshfield/log-platform,False,0,,0,0.9787,False,False,True,True,True,False,False,True,True,False,True,True,False,True,False,8,23,1252,3,8
+Jzy258/canteen-recommendation-agent,True,2,markers=['example'],3,0.7915,False,False,True,True,False,False,False,False,False,True,True,True,False,True,False,0,98,9824,26,6
+KB-NEST/Backend,False,0,,0,1.0,False,False,False,False,False,False,False,False,False,True,False,False,False,False,False,5,39,6830,0,1
+KayvanShah1/firebase-realtime-db-emulator,False,0,,0,0.9205,False,False,True,True,True,False,False,False,True,False,True,True,False,True,False,2,51,2324,12,7
+Kevin-O-Hsu/Sealium,False,0,,3,1.0,False,False,False,False,True,False,False,False,False,False,False,True,False,True,False,0,58,6857,7,3
+KineticSystems/harbor,True,2,markers=['example'],0,0.937,True,False,True,True,True,False,False,False,False,False,True,True,False,True,False,0,1251,359450,130,7
+Kirito161718/Obsidian-Learning-Agent,True,2,markers=['learn'],1,0.8876,False,False,True,True,False,False,False,True,True,False,True,True,False,True,False,4,214,32403,18,7
+Kirky-X/weaver,False,0,,1,0.997,False,False,True,True,True,False,False,False,True,False,True,True,False,True,True,0,1044,284389,180,8
+Krumqnkata/AI-TV-COMPUTER_VISION,True,2,markers=['template'],0,0.6624,False,False,False,False,True,False,False,True,True,False,True,True,False,True,False,1,75,15741,6,6
+LiXuanyaun/cross-border-ecommerce-analysis,False,0,,0,0.6805,True,False,True,False,True,False,False,False,False,False,True,True,False,True,False,0,88,20220,4,6
+Lians-ai/Lians,False,0,,2,0.924,True,False,True,True,True,False,False,False,True,False,True,True,False,False,False,1,342,85837,11,7
+Lohith-07-coder/Sentrimail,True,2,markers=['learn'],1,0.5752,False,False,False,False,False,False,False,False,True,False,True,True,False,True,False,1,29,2502,6,4
+LuminariMUD/sage,False,0,,1,0.8624,False,False,True,True,True,True,False,False,True,False,True,True,True,True,True,11,236,65904,19,10
+MATZ-Solution/Info_Senior_Care_Backend,True,2,markers=['example'],0,0.9993,False,False,False,True,False,False,False,True,True,False,True,True,False,True,False,8,117,23472,13,6
+MJ-CJM/tianshu,True,2,markers=['learn'],1,0.8488,True,False,True,False,True,False,False,False,False,False,False,True,False,True,True,1,948,221045,73,6
+MOK-5-ha/MayaMCP,True,6,"markers=['course', 'demo', 'learn']",1,0.6808,True,True,True,False,False,False,False,False,False,False,False,True,False,True,False,3,121,24655,15,5
+Maheesh09/IncidentIQ,False,0,,0,0.994,False,False,True,True,True,False,False,True,True,False,True,False,False,True,False,5,56,6451,11,7
+Malaber/repperoni,True,2,markers=['example'],0,0.7291,False,False,True,True,True,False,False,True,True,False,True,True,False,True,False,0,43,4394,10,8
+ManibalaSinha/data_pipeline,True,4,"markers=['demo', 'sample']",0,0.8424,False,False,True,True,False,False,False,False,True,False,True,False,True,True,False,6,43,644,7,6
+Markhhyu/equipment-rag-agent,True,2,markers=['demo'],1,0.7929,False,False,True,True,True,False,False,False,True,False,False,True,False,True,False,0,297,27063,59,6
+MasSciencer/raph-line,False,0,,3,0.799,False,False,False,False,True,False,False,False,False,False,False,True,False,True,False,0,431,71358,47,3
+Michael-Rocco-Goldmann/claude-code-proxy---Kirran,True,2,markers=['example'],2,0.8022,True,False,True,True,True,False,False,False,False,False,False,True,False,True,False,1,49,11523,5,6
+Mooncore-inc/demon-cry,True,2,markers=['demo'],0,0.6616,False,False,True,False,True,False,False,False,False,False,False,False,False,True,True,0,13,730,2,4
+MusheAbdulHakim/Yoma-Triage,False,0,,0,0.5891,False,False,False,False,False,False,False,False,True,False,True,False,False,True,True,5,64,6480,8,4
+MwoMeokJo/MwoMeokJo,True,4,"markers=['demo', 'example']",0,0.9987,False,False,True,False,True,False,False,False,False,False,True,True,False,True,False,3,88,8875,12,5
+NMsby/clinic-booking-api,True,2,markers=['learn'],0,0.9739,False,False,True,True,True,False,False,True,True,False,False,False,False,True,False,1,27,1140,6,6
+Nebur692/ha-login-approval,False,0,,0,0.9142,False,False,True,True,True,False,False,False,False,False,True,True,False,True,False,0,39,4490,1,6
+NeuroticGamer99/healthspan,False,0,,0,1.0,True,False,False,False,True,False,False,False,False,False,False,True,False,True,False,0,120,52880,2,4
+NoorRattan/GitRoast.ai,True,6,"markers=['demo', 'example', 'sample']",1,0.5305,False,False,False,False,True,False,False,True,True,False,False,True,False,True,False,0,47,5660,6,5
+NooruzbekT/demand-pulse,True,6,"markers=['demo', 'example', 'learn']",0,0.8334,False,False,True,False,True,False,False,False,True,False,True,True,False,True,False,3,44,2040,11,6
+NorthernLatitude40/onto-agent,False,0,,1,0.9947,False,False,True,True,True,False,False,False,True,False,True,True,False,True,False,0,89,10161,0,7
+Nyaecho/web_aily2api,True,2,markers=['example'],0,0.8727,False,False,False,False,True,False,False,False,False,False,False,False,False,True,False,0,20,1898,2,2
+OpenG2P/awe,False,0,,0,0.7605,False,False,True,True,True,False,True,False,True,False,True,True,False,True,False,0,71,12717,7,8
+OpenHubble/metrics-dashboard-backend,False,0,,1,0.9911,False,False,True,False,False,False,False,True,True,False,True,False,False,False,False,0,56,3454,3,4
+Oxygen56/TripChord,False,0,,1,0.7358,False,False,True,True,True,False,False,True,True,False,False,True,False,False,False,0,219,107265,8,6
+Palak009944/PROJECT-2.0,False,0,,0,1.0,False,False,False,False,False,False,False,False,False,False,True,False,False,False,False,3,20,1601,0,1
+Peter-McCann-Strain/Personal_Execution_OS,True,2,markers=['sample'],0,0.7118,True,False,True,True,True,False,False,False,True,False,True,True,True,True,True,0,598,156272,31,10
+Playdovsky/GammaBackend,True,2,markers=['learn'],0,0.9858,False,False,True,False,True,False,False,False,True,False,True,False,False,True,False,1,15,754,2,5
+PodZonePlatformEngineering/gitopsapi,False,0,,1,0.9689,False,False,True,True,True,True,True,False,False,False,False,True,False,True,False,0,106,17802,15,7
+Project-Practicum-2026/Project-Practicum-Backend,True,4,"markers=['example', 'getting started']",0,0.9915,False,False,True,True,False,False,False,True,True,False,True,True,True,True,False,5,75,3954,11,8
+ProjectViventium/google_workspace_mcp,True,2,markers=['starter'],0,0.9949,True,False,True,True,False,False,True,False,False,False,True,True,False,True,False,0,62,16498,14,7
+Quantum-L9/Cognitive.Engine.Graphs,True,4,"markers=['learn', 'sample']",1,0.9566,False,False,True,True,True,True,False,False,True,False,True,True,False,True,True,5,364,74253,43,9
+RAJA-432/hiil,True,4,"markers=['demo', 'example']",0,0.7703,False,False,True,True,True,True,False,False,False,False,True,True,False,True,True,0,298,34807,33,8
+ROJIT270/DSANexus_Capstone,True,2,markers=['course'],0,0.5831,False,False,False,False,True,False,False,False,True,False,True,True,False,False,False,9,162,139225,0,4
+RedBeret/earth-observation-verification-lab,False,0,,0,0.9649,True,False,True,True,True,False,False,False,True,False,True,True,False,True,False,3,97,10044,7,8
+RiyaRedkar/Indus_Brain,True,4,"markers=['demo', 'learn']",0,0.6886,False,False,False,False,False,False,False,False,False,False,True,False,False,True,False,3,52,14444,4,2
+Roman-Andr/cosmetic-bot,True,4,"markers=['example', 'template']",0,0.5755,True,False,True,True,True,False,False,True,True,False,False,True,False,True,False,0,57,5235,10,8
+SEO-Dynamics/Wind-Turbine-Predictive-Maintenance-Platform,False,0,,0,0.9671,False,False,True,True,True,True,False,False,False,False,True,True,False,True,True,4,115,26419,15,8
+SSKG2602/chronorag-acv,False,0,,1,0.9945,False,False,False,False,True,True,False,False,True,False,False,True,False,True,False,2,143,27009,11,5
+SWHee/finbom-agent,False,0,,1,0.7644,False,False,True,True,True,False,False,False,False,False,False,False,False,True,False,0,82,7923,9,4
+SameerAliKhan-git/CORPUS-System,False,0,,1,0.6951,False,False,True,True,True,True,False,False,True,False,False,True,True,True,True,0,115,16342,14,9
+SansMercantile/kev,False,0,,0,0.9621,False,False,True,False,False,False,False,False,True,False,True,True,False,True,False,7,1150,82069,13,5
+Se2logy/guest_checkin,True,2,markers=['demo'],0,0.8485,False,False,False,False,False,False,False,False,False,False,False,True,False,True,False,0,66,11970,13,2
+SecondLifes/code-intel,False,0,,2,0.7305,False,False,False,False,True,False,False,False,False,False,True,True,False,True,False,2,39,9986,2,4
+SpectreDeath/Semantic-Memory-Engine,False,0,,0,0.9499,True,False,True,True,True,False,False,False,False,False,True,True,False,True,True,0,464,98874,44,8
+SpectreDeath/skill-flywheel,True,2,markers=['learn'],1,0.982,False,False,False,False,True,False,False,False,True,False,True,True,True,True,False,10,1062,160105,72,6
+SquidSec/SquidC5,False,0,,31,0.7497,True,False,True,True,True,False,False,False,False,False,True,True,False,True,False,0,165,27674,31,7
+SupravoCoder/NIELIT_PRROJECT,False,0,,0,0.9837,False,False,True,True,False,False,False,False,True,False,False,True,False,True,False,2,38,2050,14,5
+TRIOSCS/Avail-AI-Test,False,0,,0,0.9086,False,False,True,True,True,False,False,True,True,False,True,True,False,True,True,6,1999,609664,36,9
+Team-Of-Elites/SurakshaCall-AI,True,4,"markers=['demo', 'learn']",1,0.8208,False,False,True,True,False,False,False,False,False,True,True,True,False,True,False,2,234,19028,17,6
+The-MAST-project/MAST_spec,False,0,,0,0.8415,False,False,False,False,False,False,False,False,False,False,False,True,False,False,False,3,58,25559,13,1
+Thepizzapie/BuildersGate,False,0,,17,0.7222,True,False,False,False,True,False,False,False,False,False,False,True,False,True,False,0,390,176307,7,4
+Tomifarmer/zimmporter-api,True,4,"markers=['example', 'getting started']",0,0.944,False,False,True,True,True,False,False,False,True,False,True,True,True,True,False,0,50,8019,6,8
+Tufts-Technology-Services/rt-analytics-api,False,0,,0,1.0,True,False,False,False,False,False,False,False,True,False,False,False,False,False,False,0,7,133,2,2
+URBREATH/idra-ai-chatbot,True,2,markers=['learn'],0,0.9972,False,False,True,False,False,False,False,False,True,False,True,False,False,True,False,3,60,3733,16,4
+Ulzuhan/reed,True,2,markers=['demo'],1,0.9318,True,False,True,True,True,True,False,False,False,False,False,True,False,True,False,0,83,13003,9,7
+Vimal-Seshadri-Raguraman/simple-multi-agent-chat,False,0,,0,0.6529,True,False,False,False,False,False,False,True,True,False,True,True,False,True,False,1,129,27139,7,6
+WalterSolorzano/ProyectoAPA7,False,0,,0,0.5947,False,False,True,True,True,False,False,False,False,False,True,True,False,False,False,1,171,43355,12,5
+WuiiiGithub/Candilicious,True,2,markers=['learn'],1,0.9987,False,False,True,False,False,False,False,False,True,False,True,False,False,False,False,3,51,14636,4,3
+Xavier-123/api-ragas,False,0,,1,1.0,False,False,False,False,False,False,False,False,False,False,True,False,False,False,False,1,10,1480,0,1
+Zacccyyy/TheRavensNest,True,4,"markers=['example', 'walkthrough']",0,0.6326,False,False,False,False,False,False,False,False,False,False,False,False,False,True,False,0,41,12290,1,1
+ZacharyHu0/QuantMaster,False,0,,0,0.71,True,False,False,False,True,False,False,False,False,False,False,True,False,True,False,0,362,174735,24,4
+a7ttaf/Youtube,False,0,,0,0.8172,False,True,True,True,True,True,False,False,True,False,True,True,True,True,False,4,483,155182,31,10
+aah3/EarningsAgents,False,0,,1,0.7542,False,False,True,True,True,True,False,True,True,False,True,True,True,True,False,11,118,24857,5,10
+aditya226-sharma/netsentinel,False,0,,0,0.8174,False,True,False,False,False,False,False,False,False,False,True,True,False,True,False,0,70,12408,11,4
+ahmdelbaz28-ux/ETAP-AI-WORK-,False,0,,2,0.7685,True,False,True,True,True,True,True,True,True,False,True,True,True,True,True,11,1007,380914,72,13
+aivis-one/comms,False,0,,0,0.9776,False,False,True,True,True,False,False,True,True,False,False,True,False,True,False,0,101,21498,9,7
+al-fara-bi/lens-api,True,2,markers=['example'],0,0.8412,False,False,True,True,False,False,False,True,True,False,False,True,False,True,False,3,42,2663,10,6
+alangg689-dotcom/taxi-fleet-backend,True,2,markers=['example'],0,0.995,False,False,True,True,True,False,False,True,True,False,True,True,False,True,False,3,90,14271,9,8
+alethical-org/alethical,True,2,markers=['demo'],2,0.5252,False,False,True,True,True,False,False,False,True,False,True,True,False,False,False,0,217,99572,7,6
+andrewtryder/unifi-netwatcher,False,0,,0,0.6854,False,False,True,True,True,False,False,True,True,False,False,True,False,True,True,0,81,8736,8,8
+ankit25bcs10610/OmniPotent,False,0,,1,0.8835,True,False,True,True,True,False,True,True,True,False,True,True,True,True,True,1,772,280725,137,12
+ankitrout07/Cloud-Reaper,True,4,"markers=['getting started', 'learn']",1,0.5012,False,False,True,True,True,True,False,False,True,False,True,True,False,True,False,9,91,30089,10,8
+aparragithub/odoo-forge,False,0,,2,0.9756,True,False,True,False,True,False,False,False,False,False,False,True,False,True,False,0,326,61256,50,5
+apricitea/project-aurum,True,4,"markers=['learn', 'sample']",0,0.6491,False,False,True,True,False,False,False,True,True,False,True,True,True,True,False,15,110,30909,8,8
+ardasoyturk/passenger-demand-prediction,False,0,,1,0.8656,False,False,False,False,False,False,False,False,False,False,False,True,False,False,False,0,94,25033,19,1
+areesh-ali/inkboard,True,2,markers=['learn'],0,0.9221,False,False,True,True,False,False,False,True,True,False,True,True,True,True,False,9,68,6029,2,8
+aryansinghnagar/AnonyMus,True,2,markers=['getting started'],0,0.5572,False,False,True,True,True,False,False,True,True,False,True,True,False,True,True,3,107,18789,10,9
+asfrosche/VillageGameBot,False,0,,1,0.9941,False,False,False,False,False,False,False,False,False,False,False,True,False,False,False,3,245,88716,11,1
+ashtonchew/modal-computer-use,False,0,,1,1.0,True,False,False,False,True,False,False,False,False,False,False,True,False,True,False,2,399,174853,15,4
+aws-samples/sample-medical-imaging-mlops,True,2,markers=['getting started'],0,0.5059,False,False,True,True,True,False,False,False,False,False,True,True,False,True,False,4,51,8934,8,6
+baDrsh531/matchiq,True,2,markers=['demo'],0,0.6618,False,False,False,False,True,False,False,False,True,False,False,True,False,True,False,4,59,6917,8,4
+becksclair/honcho,True,2,markers=['learn'],0,0.9088,False,False,True,False,True,False,False,True,True,True,True,True,False,True,True,0,441,141155,42,9
+beenycool/yotuubef,True,2,markers=['example'],1,0.8552,False,False,False,False,False,False,False,False,False,False,True,True,False,True,False,4,63,27137,10,3
+bhav09/gcp-voice-ai-framework,False,0,,4,1.0,False,False,False,False,False,False,False,False,False,False,False,False,False,True,False,0,60,2838,11,1
+bluesky/bluesky-httpserver,False,0,,19,0.9617,True,False,False,False,True,False,False,False,True,False,True,True,False,False,True,0,49,15269,7,6
+bossayan9999/aios-one-command-center,False,0,,0,0.5904,False,False,False,False,True,False,False,False,False,False,False,True,False,True,False,2,111,13638,3,3
+celuma/celuma-backend,True,2,markers=['template'],0,0.9827,False,False,True,True,True,True,False,True,True,False,True,True,False,True,False,3,121,29862,4,9
+chanuka8/argus-gait-recognition,False,0,,0,0.9922,False,False,False,False,True,True,False,False,False,False,True,True,False,True,False,1,327,43053,30,5
+chichi-lyman/saphira-ai,False,0,,2,0.6983,False,False,True,True,True,False,False,False,True,False,True,True,True,True,False,7,191,12484,43,8
+cnapcloud/rag-api,False,0,,0,0.9934,True,False,True,True,True,True,True,True,False,False,False,True,False,True,False,0,143,21156,27,9
+code-with-zeeshan/universal-dependency-resolver,False,0,,1,0.9053,True,False,True,True,True,True,False,True,True,False,True,True,False,True,True,0,326,101260,17,11
+coinexmarket/chatbucket_b2b_backend,False,0,,0,0.9965,False,False,True,False,True,False,False,False,True,False,True,True,False,False,False,2,49,8860,3,5
+computacenter-ro/order-intelligence-layer,False,0,,0,0.7115,False,False,True,True,True,False,False,False,True,False,True,True,False,True,False,4,122,34585,11,7
+cyxc1124/cyxcbot,True,2,markers=['example'],0,0.7694,False,False,True,True,True,False,True,False,True,False,True,True,False,True,False,2,329,52842,35,8
+dabeckham/beckham-share,False,0,,0,0.6154,False,False,True,True,True,False,False,False,True,False,True,True,False,True,False,2,22,1705,4,7
+damien-robotsix/robotsix-file-hub,False,0,,0,0.7139,False,False,True,True,True,False,False,True,True,False,False,True,False,True,True,0,36,7236,3,8
+darkspock/CareerPython,True,4,"markers=['demo', 'template']",1,0.5412,False,False,True,True,True,True,False,True,True,True,True,False,True,True,False,0,1590,102939,493,10
+darkspock/desksupportmonkey,True,4,"markers=['demo', 'template']",21,0.6646,False,False,False,True,False,True,False,True,True,False,True,False,True,True,False,0,1708,150340,493,7
+darkspock/renfeserver,True,2,markers=['getting started'],0,0.9762,False,False,False,True,False,True,False,True,True,False,True,False,True,False,False,0,233,12468,143,6
+dasherrrrrr/video-preview-app,True,2,markers=['example'],0,0.7153,False,False,True,True,False,False,False,False,False,False,True,False,False,False,False,0,25,2247,2,3
+databrickslabs/lakemeter-oss,False,0,,58,0.7359,False,False,False,False,True,False,False,False,True,False,True,True,False,True,False,2,501,89143,47,5
+dhivya-1010/workgen-ai,False,0,,0,0.5113,False,False,False,False,False,False,False,False,False,False,True,False,False,False,False,5,46,6247,4,1
+dikatapulta/HospitalityAIPlatform,True,2,markers=['example'],0,0.9442,False,False,True,True,True,True,False,True,True,False,True,True,False,True,False,0,234,38562,28,9
+dlasley/account-intelligence,False,0,,0,0.8141,False,False,True,False,True,False,False,False,False,False,False,True,False,True,False,0,181,36996,27,4
+dmarakom6/oswg,True,2,markers=['example'],0,0.6269,True,False,False,False,True,True,False,False,False,False,False,False,False,False,False,0,25,2746,4,3
+dmux/minilake,False,0,,5,0.9786,True,False,True,True,True,False,False,False,False,False,True,True,False,True,True,0,96,13998,7,8
+doncazper/ultimate-ai-agent,True,2,markers=['demo'],0,0.8634,False,False,True,True,True,True,False,False,False,False,False,True,False,True,False,0,2440,980639,108,6
+doshirush1901/brain-os,True,6,"markers=['demo', 'example', 'starter']",5,0.9992,True,False,False,False,True,False,False,True,True,False,False,True,False,True,False,6,359,103870,13,6
+doublew6/forecast-loop,True,2,markers=['learn'],0,0.8501,True,False,True,True,True,True,False,False,True,False,False,True,False,False,False,0,158,78644,10,7
+dtbray/ynab-agent,True,2,markers=['example'],0,0.9997,True,False,True,False,True,False,False,True,True,True,False,True,False,True,False,0,217,67760,15,8
+ed-is-ai/Agents.stocks,False,0,,1,0.9228,False,False,False,False,True,False,False,False,False,False,False,True,False,True,False,4,307,81526,19,3
+edithatogo/global-medicines-atlas,False,0,,1,0.9924,True,False,False,False,True,False,False,False,False,False,False,False,False,True,False,0,268,67391,4,3
+efigueroaa1-cpu/agentdesk,False,0,,0,0.6704,False,False,False,False,True,False,False,True,True,False,True,True,True,True,False,9,196,35960,27,7
+eliekh05/local-ai-runtime,False,0,,1,0.9802,True,False,False,False,False,False,False,False,False,False,False,True,False,False,False,0,51,4625,11,2
+emilienrk/capitalview-api,False,0,,0,0.9994,False,False,True,False,True,False,False,True,True,False,True,True,False,True,False,0,204,46321,8,7
+end1989/tailored,True,4,"markers=['demo', 'template']",0,0.6598,False,False,False,False,False,False,False,False,True,False,True,True,False,True,False,1,57,11661,3,4
+eseifert/altero,True,2,markers=['example'],3,0.7343,True,False,True,True,True,False,False,True,True,False,True,True,False,True,True,0,275,68496,9,10
+evolvingstuff/metalist,True,2,markers=['template'],0,0.5223,True,False,False,False,True,False,False,False,False,False,True,True,False,True,False,1,282,70940,8,5
+fderuiter/cadence-clinical,True,4,"markers=['demo', 'walkthrough']",3,0.8341,True,False,True,True,True,True,False,False,True,False,True,True,False,True,True,0,983,274091,90,10
+ferjosem362/prima-tech-challenge,False,0,,0,0.5085,False,False,True,True,True,True,True,False,False,False,True,True,False,True,False,1,30,1532,9,8
+fespino/resgraph,False,0,,0,0.9869,True,False,False,True,True,False,False,False,False,False,False,True,False,True,False,0,152,23190,12,5
+florianboymond/decoy-webhook,False,0,,0,1.0,False,False,False,False,False,False,False,False,False,False,True,False,False,False,False,1,9,639,0,1
+fsantibanezleal/CAOS_CareerTwin,False,0,,0,0.6576,True,False,True,True,True,False,False,True,True,False,True,True,False,True,False,3,76,15034,5,9
+giorgoschar/bucketing,True,2,markers=['example'],0,0.6218,False,False,True,True,False,False,False,True,True,False,True,True,False,True,False,2,81,16573,3,7
+gj3447/metahumotonic_web_back,False,0,,0,0.9988,True,False,True,True,True,False,False,True,False,False,False,True,False,True,False,0,108,20671,9,7
+glorden/OpenSOS,False,0,,0,0.8102,False,False,False,False,True,False,False,True,True,False,False,True,False,True,False,0,57,6409,5,5
+glorden/home-library-catalog,False,0,,0,0.7775,False,False,True,True,True,True,False,True,True,False,True,False,False,True,False,0,62,4159,7,8
+gostgmaer/langchain-knoledgebase-rag,True,2,markers=['tutorial'],0,0.8367,False,False,True,True,False,True,False,True,True,False,True,True,True,True,False,0,522,30231,75,9
+gpojarvis-sudo/nagvijay-smart-monitoring-system,False,0,,0,0.7468,False,False,True,True,True,False,False,False,True,False,True,True,False,True,False,0,122,10412,16,7
+greenmdw/skn32_3rd_pj_rag_mcp_chatbot,False,0,,2,0.9481,False,False,False,False,False,False,False,False,False,True,False,True,False,True,False,5,148,13727,19,3
+grounzero/live-football-insight-engine,True,2,markers=['demo'],1,0.9698,True,False,True,True,True,True,False,False,False,False,False,False,False,True,False,0,74,21318,12,6
+gvneshv/TeleVault,True,2,markers=['example'],0,0.5947,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,0,39,4395,6,0
+hackthevalley/hack-the-back,False,0,,6,0.6781,False,False,True,True,True,False,False,True,True,False,True,True,False,True,False,0,76,7493,11,8
+haykeminyan/culture_aggregator,True,2,markers=['learn'],0,0.6794,False,False,True,True,True,False,False,False,True,False,True,False,False,False,True,5,50,5908,9,6
+huzjie/video-forge-studio,True,2,markers=['demo'],0,0.7858,True,False,True,True,True,True,False,True,True,False,True,True,True,True,True,4,130,7649,20,12
+hyuntohoon/myblog_backend,False,0,,1,0.9992,False,False,False,False,True,True,False,False,True,False,True,True,False,True,False,2,115,26740,5,6
+hyuntohoon/myblog_music,False,0,,0,0.9826,False,False,False,True,True,True,False,False,True,True,True,True,False,True,False,2,51,6603,2,8
+iamez/slomix,True,2,markers=['sample'],0,0.681,False,False,True,True,True,True,False,True,False,True,True,True,False,True,True,4,747,220308,46,10
+iarjunganesh/bankers-wrapped,True,2,markers=['demo'],0,0.6703,False,False,True,True,True,True,False,False,False,False,False,True,False,True,False,0,53,6746,12,6
+iknowkungfubar/neur-os,True,2,markers=['template'],2,0.6632,False,False,False,False,True,False,False,False,False,False,False,True,False,False,False,0,41,4303,2,2
+inDivyanshu/ai_automation_platform,True,2,markers=['example'],0,0.9989,True,False,False,False,True,False,False,False,False,False,False,False,False,True,False,0,385,31679,76,3
+infotact-soar-team/soar-incident-containment-engine,False,0,,0,0.9572,False,False,False,True,True,False,False,False,True,False,True,True,True,True,False,2,119,3315,7,7
+iscodesnippet2/horo-agent,False,0,,0,0.8545,True,True,False,False,True,False,False,False,False,False,True,True,False,True,False,3,574,408242,29,6
+its-spark-dev/toollayer-ai,True,4,"markers=['demo', 'walkthrough']",1,0.8737,True,False,True,True,True,True,False,False,True,False,False,True,False,True,False,0,71,16617,8,8
+iyadmak/flash,False,0,,0,0.9886,False,False,True,True,False,True,False,True,True,False,True,True,True,True,True,0,116,6934,23,10
+jamabaiz/powtorki-online-api,True,2,markers=['learn'],0,0.9839,False,False,False,False,False,False,False,False,True,False,True,False,False,False,False,2,43,2137,10,2
+jamesbconner/Jidou,True,2,markers=['example'],0,0.737,True,False,True,True,True,False,False,True,True,False,False,True,True,True,True,0,194,60031,9,10
+jasonleetucker-code/riskittogetthebrisket,False,0,,2,0.6753,False,False,False,False,True,True,False,False,False,True,False,True,False,True,False,2,1110,348671,62,5
+jbright471/Vantage,False,0,,0,0.5393,False,False,True,True,True,False,False,True,True,False,False,False,False,True,False,0,95,11992,7,6
+jeanslw/Devops_CD,False,0,,1,0.5423,False,False,True,True,False,False,False,False,False,False,True,True,False,False,False,2,53,9088,6,4
+jjee33/netops-console,False,0,,0,0.8517,False,False,True,True,True,True,False,True,True,False,True,True,False,True,False,0,92,12271,12,9
+joeynyc/hermes-hudui,False,0,,1801,0.5872,True,False,False,False,True,False,False,False,False,False,False,True,False,True,False,0,99,16296,6,4
+kaoszwerg/norn,False,0,,0,0.6487,True,False,True,True,True,False,False,True,True,False,True,True,False,True,False,2,133,36422,6,9
+kibretmulugeta/personal-ai-assistant,True,2,markers=['learn'],0,0.8681,False,False,True,True,False,False,False,False,True,False,True,True,False,True,False,3,95,4692,22,6
+kiridore/Bot_Ero,True,2,markers=['tutorial'],0,0.7768,False,False,False,False,False,False,False,False,False,False,True,True,False,True,False,2,153,17569,51,3
+kishan0-07/LLM-Gateway,True,4,"markers=['demo', 'walkthrough']",1,0.992,False,False,True,True,True,False,False,True,True,False,False,True,False,True,False,0,124,15613,20,7
+kitahara-6355/antigravity-video-studio,False,0,,0,0.9776,False,False,False,False,True,False,False,False,False,False,True,True,False,True,False,2,1912,655069,26,4
+kjgb001/Plexa,True,2,markers=['course'],0,0.6606,False,False,True,True,True,False,False,False,True,False,False,True,False,False,False,0,117,20328,11,5
+kjpatel/duly,True,2,markers=['demo'],0,1.0,False,False,False,False,True,False,False,False,False,False,False,True,False,False,False,0,157,38406,10,2
+kouroshez/coding-os,False,0,,0,0.5659,True,False,True,True,True,True,False,False,False,False,False,True,False,True,True,0,744,201333,29,8
+krakenalt/gigaloom,False,0,,1,0.8865,True,False,False,False,True,True,False,False,False,False,True,True,False,True,True,0,1551,351110,121,7
+kt2saint-sec/braincell,False,0,,2,0.9872,True,False,False,False,True,False,False,False,False,False,False,True,False,True,False,1,130,44725,4,4
+kuotunyu/fhir-care-copilot,True,2,markers=['demo'],0,0.8733,False,False,True,True,True,False,False,False,False,False,False,True,False,True,True,0,111,16554,10,6
+kwal0203/agent-failure,True,2,markers=['learn'],0,0.7736,False,False,True,True,True,False,False,True,True,False,True,True,False,False,True,0,497,62981,56,8
+kyjness/puppytalk-be,False,0,,0,0.9855,False,False,True,True,True,False,False,True,True,False,True,True,True,True,False,0,196,20051,31,9
+kzhirikhin/smart-lists-fastapi-service,False,0,,0,0.9911,False,False,True,True,True,False,False,False,False,False,False,False,False,True,False,2,19,1670,6,4
+leonardoburbanov/navbe_ai,False,0,,0,0.9929,True,False,False,False,True,False,False,False,True,False,False,True,False,True,False,0,225,19877,36,5
+liu-kan/pdf2othersAPI,False,0,,0,0.9319,False,True,False,True,False,False,False,False,True,False,True,True,False,True,False,2,74,13367,13,6
+liviubucel/zebrabyte-darkweb-scan,True,2,markers=['demo'],0,0.8407,False,False,True,False,True,False,False,False,False,False,False,True,False,False,False,1,23,3218,0,3
+lmolteno/prescient,False,0,,0,0.9824,True,False,True,True,True,False,False,True,True,False,False,True,False,True,False,0,44,2643,9,8
+lordwilsonDev/msb-v3,False,0,,0,0.9767,True,False,True,True,True,True,False,False,False,False,False,True,False,True,False,1,403,72091,27,7
+loryanstrant/M365Copilot-Usage-Reporter,True,4,"markers=['template', 'walkthrough']",2,0.5533,False,False,True,True,True,False,False,True,True,False,True,True,False,True,False,0,47,6092,4,8
+lucianoon/forgehand,False,0,,0,0.9412,False,False,True,True,True,True,False,False,False,False,False,True,False,True,False,0,67,12771,12,6
+matt-taylor-tech/subreddit-sounds,True,2,markers=['example'],0,0.8264,False,False,True,True,True,False,False,False,True,False,True,True,False,True,False,1,52,6893,1,7
+maxexcloo/comfy-cloud,True,2,markers=['example'],0,0.9896,False,False,True,True,True,False,False,False,False,False,False,True,False,True,True,0,89,18744,9,6
+mayowa-kalejaiye/bhcpf-backend,True,2,markers=['getting started'],0,1.0,False,False,False,False,False,False,False,False,True,False,True,True,False,True,False,5,10,493,0,4
+ming-14/PTY-Agent,False,0,,1,0.6476,False,False,False,False,False,False,False,False,False,False,False,True,False,True,False,1,493,75596,92,2
+mirzatghayrat/arslan,False,0,,1,0.6558,True,False,True,True,True,False,False,False,True,False,False,True,False,True,False,0,804,118336,29,7
+mizuwonomu/hust-regulations-bot,False,0,,2,1.0,False,False,False,False,False,False,False,False,True,False,True,True,False,False,False,11,57,5246,12,3
+mohamedtalaat-gif/CEREBRO-X,True,2,markers=['template'],3,0.7292,False,False,True,True,True,False,False,True,True,True,True,True,True,True,False,8,106,57318,16,10
+mojtaba-py-code/smart-travel-aggregator,True,4,"markers=['demo', 'tutorial']",0,0.986,False,False,True,True,True,True,False,True,True,False,True,True,True,True,True,0,77,5163,12,11
+monkeydjl/web3-airdrop-alpha-agent,False,0,,0,0.8918,True,False,True,True,True,True,False,False,True,False,False,True,False,True,True,0,223,70024,19,9
+mostafadamisi/task-manager-api,True,2,markers=['example'],0,0.9947,False,False,True,True,False,False,False,False,False,False,True,False,False,True,False,2,37,1239,8,4
+netzen-abm/janavani,False,0,,0,0.9699,False,False,True,True,True,False,False,False,False,False,False,True,True,True,True,3,189,8200,15,7
+nicglazkov/Chalkboard,True,2,markers=['example'],5,0.7343,False,False,True,False,False,False,False,False,False,False,False,True,False,True,False,4,75,8858,7,3
+nickwhitt/housepy,False,0,,0,1.0,False,False,False,False,True,False,False,False,True,False,False,True,False,True,False,0,46,3793,10,4
+nirvanfadillah/backendritles,False,0,,0,1.0,False,False,False,False,False,False,False,False,True,False,True,False,False,False,False,2,47,2266,2,2
+notarobot63/excerpta,False,0,,1,0.6353,False,False,True,True,True,False,False,False,True,False,True,True,False,True,False,0,54,8201,3,7
+nousergon/vires,True,2,markers=['template'],0,0.6106,False,False,False,False,True,False,False,True,True,False,True,True,False,True,False,0,153,21737,9,6
+nulleimy/Applaylist-old,False,0,,1,0.8847,False,False,False,False,True,True,False,False,False,True,False,True,False,True,False,1,79,4660,15,5
+obhht2302-ctrl/team01_0728,False,0,,1,1.0,False,False,False,False,False,False,False,False,False,False,True,False,False,False,False,1,28,1529,1,1
+odysseus-dev/odysseus,True,2,markers=['example'],84888,0.5297,False,True,True,True,True,False,False,False,True,False,True,True,False,True,False,2,1149,244328,36,8
+oodaooda/watchTower,False,0,,0,0.6608,False,False,False,True,False,False,False,True,True,False,False,True,False,True,False,5,117,21201,8,5
+opencodon/opencodon,True,2,markers=['learn'],1,0.8098,True,True,True,True,True,False,False,False,False,False,True,True,False,True,False,7,2875,1237577,152,8
+openstack-afterglow/waygate,False,0,,0,0.9597,True,False,True,False,True,False,False,False,True,False,False,True,False,True,False,1,51,8164,6,6
+opentargets/platform-ai-api,True,2,markers=['example'],0,0.9728,False,False,True,False,True,False,False,False,False,False,False,False,False,False,False,0,10,1123,3,2
+orbingol/soju-platform,True,4,"markers=['example', 'learn']",0,0.5909,True,False,True,True,True,False,False,False,False,False,False,True,False,True,True,0,172,14104,40,7
+orlovRoman/flipoly,False,0,,0,0.8086,False,False,True,True,True,False,False,True,True,False,False,True,False,True,True,8,570,81311,14,8
+pete-builds/plex-tautulli-letterboxd,False,0,,0,0.9096,False,False,True,True,True,False,False,False,False,False,False,True,False,True,False,0,35,3611,6,5
+pgomez35/webhook,False,0,,0,1.0,False,False,False,False,False,False,False,False,False,False,True,True,False,False,False,6,133,142789,0,2
+pinnnthreetriples/telebuba,False,0,,0,0.698,False,False,False,False,True,False,False,False,True,False,True,True,False,True,True,0,675,156581,28,6
+pramod-krishivaas/automation-test-platform,False,0,,0,0.582,False,False,False,True,False,False,False,True,True,False,True,False,False,True,False,7,89,15275,4,5
+psyb0t/rankrat,False,0,,0,0.9174,True,False,True,True,True,True,False,False,False,False,False,True,False,True,False,1,178,61513,9,7
+pterodaktil02/selfdocs,False,0,,0,0.5243,False,False,False,False,True,False,False,False,True,False,True,False,False,True,False,1,20,3734,2,4
+pullboxapp/pullbox-direct-providers,False,0,,1,0.996,False,False,True,False,True,True,False,False,False,False,False,False,False,True,False,0,52,8095,5,4
+punith-webknot/talentOS_AI,False,0,,1,0.9965,False,False,True,False,False,False,False,False,False,False,False,True,False,False,False,0,38,1623,11,2
+punt-labs/lux,False,0,,0,0.9823,True,False,False,False,True,True,False,False,False,False,False,True,False,True,False,0,980,142915,41,5
+qtangs/havachat-library-server,True,2,markers=['learn'],0,0.9224,True,False,False,True,False,False,False,False,False,False,False,True,False,True,False,1,131,29075,23,4
+ral-facilities/datagateway-api,False,0,,5,0.9935,False,False,True,True,True,False,False,False,False,False,False,True,False,True,True,0,110,17230,11,6
+ral-facilities/ldap-jwt-auth,True,2,markers=['example'],3,0.9567,False,False,True,True,True,False,False,False,False,False,True,True,False,True,False,0,30,2130,9,6
+ral-facilities/object-storage-api,True,2,markers=['example'],1,0.9822,False,False,True,True,True,False,False,False,True,False,True,False,False,True,False,0,60,7573,16,6
+raminmohammadi/CGX,False,0,,1,0.8543,True,False,True,True,True,False,True,False,False,False,True,True,False,True,False,2,292,94604,33,8
+rascalking56/msit-capstone-project,True,2,markers=['demo'],0,0.9863,False,False,False,False,False,False,False,False,True,False,True,False,False,False,False,1,77,4430,7,2
+rekursiv-ai/trackinizer,False,0,,7,0.9343,True,False,False,False,True,False,False,False,False,True,False,True,False,False,True,0,178,71428,13,5
+ricardomb-tech/solicitudes-backend-api,False,0,,0,0.9552,False,False,True,True,False,False,False,False,True,False,False,True,False,False,False,2,51,4311,15,4
+ringlochid/banksia,True,8,"markers=['example', 'starter', 'tutorial', 'walkthrough']",67,0.823,True,False,True,True,True,True,False,False,True,False,False,True,False,True,False,0,636,125820,81,8
+rmayen/halotrace,True,2,markers=['example'],0,0.7526,False,False,True,True,True,False,False,False,True,False,True,True,False,True,False,1,27,1490,5,7
+rmholston420/Forge-OH,False,0,,0,0.5379,False,False,True,True,True,False,False,False,False,False,True,True,False,False,True,1,252,47586,46,6
+roleroz/3d_printer_debugger,False,0,,0,0.9147,False,False,False,False,False,False,False,False,False,False,True,True,False,False,False,2,92,12760,8,2
+runovelhq/wolt,False,0,,3,0.6864,False,False,True,False,True,False,False,True,True,False,False,False,False,True,False,1,62,7883,9,5
+s-shahzad/fusion-nids,True,2,markers=['demo'],0,0.8828,False,False,True,True,True,False,False,False,False,False,False,True,False,True,False,3,216,40386,28,5
+sandeep-devarapalli/helm,False,0,,1,0.6613,False,False,False,True,True,False,False,False,True,False,False,True,False,True,False,0,32,8031,7,5
+sandraschi/calibremcp,False,0,,38,0.911,True,True,True,True,True,False,False,False,True,False,True,True,False,True,True,0,770,164164,142,10
+sarox-dev/Nodecast,True,2,markers=['example'],5,0.5208,False,False,True,True,True,False,False,False,False,False,True,True,False,True,False,1,55,11022,3,6
+satheeshds/bank-transactions,False,0,,0,0.517,False,False,True,True,False,False,False,False,False,False,False,True,False,True,False,0,35,3546,9,4
+schniggie/openapi-anything,False,0,,0,0.9244,True,False,True,True,True,False,False,False,False,False,False,True,False,True,False,0,37,6132,5,6
+scythe-labs/reaper,False,0,,1,0.6446,True,False,True,True,True,False,False,True,True,False,False,True,False,True,False,0,253,132547,9,8
+selvalabs/monitor-comunitario,True,2,markers=['demo'],0,0.6397,True,False,True,True,True,True,False,True,True,False,False,True,False,True,True,0,92,7030,10,10
+selvamanigovindaraj/aagentic-rag,False,0,,1,0.9698,False,False,True,True,True,True,False,False,False,False,True,True,False,True,False,0,89,10573,13,7
+sendhello/FlowDesk-Backend,False,0,,0,0.9959,False,False,True,False,True,False,False,True,True,False,True,True,False,True,False,0,78,11255,11,7
+serhatvs/Collective_MindGraph_desktop_app,False,0,,0,0.9941,True,False,True,True,True,False,False,False,True,False,True,True,False,True,False,0,446,63125,85,8
+siddharthpanda99/backend,False,0,,0,0.9987,True,True,False,False,False,False,False,False,True,False,True,True,False,True,False,0,1181,203378,236,6
+sistema-evaluacion-docente/api.evd,False,0,,0,0.9985,False,False,True,True,True,True,False,True,True,False,True,False,False,True,False,2,244,34083,18,8
+stevezau/shortlist,False,0,,14,0.6746,False,False,True,False,True,False,False,False,True,False,False,True,False,True,True,2,212,70789,13,6
+sth007/bmw-i5-agent,False,0,,1,0.9925,False,False,True,True,False,False,False,True,True,False,False,False,False,True,False,3,109,14022,8,5
+sumitrevolt/leadgenrationaivoiceagent,True,4,"markers=['demo', 'learn']",0,0.8354,True,False,True,True,True,True,False,True,True,False,True,True,True,True,True,16,2078,532837,42,12
+sunnyday2/agente_testing_automatizado,False,0,,0,0.673,False,False,True,True,False,False,False,False,False,False,True,False,False,True,False,5,109,15227,21,4
+sunnyday2/challenge-alura-agente-g10,False,0,,0,1.0,False,False,False,False,False,False,False,False,True,False,True,True,False,True,False,8,50,2803,7,4
+superversivesf/open-grimoire,False,0,,0,0.8516,False,False,True,True,False,False,False,False,False,False,False,False,False,True,False,0,94,9190,10,3
+tbuschbeck/JobMatching,True,2,markers=['example'],0,0.7078,False,False,True,True,False,False,False,True,True,False,False,True,True,True,False,5,138,21888,8,7
+teaching-practice-lab-oral/oral,True,2,markers=['example'],0,0.532,False,False,True,True,False,False,False,True,True,False,True,False,False,True,False,5,94,21051,5,6
+the-mace/aquarium-tracker,True,4,"markers=['example', 'template']",0,0.6414,False,False,False,False,True,False,False,False,False,False,True,True,False,False,False,1,38,13255,1,3
+thealirazadev/ticket-triage,True,2,markers=['example'],0,0.9839,False,False,False,False,True,False,False,True,True,False,False,True,False,True,False,2,54,5891,6,5
+thulasidharan96/API-Gateway,False,0,,0,0.9835,True,False,True,True,True,False,False,False,True,False,True,True,False,True,True,0,57,1720,13,9
+ticket-vision/mapi,True,2,markers=['example'],1,0.9948,False,False,True,True,True,True,False,False,False,False,False,True,False,True,True,0,60,3856,18,7
+timames/kahu,True,2,markers=['sample'],0,0.8871,False,False,True,True,False,False,False,True,True,False,True,False,False,True,False,0,151,20282,22,6
+tonyhyworld/TraceArena,True,2,markers=['demo'],1,0.7998,False,False,True,True,True,False,False,False,False,False,True,True,False,False,False,0,247,58286,41,5
+toyboy0093-a11y/hermes-os,False,0,,0,0.7406,False,False,True,True,True,False,False,False,True,False,False,True,False,False,False,0,123,15302,22,5
+trussiumhq/trussium,False,0,,1,0.9296,False,False,True,False,True,False,False,False,False,False,False,True,False,True,True,0,85,10027,26,5
+tsondo/StemForge,False,0,,21,0.6825,True,False,False,False,True,False,False,False,False,False,False,True,False,True,False,0,152,38474,27,4
+tuannguyen8531/novel-ai-trans,True,2,markers=['example'],0,0.8323,True,False,True,True,True,False,False,False,False,False,False,True,False,True,False,0,292,39410,33,6
+tvhahn/tidings,True,2,markers=['demo'],2,0.611,False,False,True,True,True,True,False,False,False,False,False,True,False,True,False,0,404,93314,14,6
+typhoidcoma/TYVYX,False,0,,0,0.8685,False,False,False,False,False,False,False,False,False,False,False,False,False,True,False,1,76,16348,14,1
+unhexx/grok-build-gateway,True,2,markers=['example'],0,0.9927,True,False,True,True,True,False,False,False,False,False,False,False,False,True,False,0,21,1404,5,5
+v1ct0r-ops/vlv-Backend,True,2,markers=['example'],0,0.9742,False,False,True,True,True,False,False,True,True,False,True,False,False,True,False,2,50,4645,0,7
+vadimgodev/face-recognition,True,2,markers=['example'],5,0.9037,False,False,True,True,True,True,False,True,True,False,True,True,False,True,False,4,100,19917,19,9
+vagnerbarbosa/hackathon-fiap-fase-5,False,0,,0,0.7103,True,False,True,True,True,True,False,True,True,False,True,True,False,True,False,6,90,14082,15,10
+vibhanshu-mishra/procore-intake-bridge,True,2,markers=['demo'],0,0.9785,False,False,True,True,False,True,False,True,True,False,False,True,False,True,False,0,495,77318,6,7
+vpathai-git/vpath_platform_mgmt,True,2,markers=['example'],0,0.7502,True,False,False,False,True,True,False,False,False,False,True,True,False,True,False,0,165,25684,17,6
+wamakologeorge-dev/amosclaude-clean,False,0,,1,0.7871,True,True,True,True,True,True,False,False,True,False,True,True,True,True,False,9,956,136557,94,11
+wangmeiwen/hypertension-kg-qa,False,0,,0,0.8553,False,False,False,False,True,False,False,False,True,False,True,True,False,True,False,8,250,64209,31,5
+web4uai-cpu/socioauto,False,0,,0,0.7652,False,False,True,True,True,False,False,True,True,False,True,True,True,True,False,6,117,13394,18,9
+weiweity/fuqing-crm-analytics,False,0,,1,0.6848,False,False,True,True,True,False,False,False,False,False,True,True,False,False,True,3,417,92413,23,6
+willcassell/scorched,True,2,markers=['learn'],0,0.7546,False,False,True,True,True,False,False,True,True,False,False,True,False,True,True,0,150,28601,6,8
+yatochkaa/DocSift-Agent,False,0,,0,0.8573,False,False,True,True,False,False,False,True,True,False,False,True,False,True,False,0,131,21688,21,6
+zeroday0619/KotonohaInterpreter,False,0,,2,0.9277,True,False,True,True,True,False,False,False,False,True,False,True,False,True,False,0,117,26125,9,7

@@ -1,0 +1,49 @@
+case,repo,group,label,label_name,sophistication_index,markers,stars_gh
+1,nickwhitt/housepy,control,G,genuine,4,,0
+2,Kevin-O-Hsu/Sealium,control,G,genuine,3,,3
+3,SEO-Dynamics/Wind-Turbine-Predictive-Maintenance-Platform,control,G,genuine,8,,0
+5,sistema-evaluacion-docente/api.evd,control,G,genuine,8,,0
+6,hyuntohoon/myblog_backend,control,G,genuine,6,,1
+8,emilienrk/capitalview-api,control,G,genuine,7,,0
+11,rekursiv-ai/trackinizer,control,G,genuine,5,,7
+12,superversivesf/open-grimoire,control,G,genuine,3,,0
+13,asfrosche/VillageGameBot,control,G,genuine,1,,1
+16,openstack-afterglow/waygate,control,G,genuine,6,,0
+18,rmholston420/Forge-OH,control,G,genuine,6,,0
+19,computacenter-ro/order-intelligence-layer,control,G,genuine,7,,0
+20,lordwilsonDev/msb-v3,control,G,genuine,7,,0
+21,sendhello/FlowDesk-Backend,control,G,genuine,7,,0
+27,trussiumhq/trussium,control,G,genuine,5,,1
+28,jeanslw/Devops_CD,control,G,genuine,4,,1
+32,wamakologeorge-dev/amosclaude-clean,control,G,genuine,11,,1
+33,RedBeret/earth-observation-verification-lab,control,U,uncertain,8,,0
+34,punt-labs/lux,control,G,genuine,5,,0
+36,DansiDanutz/MoneyPrint,control,G,genuine,6,,0
+37,KB-NEST/Backend,control,D,demo,1,,0
+43,ferjosem362/prima-tech-challenge,control,U,uncertain,8,,0
+44,PodZonePlatformEngineering/gitopsapi,control,G,genuine,7,,1
+47,OpenHubble/metrics-dashboard-backend,control,G,genuine,4,,1
+0,Christie-Scientific-Computing/HERMES,flag,G,genuine,5,"'example', 'getting started'",0
+4,4alvit/energy-data-rag-pipeline,flag,G,genuine,9,"'example', 'sample', 'template'",0
+7,kwal0203/agent-failure,flag,G,genuine,8,'learn',0
+9,AdriDob/rastrohunteralpha,flag,U,uncertain,7,'learn',1
+10,giorgoschar/bucketing,flag,G,genuine,7,'example',0
+14,dasherrrrrr/video-preview-app,flag,G,genuine,3,'example',0
+15,loryanstrant/M365Copilot-Usage-Reporter,flag,G,genuine,8,"'template', 'walkthrough'",2
+17,mohamedtalaat-gif/CEREBRO-X,flag,U,uncertain,10,'template',3
+22,Dilip-Bhakadiwal/AI-Projects,flag,G,genuine,5,'learn',0
+23,celuma/celuma-backend,flag,G,genuine,9,'template',0
+24,Alaa-Eldeen-Essam/Nile-Connect-Support-AI,flag,D,demo,5,"'demo', 'example'",0
+25,unhexx/grok-build-gateway,flag,G,genuine,5,'example',0
+26,fderuiter/cadence-clinical,flag,U,uncertain,10,"'demo', 'walkthrough'",3
+29,ticket-vision/mapi,flag,U,uncertain,7,'example',1
+30,qtangs/havachat-library-server,flag,G,genuine,4,'learn',0
+31,tvhahn/tidings,flag,G,genuine,6,'demo',2
+35,cyxc1124/cyxcbot,flag,G,genuine,8,'example',0
+38,rascalking56/msit-capstone-project,flag,D,demo,2,'demo',0
+39,AmitabhainArunachala/dharma_swarm,flag,U,uncertain,9,'demo',1
+40,ManibalaSinha/data_pipeline,flag,G,genuine,6,"'demo', 'sample'",0
+41,dikatapulta/HospitalityAIPlatform,flag,G,genuine,9,'example',0
+42,nousergon/vires,flag,G,genuine,6,'template',0
+45,Peter-McCann-Strain/Personal_Execution_OS,flag,G,genuine,10,'sample',0
+46,the-mace/aquarium-tracker,flag,U,uncertain,3,"'example', 'template'",0

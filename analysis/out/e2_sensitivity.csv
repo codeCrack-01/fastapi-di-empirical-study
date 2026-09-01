@@ -1,0 +1,12 @@
+threshold,pool_passing_gate,accepted_kept,e2_excluded_now_passing_upper_bound,projected_accepted_upper_bound,note
+0.0,4500,351,1631,1982,E2-excluded admission is an upper bound (no reports; unverified past E2)
+0.3,3527,351,658,1009,E2-excluded admission is an upper bound (no reports; unverified past E2)
+0.4,3214,351,345,696,E2-excluded admission is an upper bound (no reports; unverified past E2)
+0.45,3049,351,180,531,E2-excluded admission is an upper bound (no reports; unverified past E2)
+0.5,2869,351,0,351,
+0.55,2682,333,0,333,E2-excluded admission is an upper bound (no reports; unverified past E2)
+0.6,2486,314,0,314,E2-excluded admission is an upper bound (no reports; unverified past E2)
+0.7,2107,261,0,261,E2-excluded admission is an upper bound (no reports; unverified past E2)
+0.8,1702,209,0,209,E2-excluded admission is an upper bound (no reports; unverified past E2)
+0.9,1248,154,0,154,E2-excluded admission is an upper bound (no reports; unverified past E2)
+1.0,293,18,0,18,E2-excluded admission is an upper bound (no reports; unverified past E2)
