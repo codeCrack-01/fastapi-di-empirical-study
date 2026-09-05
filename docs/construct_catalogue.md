@@ -5,6 +5,12 @@ used throughout `result_draft_01.md`, `analysis/aggregate.py`, and the slides.**
 This table was renumbered on 2026-08-29 to eliminate the earlier ID collision
 between this catalogue and the measured results (see "Operationalization status").
 
+> **Constructs vs. Usage:** the catalogue below defines *constructs* — syntactically
+> detectable API tokens, counted from the left-hand token at a call site. *Usage*
+> (how those constructs are composed into dynamic relationships and idioms) is a
+> separate, usage-level lens analysed in RQ2 (`result_draft_01.md` §6) via
+> `analysis/usage_patterns.py` over the same stored extraction.
+
 | ID | Construct | Example | Measured? |
 |---|---|---|---|
 | C1 | Depends | `Depends(get_db)` | Yes |
@@ -15,7 +21,7 @@ between this catalogue and the measured results (see "Operationalization status"
 | C6 | App dependency | `FastAPI(dependencies=...)` | Yes |
 | C7 | Dependency override | `app.dependency_overrides[...]` | Yes |
 | C8 | Callable class dependency | `Depends(MyDependency())` | Yes |
-| C9 | Nested dependency | dependency depending on another dependency | **No — captured at graph level (RQ2), see below** |
+| C9 | Nested dependency | dependency depending on another dependency | **No — captured at graph/usage level (RQ2/RQ3), see below** |
 | C10 | Parameterized dependency | factory-generated dependency | **No — deferred** |
 
 ## Operationalization status
@@ -30,12 +36,13 @@ Two constructs are **not** operationalized. This is a deliberate, documented
 decision, stated so the gap is visible rather than silent:
 
 - **C9 — Nested dependency.** A nested dependency is not a distinct syntactic
-  construct but a *graph-topological property*: a dependency that is itself the
+  construct but a *usage-level (relationship) property*: a dependency that is itself the
   target of another dependency, i.e. a graph node with both an incoming and an
-  outgoing edge. It is therefore captured by the dependency-graph analysis (RQ2)
-  rather than as a per-repo syntactic counter — its effects appear in the
-  measured graph metrics (median depth, fan-out hubs) rather than as a
-  construct-prevalence percentage.
+  outgoing edge. It is therefore captured by the dependency-graph analysis (now
+  **RQ3**) and the usage/relationship analysis (**RQ2**, §6 of `result_draft_01.md`)
+  rather than as a per-repo syntactic counter — its effects appear in the measured
+  graph metrics (median depth, fan-out hubs) and in the relationship analysis
+  (chained/nested edges, dependency roles).
 - **C10 — Parameterized dependency.** Marked "Maybe detectable" in the original
   catalogue. Factory-generated dependencies are not statically decidable from a
   call site in general, so counting them reliably would risk false positives. It

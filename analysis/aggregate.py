@@ -9,10 +9,13 @@ re-cloning):
 
 Produces paper-facing tables in analysis/out/:
   rq1_constructs.csv  construct prevalence (C1-C9 + extras, zero-DI cohort)
-  rq4_graphs.csv      dependency-graph complexity per repo
+  rq4_graphs.csv      dependency-graph complexity per repo  (legacy filename; feeds RQ3)
   covariates.csv      per-repo metadata joined for post-hoc analyses
   sensitivity.csv     headline statistics re-run at every E5 threshold
   summary.md          human-readable digest of the above
+
+RQ2 (usage & dynamic relationships) is produced separately by
+analysis/usage_patterns.py → analysis/out/usage_patterns.csv + _summary.md.
 
 All orderings are sorted for byte-stable, reproducible outputs.
 
@@ -332,7 +335,7 @@ def write_summary(out: Path, sample_meta: dict, reports: dict, missing: list[str
         lines += ["", f"**Zero-DI cohort:** {z['repos_using']} repos ({z['pct_of_sample']}%) use no Depends/Security/Annotated at all."]
     lines += [
         "",
-        "## RQ2 — dependency-graph complexity (clean nodes, non-empty graphs)",
+        "## RQ3 — dependency-graph complexity (clean nodes, non-empty graphs)",
         "",
         f"- Graph-bearing repos (clean): {len(nonempty)} / {len(rq4)}",
     ]

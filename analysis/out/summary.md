@@ -19,7 +19,7 @@
 
 **Zero-DI cohort:** 88 repos (25.1%) use no Depends/Security/Annotated at all.
 
-## RQ2 — dependency-graph complexity (clean nodes, non-empty graphs)
+## RQ3 — dependency-graph complexity (clean nodes, non-empty graphs)
 
 - Graph-bearing repos (clean): 253 / 351
 - Nodes (clean): median 21, IQR (8.0, 55.5), max 1444

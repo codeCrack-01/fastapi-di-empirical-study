@@ -2,10 +2,16 @@
 
 **Paper title:** Empirical Study of Dependency Injection (DI) Usage Patterns in FastAPI Applications
 
-**Purpose:** Preparation guide for the RQ1/RQ2/RQ3 corpus presentation. The deck
+**Purpose:** Preparation guide for the RQ1/RQ2/RQ3/RQ4 corpus presentation. The deck
 (`analysis/out/fastapi_di_presentation.pptx`, 22 slides, editable) prioritises
 numbers and their significance over decoration. This document is the
 talking-points / defence prep — the "why it matters" behind every number.
+
+> **RQ numbering note (2026-09-05):** the paper now defines **RQ2 = usage/dynamic
+> relationships** (new) and **RQ3 = dependency-graph complexity** (renumbered from RQ2);
+> evolution is RQ4 (deferred). The current deck still uses the older graph-as-RQ2 labels;
+> a future deck rebuild will migrate to the new numbering. The research-question and
+> result sections below follow the new numbering.
 
 ---
 
@@ -146,7 +152,32 @@ the well-populated 0/1–9 star buckets (64 and 28 repos).
 
 ---
 
-## 8. RQ2 — graph complexity
+## 8. RQ2 — usage & dynamic relationships (new)
+
+**Numbers (census of 351):** 96.9% of 22,711 `Depends()` call sites pass a bare
+function; 0 of 143 `Security()` calls pass `scopes` (0/33 repos); 208 fan-in hub
+nodes (≥10 dependents; `get_db` 4,332); 4.0% of graph nodes are classes (625 /
+14,927+625); Tier B idioms at low n (`.as_form` 1 repo, class-as-dep 14 classes/5
+repos, `current_*` 12 repos).
+
+**Significance:** the *shape* of DI, not just its presence. RQ1 says "Depends is in
+74.6%"; RQ2 says "how it's wired" — plain-callable dominance, the unused OAuth2
+scopes feature (`Security(scopes=...) = 0%`), and the fan-out relationship
+signature (small set of shared dependencies consumed by many handlers, i.e. what
+the community actually builds with the documented constructs).
+
+**Likely grill:** "Isn't this just the graph-complexity RQ?" / "Your Tier B
+idioms are n=1–5."
+**Defence:** RQ3 measures graph *summary statistics* (median nodes/depth);
+RQ2 classifies *call-site argument shape and roles* (what is passed to `Depends()`,
+does `Security()` use scopes) plus relationship topology at the node level — a
+different, semantic lens. Tier B is explicitly qualitative, reported as
+evidence-with-n, not as a statistical claim; the quantitative backbone is Tier A
+(arg shapes, scopes=0%, hubs).
+
+---
+
+## 9. RQ3 — graph complexity
 
 **Numbers (clean, 253/351 non-empty):** median nodes 21, IQR 8–55, max 1,444;
 median depth 2, max 7; median unresolved 0.0%.
@@ -160,7 +191,7 @@ deep inheritance-like chains. This is the empirical shape of DI in the wild.
 
 ---
 
-## 9. The fan-out hub (architectural signature)
+## 10. The fan-out hub (architectural signature)
 
 **Numbers:** 91.3% of clean graph-bearing repos show ≥3-dependency fan-out.
 
@@ -170,7 +201,7 @@ quantifiable payoff of DI that justifies the study.
 
 ---
 
-## 10. Robustness — E5 sensitivity
+## 11. Robustness — E5 sensitivity
 
 **Numbers:** % using core DI 74.9% (t=4) → 81.4% (t=8); stable.
 
@@ -184,7 +215,7 @@ t ≥ 5, exactly where the monotone rise is observed.
 
 ---
 
-## 11. Data-quality handling — resolver junk nodes
+## 12. Data-quality handling — resolver junk nodes
 
 **Numbers:** 610 junk nodes across 103/253 graph-bearing repos (3.9% of all).
 Median node count 23 → 21 after filtering. All 253 graph-bearing repos keep a
@@ -200,7 +231,7 @@ nodes. The bug only polluted the graph node set.
 
 ---
 
-## 12. Caveats & threats
+## 13. Caveats & threats
 
 Presented plainly: source substitution, dependency-graph population limits,
 attrition (42, 0.9%), E5 degeneracy, **tutorial flags as an open count**,
@@ -215,7 +246,7 @@ genuine applications (backed by 0% topic overlap + E1–E5 pass).
 
 ---
 
-## 13. So what? — significance close
+## 14. So what? — significance close
 
 - **Methodology:** a corpus source with provable recall (0% topic overlap).
 - **Practice:** DI is not universal (25% zero-DI); teaching should reflect reality.

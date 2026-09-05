@@ -11,14 +11,27 @@
 question (originally RQ2) was **dropped** and folded into RQ1 as a covariate axis
 (supervisor direction): no a priori application-class taxonomy is imposed, and the
 covariate view (stars, age) answers "who uses DI" without arbitrary class labels.
-The remaining three questions are renumbered RQ1–RQ3 (graph complexity moved from
-RQ4 to RQ2).
+**RQ2 (usage/relationships) is a new question** added after an exploratory pass over
+the full corpus revealed measurable, undocumented usage patterns beyond construct
+prevalence. The graph-complexity question moved to RQ3 and evolution to RQ4.
 
 - RQ1: Which FastAPI DI constructs are used, and how frequently, across open-source projects?
   - DI prevalence is additionally disaggregated by repo covariates (stars, age) as a
     second axis of RQ1 (the folded application-class question).
-- RQ2: How complex are the resulting dependency graphs? *(renumbered from RQ4)*
-- RQ3: How has DI usage evolved over time (repo history)? *(deferred)*
+- RQ2: What dynamic dependency relationships do real FastAPI projects form, and what
+  idiomatic roles do dependencies play? *(new — mixed-methods usage analysis)*
+- RQ3: How complex are the resulting dependency graphs? *(renumbered from RQ4)*
+- RQ4: How has DI usage evolved over time (repo history)? *(deferred)*
+
+**Constructs vs. Usage (definitional line):** a *construct* is a discrete, syntactically
+detectable API token (counted from the left-hand token at a call site — `Depends(`, `Security(`,
+`dependencies=[...]`). *Usage* refers to how those constructs are composed into dynamic
+dependency relationships and idiomatic roles — it requires classifying the argument and
+context at each call site (function vs. class vs. classmethod vs. module alias) and the
+relationship structure of the dependency graph (fan-in hubs, chained/nested dependencies,
+class vs. function nodes). The extractor stores both (construct totals in `aggregate`, call
+details in `file_details`, graph in `dependency_graph`); RQ2 re-classifies that stored raw
+data with `analysis/usage_patterns.py` — no re-extraction.
 
 ## Population
 Open-source GitHub repositories that use FastAPI (import `fastapi`, expose >= 1 FastAPI app).
