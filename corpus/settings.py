@@ -1,7 +1,9 @@
 CORPUS_SCHEMA_VERSION = "0.1"
 
-TARGET_MIN_REPOS = 50
-TARGET_MAX_REPOS = 150
+# Discovery/acceptance targets (2026-09: discovery pool targeting a 5,000-
+# candidate crawl; acceptance is whatever clears E1-E6).
+TARGET_CANDIDATES = 5000
+TARGET_MIN_ACCEPTED = 50
 SAMPLE_SEED = 42
 
 FASTAPI_PACKAGE = "fastapi"
@@ -50,7 +52,14 @@ CLONE_DEPTH = 1
 CLONE_TIMEOUT_SECONDS = 900
 MAX_RETRY_ROUNDS = 3
 
-DEPENDENTS_MAX_PAGES = 150
+# Clone retention policy for filter.py: "accepted" keeps only clones of
+# accepted repos (rejected clones are deleted right after extraction);
+# "all" keeps every processed clone; "none" deletes every clone after
+# extraction (reports + manifest are sufficient for all analyses).
+CLONE_RETENTION = "accepted"
+
+DEPENDENTS_PAGE_SIZE = 30
+DEPENDENTS_MAX_PAGES = 2000  # absolute safety cap; the crawl normally stops at --target
 DEPENDENTS_PAGE_DELAY_SEC = 1.0
 
 TOPIC_QUERY = "topic:fastapi"

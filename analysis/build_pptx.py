@@ -12,6 +12,7 @@ Usage:
 
 from __future__ import annotations
 
+import collections
 import csv
 import json
 import statistics as st
@@ -40,7 +41,41 @@ LGRAY = RGBColor(0xF6, 0xF8, 0xFA)
 def _load() -> dict:
     sample = json.loads((OUT_DIR / "sample.json").read_text())
     manifest = json.loads((ROOT.parent / "corpus" / "manifest.json").read_text())
-    return {"sample": sample, "manifest": manifest}
+    candidates = json.loads((ROOT.parent / "corpus" / "candidates.json").read_text())["candidates"]
+    excluded = json.loads((ROOT.parent / "corpus" / "exclusion_log.json").read_text())["excluded"]
+    topic = json.loads((ROOT.parent / "corpus" / "topic_seed.json").read_text()).get("seed", [])
+
+    n_cand = len(candidates)
+    n_acc = len(manifest["accepted"])
+    n_excl = len(excluded)
+    by_reason: dict[str, int] = {}
+    for e in excluded:
+        by_reason[e["reason"]] = by_reason.get(e["reason"], 0) + 1
+    n_pages = len(list((ROOT.parent / "corpus" / "raw_dependents").glob("dependents_page_*.html")))
+
+    topic_names = {t["full_name"] for t in topic}
+    cand_names = {c["full_name"] for c in candidates}
+    acc_names = {a["full_name"] for a in manifest["accepted"]}
+    overlap_cand_topic = len(cand_names & topic_names)
+    overlap_acc_topic = len(acc_names & topic_names)
+
+    return {
+        "sample": sample,
+        "manifest": manifest,
+        "n_cand": n_cand,
+        "n_acc": n_acc,
+        "n_excl": n_excl,
+        "accept_rate_pct": 100.0 * n_acc / n_cand if n_cand else 0.0,
+        "exclusions_by_reason": by_reason,
+        "n_pages": n_pages,
+        "overlap_cand_topic": overlap_cand_topic,
+        "overlap_acc_topic": overlap_acc_topic,
+        "n_excl_pct": 100.0 * n_excl / n_cand if n_cand else 0.0,
+    }
+
+
+def _fmt(n: int) -> str:
+    return f"{n:,}"
 
 
 def _csv(path: str) -> list[dict]:
@@ -48,7 +83,7 @@ def _csv(path: str) -> list[dict]:
 
 
 # Per-repo construct presence, derived from the frozen extractor reports.
-# The deck aggregates the FULL accepted corpus (census, n=351) — many of the
+# The deck aggregates the FULL accepted corpus (census) — many of the
 # numbers below are deliberately computed here rather than hard-coded so the
 # deck stays correct if the corpus or threshold ever changes.
 _CORE_KEYS = (
@@ -75,6 +110,28 @@ def _load_reports() -> dict[str, dict]:
         if p.exists():
             out[a["full_name"]] = json.loads(p.read_text())
     return out
+
+
+def _fan_out3(reports: dict[str, dict]) -> tuple[int, int]:
+    """(repos, graph_bearing) where some clean dependency node has >=3 direct
+    dependents in the clean dependency graph (junk 'file:line' ids excluded)."""
+    gb = fan = 0
+    for r in reports.values():
+        nodes = (r.get("dependency_graph") or {}).get("nodes") or []
+        if not nodes:
+            continue
+        gb += 1
+        indeg: collections.Counter = collections.Counter()
+        for e in (r.get("dependency_graph") or {}).get("edges") or []:
+            if not e:
+                continue
+            src, tgt = str(e.get("source", "")), str(e.get("target", ""))
+            if "/" in src or ":" in src or "/" in tgt or ":" in tgt:
+                continue
+            indeg[tgt] += 1
+        if indeg and max(indeg.values()) >= 3:
+            fan += 1
+    return fan, gb
 
 
 def _multiplicity(reports: dict[str, dict]) -> list[tuple[int, int]]:
@@ -195,6 +252,10 @@ def slide_title(prs, title, subtitle=None):
     return s
 
 
+def _row_by(rows: list[dict], key: str, val: str) -> dict:
+    return next((r for r in rows if r[key] == val), {})
+
+
 def main():
     D = _load()
     prs = Presentation()
@@ -208,7 +269,7 @@ def main():
     b.text_frame.word_wrap = True
     for p in b.text_frame.paragraphs:
         p.font.color.rgb = INK
-    add_text(s, "A dependency-graph corpus of 351 real applications", "", top=Inches(2.8), size=Pt(20))
+    add_text(s, f"A dependency-graph corpus of {_fmt(D['n_acc'])} real applications", "", top=Inches(2.8), size=Pt(20))
     b = s.shapes[-1]; b.text_frame.paragraphs[0].font.color.rgb = MUTED; b.text_frame.paragraphs[0].font.bold = False
     add_text(s, "Mining Software Repositories (MSR) study · the three current RQs (RQ1–RQ3)", "", top=Inches(3.4), size=Pt(16))
     b = s.shapes[-1]; b.text_frame.paragraphs[0].font.color.rgb = MUTED; b.text_frame.paragraphs[0].font.bold = False
@@ -250,11 +311,11 @@ def main():
     # ---- 2. Oversize stats ----
     s = slide_title(prs, "The corpus at a glance — three headline magnitudes")
     add_bigstat(s, Inches(0.6), Inches(2.4), Inches(3.6), Inches(2.0),
-                "4,500", "candidates from the GitHub dependency graph", INK)
+                _fmt(D["n_cand"]), "candidates from the GitHub dependency graph", INK)
     add_bigstat(s, Inches(4.9), Inches(2.4), Inches(3.8), Inches(2.0),
-                "351", "accepted after rules E1–E6 (7.8%)", ACCENT)
+                _fmt(D["n_acc"]), f"accepted after rules E1\u2013E6 ({D['accept_rate_pct']:.1f}%)", ACCENT)
     add_bigstat(s, Inches(9.4), Inches(2.4), Inches(3.6), Inches(2.0),
-                "0 / 351", "overlap with the topic:fastapi signal", ACCENT2)
+                f"{D['overlap_acc_topic']} / {D['n_acc']}", "overlap with the topic:fastapi signal", ACCENT2)
     bullet_box(s, Inches(0.6), Inches(4.7), Inches(12.3), Inches(2.4), [
         (0, "These three numbers frame the whole study: a large candidate pool, a strict quality gate, and a population that an alternative signal cannot recover.", False, INK),
         (0, "Each is unpacked in the slides that follow.", False, MUTED),
@@ -271,7 +332,8 @@ def main():
     ])
     add_table(s,
               ["Candidates", "Snapshot", "Enriched", "Terminal decisions"],
-              [["4,500", "150 raw dependent pages", "via GitHub API", "351 accepted + 4,149 excluded"]],
+              [[_fmt(D["n_cand"]), f"{D['n_pages']} raw dependent pages", "via GitHub API",
+                f"{_fmt(D['n_acc'])} accepted + {_fmt(D['n_excl'])} excluded"]],
               top=Inches(4.9), col_widths=[Inches(2.0), Inches(3.4), Inches(3.4), Inches(3.5)])
 
     # ---- 4. Eligibility rules E1–E6 ----
@@ -290,33 +352,43 @@ def main():
               col_widths=[Inches(0.8), Inches(6.6), Inches(1.7), Inches(3.2)])
     bullet_box(s, Inches(0.6), Inches(4.7), Inches(12.3), Inches(2.4), [
         (0, "E1–E5 are hard gates: the first failing rule is recorded for every candidate (exclusion_log.json).", False, INK),
-        (0, "E6 is different: it FLAGS candidate repos for human review but never removes them. 162 flagged repos remain in the corpus (see caveats).", True, WARN),
+        (0, "E6 is different: it FLAGS candidate repos for human review but never removes them. "
+            f"{sum(1 for a in D['manifest']['accepted'] if a.get('tutorial_flag'))} flagged repos remain in the corpus (see caveats).", True, WARN),
         (0, "Rule thresholds are schema-versioned constants in corpus/settings.py for full reproducibility.", False, MUTED),
     ])
 
     # ---- 5. Funnel / exclusion counts ----
-    s = slide_title(prs, "From 4,500 candidates to 351 accepted — the funnel")
+    s = slide_title(prs, f"From {_fmt(D['n_cand'])} candidates to {_fmt(D['n_acc'])} accepted \u2014 the funnel")
+    reasons = D["exclusions_by_reason"]
+    e1_e2_pct = 100.0 * (reasons.get("E1", 0) + reasons.get("E2", 0)) / D["n_excl"] if D["n_excl"] else 0.0
+    e2_pct = 100.0 * reasons.get("E2", 0) / D["n_excl"] if D["n_excl"] else 0.0
+    e1_pct = 100.0 * reasons.get("E1", 0) / D["n_excl"] if D["n_excl"] else 0.0
+    unavail = reasons.get("unavailable", 0)
+    n_clone_failed = reasons.get("clone_failed", 0)
     add_table(s,
               ["Rule", "Criterion (short)", "Excluded"],
-              [["E1", "no fastapi in runtime deps", "798"],
-               ["E2", "not Python-dominant (byte ratio < 0.5)", "1,631"],
-               ["E3", "is a fork OR archived", "445"],
-               ["E4", "not pushed < 60mo OR < 10 commits", "709"],
-               ["E5", "< 4 fastapi files OR < 1 app", "524"],
-               ["unavailable", "GitHub 404 (deleted/private after discovery)", "42"]],
+              [["E1", "no fastapi in runtime deps", _fmt(reasons.get("E1", 0))],
+               ["E2", "not Python-dominant (byte ratio < 0.5)", _fmt(reasons.get("E2", 0))],
+               ["E3", "is a fork OR archived", _fmt(reasons.get("E3", 0))],
+               ["E4", "not pushed < 60mo OR < 10 commits", _fmt(reasons.get("E4", 0))],
+               ["E5", "< 4 fastapi files OR < 1 app", _fmt(reasons.get("E5", 0))],
+               ["unavailable", "GitHub 404 (deleted/private after discovery)", _fmt(unavail)]],
               top=Inches(1.6), col_widths=[Inches(1.6), Inches(8.7), Inches(2.0)])
     bullet_box(s, Inches(0.6), Inches(4.8), Inches(12.3), Inches(2.4), [
-        (0, "90%+ of the 4,149 exclusions are population-level properties of the dependency-graph source, not our thresholds: E2 (36%) and E1 (18%) are the dependency graph surfacing non-Python / non-runtime-DI repos.", False, INK),
-        (0, "Only 42 repos (0.9%) were un-retrievable (deleted/private) — minimal, documented attrition.", False, ACCENT2),
-        (0, "Zero 'clone_failed' entries remain — every candidate carries a terminal, auditable decision.", False, ACCENT2),
+        (0, f"{e1_e2_pct:.0f}% of the {_fmt(D['n_excl'])} exclusions are population-level properties of the dependency-graph source, not our thresholds: E2 ({e2_pct:.0f}%) and E1 ({e1_pct:.0f}%) are the dependency graph surfacing non-Python / non-runtime-DI repos.", False, INK),
+        (0, f"Only {_fmt(unavail)} repos ({100.0 * unavail / D['n_cand']:.1f}%) were un-retrievable (deleted/private) \u2014 minimal, documented attrition.", False, ACCENT2),
+        (0, "Zero 'clone_failed' entries remain \u2014 every candidate carries a terminal, auditable decision." if n_clone_failed == 0
+         else f"{_fmt(n_clone_failed)} 'clone_failed' entries remain (documented, retried).", False, ACCENT2),
     ])
 
     # ---- 6. Recall benchmark ----
     s = slide_title(prs, "Methodological anchor: the topic signal recovers 0% of the corpus")
     add_table(s,
               ["Pool", "Size", "Overlap with topic:fastapi", "% overlap"],
-              [["Candidates (dependency graph)", "4,500", "2", "0.0%"],
-               ["Accepted corpus", "351", "0", "0.0%"]],
+              [["Candidates (dependency graph)", _fmt(D["n_cand"]), str(D["overlap_cand_topic"]),
+                f"{100.0 * D['overlap_cand_topic'] / D['n_cand']:.1f}%"],
+               ["Accepted corpus", _fmt(D["n_acc"]), str(D["overlap_acc_topic"]),
+                f"{100.0 * D['overlap_acc_topic'] / D['n_acc']:.1f}%"]],
               top=Inches(1.6), col_widths=[Inches(5.5), Inches(2.0), Inches(3.6), Inches(1.2)])
     bullet_box(s, Inches(0.6), Inches(3.6), Inches(12.3), Inches(3.4), [
         (0, "Independent signal: the `topic:fastapi` GitHub search (top 1,000 by stars), snapshotted once.", False, INK),
@@ -328,18 +400,18 @@ def main():
     # ---- 7. Sampling / corpus ----
     reports = _load_reports()
     n_total = len(reports)
-    s = slide_title(prs, "Corpus — full census of 351 accepted repos")
+    s = slide_title(prs, f"Corpus \u2014 full census of {_fmt(D['n_acc'])} accepted repos")
     bullet_box(s, Inches(0.6), Inches(1.6), Inches(12.3), Inches(2.6), [
-        (0, "4,500 GitHub dependents of fastapi/fastapi (dependency graph) → 351 accepted under E1–E6.", False, INK),
-        (0, "This analysis reports the FULL accepted corpus (census, n = 351), not a random sample.", True, ACCENT),
+        (0, f"{_fmt(D['n_cand'])} GitHub dependents of fastapi/fastapi (dependency graph) \u2192 {_fmt(D['n_acc'])} accepted under E1\u2013E6.", False, INK),
+        (0, f"This analysis reports the FULL accepted corpus (census, n = {_fmt(D['n_acc'])}), not a random sample.", True, ACCENT),
         (0, "An earlier n = 100 seed-42 sample was used for pilot analyses; the final RQ1/RQ2 numbers here are the census.", True, ACCENT),
-        (0, "So the '%' denominators throughout are out of 351 repos (per-construct rows overlap by design).", False, MUTED),
+        (0, f"So the '%' denominators throughout are out of {_fmt(D['n_acc'])} repos (per-construct rows overlap by design).", False, MUTED),
     ])
     add_bigstat(s, Inches(4.0), Inches(4.4), Inches(5.3), Inches(1.8),
-                f"{n_total} / 351", "accepted corpus · full census", ACCENT)
+                f"{_fmt(n_total)} / {_fmt(D['n_acc'])}", "accepted corpus · full census", ACCENT)
 
     # ---- 8. RQ1 prevalence ----
-    s = slide_title(prs, "RQ1 — which DI constructs do real projects use?", "full-corpus census, n=351")
+    s = slide_title(prs, "RQ1 — which DI constructs do real projects use?", f"full-corpus census, n={_fmt(D['n_acc'])}")
     rows = _csv("rq1_constructs.csv")
     clean = [r for r in rows if r["construct_id"] in ("C1","C2","C3","C4","C5","C6","C7","C8")]
     table_rows = [[r["construct"], r["repos_using"], r["pct_of_sample"]+"%", r["total_calls"], r["median_per_repo_using"]] for r in clean]
@@ -350,7 +422,8 @@ def main():
     mult = _multiplicity(reports)
     zero, one, two = mult[0][1], mult[1][1], sum(n for i, n in mult if i >= 2)
     bullet_box(s, Inches(0.6), Inches(5.1), Inches(12.3), Inches(2.1), [
-        (0, "The \"% of corpus\" column is per-construct and does NOT sum to 100%. Each cell is the share of the 351 repos that use that construct at least once.", True, INK),
+        (0, "The \"% of corpus\" column is per-construct and does NOT sum to 100%. Each cell is the share of the "
+            f"{_fmt(D['n_acc'])} repos that use that construct at least once.", True, INK),
         (0, "A repo can appear in many rows because one project often mixes several DI constructs (e.g. Depends + generator/yield + Security together).", False, INK),
         (0, f"In the census: {100*zero/n_total:.0f}% use no core construct, {100*one/n_total:.0f}% exactly one, and {100*two/n_total:.0f}% two or more. The columns overlap by design — see the next slide for the full breakdown.", True, ACCENT2),
     ])
@@ -372,22 +445,25 @@ def main():
     bullet_box(s, Inches(0.6), Inches(4.75), Inches(12.3), Inches(2.4), [
         (0, f"{100*two/n_total:.0f}% of repos mix two or more DI constructs — the per-construct rows on the previous slide are NOT mutually exclusive.", True, ACCENT2),
         (0, "Depends (C1) is the 'host' construct: every user of Security, Annotated, Generator/yield or Router-level also uses Depends.", False, INK),
-        (0, "The dominant pairing is Depends + Generator/yield (140 repos) — the classic session-scope pattern `def foo(yield db)`; advanced constructs (Override, App-level, Callable-class) are essentially never combined.", False, WARN),
+        (0, "The dominant pairing is Depends + Generator/yield "
+            f"({_pairings(reports, top=1)[0][2]} repos) — the classic session-scope pattern `def foo(yield db)`; advanced constructs (Override, App-level, Callable-class) are essentially never combined.", False, WARN),
     ])
 
     # ---- 10. RQ1 interpretation + zero-DI ----
+    P = {r["construct_id"]: float(r["pct_of_sample"]) for r in clean}
+    zero_core = 100.0 * mult[0][1] / n_total
     s = slide_title(prs, "RQ1 — what the numbers mean")
     bullet_box(s, Inches(0.6), Inches(1.5), Inches(12.3), Inches(3.0), [
-        (0, "Depends (C1) is dominant but not universal: 74.6% of real apps use it; a quarter use none.", True, INK),
-        (0, "Generator/yield deps (C4, 39.9%) outnumber the modern Annotated style (C3, 25.1%) — the 'recommended' style is not the most common in the wild.", False, INK),
-        (0, "Security (C2, 9.4%) is under-used despite being a headline auth feature; median just 1 call among users.", False, INK),
-        (0, "Advanced constructs are rare in production: overrides 1.7%, app-level deps 2.8%, callable classes 0.6%.", False, INK),
-        (0, "Zero-DI cohort = 25.1%: substantial FastAPI apps (≥ 4 files, ≥ 1 app) that use no core DI construct at all.", True, ACCENT2),
+        (0, f"Depends (C1) is dominant but not universal: {P['C1']:.1f}% of real apps use it; the zero-DI cohort is {zero_core:.1f}%.", True, INK),
+        (0, f"Generator/yield deps (C4, {P['C4']:.1f}%) outnumber the modern Annotated style (C3, {P['C3']:.1f}%) — the 'recommended' style is not the most common in the wild.", False, INK),
+        (0, f"Security (C2, {P['C2']:.1f}%) is under-used despite being a headline auth feature; median just 1 call among users.", False, INK),
+        (0, f"Advanced constructs are rare in production: overrides {P['C7']:.1f}%, app-level deps {P['C6']:.1f}%, callable classes {P['C8']:.1f}%.", False, INK),
+        (0, f"Zero-DI cohort = {zero_core:.1f}%: substantial FastAPI apps (\u2265 4 files, \u2265 1 app) that use no core DI construct at all.", True, ACCENT2),
     ])
     add_bigstat(s, Inches(0.9), Inches(5.0), Inches(5.6), Inches(1.8),
-                "25.1%", "zero-DI cohort — real apps bypassing the DI system", ACCENT2)
+                f"{zero_core:.1f}%", "zero-DI cohort — real apps bypassing the DI system", ACCENT2)
     add_bigstat(s, Inches(6.9), Inches(5.0), Inches(5.6), Inches(1.8),
-                "74.6%", "use Depends at least once in production files", ACCENT)
+                f"{P['C1']:.1f}%", "use Depends at least once in production files", ACCENT)
 
     # ---- 10. RQ1 by covariate (the dropped application-class question) ----
     s = slide_title(prs, "RQ1 axis — who uses DI? (the dropped 'application classes' question)", "disaggregated by stars and age across the census")
@@ -405,9 +481,15 @@ def main():
               col_widths=[Inches(1.5), Inches(1.3), Inches(1.9), Inches(1.9)])
     bullet_box(s, Inches(0.6), Inches(4.2), Inches(12.3), Inches(3.0), [
         (0, "DI adoption is essentially flat across popularity (≈70–76%) in the well-populated star buckets — DI use is not a popularity artefact.", True, ACCENT),
-        (0, "The corpus skews very young: 316/351 repos are under 12 months old — a product of the E4 recency gate and a fast-growing dependency-graph population.", False, INK),
-        (0, "Ages 12–36mo and 36mo+ show slightly higher adoption (81%, 89%) but hold only 26 and 9 repos — too few for stable conclusions. Reported for completeness, not over-read.", False, WARN),
-        (0, "High-star buckets (10–99, 100+) hold 11 and 7 repos — reported for completeness, not over-read.", False, WARN),
+        (0, f"The corpus skews very young: {next((r['repos'] for r in ba if r['age_bucket'] == '<12mo'), '?')}/{n_total} repos are under 12 months old — a product of the E4 recency gate and a fast-growing dependency-graph population.", False, INK),
+        (0, "Ages 12–36mo and 36mo+ show slightly higher adoption "
+            f"({next((r['pct_using_core_di'] for r in ba if r['age_bucket'] == '12-36mo'), '?')}%, "
+            f"{next((r['pct_using_core_di'] for r in ba if r['age_bucket'] == '36mo+'), '?')}%) but hold only "
+            f"{next((r['repos'] for r in ba if r['age_bucket'] == '12-36mo'), '?')} and "
+            f"{next((r['repos'] for r in ba if r['age_bucket'] == '36mo+'), '?')} repos — too few for stable conclusions. Reported for completeness, not over-read.", False, WARN),
+        (0, "High-star buckets (10–99, 100+) hold "
+            f"{next((r['repos'] for r in bs if r['stars_bucket'] == '10-99'), '?')} and "
+            f"{next((r['repos'] for r in bs if r['stars_bucket'] == '100+'), '?')} repos — reported for completeness, not over-read.", False, WARN),
         (0, "This covariate view is how the dropped 'application classes' question is answered without an arbitrary taxonomy.", False, MUTED),
     ])
 
@@ -425,7 +507,7 @@ def main():
               top=Inches(1.6), col_widths=[Inches(3.5), Inches(2.4), Inches(3.5), Inches(2.4)])
     bullet_box(s, Inches(0.6), Inches(3.6), Inches(12.3), Inches(3.0), [
         (0, "Complexity is measured on the dependency graph the resolver builds from Depends calls.", False, INK),
-        (0, "Graphs are shallow: median depth 2, max 5 — flat dependency trees, not deep chains.", True, INK),
+        (0, f"Graphs are shallow: median depth {st.median(int(r['max_depth']) for r in g)}, max {max(int(r['max_depth']) for r in g)} — flat dependency trees, not deep chains.", True, INK),
         (0, "This is the empirical signature of FastAPI DI: a small set of shared dependencies reused across many handlers (fan-out), not deep inheritance-like nesting.", False, ACCENT),
         (0, f"{round(100*sum(1 for r_ in g if float(r_['unresolved_pct']) == 0)/len(g))}% of graph-bearing repos resolve at 0% unresolved — the resolver is reliable at corpus scale.", False, ACCENT2),
     ])
@@ -476,7 +558,8 @@ def main():
     bullet_box(s, Inches(0.6), Inches(1.5), Inches(12.3), Inches(5.4), [
         (0, "Two possible places to fix: the resolver (root cause) or the aggregation (defensive filter).", True, INK),
         (0, "We chose the aggregation-time filter, for three reasons:", False, INK),
-        (1, "Existing corpus reports are frozen snapshots — patching the resolver does not retroactively fix them, and re-running full extraction over 351 repos is expensive.", False, INK),
+        (1, "Existing corpus reports are frozen snapshots — patching the resolver does not retroactively fix them, and re-running full extraction over "
+            f"{_fmt(D['n_acc'])} repos is expensive.", False, INK),
         (1, "Filtering by node-id pattern is targeted and auditable: drop any id containing a path separator or a 'file:line' anchor, and drop any edge that references such a node.", False, INK),
         (1, "It keeps the raw and clean columns side by side (rq4_graphs.csv) so the transformation is transparent and re-checkable.", False, INK),
         (0, "The fix is deterministic and documented in docs/result_draft_01.md §6.1 as an honest reporting sentence: 'we filtered resolver-emitted non-callable artifact nodes before computing complexity metrics.'", True, ACCENT2),
@@ -513,9 +596,10 @@ def main():
         tf.paragraphs[0].font.size = Pt(14); tf.paragraphs[0].font.color.rgb = MUTED
         tf.paragraphs[0].alignment = PP_ALIGN.CENTER
     add_bigstat(s, Inches(0.6), Inches(5.3), Inches(6.0), Inches(1.6),
-                "91.3%", "of clean graph-bearing repos show ≥3-dependency fan-out", ACCENT)
+                f"{round(100*_fan_out3(reports)[0]/_fan_out3(reports)[1],1)}%",
+                "of clean graph-bearing repos have some dependency called by ≥3 other Depends sites (fan-out)", ACCENT)
     add_bigstat(s, Inches(7.0), Inches(5.3), Inches(6.0), Inches(1.6),
-                "depth ≈ 2", "median graph depth = reuse is broad, not deep", MUTED)
+                f"depth {st.median(int(r['max_depth']) for r in g):g}", "median graph depth = reuse is broad, not deep", MUTED)
 
     # ---- 17. Sensitivity ----
     s = slide_title(prs, "Robustness — E5 threshold sensitivity", "the headline % is stable across the threshold range")
@@ -525,7 +609,8 @@ def main():
               [[r["e5_min_fastapi_files"], r["eligible_n"], r["pct_using_core_di"]+"%", r["median_depends_among_users"]] for r in sens],
               top=Inches(1.6), col_widths=[Inches(2.6), Inches(2.2), Inches(3.0), Inches(3.0)])
     bullet_box(s, Inches(0.6), Inches(4.0), Inches(12.3), Inches(3.0), [
-        (0, "As the E5 threshold rises from 4 to 8 (scoping to progressively larger, more substantial apps), the % using core DI moves only 74.9% → 81.4%.", False, INK),
+        (0, "As the E5 threshold rises from 4 to 8 (scoping to progressively larger, more substantial apps), the % using core DI moves only "
+            f"{_row_by(sens, 'e5_min_fastapi_files', '4')['pct_using_core_di']}% \u2192 {_row_by(sens, 'e5_min_fastapi_files', '8')['pct_using_core_di']}%.", False, INK),
         (0, "Conclusion is threshold-stable: the qualitative findings do not depend on the specific threshold.", True, ACCENT),
         (0, "Rows t=2,3 are degenerate by construction — every accepted repo already passes at t=4, so lower thresholds add nothing. Sensitivity is meaningful at t ≥ 5.", False, WARN),
         (0, "Tighter thresholds capture larger apps with more DI per repo — larger apps do use DI more.", False, INK),
@@ -536,10 +621,16 @@ def main():
     bullet_box(s, Inches(0.6), Inches(1.4), Inches(12.3), Inches(5.7), [
         (0, "Source substitution: GitHub dependency graph replaced Libraries.io (disabled server-side).", False, INK),
         (0, "Population: only repos GitHub's dependency graph resolves; invisible setups (e.g. submodules, unusual installs) are unrepresented.", False, INK),
-        (0, "Attrition: 42 repos (0.9%) deleted/private after discovery.", False, INK),
-        (0, "E6 tutorial flags: 162 of 351 (46%) carry markers; all 35 reviewed so far are false positives (real apps). We PRESENT THIS AS AN OPEN COUNT — not yet resolved, stated honestly.", True, WARN),
-        (0, "Resolver coverage: 25% of accepted repos have empty graphs despite nonzero depends_total (resolver cannot follow some cross-file patterns).", False, INK),
-        (0, "Non-stratified sample; high-star / high-age buckets have only 1–5 repos.", False, INK),
+        (0, "Attrition: "
+            f"{_fmt(reasons.get('unavailable', 0))} repos ({100.0 * reasons.get('unavailable', 0) / D['n_cand']:.1f}%) deleted/private after discovery.", False, INK),
+        (0, "E6 tutorial flags: "
+            f"{sum(1 for a in D['manifest']['accepted'] if a.get('tutorial_flag'))} of {_fmt(D['n_acc'])} "
+            f"({100.0 * sum(1 for a in D['manifest']['accepted'] if a.get('tutorial_flag')) / D['n_acc']:.0f}%) carry markers; "
+            "all 35 reviewed so far are false positives (real apps). We PRESENT THIS AS AN OPEN COUNT — not yet resolved, stated honestly.", True, WARN),
+        (0, "Resolver coverage: "
+            f"{100 * (n_total - len(g)) // n_total}% of accepted repos have empty graphs despite nonzero depends_total (resolver cannot follow some cross-file patterns).", False, INK),
+        (0, "Non-stratified sample; the smallest star bucket (100+) has only "
+            f"{next((r['repos'] for r in bs if r['stars_bucket'] == '100+'), '?')} repos — bucket-level conclusions are not over-read.", False, INK),
         (0, "Artifacts were only first committed to git on 2026-08-31 (previously zero commits) — review the commit history before any external submission.", False, WARN),
     ])
 
@@ -547,7 +638,8 @@ def main():
     s = slide_title(prs, "So what? — the value to the table")
     bullet_box(s, Inches(0.6), Inches(1.5), Inches(12.3), Inches(5.4), [
         (0, "Methodology: a corpus source with provable recall (0% topic overlap) and full decision auditability.", True, ACCENT),
-        (0, "For tool/users: DI is NOT universal in real FastAPI (25% zero-DI) — ecosystem guidance assumes more DI than practice shows.", True, INK),
+        (0, "For tool/users: DI is NOT universal in real FastAPI "
+            f"({zero_core:.0f}% zero-DI) — ecosystem guidance assumes more DI than practice shows.", True, INK),
         (0, "For maintainers: Security() and advanced constructs are barely adopted; Depends + generator-style dominate.", True, INK),
         (0, "For the paper: hard, reproducible, threshold-stable numbers on construct prevalence, graph depth, and sensitivity.", False, INK),
         (0, "For practice: real graphs are broad-and-shallow (fan-out hubs), which informs how FastAPI DI is taught and designed.", False, INK),

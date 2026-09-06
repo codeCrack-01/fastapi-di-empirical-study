@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1",
-  "generated_at": "2026-08-25T19:31:39.430154+00:00",
+  "generated_at": "2026-09-06T09:38:11.219906+00:00",
   "config": {
     "sample_seed": 42,
     "E2_min_python_ratio": 0.5,
@@ -28258,7 +28258,4161 @@
       "extractor_schema_version": "0.2",
       "extractor_version": "0.2.1",
       "commit_sha": "0151ffadb527b0759d3cc37d3460cb344751711d"
+    },
+    {
+      "full_name": "BHAR-226/talentIA_backend_exemple",
+      "repository_url": "https://github.com/BHAR-226/talentIA_backend_exemple",
+      "stars_gh": 0,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-07-20T21:39:02Z",
+      "pushed_at": "2026-08-08T23:25:06Z",
+      "commit_count": 24,
+      "py_ratio": 0.999,
+      "license": null,
+      "topics": [],
+      "description": null,
+      "tutorial_flag": true,
+      "tutorial_markers": "markers=['example']",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['aiosmtplib', 'alembic', 'bcrypt', 'celery', 'email-validator', 'fastapi', 'hiredis', 'openpyxl']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.999"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-08-08T23:25:06Z commits=24 cutoff=2021-09-06T08:35:00.360518+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=22 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": false,
+          "detail": "markers=['example']"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 22,
+        "fastapi_app_count": 1,
+        "depends_total": 149,
+        "security_total": 0,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 1,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 62,
+        "files_production": 62,
+        "files_test": 0,
+        "pct_production": 1.0
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "a69aa54818ead2455c4c79710b0ef0cf4feca2fa"
+    },
+    {
+      "full_name": "aXtr1o1/ConvAgent",
+      "repository_url": "https://github.com/aXtr1o1/ConvAgent",
+      "stars_gh": 0,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-03-07T10:47:10Z",
+      "pushed_at": "2026-08-20T16:37:31Z",
+      "commit_count": 82,
+      "py_ratio": 0.6137,
+      "license": "Apache-2.0",
+      "topics": [],
+      "description": "An AI Powered conversation agent that is capable of understanding, analyzing & answer user queries.",
+      "tutorial_flag": true,
+      "tutorial_markers": "markers=['getting started']",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['fastapi', 'langchain-core', 'langchain-openai', 'langgraph', 'numpy', 'openai', 'openpyxl', 'pandas']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.6137"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-08-20T16:37:31Z commits=82 cutoff=2021-09-06T08:35:17.146159+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=7 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": false,
+          "detail": "markers=['getting started']"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 7,
+        "fastapi_app_count": 1,
+        "depends_total": 0,
+        "security_total": 0,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 0,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 45,
+        "files_production": 40,
+        "files_test": 5,
+        "pct_production": 0.8889
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "95ee57f8bf581a4b9478b58041da637e832dfa73"
+    },
+    {
+      "full_name": "omadli/code_runner_bot",
+      "repository_url": "https://github.com/omadli/code_runner_bot",
+      "stars_gh": 3,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2023-10-22T19:36:59Z",
+      "pushed_at": "2026-07-21T10:34:46Z",
+      "commit_count": 49,
+      "py_ratio": 0.7377,
+      "license": null,
+      "topics": [],
+      "description": null,
+      "tutorial_flag": false,
+      "tutorial_markers": "",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['aerich', 'aiocache', 'aiogram', 'aiohttp', 'asyncpg', 'environs', 'fastapi', 'pyjwt']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.7377"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-07-21T10:34:46Z commits=49 cutoff=2021-09-06T08:35:28.334295+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=6 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": true,
+          "detail": "no markers"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 6,
+        "fastapi_app_count": 1,
+        "depends_total": 11,
+        "security_total": 0,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 0,
+        "router_dep_total": 1,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 62,
+        "files_production": 43,
+        "files_test": 19,
+        "pct_production": 0.6935
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "f001028d14ebacd39353d474f15b0716d9761dda"
+    },
+    {
+      "full_name": "wenjiayi123/port-dt-multi",
+      "repository_url": "https://github.com/wenjiayi123/port-dt-multi",
+      "stars_gh": 0,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-07-21T09:07:38Z",
+      "pushed_at": "2026-09-01T12:38:38Z",
+      "commit_count": 37,
+      "py_ratio": 0.78,
+      "license": "MIT",
+      "topics": [
+        "ai-governance",
+        "fastapi",
+        "maritime",
+        "mlops",
+        "model-predictive-control",
+        "operations-research",
+        "port-digital-twin",
+        "reinforcement-learning",
+        "simulation",
+        "stable-baselines3"
+      ],
+      "description": "\u6e2f\u822a\u6570\u5b57\u5b6a\u751f AI \u51b3\u7b56\u8c03\u5ea6\u53cc\u7aef\u7cfb\u7edf\uff1aWeb + Flutter\u3001\u6570\u5b57\u5b6a\u751f\u3001RL/MPC\u3001\u5c0f\u61ffAI\u4e0e\u53ef\u5ba1\u8ba1\u5b89\u5168\u95ed\u73af\u3002",
+      "tutorial_flag": false,
+      "tutorial_markers": "",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['fastapi', 'gymnasium', 'numpy', 'pandas', 'pydantic', 'python-dateutil', 'python-multipart', 'requests']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.78"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-09-01T12:38:38Z commits=37 cutoff=2021-09-06T08:37:34.320176+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=42 apps=3 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": true,
+          "detail": "no markers"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 42,
+        "fastapi_app_count": 3,
+        "depends_total": 0,
+        "security_total": 0,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 0,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 329,
+        "files_production": 304,
+        "files_test": 25,
+        "pct_production": 0.924
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "061eff58fd3a937099be0a84e37eb8bacf14638e"
+    },
+    {
+      "full_name": "imbus/testbench-ai-service",
+      "repository_url": "https://github.com/imbus/testbench-ai-service",
+      "stars_gh": 0,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-03-31T12:59:50Z",
+      "pushed_at": "2026-08-31T02:36:40Z",
+      "commit_count": 12,
+      "py_ratio": 0.9377,
+      "license": "Apache-2.0",
+      "topics": [],
+      "description": null,
+      "tutorial_flag": true,
+      "tutorial_markers": "markers=['template']",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['aiohttp', 'anthropic', 'azure-identity', 'fastapi', 'jinja2', 'jsonschema', 'openai', 'pydantic']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.9377"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-08-31T02:36:40Z commits=12 cutoff=2021-09-06T08:37:39.070286+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=8 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": false,
+          "detail": "markers=['template']"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 8,
+        "fastapi_app_count": 1,
+        "depends_total": 20,
+        "security_total": 2,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 1,
+        "router_dep_total": 1,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 117,
+        "files_production": 54,
+        "files_test": 63,
+        "pct_production": 0.4615
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "f41d1babd60d1218f23764eb279892433258f36f"
+    },
+    {
+      "full_name": "PTejasKr/Capsule",
+      "repository_url": "https://github.com/PTejasKr/Capsule",
+      "stars_gh": 0,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-06-16T06:59:28Z",
+      "pushed_at": "2026-07-15T08:46:18Z",
+      "commit_count": 47,
+      "py_ratio": 0.6369,
+      "license": null,
+      "topics": [],
+      "description": "Ai summariser and changelog tool for jenkins pipeline",
+      "tutorial_flag": false,
+      "tutorial_markers": "",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['aiosqlite', 'asyncpg', 'celery', 'fastapi', 'kombu', 'openai', 'pydantic', 'pydantic-settings']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.6369"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-07-15T08:46:18Z commits=47 cutoff=2021-09-06T08:44:56.945519+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=6 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": true,
+          "detail": "no markers"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 6,
+        "fastapi_app_count": 1,
+        "depends_total": 26,
+        "security_total": 1,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 0,
+        "router_dep_total": 1,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 50,
+        "files_production": 35,
+        "files_test": 15,
+        "pct_production": 0.7
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "831a5f247593bdb03048960044a76060bc5e2da9"
+    },
+    {
+      "full_name": "wenjiayi123/xiaoyi-maritime-ai",
+      "repository_url": "https://github.com/wenjiayi123/xiaoyi-maritime-ai",
+      "stars_gh": 0,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-07-21T07:06:52Z",
+      "pushed_at": "2026-09-01T10:05:16Z",
+      "commit_count": 23,
+      "py_ratio": 0.781,
+      "license": "MIT",
+      "topics": [
+        "agentic-ai",
+        "auditable-ai",
+        "energy-management",
+        "fastapi",
+        "knowledge-governance",
+        "maritime-ai",
+        "port-operations",
+        "python",
+        "rag",
+        "reinforcement-learning"
+      ],
+      "description": "Evidence-governed maritime AI control plane with local RAG, fail-closed port adapters, auditable workflows, and a real 4-RL + PID lab.",
+      "tutorial_flag": false,
+      "tutorial_markers": "",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['fastapi', 'pydantic', 'python-dotenv', 'uvicorn']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.781"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-09-01T10:05:16Z commits=23 cutoff=2021-09-06T08:45:11.237733+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=24 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": true,
+          "detail": "no markers"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 24,
+        "fastapi_app_count": 1,
+        "depends_total": 0,
+        "security_total": 0,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 0,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 126,
+        "files_production": 89,
+        "files_test": 37,
+        "pct_production": 0.7063
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "3c28a040ba41309ddb65a40df2a821131d5ec5b2"
+    },
+    {
+      "full_name": "akiamuradev/arduino-component-knowledge-base",
+      "repository_url": "https://github.com/akiamuradev/arduino-component-knowledge-base",
+      "stars_gh": 4,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-07-16T00:11:49Z",
+      "pushed_at": "2026-09-05T21:27:42Z",
+      "commit_count": 130,
+      "py_ratio": 0.7543,
+      "license": "NOASSERTION",
+      "topics": [
+        "arduino",
+        "college-project",
+        "component-catalog",
+        "docker",
+        "education",
+        "fastapi",
+        "knowledge-base",
+        "postgresql",
+        "python",
+        "react",
+        "redis",
+        "typescript"
+      ],
+      "description": "Educational Arduino component knowledge base for college students. Built with FastAPI, React, PostgreSQL, Redis, MinIO and Docker.",
+      "tutorial_flag": false,
+      "tutorial_markers": "",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['alembic', 'argon2-cffi', 'asyncpg', 'dramatiq', 'fastapi', 'httpx2', 'minio', 'pillow']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.7543"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-09-05T21:27:42Z commits=130 cutoff=2021-09-06T08:45:17.944670+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=16 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": true,
+          "detail": "no markers"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 16,
+        "fastapi_app_count": 1,
+        "depends_total": 197,
+        "security_total": 0,
+        "annotated_depends_total": 394,
+        "yield_dep_total": 1,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 257,
+        "files_production": 184,
+        "files_test": 73,
+        "pct_production": 0.716
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "583d83946752bdb820abd03ea088746ec6ad1561"
+    },
+    {
+      "full_name": "prayagupa/payment-system",
+      "repository_url": "https://github.com/prayagupa/payment-system",
+      "stars_gh": 2,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2013-12-24T06:44:46Z",
+      "pushed_at": "2026-08-04T03:37:02Z",
+      "commit_count": 37,
+      "py_ratio": 0.8033,
+      "license": null,
+      "topics": [
+        "elastic-kubernetes-service",
+        "kubernetes",
+        "microservice"
+      ],
+      "description": "agentic payment system",
+      "tutorial_flag": false,
+      "tutorial_markers": "",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['fastapi', 'psycopg', 'pydantic', 'pyyaml', 'sqlalchemy', 'uvicorn']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.8033"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-08-04T03:37:02Z commits=37 cutoff=2021-09-06T08:46:57.941468+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=9 apps=8 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": true,
+          "detail": "no markers"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 9,
+        "fastapi_app_count": 8,
+        "depends_total": 15,
+        "security_total": 0,
+        "annotated_depends_total": 27,
+        "yield_dep_total": 3,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 51,
+        "files_production": 42,
+        "files_test": 9,
+        "pct_production": 0.8235
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "f14b34bf30c2e0187d5347e60994cb63be1f3bc0"
+    },
+    {
+      "full_name": "cmc0619/batterbox",
+      "repository_url": "https://github.com/cmc0619/batterbox",
+      "stars_gh": 0,
+      "stars_libio": null,
+      "forks_gh": 1,
+      "created_at": "2026-07-21T04:32:53Z",
+      "pushed_at": "2026-07-31T22:04:19Z",
+      "commit_count": 132,
+      "py_ratio": 0.6167,
+      "license": "MIT",
+      "topics": [],
+      "description": null,
+      "tutorial_flag": true,
+      "tutorial_markers": "markers=['demo']",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['fastapi', 'gpiozero', 'lgpio', 'python-multipart', 'starlette', 'uvicorn', 'yt-dlp']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.6167"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-07-31T22:04:19Z commits=132 cutoff=2021-09-06T08:47:21.357395+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=9 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": false,
+          "detail": "markers=['demo']"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 9,
+        "fastapi_app_count": 1,
+        "depends_total": 0,
+        "security_total": 0,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 0,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 21,
+        "files_production": 21,
+        "files_test": 0,
+        "pct_production": 1.0
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "2830e073d10d2fa653110b5fa62e348d4374342d"
+    },
+    {
+      "full_name": "mbwika/AI-Assurance-Framework",
+      "repository_url": "https://github.com/mbwika/AI-Assurance-Framework",
+      "stars_gh": 6,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2025-07-14T23:59:17Z",
+      "pushed_at": "2026-08-20T01:34:00Z",
+      "commit_count": 37,
+      "py_ratio": 0.9407,
+      "license": "Apache-2.0",
+      "topics": [
+        "genai",
+        "llm",
+        "owasp-llm-top-10"
+      ],
+      "description": "AI Assurance Framework (AIAF Sentry) is an open-source platform designed to improve the security, trustworthiness, resilience, and governance of Artificial Intelligence systems through continuous assurance methodologies.  The framework enables organizations to assess AI security risks, validate governance controls, and monitor AI deployments.",
+      "tutorial_flag": false,
+      "tutorial_markers": "",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['anyio', 'cryptography', 'fastapi', 'filelock', 'h11', 'huggingface_hub', 'idna', 'packaging']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.9407"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-08-20T01:34:00Z commits=37 cutoff=2021-09-06T08:47:26.054280+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=40 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": true,
+          "detail": "no markers"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 40,
+        "fastapi_app_count": 1,
+        "depends_total": 364,
+        "security_total": 3,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 0,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 298,
+        "files_production": 184,
+        "files_test": 114,
+        "pct_production": 0.6174
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "1d9d6c5f236e9bae07bdfa4b84da9ea8d4b9ec89"
+    },
+    {
+      "full_name": "mbvgua/fastapi-primer",
+      "repository_url": "https://github.com/mbvgua/fastapi-primer",
+      "stars_gh": 0,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-06-11T12:23:38Z",
+      "pushed_at": "2026-09-03T14:04:24Z",
+      "commit_count": 25,
+      "py_ratio": 0.5586,
+      "license": "GPL-3.0",
+      "topics": [],
+      "description": "the one where I learn fastapi",
+      "tutorial_flag": true,
+      "tutorial_markers": "markers=['learn', 'template']",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['aiomysql', 'aiosmtplib', 'aiosqlite', 'alembic', 'annotated-doc', 'annotated-types', 'anyio', 'argon2-cffi']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.5586"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-09-03T14:04:24Z commits=25 cutoff=2021-09-06T08:47:41.048445+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=8 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": false,
+          "detail": "markers=['learn', 'template']"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 8,
+        "fastapi_app_count": 1,
+        "depends_total": 31,
+        "security_total": 0,
+        "annotated_depends_total": 62,
+        "yield_dep_total": 1,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 23,
+        "files_production": 23,
+        "files_test": 0,
+        "pct_production": 1.0
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "93a31cd498b655369541a40049029df72669f8ac"
+    },
+    {
+      "full_name": "mateoclarke/naba-membership",
+      "repository_url": "https://github.com/mateoclarke/naba-membership",
+      "stars_gh": 0,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-01-14T08:29:05Z",
+      "pushed_at": "2026-07-21T04:00:19Z",
+      "commit_count": 24,
+      "py_ratio": 0.5794,
+      "license": null,
+      "topics": [],
+      "description": null,
+      "tutorial_flag": true,
+      "tutorial_markers": "markers=['example']",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['email-validator', 'fastapi', 'folium', 'pandas', 'plotly', 'pydantic', 'pyjwt', 'pytest']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.5794"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-07-21T04:00:19Z commits=24 cutoff=2021-09-06T08:47:59.535855+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=11 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": false,
+          "detail": "markers=['example']"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 11,
+        "fastapi_app_count": 1,
+        "depends_total": 50,
+        "security_total": 0,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 1,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 47,
+        "files_production": 31,
+        "files_test": 16,
+        "pct_production": 0.6596
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "749dbfe240bac029c76969ec6775eccf0258e52f"
+    },
+    {
+      "full_name": "djfch/llm_transaction",
+      "repository_url": "https://github.com/djfch/llm_transaction",
+      "stars_gh": 1,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-07-20T15:43:12Z",
+      "pushed_at": "2026-09-03T14:29:44Z",
+      "commit_count": 88,
+      "py_ratio": 0.7141,
+      "license": null,
+      "topics": [],
+      "description": null,
+      "tutorial_flag": true,
+      "tutorial_markers": "markers=['example']",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['aiosqlite', 'anthropic', 'fastapi', 'gate-api', 'gate-ws', 'httpx', 'mcp', 'openai']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.7141"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-09-03T14:29:44Z commits=88 cutoff=2021-09-06T08:48:57.580390+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=10 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": false,
+          "detail": "markers=['example']"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 10,
+        "fastapi_app_count": 1,
+        "depends_total": 0,
+        "security_total": 0,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 0,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 255,
+        "files_production": 156,
+        "files_test": 99,
+        "pct_production": 0.6118
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "be57454d7f027309ccdc1603c1bc8fa20a058f1f"
+    },
+    {
+      "full_name": "edwin-okun/smart-weather",
+      "repository_url": "https://github.com/edwin-okun/smart-weather",
+      "stars_gh": 0,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-07-20T22:08:43Z",
+      "pushed_at": "2026-07-30T01:19:43Z",
+      "commit_count": 22,
+      "py_ratio": 1.0,
+      "license": null,
+      "topics": [],
+      "description": null,
+      "tutorial_flag": false,
+      "tutorial_markers": "",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['aiosqlite', 'fastapi', 'fastapi-mcp', 'pydantic', 'pydantic-settings', 'tortoise-orm']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=1.0"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-07-30T01:19:43Z commits=22 cutoff=2021-09-06T08:53:07.885286+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=6 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": true,
+          "detail": "no markers"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 6,
+        "fastapi_app_count": 1,
+        "depends_total": 5,
+        "security_total": 0,
+        "annotated_depends_total": 4,
+        "yield_dep_total": 0,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 27,
+        "files_production": 26,
+        "files_test": 1,
+        "pct_production": 0.963
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "f948f790a1b25eec4f5b7c8a61fd52baed3ecf61"
+    },
+    {
+      "full_name": "S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab",
+      "repository_url": "https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab",
+      "stars_gh": 0,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-07-19T06:44:48Z",
+      "pushed_at": "2026-08-03T07:41:06Z",
+      "commit_count": 44,
+      "py_ratio": 0.9979,
+      "license": null,
+      "topics": [],
+      "description": "From Ambiguous Client Problem to Secure, Evaluated, Production-Ready Agentic Workflow",
+      "tutorial_flag": true,
+      "tutorial_markers": "markers=['tutorial']",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['fastapi', 'pydantic', 'pydantic-settings', 'uvicorn']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.9979"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-08-03T07:41:06Z commits=44 cutoff=2021-09-06T08:57:07.789742+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=7 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": false,
+          "detail": "markers=['tutorial']"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 7,
+        "fastapi_app_count": 1,
+        "depends_total": 8,
+        "security_total": 0,
+        "annotated_depends_total": 14,
+        "yield_dep_total": 0,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 108,
+        "files_production": 60,
+        "files_test": 48,
+        "pct_production": 0.5556
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "8d2b0ec68f283a9449fab35963b5ceb6a7c70606"
+    },
+    {
+      "full_name": "pkanderi-abio/tradewiser-bot",
+      "repository_url": "https://github.com/pkanderi-abio/tradewiser-bot",
+      "stars_gh": 0,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-04-27T18:10:30Z",
+      "pushed_at": "2026-08-14T21:26:19Z",
+      "commit_count": 35,
+      "py_ratio": 0.9147,
+      "license": null,
+      "topics": [],
+      "description": "TradeWiser is a production-ready automated trading bot that uses momentum-based strategies to trade stocks and options through the Alpaca API. Features include real-time market monitoring, automatic trade execution, comprehensive audit logging, and Windows MSI packaging for enterprise deployment.",
+      "tutorial_flag": false,
+      "tutorial_markers": "",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['aiohttp', 'alpaca-py', 'anthropic', 'asyncio-contextmanager', 'beautifulsoup4', 'fastapi', 'groq', 'nltk']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.9147"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-08-14T21:26:19Z commits=35 cutoff=2021-09-06T08:57:10.162348+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=6 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": true,
+          "detail": "no markers"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 6,
+        "fastapi_app_count": 1,
+        "depends_total": 3,
+        "security_total": 1,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 0,
+        "router_dep_total": 3,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 59,
+        "files_production": 40,
+        "files_test": 19,
+        "pct_production": 0.678
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "63d691d30a0de2510164972eb2d6239df66723cf"
+    },
+    {
+      "full_name": "derekrivers/atlas",
+      "repository_url": "https://github.com/derekrivers/atlas",
+      "stars_gh": 0,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-06-10T15:14:56Z",
+      "pushed_at": "2026-09-02T19:45:39Z",
+      "commit_count": 695,
+      "py_ratio": 0.8227,
+      "license": "MIT",
+      "topics": [],
+      "description": "We are here to orchestrate agents",
+      "tutorial_flag": true,
+      "tutorial_markers": "markers=['learn', 'template']",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['alembic', 'anthropic', 'fastapi', 'httpx', 'jinja2', 'networkx', 'pydantic', 'pyyaml']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.8227"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-09-02T19:45:39Z commits=695 cutoff=2021-09-06T08:57:19.607004+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=14 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": false,
+          "detail": "markers=['learn', 'template']"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 14,
+        "fastapi_app_count": 1,
+        "depends_total": 41,
+        "security_total": 3,
+        "annotated_depends_total": 41,
+        "yield_dep_total": 0,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 440,
+        "files_production": 245,
+        "files_test": 195,
+        "pct_production": 0.5568
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "c80d8ce4f698cfd946c08301af02ee36231c32c9"
+    },
+    {
+      "full_name": "krazywarez/hutch-notify",
+      "repository_url": "https://github.com/krazywarez/hutch-notify",
+      "stars_gh": 0,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-04-08T19:24:00Z",
+      "pushed_at": "2026-08-31T22:39:52Z",
+      "commit_count": 10,
+      "py_ratio": 1.0,
+      "license": "0BSD",
+      "topics": [],
+      "description": "Notification server for Hutch.",
+      "tutorial_flag": false,
+      "tutorial_markers": "",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['aiosqlite', 'alembic', 'apscheduler', 'fastapi', 'httpx', 'pydantic-settings', 'pyjwt', 'sqlalchemy']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=1.0"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-08-31T22:39:52Z commits=10 cutoff=2021-09-06T09:07:57.105892+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=6 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": true,
+          "detail": "no markers"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 6,
+        "fastapi_app_count": 1,
+        "depends_total": 6,
+        "security_total": 0,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 1,
+        "router_dep_total": 3,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 14,
+        "files_production": 14,
+        "files_test": 0,
+        "pct_production": 1.0
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "848c0ce289718bcc92626a5c82ef4b7759d96941"
+    },
+    {
+      "full_name": "krazywarez/hutch-stats",
+      "repository_url": "https://github.com/krazywarez/hutch-stats",
+      "stars_gh": 0,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-04-10T00:45:00Z",
+      "pushed_at": "2026-08-31T22:40:01Z",
+      "commit_count": 55,
+      "py_ratio": 0.9953,
+      "license": "0BSD",
+      "topics": [
+        "sourcehut"
+      ],
+      "description": "Server-side utility for calculating contributions for sourcehut users.",
+      "tutorial_flag": false,
+      "tutorial_markers": "",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['alembic', 'apscheduler', 'fastapi', 'httpx', 'pydantic', 'pydantic-settings', 'sqlalchemy', 'uvicorn']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.9953"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-08-31T22:40:01Z commits=55 cutoff=2021-09-06T09:07:58.971946+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=7 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": true,
+          "detail": "no markers"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 7,
+        "fastapi_app_count": 1,
+        "depends_total": 20,
+        "security_total": 0,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 1,
+        "router_dep_total": 1,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 45,
+        "files_production": 35,
+        "files_test": 10,
+        "pct_production": 0.7778
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "e59328fc7aad5869b2c3f0fc23dd1d8f39dad15c"
+    },
+    {
+      "full_name": "sitara2007/CivicOs",
+      "repository_url": "https://github.com/sitara2007/CivicOs",
+      "stars_gh": 1,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-06-02T13:14:06Z",
+      "pushed_at": "2026-07-24T18:18:13Z",
+      "commit_count": 28,
+      "py_ratio": 0.9885,
+      "license": "MIT",
+      "topics": [],
+      "description": "AI-powered workflow automation engine for government and public sector document triage, classification, and routing.",
+      "tutorial_flag": true,
+      "tutorial_markers": "markers=['example']",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['asyncpg', 'celery', 'fastapi', 'openai', 'pybreaker', 'pydantic', 'pydantic-settings', 'pypdf']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.9885"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-07-24T18:18:13Z commits=28 cutoff=2021-09-06T09:11:07.041057+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=5 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": false,
+          "detail": "markers=['example']"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 5,
+        "fastapi_app_count": 1,
+        "depends_total": 3,
+        "security_total": 0,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 1,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 93,
+        "files_production": 82,
+        "files_test": 11,
+        "pct_production": 0.8817
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "3fe5f961431a39e25704473958d30f438114dae5"
+    },
+    {
+      "full_name": "gggard/orbital",
+      "repository_url": "https://github.com/gggard/orbital",
+      "stars_gh": 1,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-07-19T13:09:09Z",
+      "pushed_at": "2026-09-01T08:27:25Z",
+      "commit_count": 154,
+      "py_ratio": 0.6058,
+      "license": "GPL-3.0",
+      "topics": [
+        "kubernetes",
+        "self-hosted",
+        "streamlit"
+      ],
+      "description": "Self-hosted platform for deploying, running, and managing Streamlit apps on Kubernetes",
+      "tutorial_flag": false,
+      "tutorial_markers": "",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['cryptography', 'fastapi', 'httpx', 'itsdangerous', 'jinja2', 'kubernetes', 'pydantic', 'pydantic-settings']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.6058"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-09-01T08:27:25Z commits=154 cutoff=2021-09-06T09:11:12.343354+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=11 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": true,
+          "detail": "no markers"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 11,
+        "fastapi_app_count": 1,
+        "depends_total": 82,
+        "security_total": 0,
+        "annotated_depends_total": 160,
+        "yield_dep_total": 1,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 63,
+        "files_production": 32,
+        "files_test": 31,
+        "pct_production": 0.5079
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "f98773d1e95020468c8c9d59d9805ca61677a9df"
+    },
+    {
+      "full_name": "drdgreed/pacca",
+      "repository_url": "https://github.com/drdgreed/pacca",
+      "stars_gh": 3,
+      "stars_libio": null,
+      "forks_gh": 3,
+      "created_at": "2026-02-03T19:39:52Z",
+      "pushed_at": "2026-09-06T08:21:12Z",
+      "commit_count": 262,
+      "py_ratio": 0.8819,
+      "license": "MIT",
+      "topics": [
+        "agentic-ai",
+        "claude",
+        "fastapi",
+        "harness-engineering",
+        "healthcare",
+        "llm",
+        "multi-agent",
+        "prior-authorization",
+        "python",
+        "rag"
+      ],
+      "description": "Multi-agent AI platform that automates healthcare prior-authorization decisions. RAG-grounded, harness-engineered, observability-first.",
+      "tutorial_flag": false,
+      "tutorial_markers": "",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['aiosqlite', 'alembic', 'anthropic', 'asyncpg', 'bcrypt', 'chromadb', 'click', 'fastapi']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.8819"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-09-06T08:21:12Z commits=262 cutoff=2021-09-06T09:11:38.103961+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=8 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": true,
+          "detail": "no markers"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 8,
+        "fastapi_app_count": 1,
+        "depends_total": 27,
+        "security_total": 0,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 1,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 206,
+        "files_production": 88,
+        "files_test": 118,
+        "pct_production": 0.4272
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "db47a5dda878f421dad32c0dac476552f9ed7b7f"
+    },
+    {
+      "full_name": "wycliffRotich-dev/aethergrid",
+      "repository_url": "https://github.com/wycliffRotich-dev/aethergrid",
+      "stars_gh": 9,
+      "stars_libio": null,
+      "forks_gh": 1,
+      "created_at": "2026-07-02T10:47:07Z",
+      "pushed_at": "2026-09-06T08:01:17Z",
+      "commit_count": 284,
+      "py_ratio": 0.8772,
+      "license": null,
+      "topics": [
+        "ai",
+        "automation",
+        "clean-architecture",
+        "distributed-systems",
+        "docker",
+        "docker-compose",
+        "domain-driven-design",
+        "fastapi",
+        "gpu",
+        "open-source",
+        "orchestration",
+        "postgresql",
+        "python",
+        "react",
+        "scheduler",
+        "schema",
+        "sql",
+        "telemetry",
+        "test-driven-development",
+        "websocket"
+      ],
+      "description": "A decentralized compute orchestration platform powered by strict Domain-Driven Design (DDD). Decoupled domain core, event-driven state reconciliation, and zero-overhead cluster management.",
+      "tutorial_flag": true,
+      "tutorial_markers": "markers=['demo', 'tutorial']",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['fastapi', 'httpx', 'psycopg', 'pydantic', 'pydantic-settings', 'structlog', 'uvicorn']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.8772"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-09-06T08:01:17Z commits=284 cutoff=2021-09-06T09:15:23.295952+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=8 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": false,
+          "detail": "markers=['demo', 'tutorial']"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 8,
+        "fastapi_app_count": 1,
+        "depends_total": 47,
+        "security_total": 0,
+        "annotated_depends_total": 70,
+        "yield_dep_total": 0,
+        "router_dep_total": 6,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 258,
+        "files_production": 150,
+        "files_test": 108,
+        "pct_production": 0.5814
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "331d46ba52f72b07f2b9a075b2e368acc64bf114"
+    },
+    {
+      "full_name": "dengrb1/ashare-ai-research",
+      "repository_url": "https://github.com/dengrb1/ashare-ai-research",
+      "stars_gh": 0,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-07-17T05:41:27Z",
+      "pushed_at": "2026-08-27T12:50:16Z",
+      "commit_count": 110,
+      "py_ratio": 0.7451,
+      "license": "Apache-2.0",
+      "topics": [],
+      "description": "\u53ef\u5ba1\u8ba1\u3001\u53ef\u590d\u73b0\u7684 A \u80a1\u6536\u76d8\u540e AI \u6295\u7814\u3001\u8bc4\u5206\u3001\u6a21\u62df\u7ec4\u5408\u4e0e\u4e8b\u4ef6\u9a71\u52a8\u56de\u6d4b\u5e73\u53f0\u3002",
+      "tutorial_flag": true,
+      "tutorial_markers": "markers=['example']",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['akshare', 'alembic', 'argon2-cffi', 'boto3', 'cryptography', 'duckdb', 'fastapi', 'fsspec']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.7451"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-08-27T12:50:16Z commits=110 cutoff=2021-09-06T09:15:34.266872+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=4 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": false,
+          "detail": "markers=['example']"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 4,
+        "fastapi_app_count": 1,
+        "depends_total": 6,
+        "security_total": 0,
+        "annotated_depends_total": 8,
+        "yield_dep_total": 1,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 242,
+        "files_production": 173,
+        "files_test": 69,
+        "pct_production": 0.7149
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "0c5c4fd9b860a86c89e0ff309c30ddc55a018f71"
+    },
+    {
+      "full_name": "salimc93/exiqus-oss",
+      "repository_url": "https://github.com/salimc93/exiqus-oss",
+      "stars_gh": 0,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-07-20T12:02:36Z",
+      "pushed_at": "2026-09-01T13:02:16Z",
+      "commit_count": 21,
+      "py_ratio": 0.7954,
+      "license": "AGPL-3.0",
+      "topics": [
+        "agpl",
+        "anthropic",
+        "code-analysis",
+        "developer-hiring",
+        "evidence-based",
+        "fastapi",
+        "github-analysis",
+        "nextjs",
+        "python",
+        "typescript"
+      ],
+      "description": "Evidence based developer evaluation from GitHub repository, portfolio and pull-request analysis with no scores, ratings or verdicts. AGPL-3.0.",
+      "tutorial_flag": true,
+      "tutorial_markers": "markers=['demo', 'walkthrough']",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['aiofiles', 'alembic', 'anthropic', 'anyio', 'asyncpg', 'authlib', 'bcrypt', 'click']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.7954"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-09-01T13:02:16Z commits=21 cutoff=2021-09-06T09:15:54.996030+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=41 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": false,
+          "detail": "markers=['demo', 'walkthrough']"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 41,
+        "fastapi_app_count": 1,
+        "depends_total": 295,
+        "security_total": 0,
+        "annotated_depends_total": 126,
+        "yield_dep_total": 1,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 466,
+        "files_production": 256,
+        "files_test": 210,
+        "pct_production": 0.5494
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "e757555b0a2e232997eb965133c02021f102f250"
+    },
+    {
+      "full_name": "zengqing1218/seryl",
+      "repository_url": "https://github.com/zengqing1218/seryl",
+      "stars_gh": 1,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-07-15T04:17:09Z",
+      "pushed_at": "2026-08-10T20:09:58Z",
+      "commit_count": 73,
+      "py_ratio": 0.7148,
+      "license": "MIT",
+      "topics": [],
+      "description": null,
+      "tutorial_flag": false,
+      "tutorial_markers": "",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['certifi', 'concurrent-log-handler', 'croniter', 'cryptography', 'ddgs', 'fastapi', 'fire', 'httpx']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.7148"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-08-10T20:09:58Z commits=73 cutoff=2021-09-06T09:25:17.823940+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=10 apps=2 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": true,
+          "detail": "no markers"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 10,
+        "fastapi_app_count": 2,
+        "depends_total": 19,
+        "security_total": 0,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 0,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 2923,
+        "files_production": 909,
+        "files_test": 2014,
+        "pct_production": 0.311
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "90d53d4601b7ed84b867a71a22294e59e3e28756"
+    },
+    {
+      "full_name": "simjak/ctower",
+      "repository_url": "https://github.com/simjak/ctower",
+      "stars_gh": 0,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-07-19T05:17:32Z",
+      "pushed_at": "2026-09-01T11:07:18Z",
+      "commit_count": 330,
+      "py_ratio": 0.8363,
+      "license": "Apache-2.0",
+      "topics": [
+        "agentic-workflows",
+        "ai-agents",
+        "control-plane",
+        "task-management",
+        "workflow-engine"
+      ],
+      "description": "Durable task and workflow control for humans and replaceable AI agents.",
+      "tutorial_flag": false,
+      "tutorial_markers": "",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['cryptography', 'fastapi', 'httpx', 'jsonschema', 'keyring', 'packaging', 'platformdirs', 'psycopg']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.8363"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-09-01T11:07:18Z commits=330 cutoff=2021-09-06T09:26:23.300932+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=37 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": true,
+          "detail": "no markers"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 37,
+        "fastapi_app_count": 1,
+        "depends_total": 0,
+        "security_total": 0,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 0,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 1099,
+        "files_production": 592,
+        "files_test": 507,
+        "pct_production": 0.5387
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "a9e92c08283d561fdf1909638575adac94da3da6"
+    },
+    {
+      "full_name": "skoruppa/docchi-stremio-addon",
+      "repository_url": "https://github.com/skoruppa/docchi-stremio-addon",
+      "stars_gh": 21,
+      "stars_libio": null,
+      "forks_gh": 4,
+      "created_at": "2025-01-10T14:11:06Z",
+      "pushed_at": "2026-09-03T09:36:47Z",
+      "commit_count": 705,
+      "py_ratio": 0.951,
+      "license": "MIT",
+      "topics": [],
+      "description": null,
+      "tutorial_flag": false,
+      "tutorial_markers": "",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['aiocache', 'aiohttp', 'async-tls-client', 'beautifulsoup4', 'cloudscraper-enhanced', 'cryptography', 'fastapi', 'jinja2']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.951"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-09-03T09:36:47Z commits=705 cutoff=2021-09-06T09:26:29.871664+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=7 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": true,
+          "detail": "no markers"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 7,
+        "fastapi_app_count": 1,
+        "depends_total": 0,
+        "security_total": 0,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 0,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 32,
+        "files_production": 32,
+        "files_test": 0,
+        "pct_production": 1.0
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "5776d866e05fb2906f80c59b4654e72b624710fd"
+    },
+    {
+      "full_name": "404GamerNotFound/TBC-camera-manager",
+      "repository_url": "https://github.com/404GamerNotFound/TBC-camera-manager",
+      "stars_gh": 28,
+      "stars_libio": null,
+      "forks_gh": 1,
+      "created_at": "2026-07-08T11:56:16Z",
+      "pushed_at": "2026-08-31T02:46:53Z",
+      "commit_count": 329,
+      "py_ratio": 0.7049,
+      "license": "MIT",
+      "topics": [
+        "camera",
+        "docker",
+        "docker-compose",
+        "home-assistant-addon",
+        "tbc"
+      ],
+      "description": "TBC is a modular, Docker-based camera manager. Camera vendors are integrated through installable camera modules. Reolink, Aqara, TP-Link/Tapo, Axis, Foscam, Hikvision, Dahua (including Amcrest/Annke OEM devices), Ubiquiti/UniFi Protect, and SONOFF are available as directly installable standard repositories.",
+      "tutorial_flag": false,
+      "tutorial_markers": "",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['aiohttp', 'boto3', 'cryptography', 'fast-alpr', 'fastapi', 'hap-python', 'itsdangerous', 'jinja2']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.7049"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-08-31T02:46:53Z commits=329 cutoff=2021-09-06T09:26:52.791636+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=23 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": true,
+          "detail": "no markers"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 23,
+        "fastapi_app_count": 1,
+        "depends_total": 0,
+        "security_total": 0,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 0,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 191,
+        "files_production": 124,
+        "files_test": 67,
+        "pct_production": 0.6492
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "20e3419ca54357a31d0c5f677b54f78888d419a8"
+    },
+    {
+      "full_name": "yihefeikong-rgb/ai-plc-integration-public",
+      "repository_url": "https://github.com/yihefeikong-rgb/ai-plc-integration-public",
+      "stars_gh": 5,
+      "stars_libio": null,
+      "forks_gh": 1,
+      "created_at": "2026-05-31T05:09:36Z",
+      "pushed_at": "2026-08-01T20:57:06Z",
+      "commit_count": 128,
+      "py_ratio": 0.7316,
+      "license": "NOASSERTION",
+      "topics": [
+        "ai-agents",
+        "electron",
+        "fastapi",
+        "industrial-automation",
+        "industrial-safety",
+        "model-context-protocol",
+        "plc",
+        "plcsim",
+        "react",
+        "siemens",
+        "tia-portal"
+      ],
+      "description": "Local AI automation workbench for Siemens PLC and industrial-robot R&D: MCP, TIA Portal V21, PLCSIM, guarded writes, and offline-first verification.",
+      "tutorial_flag": false,
+      "tutorial_markers": "",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['anthropic', 'asyncua', 'chromadb', 'fastapi', 'fastembed', 'fastmcp', 'influxdb-client', 'keyring']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.7316"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-08-01T20:57:06Z commits=128 cutoff=2021-09-06T09:26:56.403028+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=14 apps=2 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": true,
+          "detail": "no markers"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 14,
+        "fastapi_app_count": 2,
+        "depends_total": 47,
+        "security_total": 0,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 0,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 294,
+        "files_production": 170,
+        "files_test": 124,
+        "pct_production": 0.5782
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "82e8826e83da7efa98c03e2f7027453f041cde0d"
+    },
+    {
+      "full_name": "BrayanJay/hrms-ai-assistant",
+      "repository_url": "https://github.com/BrayanJay/hrms-ai-assistant",
+      "stars_gh": 0,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-06-16T17:31:35Z",
+      "pushed_at": "2026-09-01T11:00:10Z",
+      "commit_count": 45,
+      "py_ratio": 0.5529,
+      "license": "MIT",
+      "topics": [],
+      "description": null,
+      "tutorial_flag": true,
+      "tutorial_markers": "markers=['sample']",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['aiofiles', 'alembic', 'asyncpg', 'bcrypt', 'fastapi', 'openai', 'psycopg2-binary', 'pydantic']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.5529"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-09-01T11:00:10Z commits=45 cutoff=2021-09-06T09:27:01.941554+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=7 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": false,
+          "detail": "markers=['sample']"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 7,
+        "fastapi_app_count": 1,
+        "depends_total": 18,
+        "security_total": 0,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 1,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 54,
+        "files_production": 54,
+        "files_test": 0,
+        "pct_production": 1.0
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "6708189a486211a458cc72a5361a926ab0412564"
+    },
+    {
+      "full_name": "microsoft/fsi-agentic-wealth-transfer",
+      "repository_url": "https://github.com/microsoft/fsi-agentic-wealth-transfer",
+      "stars_gh": 1,
+      "stars_libio": null,
+      "forks_gh": 2,
+      "created_at": "2026-07-08T21:10:30Z",
+      "pushed_at": "2026-08-06T23:25:56Z",
+      "commit_count": 87,
+      "py_ratio": 0.7228,
+      "license": "MIT",
+      "topics": [],
+      "description": "FSI Agentic Wealth Transfer: AI-powered client onboarding, KYC verification, ACATS transfer orchestration, exception management, and post-transfer reconciliation using Microsoft Foundry.",
+      "tutorial_flag": false,
+      "tutorial_markers": "",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['agent-framework-core', 'agent-framework-foundry', 'agent-framework-foundry-hosting', 'azure-ai-contentsafety', 'azure-ai-contentunderstanding', 'azure-ai-projects', 'azure-functions', 'azure-identity']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.7228"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-08-06T23:25:56Z commits=87 cutoff=2021-09-06T09:28:37.612235+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=6 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": true,
+          "detail": "no markers"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 6,
+        "fastapi_app_count": 1,
+        "depends_total": 58,
+        "security_total": 0,
+        "annotated_depends_total": 116,
+        "yield_dep_total": 0,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 232,
+        "files_production": 176,
+        "files_test": 56,
+        "pct_production": 0.7586
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "e8449568a017436fae57ebf0d37c761591e9ccbe"
+    },
+    {
+      "full_name": "HyxiaoGe/auth-service",
+      "repository_url": "https://github.com/HyxiaoGe/auth-service",
+      "stars_gh": 1,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-02-18T12:46:51Z",
+      "pushed_at": "2026-08-24T01:12:23Z",
+      "commit_count": 58,
+      "py_ratio": 0.9964,
+      "license": "Apache-2.0",
+      "topics": [
+        "authentication",
+        "component-service",
+        "email-otp",
+        "fastapi",
+        "jwks",
+        "jwt",
+        "monitor-auth",
+        "oauth2",
+        "passwordless",
+        "pkce",
+        "product-auth-service",
+        "product-primary",
+        "self-hosted",
+        "single-sign-on"
+      ],
+      "description": "\u53ef\u81ea\u6258\u7ba1\u7684\u591a\u5e94\u7528\u7edf\u4e00\u8ba4\u8bc1\u670d\u52a1\uff0c\u652f\u6301 Google/GitHub\u3001\u90ae\u7bb1\u9a8c\u8bc1\u7801\u3001PKCE\u3001JWT/JWKS \u4e0e\u8de8\u5e94\u7528 SSO\u3002",
+      "tutorial_flag": false,
+      "tutorial_markers": "",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['alembic', 'asyncpg', 'authlib', 'cryptography', 'fastapi', 'psycopg2-binary', 'pwdlib', 'pydantic']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.9964"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-08-24T01:12:23Z commits=58 cutoff=2021-09-06T09:28:44.974267+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=11 apps=2 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": true,
+          "detail": "no markers"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 11,
+        "fastapi_app_count": 2,
+        "depends_total": 42,
+        "security_total": 0,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 1,
+        "router_dep_total": 1,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 89,
+        "files_production": 47,
+        "files_test": 42,
+        "pct_production": 0.5281
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "b387f771cd68fe4c075059023075f61e2648ac99"
+    },
+    {
+      "full_name": "renameAI/A2A",
+      "repository_url": "https://github.com/renameAI/A2A",
+      "stars_gh": 0,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-07-03T12:42:03Z",
+      "pushed_at": "2026-09-04T07:30:21Z",
+      "commit_count": 263,
+      "py_ratio": 0.8184,
+      "license": null,
+      "topics": [],
+      "description": null,
+      "tutorial_flag": true,
+      "tutorial_markers": "markers=['example']",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['anthropic', 'beautifulsoup4', 'fastapi', 'pydantic', 'pymupdf', 'pypdf', 'pytest', 'python-docx']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.8184"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-09-04T07:30:21Z commits=263 cutoff=2021-09-06T09:28:48.713745+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=6 apps=2 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": false,
+          "detail": "markers=['example']"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 6,
+        "fastapi_app_count": 2,
+        "depends_total": 35,
+        "security_total": 0,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 0,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 194,
+        "files_production": 118,
+        "files_test": 76,
+        "pct_production": 0.6082
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "8d9080f7b96656d60a54a3f144f9910daa44fa05"
+    },
+    {
+      "full_name": "Alteoziel/Shadow-AI-Gateway",
+      "repository_url": "https://github.com/Alteoziel/Shadow-AI-Gateway",
+      "stars_gh": 0,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-07-02T18:47:46Z",
+      "pushed_at": "2026-09-03T00:36:56Z",
+      "commit_count": 22,
+      "py_ratio": 0.7328,
+      "license": null,
+      "topics": [],
+      "description": null,
+      "tutorial_flag": false,
+      "tutorial_markers": "",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['fastapi', 'httpx', 'pydantic-settings', 'uvicorn']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.7328"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-09-03T00:36:56Z commits=22 cutoff=2021-09-06T09:29:22.110417+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=8 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": true,
+          "detail": "no markers"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 8,
+        "fastapi_app_count": 1,
+        "depends_total": 6,
+        "security_total": 0,
+        "annotated_depends_total": 12,
+        "yield_dep_total": 0,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 63,
+        "files_production": 42,
+        "files_test": 21,
+        "pct_production": 0.6667
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "3a57f7a21eb4bd78ff4c044fa33d106036de06d8"
+    },
+    {
+      "full_name": "nattaphonttcl-lab/affiliate-auto-poster",
+      "repository_url": "https://github.com/nattaphonttcl-lab/affiliate-auto-poster",
+      "stars_gh": 0,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-07-20T02:36:28Z",
+      "pushed_at": "2026-08-09T12:40:01Z",
+      "commit_count": 25,
+      "py_ratio": 0.9063,
+      "license": null,
+      "topics": [],
+      "description": null,
+      "tutorial_flag": true,
+      "tutorial_markers": "markers=['template']",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['alembic', 'bandit', 'bcrypt', 'black', 'email-validator', 'fastapi', 'opentelemetry-api', 'opentelemetry-exporter-otlp']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.9063"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-08-09T12:40:01Z commits=25 cutoff=2021-09-06T09:29:24.684564+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=18 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": false,
+          "detail": "markers=['template']"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 18,
+        "fastapi_app_count": 1,
+        "depends_total": 182,
+        "security_total": 0,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 1,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 162,
+        "files_production": 128,
+        "files_test": 34,
+        "pct_production": 0.7901
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "3f8a31b2270ea37fe701fd6118d3d0fe9c9d79c1"
+    },
+    {
+      "full_name": "ranasl62/ehr-risk-framework",
+      "repository_url": "https://github.com/ranasl62/ehr-risk-framework",
+      "stars_gh": 23,
+      "stars_libio": null,
+      "forks_gh": 6,
+      "created_at": "2026-03-30T00:10:28Z",
+      "pushed_at": "2026-08-01T10:15:48Z",
+      "commit_count": 42,
+      "py_ratio": 0.5787,
+      "license": "MIT",
+      "topics": [
+        "angular",
+        "calibration",
+        "chronic-diseases",
+        "clinical-risk-prediction",
+        "docker",
+        "ehr",
+        "ehr-data",
+        "ehr-integration",
+        "ehr-records",
+        "flask",
+        "healthcare-ai",
+        "leakage-detection",
+        "machine-learning",
+        "mimic-iv",
+        "open-source",
+        "openapi",
+        "python",
+        "risk"
+      ],
+      "description": "An open workbench for leakage-aware, calibrated, explainable risk modeling on longitudinal EHR-style data \u2014 built for students, labs, and health-informatics research.",
+      "tutorial_flag": true,
+      "tutorial_markers": "markers=['demo', 'learn']",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['fastapi', 'for line in _req.splitlines()', 'if line.strip() and not line.startswith(\"#\")', 'joblib', 'line.strip()', 'matplotlib', 'numpy', 'openpyxl']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.5787"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-08-01T10:15:48Z commits=42 cutoff=2021-09-06T09:30:21.707343+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=4 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": false,
+          "detail": "markers=['demo', 'learn']"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 4,
+        "fastapi_app_count": 1,
+        "depends_total": 4,
+        "security_total": 0,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 0,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 133,
+        "files_production": 80,
+        "files_test": 53,
+        "pct_production": 0.6015
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "6cc79dc184c525918987e187b98807f7ca490ad8"
+    },
+    {
+      "full_name": "moy-boy/agenticdb-registry",
+      "repository_url": "https://github.com/moy-boy/agenticdb-registry",
+      "stars_gh": 0,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2024-08-14T12:12:01Z",
+      "pushed_at": "2026-07-20T01:43:13Z",
+      "commit_count": 83,
+      "py_ratio": 0.8352,
+      "license": "Apache-2.0",
+      "topics": [],
+      "description": null,
+      "tutorial_flag": true,
+      "tutorial_markers": "markers=['example']",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['chromadb', 'fastapi', 'httpx', 'langchain-community', 'langchain-core', 'langchain-openai', 'langchain-text-splitters', 'langserve']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.8352"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-07-20T01:43:13Z commits=83 cutoff=2021-09-06T09:30:24.821894+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=7 apps=2 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": false,
+          "detail": "markers=['example']"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 7,
+        "fastapi_app_count": 2,
+        "depends_total": 7,
+        "security_total": 0,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 0,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 30,
+        "files_production": 12,
+        "files_test": 18,
+        "pct_production": 0.4
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "72f2bdee1576bd4debf592afb23a5533cd7f658f"
+    },
+    {
+      "full_name": "KikuAI-Lab/reliapi",
+      "repository_url": "https://github.com/KikuAI-Lab/reliapi",
+      "stars_gh": 8,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2025-11-13T21:29:15Z",
+      "pushed_at": "2026-08-31T02:11:49Z",
+      "commit_count": 31,
+      "py_ratio": 0.9543,
+      "license": "AGPL-3.0",
+      "topics": [
+        "api-gateway",
+        "api-reliability",
+        "budget-control",
+        "caching",
+        "fastapi",
+        "http-proxy",
+        "idempotency",
+        "llm-gateway",
+        "llm-proxy",
+        "prometheus",
+        "python",
+        "redis",
+        "reliability",
+        "self-hosted"
+      ],
+      "description": "Beta self-hosted HTTP and LLM proxy with Redis-backed caching, non-streaming LLM idempotency, and budget guardrails.",
+      "tutorial_flag": true,
+      "tutorial_markers": "markers=['example', 'template']",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['fastapi', 'httpx', 'prometheus-client', 'pydantic', 'pydantic-settings', 'pyyaml', 'redis', 'uvicorn']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.9543"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-08-31T02:11:49Z commits=31 cutoff=2021-09-06T09:30:27.927215+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=11 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": false,
+          "detail": "markers=['example', 'template']"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 11,
+        "fastapi_app_count": 1,
+        "depends_total": 0,
+        "security_total": 0,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 0,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 83,
+        "files_production": 63,
+        "files_test": 20,
+        "pct_production": 0.759
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "5ad71d97faf753dcfb6801b1333081de298168c8"
+    },
+    {
+      "full_name": "KikuAI-Lab/masker",
+      "repository_url": "https://github.com/KikuAI-Lab/masker",
+      "stars_gh": 6,
+      "stars_libio": null,
+      "forks_gh": 2,
+      "created_at": "2025-11-26T22:29:08Z",
+      "pushed_at": "2026-07-28T16:24:09Z",
+      "commit_count": 35,
+      "py_ratio": 0.9937,
+      "license": "AGPL-3.0",
+      "topics": [
+        "chatgpt",
+        "compliance",
+        "data-anonymization",
+        "fastapi",
+        "gdpr",
+        "llm",
+        "openai",
+        "pii",
+        "pii-detection",
+        "pii-redaction",
+        "privacy",
+        "python"
+      ],
+      "description": "PII redaction API for masking obvious personal data before LLM workflows.",
+      "tutorial_flag": true,
+      "tutorial_markers": "markers=['example']",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['fastapi', 'mypy', 'prometheus-client', 'pydantic', 'pydantic-settings', 'pytest', 'pytest-cov', 'pyyaml']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.9937"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-07-28T16:24:09Z commits=35 cutoff=2021-09-06T09:30:30.120772+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=10 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": false,
+          "detail": "markers=['example']"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 10,
+        "fastapi_app_count": 1,
+        "depends_total": 1,
+        "security_total": 0,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 0,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 48,
+        "files_production": 33,
+        "files_test": 15,
+        "pct_production": 0.6875
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "158ed9520f1e5a9695dc58a6ae02df6afed88510"
+    },
+    {
+      "full_name": "agarwalamit081/evolutionary-agents",
+      "repository_url": "https://github.com/agarwalamit081/evolutionary-agents",
+      "stars_gh": 0,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-06-10T17:55:55Z",
+      "pushed_at": "2026-09-02T16:53:16Z",
+      "commit_count": 316,
+      "py_ratio": 0.972,
+      "license": "NOASSERTION",
+      "topics": [],
+      "description": "(self-evolving) evolutionary agents with emergent capabilities",
+      "tutorial_flag": true,
+      "tutorial_markers": "markers=['example']",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['aiofiles', 'aiohttp', 'aiolimiter', 'aiosqlite', 'alembic', 'apscheduler', 'arxiv', 'asyncpg']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.972"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-09-02T16:53:16Z commits=316 cutoff=2021-09-06T09:30:35.350736+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=5 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": false,
+          "detail": "markers=['example']"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 5,
+        "fastapi_app_count": 1,
+        "depends_total": 2,
+        "security_total": 0,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 0,
+        "router_dep_total": 1,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 502,
+        "files_production": 213,
+        "files_test": 289,
+        "pct_production": 0.4243
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "2bda146c58464c2b8d08697beac4ad4c81e7e0d5"
+    },
+    {
+      "full_name": "bryanmg20/secop2-etl-pipeline",
+      "repository_url": "https://github.com/bryanmg20/secop2-etl-pipeline",
+      "stars_gh": 4,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-06-29T20:33:06Z",
+      "pushed_at": "2026-07-24T22:50:44Z",
+      "commit_count": 61,
+      "py_ratio": 1.0,
+      "license": "MIT",
+      "topics": [
+        "colombia",
+        "data-engineering",
+        "docker",
+        "etl",
+        "fastapi",
+        "pandas",
+        "postgresql",
+        "python"
+      ],
+      "description": "ETL Process for Electronic Contracts (SECOP II) Using PostgreSQL and FastApi",
+      "tutorial_flag": true,
+      "tutorial_markers": "markers=['example', 'getting started', 'template']",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['fastapi', 'pandas', 'psycopg2-binary', 'pytest', 'python-dotenv', 'requests', 'sqlalchemy', 'uvicorn']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=1.0"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-07-24T22:50:44Z commits=61 cutoff=2021-09-06T09:30:47.379681+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=4 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": false,
+          "detail": "markers=['example', 'getting started', 'template']"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 4,
+        "fastapi_app_count": 1,
+        "depends_total": 20,
+        "security_total": 0,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 1,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 37,
+        "files_production": 30,
+        "files_test": 7,
+        "pct_production": 0.8108
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "ef88c8ecb22d47271449cbd5df86ead51ec64f69"
+    },
+    {
+      "full_name": "dislovelhl/acgs-pgp",
+      "repository_url": "https://github.com/dislovelhl/acgs-pgp",
+      "stars_gh": 1,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-01-08T14:46:44Z",
+      "pushed_at": "2026-07-28T01:16:11Z",
+      "commit_count": 47,
+      "py_ratio": 0.9902,
+      "license": "Apache-2.0",
+      "topics": [],
+      "description": null,
+      "tutorial_flag": false,
+      "tutorial_markers": "",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['cachetools', 'email-validator', 'fastapi', 'httptools', 'httpx', 'jsonschema', 'msgpack', 'orjson']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.9902"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-07-28T01:16:11Z commits=47 cutoff=2021-09-06T09:31:12.811871+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=75 apps=5 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": true,
+          "detail": "no markers"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 75,
+        "fastapi_app_count": 5,
+        "depends_total": 188,
+        "security_total": 6,
+        "annotated_depends_total": 56,
+        "yield_dep_total": 1,
+        "router_dep_total": 3,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 1852,
+        "files_production": 1029,
+        "files_test": 823,
+        "pct_production": 0.5556
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "417c53345a3548c56e960653115272d499ce6cfe"
+    },
+    {
+      "full_name": "acgs-ai/enhanced-agent-bus",
+      "repository_url": "https://github.com/acgs-ai/enhanced-agent-bus",
+      "stars_gh": 1,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-04-05T14:05:39Z",
+      "pushed_at": "2026-07-29T23:28:36Z",
+      "commit_count": 87,
+      "py_ratio": 0.9922,
+      "license": null,
+      "topics": [
+        "agent-bus",
+        "ai",
+        "constitutional-ai",
+        "governance",
+        "maci",
+        "python"
+      ],
+      "description": "ACGS-2 Enhanced Agent Bus with Constitutional Compliance",
+      "tutorial_flag": false,
+      "tutorial_markers": "",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['aiofiles', 'cachetools', 'cryptography', 'email-validator', 'fastapi', 'httpx', 'jsonschema', 'litellm']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.9922"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-07-29T23:28:36Z commits=87 cutoff=2021-09-06T09:31:29.566597+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=43 apps=2 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": true,
+          "detail": "no markers"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 43,
+        "fastapi_app_count": 2,
+        "depends_total": 134,
+        "security_total": 2,
+        "annotated_depends_total": 72,
+        "yield_dep_total": 0,
+        "router_dep_total": 3,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 1808,
+        "files_production": 862,
+        "files_test": 946,
+        "pct_production": 0.4768
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "e4ecaf56b31aeed2e93c91ab0ce26424ae197e54"
+    },
+    {
+      "full_name": "thomas-illiet/CoderManager",
+      "repository_url": "https://github.com/thomas-illiet/CoderManager",
+      "stars_gh": 0,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-07-19T22:35:18Z",
+      "pushed_at": "2026-09-02T17:04:29Z",
+      "commit_count": 87,
+      "py_ratio": 0.9982,
+      "license": null,
+      "topics": [],
+      "description": null,
+      "tutorial_flag": true,
+      "tutorial_markers": "markers=['example', 'template']",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['alembic', 'asyncpg', 'celery', 'cryptography', 'fastapi', 'flower', 'httpx', 'prometheus-client']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.9982"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-09-02T17:04:29Z commits=87 cutoff=2021-09-06T09:31:47.276516+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=12 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": false,
+          "detail": "markers=['example', 'template']"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 12,
+        "fastapi_app_count": 1,
+        "depends_total": 14,
+        "security_total": 1,
+        "annotated_depends_total": 13,
+        "yield_dep_total": 1,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 1,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 154,
+        "files_production": 131,
+        "files_test": 23,
+        "pct_production": 0.8506
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "40c7864e80609551e4acf2764f540751d2eb7981"
+    },
+    {
+      "full_name": "kristovatlas/somnus",
+      "repository_url": "https://github.com/kristovatlas/somnus",
+      "stars_gh": 1,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-02-17T21:10:01Z",
+      "pushed_at": "2026-07-25T20:08:37Z",
+      "commit_count": 80,
+      "py_ratio": 0.5194,
+      "license": null,
+      "topics": [
+        "biohacking",
+        "health",
+        "healthcare",
+        "local-first",
+        "open-source",
+        "oura",
+        "oura-api-v2",
+        "oura-ring",
+        "quantified-self",
+        "self-experimentation",
+        "sleep",
+        "sleep-analysis",
+        "sleep-research",
+        "sleep-tracking"
+      ],
+      "description": "Your instrument for n=1 sleep optimization \u2014 local & open-source. Sync Oura, log your habits, and see what actually moves your sleep.",
+      "tutorial_flag": false,
+      "tutorial_markers": "",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['alembic', 'fastapi', 'httpx', 'numpy', 'pandas', 'pydantic', 'pydantic-settings', 'scipy']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.5194"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-07-25T20:08:37Z commits=80 cutoff=2021-09-06T09:31:57.168568+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=11 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": true,
+          "detail": "no markers"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 11,
+        "fastapi_app_count": 1,
+        "depends_total": 35,
+        "security_total": 0,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 1,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 62,
+        "files_production": 36,
+        "files_test": 26,
+        "pct_production": 0.5806
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "3845fd9da551c7d7a9c9e3a99ecf9b129b44f2a9"
+    },
+    {
+      "full_name": "ejupi-djenis30/careeros-local",
+      "repository_url": "https://github.com/ejupi-djenis30/careeros-local",
+      "stars_gh": 0,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-02-15T22:06:35Z",
+      "pushed_at": "2026-09-02T19:26:14Z",
+      "commit_count": 31,
+      "py_ratio": 0.7065,
+      "license": "MIT",
+      "topics": [
+        "application-tracker",
+        "career-development",
+        "desktop-app",
+        "desktop-software",
+        "fastapi",
+        "github-actions",
+        "job-search",
+        "llama-cpp",
+        "local-first",
+        "on-device-ai",
+        "privacy",
+        "python",
+        "react",
+        "resume-builder",
+        "rust",
+        "sqlite",
+        "tauri"
+      ],
+      "description": "Privacy-first desktop career workspace with required local LLM analysis for resumes, job matching, applications, and career evidence.",
+      "tutorial_flag": true,
+      "tutorial_markers": "markers=['demo']",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['alembic', 'apscheduler', 'bcrypt', 'development status :: 4 - beta', 'fastapi', 'greenlet', 'httpx', 'mcp']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.7065"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-09-02T19:26:14Z commits=31 cutoff=2021-09-06T09:32:25.739435+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=21 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": false,
+          "detail": "markers=['demo']"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 21,
+        "fastapi_app_count": 1,
+        "depends_total": 170,
+        "security_total": 1,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 1,
+        "router_dep_total": 2,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 476,
+        "files_production": 296,
+        "files_test": 180,
+        "pct_production": 0.6218
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "782cdf8318d1d947722db3073f36d09c07b907d2"
+    },
+    {
+      "full_name": "SergejSchweizer/portfell",
+      "repository_url": "https://github.com/SergejSchweizer/portfell",
+      "stars_gh": 0,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-07-12T16:52:45Z",
+      "pushed_at": "2026-09-04T21:49:54Z",
+      "commit_count": 549,
+      "py_ratio": 0.9942,
+      "license": null,
+      "topics": [],
+      "description": "A web app for exploring ETF data, comparing performance and risk, and building diversified portfolios with transparent statistics.",
+      "tutorial_flag": true,
+      "tutorial_markers": "markers=['sample']",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['anyio', 'cryptography', 'dash', 'fastapi', 'numpy', 'plotly', 'polars', 'psycopg']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.9942"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-09-04T21:49:54Z commits=549 cutoff=2021-09-06T09:32:38.254783+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=13 apps=6 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": false,
+          "detail": "markers=['sample']"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 13,
+        "fastapi_app_count": 6,
+        "depends_total": 0,
+        "security_total": 0,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 0,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 370,
+        "files_production": 196,
+        "files_test": 174,
+        "pct_production": 0.5297
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "66d7b7e948bbc58a14688156c3118bc1c8a8eaec"
+    },
+    {
+      "full_name": "Verdaxis/verdaxis-backend",
+      "repository_url": "https://github.com/Verdaxis/verdaxis-backend",
+      "stars_gh": 0,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2026-01-27T07:04:46Z",
+      "pushed_at": "2026-08-31T09:44:27Z",
+      "commit_count": 29,
+      "py_ratio": 0.9744,
+      "license": null,
+      "topics": [],
+      "description": null,
+      "tutorial_flag": true,
+      "tutorial_markers": "markers=['example', 'getting started']",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['aiosqlite', 'alembic', 'asyncpg', 'email-validator', 'fastapi', 'geoalchemy2', 'google-generativeai', 'passlib']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.9744"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-08-31T09:44:27Z commits=29 cutoff=2021-09-06T09:36:10.390115+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=11 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": false,
+          "detail": "markers=['example', 'getting started']"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 11,
+        "fastapi_app_count": 1,
+        "depends_total": 55,
+        "security_total": 0,
+        "annotated_depends_total": 50,
+        "yield_dep_total": 1,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 40,
+        "files_production": 33,
+        "files_test": 7,
+        "pct_production": 0.825
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "a8b98dda548a3977503cd1a33511b534540aba51"
+    },
+    {
+      "full_name": "drdubel/scrablozaur",
+      "repository_url": "https://github.com/drdubel/scrablozaur",
+      "stars_gh": 1,
+      "stars_libio": null,
+      "forks_gh": 0,
+      "created_at": "2022-12-31T11:22:44Z",
+      "pushed_at": "2026-08-04T12:18:30Z",
+      "commit_count": 217,
+      "py_ratio": 0.5949,
+      "license": null,
+      "topics": [],
+      "description": "Python program designed to win scrabble game",
+      "tutorial_flag": false,
+      "tutorial_markers": "",
+      "rules_passed": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "rules": [
+        {
+          "rule": "E1",
+          "passed": true,
+          "detail": "runtime deps found: ['fastapi', 'matplotlib', 'numpy', 'opencv-python', 'pillow', 'pydantic', 'python-multipart', 'torch']"
+        },
+        {
+          "rule": "E2",
+          "passed": true,
+          "detail": "py_ratio=0.5949"
+        },
+        {
+          "rule": "E3",
+          "passed": true,
+          "detail": "fork=False archived=False"
+        },
+        {
+          "rule": "E4",
+          "passed": true,
+          "detail": "pushed_at=2026-08-04T12:18:30Z commits=217 cutoff=2021-09-06T09:38:07.289189+00:00"
+        },
+        {
+          "rule": "E5",
+          "passed": true,
+          "detail": "fastapi_files=5 apps=1 (min 4/1)"
+        },
+        {
+          "rule": "E6",
+          "passed": true,
+          "detail": "no markers"
+        }
+      ],
+      "aggregate": {
+        "files_importing_fastapi": 5,
+        "fastapi_app_count": 1,
+        "depends_total": 12,
+        "security_total": 0,
+        "annotated_depends_total": 0,
+        "yield_dep_total": 0,
+        "router_dep_total": 0,
+        "app_dep_total": 0,
+        "override_total": 0,
+        "callable_class_dep_total": 0
+      },
+      "coverage": {
+        "files_total": 47,
+        "files_production": 43,
+        "files_test": 4,
+        "pct_production": 0.9149
+      },
+      "extractor_schema_version": "0.2",
+      "extractor_version": "0.2.1",
+      "commit_sha": "236d2cb16757d4870268f6d045000a6fa393250e"
     }
   ],
-  "accepted_count": 351
+  "accepted_count": 402
 }

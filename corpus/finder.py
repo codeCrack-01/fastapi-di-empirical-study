@@ -21,7 +21,9 @@ re-running skips already-enriched repos and continues where it left off.
 
 Usage:
     export GITHUB_TOKEN=...
-    python corpus/finder.py --output corpus/candidates.json --max-pages 100
+    python corpus/finder.py --target 5000 --output corpus/candidates.json
+    python corpus/finder.py --target 5000 --include-topic corpus/topic_seed.json
+    python corpus/finder.py --skip-scrape   # offline: replay saved pages only
 """
 
 from __future__ import annotations
@@ -40,7 +42,12 @@ from typing import Optional
 import requests
 from dotenv import load_dotenv
 
-from settings import CORPUS_SCHEMA_VERSION, DEPENDENTS_MAX_PAGES, DEPENDENTS_PAGE_DELAY_SEC
+from settings import (
+    CORPUS_SCHEMA_VERSION,
+    DEPENDENTS_MAX_PAGES,
+    DEPENDENTS_PAGE_DELAY_SEC,
+    TARGET_CANDIDATES,
+)
 
 ROOT = Path(__file__).resolve().parent
 ENV_FILE = ROOT.parent / ".env"
@@ -102,14 +109,51 @@ def _gh_request(token: str, url: str, params: Optional[dict] = None, attempts: i
     raise APIError(f"GitHub request failed after {attempts} attempts: {last}")
 
 
-def scrape_dependents_pages(max_pages: int, delay: float = 1.0) -> list[str]:
-    """Return owner/repo full names from the GitHub dependents HTML."""
+def scrape_dependents_pages(
+    max_pages: int,
+    delay: float = 1.0,
+    min_count: Optional[int] = None,
+    from_cache: bool = False,
+) -> list[str]:
+    """Return owner/repo full names from the GitHub dependents HTML.
+
+    Pages are paginated newest-candidate-first; when ``min_count`` is given the
+    crawl stops as soon as ``min_count`` unique repos are scraped (best-effort:
+    end-of-pagination and HTTP 429 stay hard stops). Each fetched page is
+    snapshotted to ``corpus/raw_dependents/`` for reproducibility.
+
+    With ``from_cache`` the already-snapshotted pages are replayed first (offline
+    resume / verification), then — if ``min_count`` is not yet met — the crawl
+    continues live from the last cached page's cursor, adding only the missing
+    tail instead of re-fetching every page.
+    """
+    raw_dir = ROOT / "raw_dependents"
+    raw_dir.mkdir(exist_ok=True)
     repos: list[str] = []
     seen: set[str] = set()
     cursor: Optional[str] = None
-    raw_dir = ROOT / "raw_dependents"
-    raw_dir.mkdir(exist_ok=True)
-    for page in range(1, max_pages + 1):
+    start_page = 1
+
+    if from_cache:
+        pages = sorted(
+            raw_dir.glob("dependents_page_*.html"),
+            key=lambda p: int(re.search(r"(\d+)", p.stem).group(1)),
+        )
+        for page in pages:
+            html = page.read_text(encoding="utf-8", errors="replace")
+            added = [r for r in DEPENDENTS_ROW_RE.findall(html) if r not in seen]
+            repos.extend(added)
+            seen.update(added)
+            m = NEXT_CURSOR_RE.search(html)
+            cursor = m.group(1) if m else cursor
+        if pages:
+            start_page = len(pages) + 1
+        print(f"[finder] replayed {len(repos)} repos from {len(pages)} cached pages")
+        if min_count is not None and len(repos) >= min_count:
+            print(f"[finder] cache alone meets target ({min_count}); no live fetch needed")
+            return repos
+
+    for page in range(start_page, max_pages + 1):
         url = DEPENDENTS_URL + (f"?dependents_after={cursor}" if cursor else "")
         resp = requests.get(url, timeout=60)
         if resp.status_code == 429 or resp.status_code == 403:
@@ -129,6 +173,9 @@ def scrape_dependents_pages(max_pages: int, delay: float = 1.0) -> list[str]:
             break
         cursor = m.group(1)
         print(f"[finder] dependents page {page}: +{len(added)} (cumulative {len(repos)})")
+        if min_count is not None and len(repos) >= min_count:
+            print(f"[finder] reached scrape target ({min_count} unique repos) at page {page}")
+            break
         time.sleep(delay)
     return repos
 
@@ -216,10 +263,30 @@ def main():
     )
     parser.add_argument("--output", default=str(ROOT / "candidates.json"))
     parser.add_argument(
-        "--max-pages", type=int, default=DEPENDENTS_MAX_PAGES, help="Dependents pages (30 repos/page)"
+        "--target",
+        type=int,
+        default=TARGET_CANDIDATES,
+        help="Stop once this many unique repos are scraped (best-effort; default %(default)s)",
+    )
+    parser.add_argument(
+        "--max-pages",
+        type=int,
+        default=DEPENDENTS_MAX_PAGES,
+        help="Absolute safety cap on dependents pages (30 repos/page)",
     )
     parser.add_argument(
         "--page-delay", type=float, default=DEPENDENTS_PAGE_DELAY_SEC, help="Seconds between page fetches"
+    )
+    parser.add_argument(
+        "--include-topic",
+        default="",
+        metavar="TOPIC_SEED.json",
+        help="Optional topic:fastapi seed file whose repos are unioned into the candidate pool",
+    )
+    parser.add_argument(
+        "--skip-scrape",
+        action="store_true",
+        help="Replay already-snapshotted dependents pages from corpus/raw_dependents/ instead of fetching",
     )
     args = parser.parse_args()
 
@@ -242,10 +309,18 @@ def main():
     enriched = list(existing)
     done = {c["full_name"] for c in enriched}
 
-    full_names = scrape_dependents_pages(args.max_pages, args.page_delay)
+    full_names = scrape_dependents_pages(
+        args.max_pages, args.page_delay, min_count=args.target, from_cache=args.skip_scrape
+    )
+    if args.include_topic:
+        topic = json.loads(Path(args.include_topic).read_text()).get("seed", [])
+        topic_names = [t["full_name"] for t in topic]
+        before = len(full_names)
+        full_names.extend(n for n in topic_names if n not in full_names)
+        print(f"[finder] topic union (+{len(full_names) - before} repos from {args.include_topic})")
     pending = [f for f in full_names if f not in done]
     print(
-        f"[finder] {len(full_names)} scraped; {len(enriched)} already enriched; "
+        f"[finder] {len(full_names)} scraped/union; {len(enriched)} already enriched; "
         f"{len(pending)} pending"
     )
 
@@ -303,7 +378,8 @@ def main():
     out_path.write_text(json.dumps(payload, indent=2))
     if partial_path.exists():
         partial_path.unlink()
-    print(f"[finder] wrote {len(enriched)} candidates to {out_path}")
+    status = "TARGET MET" if len(enriched) >= args.target else "BEST EFFORT (target not met)"
+    print(f"[finder] {status}: {len(enriched)} / {args.target} candidates -> {out_path}")
 
 
 if __name__ == "__main__":

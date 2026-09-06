@@ -1,28 +1,28 @@
 facet,label,count,repos,pct_calls
-depends_arg_shape,bare function,22005,256,96.9
-depends_arg_shape,placeholder,423,24,1.9
-depends_arg_shape,module alias (mod.x),258,8,1.1
-depends_arg_shape,title-case class,19,5,0.1
+depends_arg_shape,bare function,24444,297,97.1
+depends_arg_shape,placeholder,429,27,1.7
+depends_arg_shape,module alias (mod.x),266,11,1.1
+depends_arg_shape,title-case class,21,7,0.1
 depends_arg_shape,classmethod (Cls.meth),6,1,0.0
 security_scopes,calls passing scopes,0,0,0.0
-security_scopes,total security calls,143,33,100.0
-graph,graph_bearing_repos,253,253,72.1
-graph,function_nodes,14927,253,
-graph,class_nodes,625,107,4.0
-graph,edges,20904,253,
-graph,fan_in_hubs_ge10,208,253,
-graph,depth_median,2,,
+security_scopes,total security calls,163,42,100.0
+graph,graph_bearing_repos,294,294,73.1
+graph,function_nodes,16494,294,
+graph,class_nodes,728,126,4.2
+graph,edges,23223,294,
+graph,fan_in_hubs_ge10,227,294,
+graph,depth_median,2.0,,
 graph,depth_max,7,,
-graph,repos_with_unresolved,98,98,
-annotated_type,User,671,17,
-annotated_type,AsyncSession,401,21,
-annotated_type,str,365,18,
-annotated_type,Session,270,16,
+graph,repos_with_unresolved,114,114,
+annotated_type,User,749,19,
+annotated_type,AsyncSession,616,26,
+annotated_type,str,458,21,
+annotated_type,Session,355,19,
+annotated_type,Principal,235,7,
 annotated_type,UserPrincipal,180,1,
+annotated_type,...,169,36,
+annotated_type,Settings,142,19,
 annotated_type,AuditSink,142,1,
-annotated_type,...,103,29,
 annotated_type,AuthIdentity,98,1,
-annotated_type,Settings,95,15,
+annotated_type,Any,93,5,
 annotated_type,CurrentAdminUser,76,1,
-annotated_type,Actor,72,1,
-annotated_type,OrgAccessIndex,72,1,

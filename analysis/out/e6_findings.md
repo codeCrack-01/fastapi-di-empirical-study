@@ -15,7 +15,9 @@ E6-tutorial-flagged pool **and** an equal-sized unflagged control:
 - Evidence bundle: `analysis/out/e6_review_evidence.txt`; mapping/labels in
   `analysis/out/e6_labels.csv` (+ `analysis/e6_labels_blinded.py`).
 
-This is a **judgment sample (48/351)**, not ground truth for the whole corpus.
+This is a **judgment sample (48 repos; drawn with a fixed seed from the 351-pool
+corpus era and frozen — not re-drawn on the 2026-09 census expansion)**, not
+ground truth for the whole corpus.
 
 ## Unmasked label distribution
 

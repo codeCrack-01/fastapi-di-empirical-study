@@ -280,8 +280,8 @@ def main():
              "reported as *discovered patterns with explicit n*, not as statistical findings. "
              "They are qualitative evidence of how practitioners extend the documented API.\n")
     L.append("**Note on `.as_dependency`:** a second classmethod-DI variant "
-             "(`Class.as_dependency`) exists in `mealie-recipes/mealie`, but that repo is not "
-             "in the current 351-repo accepted census, so it is reported here as an observed "
+             f"(`Class.as_dependency`) exists in `mealie-recipes/mealie`, but that repo is not "
+             f"in the current {n}-repo accepted census, so it is reported here as an observed "
              "out-of-corpus idiom rather than a census count.\n")
     (OUT_DIR / "usage_patterns_summary.md").write_text("\n".join(L) + "\n")
 

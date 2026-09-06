@@ -1,29 +1,29 @@
 # Extraction summary
 
-- Sample: 351 of pool 351 (full-corpus census (not a sample))
-- Reports loaded: 351
+- Sample: 402 of pool 402 (full-corpus census (not a sample))
+- Reports loaded: 402
 
 ## RQ1 — construct prevalence (top rows)
 
 | Construct | Repos | % | Total calls | Median (users) |
 |---|---|---|---|---|
-| Depends | 262 | 74.6% | 22711 | 22.0 |
-| Security | 33 | 9.4% | 143 | 1 |
-| Annotated dependency | 88 | 25.1% | 4688 | 8.0 |
-| Generator/yield dependency | 140 | 39.9% | 192 | 1.0 |
-| Router-level dependency | 46 | 13.1% | 271 | 3.0 |
-| App-level dependency | 10 | 2.8% | 10 | 1.0 |
-| Dependency override | 6 | 1.7% | 34 | 1.0 |
-| Callable class dependency | 2 | 0.6% | 3 | 1.5 |
-| Non-FastAPI Depends sources | 2 | 0.6% | 2 |  |
+| Depends | 303 | 75.4% | 25166 | 22 |
+| Security | 42 | 10.4% | 163 | 1.0 |
+| Annotated dependency | 104 | 25.9% | 5913 | 11.0 |
+| Generator/yield dependency | 162 | 40.3% | 216 | 1.0 |
+| Router-level dependency | 58 | 14.4% | 297 | 3.0 |
+| App-level dependency | 10 | 2.5% | 10 | 1.0 |
+| Dependency override | 7 | 1.7% | 35 | 1 |
+| Callable class dependency | 2 | 0.5% | 3 | 1.5 |
+| Non-FastAPI Depends sources | 2 | 0.5% | 2 |  |
 
-**Zero-DI cohort:** 88 repos (25.1%) use no Depends/Security/Annotated at all.
+**Zero-DI cohort:** 98 repos (24.4%) use no Depends/Security/Annotated at all.
 
 ## RQ3 — dependency-graph complexity (clean nodes, non-empty graphs)
 
-- Graph-bearing repos (clean): 253 / 351
-- Nodes (clean): median 21, IQR (8.0, 55.5), max 1444
-- Max depth: median 2, max 7
+- Graph-bearing repos (clean): 294 / 402
+- Nodes (clean): median 19.5, IQR (8.0, 54.25), max 1444
+- Max depth: median 2.0, max 7
 - Unresolved %: median 0.0
 
-- Junk nodes filtered: 610 across 103/351 repos (module-scope file:line placeholders from the resolver)
+- Junk nodes filtered: 713 across 122/402 repos (module-scope file:line placeholders from the resolver)

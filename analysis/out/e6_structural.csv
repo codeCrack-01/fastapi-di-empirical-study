@@ -2,6 +2,7 @@ repo,tutorial_flag,marker_count,markers,stars_gh,py_ratio,has_scripts,has_setup_
 0x0021/Linkora,False,0,,1,0.7676,False,False,True,True,True,False,False,False,False,False,True,True,False,True,True,3,438,102330,16,7
 1semptify-arch/Semptify,False,0,,0,0.7166,False,False,True,True,True,True,False,True,True,False,True,True,False,True,True,4,1218,290007,154,10
 34LiuNian/OopsNote,False,0,,2,0.5244,False,False,True,True,False,False,False,False,False,False,True,True,False,True,False,0,106,24769,18,5
+404GamerNotFound/TBC-camera-manager,False,0,,28,0.7049,False,False,True,True,True,False,False,False,False,False,True,True,False,True,False,3,191,39515,14,6
 4alvit/energy-data-rag-pipeline,True,6,"markers=['example', 'sample', 'template']",0,0.9557,True,False,True,True,True,False,False,False,True,True,False,True,False,True,True,0,26,2257,7,9
 4ch1m/pixoo-rest,True,4,"markers=['example', 'getting started']",331,0.9651,False,False,True,True,False,False,True,False,False,False,True,True,False,False,False,1,21,1010,4,5
 59psi/headroom,False,0,,2,0.5397,False,False,True,True,True,False,False,False,True,False,False,True,False,True,False,0,94,10683,8,6
@@ -14,6 +15,7 @@ Alajmah/NodeChain,True,2,markers=['demo'],0,0.9973,True,False,True,True,True,Tru
 AlbanAndrieu/fastapi-sample,True,6,"markers=['demo', 'getting started', 'sample']",0,0.7664,True,True,True,True,True,True,True,True,True,False,True,True,False,True,True,0,139,16529,12,13
 Alg0rix/tomo,True,4,"markers=['getting started', 'learn']",0,0.6919,True,False,True,True,True,False,False,False,False,False,False,True,False,True,False,0,360,55482,38,6
 AlphaHorizon-AI/Shogun,False,0,,7,0.6376,True,False,True,True,True,False,False,True,True,False,True,True,False,True,False,0,558,119049,41,9
+Alteoziel/Shadow-AI-Gateway,False,0,,0,0.7328,False,False,True,True,True,False,False,False,False,False,False,True,False,True,True,0,63,8583,11,6
 AmitabhainArunachala/dharma_swarm,True,2,markers=['demo'],1,0.878,True,False,True,True,True,True,False,True,False,False,False,True,False,True,True,1,2477,799178,100,9
 Anmolnoor/skep,True,2,markers=['demo'],1,0.9297,True,False,True,True,True,True,False,False,False,False,False,True,False,True,False,0,386,122874,20,7
 AristaLabs/smeme,True,4,"markers=['example', 'template']",0,0.8192,False,False,True,False,True,False,False,True,True,False,True,True,False,True,False,0,293,62336,20,7
@@ -22,12 +24,14 @@ AugmentumHQ/Augmentum,False,0,,0,0.6697,True,False,True,True,True,False,False,Fa
 Avadis7860/forgemaster,False,0,,0,0.738,True,False,True,True,False,False,False,False,False,False,False,False,False,True,False,0,198,43851,19,4
 Axellum/vromvrom-engine,True,2,markers=['learn'],0,0.7255,False,False,True,True,True,False,False,False,False,False,False,True,False,True,True,5,402,97498,12,6
 Azure-Samples/chat-with-your-data-solution-accelerator,True,6,"markers=['learn', 'sample', 'template']",1172,0.6486,False,False,True,False,True,True,False,False,False,False,False,True,False,True,True,1,246,49879,30,6
+BHAR-226/talentIA_backend_exemple,True,2,markers=['example'],0,0.999,True,False,False,True,True,False,False,True,True,False,True,True,True,False,False,5,62,16250,7,8
 BernydotJar/OS-Electoral,True,2,markers=['demo'],0,0.7068,True,False,True,True,True,True,False,False,True,False,True,True,False,True,False,1,254,70461,19,9
 BlessedRebuS/Krawl,True,4,"markers=['demo', 'template']",556,0.7511,False,False,True,True,True,False,True,False,True,False,False,True,False,True,False,5,56,15590,5,7
 Bmowville/dataops-observability-api,True,4,"markers=['example', 'sample']",0,0.5702,False,False,True,True,True,False,False,True,True,False,False,True,False,True,False,0,47,3925,8,7
 Bobbyjsx/cognito-chat-api,True,2,markers=['example'],0,0.992,False,False,True,True,False,True,False,False,False,False,True,True,False,True,False,1,63,6301,3,6
 BoriskaGlebov/vpn_bot,False,0,,2,0.9718,False,False,True,False,True,False,False,False,True,False,True,True,False,False,True,7,341,42499,70,6
 BramAlkema/svg2pptx,False,0,,1,0.9569,True,False,False,False,True,False,False,False,False,False,True,True,True,True,True,2,946,274654,122,7
+BrayanJay/hrms-ai-assistant,True,2,markers=['sample'],0,0.5529,False,False,True,True,False,False,False,True,True,False,True,True,False,False,False,5,54,2065,1,6
 Braydenh563/MemoryMap-AI,False,0,,1,0.5834,True,False,False,False,True,True,False,False,True,False,True,True,False,True,True,3,185,55212,6,8
 CaspianG/wavemind,True,2,markers=['learn'],6,0.9881,True,False,True,True,True,False,True,False,False,False,False,True,False,True,False,3,343,159875,2,7
 CatholicOS/martyrology-api,True,2,markers=['sample'],0,0.8512,False,False,True,True,True,False,False,True,True,False,False,False,False,True,False,0,60,10970,3,6
@@ -68,6 +72,7 @@ GolubchikovKirill/InfraScope,False,0,,1,0.6204,False,False,True,True,True,False,
 GuilhermeLossio/Tech-Challange-FIAP-5,True,8,"markers=['demo', 'example', 'getting started', 'learn']",0,0.7297,False,False,True,False,True,False,False,False,True,True,True,True,False,True,False,0,88,10039,13,7
 Hemang0710/Cinach,False,0,,0,0.9901,False,False,True,True,True,False,False,True,True,False,False,True,False,True,True,0,108,10897,13,8
 Hitesh709/titan-x,True,2,markers=['example'],0,0.9192,True,False,True,True,True,False,False,True,True,False,True,True,False,True,False,3,513,107078,22,9
+HyxiaoGe/auth-service,False,0,,1,0.9964,False,False,True,True,True,False,False,True,True,False,True,True,False,True,False,4,89,17792,8,8
 I-ivan-x/agent-reliability-lab,False,0,,1,0.9477,False,False,True,True,True,True,False,False,False,False,False,True,False,True,False,0,391,78401,22,6
 IBM/docling-pipelines,True,2,markers=['template'],10,0.9944,True,False,True,True,True,False,False,False,True,False,True,True,False,True,True,16,818,202469,251,9
 ISEU-Cloud-Dev/Team-Delta-,False,0,,0,0.6682,False,False,False,True,True,False,False,True,True,False,True,False,False,True,False,1,37,1730,1,6
@@ -78,6 +83,8 @@ Jzy258/canteen-recommendation-agent,True,2,markers=['example'],3,0.7915,False,Fa
 KB-NEST/Backend,False,0,,0,1.0,False,False,False,False,False,False,False,False,False,True,False,False,False,False,False,5,39,6830,0,1
 KayvanShah1/firebase-realtime-db-emulator,False,0,,0,0.9205,False,False,True,True,True,False,False,False,True,False,True,True,False,True,False,2,51,2324,12,7
 Kevin-O-Hsu/Sealium,False,0,,3,1.0,False,False,False,False,True,False,False,False,False,False,False,True,False,True,False,0,58,6857,7,3
+KikuAI-Lab/masker,True,2,markers=['example'],6,0.9937,False,False,True,True,True,False,False,False,False,False,False,False,False,True,False,0,48,5076,10,4
+KikuAI-Lab/reliapi,True,4,"markers=['example', 'template']",8,0.9543,False,False,True,True,True,True,False,False,False,False,False,True,False,True,False,1,83,19138,14,6
 KineticSystems/harbor,True,2,markers=['example'],0,0.937,True,False,True,True,True,False,False,False,False,False,True,True,False,True,False,0,1251,359450,130,7
 Kirito161718/Obsidian-Learning-Agent,True,2,markers=['learn'],1,0.8876,False,False,True,True,False,False,False,True,True,False,True,True,False,True,False,4,214,32403,18,7
 Kirky-X/weaver,False,0,,1,0.997,False,False,True,True,True,False,False,False,True,False,True,True,False,True,True,0,1044,284389,180,8
@@ -108,6 +115,7 @@ Nyaecho/web_aily2api,True,2,markers=['example'],0,0.8727,False,False,False,False
 OpenG2P/awe,False,0,,0,0.7605,False,False,True,True,True,False,True,False,True,False,True,True,False,True,False,0,71,12717,7,8
 OpenHubble/metrics-dashboard-backend,False,0,,1,0.9911,False,False,True,False,False,False,False,True,True,False,True,False,False,False,False,0,56,3454,3,4
 Oxygen56/TripChord,False,0,,1,0.7358,False,False,True,True,True,False,False,True,True,False,False,True,False,False,False,0,219,107265,8,6
+PTejasKr/Capsule,False,0,,0,0.6369,False,False,True,True,True,False,False,False,False,False,True,True,True,False,False,4,50,5502,9,6
 Palak009944/PROJECT-2.0,False,0,,0,1.0,False,False,False,False,False,False,False,False,False,False,True,False,False,False,False,3,20,1601,0,1
 Peter-McCann-Strain/Personal_Execution_OS,True,2,markers=['sample'],0,0.7118,True,False,True,True,True,False,False,False,True,False,True,True,True,True,True,0,598,156272,31,10
 Playdovsky/GammaBackend,True,2,markers=['learn'],0,0.9858,False,False,True,False,True,False,False,False,True,False,True,False,False,True,False,1,15,754,2,5
@@ -120,6 +128,7 @@ ROJIT270/DSANexus_Capstone,True,2,markers=['course'],0,0.5831,False,False,False,
 RedBeret/earth-observation-verification-lab,False,0,,0,0.9649,True,False,True,True,True,False,False,False,True,False,True,True,False,True,False,3,97,10044,7,8
 RiyaRedkar/Indus_Brain,True,4,"markers=['demo', 'learn']",0,0.6886,False,False,False,False,False,False,False,False,False,False,True,False,False,True,False,3,52,14444,4,2
 Roman-Andr/cosmetic-bot,True,4,"markers=['example', 'template']",0,0.5755,True,False,True,True,True,False,False,True,True,False,False,True,False,True,False,0,57,5235,10,8
+S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab,True,2,markers=['tutorial'],0,0.9979,True,False,True,True,True,False,False,False,False,False,False,True,False,True,False,0,108,20467,17,6
 SEO-Dynamics/Wind-Turbine-Predictive-Maintenance-Platform,False,0,,0,0.9671,False,False,True,True,True,True,False,False,False,False,True,True,False,True,True,4,115,26419,15,8
 SSKG2602/chronorag-acv,False,0,,1,0.9945,False,False,False,False,True,True,False,False,True,False,False,True,False,True,False,2,143,27009,11,5
 SWHee/finbom-agent,False,0,,1,0.7644,False,False,True,True,True,False,False,False,False,False,False,False,False,True,False,0,82,7923,9,4
@@ -127,6 +136,7 @@ SameerAliKhan-git/CORPUS-System,False,0,,1,0.6951,False,False,True,True,True,Tru
 SansMercantile/kev,False,0,,0,0.9621,False,False,True,False,False,False,False,False,True,False,True,True,False,True,False,7,1150,82069,13,5
 Se2logy/guest_checkin,True,2,markers=['demo'],0,0.8485,False,False,False,False,False,False,False,False,False,False,False,True,False,True,False,0,66,11970,13,2
 SecondLifes/code-intel,False,0,,2,0.7305,False,False,False,False,True,False,False,False,False,False,True,True,False,True,False,2,39,9986,2,4
+SergejSchweizer/portfell,True,2,markers=['sample'],0,0.9942,True,False,True,True,True,False,False,False,False,True,False,True,False,True,True,0,376,57830,27,8
 SpectreDeath/Semantic-Memory-Engine,False,0,,0,0.9499,True,False,True,True,True,False,False,False,False,False,True,True,False,True,True,0,464,98874,44,8
 SpectreDeath/skill-flywheel,True,2,markers=['learn'],1,0.982,False,False,False,False,True,False,False,False,True,False,True,True,True,True,False,10,1062,160105,72,6
 SquidSec/SquidC5,False,0,,31,0.7497,True,False,True,True,True,False,False,False,False,False,True,True,False,True,False,0,165,27674,31,7
@@ -139,6 +149,7 @@ Tomifarmer/zimmporter-api,True,4,"markers=['example', 'getting started']",0,0.94
 Tufts-Technology-Services/rt-analytics-api,False,0,,0,1.0,True,False,False,False,False,False,False,False,True,False,False,False,False,False,False,0,7,133,2,2
 URBREATH/idra-ai-chatbot,True,2,markers=['learn'],0,0.9972,False,False,True,False,False,False,False,False,True,False,True,False,False,True,False,3,60,3733,16,4
 Ulzuhan/reed,True,2,markers=['demo'],1,0.9318,True,False,True,True,True,True,False,False,False,False,False,True,False,True,False,0,83,13003,9,7
+Verdaxis/verdaxis-backend,True,4,"markers=['example', 'getting started']",0,0.9744,False,False,True,True,False,False,False,True,True,False,True,False,False,True,False,2,40,3058,4,6
 Vimal-Seshadri-Raguraman/simple-multi-agent-chat,False,0,,0,0.6529,True,False,False,False,False,False,False,True,True,False,True,True,False,True,False,1,129,27139,7,6
 WalterSolorzano/ProyectoAPA7,False,0,,0,0.5947,False,False,True,True,True,False,False,False,False,False,True,True,False,False,False,1,171,43355,12,5
 WuiiiGithub/Candilicious,True,2,markers=['learn'],1,0.9987,False,False,True,False,False,False,False,False,True,False,True,False,False,False,False,3,51,14636,4,3
@@ -146,10 +157,14 @@ Xavier-123/api-ragas,False,0,,1,1.0,False,False,False,False,False,False,False,Fa
 Zacccyyy/TheRavensNest,True,4,"markers=['example', 'walkthrough']",0,0.6326,False,False,False,False,False,False,False,False,False,False,False,False,False,True,False,0,41,12290,1,1
 ZacharyHu0/QuantMaster,False,0,,0,0.71,True,False,False,False,True,False,False,False,False,False,False,True,False,True,False,0,362,174735,24,4
 a7ttaf/Youtube,False,0,,0,0.8172,False,True,True,True,True,True,False,False,True,False,True,True,True,True,False,4,483,155182,31,10
+aXtr1o1/ConvAgent,True,2,markers=['getting started'],0,0.6137,False,False,False,False,True,False,False,False,False,False,False,True,False,True,False,4,46,6102,3,3
 aah3/EarningsAgents,False,0,,1,0.7542,False,False,True,True,True,True,False,True,True,False,True,True,True,True,False,11,118,24857,5,10
+acgs-ai/enhanced-agent-bus,False,0,,1,0.9922,False,False,True,False,True,False,False,True,True,False,True,True,False,True,False,0,1808,817020,156,7
 aditya226-sharma/netsentinel,False,0,,0,0.8174,False,True,False,False,False,False,False,False,False,False,True,True,False,True,False,0,70,12408,11,4
+agarwalamit081/evolutionary-agents,True,2,markers=['example'],0,0.972,False,False,True,True,False,False,False,False,True,False,False,True,False,True,False,9,502,147257,48,5
 ahmdelbaz28-ux/ETAP-AI-WORK-,False,0,,2,0.7685,True,False,True,True,True,True,True,True,True,False,True,True,True,True,True,11,1007,380914,72,13
 aivis-one/comms,False,0,,0,0.9776,False,False,True,True,True,False,False,True,True,False,False,True,False,True,False,0,101,21498,9,7
+akiamuradev/arduino-component-knowledge-base,False,0,,4,0.7543,True,False,True,True,True,False,False,True,True,False,False,True,True,True,False,0,257,49492,20,9
 al-fara-bi/lens-api,True,2,markers=['example'],0,0.8412,False,False,True,True,False,False,False,True,True,False,False,True,False,True,False,3,42,2663,10,6
 alangg689-dotcom/taxi-fleet-backend,True,2,markers=['example'],0,0.995,False,False,True,True,True,False,False,True,True,False,True,True,False,True,False,3,90,14271,9,8
 alethical-org/alethical,True,2,markers=['demo'],2,0.5252,False,False,True,True,True,False,False,False,True,False,True,True,False,False,False,0,217,99572,7,6
@@ -170,9 +185,11 @@ beenycool/yotuubef,True,2,markers=['example'],1,0.8552,False,False,False,False,F
 bhav09/gcp-voice-ai-framework,False,0,,4,1.0,False,False,False,False,False,False,False,False,False,False,False,False,False,True,False,0,60,2838,11,1
 bluesky/bluesky-httpserver,False,0,,19,0.9617,True,False,False,False,True,False,False,False,True,False,True,True,False,False,True,0,49,15269,7,6
 bossayan9999/aios-one-command-center,False,0,,0,0.5904,False,False,False,False,True,False,False,False,False,False,False,True,False,True,False,2,111,13638,3,3
+bryanmg20/secop2-etl-pipeline,True,6,"markers=['example', 'getting started', 'template']",4,1.0,False,False,False,True,True,False,False,False,True,True,False,False,False,True,False,4,37,2231,6,5
 celuma/celuma-backend,True,2,markers=['template'],0,0.9827,False,False,True,True,True,True,False,True,True,False,True,True,False,True,False,3,121,29862,4,9
 chanuka8/argus-gait-recognition,False,0,,0,0.9922,False,False,False,False,True,True,False,False,False,False,True,True,False,True,False,1,327,43053,30,5
 chichi-lyman/saphira-ai,False,0,,2,0.6983,False,False,True,True,True,False,False,False,True,False,True,True,True,True,False,7,191,12484,43,8
+cmc0619/batterbox,True,2,markers=['demo'],0,0.6167,False,False,True,True,False,False,False,False,False,False,True,True,False,False,False,0,21,4361,3,4
 cnapcloud/rag-api,False,0,,0,0.9934,True,False,True,True,True,True,True,True,False,False,False,True,False,True,False,0,143,21156,27,9
 code-with-zeeshan/universal-dependency-resolver,False,0,,1,0.9053,True,False,True,True,True,True,False,True,True,False,True,True,False,True,True,0,326,101260,17,11
 coinexmarket/chatbucket_b2b_backend,False,0,,0,0.9965,False,False,True,False,True,False,False,False,True,False,True,True,False,False,False,2,49,8860,3,5
@@ -185,18 +202,26 @@ darkspock/desksupportmonkey,True,4,"markers=['demo', 'template']",21,0.6646,Fals
 darkspock/renfeserver,True,2,markers=['getting started'],0,0.9762,False,False,False,True,False,True,False,True,True,False,True,False,True,False,False,0,233,12468,143,6
 dasherrrrrr/video-preview-app,True,2,markers=['example'],0,0.7153,False,False,True,True,False,False,False,False,False,False,True,False,False,False,False,0,25,2247,2,3
 databrickslabs/lakemeter-oss,False,0,,58,0.7359,False,False,False,False,True,False,False,False,True,False,True,True,False,True,False,2,501,89143,47,5
+dengrb1/ashare-ai-research,True,2,markers=['example'],0,0.7451,True,False,True,True,True,False,False,True,True,False,False,True,False,True,False,1,245,66340,20,8
+derekrivers/atlas,True,4,"markers=['learn', 'template']",0,0.8227,True,False,False,False,True,False,False,False,True,False,False,True,False,True,True,0,440,161239,17,6
 dhivya-1010/workgen-ai,False,0,,0,0.5113,False,False,False,False,False,False,False,False,False,False,True,False,False,False,False,5,46,6247,4,1
 dikatapulta/HospitalityAIPlatform,True,2,markers=['example'],0,0.9442,False,False,True,True,True,True,False,True,True,False,True,True,False,True,False,0,234,38562,28,9
+dislovelhl/acgs-pgp,False,0,,1,0.9902,False,False,True,True,True,True,False,False,True,False,True,True,False,False,True,0,1852,746134,156,8
+djfch/llm_transaction,True,2,markers=['example'],1,0.7141,False,False,False,False,True,False,False,False,False,False,False,True,False,True,True,0,258,89434,16,4
 dlasley/account-intelligence,False,0,,0,0.8141,False,False,True,False,True,False,False,False,False,False,False,True,False,True,False,0,181,36996,27,4
 dmarakom6/oswg,True,2,markers=['example'],0,0.6269,True,False,False,False,True,True,False,False,False,False,False,False,False,False,False,0,25,2746,4,3
 dmux/minilake,False,0,,5,0.9786,True,False,True,True,True,False,False,False,False,False,True,True,False,True,True,0,96,13998,7,8
 doncazper/ultimate-ai-agent,True,2,markers=['demo'],0,0.8634,False,False,True,True,True,True,False,False,False,False,False,True,False,True,False,0,2440,980639,108,6
 doshirush1901/brain-os,True,6,"markers=['demo', 'example', 'starter']",5,0.9992,True,False,False,False,True,False,False,True,True,False,False,True,False,True,False,6,359,103870,13,6
 doublew6/forecast-loop,True,2,markers=['learn'],0,0.8501,True,False,True,True,True,True,False,False,True,False,False,True,False,False,False,0,158,78644,10,7
+drdgreed/pacca,False,0,,3,0.8819,True,False,True,True,True,True,False,False,True,False,True,True,False,True,True,5,207,50755,26,10
+drdubel/scrablozaur,False,0,,1,0.5949,False,False,False,False,False,False,False,False,False,False,False,True,False,True,False,0,47,9610,2,2
 dtbray/ynab-agent,True,2,markers=['example'],0,0.9997,True,False,True,False,True,False,False,True,True,True,False,True,False,True,False,0,217,67760,15,8
 ed-is-ai/Agents.stocks,False,0,,1,0.9228,False,False,False,False,True,False,False,False,False,False,False,True,False,True,False,4,307,81526,19,3
 edithatogo/global-medicines-atlas,False,0,,1,0.9924,True,False,False,False,True,False,False,False,False,False,False,False,False,True,False,0,268,67391,4,3
+edwin-okun/smart-weather,False,0,,0,1.0,True,False,False,False,False,False,False,False,True,False,False,True,False,True,False,0,27,3000,6,4
 efigueroaa1-cpu/agentdesk,False,0,,0,0.6704,False,False,False,False,True,False,False,True,True,False,True,True,True,True,False,9,196,35960,27,7
+ejupi-djenis30/careeros-local,True,2,markers=['demo'],0,0.7065,True,False,True,True,True,False,False,False,True,False,True,True,False,True,True,2,476,110692,35,9
 eliekh05/local-ai-runtime,False,0,,1,0.9802,True,False,False,False,False,False,False,False,False,False,False,True,False,False,False,0,51,4625,11,2
 emilienrk/capitalview-api,False,0,,0,0.9994,False,False,True,False,True,False,False,True,True,False,True,True,False,True,False,0,204,46321,8,7
 end1989/tailored,True,4,"markers=['demo', 'template']",0,0.6598,False,False,False,False,False,False,False,False,True,False,True,True,False,True,False,1,57,11661,3,4
@@ -207,6 +232,7 @@ ferjosem362/prima-tech-challenge,False,0,,0,0.5085,False,False,True,True,True,Tr
 fespino/resgraph,False,0,,0,0.9869,True,False,False,True,True,False,False,False,False,False,False,True,False,True,False,0,152,23190,12,5
 florianboymond/decoy-webhook,False,0,,0,1.0,False,False,False,False,False,False,False,False,False,False,True,False,False,False,False,1,9,639,0,1
 fsantibanezleal/CAOS_CareerTwin,False,0,,0,0.6576,True,False,True,True,True,False,False,True,True,False,True,True,False,True,False,3,76,15034,5,9
+gggard/orbital,False,0,,1,0.6058,False,False,True,False,True,True,True,False,True,False,True,True,False,True,True,0,63,10702,3,9
 giorgoschar/bucketing,True,2,markers=['example'],0,0.6218,False,False,True,True,False,False,False,True,True,False,True,True,False,True,False,2,81,16573,3,7
 gj3447/metahumotonic_web_back,False,0,,0,0.9988,True,False,True,True,True,False,False,True,False,False,False,True,False,True,False,0,108,20671,9,7
 glorden/OpenSOS,False,0,,0,0.8102,False,False,False,False,True,False,False,True,True,False,False,True,False,True,False,0,57,6409,5,5
@@ -224,6 +250,7 @@ hyuntohoon/myblog_music,False,0,,0,0.9826,False,False,False,True,True,True,False
 iamez/slomix,True,2,markers=['sample'],0,0.681,False,False,True,True,True,True,False,True,False,True,True,True,False,True,True,4,747,220308,46,10
 iarjunganesh/bankers-wrapped,True,2,markers=['demo'],0,0.6703,False,False,True,True,True,True,False,False,False,False,False,True,False,True,False,0,53,6746,12,6
 iknowkungfubar/neur-os,True,2,markers=['template'],2,0.6632,False,False,False,False,True,False,False,False,False,False,False,True,False,False,False,0,41,4303,2,2
+imbus/testbench-ai-service,True,2,markers=['template'],0,0.9377,True,False,False,False,True,False,False,False,False,False,True,True,False,True,True,0,117,16785,20,6
 inDivyanshu/ai_automation_platform,True,2,markers=['example'],0,0.9989,True,False,False,False,True,False,False,False,False,False,False,False,False,True,False,0,385,31679,76,3
 infotact-soar-team/soar-incident-containment-engine,False,0,,0,0.9572,False,False,False,True,True,False,False,False,True,False,True,True,True,True,False,2,119,3315,7,7
 iscodesnippet2/horo-agent,False,0,,0,0.8545,True,True,False,False,True,False,False,False,False,False,True,True,False,True,False,3,574,408242,29,6
@@ -245,6 +272,9 @@ kjgb001/Plexa,True,2,markers=['course'],0,0.6606,False,False,True,True,True,Fals
 kjpatel/duly,True,2,markers=['demo'],0,1.0,False,False,False,False,True,False,False,False,False,False,False,True,False,False,False,0,157,38406,10,2
 kouroshez/coding-os,False,0,,0,0.5659,True,False,True,True,True,True,False,False,False,False,False,True,False,True,True,0,744,201333,29,8
 krakenalt/gigaloom,False,0,,1,0.8865,True,False,False,False,True,True,False,False,False,False,True,True,False,True,True,0,1551,351110,121,7
+krazywarez/hutch-notify,False,0,,0,1.0,False,False,False,False,False,False,False,False,True,False,True,False,False,False,False,0,14,418,0,2
+krazywarez/hutch-stats,False,0,,0,0.9953,True,False,True,True,False,False,False,True,True,False,False,True,False,True,False,0,45,5408,6,7
+kristovatlas/somnus,False,0,,1,0.5194,False,False,False,False,True,True,False,True,True,False,False,False,False,False,False,0,62,15231,5,4
 kt2saint-sec/braincell,False,0,,2,0.9872,True,False,False,False,True,False,False,False,False,False,False,True,False,True,False,1,130,44725,4,4
 kuotunyu/fhir-care-copilot,True,2,markers=['demo'],0,0.8733,False,False,True,True,True,False,False,False,False,False,False,True,False,True,True,0,111,16554,10,6
 kwal0203/agent-failure,True,2,markers=['learn'],0,0.7736,False,False,True,True,True,False,False,True,True,False,True,True,False,False,True,0,497,62981,56,8
@@ -257,9 +287,13 @@ lmolteno/prescient,False,0,,0,0.9824,True,False,True,True,True,False,False,True,
 lordwilsonDev/msb-v3,False,0,,0,0.9767,True,False,True,True,True,True,False,False,False,False,False,True,False,True,False,1,403,72091,27,7
 loryanstrant/M365Copilot-Usage-Reporter,True,4,"markers=['template', 'walkthrough']",2,0.5533,False,False,True,True,True,False,False,True,True,False,True,True,False,True,False,0,47,6092,4,8
 lucianoon/forgehand,False,0,,0,0.9412,False,False,True,True,True,True,False,False,False,False,False,True,False,True,False,0,67,12771,12,6
+mateoclarke/naba-membership,True,2,markers=['example'],0,0.5794,False,False,False,False,False,False,False,False,True,False,True,False,False,True,False,3,47,7326,1,3
 matt-taylor-tech/subreddit-sounds,True,2,markers=['example'],0,0.8264,False,False,True,True,True,False,False,False,True,False,True,True,False,True,False,1,52,6893,1,7
 maxexcloo/comfy-cloud,True,2,markers=['example'],0,0.9896,False,False,True,True,True,False,False,False,False,False,False,True,False,True,True,0,89,18744,9,6
 mayowa-kalejaiye/bhcpf-backend,True,2,markers=['getting started'],0,1.0,False,False,False,False,False,False,False,False,True,False,True,True,False,True,False,5,10,493,0,4
+mbvgua/fastapi-primer,True,4,"markers=['learn', 'template']",0,0.5586,False,False,False,False,False,True,False,True,True,False,True,True,False,False,False,3,24,3015,1,5
+mbwika/AI-Assurance-Framework,False,0,,6,0.9407,True,False,True,True,True,False,False,False,False,False,True,False,False,True,False,2,298,105510,13,6
+microsoft/fsi-agentic-wealth-transfer,False,0,,1,0.7228,False,False,False,False,True,False,False,False,False,False,False,True,False,True,False,0,232,31930,47,3
 ming-14/PTY-Agent,False,0,,1,0.6476,False,False,False,False,False,False,False,False,False,False,False,True,False,True,False,1,493,75596,92,2
 mirzatghayrat/arslan,False,0,,1,0.6558,True,False,True,True,True,False,False,False,True,False,False,True,False,True,False,0,804,118336,29,7
 mizuwonomu/hust-regulations-bot,False,0,,2,1.0,False,False,False,False,False,False,False,False,True,False,True,True,False,False,False,11,57,5246,12,3
@@ -267,6 +301,8 @@ mohamedtalaat-gif/CEREBRO-X,True,2,markers=['template'],3,0.7292,False,False,Tru
 mojtaba-py-code/smart-travel-aggregator,True,4,"markers=['demo', 'tutorial']",0,0.986,False,False,True,True,True,True,False,True,True,False,True,True,True,True,True,0,77,5163,12,11
 monkeydjl/web3-airdrop-alpha-agent,False,0,,0,0.8918,True,False,True,True,True,True,False,False,True,False,False,True,False,True,True,0,223,70024,19,9
 mostafadamisi/task-manager-api,True,2,markers=['example'],0,0.9947,False,False,True,True,False,False,False,False,False,False,True,False,False,True,False,2,37,1239,8,4
+moy-boy/agenticdb-registry,True,2,markers=['example'],0,0.8352,False,False,True,False,False,False,False,False,False,False,False,False,False,True,False,2,30,2690,3,2
+nattaphonttcl-lab/affiliate-auto-poster,True,2,markers=['template'],0,0.9063,False,False,True,True,True,False,False,True,True,False,True,True,False,True,False,2,162,21697,10,8
 netzen-abm/janavani,False,0,,0,0.9699,False,False,True,True,True,False,False,False,False,False,False,True,True,True,True,3,189,8200,15,7
 nicglazkov/Chalkboard,True,2,markers=['example'],5,0.7343,False,False,True,False,False,False,False,False,False,False,False,True,False,True,False,4,75,8858,7,3
 nickwhitt/housepy,False,0,,0,1.0,False,False,False,False,True,False,False,False,True,False,False,True,False,True,False,0,46,3793,10,4
@@ -276,6 +312,7 @@ nousergon/vires,True,2,markers=['template'],0,0.6106,False,False,False,False,Tru
 nulleimy/Applaylist-old,False,0,,1,0.8847,False,False,False,False,True,True,False,False,False,True,False,True,False,True,False,1,79,4660,15,5
 obhht2302-ctrl/team01_0728,False,0,,1,1.0,False,False,False,False,False,False,False,False,False,False,True,False,False,False,False,1,28,1529,1,1
 odysseus-dev/odysseus,True,2,markers=['example'],84888,0.5297,False,True,True,True,True,False,False,False,True,False,True,True,False,True,False,2,1149,244328,36,8
+omadli/code_runner_bot,False,0,,3,0.7377,False,False,True,True,False,False,False,False,True,False,True,True,False,True,False,3,62,2546,9,6
 oodaooda/watchTower,False,0,,0,0.6608,False,False,False,True,False,False,False,True,True,False,False,True,False,True,False,5,117,21201,8,5
 opencodon/opencodon,True,2,markers=['learn'],1,0.8098,True,True,True,True,True,False,False,False,False,False,True,True,False,True,False,7,2875,1237577,152,8
 openstack-afterglow/waygate,False,0,,0,0.9597,True,False,True,False,True,False,False,False,True,False,False,True,False,True,False,1,51,8164,6,6
@@ -285,7 +322,9 @@ orlovRoman/flipoly,False,0,,0,0.8086,False,False,True,True,True,False,False,True
 pete-builds/plex-tautulli-letterboxd,False,0,,0,0.9096,False,False,True,True,True,False,False,False,False,False,False,True,False,True,False,0,35,3611,6,5
 pgomez35/webhook,False,0,,0,1.0,False,False,False,False,False,False,False,False,False,False,True,True,False,False,False,6,133,142789,0,2
 pinnnthreetriples/telebuba,False,0,,0,0.698,False,False,False,False,True,False,False,False,True,False,True,True,False,True,True,0,675,156581,28,6
+pkanderi-abio/tradewiser-bot,False,0,,0,0.9147,False,True,False,False,True,False,False,False,True,False,False,True,False,True,False,9,60,15636,6,5
 pramod-krishivaas/automation-test-platform,False,0,,0,0.582,False,False,False,True,False,False,False,True,True,False,True,False,False,True,False,7,89,15275,4,5
+prayagupa/payment-system,False,0,,2,0.8033,False,False,True,True,False,False,False,False,True,False,False,False,False,True,False,0,51,4120,14,4
 psyb0t/rankrat,False,0,,0,0.9174,True,False,True,True,True,True,False,False,False,False,False,True,False,True,False,1,178,61513,9,7
 pterodaktil02/selfdocs,False,0,,0,0.5243,False,False,False,False,True,False,False,False,True,False,True,False,False,True,False,1,20,3734,2,4
 pullboxapp/pullbox-direct-providers,False,0,,1,0.996,False,False,True,False,True,True,False,False,False,False,False,False,False,True,False,0,52,8095,5,4
@@ -296,8 +335,10 @@ ral-facilities/datagateway-api,False,0,,5,0.9935,False,False,True,True,True,Fals
 ral-facilities/ldap-jwt-auth,True,2,markers=['example'],3,0.9567,False,False,True,True,True,False,False,False,False,False,True,True,False,True,False,0,30,2130,9,6
 ral-facilities/object-storage-api,True,2,markers=['example'],1,0.9822,False,False,True,True,True,False,False,False,True,False,True,False,False,True,False,0,60,7573,16,6
 raminmohammadi/CGX,False,0,,1,0.8543,True,False,True,True,True,False,True,False,False,False,True,True,False,True,False,2,292,94604,33,8
+ranasl62/ehr-risk-framework,True,4,"markers=['demo', 'learn']",23,0.5787,False,True,True,True,True,True,False,False,True,False,True,True,False,True,False,4,134,16127,11,9
 rascalking56/msit-capstone-project,True,2,markers=['demo'],0,0.9863,False,False,False,False,False,False,False,False,True,False,True,False,False,False,False,1,77,4430,7,2
 rekursiv-ai/trackinizer,False,0,,7,0.9343,True,False,False,False,True,False,False,False,False,True,False,True,False,False,True,0,178,71428,13,5
+renameAI/A2A,True,2,markers=['example'],0,0.8184,False,False,True,False,True,False,False,False,False,False,True,True,False,True,False,1,195,43117,12,5
 ricardomb-tech/solicitudes-backend-api,False,0,,0,0.9552,False,False,True,True,False,False,False,False,True,False,False,True,False,False,False,2,51,4311,15,4
 ringlochid/banksia,True,8,"markers=['example', 'starter', 'tutorial', 'walkthrough']",67,0.823,True,False,True,True,True,True,False,False,True,False,False,True,False,True,False,0,636,125820,81,8
 rmayen/halotrace,True,2,markers=['example'],0,0.7526,False,False,True,True,True,False,False,False,True,False,True,True,False,True,False,1,27,1490,5,7
@@ -305,6 +346,7 @@ rmholston420/Forge-OH,False,0,,0,0.5379,False,False,True,True,True,False,False,F
 roleroz/3d_printer_debugger,False,0,,0,0.9147,False,False,False,False,False,False,False,False,False,False,True,True,False,False,False,2,92,12760,8,2
 runovelhq/wolt,False,0,,3,0.6864,False,False,True,False,True,False,False,True,True,False,False,False,False,True,False,1,62,7883,9,5
 s-shahzad/fusion-nids,True,2,markers=['demo'],0,0.8828,False,False,True,True,True,False,False,False,False,False,False,True,False,True,False,3,216,40386,28,5
+salimc93/exiqus-oss,True,4,"markers=['demo', 'walkthrough']",0,0.7954,True,False,True,True,True,True,False,True,True,False,True,True,False,True,True,9,467,163979,37,11
 sandeep-devarapalli/helm,False,0,,1,0.6613,False,False,False,True,True,False,False,False,True,False,False,True,False,True,False,0,32,8031,7,5
 sandraschi/calibremcp,False,0,,38,0.911,True,True,True,True,True,False,False,False,True,False,True,True,False,True,True,0,770,164164,142,10
 sarox-dev/Nodecast,True,2,markers=['example'],5,0.5208,False,False,True,True,True,False,False,False,False,False,True,True,False,True,False,1,55,11022,3,6
@@ -316,7 +358,10 @@ selvamanigovindaraj/aagentic-rag,False,0,,1,0.9698,False,False,True,True,True,Tr
 sendhello/FlowDesk-Backend,False,0,,0,0.9959,False,False,True,False,True,False,False,True,True,False,True,True,False,True,False,0,78,11255,11,7
 serhatvs/Collective_MindGraph_desktop_app,False,0,,0,0.9941,True,False,True,True,True,False,False,False,True,False,True,True,False,True,False,0,446,63125,85,8
 siddharthpanda99/backend,False,0,,0,0.9987,True,True,False,False,False,False,False,False,True,False,True,True,False,True,False,0,1181,203378,236,6
+simjak/ctower,False,0,,0,0.8363,True,False,False,True,True,False,False,False,False,False,False,True,False,True,True,0,1099,257529,104,6
 sistema-evaluacion-docente/api.evd,False,0,,0,0.9985,False,False,True,True,True,True,False,True,True,False,True,False,False,True,False,2,244,34083,18,8
+sitara2007/CivicOs,True,2,markers=['example'],1,0.9885,False,False,True,True,True,False,False,False,True,False,False,True,True,True,False,0,93,2733,14,7
+skoruppa/docchi-stremio-addon,False,0,,21,0.951,False,False,True,True,True,False,False,False,False,False,False,True,False,False,False,3,32,7321,5,4
 stevezau/shortlist,False,0,,14,0.6746,False,False,True,False,True,False,False,False,True,False,False,True,False,True,True,2,212,70789,13,6
 sth007/bmw-i5-agent,False,0,,1,0.9925,False,False,True,True,False,False,False,True,True,False,False,False,False,True,False,3,109,14022,8,5
 sumitrevolt/leadgenrationaivoiceagent,True,4,"markers=['demo', 'learn']",0,0.8354,True,False,True,True,True,True,False,True,True,False,True,True,True,True,True,16,2078,532837,42,12
@@ -327,6 +372,7 @@ tbuschbeck/JobMatching,True,2,markers=['example'],0,0.7078,False,False,True,True
 teaching-practice-lab-oral/oral,True,2,markers=['example'],0,0.532,False,False,True,True,False,False,False,True,True,False,True,False,False,True,False,5,94,21051,5,6
 the-mace/aquarium-tracker,True,4,"markers=['example', 'template']",0,0.6414,False,False,False,False,True,False,False,False,False,False,True,True,False,False,False,1,38,13255,1,3
 thealirazadev/ticket-triage,True,2,markers=['example'],0,0.9839,False,False,False,False,True,False,False,True,True,False,False,True,False,True,False,2,54,5891,6,5
+thomas-illiet/CoderManager,True,4,"markers=['example', 'template']",0,0.9982,True,False,True,True,False,True,False,True,True,False,True,True,True,True,False,0,154,31262,31,10
 thulasidharan96/API-Gateway,False,0,,0,0.9835,True,False,True,True,True,False,False,False,True,False,True,True,False,True,True,0,57,1720,13,9
 ticket-vision/mapi,True,2,markers=['example'],1,0.9948,False,False,True,True,True,True,False,False,False,False,False,True,False,True,True,0,60,3856,18,7
 timames/kahu,True,2,markers=['sample'],0,0.8871,False,False,True,True,False,False,False,True,True,False,True,False,False,True,False,0,151,20282,22,6
@@ -347,6 +393,11 @@ wamakologeorge-dev/amosclaude-clean,False,0,,1,0.7871,True,True,True,True,True,T
 wangmeiwen/hypertension-kg-qa,False,0,,0,0.8553,False,False,False,False,True,False,False,False,True,False,True,True,False,True,False,8,250,64209,31,5
 web4uai-cpu/socioauto,False,0,,0,0.7652,False,False,True,True,True,False,False,True,True,False,True,True,True,True,False,6,117,13394,18,9
 weiweity/fuqing-crm-analytics,False,0,,1,0.6848,False,False,True,True,True,False,False,False,False,False,True,True,False,False,True,3,417,92413,23,6
+wenjiayi123/port-dt-multi,False,0,,0,0.78,False,False,True,False,True,True,False,False,False,False,True,True,False,True,False,3,329,99554,54,6
+wenjiayi123/xiaoyi-maritime-ai,False,0,,0,0.781,False,False,True,True,True,True,False,False,False,False,False,True,False,True,False,0,126,33784,2,6
 willcassell/scorched,True,2,markers=['learn'],0,0.7546,False,False,True,True,True,False,False,True,True,False,False,True,False,True,True,0,150,28601,6,8
+wycliffRotich-dev/aethergrid,True,4,"markers=['demo', 'tutorial']",9,0.8772,False,False,True,True,True,False,False,False,False,True,False,True,False,True,False,0,258,21461,16,6
 yatochkaa/DocSift-Agent,False,0,,0,0.8573,False,False,True,True,False,False,False,True,True,False,False,True,False,True,False,0,131,21688,21,6
+yihefeikong-rgb/ai-plc-integration-public,False,0,,5,0.7316,False,False,True,True,True,True,False,False,False,False,True,False,False,True,False,4,315,59785,28,6
+zengqing1218/seryl,False,0,,1,0.7148,True,True,True,True,True,False,False,False,False,False,True,True,False,True,False,8,2953,1378153,152,8
 zeroday0619/KotonohaInterpreter,False,0,,2,0.9277,True,False,True,True,True,False,False,False,False,True,False,True,False,True,False,0,117,26125,9,7

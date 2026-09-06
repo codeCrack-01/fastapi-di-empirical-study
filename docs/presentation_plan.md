@@ -193,7 +193,11 @@ deep inheritance-like chains. This is the empirical shape of DI in the wild.
 
 ## 10. The fan-out hub (architectural signature)
 
-**Numbers:** 91.3% of clean graph-bearing repos show ≥3-dependency fan-out.
+**Numbers:** 78.2% of clean graph-bearing repos have some dependency called by
+≥3 other Depends sites (fan-out). Computed by `analysis/build_pptx.py`
+(`_fan_out3`) directly from the census reports' clean dependency graphs — a
+`file:line` junk-node id in either endpoint excludes that edge, matching the
+RQ3 clean-graph definition.
 
 **Significance:** DI's value proposition — one shared resource injected into
 many consumers — is empirically the dominant pattern. This is the concrete,
@@ -203,7 +207,7 @@ quantifiable payoff of DI that justifies the study.
 
 ## 11. Robustness — E5 sensitivity
 
-**Numbers:** % using core DI 74.9% (t=4) → 81.4% (t=8); stable.
+**Numbers:** % using core DI 75.6% (t=4) → 80.6% (t=8); stable.
 
 **Significance:** conclusions are **not threshold-dependent** — the anchor for
 the E5 heuristic.

@@ -6,10 +6,10 @@ Implements the sampling rule documented in docs/methodology_notes.md:
   - otherwise a uniform random sample of SAMPLE_SIZE repos drawn with
     random.Random(SAMPLE_SEED) over the SORTED accepted names.
 
-Sorting before drawing guarantees the superset property: the sample for a
-smaller pool is always a subset of the sample for any larger pool drawn
-with the same seed, so later corpus expansions never invalidate earlier
-manual work.
+The sample is drawn ONCE from the pool as it stood at draw time (currently
+pool_size=351) and is FROZEN thereafter. Corpus expansions after sampling do
+NOT re-draw it, so repo-name-referenced manual work stays valid; the full
+accepted census is the analysis universe for all reported results.
 
 Output: analysis/out/sample.json (schema-versioned, reproducible).
 
@@ -42,6 +42,8 @@ def main():
     ap.add_argument("--manifest", default=str(ROOT.parent / "corpus" / "manifest.json"))
     ap.add_argument("--size", type=int, default=SAMPLE_SIZE)
     ap.add_argument("--max-exhaustive", type=int, default=SAMPLE_MAX_EXHAUSTIVE)
+    ap.add_argument("--force", action="store_true",
+                    help="re-draw even though a frozen sample.json already exists for a different pool")
     args = ap.parse_args()
 
     manifest = json.loads(Path(args.manifest).read_text())
@@ -49,6 +51,17 @@ def main():
     n = len(names)
     if n == 0:
         sys.exit("no accepted repos in manifest")
+
+    out = OUT_DIR / "sample.json"
+    if out.exists():
+        frozen = json.loads(out.read_text())
+        if frozen.get("pool_size") != n and not args.force:
+            sys.exit(
+                f"refusing to re-draw: sample.json is frozen at pool_size={frozen.get('pool_size')} "
+                f"(current pool {n}). The {frozen.get('sample_size')}-repo sample was drawn once for "
+                "pilot/manual work and is not re-drawn on corpus expansions. Re-run with --force to "
+                "explicitly replace it (invalidate prior repo-name-referenced work)."
+            )
 
     if n <= args.max_exhaustive:
         method = "exhaustive"

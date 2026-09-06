@@ -8,7 +8,7 @@ artifacts:
   corpus/candidates.json     every discovered candidate has ``py_ratio``
   corpus/exclusion_log.json  terminal decision per candidate (reason = first
                              failing rule; E2 failures carry ``py_ratio=...``)
-  corpus/manifest.json       the 351 accepted repos (all ``py_ratio`` recorded)
+  corpus/manifest.json       the accepted repos (all ``py_ratio`` recorded)
 
 Model (honest about first-failure ordering and un-cloned repos):
 

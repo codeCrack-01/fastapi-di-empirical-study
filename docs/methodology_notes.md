@@ -37,14 +37,25 @@ data with `analysis/usage_patterns.py` — no re-extraction.
 Open-source GitHub repositories that use FastAPI (import `fastapi`, expose >= 1 FastAPI app).
 
 ## Target
-- Minimum 50 repos, target 50-100, hard ceiling ~150 if candidates are good.
-- Expandable in phases before the Oct'26 submission.
+- **Candidate discovery pool targets 5,000 repos** (`TARGET_CANDIDATES` in
+  settings.py) via a best-effort deep crawl of the GitHub dependents list.
+- **Accepted (the census) is whatever clears E1–E6** — the current 5,009-candidate
+  pool (4,500 → 5,000 patch, 2026-09) yields 402 accepted (8.0%);
+  the pool size and accepted count are deliberately distinct concepts.
+- Expanded in phases (2026-09: pooled increased 4,500 → 5,000 candidates;
+  +51 accepted, no decision altered).
 
 ## Discovery (finder.py)
 - Primary: **GitHub dependency-graph dependents** of `fastapi/fastapi`
   (`https://github.com/fastapi/fastapi/network/dependents`) — repos whose
   manifests GitHub's dependency graph resolves as depending on fastapi.
   Paginated HTML, snapshotted per page (`corpus/raw_dependents/`).
+- Crawl stops at `--target` unique repos (default `TARGET_CANDIDATES = 5000`);
+  deep-pagination 429s and the last page are hard best-effort stops.
+  `--max-pages` remains only as an absolute safety cap.
+- `--include-topic corpus/topic_seed.json` unions the `topic:fastapi` seed as a
+  secondary source; `--skip-scrape` replays the snapshotted pages offline.
+  The crawl is resumable (checkpoint to `candidates.partial.json`).
 - Original choice was Libraries.io `/dependents`; **disabled server-side**
   ("Disabled for performance reasons", librariesio/libraries.io#2647).
   GitHub's dependency graph uses the same manifest-parsing mechanism and is
@@ -78,6 +89,12 @@ Open-source GitHub repositories that use FastAPI (import `fastapi`, expose >= 1 
 - Repos failing E1-E5 are excluded with the first failing rule logged.
 - E6-flagged repos stay in the manifest with `tutorial_flag: true`; a human resolves each.
 - Thresholds are schema-versioned constants in corpus/settings.py.
+- **Incremental `--delta` mode** processes only candidates not yet decided,
+  merging new decisions into the existing manifest/exclusion_log — used to
+  patch the pool upward (4,500 → 5,000) without re-cloning what was judged.
+- **Clone retention** (default `accepted`): clones of rejected repos are
+  deleted after extraction; accepted clones are kept for audit + E6 structural
+  signals; `--keep-clones all|none` and `--prune-rejected` override.
 - Repos returning GitHub API 404 after discovery (deleted/private between
   snapshot and cloning) are reclassified `clone_failed` -> `unavailable`
   (`corpus/reclassify_unavailable.py`, timestamped detail) — permanent
@@ -91,8 +108,12 @@ from real applications). Sensitivity analysis runs all downstream results at thr
 
 ## Sampling
 - Exhaustive if the eligible pool N <= 100.
-- If N > 100, random sample of 100 with seed=42; expansion superset property
-  (the sample is a subset of any larger sample drawn with the same seed).
+- If N > 100, random sample of 100 with seed=42 over the SORTED accepted names.
+- The sample is drawn ONCE from the pool as it stood at draw time (currently
+  `analysis/out/sample.json`, pool_size=351) and is FROZEN thereafter: later
+  corpus expansions do not re-draw it, so repo-name-referenced manual work
+  (pilot analyses, audits) stays valid. The full accepted census — not this
+  sample — is the analysis universe for all reported results.
 
 ## Pipeline Artifacts
 - corpus/candidates.json     — finder output (raw enriched candidates)
@@ -101,7 +122,7 @@ from real applications). Sensitivity analysis runs all downstream results at thr
 - corpus/reports/<name>.json — full extractor report per accepted repo
 - corpus/raw_dependents/     — snapshotted GitHub dependents HTML pages (reproducibility)
 - corpus/topic_seed.json     — benchmark signal snapshot (recall measurement)
-- study_repos/corpus/        — shallow clones
+- study_repos/corpus/        — shallow clones (accepted retained by default; rejected pruned)
 
 ## Pilot Validation (2026-08-06)
 | Repo | E1 | E2 | E3 | E4 | E5 | E6 | Decision |
