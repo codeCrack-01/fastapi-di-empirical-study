@@ -375,6 +375,12 @@ All artifacts are schema-versioned, byte-stable (sorted order), and fully reprod
 | `analysis/out/covariates.csv` | Per-repo metadata (stars, age, coverage, etc.) |
 | `analysis/out/sensitivity.csv` | E5 threshold sensitivity analysis |
 | `analysis/out/summary.md` | Human-readable extraction summary |
+| `analysis/out/pattern_features.csv` | Per-repo DI-style predictor matrix (Phase 1) |
+| `analysis/out/ast_quality.csv` | Per-repo AST quality/complexity metrics (Phase 2A) |
+| `analysis/out/github_signals.csv` | Per-repo GitHub maintainer signals (Phase 2B) |
+| `analysis/out/pattern_outcomes.csv` | Joined dataset for the pattern comparison |
+| `analysis/out/pattern_compare_results.md` | Style × outcome table + standardized regressions (Phase 2C) |
+| `analysis/out/bench_di_results.md` | DI-style runtime micro-benchmark (Phase 3) |
 
 ---
 
@@ -412,5 +418,87 @@ All artifacts are schema-versioned, byte-stable (sorted order), and fully reprod
 
 2. **Tutorial flag decision:** choose one of sample-only review / bulk dismiss / full review (Section 10).
 3. **RQ4 git-history script:** implement per-repo temporal analysis, building on the existing extractor.
+4. **Controlled change-cost experiment** (resolves the "which pattern is best" bound from §14): hand-write equivalent apps per style and measure edit-blast-radius over modification tasks — the only design that can support a causal "best"-style claim.
 4. **Paper write-up:** methodology section and RQ1/RQ2 results are ready for first draft. Overlap benchmark (0%) is a strong methodological contribution.
 5. **Threats section:** document all items from Section 12, particularly the E5 sensitivity caveat and the E6 false-positive rate.
+
+---
+
+## 14. Comparative assessment of DI patterns (exploratory)
+
+*Scripts: `analysis/pattern_features.py`, `analysis/ast_quality.py`,
+`analysis/github_signals.py`, `analysis/pattern_outcomes.py`, `analysis/bench_di.py`.
+Outputs: `analysis/out/pattern_features.csv`, `ast_quality.csv`,
+`github_signals.csv`, `pattern_outcomes.csv`, `pattern_compare_results.md`,
+`bench_di_results.md`.*
+
+A deliberately *bounded* question: does the DI style a repo chooses associate
+with maintainability proxies, and does any style carry a measurable runtime
+cost? This section answers **associations**, not "which pattern is best" — a
+ranking is not statistically resolvable here because the Tier B idiom groups are
+tiny (n=1–15) and the design is cross-sectional and observational.
+
+### 14.1 Outcome means by style
+
+Per-repo features joined for **402 accepted repos**; GitHub maintainer signals
+for 390/402 (98.5%; 12 deleted/private), of which **384** (95.5%) have issue
+tracking enabled and enter the issues-per-kLOC model.
+
+| style | n | hygiene (0–5) | sophist. | func_len | branch/fn | doc% | type-ann% | issues/1kLOC | contribs |
+|---|---|---|---|---|---|---|---|---|---|
+| bare-function dominant | 279 | 3.27 | 6.5 | 20.6 | 2.56 | 43 | 92 | 0.36 | 5 |
+| zero-DI | 98 | 2.72 | 4.9 | 21.8 | 3.07 | 47 | 88 | 0.18 | 26 |
+| class-as-dependency | 7 | 3.71 | 7.3 | 17.9 | 1.98 | 64 | 84 | 1.24 | 6 |
+| `current_*` request-scope | 15 | 3.33 | 7.7 | 21.4 | 2.68 | 51 | 95 | 0.15 | 4 |
+| module-alias deps | 3 | 2.67 | 4.3 | 21.2 | 2.94 | 34 | 86 | 0.06 | 28 |
+
+### 14.2 Regression highlights (standardized OLS, controls for stars/age/size/Python share/tutorial flag)
+
+Descriptive census regressions (HC1 robust SEs); CIs are descriptive, not
+sampling inference (see §12.6).
+
+- **module-alias deps (continuous share; n=3 dominant / 11 users):** positive for
+  hygiene, sophistication, func length, branch density, docs, annotations, and
+  *negative* for open-issues-per-kLOC. Direction is consistent but the effective
+  n is tiny — treat as incidental evidence, not a recommendation.
+- **hub-rich graph (fan-out≥3):** positive for sophistication and mean function
+  length — larger/healthier repos are the ones that build shared hub
+  dependencies.
+- **`current_*` request-scope:** negative for branch density (CIs exclude 0).
+- **zero-DI:** positive for log#contributors — repos that skip DI constructs
+  tend to have more contributors (collinear with maturity, not necessarily
+  causal).
+- **class-as-dependency and `Annotated[...]`:** all CIs include 0 — no
+  detectable association with any proxy outcome.
+
+Net: once maturity/size are controlled, **no style is robustly "better" on
+maintainability proxies**, and the few significant coefficients cluster in
+n≈3–15 groups.
+
+### 14.3 Runtime micro-benchmark
+
+Synthetic 40-endpoint apps per style, 1500 requests/app over ASGI, best-of-3
+medians:
+
+| style | median req | vs. fastest |
+|---|---|---|
+| zero-DI (direct call) | 385 µs | 1.00× |
+| bare `Depends(fn)` | 581 µs | 1.51× |
+| class `Depends(Cls)` | 632 µs | 1.64× |
+| `current_*` request-scope | 683 µs | 1.78× |
+
+`Depends()` adds ≈0.25 ms/request on a body doing nothing → **measurable, not
+free**, but a single DB round-trip (1–10 ms) dwarfs it. Run-to-run variance is
+high; treat the multiplier as an upper bound on a trivial handler, not a
+production ratio.
+
+### 14.4 Bottom line
+
+No corpus evidence supports a "single best DI pattern". Bare-function
+`Depends(...)` is the community default (97.1% of call sites) and shows no
+downside in any proxy outcome, so it is the defensible recommendation by
+*prevalence + neutrality*. Class-based, `current_*`, module-alias, and `Annotated`
+styles are neutral-to-weakly-evidenced; zero-DI trades the (small, ~0.25 ms)
+DI overhead for added plumbing-by-hand with no detectable maintainability
+benefit in this data. Any stronger "which is best" claim requires a controlled
+change-cost experiment (planned future work) or maintainer surveys.
