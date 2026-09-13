@@ -1,19 +1,18 @@
 """
 corpus/filter.py — Eligibility filtering for the FastAPI DI corpus.
 
-Stage 2 of the corpus methodology. Applies rules E1-E6 to the candidates
+Stage 2 of the corpus methodology. Applies rules E1-E3 to the candidates
 produced by finder.py, cloning repos that pass the cheap metadata rules.
 
-Rules
------
-E1  fastapi is a runtime dependency (pyproject.toml [project] / [tool.poetry.dependencies],
-    requirements*.txt runtime files, Pipfile [packages], setup.cfg / setup.py).
-E2  Python is the dominant language (py_ratio >= 0.5, from GitHub languages bytes).
-E3  Not a fork and not archived.
-E4  pushed_at within the last 60 months AND >= 10 commits.
-E5  Real FastAPI usage: >= 4 files import fastapi AND >= 1 FastAPI() call (extractor).
-E6  No tutorial/demo markers in description or README — FLAGS for manual review,
-    never auto-excludes.
+Rules (census v2)
+-----------------
+E1  Imports FastAPI: files_importing_fastapi >= 1 in production code (extractor).
+E2  Origin: not a fork and not archived (GitHub metadata).
+E3  Window: pushed_at within the last 60 months (GitHub metadata; purely temporal).
+
+E2/E3 are metadata gates evaluated before cloning; E1 is evaluated from the
+extractor report after cloning. All rules are binary existence checks — no
+magnitude thresholds.
 
 Outputs
 -------
@@ -32,7 +31,7 @@ from __future__ import annotations
 import argparse
 import calendar
 import json
-import re
+import os
 import shutil
 import subprocess
 import sys
@@ -51,24 +50,12 @@ from settings import (
     CLONE_RETENTION,
     CLONE_TIMEOUT_SECONDS,
     CORPUS_SCHEMA_VERSION,
-    DEPENDENCY_FILES,
-    E1_RUNTIME_DEPS_REQUIRED,
-    E2_MIN_PYTHON_RATIO,
-    E4_MAX_AGE_MONTHS,
-    E4_MIN_COMMITS,
-    E5_MIN_FASTAPI_APPS,
-    E5_MIN_FASTAPI_FILES,
-    E6_README_CHECK_LIMIT,
-    E6_TUTORIAL_MARKERS,
+    E3_MAX_AGE_MONTHS,
     MAX_RETRY_ROUNDS,
     SAMPLE_SEED,
 )
 
 from extract import analyze_repo  # noqa: E402
-
-TUTORIAL_RE = re.compile(
-    r"(?i)" + r"|".join(re.escape(m) for m in E6_TUTORIAL_MARKERS)
-)
 
 
 class RuleResult:
@@ -91,6 +78,32 @@ def _delete_clone(clone_dir: Path, full_name: str) -> None:
         shutil.rmtree(dest, ignore_errors=True)
 
 
+def _github_clone_env() -> dict:
+    """Return extra env vars that let `git clone` authenticate via GITHUB_TOKEN.
+
+    The token is injected through a live credential helper rather than the
+    clone URL, so it is never persisted into the clone's .git/config.
+    """
+    token = os.environ.get("GITHUB_TOKEN")
+    if not token:
+        env_file = ROOT.parent / ".env"
+        if env_file.exists():
+            for line in env_file.read_text().splitlines():
+                line = line.strip()
+                if line.startswith("GITHUB_TOKEN="):
+                    token = line.split("=", 1)[1].strip().strip("\"'")
+                    break
+    if not token:
+        return {}
+    helper = f"!f() {{ echo username=x-access-token; echo password={token}; }}; f"
+    return {
+        "GIT_TERMINAL_PROMPT": "0",
+        "GIT_CONFIG_COUNT": "1",
+        "GIT_CONFIG_KEY_0": "credential.https://github.com.helper",
+        "GIT_CONFIG_VALUE_0": helper,
+    }
+
+
 def clone_repo(candidate: dict, clone_dir: Path) -> Optional[Path]:
     full_name = candidate["full_name"]
     dest = clone_path(clone_dir, full_name)
@@ -98,12 +111,14 @@ def clone_repo(candidate: dict, clone_dir: Path) -> Optional[Path]:
         return dest
     dest.mkdir(parents=True, exist_ok=True)
     url = f"https://github.com/{full_name}.git"
+    extra_env = _github_clone_env()
     try:
         result = subprocess.run(
             ["git", "clone", "--depth", str(CLONE_DEPTH), url, str(dest)],
             capture_output=True,
             text=True,
             timeout=CLONE_TIMEOUT_SECONDS,
+            env={**os.environ, **extra_env},
         )
     except subprocess.TimeoutExpired:
         print(f"[filter] clone timed out {full_name}", flush=True)
@@ -116,116 +131,6 @@ def clone_repo(candidate: dict, clone_dir: Path) -> Optional[Path]:
     return dest
 
 
-def _parse_requirements(text: str) -> set[str]:
-    deps: set[str] = set()
-    for line in text.splitlines():
-        line = line.strip()
-        if not line or line.startswith(("#", "-", "[", "git+", "http")):
-            continue
-        name = re.split(r"[=<>!~\[;]", line, maxsplit=1)[0].strip()
-        if name:
-            deps.add(name.lower())
-    return deps
-
-
-def _normalize_pkg_name(name: str) -> str:
-    name = name.strip()
-    name = re.split(r"[=<>!~;\[]", name, maxsplit=1)[0].strip()
-    return name.lower()
-
-
-def _parse_toml(text: str) -> set[str]:
-    deps: set[str] = set()
-    section = ""
-    in_project_deps_array = False
-    for raw in text.splitlines():
-        line = raw.strip()
-        if line.startswith("["):
-            section = line
-            in_project_deps_array = False
-            continue
-        if not line or line.startswith("#"):
-            continue
-        if section == "[project]":
-            if line.startswith("dependencies") and "=" in line:
-                in_project_deps_array = not line.rstrip().endswith("]")
-                continue
-            if in_project_deps_array and not line.startswith(("]", ",]", ")")):
-                m = re.search(r'["\']([^"\']+)["\']', line)
-                if m:
-                    deps.add(_normalize_pkg_name(m.group(1)))
-            continue
-        if section == "[tool.poetry.dependencies]":
-            if re.match(r"^[A-Za-z0-9_.-]+\s*=", line):
-                key = line.split("=")[0].strip().lower()
-                key = re.split(r"[\[;]", key)[0].strip()
-                if key not in {"python"}:
-                    deps.add(key)
-            continue
-    return deps
-
-
-def runtime_deps(repo_path: Path) -> set[str]:
-    deps: set[str] = set()
-    for rel in DEPENDENCY_FILES:
-        f = repo_path / rel
-        if not f.exists():
-            continue
-        try:
-            text = f.read_text(encoding="utf-8", errors="replace")
-        except OSError:
-            continue
-        if f.suffix == ".toml":
-            deps |= _parse_toml(text)
-        elif f.name == "Pipfile":
-            in_packages = False
-            for line in text.splitlines():
-                line = line.strip()
-                if line.startswith("[packages]") or line.startswith("[packages."):
-                    in_packages = True
-                    continue
-                if line.startswith("["):
-                    in_packages = False
-                    continue
-                if in_packages and re.match(r"^[A-Za-z0-9_.-]+\s*=", line):
-                    deps.add(line.split("=")[0].strip().lower())
-        elif f.suffix == ".cfg":
-            for line in text.splitlines():
-                line = line.strip()
-                if line.startswith("install_requires"):
-                    deps |= _parse_requirements(line)
-        elif f.name == "setup.py":
-            m = re.search(r"install_requires\s*=\s*\[(.*?)\]", text, re.S)
-            if m:
-                deps |= _parse_requirements(m.group(1))
-        else:
-            deps |= _parse_requirements(text)
-    return deps
-
-
-def find_tutorial_markers(candidate: dict, repo_path: Path) -> list[str]:
-    texts = [
-        candidate.get("description_libio") or "",
-        candidate.get("description_gh") or "",
-    ]
-    for readme_name in ("README.md", "README.rst", "README", "readme.md"):
-        readme = repo_path / readme_name
-        if readme.exists():
-            try:
-                texts.append(
-                    readme.read_text(encoding="utf-8", errors="replace")[:E6_README_CHECK_LIMIT]
-                )
-            except OSError:
-                pass
-            break
-    markers: set[str] = set()
-    for text in texts:
-        for marker in E6_TUTORIAL_MARKERS:
-            if re.search(rf"(?i){re.escape(marker)}", text):
-                markers.add(marker)
-    return sorted(markers)
-
-
 def months_before(now: datetime, months: int) -> datetime:
     total = now.year * 12 + now.month - months
     y, m = divmod(total - 1, 12)
@@ -235,69 +140,50 @@ def months_before(now: datetime, months: int) -> datetime:
 
 
 def evaluate(candidate: dict, repo_path: Optional[Path]) -> tuple[list[RuleResult], Optional[dict]]:
-    """Evaluate eligibility rules.
+    """Evaluate eligibility rules E1-E3.
 
-    E2/E3/E4 are pure metadata rules and are always evaluated. When
+    E2/E3 are pure metadata rules and are always evaluated. When
     ``repo_path`` is None, evaluation stops there (metadata gate) so the
     caller can skip cloning for candidates that already fail a metadata rule;
-    when ``repo_path`` is given, the clone-dependent rules E1/E5/E6 are added
-    and results are returned in canonical E1..E6 order.
+    when ``repo_path`` is given, the clone-dependent rule E1 (production
+    import of fastapi) is added at the front of the results, keeping
+    canonical E1..E3 order.
     """
     results: list[RuleResult] = []
-
-    py_ratio = candidate.get("py_ratio", 0.0)
-    results.append(RuleResult("E2", py_ratio >= E2_MIN_PYTHON_RATIO, f"py_ratio={py_ratio}"))
 
     fork = candidate.get("fork", False)
     archived = candidate.get("archived", False)
     results.append(
-        RuleResult("E3", not fork and not archived, f"fork={fork} archived={archived}")
+        RuleResult("E2", not fork and not archived, f"fork={fork} archived={archived}")
     )
 
     pushed_at = candidate.get("pushed_at")
-    commits = candidate.get("commit_count") or 0
-    cutoff = months_before(datetime.now(timezone.utc), E4_MAX_AGE_MONTHS)
+    cutoff = months_before(datetime.now(timezone.utc), E3_MAX_AGE_MONTHS)
     try:
         pushed_dt = datetime.fromisoformat(pushed_at.replace("Z", "+00:00"))
         fresh = pushed_dt >= cutoff
     except (ValueError, AttributeError):
         fresh = False
-    e4 = fresh and commits >= E4_MIN_COMMITS
     results.append(
         RuleResult(
-            "E4",
-            e4,
-            f"pushed_at={pushed_at} commits={commits} cutoff={cutoff.isoformat()}",
+            "E3",
+            fresh,
+            f"pushed_at={pushed_at} cutoff={cutoff.isoformat()}",
         )
     )
 
     if repo_path is None:
         return results, None
 
-    deps = runtime_deps(repo_path)
-    e1 = "fastapi" in deps
-    results.insert(0, RuleResult("E1", e1, f"runtime deps found: {sorted(deps)[:8]}"))
-
     try:
         report = analyze_repo(repo_path)
     except Exception as exc:
-        results.append(RuleResult("E5", False, f"extractor error: {exc}"))
+        results.insert(0, RuleResult("E1", False, f"extractor error: {exc}"))
         return results, None
-    agg = report.aggregate
-    fastapi_files = agg.files_importing_fastapi
-    apps = agg.fastapi_app_count
-    e5 = fastapi_files >= E5_MIN_FASTAPI_FILES and apps >= E5_MIN_FASTAPI_APPS
-    results.append(
-        RuleResult(
-            "E5",
-            e5,
-            f"fastapi_files={fastapi_files} apps={apps} (min {E5_MIN_FASTAPI_FILES}/{E5_MIN_FASTAPI_APPS})",
-        )
-    )
-
-    markers = find_tutorial_markers(candidate, repo_path)
-    results.append(
-        RuleResult("E6", len(markers) == 0, f"markers={markers}" if markers else "no markers")
+    fastapi_files = report.aggregate.files_importing_fastapi
+    results.insert(
+        0,
+        RuleResult("E1", fastapi_files >= 1, f"files_importing_fastapi={fastapi_files}"),
     )
 
     snapshot = report.model_dump(mode="json")
@@ -306,7 +192,7 @@ def evaluate(candidate: dict, repo_path: Optional[Path]) -> tuple[list[RuleResul
 
 def first_failure(results: list[RuleResult]) -> Optional[RuleResult]:
     for r in results:
-        if not r.passed and r.rule != "E6":
+        if not r.passed:
             return r
     return None
 
@@ -317,7 +203,7 @@ def process_candidate(
     reports_dir: Path,
     retention: str = CLONE_RETENTION,
 ) -> tuple[Optional[dict], Optional[dict]]:
-    """Run the full E1-E6 pipeline for one candidate.
+    """Run the full E1-E3 pipeline for one candidate.
 
     Returns (accepted_entry, excluded_entry); exactly one is non-None.
 
@@ -372,10 +258,6 @@ def process_candidate(
         "license": candidate.get("license"),
         "topics": candidate.get("topics"),
         "description": candidate.get("description_gh") or candidate.get("description_libio"),
-        "tutorial_flag": any(not r.passed for r in results if r.rule == "E6"),
-        "tutorial_markers": next(
-            (r.detail for r in results if r.rule == "E6" and not r.passed), ""
-        ),
         "rules_passed": [r.rule for r in results],
         "rules": [r.to_dict() for r in results],
         "aggregate": snapshot["aggregate"],
@@ -459,7 +341,7 @@ def retry_clone_failures(
             if accepted_entry is not None:
                 new_accepted.append(accepted_entry)
                 print(
-                    f"  ACCEPTED (E5: {accepted_entry['aggregate']['files_importing_fastapi']} files)",
+                    f"  ACCEPTED (E1: {accepted_entry['aggregate']['files_importing_fastapi']} files)",
                     flush=True,
                 )
             else:
@@ -492,7 +374,7 @@ def run_retry(
 
     A prior run can record clone_failed when the network dropped mid-run even
     though the repo itself is clonable; those candidates passed the metadata
-    gate but never had E1/E5/E6 evaluated. This mode evaluates them and merges
+    gate but never had E1 evaluated. This mode evaluates them and merges
     the results, preserving everything that was already decided.
     """
     exclusion_path = out_path.parent / "exclusion_log.json"
@@ -604,7 +486,7 @@ def run_delta(
         if accepted_entry is not None:
             new_accepted.append(accepted_entry)
             print(
-                f"  ACCEPTED (E5: {accepted_entry['aggregate']['files_importing_fastapi']} files)",
+                f"  ACCEPTED (E1: {accepted_entry['aggregate']['files_importing_fastapi']} files)",
                 flush=True,
             )
         else:
@@ -650,7 +532,7 @@ def run_delta(
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Apply eligibility rules E1-E6")
+    parser = argparse.ArgumentParser(description="Apply eligibility rules E1-E3")
     parser.add_argument("--candidates", default=str(ROOT / "candidates.json"))
     parser.add_argument("--clone-dir", default=str(ROOT.parent / "study_repos" / "corpus"))
     parser.add_argument("--output", default=str(ROOT / "manifest.json"))
@@ -680,6 +562,18 @@ def main():
         default=MAX_RETRY_ROUNDS,
         help="Rounds of clone_failed retries after the main pass (0 disables)",
     )
+    parser.add_argument(
+        "--resume",
+        action="store_true",
+        help="Skip candidates already decided in existing 0.2 manifest/exclusion_log "
+        "(checkpointed runs only; older schema outputs are ignored)",
+    )
+    parser.add_argument(
+        "--checkpoint-every",
+        type=int,
+        default=50,
+        help="Write checkpoint outputs every N candidates (default: %(default)s)",
+    )
     args = parser.parse_args()
 
     cand_path = Path(args.candidates)
@@ -696,11 +590,7 @@ def main():
 
     config = {
         "sample_seed": SAMPLE_SEED,
-        "E2_min_python_ratio": E2_MIN_PYTHON_RATIO,
-        "E4_max_age_months": E4_MAX_AGE_MONTHS,
-        "E4_min_commits": E4_MIN_COMMITS,
-        "E5_min_fastapi_files": E5_MIN_FASTAPI_FILES,
-        "E5_min_fastapi_apps": E5_MIN_FASTAPI_APPS,
+        "E3_max_age_months": E3_MAX_AGE_MONTHS,
     }
 
     if args.delta:
@@ -729,12 +619,64 @@ def main():
 
     if args.limit:
         candidates = candidates[: args.limit]
+
     accepted: list[dict] = []
     excluded: list[dict] = []
-    start_time = time.monotonic()
+    decided: set[str] = set()
+    out_path = Path(args.output)
+    if args.resume:
+        try:
+            prev = json.loads(out_path.read_text())
+            if prev.get("schema_version") == CORPUS_SCHEMA_VERSION:
+                accepted = list(prev.get("accepted", []))
+                decided.update(e["full_name"] for e in accepted)
+            else:
+                print(
+                    f"[filter] resume: existing manifest is schema {prev.get('schema_version')} "
+                    f"(!= {CORPUS_SCHEMA_VERSION}), ignoring; will do a clean unchanged pass",
+                    flush=True,
+                )
+        except FileNotFoundError:
+            pass
+        except (json.JSONDecodeError, KeyError, OSError) as e:
+            print(f"[filter] WARNING: could not load previous manifest for resume: {e}", flush=True)
+        exclusion_path = out_path.parent / "exclusion_log.json"
+        try:
+            prev = json.loads(exclusion_path.read_text())
+            if prev.get("schema_version") == CORPUS_SCHEMA_VERSION:
+                excluded = list(prev.get("excluded", []))
+                decided.update(e["full_name"] for e in excluded)
+        except FileNotFoundError:
+            pass
+        except (json.JSONDecodeError, KeyError, OSError) as e:
+            print(
+                f"[filter] WARNING: could not load previous exclusion_log for resume: {e}",
+                flush=True,
+            )
+        if decided:
+            print(
+                f"[filter] resume: {len(decided)} candidates already decided, "
+                f"{len([c for c in candidates if c['full_name'] not in decided])} remaining",
+                flush=True,
+            )
 
+    start_time = time.monotonic()
+    skipped = 0
     for i, candidate in enumerate(candidates):
         full_name = candidate["full_name"]
+        if args.resume and full_name in decided:
+            skipped += 1
+            continue
+        dest = clone_path(clone_dir, full_name)
+        if (dest / ".git").exists():
+            verify = subprocess.run(
+                ["git", "-C", str(dest), "rev-parse", "--verify", "HEAD"],
+                capture_output=True,
+                text=True,
+            )
+            if verify.returncode != 0:
+                print(f"[filter] removing stale partial clone {full_name}", flush=True)
+                shutil.rmtree(dest, ignore_errors=True)
         elapsed = int(time.monotonic() - start_time)
         print(
             f"[filter] ({i + 1}/{len(candidates)}) {full_name} "
@@ -748,7 +690,7 @@ def main():
         if accepted_entry is not None:
             accepted.append(accepted_entry)
             print(
-                f"  ACCEPTED (E5: {accepted_entry['aggregate']['files_importing_fastapi']} files)",
+                f"  ACCEPTED (E1: {accepted_entry['aggregate']['files_importing_fastapi']} files)",
                 flush=True,
             )
         else:
@@ -758,6 +700,16 @@ def main():
                 flush=True,
             )
         time.sleep(0.2)
+        if args.checkpoint_every > 0 and (i + 1) % args.checkpoint_every == 0:
+            write_outputs(out_path, config, accepted, excluded)
+            print(
+                f"[filter] checkpoint @ {i + 1}: accepted {len(accepted)}, "
+                f"excluded {len(excluded)}",
+                flush=True,
+            )
+
+    if skipped:
+        print(f"[filter] skipped {skipped} already-decided candidates", flush=True)
 
     if args.max_retry_rounds:
         by_name = {c["full_name"]: c for c in candidates}
@@ -772,7 +724,7 @@ def main():
         accepted.extend(new_accepted)
         excluded = final_excluded
 
-    write_outputs(Path(args.output), config, accepted, excluded)
+    write_outputs(out_path, config, accepted, excluded)
     print(f"[filter] done: {len(accepted)} accepted, {len(excluded)} excluded")
 
 

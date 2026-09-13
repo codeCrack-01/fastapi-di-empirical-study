@@ -1,52 +1,21 @@
-CORPUS_SCHEMA_VERSION = "0.1"
+CORPUS_SCHEMA_VERSION = "0.2"
 
 # Discovery/acceptance targets (2026-09: discovery pool targeting a 5,000-
-# candidate crawl; acceptance is whatever clears E1-E6).
+# candidate crawl; acceptance is whatever clears E1-E3).
 TARGET_CANDIDATES = 5000
 TARGET_MIN_ACCEPTED = 50
 SAMPLE_SEED = 42
 
 FASTAPI_PACKAGE = "fastapi"
 
-DEPENDENCY_FILES = [
-    "pyproject.toml",
-    "requirements.txt",
-    "requirements/base.txt",
-    "requirements/prod.txt",
-    "requirements/main.txt",
-    "Pipfile",
-    "setup.cfg",
-    "setup.py",
-]
-
-E1_RUNTIME_DEPS_REQUIRED = True
-
-E2_MIN_PYTHON_RATIO = 0.5
-
-E4_MAX_AGE_MONTHS = 60
-E4_MIN_COMMITS = 10
-
-E5_MIN_FASTAPI_FILES = 4
-E5_MIN_FASTAPI_APPS = 1
-
-E6_TUTORIAL_MARKERS = [
-    "tutorial",
-    "example",
-    "demo",
-    "sample",
-    "boilerplate",
-    "template",
-    "playground",
-    "starter",
-    "course",
-    "learn",
-    "getting started",
-    "walkthrough",
-]
-
-E6_README_CHECK_LIMIT = 2000
-
-E5_SENSITIVITY_THRESHOLDS = [2, 3, 4, 5, 6, 8]
+# Eligibility rules (census v2):
+#   E1  Imports FastAPI: files_importing_fastapi >= 1 in production code.
+#   E2  Origin: not a fork and not archived.
+#   E3  Window: pushed_at within the last E3_MAX_AGE_MONTHS months.
+# E2/E3 are metadata gates evaluated before cloning; E1 is evaluated from
+# the extractor report after cloning. All rules are binary existence checks
+# (no magnitude thresholds).
+E3_MAX_AGE_MONTHS = 60
 
 CLONE_DEPTH = 1
 CLONE_TIMEOUT_SECONDS = 900
