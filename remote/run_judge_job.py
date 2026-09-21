@@ -128,6 +128,8 @@ def run_stage(stage: str, job: dict, state: dict, fake: bool,
         )
     elif stage == "annotate":
         fprints = json.loads(Path(job["fingerprints"]).read_text())
+        if isinstance(fprints, dict):
+            fprints = fprints["fingerprints"]
         panel = json.loads((out_dir / "novelty_panel.json").read_text())
         summary = ann_mod.run_annotate(
             fprints, panel, results_dir,

@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "chunk_size": 10,
+  "tau": 0.65,
+  "floor": 0.8,
+  "eps": 0.02,
+  "max_k": 5,
+  "host": "",
+  "pool": ["qwen3-coder:4b", "llama3.2:3b", "deepseek-coder:6.7b"],
+  "fingerprints": "analysis/novelty/out/novelty_fingerprints.json",
+  "out_dir": "analysis/novelty/out",
+  "results_dir": "remote/results",
+  "share_dir": "remote",
+  "received_path": "remote/received.txt",
+  "job_state": "remote/job_state.json",
+  "ollama_path": "ollama"
+}
