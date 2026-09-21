@@ -91,9 +91,10 @@ def fingerprint_for(node: dict, construct: str) -> str:
     return fn(node)
 
 
-def _node_occurrence(name: str, node: dict, construct: str) -> dict:
+def _node_occurrence(name: str, node: dict, construct: str,
+                     file: str | None = None, github_url: str | None = None) -> dict:
     fp = fingerprint_for(node, construct)
-    return {
+    occ = {
         "construct": construct,
         "fingerprint": fp,
         "repo": name,
@@ -104,9 +105,48 @@ def _node_occurrence(name: str, node: dict, construct: str) -> dict:
         "dependencies": node.get("dependencies"),
         "scopes": node.get("scopes"),
     }
+    if file:
+        occ["file"] = file
+    if github_url:
+        occ["github_url"] = github_url
+    return occ
 
 
-def node_lists(report: dict) -> list[tuple[str, list[dict]]]:
+def _rel_file_path(path: str | None, repo_id: str | None) -> str | None:
+    """Strip the local clone prefix off a stored path, giving ``owner/repo/file.py``-style relpath.
+
+    Stored paths look like ``/…/study_repos/corpus/<repo_id>/cli/holon.py``. We keep
+    everything after ``corpus/<repo_id>/`` and normalize separators.
+    """
+    if not path:
+        return None
+    p = path.replace("\\", "/").lstrip("/")
+    if repo_id:
+        marker = f"corpus/{repo_id}/"
+        idx = p.find(marker)
+        if idx >= 0:
+            p = p[idx + len(marker):]
+    return p.rstrip("/") or None
+
+
+def github_url_for(repo: dict | None, name: str, rel_path: str | None, line: int | None) -> str | None:
+    """Commit-pinned GitHub blob URL for one occurrence (deterministic, reproducible)."""
+    sha = repo.get("commit_sha") if isinstance(repo, dict) else None
+    if not sha or not rel_path:
+        return None
+    owner_repo = str(name).replace("__", "/")
+    if "/" not in owner_repo:
+        return None
+    base = f"https://github.com/{owner_repo}/blob/{sha}/{rel_path}"
+    return f"{base}#L{line}" if line else base
+
+
+def node_lists(report: dict) -> list[tuple[str, list[dict], str]]:
+    """Yield ``(construct_id, nodes, file_path)`` for every construct node in the report.
+
+    The tuple includes the per-file path (from ``file_details``) so that an
+    occurrence can later carry its exact ``file`` + commit-pinned GitHub URL.
+    """
     fd = report.get("file_details", [])
     mapping = [
         ("C1", "depends_calls"),
@@ -114,13 +154,14 @@ def node_lists(report: dict) -> list[tuple[str, list[dict]]]:
         ("C3", "annotated_depends"),
         ("C4", "yield_functions"),
     ]
-    out: list[tuple[str, list[dict]]] = []
+    out: list[tuple[str, list[dict], str]] = []
     for cid, key in mapping:
-        nodes: list[dict] = []
         for fr in fd:
+            nodes: list[dict] = []
             for n in fr.get(key, []):
                 nodes.append(dict(n))
-        out.append((cid, nodes))
+            if nodes:
+                out.append((cid, nodes, fr.get("path") or ""))
     return out
 
 
@@ -135,11 +176,16 @@ def collect_occurrences(reports_dir: Path | None = None) -> list[dict]:
             report = json.loads(path.read_text())
         except (OSError, json.JSONDecodeError):
             continue
-        name = report.get("repo", {}).get("name") if isinstance(report.get("repo"), dict) else None
-        display = report.get("repo", {}).get("full_name") or name or path.stem.replace("__", "/")
-        for cid, nodes in node_lists(report):
+        repo = report.get("repo") if isinstance(report.get("repo"), dict) else None
+        name = repo.get("name") if repo else None
+        display = repo.get("full_name") or name or path.stem.replace("__", "/")
+        for cid, nodes, fpath in node_lists(report):
+            rel = _rel_file_path(fpath, name)
             for n in nodes:
-                occurrences.append(_node_occurrence(str(display), n, cid))
+                url = github_url_for(repo, str(display), rel, n.get("line"))
+                occurrences.append(
+                    _node_occurrence(str(display), n, cid, file=rel or None, github_url=url or None)
+                )
     return occurrences
 
 

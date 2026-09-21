@@ -109,31 +109,43 @@ def render_user(fingerprint: str, examples: list[dict]) -> str:
 
 
 def parse_response(text: str) -> dict:
-    """Extract the first JSON object from a rater's (possibly chatty) reply.
+    """Extract the final JSON object from a rater's (possibly chatty) reply.
 
     Returns normalized {label, rule, evidence} with label lowercased and
     validated against known labels.
+
+    Hardened for thinking-mode models (qwen3): reasoning can contain draft
+    ``{"label": ...}`` objects, so we collect ALL candidate JSON objects and
+    take the LAST one (the final answer), never the first.
     """
     import re
-    match_curly = re.search(r"\{[^{}]*\"label\"[^{}]*\}", text, re.DOTALL)
-    if match_curly:
-        chunk = match_curly.group(0)
+    clean = text.strip()
+    # strip markdown code fences if the model wrapped its answer in them
+    clean = re.sub(r"```[a-zA-Z0-9]*\n?|\n?```", "", clean)
+
+    blocks = list(re.finditer(r"\{[^{}]*?\"label\"[^{}]*\}", clean, re.DOTALL))
+    if blocks:
+        chunk = blocks[-1].group(0)
     else:
-        chunk = text
-    try:
-        data = json.loads(chunk)
-    except json.JSONDecodeError:
-        # fallback: pull a bare label token
-        m = re.search(r'\b(known|variant|novel|false_pos|external_di|C[1-8]|EX2|Z)\b', text)
+        chunk = None
+
+    if chunk is None:
+        m = re.search(r'\b(known|variant|novel|false_pos|external_di|C[1-8]|EX2|Z)\b', clean)
         if not m:
-            return {"label": "unknown", "rule": None, "evidence": text[:200]}
+            return {"label": "unknown", "rule": None, "evidence": clean[:200]}
         data = {"label": m.group(1)}
+    else:
+        try:
+            data = json.loads(chunk)
+        except json.JSONDecodeError:
+            return {"label": "unknown", "rule": None, "evidence": clean[:200]}
+
     label = str(data.get("label", "unknown")).strip().lower()
     label = label if re.fullmatch(r"known|variant|novel|false_pos|external_di|C[1-8]|ex2|z", label) else "unknown"
     return {
         "label": label,
         "rule": data.get("rule"),
-        "evidence": str(data.get("evidence", ""))[:300],
+        "evidence": str(data.get("evidence", ""))[:2000],
     }
 
 

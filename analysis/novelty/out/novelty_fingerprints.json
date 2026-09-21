@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1",
-  "source_reports": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports",
+  "source_reports": "corpus/reports",
   "total_occurrences": 187443,
   "distinct_fingerprints": 27,
   "fingerprints": [
@@ -839,6 +839,8 @@
           "construct": "C1",
           "fingerprint": "C1|BARE|PARAM",
           "argument": "require_scim_token",
+          "file": "services/identity/app/scim.py",
+          "github_url": "https://github.com/0SansNom/holon/blob/77d0d648139f05efc69c9332cdc71a5b36a4863f/services/identity/app/scim.py#L52",
           "repo": "0SansNom__holon",
           "line": 52
         },
@@ -846,6 +848,8 @@
           "construct": "C1",
           "fingerprint": "C1|BARE|PARAM",
           "argument": "require_admin_write",
+          "file": "backend/app/api/v1/routes.py",
+          "github_url": "https://github.com/0x3e4/hecate/blob/ed10481ba4351a42d156fba12983b2d171736a8e/backend/app/api/v1/routes.py#L37",
           "repo": "0x3e4__hecate",
           "line": 37
         },
@@ -853,6 +857,8 @@
           "construct": "C1",
           "fingerprint": "C1|BARE|PARAM",
           "argument": "require_capability",
+          "file": "app/modules/admin_console/module_flags.py",
+          "github_url": "https://github.com/1semptify-arch/Semptify/blob/009c4c4d0fb493bdc8587e9def6ae84f8f90e25c/app/modules/admin_console/module_flags.py#L39",
           "repo": "1semptify-arch__Semptify",
           "line": 39
         },
@@ -860,6 +866,8 @@
           "construct": "C1",
           "fingerprint": "C1|BARE|PARAM",
           "argument": "require_capability",
+          "file": "app/modules/admin_console/router.py",
+          "github_url": "https://github.com/1semptify-arch/Semptify/blob/009c4c4d0fb493bdc8587e9def6ae84f8f90e25c/app/modules/admin_console/router.py#L138",
           "repo": "1semptify-arch__Semptify",
           "line": 138
         },
@@ -867,6 +875,8 @@
           "construct": "C1",
           "fingerprint": "C1|BARE|PARAM",
           "argument": "require_admin",
+          "file": "app/modules/advanced/router.py",
+          "github_url": "https://github.com/1semptify-arch/Semptify/blob/009c4c4d0fb493bdc8587e9def6ae84f8f90e25c/app/modules/advanced/router.py#L31",
           "repo": "1semptify-arch__Semptify",
           "line": 31
         }
@@ -2083,6 +2093,8 @@
           "fingerprint": "C1|BARE|SIG",
           "context_function": "list_automation_audit_events",
           "argument": "current_principal",
+          "file": "services/automation/app/main.py",
+          "github_url": "https://github.com/0SansNom/holon/blob/77d0d648139f05efc69c9332cdc71a5b36a4863f/services/automation/app/main.py#L171",
           "repo": "0SansNom__holon",
           "line": 171
         },
@@ -2091,6 +2103,8 @@
           "fingerprint": "C1|BARE|SIG",
           "context_function": "get_workflow_execution",
           "argument": "current_principal",
+          "file": "services/automation/app/main.py",
+          "github_url": "https://github.com/0SansNom/holon/blob/77d0d648139f05efc69c9332cdc71a5b36a4863f/services/automation/app/main.py#L194",
           "repo": "0SansNom__holon",
           "line": 194
         },
@@ -2099,6 +2113,8 @@
           "fingerprint": "C1|BARE|SIG",
           "context_function": "list_connectivity_audit_events",
           "argument": "current_principal",
+          "file": "services/connectivity/app/routers/admin.py",
+          "github_url": "https://github.com/0SansNom/holon/blob/77d0d648139f05efc69c9332cdc71a5b36a4863f/services/connectivity/app/routers/admin.py#L22",
           "repo": "0SansNom__holon",
           "line": 22
         },
@@ -2107,6 +2123,8 @@
           "fingerprint": "C1|BARE|SIG",
           "context_function": "admin_quiesce",
           "argument": "current_principal",
+          "file": "services/connectivity/app/routers/admin.py",
+          "github_url": "https://github.com/0SansNom/holon/blob/77d0d648139f05efc69c9332cdc71a5b36a4863f/services/connectivity/app/routers/admin.py#L47",
           "repo": "0SansNom__holon",
           "line": 47
         },
@@ -2115,6 +2133,8 @@
           "fingerprint": "C1|BARE|SIG",
           "context_function": "create_pipeline",
           "argument": "current_principal",
+          "file": "services/connectivity/app/routers/pipelines.py",
+          "github_url": "https://github.com/0SansNom/holon/blob/77d0d648139f05efc69c9332cdc71a5b36a4863f/services/connectivity/app/routers/pipelines.py#L19",
           "repo": "0SansNom__holon",
           "line": 19
         }
@@ -2143,6 +2163,8 @@
           "fingerprint": "C1|CLASS|PARAM",
           "context_function": "create_case",
           "argument": "COOKIE_SCHEME",
+          "file": "Backend/app/api/routers/cases_router.py",
+          "github_url": "https://github.com/COS301-SE-2026/Veritas-Lab/blob/7d9fc208b169e3a7821864c0658f7c3014ae8f2b/Backend/app/api/routers/cases_router.py#L242",
           "repo": "COS301-SE-2026__Veritas-Lab",
           "line": 242
         },
@@ -2151,6 +2173,8 @@
           "fingerprint": "C1|CLASS|PARAM",
           "context_function": "get_cases",
           "argument": "COOKIE_SCHEME",
+          "file": "Backend/app/api/routers/cases_router.py",
+          "github_url": "https://github.com/COS301-SE-2026/Veritas-Lab/blob/7d9fc208b169e3a7821864c0658f7c3014ae8f2b/Backend/app/api/routers/cases_router.py#L328",
           "repo": "COS301-SE-2026__Veritas-Lab",
           "line": 328
         },
@@ -2159,6 +2183,8 @@
           "fingerprint": "C1|CLASS|PARAM",
           "context_function": "get_single_case",
           "argument": "COOKIE_SCHEME",
+          "file": "Backend/app/api/routers/cases_router.py",
+          "github_url": "https://github.com/COS301-SE-2026/Veritas-Lab/blob/7d9fc208b169e3a7821864c0658f7c3014ae8f2b/Backend/app/api/routers/cases_router.py#L445",
           "repo": "COS301-SE-2026__Veritas-Lab",
           "line": 445
         },
@@ -2167,6 +2193,8 @@
           "fingerprint": "C1|CLASS|PARAM",
           "context_function": "upload_evidence",
           "argument": "COOKIE_SCHEME",
+          "file": "Backend/app/api/routers/cases_router.py",
+          "github_url": "https://github.com/COS301-SE-2026/Veritas-Lab/blob/7d9fc208b169e3a7821864c0658f7c3014ae8f2b/Backend/app/api/routers/cases_router.py#L620",
           "repo": "COS301-SE-2026__Veritas-Lab",
           "line": 620
         },
@@ -2175,6 +2203,8 @@
           "fingerprint": "C1|CLASS|PARAM",
           "context_function": "close_case",
           "argument": "COOKIE_SCHEME",
+          "file": "Backend/app/api/routers/cases_router.py",
+          "github_url": "https://github.com/COS301-SE-2026/Veritas-Lab/blob/7d9fc208b169e3a7821864c0658f7c3014ae8f2b/Backend/app/api/routers/cases_router.py#L818",
           "repo": "COS301-SE-2026__Veritas-Lab",
           "line": 818
         }
@@ -2212,6 +2242,8 @@
           "fingerprint": "C1|CLASS|SIG",
           "context_function": "get_current_user_sse",
           "argument": "HTTPBearer",
+          "file": "app-backend/app/middleware/auth.py",
+          "github_url": "https://github.com/Coding-Temple-Tech-Residency/MedBridge-B/blob/2d70a85fce879589ad33bf938ee224a5edd8f2dc/app-backend/app/middleware/auth.py#L45",
           "repo": "Coding-Temple-Tech-Residency__MedBridge-B",
           "line": 45
         },
@@ -2220,6 +2252,8 @@
           "fingerprint": "C1|CLASS|SIG",
           "context_function": "info_geojson",
           "argument": "CRSParams",
+          "file": "titiler/eopf/factory.py",
+          "github_url": "https://github.com/EOPF-Explorer/titiler-eopf/blob/f8a07ef0bde8e7d7475df92197048aa37ecbd953/titiler/eopf/factory.py#L104",
           "repo": "EOPF-Explorer__titiler-eopf",
           "line": 104
         },
@@ -2228,6 +2262,8 @@
           "fingerprint": "C1|CLASS|SIG",
           "context_function": "tileset_list",
           "argument": "CRSParams",
+          "file": "titiler/eopf/factory.py",
+          "github_url": "https://github.com/EOPF-Explorer/titiler-eopf/blob/f8a07ef0bde8e7d7475df92197048aa37ecbd953/titiler/eopf/factory.py#L160",
           "repo": "EOPF-Explorer__titiler-eopf",
           "line": 160
         },
@@ -2236,6 +2272,8 @@
           "fingerprint": "C1|CLASS|SIG",
           "context_function": "get_current_user_optional",
           "argument": "HTTPBearer",
+          "file": "backend/auth.py",
+          "github_url": "https://github.com/Fergana-Labs/stash/blob/c56f81c961c3382f2b37734142ee982555d2e69d/backend/auth.py#L287",
           "repo": "Fergana-Labs__stash",
           "line": 287
         },
@@ -2244,6 +2282,8 @@
           "fingerprint": "C1|CLASS|SIG",
           "context_function": "list_ai_usage",
           "argument": "RoleChecker",
+          "file": "apps/api/features/ai_usage/routes.py",
+          "github_url": "https://github.com/Mahnoor-Zaffar/Tayari.ai/blob/f76834b262f6b6daac6a2c060710ffbebda80611/apps/api/features/ai_usage/routes.py#L27",
           "repo": "Mahnoor-Zaffar__Tayari.ai",
           "line": 27
         }
@@ -2293,6 +2333,8 @@
           "fingerprint": "C1|DOTTED|PARAM",
           "context_function": "create_app",
           "argument": "routes_auth.require_unlock_media",
+          "file": "src/memorymap/api/app.py",
+          "github_url": "https://github.com/Braydenh563/MemoryMap-AI/blob/b5c29b75f0c53d71f0006e8d47bd88db3e4130a1/src/memorymap/api/app.py#L218",
           "repo": "Braydenh563__MemoryMap-AI",
           "line": 218
         },
@@ -2301,6 +2343,8 @@
           "fingerprint": "C1|DOTTED|PARAM",
           "context_function": "login",
           "argument": "deps.db",
+          "file": "apps/backend/src/api/routes/auth.py",
+          "github_url": "https://github.com/Codeit-AI10-Part4-3Team/AI10-Part4-3Team-Advanced-Project/blob/ade5ea909f9ffd4adc8b5ed5bf503e86aeb64571/apps/backend/src/api/routes/auth.py#L86",
           "repo": "Codeit-AI10-Part4-3Team__AI10-Part4-3Team-Advanced-Project",
           "line": 86
         },
@@ -2309,6 +2353,8 @@
           "fingerprint": "C1|DOTTED|PARAM",
           "context_function": "login",
           "argument": "deps.settings",
+          "file": "apps/backend/src/api/routes/auth.py",
+          "github_url": "https://github.com/Codeit-AI10-Part4-3Team/AI10-Part4-3Team-Advanced-Project/blob/ade5ea909f9ffd4adc8b5ed5bf503e86aeb64571/apps/backend/src/api/routes/auth.py#L87",
           "repo": "Codeit-AI10-Part4-3Team__AI10-Part4-3Team-Advanced-Project",
           "line": 87
         },
@@ -2317,6 +2363,8 @@
           "fingerprint": "C1|DOTTED|PARAM",
           "context_function": "logout",
           "argument": "deps.current_user",
+          "file": "apps/backend/src/api/routes/auth.py",
+          "github_url": "https://github.com/Codeit-AI10-Part4-3Team/AI10-Part4-3Team-Advanced-Project/blob/ade5ea909f9ffd4adc8b5ed5bf503e86aeb64571/apps/backend/src/api/routes/auth.py#L112",
           "repo": "Codeit-AI10-Part4-3Team__AI10-Part4-3Team-Advanced-Project",
           "line": 112
         },
@@ -2325,6 +2373,8 @@
           "fingerprint": "C1|DOTTED|PARAM",
           "context_function": "me",
           "argument": "deps.current_user",
+          "file": "apps/backend/src/api/routes/auth.py",
+          "github_url": "https://github.com/Codeit-AI10-Part4-3Team/AI10-Part4-3Team-Advanced-Project/blob/ade5ea909f9ffd4adc8b5ed5bf503e86aeb64571/apps/backend/src/api/routes/auth.py#L134",
           "repo": "Codeit-AI10-Part4-3Team__AI10-Part4-3Team-Advanced-Project",
           "line": 134
         }
@@ -2388,6 +2438,8 @@
           "fingerprint": "C1|DOTTED|SIG",
           "context_function": "list_ontologies",
           "argument": "core.current_principal",
+          "file": "services/knowledge/app/api/ontologies.py",
+          "github_url": "https://github.com/0SansNom/holon/blob/77d0d648139f05efc69c9332cdc71a5b36a4863f/services/knowledge/app/api/ontologies.py#L22",
           "repo": "0SansNom__holon",
           "line": 22
         },
@@ -2396,6 +2448,8 @@
           "fingerprint": "C1|DOTTED|SIG",
           "context_function": "get_ontology",
           "argument": "core.current_principal",
+          "file": "services/knowledge/app/api/ontologies.py",
+          "github_url": "https://github.com/0SansNom/holon/blob/77d0d648139f05efc69c9332cdc71a5b36a4863f/services/knowledge/app/api/ontologies.py#L38",
           "repo": "0SansNom__holon",
           "line": 38
         },
@@ -2404,6 +2458,8 @@
           "fingerprint": "C1|DOTTED|SIG",
           "context_function": "preview_action",
           "argument": "core.current_principal",
+          "file": "services/knowledge/app/api/ontologies.py",
+          "github_url": "https://github.com/0SansNom/holon/blob/77d0d648139f05efc69c9332cdc71a5b36a4863f/services/knowledge/app/api/ontologies.py#L121",
           "repo": "0SansNom__holon",
           "line": 121
         },
@@ -2412,6 +2468,8 @@
           "fingerprint": "C1|DOTTED|SIG",
           "context_function": "preview_action",
           "argument": "core.current_workspace",
+          "file": "services/knowledge/app/api/ontologies.py",
+          "github_url": "https://github.com/0SansNom/holon/blob/77d0d648139f05efc69c9332cdc71a5b36a4863f/services/knowledge/app/api/ontologies.py#L122",
           "repo": "0SansNom__holon",
           "line": 122
         },
@@ -2420,6 +2478,8 @@
           "fingerprint": "C1|DOTTED|SIG",
           "context_function": "apply_action",
           "argument": "core.current_principal",
+          "file": "services/knowledge/app/api/ontologies.py",
+          "github_url": "https://github.com/0SansNom/holon/blob/77d0d648139f05efc69c9332cdc71a5b36a4863f/services/knowledge/app/api/ontologies.py#L156",
           "repo": "0SansNom__holon",
           "line": 156
         }
@@ -2446,6 +2506,8 @@
           "fingerprint": "C1|ELLIPSIS|PARAM",
           "context_function": "cliente",
           "argument": "...",
+          "file": "tests/test_crew_respects_the_ceiling.py",
+          "github_url": "https://github.com/brcampidelli/chimera-agent/blob/91949b993ebd26cf9f68727f18f7600024bbe35d/tests/test_crew_respects_the_ceiling.py#L63",
           "repo": "brcampidelli__chimera-agent",
           "line": 63
         },
@@ -2454,6 +2516,8 @@
           "fingerprint": "C1|ELLIPSIS|PARAM",
           "context_function": "app_and_backend",
           "argument": "...",
+          "file": "tests/test_orchestration_api.py",
+          "github_url": "https://github.com/brcampidelli/chimera-agent/blob/91949b993ebd26cf9f68727f18f7600024bbe35d/tests/test_orchestration_api.py#L43",
           "repo": "brcampidelli__chimera-agent",
           "line": 43
         },
@@ -2462,6 +2526,8 @@
           "fingerprint": "C1|ELLIPSIS|PARAM",
           "context_function": "get_current_admin_user",
           "argument": "...",
+          "file": "adapters/http/admin_app/routes/admin_router.py",
+          "github_url": "https://github.com/darkspock/CareerPython/blob/cbce362519762b2ed7b5839ee8628fe16437979f/adapters/http/admin_app/routes/admin_router.py#L80",
           "repo": "darkspock__CareerPython",
           "line": 80
         },
@@ -2470,6 +2536,8 @@
           "fingerprint": "C1|ELLIPSIS|PARAM",
           "context_function": "list_interview_templates",
           "argument": "...",
+          "file": "adapters/http/admin_app/routes/admin_router.py",
+          "github_url": "https://github.com/darkspock/CareerPython/blob/cbce362519762b2ed7b5839ee8628fe16437979f/adapters/http/admin_app/routes/admin_router.py#L110",
           "repo": "darkspock__CareerPython",
           "line": 110
         },
@@ -2478,6 +2546,8 @@
           "fingerprint": "C1|ELLIPSIS|PARAM",
           "context_function": "create_interview_template",
           "argument": "...",
+          "file": "adapters/http/admin_app/routes/admin_router.py",
+          "github_url": "https://github.com/darkspock/CareerPython/blob/cbce362519762b2ed7b5839ee8628fe16437979f/adapters/http/admin_app/routes/admin_router.py#L133",
           "repo": "darkspock__CareerPython",
           "line": 133
         }
@@ -2507,6 +2577,8 @@
           "fingerprint": "C1|ELLIPSIS|SIG",
           "context_function": "recommend_control",
           "argument": "...",
+          "file": "backend/app/api/device_controls.py",
+          "github_url": "https://github.com/Bederf/sentinel-ai/blob/b54d1703cb375ff0a89d613042e060da6cd8fad4/backend/app/api/device_controls.py#L245",
           "repo": "Bederf__sentinel-ai",
           "line": 245
         },
@@ -2515,6 +2587,8 @@
           "fingerprint": "C1|ELLIPSIS|SIG",
           "context_function": "execute_control",
           "argument": "...",
+          "file": "backend/app/api/device_controls.py",
+          "github_url": "https://github.com/Bederf/sentinel-ai/blob/b54d1703cb375ff0a89d613042e060da6cd8fad4/backend/app/api/device_controls.py#L333",
           "repo": "Bederf__sentinel-ai",
           "line": 333
         },
@@ -2523,6 +2597,8 @@
           "fingerprint": "C1|ELLIPSIS|SIG",
           "context_function": "get_control_history",
           "argument": "...",
+          "file": "backend/app/api/device_controls.py",
+          "github_url": "https://github.com/Bederf/sentinel-ai/blob/b54d1703cb375ff0a89d613042e060da6cd8fad4/backend/app/api/device_controls.py#L418",
           "repo": "Bederf__sentinel-ai",
           "line": 418
         },
@@ -2531,6 +2607,8 @@
           "fingerprint": "C1|ELLIPSIS|SIG",
           "context_function": "get_me",
           "argument": "...",
+          "file": "backend/app/routes/auth.py",
+          "github_url": "https://github.com/Murugavl/AI-powered-personal-finance/blob/bd7efa53d4bbb06027013ad71b7a44f45ecac227/backend/app/routes/auth.py#L78",
           "repo": "Murugavl__AI-powered-personal-finance",
           "line": 78
         },
@@ -2539,6 +2617,8 @@
           "fingerprint": "C1|ELLIPSIS|SIG",
           "context_function": "get_proposal_ai_summary",
           "argument": "...",
+          "file": "backend/PPM/routes/ai.py",
+          "github_url": "https://github.com/Ranjithr2532/PPM/blob/6df209baaf4e2d1f57a4f762a1f80a85de5b6909/backend/PPM/routes/ai.py#L83",
           "repo": "Ranjithr2532__PPM",
           "line": 83
         }
@@ -2593,6 +2673,8 @@
           "fingerprint": "C1|EMPTY|PARAM",
           "context_function": "image",
           "argument": "<empty>",
+          "file": "pixoo_rest/routers/draw.py",
+          "github_url": "https://github.com/4ch1m/pixoo-rest/blob/ef6819605ca2da24bcf51bd46b486fa4d25c4258/pixoo_rest/routers/draw.py#L27",
           "repo": "4ch1m__pixoo-rest",
           "line": 27
         },
@@ -2601,6 +2683,8 @@
           "fingerprint": "C1|EMPTY|PARAM",
           "context_function": "send_gif",
           "argument": "<empty>",
+          "file": "pixoo_rest/routers/send.py",
+          "github_url": "https://github.com/4ch1m/pixoo-rest/blob/ef6819605ca2da24bcf51bd46b486fa4d25c4258/pixoo_rest/routers/send.py#L36",
           "repo": "4ch1m__pixoo-rest",
           "line": 36
         },
@@ -2609,6 +2693,8 @@
           "fingerprint": "C1|EMPTY|PARAM",
           "context_function": "login",
           "argument": "<empty>",
+          "file": "backend/src/auth/router.py",
+          "github_url": "https://github.com/ALK-IT/hackathon-manager/blob/08db7a46e25057fde64a4eb03a459ceac949e182/backend/src/auth/router.py#L146",
           "repo": "ALK-IT__hackathon-manager",
           "line": 146
         },
@@ -2617,6 +2703,8 @@
           "fingerprint": "C1|EMPTY|PARAM",
           "context_function": "login",
           "argument": "<empty>",
+          "file": "tests/unit/test_login.py",
+          "github_url": "https://github.com/AlbanAndrieu/fastapi-sample/blob/c52c9e35a98a914df2850769ac0388be4966fd0e/tests/unit/test_login.py#L60",
           "repo": "AlbanAndrieu__fastapi-sample",
           "line": 60
         },
@@ -2625,6 +2713,8 @@
           "fingerprint": "C1|EMPTY|PARAM",
           "context_function": "find",
           "argument": "<empty>",
+          "file": "app/retrieval/routes.py",
+          "github_url": "https://github.com/AliSK81/ckw/blob/d9a0e2051fddcb49e7ab49954c29e4916cc66245/app/retrieval/routes.py#L44",
           "repo": "AliSK81__ckw",
           "line": 44
         }
@@ -2727,6 +2817,8 @@
           "fingerprint": "C1|EMPTY|SIG",
           "context_function": "get_bar_data",
           "argument": "<empty>",
+          "file": "templates/python-fastapi-client-only/app/fastapi.py",
+          "github_url": "https://github.com/514-labs/moosestack/blob/99bcb9f9fff7230e23db49fd5b70af62af511bf9/templates/python-fastapi-client-only/app/fastapi.py#L57",
           "repo": "514-labs__moosestack",
           "line": 57
         },
@@ -2735,6 +2827,8 @@
           "fingerprint": "C1|EMPTY|SIG",
           "context_function": "login_for_access_token",
           "argument": "<empty>",
+          "file": "backend/api/v1/endpoints/auth.py",
+          "github_url": "https://github.com/7-Blocks/Kepler/blob/7497a93f6d829b1e3cf491c31c16f749ae01d47e/backend/api/v1/endpoints/auth.py#L109",
           "repo": "7-Blocks__Kepler",
           "line": 109
         },
@@ -2743,6 +2837,8 @@
           "fingerprint": "C1|EMPTY|SIG",
           "context_function": "login_access_token",
           "argument": "<empty>",
+          "file": "app/api/endpoints/login.py",
+          "github_url": "https://github.com/88866888/MoviePilot/blob/1336b2136d9fac4dce64d4fa70a4a669fb157bd3/app/api/endpoints/login.py#L26",
           "repo": "88866888__MoviePilot",
           "line": 26
         },
@@ -2751,6 +2847,8 @@
           "fingerprint": "C1|EMPTY|SIG",
           "context_function": "login",
           "argument": "<empty>",
+          "file": "backend/app/api/routes.py",
+          "github_url": "https://github.com/Adejare-ml/News-Intelligence-System/blob/d1215b5c56d8f8525b0e343763b0749557b51f68/backend/app/api/routes.py#L59",
           "repo": "Adejare-ml__News-Intelligence-System",
           "line": 59
         },
@@ -2759,6 +2857,8 @@
           "fingerprint": "C1|EMPTY|SIG",
           "context_function": "create_node",
           "argument": "<empty>",
+          "file": "smeme/decision_tree/editor/routes.py",
+          "github_url": "https://github.com/AristaLabs/smeme/blob/5ac62e9ff6b473ff3b13fde038bbb83d6f07b42b/smeme/decision_tree/editor/routes.py#L449",
           "repo": "AristaLabs__smeme",
           "line": 449
         }
@@ -2888,6 +2988,8 @@
           "context_function": "validate_api_key",
           "argument": "api_key_header",
           "scopes": [],
+          "file": "app.py",
+          "github_url": "https://github.com/AbheyTiwari/OCR/blob/a70119fed897b21116626c7371a0d6ac01fb9ae5/app.py#L28",
           "repo": "AbheyTiwari__OCR",
           "line": 28
         },
@@ -2897,6 +2999,8 @@
           "context_function": "verify_token",
           "argument": "_security",
           "scopes": [],
+          "file": "src/nodechain/api/auth.py",
+          "github_url": "https://github.com/Alajmah/NodeChain/blob/a02a7904e92300ff3417990837822df176e14aa3/src/nodechain/api/auth.py#L30",
           "repo": "Alajmah__NodeChain",
           "line": 30
         },
@@ -2906,6 +3010,8 @@
           "context_function": "get_authenticated_agent",
           "argument": "security",
           "scopes": [],
+          "file": "shogun/nexus/gateway/auth_handler.py",
+          "github_url": "https://github.com/AlphaHorizon-AI/Shogun/blob/9f80f4d175bff09f73e1e85924b9f01b84f97467/shogun/nexus/gateway/auth_handler.py#L18",
           "repo": "AlphaHorizon-AI__Shogun",
           "line": 18
         },
@@ -2915,6 +3021,8 @@
           "context_function": "require_admin_api_key",
           "argument": "admin_api_key_header",
           "scopes": [],
+          "file": "backend/app/security.py",
+          "github_url": "https://github.com/Amit-Mahato54322/TxstAssistant/blob/f1bc5c1b86f9a69145ce019c9afb877160dede8d/backend/app/security.py#L20",
           "repo": "Amit-Mahato54322__TxstAssistant",
           "line": 20
         },
@@ -2924,6 +3032,8 @@
           "context_function": "verify_token",
           "argument": "security",
           "scopes": [],
+          "file": "api/auth.py",
+          "github_url": "https://github.com/Ansh1707/autoops/blob/18c05ed43d64524eaa129d60ce9c3ac925b3dea8/api/auth.py#L112",
           "repo": "Ansh1707__autoops",
           "line": 112
         }
@@ -2953,6 +3063,8 @@
           "context_function": "inbound_seal_webhook_trigger",
           "argument": "X_HUB_SIGNATURE",
           "scopes": [],
+          "file": "integrations/history/Tri-State-River-Valley-Engineering-System/src/api/routers/webhooks.py",
+          "github_url": "https://github.com/ATphobia22/PTDT-v33/blob/c947c5de4379da281faa645ac1554ff88a6c694c/integrations/history/Tri-State-River-Valley-Engineering-System/src/api/routers/webhooks.py#L37",
           "repo": "ATphobia22__PTDT-v33",
           "line": 37
         },
@@ -2962,6 +3074,8 @@
           "context_function": "_require_api_key",
           "argument": "API_KEY_HEADER",
           "scopes": [],
+          "file": "backend/app/core/engine.py",
+          "github_url": "https://github.com/Danush-Aries/sovereign-ai-core/blob/77ad73a9424a8378dab951c7167d35eb7698e4e9/backend/app/core/engine.py#L174",
           "repo": "Danush-Aries__sovereign-ai-core",
           "line": 174
         },
@@ -2971,6 +3085,8 @@
           "context_function": "verify_api_key",
           "argument": "API_KEY_HEADER",
           "scopes": [],
+          "file": "backend/middleware/security.py",
+          "github_url": "https://github.com/PTejasKr/Capsule/blob/831a5f247593bdb03048960044a76060bc5e2da9/backend/middleware/security.py#L13",
           "repo": "PTejasKr__Capsule",
           "line": 13
         },
@@ -2980,6 +3096,8 @@
           "context_function": "principal",
           "argument": "API_KEY_HEADER",
           "scopes": [],
+          "file": "src/modoroco/interfaces/api.py",
+          "github_url": "https://github.com/The-1807/modoroco/blob/2854d99d0f6d058dd970262712f14e6406d61ae7/src/modoroco/interfaces/api.py#L115",
           "repo": "The-1807__modoroco",
           "line": 115
         },
@@ -2989,6 +3107,8 @@
           "context_function": "require_api_key",
           "argument": "API_KEY_HEADER",
           "scopes": [],
+          "file": "api/api_key_auth.py",
+          "github_url": "https://github.com/acgs-ai/enhanced-agent-bus/blob/e4ecaf56b31aeed2e93c91ab0ce26424ae197e54/api/api_key_auth.py#L200",
           "repo": "acgs-ai__enhanced-agent-bus",
           "line": 200
         }
@@ -3012,6 +3132,8 @@
           "context_function": "verify_api_key_http",
           "argument": "...",
           "scopes": [],
+          "file": "backend/app/main.py",
+          "github_url": "https://github.com/Abishek-kk/RailMind-AI/blob/4d572c823ca1ecc14c5d7f58a1c1a2f50392757b/backend/app/main.py#L57",
           "repo": "Abishek-kk__RailMind-AI",
           "line": 57
         },
@@ -3021,6 +3143,8 @@
           "context_function": "validated_token",
           "argument": "...",
           "scopes": [],
+          "file": "common/auth/veda_auth/main.py",
+          "github_url": "https://github.com/NASA-IMPACT/veda-backend/blob/32273eb09e60e5af7f68c779d60c06a9372f7270/common/auth/veda_auth/main.py#L36",
           "repo": "NASA-IMPACT__veda-backend",
           "line": 36
         },
@@ -3030,6 +3154,8 @@
           "context_function": "enqueue_ingestion",
           "argument": "...",
           "scopes": [],
+          "file": "ingest_api/runtime/src/main.py",
+          "github_url": "https://github.com/NASA-IMPACT/veda-backend/blob/32273eb09e60e5af7f68c779d60c06a9372f7270/ingest_api/runtime/src/main.py#L61",
           "repo": "NASA-IMPACT__veda-backend",
           "line": 61
         },
@@ -3039,6 +3165,8 @@
           "context_function": "update_ingestion",
           "argument": "...",
           "scopes": [],
+          "file": "ingest_api/runtime/src/main.py",
+          "github_url": "https://github.com/NASA-IMPACT/veda-backend/blob/32273eb09e60e5af7f68c779d60c06a9372f7270/ingest_api/runtime/src/main.py#L103",
           "repo": "NASA-IMPACT__veda-backend",
           "line": 103
         },
@@ -3048,6 +3176,8 @@
           "context_function": "cancel_ingestion",
           "argument": "...",
           "scopes": [],
+          "file": "ingest_api/runtime/src/main.py",
+          "github_url": "https://github.com/NASA-IMPACT/veda-backend/blob/32273eb09e60e5af7f68c779d60c06a9372f7270/ingest_api/runtime/src/main.py#L123",
           "repo": "NASA-IMPACT__veda-backend",
           "line": 123
         }
@@ -3172,6 +3302,8 @@
           "construct": "C3",
           "fingerprint": "C3|BARE|BARE",
           "annotated_type": "str",
+          "file": "src/fastapi_mqtt_gateway/api/__init__.py",
+          "github_url": "https://github.com/4alvit/fastapi-mqtt-gateway/blob/9256e10ca0380922ccc1f3a3ffee7a62bb718061/src/fastapi_mqtt_gateway/api/__init__.py#L89",
           "repo": "4alvit__fastapi-mqtt-gateway",
           "line": 89
         },
@@ -3179,6 +3311,8 @@
           "construct": "C3",
           "fingerprint": "C3|BARE|BARE",
           "annotated_type": "dict",
+          "file": "src/ai_almanac/server/routers/jobs.py",
+          "github_url": "https://github.com/AI-Almanac/ai-almanac/blob/e60a4ca5e1112c7b3d4c97ab7f595014b1178972/src/ai_almanac/server/routers/jobs.py#L148",
           "repo": "AI-Almanac__ai-almanac",
           "line": 148
         },
@@ -3186,6 +3320,8 @@
           "construct": "C3",
           "fingerprint": "C3|BARE|BARE",
           "annotated_type": "dict",
+          "file": "src/ai_almanac/server/routers/jobs.py",
+          "github_url": "https://github.com/AI-Almanac/ai-almanac/blob/e60a4ca5e1112c7b3d4c97ab7f595014b1178972/src/ai_almanac/server/routers/jobs.py#L149",
           "repo": "AI-Almanac__ai-almanac",
           "line": 149
         },
@@ -3194,6 +3330,8 @@
           "fingerprint": "C3|BARE|BARE",
           "context_function": "get_current_user",
           "annotated_type": "str",
+          "file": "backend/src/auth/dependencies.py",
+          "github_url": "https://github.com/ALK-IT/hackathon-manager/blob/08db7a46e25057fde64a4eb03a459ceac949e182/backend/src/auth/dependencies.py#L41",
           "repo": "ALK-IT__hackathon-manager",
           "line": 41
         },
@@ -3202,6 +3340,8 @@
           "fingerprint": "C3|BARE|BARE",
           "context_function": "get_current_user",
           "annotated_type": "str",
+          "file": "backend/src/auth/dependencies.py",
+          "github_url": "https://github.com/ALK-IT/hackathon-manager/blob/08db7a46e25057fde64a4eb03a459ceac949e182/backend/src/auth/dependencies.py#L41",
           "repo": "ALK-IT__hackathon-manager",
           "line": 41
         }
@@ -3220,6 +3360,8 @@
           "fingerprint": "C3|BARE|CLASS",
           "context_function": "api_key_based_authenticated_partner_impl",
           "annotated_type": "str",
+          "file": "odoo/community-addons/fastapi/models/fastapi_endpoint_demo.py",
+          "github_url": "https://github.com/OpenG2P/pbms/blob/aa1ce60cdd91a8c01148c044caef9e27049741af/odoo/community-addons/fastapi/models/fastapi_endpoint_demo.py#L83",
           "repo": "OpenG2P__pbms",
           "line": 83
         },
@@ -3228,6 +3370,8 @@
           "fingerprint": "C3|BARE|CLASS",
           "context_function": "api_key_based_authenticated_partner_impl",
           "annotated_type": "str",
+          "file": "odoo/community-addons/fastapi/models/fastapi_endpoint_demo.py",
+          "github_url": "https://github.com/OpenG2P/pbms/blob/aa1ce60cdd91a8c01148c044caef9e27049741af/odoo/community-addons/fastapi/models/fastapi_endpoint_demo.py#L83",
           "repo": "OpenG2P__pbms",
           "line": 83
         }
@@ -3246,6 +3390,8 @@
           "fingerprint": "C3|BARE|DOTTED",
           "context_function": "logout",
           "annotated_type": "str",
+          "file": "mobile/android/oxo-android-ben32/backend/purplecloud/router.py",
+          "github_url": "https://github.com/Ostorlab/benchmarks/blob/4e2e65af83d748736fe867cf56144c3e34e3f9a2/mobile/android/oxo-android-ben32/backend/purplecloud/router.py#L73",
           "repo": "Ostorlab__benchmarks",
           "line": 73
         },
@@ -3254,6 +3400,8 @@
           "fingerprint": "C3|BARE|DOTTED",
           "context_function": "logout",
           "annotated_type": "str",
+          "file": "mobile/android/oxo-android-ben32/backend/purplecloud/router.py",
+          "github_url": "https://github.com/Ostorlab/benchmarks/blob/4e2e65af83d748736fe867cf56144c3e34e3f9a2/mobile/android/oxo-android-ben32/backend/purplecloud/router.py#L73",
           "repo": "Ostorlab__benchmarks",
           "line": 73
         }
@@ -3634,6 +3782,8 @@
           "fingerprint": "C3|CLASS|BARE",
           "context_function": "get_bran_gateway",
           "annotated_type": "Settings",
+          "file": "app/api/__init__.py",
+          "github_url": "https://github.com/1wgrumph/citypulse-austin/blob/189c299d1843eb9d9e73f8c4a208dbe2c5a3db2f/app/api/__init__.py#L39",
           "repo": "1wgrumph__citypulse-austin",
           "line": 39
         },
@@ -3642,6 +3792,8 @@
           "fingerprint": "C3|CLASS|BARE",
           "context_function": "get_bran_gateway",
           "annotated_type": "Any",
+          "file": "app/api/__init__.py",
+          "github_url": "https://github.com/1wgrumph/citypulse-austin/blob/189c299d1843eb9d9e73f8c4a208dbe2c5a3db2f/app/api/__init__.py#L40",
           "repo": "1wgrumph__citypulse-austin",
           "line": 40
         },
@@ -3650,6 +3802,8 @@
           "fingerprint": "C3|CLASS|BARE",
           "context_function": "get_bran_gateway",
           "annotated_type": "Settings",
+          "file": "app/api/__init__.py",
+          "github_url": "https://github.com/1wgrumph/citypulse-austin/blob/189c299d1843eb9d9e73f8c4a208dbe2c5a3db2f/app/api/__init__.py#L39",
           "repo": "1wgrumph__citypulse-austin",
           "line": 39
         },
@@ -3658,6 +3812,8 @@
           "fingerprint": "C3|CLASS|BARE",
           "context_function": "get_bran_gateway",
           "annotated_type": "Any",
+          "file": "app/api/__init__.py",
+          "github_url": "https://github.com/1wgrumph/citypulse-austin/blob/189c299d1843eb9d9e73f8c4a208dbe2c5a3db2f/app/api/__init__.py#L40",
           "repo": "1wgrumph__citypulse-austin",
           "line": 40
         },
@@ -3666,6 +3822,8 @@
           "fingerprint": "C3|CLASS|BARE",
           "context_function": "ask_citypulse",
           "annotated_type": "BranGateway",
+          "file": "app/api/ask.py",
+          "github_url": "https://github.com/1wgrumph/citypulse-austin/blob/189c299d1843eb9d9e73f8c4a208dbe2c5a3db2f/app/api/ask.py#L15",
           "repo": "1wgrumph__citypulse-austin",
           "line": 15
         }
@@ -3688,6 +3846,8 @@
           "construct": "C3",
           "fingerprint": "C3|CLASS|CLASS",
           "annotated_type": "CatalogRepository",
+          "file": "EEI/apps/api/app/domain.py",
+          "github_url": "https://github.com/LinzeColin/MetaDatabase/blob/dd273b496e172c80d1782a0c2767398d1ca99f9f/EEI/apps/api/app/domain.py#L216",
           "repo": "LinzeColin__MetaDatabase",
           "line": 216
         },
@@ -3696,6 +3856,8 @@
           "fingerprint": "C3|CLASS|CLASS",
           "context_function": "get_my_programs",
           "annotated_type": "AuthCredentials",
+          "file": "apis/openg2p-pbms-bene-portal-api/src/openg2p_pbms_bene_portal_api/controllers/benefit_program.py",
+          "github_url": "https://github.com/OpenG2P/pbms/blob/aa1ce60cdd91a8c01148c044caef9e27049741af/apis/openg2p-pbms-bene-portal-api/src/openg2p_pbms_bene_portal_api/controllers/benefit_program.py#L52",
           "repo": "OpenG2P__pbms",
           "line": 52
         },
@@ -3704,6 +3866,8 @@
           "fingerprint": "C3|CLASS|CLASS",
           "context_function": "get_my_programs",
           "annotated_type": "AuthCredentials",
+          "file": "apis/openg2p-pbms-bene-portal-api/src/openg2p_pbms_bene_portal_api/controllers/benefit_program.py",
+          "github_url": "https://github.com/OpenG2P/pbms/blob/aa1ce60cdd91a8c01148c044caef9e27049741af/apis/openg2p-pbms-bene-portal-api/src/openg2p_pbms_bene_portal_api/controllers/benefit_program.py#L52",
           "repo": "OpenG2P__pbms",
           "line": 52
         },
@@ -3712,6 +3876,8 @@
           "fingerprint": "C3|CLASS|CLASS",
           "context_function": "get_all_programs",
           "annotated_type": "AuthCredentials",
+          "file": "apis/openg2p-pbms-bene-portal-api/src/openg2p_pbms_bene_portal_api/controllers/benefit_program.py",
+          "github_url": "https://github.com/OpenG2P/pbms/blob/aa1ce60cdd91a8c01148c044caef9e27049741af/apis/openg2p-pbms-bene-portal-api/src/openg2p_pbms_bene_portal_api/controllers/benefit_program.py#L81",
           "repo": "OpenG2P__pbms",
           "line": 81
         },
@@ -3720,6 +3886,8 @@
           "fingerprint": "C3|CLASS|CLASS",
           "context_function": "get_all_programs",
           "annotated_type": "AuthCredentials",
+          "file": "apis/openg2p-pbms-bene-portal-api/src/openg2p_pbms_bene_portal_api/controllers/benefit_program.py",
+          "github_url": "https://github.com/OpenG2P/pbms/blob/aa1ce60cdd91a8c01148c044caef9e27049741af/apis/openg2p-pbms-bene-portal-api/src/openg2p_pbms_bene_portal_api/controllers/benefit_program.py#L81",
           "repo": "OpenG2P__pbms",
           "line": 81
         }
@@ -3742,6 +3910,8 @@
           "fingerprint": "C3|CLASS|DOTTED",
           "context_function": "login",
           "annotated_type": "Settings",
+          "file": "apps/backend/src/api/routes/auth.py",
+          "github_url": "https://github.com/Codeit-AI10-Part4-3Team/AI10-Part4-3Team-Advanced-Project/blob/ade5ea909f9ffd4adc8b5ed5bf503e86aeb64571/apps/backend/src/api/routes/auth.py#L87",
           "repo": "Codeit-AI10-Part4-3Team__AI10-Part4-3Team-Advanced-Project",
           "line": 87
         },
@@ -3750,6 +3920,8 @@
           "fingerprint": "C3|CLASS|DOTTED",
           "context_function": "login",
           "annotated_type": "Settings",
+          "file": "apps/backend/src/api/routes/auth.py",
+          "github_url": "https://github.com/Codeit-AI10-Part4-3Team/AI10-Part4-3Team-Advanced-Project/blob/ade5ea909f9ffd4adc8b5ed5bf503e86aeb64571/apps/backend/src/api/routes/auth.py#L87",
           "repo": "Codeit-AI10-Part4-3Team__AI10-Part4-3Team-Advanced-Project",
           "line": 87
         },
@@ -3758,6 +3930,8 @@
           "fingerprint": "C3|CLASS|DOTTED",
           "context_function": "logout",
           "annotated_type": "Account",
+          "file": "apps/backend/src/api/routes/auth.py",
+          "github_url": "https://github.com/Codeit-AI10-Part4-3Team/AI10-Part4-3Team-Advanced-Project/blob/ade5ea909f9ffd4adc8b5ed5bf503e86aeb64571/apps/backend/src/api/routes/auth.py#L112",
           "repo": "Codeit-AI10-Part4-3Team__AI10-Part4-3Team-Advanced-Project",
           "line": 112
         },
@@ -3766,6 +3940,8 @@
           "fingerprint": "C3|CLASS|DOTTED",
           "context_function": "logout",
           "annotated_type": "Account",
+          "file": "apps/backend/src/api/routes/auth.py",
+          "github_url": "https://github.com/Codeit-AI10-Part4-3Team/AI10-Part4-3Team-Advanced-Project/blob/ade5ea909f9ffd4adc8b5ed5bf503e86aeb64571/apps/backend/src/api/routes/auth.py#L112",
           "repo": "Codeit-AI10-Part4-3Team__AI10-Part4-3Team-Advanced-Project",
           "line": 112
         },
@@ -3774,6 +3950,8 @@
           "fingerprint": "C3|CLASS|DOTTED",
           "context_function": "me",
           "annotated_type": "Account",
+          "file": "apps/backend/src/api/routes/auth.py",
+          "github_url": "https://github.com/Codeit-AI10-Part4-3Team/AI10-Part4-3Team-Advanced-Project/blob/ade5ea909f9ffd4adc8b5ed5bf503e86aeb64571/apps/backend/src/api/routes/auth.py#L134",
           "repo": "Codeit-AI10-Part4-3Team__AI10-Part4-3Team-Advanced-Project",
           "line": 134
         }
@@ -3794,6 +3972,8 @@
           "fingerprint": "C3|CLASS|ELLIPSIS",
           "context_function": "get_current_admin_user",
           "annotated_type": "QueryBus",
+          "file": "adapters/http/admin_app/routes/admin_router.py",
+          "github_url": "https://github.com/darkspock/CareerPython/blob/cbce362519762b2ed7b5839ee8628fe16437979f/adapters/http/admin_app/routes/admin_router.py#L80",
           "repo": "darkspock__CareerPython",
           "line": 80
         },
@@ -3802,6 +3982,8 @@
           "fingerprint": "C3|CLASS|ELLIPSIS",
           "context_function": "get_current_admin_user",
           "annotated_type": "QueryBus",
+          "file": "adapters/http/admin_app/routes/admin_router.py",
+          "github_url": "https://github.com/darkspock/CareerPython/blob/cbce362519762b2ed7b5839ee8628fe16437979f/adapters/http/admin_app/routes/admin_router.py#L80",
           "repo": "darkspock__CareerPython",
           "line": 80
         },
@@ -3810,6 +3992,8 @@
           "fingerprint": "C3|CLASS|ELLIPSIS",
           "context_function": "list_interview_templates",
           "annotated_type": "InterviewTemplateController",
+          "file": "adapters/http/admin_app/routes/admin_router.py",
+          "github_url": "https://github.com/darkspock/CareerPython/blob/cbce362519762b2ed7b5839ee8628fe16437979f/adapters/http/admin_app/routes/admin_router.py#L110",
           "repo": "darkspock__CareerPython",
           "line": 110
         },
@@ -3818,6 +4002,8 @@
           "fingerprint": "C3|CLASS|ELLIPSIS",
           "context_function": "list_interview_templates",
           "annotated_type": "InterviewTemplateController",
+          "file": "adapters/http/admin_app/routes/admin_router.py",
+          "github_url": "https://github.com/darkspock/CareerPython/blob/cbce362519762b2ed7b5839ee8628fe16437979f/adapters/http/admin_app/routes/admin_router.py#L110",
           "repo": "darkspock__CareerPython",
           "line": 110
         },
@@ -3826,6 +4012,8 @@
           "fingerprint": "C3|CLASS|ELLIPSIS",
           "context_function": "create_interview_template",
           "annotated_type": "InterviewTemplateController",
+          "file": "adapters/http/admin_app/routes/admin_router.py",
+          "github_url": "https://github.com/darkspock/CareerPython/blob/cbce362519762b2ed7b5839ee8628fe16437979f/adapters/http/admin_app/routes/admin_router.py#L133",
           "repo": "darkspock__CareerPython",
           "line": 133
         }
@@ -3880,6 +4068,8 @@
           "fingerprint": "C3|CLASS|EMPTY",
           "context_function": "image",
           "annotated_type": "ImageModel",
+          "file": "pixoo_rest/routers/draw.py",
+          "github_url": "https://github.com/4ch1m/pixoo-rest/blob/ef6819605ca2da24bcf51bd46b486fa4d25c4258/pixoo_rest/routers/draw.py#L27",
           "repo": "4ch1m__pixoo-rest",
           "line": 27
         },
@@ -3888,6 +4078,8 @@
           "fingerprint": "C3|CLASS|EMPTY",
           "context_function": "image",
           "annotated_type": "ImageModel",
+          "file": "pixoo_rest/routers/draw.py",
+          "github_url": "https://github.com/4ch1m/pixoo-rest/blob/ef6819605ca2da24bcf51bd46b486fa4d25c4258/pixoo_rest/routers/draw.py#L27",
           "repo": "4ch1m__pixoo-rest",
           "line": 27
         },
@@ -3896,6 +4088,8 @@
           "fingerprint": "C3|CLASS|EMPTY",
           "context_function": "send_gif",
           "annotated_type": "GIFModel",
+          "file": "pixoo_rest/routers/send.py",
+          "github_url": "https://github.com/4ch1m/pixoo-rest/blob/ef6819605ca2da24bcf51bd46b486fa4d25c4258/pixoo_rest/routers/send.py#L36",
           "repo": "4ch1m__pixoo-rest",
           "line": 36
         },
@@ -3904,6 +4098,8 @@
           "fingerprint": "C3|CLASS|EMPTY",
           "context_function": "send_gif",
           "annotated_type": "GIFModel",
+          "file": "pixoo_rest/routers/send.py",
+          "github_url": "https://github.com/4ch1m/pixoo-rest/blob/ef6819605ca2da24bcf51bd46b486fa4d25c4258/pixoo_rest/routers/send.py#L36",
           "repo": "4ch1m__pixoo-rest",
           "line": 36
         },
@@ -3912,6 +4108,8 @@
           "fingerprint": "C3|CLASS|EMPTY",
           "context_function": "login",
           "annotated_type": "OAuth2PasswordRequestForm",
+          "file": "backend/src/auth/router.py",
+          "github_url": "https://github.com/ALK-IT/hackathon-manager/blob/08db7a46e25057fde64a4eb03a459ceac949e182/backend/src/auth/router.py#L146",
           "repo": "ALK-IT__hackathon-manager",
           "line": 146
         }
@@ -3950,6 +4148,8 @@
           "fingerprint": "C3|DOTTED|BARE",
           "context_function": "create_case",
           "annotated_type": "asyncpg.Connection",
+          "file": "Backend/app/api/routers/cases_router.py",
+          "github_url": "https://github.com/COS301-SE-2026/Veritas-Lab/blob/7d9fc208b169e3a7821864c0658f7c3014ae8f2b/Backend/app/api/routers/cases_router.py#L307",
           "repo": "COS301-SE-2026__Veritas-Lab",
           "line": 307
         },
@@ -3958,6 +4158,8 @@
           "fingerprint": "C3|DOTTED|BARE",
           "context_function": "create_case",
           "annotated_type": "asyncpg.Connection",
+          "file": "Backend/app/api/routers/cases_router.py",
+          "github_url": "https://github.com/COS301-SE-2026/Veritas-Lab/blob/7d9fc208b169e3a7821864c0658f7c3014ae8f2b/Backend/app/api/routers/cases_router.py#L307",
           "repo": "COS301-SE-2026__Veritas-Lab",
           "line": 307
         },
@@ -3966,6 +4168,8 @@
           "fingerprint": "C3|DOTTED|BARE",
           "context_function": "get_cases",
           "annotated_type": "asyncpg.Connection",
+          "file": "Backend/app/api/routers/cases_router.py",
+          "github_url": "https://github.com/COS301-SE-2026/Veritas-Lab/blob/7d9fc208b169e3a7821864c0658f7c3014ae8f2b/Backend/app/api/routers/cases_router.py#L410",
           "repo": "COS301-SE-2026__Veritas-Lab",
           "line": 410
         },
@@ -3974,6 +4178,8 @@
           "fingerprint": "C3|DOTTED|BARE",
           "context_function": "get_cases",
           "annotated_type": "asyncpg.Connection",
+          "file": "Backend/app/api/routers/cases_router.py",
+          "github_url": "https://github.com/COS301-SE-2026/Veritas-Lab/blob/7d9fc208b169e3a7821864c0658f7c3014ae8f2b/Backend/app/api/routers/cases_router.py#L410",
           "repo": "COS301-SE-2026__Veritas-Lab",
           "line": 410
         },
@@ -3982,6 +4188,8 @@
           "fingerprint": "C3|DOTTED|BARE",
           "context_function": "get_single_case",
           "annotated_type": "asyncpg.Connection",
+          "file": "Backend/app/api/routers/cases_router.py",
+          "github_url": "https://github.com/COS301-SE-2026/Veritas-Lab/blob/7d9fc208b169e3a7821864c0658f7c3014ae8f2b/Backend/app/api/routers/cases_router.py#L532",
           "repo": "COS301-SE-2026__Veritas-Lab",
           "line": 532
         }
@@ -4004,6 +4212,8 @@
           "fingerprint": "C3|DOTTED|DOTTED",
           "context_function": "login",
           "annotated_type": "sqlite3.Connection",
+          "file": "apps/backend/src/api/routes/auth.py",
+          "github_url": "https://github.com/Codeit-AI10-Part4-3Team/AI10-Part4-3Team-Advanced-Project/blob/ade5ea909f9ffd4adc8b5ed5bf503e86aeb64571/apps/backend/src/api/routes/auth.py#L86",
           "repo": "Codeit-AI10-Part4-3Team__AI10-Part4-3Team-Advanced-Project",
           "line": 86
         },
@@ -4012,6 +4222,8 @@
           "fingerprint": "C3|DOTTED|DOTTED",
           "context_function": "login",
           "annotated_type": "sqlite3.Connection",
+          "file": "apps/backend/src/api/routes/auth.py",
+          "github_url": "https://github.com/Codeit-AI10-Part4-3Team/AI10-Part4-3Team-Advanced-Project/blob/ade5ea909f9ffd4adc8b5ed5bf503e86aeb64571/apps/backend/src/api/routes/auth.py#L86",
           "repo": "Codeit-AI10-Part4-3Team__AI10-Part4-3Team-Advanced-Project",
           "line": 86
         },
@@ -4020,6 +4232,8 @@
           "fingerprint": "C3|DOTTED|DOTTED",
           "context_function": "get_job",
           "annotated_type": "sqlite3.Connection",
+          "file": "apps/backend/src/api/routes/jobs.py",
+          "github_url": "https://github.com/Codeit-AI10-Part4-3Team/AI10-Part4-3Team-Advanced-Project/blob/ade5ea909f9ffd4adc8b5ed5bf503e86aeb64571/apps/backend/src/api/routes/jobs.py#L37",
           "repo": "Codeit-AI10-Part4-3Team__AI10-Part4-3Team-Advanced-Project",
           "line": 37
         },
@@ -4028,6 +4242,8 @@
           "fingerprint": "C3|DOTTED|DOTTED",
           "context_function": "get_job",
           "annotated_type": "sqlite3.Connection",
+          "file": "apps/backend/src/api/routes/jobs.py",
+          "github_url": "https://github.com/Codeit-AI10-Part4-3Team/AI10-Part4-3Team-Advanced-Project/blob/ade5ea909f9ffd4adc8b5ed5bf503e86aeb64571/apps/backend/src/api/routes/jobs.py#L37",
           "repo": "Codeit-AI10-Part4-3Team__AI10-Part4-3Team-Advanced-Project",
           "line": 37
         },
@@ -4036,6 +4252,8 @@
           "fingerprint": "C3|DOTTED|DOTTED",
           "context_function": "get_job_image",
           "annotated_type": "sqlite3.Connection",
+          "file": "apps/backend/src/api/routes/jobs.py",
+          "github_url": "https://github.com/Codeit-AI10-Part4-3Team/AI10-Part4-3Team-Advanced-Project/blob/ade5ea909f9ffd4adc8b5ed5bf503e86aeb64571/apps/backend/src/api/routes/jobs.py#L68",
           "repo": "Codeit-AI10-Part4-3Team__AI10-Part4-3Team-Advanced-Project",
           "line": 68
         }
@@ -4206,6 +4424,8 @@
           "fingerprint": "C3|ELLIPSIS|BARE",
           "context_function": "get_bran_gateway",
           "annotated_type": "...",
+          "file": "app/api/__init__.py",
+          "github_url": "https://github.com/1wgrumph/citypulse-austin/blob/189c299d1843eb9d9e73f8c4a208dbe2c5a3db2f/app/api/__init__.py#L41",
           "repo": "1wgrumph__citypulse-austin",
           "line": 41
         },
@@ -4214,6 +4434,8 @@
           "fingerprint": "C3|ELLIPSIS|BARE",
           "context_function": "get_bran_gateway",
           "annotated_type": "...",
+          "file": "app/api/__init__.py",
+          "github_url": "https://github.com/1wgrumph/citypulse-austin/blob/189c299d1843eb9d9e73f8c4a208dbe2c5a3db2f/app/api/__init__.py#L41",
           "repo": "1wgrumph__citypulse-austin",
           "line": 41
         },
@@ -4222,6 +4444,8 @@
           "fingerprint": "C3|ELLIPSIS|BARE",
           "context_function": "receive_apify_webhook",
           "annotated_type": "...",
+          "file": "app/api/webhooks.py",
+          "github_url": "https://github.com/1wgrumph/citypulse-austin/blob/189c299d1843eb9d9e73f8c4a208dbe2c5a3db2f/app/api/webhooks.py#L63",
           "repo": "1wgrumph__citypulse-austin",
           "line": 63
         },
@@ -4230,6 +4454,8 @@
           "fingerprint": "C3|ELLIPSIS|BARE",
           "context_function": "receive_apify_webhook",
           "annotated_type": "...",
+          "file": "app/api/webhooks.py",
+          "github_url": "https://github.com/1wgrumph/citypulse-austin/blob/189c299d1843eb9d9e73f8c4a208dbe2c5a3db2f/app/api/webhooks.py#L63",
           "repo": "1wgrumph__citypulse-austin",
           "line": 63
         },
@@ -4237,6 +4463,8 @@
           "construct": "C3",
           "fingerprint": "C3|ELLIPSIS|BARE",
           "annotated_type": "...",
+          "file": "src/ai_almanac/server/auth.py",
+          "github_url": "https://github.com/AI-Almanac/ai-almanac/blob/e60a4ca5e1112c7b3d4c97ab7f595014b1178972/src/ai_almanac/server/auth.py#L362",
           "repo": "AI-Almanac__ai-almanac",
           "line": 362
         }
@@ -4256,6 +4484,8 @@
           "fingerprint": "C3|ELLIPSIS|DOTTED",
           "context_function": "get_username",
           "annotated_type": "...",
+          "file": "common/auth/veda_auth/main.py",
+          "github_url": "https://github.com/NASA-IMPACT/veda-backend/blob/32273eb09e60e5af7f68c779d60c06a9372f7270/common/auth/veda_auth/main.py#L70",
           "repo": "NASA-IMPACT__veda-backend",
           "line": 70
         },
@@ -4264,6 +4494,8 @@
           "fingerprint": "C3|ELLIPSIS|DOTTED",
           "context_function": "get_username",
           "annotated_type": "...",
+          "file": "common/auth/veda_auth/main.py",
+          "github_url": "https://github.com/NASA-IMPACT/veda-backend/blob/32273eb09e60e5af7f68c779d60c06a9372f7270/common/auth/veda_auth/main.py#L70",
           "repo": "NASA-IMPACT__veda-backend",
           "line": 70
         },
@@ -4272,6 +4504,8 @@
           "fingerprint": "C3|ELLIPSIS|DOTTED",
           "context_function": "get_username",
           "annotated_type": "...",
+          "file": "ingest_api/runtime/src/auth.py",
+          "github_url": "https://github.com/NASA-IMPACT/veda-backend/blob/32273eb09e60e5af7f68c779d60c06a9372f7270/ingest_api/runtime/src/auth.py#L16",
           "repo": "NASA-IMPACT__veda-backend",
           "line": 16
         },
@@ -4280,6 +4514,8 @@
           "fingerprint": "C3|ELLIPSIS|DOTTED",
           "context_function": "get_username",
           "annotated_type": "...",
+          "file": "ingest_api/runtime/src/auth.py",
+          "github_url": "https://github.com/NASA-IMPACT/veda-backend/blob/32273eb09e60e5af7f68c779d60c06a9372f7270/ingest_api/runtime/src/auth.py#L16",
           "repo": "NASA-IMPACT__veda-backend",
           "line": 16
         },
@@ -4288,6 +4524,8 @@
           "fingerprint": "C3|ELLIPSIS|DOTTED",
           "context_function": "delete_workspace",
           "annotated_type": "...",
+          "file": "app/main.py",
+          "github_url": "https://github.com/knz/battery-sim/blob/257acc3c6e3016cd02029377fde3ef67adf6a036/app/main.py#L371",
           "repo": "knz__battery-sim",
           "line": 371
         }
@@ -6877,6 +7115,8 @@
           "construct": "C4",
           "fingerprint": "C4|DEF",
           "argument": "__aiter__",
+          "file": "libs/holon_common/events.py",
+          "github_url": "https://github.com/0SansNom/holon/blob/77d0d648139f05efc69c9332cdc71a5b36a4863f/libs/holon_common/events.py#L185",
           "repo": "0SansNom__holon",
           "line": 185
         },
@@ -6884,6 +7124,8 @@
           "construct": "C4",
           "fingerprint": "C4|DEF",
           "argument": "lifespan",
+          "file": "services/automation/app/main.py",
+          "github_url": "https://github.com/0SansNom/holon/blob/77d0d648139f05efc69c9332cdc71a5b36a4863f/services/automation/app/main.py#L67",
           "repo": "0SansNom__holon",
           "line": 67
         },
@@ -6891,6 +7133,8 @@
           "construct": "C4",
           "fingerprint": "C4|DEF",
           "argument": "lifespan",
+          "file": "services/connectivity/app/main.py",
+          "github_url": "https://github.com/0SansNom/holon/blob/77d0d648139f05efc69c9332cdc71a5b36a4863f/services/connectivity/app/main.py#L95",
           "repo": "0SansNom__holon",
           "line": 95
         },
@@ -6898,6 +7142,8 @@
           "construct": "C4",
           "fingerprint": "C4|DEF",
           "argument": "_drain",
+          "file": "services/connectivity/app/stream_connector.py",
+          "github_url": "https://github.com/0SansNom/holon/blob/77d0d648139f05efc69c9332cdc71a5b36a4863f/services/connectivity/app/stream_connector.py#L23",
           "repo": "0SansNom__holon",
           "line": 23
         },
@@ -6905,6 +7151,8 @@
           "construct": "C4",
           "fingerprint": "C4|DEF",
           "argument": "lifespan",
+          "file": "services/experience/app/main.py",
+          "github_url": "https://github.com/0SansNom/holon/blob/77d0d648139f05efc69c9332cdc71a5b36a4863f/services/experience/app/main.py#L94",
           "repo": "0SansNom__holon",
           "line": 94
         }
@@ -7753,6 +8001,8 @@
           "construct": "C4",
           "fingerprint": "C4|USED",
           "argument": "get_db",
+          "file": "backend/app/database.py",
+          "github_url": "https://github.com/0x3e4/pflanzn/blob/05f2968c7649b8a126b8542d5caa57282028b168/backend/app/database.py#L185",
           "repo": "0x3e4__pflanzn",
           "line": 185
         },
@@ -7760,6 +8010,8 @@
           "construct": "C4",
           "fingerprint": "C4|USED",
           "argument": "_get_db",
+          "file": "app/core/capabilities.py",
+          "github_url": "https://github.com/1semptify-arch/Semptify/blob/009c4c4d0fb493bdc8587e9def6ae84f8f90e25c/app/core/capabilities.py#L315",
           "repo": "1semptify-arch__Semptify",
           "line": 315
         },
@@ -7767,6 +8019,8 @@
           "construct": "C4",
           "fingerprint": "C4|USED",
           "argument": "get_db",
+          "file": "app/core/database.py",
+          "github_url": "https://github.com/1semptify-arch/Semptify/blob/009c4c4d0fb493bdc8587e9def6ae84f8f90e25c/app/core/database.py#L104",
           "repo": "1semptify-arch__Semptify",
           "line": 104
         },
@@ -7774,6 +8028,8 @@
           "construct": "C4",
           "fingerprint": "C4|USED",
           "argument": "get_db",
+          "file": "funding_forge/database.py",
+          "github_url": "https://github.com/1semptify-arch/Semptify/blob/009c4c4d0fb493bdc8587e9def6ae84f8f90e25c/funding_forge/database.py#L28",
           "repo": "1semptify-arch__Semptify",
           "line": 28
         },
@@ -7781,6 +8037,8 @@
           "construct": "C4",
           "fingerprint": "C4|USED",
           "argument": "get_db",
+          "file": "legal_intel/app/db.py",
+          "github_url": "https://github.com/1semptify-arch/Semptify/blob/009c4c4d0fb493bdc8587e9def6ae84f8f90e25c/legal_intel/app/db.py#L13",
           "repo": "1semptify-arch__Semptify",
           "line": 13
         }

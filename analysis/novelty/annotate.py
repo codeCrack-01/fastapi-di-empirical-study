@@ -123,15 +123,18 @@ def _annotate_one(
         rater_labels[m] = parsed["label"]
         responses.append({
             "model": m, "latency_s": rec.get("latency_s"),
-            "content": rec.get("content", ""), "parsed": parsed,
+            "content": rec.get("content", ""),
+            "thinking": rec.get("thinking") or rec.get("reasoning"),
+            "parsed": parsed,
         })
     decision = None
     from consensus import consensus_decision
     decision = consensus_decision(list(rater_labels.values()), tau)
     return {
         "fingerprint_id": fid,
-        "count": fp.get("count"),
+        "count": fp.get("count") or fp.get("total_occurrences"),
         "repos": fp.get("repos"),
+        "examples": examples[:5],
         "rater_labels": rater_labels,
         "consensus": decision,
         "tau": tau,

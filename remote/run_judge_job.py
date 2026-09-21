@@ -131,6 +131,11 @@ def run_stage(stage: str, job: dict, state: dict, fake: bool,
         if isinstance(fprints, dict):
             fprints = fprints["fingerprints"]
         panel = json.loads((out_dir / "novelty_panel.json").read_text())
+        if not panel.get("panel"):
+            raise SystemExit(
+                "[job] annotate: selected panel is empty — nothing to label. "
+                "Check that the model was pulled and Ollama is up."
+            )
         summary = ann_mod.run_annotate(
             fprints, panel, results_dir,
             chunk_size=job["chunk_size"], host=host, rater_factory=rater_factory,
