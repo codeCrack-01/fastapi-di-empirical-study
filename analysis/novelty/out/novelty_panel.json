@@ -1,0 +1,43 @@
+{
+  "floor": 0.8,
+  "eps": 0.02,
+  "candidates": [
+    "fake-qwen",
+    "fake-llama",
+    "fake-deepseek",
+    "fake-glm",
+    "fake-phi"
+  ],
+  "qualified": [
+    "fake-qwen",
+    "fake-llama",
+    "fake-deepseek",
+    "fake-glm"
+  ],
+  "panel": [
+    "fake-qwen",
+    "fake-deepseek",
+    "fake-glm",
+    "fake-llama"
+  ],
+  "k_reported": 4,
+  "k_design": 4,
+  "loo": [
+    {
+      "k": 2,
+      "flip_rate": 0.08333333333333333,
+      "k_stable": false
+    },
+    {
+      "k": 3,
+      "flip_rate": 0.08333333333333333,
+      "k_stable": false
+    },
+    {
+      "k": 4,
+      "flip_rate": 0.0,
+      "k_stable": true
+    }
+  ],
+  "records": []
+}

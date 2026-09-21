@@ -1,0 +1,49 @@
+{
+  "full_name": "AristaLabs/smeme",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/AristaLabs__smeme.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 289,
+    "files_production": 182,
+    "files_test": 107,
+    "pct_production": 0.6298
+  },
+  "aggregate": {
+    "depends_total": 52,
+    "security_total": 0,
+    "annotated_depends_total": 49,
+    "yield_dep_total": 3
+  },
+  "known": [
+    "C1",
+    "C3",
+    "C4"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C3; C4",
+  "arg_shapes": {
+    "BARE": 45,
+    "EMPTY": 7
+  },
+  "security_scopes": {},
+  "yield_function_names": [
+    "get_db",
+    "get_user_db",
+    "get_user_manager"
+  ],
+  "n_yield_functions": 3,
+  "dependency_graph": {
+    "nodes": 22,
+    "edges": 24,
+    "max_depth": 4,
+    "unresolved_depends": 21
+  },
+  "observations": [
+    "dependency_overrides found only in test code, not in production"
+  ],
+  "stratum": "S1",
+  "weight": 12.74359
+}

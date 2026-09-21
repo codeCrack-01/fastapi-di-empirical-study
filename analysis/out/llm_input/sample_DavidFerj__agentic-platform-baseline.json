@@ -1,0 +1,41 @@
+{
+  "full_name": "DavidFerj/agentic-platform-baseline",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/DavidFerj__agentic-platform-baseline.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 60,
+    "files_production": 44,
+    "files_test": 16,
+    "pct_production": 0.7333
+  },
+  "aggregate": {
+    "depends_total": 2,
+    "security_total": 0,
+    "annotated_depends_total": 4,
+    "yield_dep_total": 0
+  },
+  "known": [
+    "C1",
+    "C3"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C3",
+  "arg_shapes": {
+    "BARE": 2
+  },
+  "security_scopes": {},
+  "yield_function_names": [],
+  "n_yield_functions": 0,
+  "dependency_graph": {
+    "nodes": 4,
+    "edges": 2,
+    "max_depth": 2,
+    "unresolved_depends": 0
+  },
+  "observations": [],
+  "stratum": "S1",
+  "weight": 12.74359
+}

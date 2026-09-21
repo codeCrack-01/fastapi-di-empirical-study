@@ -1,0 +1,46 @@
+{
+  "full_name": "agustinpic72/alphawave-taskd",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/agustinpic72__alphawave-taskd.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 153,
+    "files_production": 89,
+    "files_test": 64,
+    "pct_production": 0.5817
+  },
+  "aggregate": {
+    "depends_total": 204,
+    "security_total": 0,
+    "annotated_depends_total": 0,
+    "yield_dep_total": 1
+  },
+  "known": [
+    "C1",
+    "C4"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C4",
+  "arg_shapes": {
+    "BARE": 204
+  },
+  "security_scopes": {},
+  "yield_function_names": [
+    "get_db"
+  ],
+  "n_yield_functions": 1,
+  "dependency_graph": {
+    "nodes": 110,
+    "edges": 204,
+    "max_depth": 5,
+    "unresolved_depends": 0
+  },
+  "observations": [
+    "Uses traditional Depends() pattern extensively but no Annotated[..., Depends(...)]",
+    "dependency_overrides found only in test code, not in production"
+  ],
+  "stratum": "S1",
+  "weight": 12.74359
+}

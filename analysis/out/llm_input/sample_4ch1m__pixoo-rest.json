@@ -1,0 +1,41 @@
+{
+  "full_name": "4ch1m/pixoo-rest",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/4ch1m__pixoo-rest.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 21,
+    "files_production": 21,
+    "files_test": 0,
+    "pct_production": 1.0
+  },
+  "aggregate": {
+    "depends_total": 2,
+    "security_total": 0,
+    "annotated_depends_total": 4,
+    "yield_dep_total": 0
+  },
+  "known": [
+    "C1",
+    "C3"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C3",
+  "arg_shapes": {
+    "EMPTY": 2
+  },
+  "security_scopes": {},
+  "yield_function_names": [],
+  "n_yield_functions": 0,
+  "dependency_graph": {
+    "nodes": 0,
+    "edges": 0,
+    "max_depth": 0,
+    "unresolved_depends": 0
+  },
+  "observations": [],
+  "stratum": "S4",
+  "weight": 1.0
+}

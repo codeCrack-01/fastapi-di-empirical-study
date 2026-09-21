@@ -1,0 +1,45 @@
+{
+  "full_name": "gpojarvis-sudo/nagvijay-smart-monitoring-system",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/gpojarvis-sudo__nagvijay-smart-monitoring-system.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 121,
+    "files_production": 113,
+    "files_test": 8,
+    "pct_production": 0.9339
+  },
+  "aggregate": {
+    "depends_total": 135,
+    "security_total": 0,
+    "annotated_depends_total": 0,
+    "yield_dep_total": 1
+  },
+  "known": [
+    "C1",
+    "C4"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C4",
+  "arg_shapes": {
+    "BARE": 135
+  },
+  "security_scopes": {},
+  "yield_function_names": [
+    "get_db"
+  ],
+  "n_yield_functions": 1,
+  "dependency_graph": {
+    "nodes": 75,
+    "edges": 134,
+    "max_depth": 4,
+    "unresolved_depends": 1
+  },
+  "observations": [
+    "Uses traditional Depends() pattern extensively but no Annotated[..., Depends(...)]"
+  ],
+  "stratum": "S1",
+  "weight": 12.74359
+}

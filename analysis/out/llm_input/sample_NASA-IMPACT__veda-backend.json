@@ -1,0 +1,49 @@
+{
+  "full_name": "NASA-IMPACT/veda-backend",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/NASA-IMPACT__veda-backend.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 87,
+    "files_production": 75,
+    "files_test": 12,
+    "pct_production": 0.8621
+  },
+  "aggregate": {
+    "depends_total": 17,
+    "security_total": 6,
+    "annotated_depends_total": 4,
+    "yield_dep_total": 0
+  },
+  "known": [
+    "C1",
+    "C2",
+    "C3"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C2; C3",
+  "arg_shapes": {
+    "DOTTED": 12,
+    "BARE": 4,
+    "EMPTY": 1
+  },
+  "security_scopes": {
+    "<no-scopes>": 6
+  },
+  "yield_function_names": [],
+  "n_yield_functions": 0,
+  "dependency_graph": {
+    "nodes": 5,
+    "edges": 4,
+    "max_depth": 3,
+    "unresolved_depends": 12
+  },
+  "observations": [
+    "dependency_overrides found only in test code, not in production",
+    "No yield-based generator dependencies despite significant Depends usage"
+  ],
+  "stratum": "S3",
+  "weight": 1.0
+}

@@ -1,0 +1,43 @@
+{
+  "full_name": "mjebalidev/thedailymodel",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/mjebalidev__thedailymodel.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 29,
+    "files_production": 23,
+    "files_test": 6,
+    "pct_production": 0.7931
+  },
+  "aggregate": {
+    "depends_total": 3,
+    "security_total": 0,
+    "annotated_depends_total": 0,
+    "yield_dep_total": 1
+  },
+  "known": [
+    "C1",
+    "C4"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C4",
+  "arg_shapes": {
+    "BARE": 3
+  },
+  "security_scopes": {},
+  "yield_function_names": [
+    "get_session"
+  ],
+  "n_yield_functions": 1,
+  "dependency_graph": {
+    "nodes": 4,
+    "edges": 3,
+    "max_depth": 2,
+    "unresolved_depends": 0
+  },
+  "observations": [],
+  "stratum": "S1",
+  "weight": 12.74359
+}

@@ -1,2 +1,13 @@
 \section{Introduction}
-% TODO
+
+Modern software frameworks rely heavily on Dependency Injection (DI) to decouple components, improve testability, and streamline configuration management. Despite its widespread adoption across major software ecosystems, how developers leverage DI mechanisms in practice---and the architectural trade-offs that emerge across large-scale codebases---remains under-examined. One such web framework that provides built-in dependency injection used extensively with Python is FastAPI.
+
+According to the Stack Overflow Developer Survey 2025~\cite{so2025}, FastAPI has become the leading web framework for Python, surpassing Django and Flask. Its high throughput, low boilerplate asynchronous stack has made it ideal for the recent surge in AI development. The built-in async function makes I/O operations easier, which is used to implement agent skills through the use of MCP to assist the agent. This, alongside great DX through auto OpenAI specification, interactive Swagger documentation and containerized deployment, has made FastAPI the most relevant Python framework as of 2025.
+
+Despite this, there has been no major study on the different methods of dependency injection within the FastAPI community, the complexity of the relationships these methods form, or the effects they play. In this paper we address the following questions:
+
+\begin{itemize}
+    \item \textbf{RQ1:} Which FastAPI DI constructs are used, and how frequently, across open-source projects? To address this question, we extract 402 repositories from a general selection of 5,009 repositories through a series of filters, yielding open-source, dependency-based real-world applications of FastAPI. Using this dataset, we evaluate the different patterns that form due to the multitude of approaches used for dependency injection.
+    \item \textbf{RQ2:} What dynamic dependency relationships do real FastAPI projects form, and what idiomatic roles do dependencies play?
+    \item \textbf{RQ3:} How complex are the resulting dependency graphs?
+\end{itemize}

@@ -1,0 +1,7 @@
+\section{Analysis}
+
+\subsection{Analysis of the Current Results}
+
+The dataset provides us with an in-depth view of the different patterns of dependency injection across the 402 repositories. It demonstrates the variance in the usage of different FastAPI dependency mechanisms, the underlying characteristics of the repository involved and the resulting dependency graphs formed.
+
+Nevertheless, the motives about why such patterns occur are relatively unexplored (ground for future work), questioning whether the difference in usage of the different structures for dependency injection really is due to better power consumption, less run-time, better developer experience or just developer preference. Also, 114 repositories (28.3\% of corpus) contained at least one unresolved dependency reference. Although the current AST analysis provides a way to test untrusted repositories through static analysis, it introduces limitations in resolving dynamic behavior and other run-time mechanisms hindering its constructor from reproducing every dependency relationship leading to a less accurate dependency graph.

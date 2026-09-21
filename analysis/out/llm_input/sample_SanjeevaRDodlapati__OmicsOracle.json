@@ -1,0 +1,51 @@
+{
+  "full_name": "SanjeevaRDodlapati/OmicsOracle",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/SanjeevaRDodlapati__OmicsOracle.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 694,
+    "files_production": 358,
+    "files_test": 336,
+    "pct_production": 0.5159
+  },
+  "aggregate": {
+    "depends_total": 63,
+    "security_total": 3,
+    "annotated_depends_total": 0,
+    "yield_dep_total": 1
+  },
+  "known": [
+    "C1",
+    "C2",
+    "C4"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C2; C4",
+  "arg_shapes": {
+    "CLASS": 1,
+    "BARE": 62
+  },
+  "security_scopes": {
+    "<no-scopes>": 3
+  },
+  "yield_function_names": [
+    "get_db"
+  ],
+  "n_yield_functions": 1,
+  "dependency_graph": {
+    "nodes": 43,
+    "edges": 61,
+    "max_depth": 6,
+    "unresolved_depends": 2
+  },
+  "observations": [
+    "Uses traditional Depends() pattern extensively but no Annotated[..., Depends(...)]",
+    "dependency_overrides found only in test code, not in production",
+    "Cross-file callable class deps: APIKeyAuth"
+  ],
+  "stratum": "S1",
+  "weight": 12.74359
+}

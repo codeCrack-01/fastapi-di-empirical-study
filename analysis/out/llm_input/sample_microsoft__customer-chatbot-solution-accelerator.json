@@ -1,0 +1,43 @@
+{
+  "full_name": "microsoft/customer-chatbot-solution-accelerator",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/microsoft__customer-chatbot-solution-accelerator.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 83,
+    "files_production": 73,
+    "files_test": 10,
+    "pct_production": 0.8795
+  },
+  "aggregate": {
+    "depends_total": 24,
+    "security_total": 0,
+    "annotated_depends_total": 0,
+    "yield_dep_total": 0
+  },
+  "known": [
+    "C1"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1",
+  "arg_shapes": {
+    "BARE": 24
+  },
+  "security_scopes": {},
+  "yield_function_names": [],
+  "n_yield_functions": 0,
+  "dependency_graph": {
+    "nodes": 20,
+    "edges": 24,
+    "max_depth": 2,
+    "unresolved_depends": 0
+  },
+  "observations": [
+    "Uses traditional Depends() pattern extensively but no Annotated[..., Depends(...)]",
+    "No yield-based generator dependencies despite significant Depends usage"
+  ],
+  "stratum": "S3",
+  "weight": 1.0
+}

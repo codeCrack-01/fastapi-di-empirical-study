@@ -1,0 +1,43 @@
+{
+  "full_name": "LogCoreTech/LogCoreOS",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/LogCoreTech__LogCoreOS.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 297,
+    "files_production": 179,
+    "files_test": 118,
+    "pct_production": 0.6027
+  },
+  "aggregate": {
+    "depends_total": 776,
+    "security_total": 0,
+    "annotated_depends_total": 0,
+    "yield_dep_total": 0
+  },
+  "known": [
+    "C1"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1",
+  "arg_shapes": {
+    "BARE": 776
+  },
+  "security_scopes": {},
+  "yield_function_names": [],
+  "n_yield_functions": 0,
+  "dependency_graph": {
+    "nodes": 281,
+    "edges": 293,
+    "max_depth": 3,
+    "unresolved_depends": 483
+  },
+  "observations": [
+    "Uses traditional Depends() pattern extensively but no Annotated[..., Depends(...)]",
+    "No yield-based generator dependencies despite significant Depends usage"
+  ],
+  "stratum": "S2",
+  "weight": 6.370787
+}

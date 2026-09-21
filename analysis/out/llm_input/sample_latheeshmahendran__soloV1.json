@@ -1,0 +1,46 @@
+{
+  "full_name": "latheeshmahendran/soloV1",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/latheeshmahendran__soloV1.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 120,
+    "files_production": 105,
+    "files_test": 15,
+    "pct_production": 0.875
+  },
+  "aggregate": {
+    "depends_total": 16,
+    "security_total": 0,
+    "annotated_depends_total": 0,
+    "yield_dep_total": 1
+  },
+  "known": [
+    "C1",
+    "C4"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C4",
+  "arg_shapes": {
+    "BARE": 16
+  },
+  "security_scopes": {},
+  "yield_function_names": [
+    "get_db_session"
+  ],
+  "n_yield_functions": 1,
+  "dependency_graph": {
+    "nodes": 17,
+    "edges": 16,
+    "max_depth": 3,
+    "unresolved_depends": 0
+  },
+  "observations": [
+    "Uses traditional Depends() pattern extensively but no Annotated[..., Depends(...)]",
+    "dependency_overrides found only in test code, not in production"
+  ],
+  "stratum": "S1",
+  "weight": 12.74359
+}

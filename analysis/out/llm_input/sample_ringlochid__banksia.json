@@ -1,0 +1,49 @@
+{
+  "full_name": "ringlochid/banksia",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/ringlochid__banksia.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 596,
+    "files_production": 379,
+    "files_test": 217,
+    "pct_production": 0.6359
+  },
+  "aggregate": {
+    "depends_total": 16,
+    "security_total": 1,
+    "annotated_depends_total": 15,
+    "yield_dep_total": 1
+  },
+  "known": [
+    "C1",
+    "C2",
+    "C3",
+    "C4"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C2; C3; C4",
+  "arg_shapes": {
+    "BARE": 16
+  },
+  "security_scopes": {
+    "<no-scopes>": 1
+  },
+  "yield_function_names": [
+    "get_db_session"
+  ],
+  "n_yield_functions": 1,
+  "dependency_graph": {
+    "nodes": 23,
+    "edges": 16,
+    "max_depth": 2,
+    "unresolved_depends": 0
+  },
+  "observations": [
+    "dependency_overrides found only in test code, not in production"
+  ],
+  "stratum": "S3",
+  "weight": 1.0
+}

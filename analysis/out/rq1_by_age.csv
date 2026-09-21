@@ -1,4 +1,4 @@
 age_bucket,repos,repos_using_core_di,pct_using_core_di,repos_using_depends,pct_using_depends,median_core_calls
-<12mo,361,270,74.8,269,74.5,15
-12-36mo,30,24,80.0,24,80.0,16.5
-36mo+,11,10,90.9,10,90.9,22
+<12mo,251,172,68.5,172,68.5,11
+12-36mo,43,29,67.4,29,67.4,17
+36mo+,33,21,63.6,21,63.6,8

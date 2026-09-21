@@ -1,0 +1,43 @@
+{
+  "full_name": "mrwogu/factory-droid-openai",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/mrwogu__factory-droid-openai.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 50,
+    "files_production": 26,
+    "files_test": 24,
+    "pct_production": 0.52
+  },
+  "aggregate": {
+    "depends_total": 8,
+    "security_total": 1,
+    "annotated_depends_total": 0,
+    "yield_dep_total": 0
+  },
+  "known": [
+    "C1",
+    "C2"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C2",
+  "arg_shapes": {
+    "BARE": 8
+  },
+  "security_scopes": {
+    "<no-scopes>": 1
+  },
+  "yield_function_names": [],
+  "n_yield_functions": 0,
+  "dependency_graph": {
+    "nodes": 9,
+    "edges": 8,
+    "max_depth": 2,
+    "unresolved_depends": 0
+  },
+  "observations": [],
+  "stratum": "S3",
+  "weight": 1.0
+}

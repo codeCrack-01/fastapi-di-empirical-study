@@ -1,0 +1,49 @@
+{
+  "full_name": "b1rdmania/legalise",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/b1rdmania__legalise.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 383,
+    "files_production": 265,
+    "files_test": 118,
+    "pct_production": 0.6919
+  },
+  "aggregate": {
+    "depends_total": 176,
+    "security_total": 0,
+    "annotated_depends_total": 6,
+    "yield_dep_total": 4
+  },
+  "known": [
+    "C1",
+    "C3",
+    "C4"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C3; C4",
+  "arg_shapes": {
+    "BARE": 176
+  },
+  "security_scopes": {},
+  "yield_function_names": [
+    "get_access_token_db",
+    "get_session",
+    "get_user_db",
+    "get_user_manager"
+  ],
+  "n_yield_functions": 4,
+  "dependency_graph": {
+    "nodes": 93,
+    "edges": 94,
+    "max_depth": 4,
+    "unresolved_depends": 82
+  },
+  "observations": [
+    "dependency_overrides found only in test code, not in production"
+  ],
+  "stratum": "S3",
+  "weight": 1.0
+}

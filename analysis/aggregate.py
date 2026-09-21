@@ -34,8 +34,11 @@ import statistics as st
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "corpus"))
-from settings import E5_MIN_FASTAPI_APPS, E5_SENSITIVITY_THRESHOLDS  # noqa: E402
+# Sensitivity thresholds for the E5 (scale) eligibility rule removed from
+# settings.py during the schema-0.2 migration. Kept here with the historical
+# values so the census sensitivity table stays comparable to the 402-era paper.
+E5_MIN_FASTAPI_APPS = 1
+E5_SENSITIVITY_THRESHOLDS = [2, 3, 4, 5, 6, 8]
 
 ROOT = Path(__file__).resolve().parent
 OUT_DIR = ROOT / "out"
@@ -45,10 +48,6 @@ CONSTRUCTS = [
     ("C2", "Security", "security_total"),
     ("C3", "Annotated dependency", "annotated_depends_total"),
     ("C4", "Generator/yield dependency", "yield_dep_total"),
-    ("C5", "Router-level dependency", "router_dep_total"),
-    ("C6", "App-level dependency", "app_dep_total"),
-    ("C7", "Dependency override", "override_total"),
-    ("C8", "Callable class dependency", "callable_class_dep_total"),
 ]
 
 
@@ -380,7 +379,10 @@ def main():
         sample_payload["method"] = "full-corpus census (not a sample)"
         sample_payload["seed"] = None
     else:
-        names = sorted(sample_payload["sampled"])
+        entries = sample_payload["sampled"]
+        names = sorted(
+            e["full_name"] if isinstance(e, dict) else e for e in entries
+        )
 
     reports, missing = load_reports(names, Path(args.reports))
     if missing:

@@ -1,0 +1,40 @@
+{
+  "full_name": "doronz88/pymobiledevice3",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/doronz88__pymobiledevice3.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 317,
+    "files_production": 223,
+    "files_test": 94,
+    "pct_production": 0.7035
+  },
+  "aggregate": {
+    "depends_total": 0,
+    "security_total": 0,
+    "annotated_depends_total": 0,
+    "yield_dep_total": 0
+  },
+  "known": [],
+  "ex2_flag": true,
+  "ex2_sources": [
+    "Depends"
+  ],
+  "zero_di": true,
+  "catalog_baseline": "ZERO-DI",
+  "arg_shapes": {},
+  "security_scopes": {},
+  "yield_function_names": [],
+  "n_yield_functions": 0,
+  "dependency_graph": {
+    "nodes": 0,
+    "edges": 0,
+    "max_depth": 0,
+    "unresolved_depends": 0
+  },
+  "observations": [
+    "Depends imported from non-fastapi source 'typer_injector': Depends"
+  ],
+  "stratum": "S4",
+  "weight": 1.0
+}

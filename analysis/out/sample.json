@@ -1,110 +1,1675 @@
 {
-  "schema_version": "0.1",
-  "generated_at": "2026-08-25T19:39:50.020859+00:00",
-  "method": "random",
+  "schema_version": "0.2",
+  "generated_at": "2026-09-19T07:14:12.981210+00:00",
+  "method": "stratified_random",
   "seed": 42,
-  "pool_size": 351,
-  "sample_size": 100,
+  "strata": [
+    {
+      "id": "S1",
+      "label": "0",
+      "population": 1491,
+      "sample": 117,
+      "weight": 12.74359
+    },
+    {
+      "id": "S2",
+      "label": "1-9",
+      "population": 567,
+      "sample": 89,
+      "weight": 6.370787
+    },
+    {
+      "id": "S3",
+      "label": "10-99",
+      "population": 87,
+      "sample": 87,
+      "weight": 1.0
+    },
+    {
+      "id": "S4",
+      "label": "100+",
+      "population": 34,
+      "sample": 34,
+      "weight": 1.0
+    }
+  ],
+  "pool_size": 2179,
+  "sample_size": 327,
   "sampled": [
-    "4alvit/energy-data-rag-pipeline",
-    "AlbanAndrieu/fastapi-sample",
-    "Alg0rix/tomo",
-    "AmitabhainArunachala/dharma_swarm",
-    "Anmolnoor/skep",
-    "Azure-Samples/chat-with-your-data-solution-accelerator",
-    "BernydotJar/OS-Electoral",
-    "BramAlkema/svg2pptx",
-    "Ciiceronee/Ciiceronee",
-    "DICKY1987/eafix-modular",
-    "Dadowatt/smarthelp-support-api",
-    "Dezodemius/dndshing",
-    "Dr-Opara/VictoriaOS",
-    "EarthSpark/thundercloud",
-    "Endkind/Music-Roulette-Backend",
-    "Feberdin/local-multi-agent-company",
-    "Feberdin/security-watchdog",
-    "Ganesh-403/semantic-plagiarism-detector",
-    "Glitchedpixel-io/media-api",
-    "ISEU-Cloud-Dev/Team-Delta-",
-    "JINXia-hz/LLMSafetyTester",
-    "KineticSystems/harbor",
-    "Kirky-X/weaver",
-    "LiXuanyaun/cross-border-ecommerce-analysis",
-    "MATZ-Solution/Info_Senior_Care_Backend",
-    "MwoMeokJo/MwoMeokJo",
-    "NeuroticGamer99/healthspan",
-    "OpenHubble/metrics-dashboard-backend",
-    "Oxygen56/TripChord",
-    "Peter-McCann-Strain/Personal_Execution_OS",
-    "Playdovsky/GammaBackend",
-    "PodZonePlatformEngineering/gitopsapi",
-    "ProjectViventium/google_workspace_mcp",
-    "RAJA-432/hiil",
-    "ROJIT270/DSANexus_Capstone",
-    "RiyaRedkar/Indus_Brain",
-    "SansMercantile/kev",
-    "Thepizzapie/BuildersGate",
-    "Tomifarmer/zimmporter-api",
-    "Tufts-Technology-Services/rt-analytics-api",
-    "URBREATH/idra-ai-chatbot",
-    "Vimal-Seshadri-Raguraman/simple-multi-agent-chat",
-    "WuiiiGithub/Candilicious",
-    "Xavier-123/api-ragas",
-    "aditya226-sharma/netsentinel",
-    "aivis-one/comms",
-    "aryansinghnagar/AnonyMus",
-    "becksclair/honcho",
-    "chanuka8/argus-gait-recognition",
-    "cnapcloud/rag-api",
-    "coinexmarket/chatbucket_b2b_backend",
-    "darkspock/CareerPython",
-    "darkspock/renfeserver",
-    "databrickslabs/lakemeter-oss",
-    "dhivya-1010/workgen-ai",
-    "dmarakom6/oswg",
-    "dmux/minilake",
-    "doublew6/forecast-loop",
-    "dtbray/ynab-agent",
-    "evolvingstuff/metalist",
-    "fespino/resgraph",
-    "greenmdw/skn32_3rd_pj_rag_mcp_chatbot",
-    "gvneshv/TeleVault",
-    "iyadmak/flash",
-    "jasonleetucker-code/riskittogetthebrisket",
-    "jeanslw/Devops_CD",
-    "jjee33/netops-console",
-    "joeynyc/hermes-hudui",
-    "lordwilsonDev/msb-v3",
-    "matt-taylor-tech/subreddit-sounds",
-    "mizuwonomu/hust-regulations-bot",
-    "mojtaba-py-code/smart-travel-aggregator",
-    "mostafadamisi/task-manager-api",
-    "nousergon/vires",
-    "nulleimy/Applaylist-old",
-    "openstack-afterglow/waygate",
-    "orlovRoman/flipoly",
-    "pinnnthreetriples/telebuba",
-    "psyb0t/rankrat",
-    "pullboxapp/pullbox-direct-providers",
-    "ral-facilities/object-storage-api",
-    "rmayen/halotrace",
-    "rmholston420/Forge-OH",
-    "runovelhq/wolt",
-    "sarox-dev/Nodecast",
-    "selvalabs/monitor-comunitario",
-    "stevezau/shortlist",
-    "superversivesf/open-grimoire",
-    "the-mace/aquarium-tracker",
-    "thealirazadev/ticket-triage",
-    "toyboy0093-a11y/hermes-os",
-    "tsondo/StemForge",
-    "tvhahn/tidings",
-    "unhexx/grok-build-gateway",
-    "v1ct0r-ops/vlv-Backend",
-    "vadimgodev/face-recognition",
-    "vibhanshu-mishra/procore-intake-bridge",
-    "vpathai-git/vpath_platform_mgmt",
-    "wamakologeorge-dev/amosclaude-clean",
-    "web4uai-cpu/socioauto"
+    {
+      "full_name": "0x0021/Linkora",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "22V01D/Key-Scraper",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "404GamerNotFound/TBC-camera-manager",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "4ch1m/pixoo-rest",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "514-labs/moosestack",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "7-Blocks/Kepler",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "7finger0x/ht",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "ActiveInferenceInstitute/ActiveInferAnts",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "Addrick/agent-orchestrator",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "Adejare-ml/News-Intelligence-System",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "AlphaHorizon-AI/Shogun",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "Anubhav9/Yellow-Olive",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "AristaLabs/smeme",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "ArtigenZ-IT-Solutions/artigenznewsite",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "Axellum/vromvrom-engine",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "AydinTHR/aimentum",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "Azure-Samples/chat-with-your-data-solution-accelerator",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "BennyKok/omg.dev",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "Big-Sh0t114/NachoBot",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "BlackIQ/amirhossein.info",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "BlackIQ/tgju-api",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "BlessedRebuS/Krawl",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "BramAlkema/svg2pptx",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "BrentIO/SkyFollower",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "COS301-SE-2026/Gesture-Based-Drone-Control",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "CPL-Compliance/software-engineer-assessment-guardian-fastapi",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "Ciiceronee/Ciiceronee",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "CognitiveCodeAI/rag-main-2",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "DGuckert/Butler",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "Dadowatt/smarthelp-support-api",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "DavidFerj/agentic-platform-baseline",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "DavidKrGH/Dockkeep",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "DenisKimskku/DenisKimskku.github.io",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "DevOpsAIguru123/awesome-agentic-devops",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "Devathmaj/VoucherBot",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "Dhairya2289/Personal-AI-System",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "Dibyataru-Chakraborty/ASM-Tool",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "DockVault/vault",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "EOPF-Explorer/titiler-eopf",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "EarthSpark/thundercloud",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "EndofTimeWorks/pluris-haven",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "EnkrateiaLucca/oreilly_live_training_getting_started_with_langchain",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "EpicEric/duper",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "EssenceSentry/relay",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "Fergana-Labs/stash",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "FlintsXzzz/AGORA",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "FlowElement-xinliuyuansu/m_flow",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "Fosnie/fosnie",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "Frjeil/cloistr",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "GG-Angel/overplayed",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "Ganesh-403/semantic-plagiarism-detector",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "GiZano/QuakeGuard",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "Git-me-Harish/Mentora",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "GlacierEQ/ECHO",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "GolubchikovKirill/InfraScope",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "GregB712/Loomi-Brain",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "Hardonian/truthcore",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "Harshith-Shetty/data-validator-testing-tool",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "IBM/docling-pipelines",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "IanShaw027/openmail",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "IbukunSanni/SudokuSensei",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "IdealDestructor/RiskAtlas",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "InfoSecInnovations/shabti",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "JafarMahmood123/IntelliLect",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "Joshua-Ranish-T/AetherLearn.ai",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "Joulenap/joulenap",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "Junping0645/TAB",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "Jzy258/canteen-recommendation-agent",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "Kevin-O-Hsu/Sealium",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "KikuAI-Lab/reliapi",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "Kirito161718/Obsidian-Learning-Agent",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "Kirov-Dynamics-Technology/kirov-secure-api-gateway",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "Lawofall/AgentCore",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "Leonidy431/klab_web",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "LinzeColin/MetaDatabase",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "LogCoreTech/LogCoreOS",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "Lukyyyyy/KairoCLI",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "M2002HR/Speech_to_Text_FastAPI_Service",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "MKRWW/wortlaut",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "MSKazemi/kubeintellect",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "Markhhyu/equipment-rag-agent",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "Mdnow/curator-v3",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "MitCaine/Nutrition-App",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "Mmodarre/Lakehouse_Plumber",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "MoMoM101/RAG-ReActAgent",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "MrGibbage/Python-Music-Video-Grabber",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "MrLappes/MrLappesPage",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "NASA-IMPACT/veda-backend",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "NeuroticGamer99/healthspan",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "Nsh-GaMeS/Global-Vision",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "Ocel-Labs/Osprey",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "OpenBMB/StaffDeck",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "PedroooAlmeida/something",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "PetervanLunteren/AddaxAI",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "Phobetore/Evermind",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "PodZonePlatformEngineering/gitopsapi",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "Pratzz14/Phys.io",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "PurpleAILAB/Decepticon",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "Quantrail-Data/CH-AdNova",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "Raphasha27/secure-auth-rbac-template",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "ReidSurmeier/woodblock-reidsurmeier-wtf",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "RightNow-AI/local-kimi",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "SDM-TIB/Tool4Boxology",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "SHalimoosavi/SYJ-LaunchPad",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "STarLighTsMoveMenTs/European-Union-Complince-Portal",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "Saiteja02806/watermark",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "Samarth-23-eng/scope-intelligence",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "SanjeevaRDodlapati/OmicsOracle",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "Sathvik33/OmniMind",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "Scorpio-meow/high-school-mock-api",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "Shadowgar/SnakeTracker",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "ShaharBand/fluxly",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "ShiBui2003/Type",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "Shivaninandyala/TaskTracker",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "Skilluv/skilluv-ia",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "Smart-AI-Memory/attune-ai",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "SquidSec/SquidC5",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "Stane316/daba-pulse",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "SteveGJones/ai-first-sdlc-practices",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "Sthitadhi1/PharmaIQ",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "TECHLETES/techletes-tooling",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "Tanishpd/linkedin-insights-microservice",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "Tanush-Jain/kelan",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "Telefonica/AgentHound",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "Thepizzapie/BuildersGate",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "TryCaspian/caspian-sdk",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "Turing222/dewflow",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "Upties/Geoatlas-x-NOS",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "Uranus313/loan-system",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "Vist233/infinity_Agents",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "WiredMind2/AnimeManager",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "Yakhyobek1997/yagu-wise-ai",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "ZeroDayZ7/dev-stack",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "aXtr1o1/ConvAgent",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "aadil-zikre/HelloAgain",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "abdeljalil-elg/ai-fraud-detection-platform",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "abhaythakur754-0/parwa",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "acebmxer/beacon_pxe",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "acgs-ai/ACGS",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "acgs-ai/enhanced-agent-bus",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "agustinpic72/alphawave-taskd",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "ailinone/collective-intelligence",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "aiuda-io/aiuda",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "aliseylaneh/Python-Eventsourcing-CQRS",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "amurark3/F1-AI",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "andrewtryder/unifi-netwatcher",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "anubhab7111/lawWeb",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "anupanujit/SAARTHI-AI",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "apache/hudi",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "asadbutt64/OGS",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "asfrosche/VillageGameBot",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "asklokesh/loki-mode",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "auracarehq/auradefi",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "auth0/auth0-fastapi-api",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "automatika-robotics/roboml",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "aws-samples/sample-agent-platform-with-agentcore",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "aws-samples/sample-multiagent-multimodal-hcls",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "aws/context-ontology-accelerator",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "b1rdmania/legalise",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "baDrsh531/matchiq",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "backblaze-b2-samples/birdnet-passive-acoustic-monitoring",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "bdjoseluis/b-devops",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "beenycool/yotuubef",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "bluesky/bluesky-httpserver",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "brcampidelli/chimera-agent",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "breim/TAlib-altcoins-api",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "capstone-nova-minds/main-repo",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "center-for-threat-informed-defense/attack-flow",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "ceraldicontabilita/AppDipendenti",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "christian-meyndt/personal-finance-tracker",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "cjbaxt/house-lights",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "ckoenig673/recipe-clipper",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "cmu-sei/GHOSTS",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "coinbase/cdp-sdk",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "commercialbrainz/CommercialBrainz",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "crygup/fish",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "cvtflam/skills-introduction-to-repository-management",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "d4551/pekka",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "danimall/file_migration",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "darkspock/ddd_python_sample",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "darkspock/desksupportmonkey",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "databricks-industry-solutions/care-manager",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "databrickslabs/lakemeter-oss",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "davidmonterocrespo24/DaveLovable",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "davidmonterocrespo24/velxio",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "derekrivers/atlas",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "dmfenton/CodeMonet",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "dock108dev/money-map",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "doctum-consilium/market_screener",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "doronz88/pymobiledevice3",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "dzhalaevd/Donatello",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "erhel-czc/asco2",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "eseifert/altero",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "exeaman/Atlanta-Banking",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "feliciatanxl/FlowGuard",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "freemocap/freemocap",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "fwerkor/local-shell-mcp",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "fyfsxkh/TokBrain",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "gdb-mtx/fire-master",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "georgejieh/REED",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "gmlrep/tasker",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "gnt-ai/gnt",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "google-gemini/robotics-samples",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "googleworkspace/devicetrustportal",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "gpojarvis-sudo/nagvijay-smart-monitoring-system",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "gradoslovar/la-vie-en-rose",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "grayhatdevelopers/vidxp",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "guardana/guardana",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "gzhu-team/deep-research",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "habinrahman/MyCareer-AI",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "huawei-noah/noah-research",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "i2ptuber/itubep",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "iadnanmukhtar/hadithdb",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "ifelsedotonestd/lens",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "indranildchandra/cursor-session-tracer",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "infinite2004/LastknownGood",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "innova-space-edu/eduai-platform",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "its-spark-dev/toollayer-ai",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "itsdaibend/proth",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "itsdeepak59/AI-YouTube-Factory",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "ivangor246/live_stream",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "jameswniu/multi-agent-rl-mapf-drone-navigation",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "jasonleetucker-code/riskittogetthebrisket",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "joeynyc/hermes-hudui",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "johnsonhk88/AI-Bank-Statement-Document-Automation-By-LLM-And-Personal-Finanical-Analysis-Prediction",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "kaizencycle/mobius-civic-ai-terminal",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "kimbrenekakande/orunos",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "klebgenomics/Kaptive-Web",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "kouroshez/coding-os",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "kristovatlas/somnus",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "langwatch/langwatch",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "latheeshmahendran/soloV1",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "letya999/job_ftch",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "lm-webui/lm-webui",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "lss100200/omnibase",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "maltewinckler/swen",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "martinge17/codex-exporter",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "masumi-network/Citadel",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "mathiaswb2901/Master_program",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "mayldute/tour-pass-api",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "mic1on/onestep",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "microsoft/Echoverse",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "microsoft/customer-chatbot-solution-accelerator",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "minhpham6/skills-introduction-to-repository-management",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "misears/Storyteller-AI-Agent",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "mizcausevic-dev/learner-intervention-ledger",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "mjebalidev/thedailymodel",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "moranch/grok-register",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "morpheuslord/PICOTTY",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "mrwogu/factory-droid-openai",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "muju0629/KB_Tune",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "murillo-consulting/langgraph-resilient-agent",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "muthuishere/cljgo",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "mypaios/mypaios",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "nerdai/llm-agents-from-scratch",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "nkswalih/skyrict",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "nmfs-ost/AA-SI_Workbench",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "odysseus-dev/odysseus",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "oodaooda/watchTower",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "openJiuwen-ai/agent-protocol",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "oracle/ai-optimizer",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "orca-gamedev/orca-engine",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "orqestraai/orqestra-demo",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "pafful/fastapi-app-main",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "paperworkmg-arch/VOLT",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "paslaycorp/FAP-Core-v0.2.0",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "pmgraham/datagrunt-studio",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "pranee54/AgentDoctor",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "prdariomarques-ship-it/ship-it",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "pvchaitanya8/Synapse",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "qiuziyan1998/LMCache",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "quoeamaster/python_for_ai_prep",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "rajveer-makkar/DeepTrace",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "ranasl62/ehr-risk-framework",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "rcnsnr/job-search-workflow",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "ringlochid/banksia",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "rmayen/cerberus",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "roberjo/roomba-telemetry",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "runovelhq/wolt",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "sabihul2110/SafeSwipe",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "samsarone/samsar",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "sandraschi/calibremcp",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "satheeshds/bank-transactions",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "sautalwar/avid_training",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "schroneko/homebrew-nicevoice",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "sebderhy/shellteam",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "serhatvs/Collective_MindGraph_desktop_app",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "sessojunior/silo",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "shlokDS16/CITADEL",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "shu0411/trade-lab",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "sitara2007/CivicOs",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "skoruppa/docchi-stremio-addon",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "skyones-0/kimi-mcp",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "smcgarrigle/ihavethereceipts",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "sofi-280/autorepair-voice-agent",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "sriram21-09/PhantomNet",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "stevezau/shortlist",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "sudetufan/mebidai",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "suzu-devworks/examples-py",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "tanvir14012/JwtAuth",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "teaching-practice-lab-oral/oral",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "theSamPadilla/montaj",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "thulasidharan96/API-Gateway",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "ticket-vision/mapi",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "toddawhittaker/ipeds-oracle",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "tramontano/fiap-ml-stock-price-prediction",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "transformerlab/nebula-tower",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "trghcj/TaskFlow",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "tsondo/StemForge",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "tuannguyen8531/novel-ai-trans",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "verticalpartnersai-sketch/haz-que-vuelva-lw-dr",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "vivekmisar/Saas_Sales_Application",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "volcano-sh/agentcube",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "volcengine/vePhone",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "vortex469/atlas-os",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "vsem-azamat/teachers-catalog",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "vstorm-co/agenticos",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "vstorm-co/pydantic-ai-backend",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "walternascimentobarroso/wquiz",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "whitebreadisu/hyperspacevault",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "wq147/bookmark-navigation",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "xinvxueyuan/orbital-marketplace",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "y0sif/whisrs",
+      "stratum": "S3",
+      "weight": 1.0
+    },
+    {
+      "full_name": "yag-im/accountsvc",
+      "stratum": "S1",
+      "weight": 12.74359
+    },
+    {
+      "full_name": "yezz123/ormdantic",
+      "stratum": "S4",
+      "weight": 1.0
+    },
+    {
+      "full_name": "zeroday0619/KotonohaInterpreter",
+      "stratum": "S2",
+      "weight": 6.370787
+    },
+    {
+      "full_name": "zskbot/clriks",
+      "stratum": "S2",
+      "weight": 6.370787
+    }
   ]
 }

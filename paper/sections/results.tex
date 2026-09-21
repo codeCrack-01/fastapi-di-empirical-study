@@ -1,2 +1,109 @@
-\section{Results}
-% TODO
+\section{Results and Findings}
+
+\subsection{Construct Usage}
+
+The final corpus contains 402 repositories, obtained from 5,009 candidate repositories identified through GitHub's dependency-graph dependents. The static analysis identified several distinct FastAPI dependency-injection constructs.
+
+Depends() was the most prevalent construct, occurring in 303 repositories (75.4\%), with 25,166 call sites and a median of 22 calls among repositories using the construct. Annotated[..., Depends] occurred in 104 repositories (25.9\%), comprising 5,913 call sites. Generator/yield-based dependencies were observed in 162 repositories (40.3\%).
+
+Security dependencies were observed in 42 repositories (10.4\%), with 163 Security() call sites.
+
+\begin{table*}[!t]
+\centering
+\caption{Prevalence of FastAPI dependency-injection constructs across the 402-repository corpus.}
+\label{tab:constructs}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+\textbf{Construct} & \textbf{Repositories} & \textbf{\% of corpus} & \textbf{Call sites} & \textbf{Median calls among users} \\
+\midrule
+Depends & 303 & 75.4\% & 25,166 & 22.0 \\
+Security & 42 & 10.4\% & 163 & 1.0 \\
+Annotated[..., Depends] & 104 & 25.9\% & 5,913 & 11.0 \\
+Generator/yield dependency & 162 & 40.3\% & 216 & 1.0 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+A total of 98 repositories (24.4\%) recorded no usage across Depends(), Security(), and Annotated[..., Depends], despite satisfying the repository-level usage criteria.
+
+\subsection{Usage Across Repository Characteristics}
+
+Core DI usage was observed across all star-count categories. The proportion of repositories using core DI ranged from 73.3\% among repositories with 1--9 stars to 85.7\% among repositories with 10--99 and 100+ stars.
+
+\begin{table*}[!t]
+\centering
+\caption{Core DI usage by repository star count.}
+\label{tab:stars}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+\textbf{Stars} & \textbf{Repositories} & \textbf{Using core DI} & \textbf{Median core DI calls} \\
+\midrule
+0 & 246 & 76.0\% & 14.0 \\
+1--9 & 135 & 73.3\% & 18.0 \\
+10--99 & 14 & 85.7\% & 28.0 \\
+100+ & 7 & 85.7\% & 6.0 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+Core DI usage was also observed across all repository-age categories, ranging from 74.8\% among repositories younger than 12 months to 90.9\% among repositories aged 36 months or more.
+
+\begin{table*}[!t]
+\centering
+\caption{Core DI usage by repository age.}
+\label{tab:age}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+\textbf{Repository Age} & \textbf{Repositories} & \textbf{Using core DI} & \textbf{Median core DI calls} \\
+\midrule
+$<$12 months & 361 & 74.8\% & 15.0 \\
+12--36 months & 30 & 80.0\% & 16.5 \\
+36+ months & 11 & 90.9\% & 22.0 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\subsection{Depends() Argument Shapes}
+
+Across the 25,166 Depends() call sites, bare function references accounted for 24,444 calls (97.1\%) and occurred across 297 repositories. Placeholder forms accounted for 429 calls (1.7\%), while module aliases accounted for 266 calls (1.1\%). Title-case classes and class methods accounted for 21 and 6 calls, respectively.
+
+\begin{table*}[!t]
+\centering
+\caption{Shapes of arguments passed to Depends() call sites.}
+\label{tab:shapes}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+\textbf{Argument shape} & \textbf{Calls} & \textbf{\% of calls} & \textbf{Repositories} \\
+\midrule
+Bare function reference & 24,444 & 97.1\% & 297 \\
+Placeholder (..., empty) & 429 & 1.7\% & 27 \\
+Module alias & 266 & 1.1\% & 11 \\
+Title-case class & 21 & 0.1\% & 7 \\
+Classmethod & 6 & $<$0.1\% & 1 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+Among the 163 Security() call sites identified across 42 repositories, no call site supplied a scopes=[...] argument.
+
+\subsection{Dependency Graph Structure}
+
+Non-empty dependency graphs were extracted from 294 of the 402 repositories. These graphs contained 16,494 function nodes, 728 class nodes, and 23,223 directed edges. Class nodes occurred in 126 repositories.
+
+A total of 227 nodes had at least 10 dependents. The highest observed fan-in counts were associated with get\_db (4,683 dependents), get\_session (1,732), get\_current\_user (1,471), and require\_admin (1,175).
+
+Chained dependency relationships were observed, with a median maximum dependency depth of 2 and a maximum observed depth of 7.
+
+After removal of resolver-generated placeholder nodes, graph sizes had a median of 19.5 nodes (IQR: 8--54), with a maximum of 1,444 nodes. The median unresolved-reference rate was 0\% (IQR: 0--3.4\%), although one repository had a 100\% unresolved rate.
+
+Overall, 180 of the 294 graph-bearing repositories (61.2\%) had no unresolved dependency references. Conversely, 114 repositories contained at least one unresolved dependency reference. A further 108 repositories (26.9\% of the complete corpus) had empty dependency graphs despite satisfying the repository-level eligibility criteria.
+
+\subsection{Annotated Types and DI Idioms}
+
+The most frequently observed types in Annotated[...] dependency declarations included User (749 occurrences), AsyncSession (616), str (458), and Session (355). Other frequently observed types included Principal, UserPrincipal, CurrentAdminUser, AuditSink, AuthIdentity, Settings, and Any.
+
+Several additional DI idioms were detected, although most occurred at low frequency. Classmethod-based dependencies were observed in one repository across six call sites, while constructor-injected classes occurred in seven repositories across 14 distinct classes. A provide\_* namespace pattern occurred in one repository, and current\_* request-scope injection occurred in 15 repositories. Module-alias dependencies occurred in 11 repositories. No repositories contained an observed *Repository-typed injection pattern.
+
+\subsection{Data Quality Issue (Resolved Now)}
+
+The resolver generated file:line-style placeholder nodes when a Depends() call occurred outside an identifiable function context. Such nodes occurred in 122 of 294 graph-bearing repositories and accounted for 713 of 17,222 raw nodes (4.1\%). These nodes were removed before computing the cleaned graph-size statistics.

@@ -101,8 +101,10 @@ that the two sources are disjoint.
 ## 5. RQ1 — construct prevalence
 
 **Numbers (full-corpus census of 402):** Depends 75.4% (median 22), Annotated 25.9% (11),
-Generator/yield 40.3% (1), Security 10.4% (1), Router 14.4% (3), App 2.5%, Override 1.7%,
-Callable-class 0.5%.
+Generator/yield 40.3% (1), Security 10.4% (1). Router/app-level wiring, dependency
+overrides and callable-class dependencies are compositions of the core constructs
+(never used without C1/C2) and are reported as structural placements, not as
+separate constructs.
 
 **Significance:** the empirical DI usage distribution in real production code —
 something the ecosystem lacks hard numbers for.
@@ -142,8 +144,10 @@ work / RQ3 clutches).
 361/402 repos <12 months old; 100+-star bucket has 7 repos, 36mo+ has 11.
 
 **Significance:** DI adoption is **flat** across popularity — it is a stable
-property of the population, not skewed by stars. The youth of the corpus is a
-consequence of the E4 recency gate × fast-growing dependency-graph population.
+property of the population, not skewed by stars. The youth of the corpus
+(361/402 repos under a year) is a property of the discovered dependency-graph
+population; the E4 gate admits repos up to 60 months old, so the skew is not an
+artifact of that gate.
 
 **Likely grill:** "Your high-star/high-age buckets are nearly empty."
 **Defence:** Correct and disclosed (§Threats). We do not over-read bins with

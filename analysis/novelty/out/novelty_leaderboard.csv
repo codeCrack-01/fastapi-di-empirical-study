@@ -1,0 +1,6 @@
+model,accuracy,qualified,n,f1_macro
+fake-qwen,1.0,True,12,
+fake-llama,0.9167,True,12,
+fake-deepseek,1.0,True,12,
+fake-glm,1.0,True,12,
+fake-phi,0.5833,False,12,

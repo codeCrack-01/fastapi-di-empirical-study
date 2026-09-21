@@ -12,10 +12,13 @@ FASTAPI_PACKAGE = "fastapi"
 #   E1  Imports FastAPI: files_importing_fastapi >= 1 in production code.
 #   E2  Origin: not a fork and not archived.
 #   E3  Window: pushed_at within the last E3_MAX_AGE_MONTHS months.
+#   E4  Scale: at least E4_MIN_FASTAPI_FILES distinct files import FastAPI
+#       (rejects single-file/demo projects).
 # E2/E3 are metadata gates evaluated before cloning; E1 is evaluated from
 # the extractor report after cloning. All rules are binary existence checks
 # (no magnitude thresholds).
 E3_MAX_AGE_MONTHS = 60
+E4_MIN_FASTAPI_FILES = 2
 
 CLONE_DEPTH = 1
 CLONE_TIMEOUT_SECONDS = 900

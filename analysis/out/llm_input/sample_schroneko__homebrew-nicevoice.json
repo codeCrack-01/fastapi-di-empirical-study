@@ -1,0 +1,36 @@
+{
+  "full_name": "schroneko/homebrew-nicevoice",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/schroneko__homebrew-nicevoice.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 14,
+    "files_production": 14,
+    "files_test": 0,
+    "pct_production": 1.0
+  },
+  "aggregate": {
+    "depends_total": 0,
+    "security_total": 0,
+    "annotated_depends_total": 0,
+    "yield_dep_total": 0
+  },
+  "known": [],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": true,
+  "catalog_baseline": "ZERO-DI",
+  "arg_shapes": {},
+  "security_scopes": {},
+  "yield_function_names": [],
+  "n_yield_functions": 0,
+  "dependency_graph": {
+    "nodes": 0,
+    "edges": 0,
+    "max_depth": 0,
+    "unresolved_depends": 0
+  },
+  "observations": [],
+  "stratum": "S2",
+  "weight": 6.370787
+}

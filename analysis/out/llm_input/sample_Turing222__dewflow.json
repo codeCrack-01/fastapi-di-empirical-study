@@ -1,0 +1,47 @@
+{
+  "full_name": "Turing222/dewflow",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/Turing222__dewflow.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 454,
+    "files_production": 271,
+    "files_test": 183,
+    "pct_production": 0.5969
+  },
+  "aggregate": {
+    "depends_total": 103,
+    "security_total": 0,
+    "annotated_depends_total": 45,
+    "yield_dep_total": 1
+  },
+  "known": [
+    "C1",
+    "C3",
+    "C4"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C3; C4",
+  "arg_shapes": {
+    "BARE": 102,
+    "EMPTY": 2
+  },
+  "security_scopes": {},
+  "yield_function_names": [
+    "get_redis"
+  ],
+  "n_yield_functions": 1,
+  "dependency_graph": {
+    "nodes": 68,
+    "edges": 83,
+    "max_depth": 6,
+    "unresolved_depends": 18
+  },
+  "observations": [
+    "dependency_overrides found only in test code, not in production"
+  ],
+  "stratum": "S1",
+  "weight": 12.74359
+}

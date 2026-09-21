@@ -1,2 +1,27 @@
-\section{Threats to Validity}
-% TODO
+\section{Limitations and Threats to Validity}
+
+\subsection{Construct Validity}
+
+The top concern is defining what a ``meaningfully real'' FastAPI application means. The current criteria use observable source-level indicators, including FastAPI imports and application instantiation. These provide reproducible inclusion criteria but cannot perfectly capture the semantic importance of FastAPI within every application. For this reason, we propose that for future work, we can use a more broader filter than E5 to check if the results we propose are affected in a significant way and whether or not our results apply to the broader, more general corpus of the Python space.
+
+Similarly, the AST analyzer identifies dependency-injection constructs through syntactic patterns. Different source-level forms may represent similar dependency-management behavior, while similar syntax may have different runtime semantics. The census should therefore be understood as a characterization of detectable source-level DI usage, rather than a complete representation of all runtime dependency-management behavior.
+
+\subsection{Internal Validity}
+
+The planned comparative experiment introduces additional threats to internal validity. Runtime performance can be influenced by hardware, operating-system scheduling, Python version, FastAPI version, database configuration, workload characteristics, concurrency, and other environmental factors.
+
+The controlled experiment will mitigate these factors by keeping the application logic, workload, execution environment, and benchmark configuration constant while changing the dependency-management strategy. Measurements will be repeated across multiple trials, with appropriate summary statistics and statistical comparisons used instead of relying on individual benchmark runs.
+
+For the real-project evaluation, an additional threat is that replacing a project's dependency-management strategy may inadvertently alter its behavior. Existing project tests and additional behavioral checks will therefore be used where possible to establish functional equivalence before performance measurements are taken.
+
+\subsection{External Validity}
+
+The corpus consists exclusively of publicly accessible GitHub repositories and may not represent private, proprietary, or internally hosted FastAPI applications.
+
+Similarly, a controlled benchmark necessarily simplifies real-world applications. Results from the synthetic experiment should therefore not be generalized directly to all FastAPI systems. This motivates the second experimental stage, in which alternative dependency-management strategies will be evaluated on a small sample of real applications from the accepted corpus.
+
+\subsection{Conclusion Validity}
+
+Several constructs and idioms occur at very low frequencies. These observations are insufficient to support strong population-level conclusions and will therefore remain descriptive. In the future, we plan to expand the corpus used in this paper in order to establish a more meaningful relationship between the observations and the conclusions by including projects that may not necessarily have the majority of their code in Python (E2) but still use FastAPI in a meaningful way.
+
+The comparative experiment will also require appropriate statistical treatment. Small measured differences should not automatically be interpreted as practically meaningful, even where statistical significance is observed. Effect sizes and variability should therefore be reported alongside point estimates.

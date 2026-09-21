@@ -11,10 +11,7 @@ Primary backend / Auxiliary / AI API / MCP-only / Developer tool
 - Security:
 - Annotated[..., Depends(...)]:
 - Yield/generator deps:
-- Router-level deps:
-- App-level deps:
-- Overrides:
-- Callable class deps:
+- Router-level deps (compositional placement):
 - Non-fastapi Depends sources:
 
 ### Dependency graph:

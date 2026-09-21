@@ -1,0 +1,46 @@
+{
+  "full_name": "nkswalih/skyrict",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/nkswalih__skyrict.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 1206,
+    "files_production": 876,
+    "files_test": 330,
+    "pct_production": 0.7264
+  },
+  "aggregate": {
+    "depends_total": 1001,
+    "security_total": 0,
+    "annotated_depends_total": 334,
+    "yield_dep_total": 4
+  },
+  "known": [
+    "C1",
+    "C3",
+    "C4"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C3; C4",
+  "arg_shapes": {
+    "BARE": 1001
+  },
+  "security_scopes": {},
+  "yield_function_names": [
+    "get_db"
+  ],
+  "n_yield_functions": 1,
+  "dependency_graph": {
+    "nodes": 428,
+    "edges": 735,
+    "max_depth": 7,
+    "unresolved_depends": 266
+  },
+  "observations": [
+    "dependency_overrides found only in test code, not in production"
+  ],
+  "stratum": "S2",
+  "weight": 6.370787
+}

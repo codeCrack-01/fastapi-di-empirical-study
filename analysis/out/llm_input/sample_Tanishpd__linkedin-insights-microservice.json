@@ -1,0 +1,43 @@
+{
+  "full_name": "Tanishpd/linkedin-insights-microservice",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/Tanishpd__linkedin-insights-microservice.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 18,
+    "files_production": 17,
+    "files_test": 1,
+    "pct_production": 0.9444
+  },
+  "aggregate": {
+    "depends_total": 2,
+    "security_total": 0,
+    "annotated_depends_total": 0,
+    "yield_dep_total": 1
+  },
+  "known": [
+    "C1",
+    "C4"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C4",
+  "arg_shapes": {
+    "BARE": 2
+  },
+  "security_scopes": {},
+  "yield_function_names": [
+    "get_scraper"
+  ],
+  "n_yield_functions": 1,
+  "dependency_graph": {
+    "nodes": 3,
+    "edges": 2,
+    "max_depth": 2,
+    "unresolved_depends": 0
+  },
+  "observations": [],
+  "stratum": "S2",
+  "weight": 6.370787
+}

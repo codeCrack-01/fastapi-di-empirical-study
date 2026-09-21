@@ -1,0 +1,46 @@
+{
+  "full_name": "gnt-ai/gnt",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/gnt-ai__gnt.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 238,
+    "files_production": 171,
+    "files_test": 67,
+    "pct_production": 0.7185
+  },
+  "aggregate": {
+    "depends_total": 140,
+    "security_total": 0,
+    "annotated_depends_total": 0,
+    "yield_dep_total": 1
+  },
+  "known": [
+    "C1",
+    "C4"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C4",
+  "arg_shapes": {
+    "BARE": 140
+  },
+  "security_scopes": {},
+  "yield_function_names": [
+    "get_session"
+  ],
+  "n_yield_functions": 1,
+  "dependency_graph": {
+    "nodes": 73,
+    "edges": 138,
+    "max_depth": 5,
+    "unresolved_depends": 2
+  },
+  "observations": [
+    "Uses traditional Depends() pattern extensively but no Annotated[..., Depends(...)]",
+    "dependency_overrides found only in test code, not in production"
+  ],
+  "stratum": "S3",
+  "weight": 1.0
+}

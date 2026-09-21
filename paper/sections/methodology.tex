@@ -1,2 +1,45 @@
 \section{Methodology}
-% TODO
+
+\textbf{Step 0 --- Formalize Codebase Discovery Techniques.} To initiate this research, we needed to come up with some way to collect and structure this data for analysis. Our team came up with 3 initial directions: (1) Use the libraries.io API for scraping. (2) Use the basic topic-based search on the GitHub API for data extraction. (3) Use the GitHub Dependency Graph API to check if a repo requires FastAPI and Python in any of the manifest files (like requirements.txt or pyproject.toml or setup.cfg, the env file, etc.) and select them without needing to clone the repository. This way, we can filter out irrelevant projects that don't use FastAPI at all. These are the three initial approaches we came up with.
+
+\textbf{Step 1 --- Validation of the Data Query Methods.} First off, we started by exploring the libraries.io path, but unfortunately, we hit a wall. To be precise, we were using the /dependents endpoint, as it is designed to look up which other software packages or repositories depend on a specific package. We could essentially use this to weed out those projects that don't use FastAPI at all. But unfortunately, that endpoint worked unreliably, had hard rate limits, and was disabled most of the time with an empty JSON response. The primary reason for this might be that libraries.io is focusing on tidelift.com, which requires a paid subscription to access.
+
+Next, we moved towards GitHub and tested our two approaches: topic-based search vs.\ dependency-based search. The first approach considered GitHub's topic-based search, using the topic:fastapi tag as the primary means of identifying candidate projects. However, a manual review of the first 10 results raised concerns. It showed tutorial projects (introducing bias), demos, learning projects, and coursework. We want real-world applications and use cases. This introduced a potential threat to construct validity, since the study aims to investigate dependency-injection practices in applications that genuinely depend on FastAPI, rather than projects merely labelled with the framework's topic (toy projects or learning demos). Consequently, rather than assuming that topic-based search was an adequate sampling mechanism, an alternative approach based on GitHub's dependency graph was investigated.
+
+The dependency-based approach starts from FastAPI itself and identifies repositories that explicitly depend on the framework, providing a more direct connection between the sampling mechanism and the study's target population. To evaluate whether this represented a meaningful improvement rather than simply adopting an alternative arbitrarily, the resulting corpus was compared with the repositories identified through the topic-based approach. The comparison revealed 0.44\% overlap between the repositories in the dependency-derived corpus and the repositories returned by the topic:fastapi search (top 1000). This substantial divergence provided empirical evidence that the two mechanisms were identifying fundamentally different populations. Given that the dependency-based approach directly evidenced an actual FastAPI dependency and avoided reliance on self-applied repository topics, it was selected as the primary corpus-construction strategy for the study, with subsequent eligibility criteria applied to obtain the final research corpus. Also, to highlight the fact that the average GitHub star count (computed from top 1000 repos) was 27 for this approach, compared to 11 star count in topic-based search.
+
+\textbf{Step 2 --- Running the Validated Query Technique.} We ran the dependency-based search and collected 5,009 GitHub repositories, all of which are documented in the construction\_logs in the dataset. These raw projects contained all kinds of projects from archived and toy projects to real-world repositories, and a bunch of false positives which brought threats to validity of the corpus (collection of projects). To tackle this situation, we brought in a filtering method based on certain standards to reduce contamination and get accurate corpus.
+
+\textbf{Step 3 --- Filter down to real, serious projects.} We applied six eligibility rules in sequence, and logged the first rule each rejected repo failed, so nothing was silently dropped:
+
+\begin{table*}[!t]
+\centering
+\caption{Eligibility rules applied to select the study corpus.}
+\label{tab:rules}
+\begin{tabularx}{\linewidth}{@{}llX@{}}
+\toprule
+\textbf{Rule} & \textbf{Requirement} & \textbf{Why} \\
+\midrule
+E1 & FastAPI is declared as a runtime dependency (not dev/test-only) &
+  A dev dependency doesn't mean the app actually uses FastAPI in production. \\
+E2* & Python is the dominant language ($\geq$ 50\% threshold) &
+  Filters out repos where FastAPI shows up incidentally in a non-Python-primary codebase. \\
+E3 & Not a fork, not an archived (abandoned) repository &
+  Forks and archived repos duplicate or abandon the ``real'' signal. \\
+E4 & Recently active (5-year window), $\geq$ 10 commits &
+  Filters out dead or one-off repos. \\
+E5* & Meaningfully uses FastAPI --- $\geq$ 1 file calls FastAPI(), $\geq$ 4 endpoints &
+  Filters out repos that use FastAPI once and never build anything with it. \\
+\bottomrule
+\end{tabularx}
+\end{table*}
+
+Only repos that pass E1--E5 are accepted into the study corpus.
+
+\textbf{Step 4 --- Static Analysis on The Final Corpus.} Every accepted repo's Python source is parsed into an AST (abstract syntax tree) without executing any code. An analyzer scans this tree for four core DI-related syntax patterns: \texttt{Depends(...)} calls, generator-based (yield) dependencies, \texttt{Security(...)} calls, and \texttt{Annotated[..., Depends]} declarations, and counts how often each appears, per repo.
+
+A second pass, the resolver, uses the same extracted data to reconstruct a dependency graph: which function depends on which other function, via DI. This lets us look at structural properties later (how deep chains of dependencies get, which functions act as shared hubs, etc.) without re-parsing anything. It shows how people have used dependency injection in FastAPI repositories, any common chaining patterns or standards people use and such.
+
+The per-repo counts and graphs are combined into corpus-wide tables---prevalence of each construct, distribution of graph depth and size, and so on. This aggregation step is where the raw per-file measurements become answerable statistics.
+
+That's the pipeline end-to-end: discover $\rightarrow$ filter $\rightarrow$ statically analyze $\rightarrow$ aggregate $\rightarrow$ validate.

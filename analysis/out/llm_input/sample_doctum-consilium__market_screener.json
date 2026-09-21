@@ -1,0 +1,45 @@
+{
+  "full_name": "doctum-consilium/market_screener",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/doctum-consilium__market_screener.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 18,
+    "files_production": 18,
+    "files_test": 0,
+    "pct_production": 1.0
+  },
+  "aggregate": {
+    "depends_total": 14,
+    "security_total": 0,
+    "annotated_depends_total": 0,
+    "yield_dep_total": 1
+  },
+  "known": [
+    "C1",
+    "C4"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C4",
+  "arg_shapes": {
+    "BARE": 14
+  },
+  "security_scopes": {},
+  "yield_function_names": [
+    "get_db"
+  ],
+  "n_yield_functions": 1,
+  "dependency_graph": {
+    "nodes": 15,
+    "edges": 14,
+    "max_depth": 2,
+    "unresolved_depends": 0
+  },
+  "observations": [
+    "Uses traditional Depends() pattern extensively but no Annotated[..., Depends(...)]"
+  ],
+  "stratum": "S1",
+  "weight": 12.74359
+}

@@ -1,0 +1,89 @@
+{
+  "executor": "default",
+  "anchors": [
+    "C1::c1_bare",
+    "C1::c1_call_inline",
+    "C1::c1_class",
+    "C1::c1_dotted",
+    "C1::c1_empty",
+    "C2::c2_scopes",
+    "C3::c3_annotated",
+    "C4::c4_generator_unused",
+    "C4::c4_generator_used",
+    "EX2::ex2_non_fastapi_depends",
+    "Z::z_zero_di",
+    "external_di::external_di_injector"
+  ],
+  "rater_predictions": {
+    "fake-qwen": [
+      "C1",
+      "C1",
+      "C1",
+      "C1",
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "C4",
+      "EX2",
+      "Z",
+      "external_di"
+    ],
+    "fake-llama": [
+      "C1",
+      "C1",
+      "C1",
+      "novel",
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "C4",
+      "EX2",
+      "Z",
+      "external_di"
+    ],
+    "fake-deepseek": [
+      "C1",
+      "C1",
+      "C1",
+      "C1",
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "C4",
+      "EX2",
+      "Z",
+      "external_di"
+    ],
+    "fake-glm": [
+      "C1",
+      "C1",
+      "C1",
+      "C1",
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "C4",
+      "EX2",
+      "Z",
+      "external_di"
+    ],
+    "fake-phi": [
+      "C1",
+      "EX2",
+      "C1",
+      "C1",
+      "novel",
+      "C3",
+      "C3",
+      "C4",
+      "C4",
+      "C1",
+      "C3",
+      "external_di"
+    ]
+  }
+}

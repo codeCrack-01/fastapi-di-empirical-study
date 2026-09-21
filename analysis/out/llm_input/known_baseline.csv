@@ -1,0 +1,328 @@
+file,stratum,known_baseline,depends_total,nodes,edges,weight
+sample_0x0021__Linkora.json,S2,ZERO-DI,0,0,0,6.370787
+sample_22V01D__Key-Scraper.json,S2,ZERO-DI,0,0,0,6.370787
+sample_404GamerNotFound__TBC-camera-manager.json,S3,ZERO-DI,0,0,0,1.0
+sample_4ch1m__pixoo-rest.json,S4,C1; C3,2,0,0,1.0
+sample_514-labs__moosestack.json,S4,C1,4,2,3,1.0
+sample_7-Blocks__Kepler.json,S3,C1; C4,23,23,22,1.0
+sample_7finger0x__ht.json,S1,C1; C3,13,13,11,12.74359
+sample_ActiveInferenceInstitute__ActiveInferAnts.json,S3,C1; C4,16,12,14,1.0
+sample_Addrick__agent-orchestrator.json,S2,ZERO-DI,0,0,0,6.370787
+sample_Adejare-ml__News-Intelligence-System.json,S2,C1; C4,5,4,3,6.370787
+sample_AlphaHorizon-AI__Shogun.json,S2,C1; C2; C4,568,480,568,6.370787
+sample_Anubhav9__Yellow-Olive.json,S3,ZERO-DI,0,0,0,1.0
+sample_AristaLabs__smeme.json,S1,C1; C3; C4,52,22,24,12.74359
+sample_ArtigenZ-IT-Solutions__artigenznewsite.json,S1,ZERO-DI,0,0,0,12.74359
+sample_Axellum__vromvrom-engine.json,S1,C1,11,12,9,12.74359
+sample_AydinTHR__aimentum.json,S1,C1; C3; C4,6,12,6,12.74359
+sample_Azure-Samples__chat-with-your-data-solution-accelerator.json,S4,C1; C3,11,22,11,1.0
+sample_BennyKok__omg.dev.json,S4,ZERO-DI,0,0,0,1.0
+sample_Big-Sh0t114__NachoBot.json,S4,ZERO-DI,0,0,0,1.0
+sample_BlackIQ__amirhossein.info.json,S3,C1; C4,45,28,44,1.0
+sample_BlackIQ__tgju-api.json,S3,ZERO-DI,0,0,0,1.0
+sample_BlessedRebuS__Krawl.json,S4,C1,1,2,1,1.0
+sample_BramAlkema__svg2pptx.json,S2,C1; C2; C3,21,24,21,6.370787
+sample_BrentIO__SkyFollower.json,S1,ZERO-DI,0,0,0,12.74359
+sample_COS301-SE-2026__Gesture-Based-Drone-Control.json,S3,C1; C3; C4,27,28,27,1.0
+sample_CPL-Compliance__software-engineer-assessment-guardian-fastapi.json,S1,C1; C3; C4,1,2,1,12.74359
+sample_Ciiceronee__Ciiceronee.json,S4,C1,5,7,5,1.0
+sample_CognitiveCodeAI__rag-main-2.json,S2,C1; C4,45,31,45,6.370787
+sample_DGuckert__Butler.json,S3,C1,53,53,52,1.0
+sample_Dadowatt__smarthelp-support-api.json,S1,ZERO-DI,0,0,0,12.74359
+sample_DavidFerj__agentic-platform-baseline.json,S1,C1; C3,2,4,2,12.74359
+sample_DavidKrGH__Dockkeep.json,S2,ZERO-DI,0,0,0,6.370787
+sample_DenisKimskku__DenisKimskku.github.io.json,S1,ZERO-DI,0,0,0,12.74359
+sample_DevOpsAIguru123__awesome-agentic-devops.json,S3,ZERO-DI,0,0,0,1.0
+sample_Devathmaj__VoucherBot.json,S3,C1; C4,3,3,3,1.0
+sample_Dhairya2289__Personal-AI-System.json,S2,ZERO-DI,0,0,0,6.370787
+sample_Dibyataru-Chakraborty__ASM-Tool.json,S1,C1; C4,344,168,344,12.74359
+sample_DockVault__vault.json,S2,C1; C4,303,151,298,6.370787
+sample_EOPF-Explorer__titiler-eopf.json,S3,C1; C3,44,4,2,1.0
+sample_EarthSpark__thundercloud.json,S2,ZERO-DI,0,0,0,6.370787
+sample_EndofTimeWorks__pluris-haven.json,S1,C1; C3; C4,8,8,7,12.74359
+sample_EnkrateiaLucca__oreilly_live_training_getting_started_with_langchain.json,S3,ZERO-DI,0,0,0,1.0
+sample_EpicEric__duper.json,S3,C1,1,2,1,1.0
+sample_EssenceSentry__relay.json,S1,C1; C3,2,0,0,12.74359
+sample_Fergana-Labs__stash.json,S4,C1,423,294,420,1.0
+sample_FlintsXzzz__AGORA.json,S2,C1; C4,3,4,3,6.370787
+sample_FlowElement-xinliuyuansu__m_flow.json,S4,C1; C4,78,79,75,1.0
+sample_Fosnie__fosnie.json,S2,ZERO-DI,0,0,0,6.370787
+sample_Frjeil__cloistr.json,S1,ZERO-DI,0,0,0,12.74359
+sample_GG-Angel__overplayed.json,S2,C1; C4,40,30,40,6.370787
+sample_Ganesh-403__semantic-plagiarism-detector.json,S3,C1; C2,6,7,5,1.0
+sample_GiZano__QuakeGuard.json,S3,C1; C2; C4,28,18,28,1.0
+sample_Git-me-Harish__Mentora.json,S1,C1; C3,100,76,97,12.74359
+sample_GlacierEQ__ECHO.json,S1,C1; C3,4,5,4,12.74359
+sample_GolubchikovKirill__InfraScope.json,S2,C1; C3; C4,91,93,89,6.370787
+sample_GregB712__Loomi-Brain.json,S1,C1; C3; C4,3,6,3,12.74359
+sample_Hardonian__truthcore.json,S1,C1,17,9,8,12.74359
+sample_Harshith-Shetty__data-validator-testing-tool.json,S1,ZERO-DI,0,0,0,12.74359
+sample_IBM__docling-pipelines.json,S3,C1; C3,42,50,38,1.0
+sample_IanShaw027__openmail.json,S3,C1; C3; C4,27,33,27,1.0
+sample_IbukunSanni__SudokuSensei.json,S1,ZERO-DI,0,0,0,12.74359
+sample_IdealDestructor__RiskAtlas.json,S3,ZERO-DI,0,0,0,1.0
+sample_InfoSecInnovations__shabti.json,S4,C1; C3,15,15,14,1.0
+sample_JafarMahmood123__IntelliLect.json,S2,C1; C3; C4,38,66,38,6.370787
+sample_Joshua-Ranish-T__AetherLearn.ai.json,S3,C1,16,16,15,1.0
+sample_Joulenap__joulenap.json,S3,C1; C4,79,55,79,1.0
+sample_Junping0645__TAB.json,S1,ZERO-DI,0,0,0,12.74359
+sample_Jzy258__canteen-recommendation-agent.json,S2,C1,25,24,23,6.370787
+sample_Kevin-O-Hsu__Sealium.json,S2,C1,6,5,6,6.370787
+sample_KikuAI-Lab__reliapi.json,S2,ZERO-DI,0,0,0,6.370787
+sample_Kirito161718__Obsidian-Learning-Agent.json,S2,C1; C4,110,106,110,6.370787
+sample_Kirov-Dynamics-Technology__kirov-secure-api-gateway.json,S2,C1,2,0,0,6.370787
+sample_Lawofall__AgentCore.json,S3,C1; C3; C4,599,374,599,1.0
+sample_Leonidy431__klab_web.json,S1,C1; C4,35,39,35,12.74359
+sample_LinzeColin__MetaDatabase.json,S1,C1; C3,89,50,47,12.74359
+sample_LogCoreTech__LogCoreOS.json,S2,C1,776,281,293,6.370787
+sample_Lukyyyyy__KairoCLI.json,S2,C1,40,40,39,6.370787
+sample_M2002HR__Speech_to_Text_FastAPI_Service.json,S2,ZERO-DI,0,0,0,6.370787
+sample_MKRWW__wortlaut.json,S3,C1; C3; C4,1,2,1,1.0
+sample_MSKazemi__kubeintellect.json,S2,C1,1,2,1,6.370787
+sample_Markhhyu__equipment-rag-agent.json,S2,C1; C2; C3,41,41,41,6.370787
+sample_Mdnow__curator-v3.json,S1,C1,49,49,48,12.74359
+sample_MitCaine__Nutrition-App.json,S1,C1; C4,95,50,94,12.74359
+sample_Mmodarre__Lakehouse_Plumber.json,S3,C1,65,60,65,1.0
+sample_MoMoM101__RAG-ReActAgent.json,S3,C1; C4,35,39,35,1.0
+sample_MrGibbage__Python-Music-Video-Grabber.json,S1,C1,70,35,70,12.74359
+sample_MrLappes__MrLappesPage.json,S1,C1,19,19,17,12.74359
+sample_NASA-IMPACT__veda-backend.json,S3,C1; C2; C3,17,5,4,1.0
+sample_NeuroticGamer99__healthspan.json,S1,C1,2,3,2,12.74359
+sample_Nsh-GaMeS__Global-Vision.json,S2,C1; C4,8,7,7,6.370787
+sample_Ocel-Labs__Osprey.json,S3,ZERO-DI,0,0,0,1.0
+sample_OpenBMB__StaffDeck.json,S4,C1; C3; C4,706,342,703,1.0
+sample_PedroooAlmeida__something.json,S2,ZERO-DI,0,0,0,6.370787
+sample_PetervanLunteren__AddaxAI.json,S4,C1; C4,133,133,133,1.0
+sample_Phobetore__Evermind.json,S2,C1; C4,48,48,48,6.370787
+sample_PodZonePlatformEngineering__gitopsapi.json,S2,C1,2,4,2,6.370787
+sample_Pratzz14__Phys.io.json,S2,C1; C4,23,16,23,6.370787
+sample_PurpleAILAB__Decepticon.json,S4,C1; C3,12,14,12,1.0
+sample_Quantrail-Data__CH-AdNova.json,S1,C1,24,22,24,12.74359
+sample_Raphasha27__secure-auth-rbac-template.json,S2,C1; C4,16,15,15,6.370787
+sample_ReidSurmeier__woodblock-reidsurmeier-wtf.json,S1,ZERO-DI,0,0,0,12.74359
+sample_RightNow-AI__local-kimi.json,S3,ZERO-DI,0,0,0,1.0
+sample_SDM-TIB__Tool4Boxology.json,S3,ZERO-DI,0,0,0,1.0
+sample_SHalimoosavi__SYJ-LaunchPad.json,S2,C1; C4,2,3,2,6.370787
+sample_STarLighTsMoveMenTs__European-Union-Complince-Portal.json,S1,C1,13,15,13,12.74359
+sample_Saiteja02806__watermark.json,S1,ZERO-DI,0,0,0,12.74359
+sample_Samarth-23-eng__scope-intelligence.json,S3,ZERO-DI,0,0,0,1.0
+sample_SanjeevaRDodlapati__OmicsOracle.json,S1,C1; C2; C4,63,43,61,12.74359
+sample_Sathvik33__OmniMind.json,S2,C1; C4,24,15,23,6.370787
+sample_Scorpio-meow__high-school-mock-api.json,S1,ZERO-DI,0,0,0,12.74359
+sample_Shadowgar__SnakeTracker.json,S1,ZERO-DI,0,0,0,12.74359
+sample_ShaharBand__fluxly.json,S3,ZERO-DI,0,0,0,1.0
+sample_ShiBui2003__Type.json,S1,C1; C4,18,19,18,12.74359
+sample_Shivaninandyala__TaskTracker.json,S1,C1; C4,26,15,24,12.74359
+sample_Skilluv__skilluv-ia.json,S1,ZERO-DI,0,0,0,12.74359
+sample_Smart-AI-Memory__attune-ai.json,S3,C1,8,9,8,1.0
+sample_SquidSec__SquidC5.json,S3,C1,133,136,133,1.0
+sample_Stane316__daba-pulse.json,S1,ZERO-DI,0,0,0,12.74359
+sample_SteveGJones__ai-first-sdlc-practices.json,S3,ZERO-DI,0,0,0,1.0
+sample_Sthitadhi1__PharmaIQ.json,S1,C1,2,2,1,12.74359
+sample_TECHLETES__techletes-tooling.json,S1,C1; C3; C4,10,12,8,12.74359
+sample_Tanishpd__linkedin-insights-microservice.json,S2,C1; C4,2,3,2,6.370787
+sample_Tanush-Jain__kelan.json,S2,C1,11,11,10,6.370787
+sample_Telefonica__AgentHound.json,S3,ZERO-DI,0,0,0,1.0
+sample_Thepizzapie__BuildersGate.json,S3,C1,13,0,0,1.0
+sample_TryCaspian__caspian-sdk.json,S4,C1; C4,109,60,109,1.0
+sample_Turing222__dewflow.json,S1,C1; C3; C4,103,68,83,12.74359
+sample_Upties__Geoatlas-x-NOS.json,S1,C1; C2; C4,199,110,195,12.74359
+sample_Uranus313__loan-system.json,S2,C1; C3; C4,65,32,33,6.370787
+sample_Vist233__infinity_Agents.json,S3,C1,42,44,42,1.0
+sample_WiredMind2__AnimeManager.json,S2,C1,8,9,8,6.370787
+sample_Yakhyobek1997__yagu-wise-ai.json,S2,ZERO-DI,0,0,0,6.370787
+sample_ZeroDayZ7__dev-stack.json,S1,ZERO-DI,0,0,0,12.74359
+sample_aXtr1o1__ConvAgent.json,S1,ZERO-DI,0,0,0,12.74359
+sample_aadil-zikre__HelloAgain.json,S1,C1; C4,67,38,67,12.74359
+sample_abdeljalil-elg__ai-fraud-detection-platform.json,S1,C1,13,13,12,12.74359
+sample_abhaythakur754-0__parwa.json,S1,C1; C4,1259,638,1244,12.74359
+sample_acebmxer__beacon_pxe.json,S1,C1; C4,93,48,93,12.74359
+sample_acgs-ai__ACGS.json,S2,C1; C3; C4,20,25,17,6.370787
+sample_acgs-ai__enhanced-agent-bus.json,S2,C1; C2; C3,134,92,127,6.370787
+sample_agustinpic72__alphawave-taskd.json,S1,C1; C4,204,110,204,12.74359
+sample_ailinone__collective-intelligence.json,S4,C1,2,3,2,1.0
+sample_aiuda-io__aiuda.json,S1,C1; C4,334,155,334,12.74359
+sample_aliseylaneh__Python-Eventsourcing-CQRS.json,S3,C1,12,13,12,1.0
+sample_amurark3__F1-AI.json,S2,ZERO-DI,0,0,0,6.370787
+sample_andrewtryder__unifi-netwatcher.json,S1,C1; C4,39,36,39,12.74359
+sample_anubhab7111__lawWeb.json,S1,C1; C4,78,45,78,12.74359
+sample_anupanujit__SAARTHI-AI.json,S2,C1; C4,51,36,50,6.370787
+sample_apache__hudi.json,S4,ZERO-DI,0,0,0,1.0
+sample_asadbutt64__OGS.json,S2,ZERO-DI,0,0,0,6.370787
+sample_asfrosche__VillageGameBot.json,S2,C1; C4,17,11,10,6.370787
+sample_asklokesh__loki-mode.json,S4,C1; C2; C4,247,28,47,1.0
+sample_auracarehq__auradefi.json,S2,ZERO-DI,0,0,0,6.370787
+sample_auth0__auth0-fastapi-api.json,S3,ZERO-DI,0,0,0,1.0
+sample_automatika-robotics__roboml.json,S3,ZERO-DI,0,0,0,1.0
+sample_aws-samples__sample-agent-platform-with-agentcore.json,S3,C1,76,74,76,1.0
+sample_aws-samples__sample-multiagent-multimodal-hcls.json,S2,ZERO-DI,0,0,0,6.370787
+sample_aws__context-ontology-accelerator.json,S4,ZERO-DI,0,0,0,1.0
+sample_b1rdmania__legalise.json,S3,C1; C3; C4,176,93,94,1.0
+sample_baDrsh531__matchiq.json,S1,ZERO-DI,0,0,0,12.74359
+sample_backblaze-b2-samples__birdnet-passive-acoustic-monitoring.json,S1,ZERO-DI,0,0,0,12.74359
+sample_bdjoseluis__b-devops.json,S1,C1,20,0,0,12.74359
+sample_beenycool__yotuubef.json,S2,ZERO-DI,0,0,0,6.370787
+sample_bluesky__bluesky-httpserver.json,S3,C1; C2,60,32,57,1.0
+sample_brcampidelli__chimera-agent.json,S3,C1,1,2,1,1.0
+sample_breim__TAlib-altcoins-api.json,S3,C1; C3,1,2,1,1.0
+sample_capstone-nova-minds__main-repo.json,S1,ZERO-DI,0,0,0,12.74359
+sample_center-for-threat-informed-defense__attack-flow.json,S4,ZERO-DI,0,0,0,1.0
+sample_ceraldicontabilita__AppDipendenti.json,S1,C1,75,72,70,12.74359
+sample_christian-meyndt__personal-finance-tracker.json,S1,C1; C3; C4,56,30,54,12.74359
+sample_cjbaxt__house-lights.json,S2,C1; C4,10,11,10,6.370787
+sample_ckoenig673__recipe-clipper.json,S2,C1,52,52,52,6.370787
+sample_cmu-sei__GHOSTS.json,S4,ZERO-DI,0,0,0,1.0
+sample_coinbase__cdp-sdk.json,S4,ZERO-DI,0,0,0,1.0
+sample_commercialbrainz__CommercialBrainz.json,S2,C1; C4,278,155,276,6.370787
+sample_crygup__fish.json,S2,ZERO-DI,0,0,0,6.370787
+sample_cvtflam__skills-introduction-to-repository-management.json,S1,ZERO-DI,0,0,0,12.74359
+sample_d4551__pekka.json,S1,C1,1,2,1,12.74359
+sample_danimall__file_migration.json,S1,ZERO-DI,0,0,0,12.74359
+sample_darkspock__ddd_python_sample.json,S2,C1; C4,10,10,10,6.370787
+sample_darkspock__desksupportmonkey.json,S3,C1; C4,1154,413,1093,1.0
+sample_databricks-industry-solutions__care-manager.json,S1,ZERO-DI,0,0,0,12.74359
+sample_databrickslabs__lakemeter-oss.json,S3,C1; C4,96,79,96,1.0
+sample_davidmonterocrespo24__DaveLovable.json,S3,C1; C4,34,35,34,1.0
+sample_davidmonterocrespo24__velxio.json,S4,C1,4,5,4,1.0
+sample_derekrivers__atlas.json,S1,C1; C2; C3,41,82,41,12.74359
+sample_dmfenton__CodeMonet.json,S1,C1; C3,11,12,9,12.74359
+sample_dock108dev__money-map.json,S1,C1; C3; C4,74,64,74,12.74359
+sample_doctum-consilium__market_screener.json,S1,C1; C4,14,15,14,12.74359
+sample_doronz88__pymobiledevice3.json,S4,ZERO-DI,0,0,0,1.0
+sample_dzhalaevd__Donatello.json,S4,ZERO-DI,0,0,0,1.0
+sample_erhel-czc__asco2.json,S1,C1; C4,19,17,19,12.74359
+sample_eseifert__altero.json,S2,C1; C3; C4,15,30,15,6.370787
+sample_exeaman__Atlanta-Banking.json,S2,ZERO-DI,0,0,0,6.370787
+sample_feliciatanxl__FlowGuard.json,S1,C1,8,9,8,12.74359
+sample_freemocap__freemocap.json,S4,ZERO-DI,0,0,0,1.0
+sample_fwerkor__local-shell-mcp.json,S3,C1,1,2,1,1.0
+sample_fyfsxkh__TokBrain.json,S3,C1; C2; C4,51,48,51,1.0
+sample_gdb-mtx__fire-master.json,S3,C1; C4,179,93,178,1.0
+sample_georgejieh__REED.json,S2,C1; C3,33,26,33,6.370787
+sample_gmlrep__tasker.json,S1,C1; C3,12,2,1,12.74359
+sample_gnt-ai__gnt.json,S3,C1; C4,140,73,138,1.0
+sample_google-gemini__robotics-samples.json,S3,ZERO-DI,0,0,0,1.0
+sample_googleworkspace__devicetrustportal.json,S2,C1,9,10,9,6.370787
+sample_gpojarvis-sudo__nagvijay-smart-monitoring-system.json,S1,C1; C4,135,75,134,12.74359
+sample_gradoslovar__la-vie-en-rose.json,S1,ZERO-DI,0,0,0,12.74359
+sample_grayhatdevelopers__vidxp.json,S3,C1; C2; C3,81,50,81,1.0
+sample_guardana__guardana.json,S3,C1; C3,2,2,2,1.0
+sample_gzhu-team__deep-research.json,S2,C1,44,27,44,6.370787
+sample_habinrahman__MyCareer-AI.json,S1,C1; C3; C4,59,27,58,12.74359
+sample_huawei-noah__noah-research.json,S4,C1,33,23,33,1.0
+sample_i2ptuber__itubep.json,S3,C1; C4,18,19,18,1.0
+sample_iadnanmukhtar__hadithdb.json,S2,ZERO-DI,0,0,0,6.370787
+sample_ifelsedotonestd__lens.json,S1,C1,118,64,118,12.74359
+sample_indranildchandra__cursor-session-tracer.json,S3,ZERO-DI,0,0,0,1.0
+sample_infinite2004__LastknownGood.json,S1,C1; C4,57,58,57,12.74359
+sample_innova-space-edu__eduai-platform.json,S2,C1,4,5,4,6.370787
+sample_its-spark-dev__toollayer-ai.json,S2,C1; C3; C4,6,11,6,6.370787
+sample_itsdaibend__proth.json,S1,C1; C4,38,22,37,12.74359
+sample_itsdeepak59__AI-YouTube-Factory.json,S1,ZERO-DI,0,0,0,12.74359
+sample_ivangor246__live_stream.json,S1,C1,8,0,0,12.74359
+sample_jameswniu__multi-agent-rl-mapf-drone-navigation.json,S3,ZERO-DI,0,0,0,1.0
+sample_jasonleetucker-code__riskittogetthebrisket.json,S2,ZERO-DI,0,0,0,6.370787
+sample_joeynyc__hermes-hudui.json,S4,ZERO-DI,0,0,0,1.0
+sample_johnsonhk88__AI-Bank-Statement-Document-Automation-By-LLM-And-Personal-Finanical-Analysis-Prediction.json,S4,C1,25,14,23,1.0
+sample_kaizencycle__mobius-civic-ai-terminal.json,S2,ZERO-DI,0,0,0,6.370787
+sample_kimbrenekakande__orunos.json,S2,ZERO-DI,0,0,0,6.370787
+sample_klebgenomics__Kaptive-Web.json,S3,C1,29,18,28,1.0
+sample_kouroshez__coding-os.json,S1,C1; C4,152,77,152,12.74359
+sample_kristovatlas__somnus.json,S2,C1; C4,35,35,35,6.370787
+sample_langwatch__langwatch.json,S4,ZERO-DI,0,0,0,1.0
+sample_latheeshmahendran__soloV1.json,S1,C1; C4,16,17,16,12.74359
+sample_letya999__job_ftch.json,S3,ZERO-DI,0,0,0,1.0
+sample_lm-webui__lm-webui.json,S2,C1,119,117,119,6.370787
+sample_lss100200__omnibase.json,S3,C1; C3; C4,208,105,208,1.0
+sample_maltewinckler__swen.json,S3,C1; C3; C4,23,25,22,1.0
+sample_martinge17__codex-exporter.json,S1,ZERO-DI,0,0,0,12.74359
+sample_masumi-network__Citadel.json,S3,ZERO-DI,0,0,0,1.0
+sample_mathiaswb2901__Master_program.json,S1,ZERO-DI,0,0,0,12.74359
+sample_mayldute__tour-pass-api.json,S1,C1; C3; C4,2,4,2,12.74359
+sample_mic1on__onestep.json,S3,C1; C2; C4,104,73,104,1.0
+sample_microsoft__Echoverse.json,S3,C1; C4,177,151,177,1.0
+sample_microsoft__customer-chatbot-solution-accelerator.json,S3,C1,24,20,24,1.0
+sample_minhpham6__skills-introduction-to-repository-management.json,S1,ZERO-DI,0,0,0,12.74359
+sample_misears__Storyteller-AI-Agent.json,S2,ZERO-DI,0,0,0,6.370787
+sample_mizcausevic-dev__learner-intervention-ledger.json,S1,ZERO-DI,0,0,0,12.74359
+sample_mjebalidev__thedailymodel.json,S1,C1; C4,3,4,3,12.74359
+sample_moranch__grok-register.json,S1,C1,34,37,34,12.74359
+sample_morpheuslord__PICOTTY.json,S3,ZERO-DI,0,0,0,1.0
+sample_mrwogu__factory-droid-openai.json,S3,C1; C2,8,9,8,1.0
+sample_muju0629__KB_Tune.json,S3,C1,4,6,4,1.0
+sample_murillo-consulting__langgraph-resilient-agent.json,S1,C1; C3,8,6,8,12.74359
+sample_muthuishere__cljgo.json,S3,ZERO-DI,0,0,0,1.0
+sample_mypaios__mypaios.json,S3,C1,139,122,139,1.0
+sample_nerdai__llm-agents-from-scratch.json,S4,ZERO-DI,0,0,0,1.0
+sample_nkswalih__skyrict.json,S2,C1; C3; C4,1001,428,735,6.370787
+sample_nmfs-ost__AA-SI_Workbench.json,S1,ZERO-DI,0,0,0,12.74359
+sample_odysseus-dev__odysseus.json,S4,C1,84,81,84,1.0
+sample_oodaooda__watchTower.json,S1,C1; C4,60,60,60,12.74359
+sample_openJiuwen-ai__agent-protocol.json,S3,C1,59,63,59,1.0
+sample_oracle__ai-optimizer.json,S3,C1,17,17,16,1.0
+sample_orca-gamedev__orca-engine.json,S3,ZERO-DI,0,0,0,1.0
+sample_orqestraai__orqestra-demo.json,S1,C1; C3; C4,10,11,8,12.74359
+sample_pafful__fastapi-app-main.json,S1,C1; C3; C4,10,11,8,12.74359
+sample_paperworkmg-arch__VOLT.json,S2,ZERO-DI,0,0,0,6.370787
+sample_paslaycorp__FAP-Core-v0.2.0.json,S2,C1,3,3,2,6.370787
+sample_pmgraham__datagrunt-studio.json,S1,ZERO-DI,0,0,0,12.74359
+sample_pranee54__AgentDoctor.json,S3,ZERO-DI,0,0,0,1.0
+sample_prdariomarques-ship-it__ship-it.json,S1,C1; C3; C4,51,22,21,12.74359
+sample_pvchaitanya8__Synapse.json,S3,C1; C4,189,148,189,1.0
+sample_qiuziyan1998__LMCache.json,S2,ZERO-DI,0,0,0,6.370787
+sample_quoeamaster__python_for_ai_prep.json,S1,C1,1,2,1,12.74359
+sample_rajveer-makkar__DeepTrace.json,S2,C1; C4,10,11,10,6.370787
+sample_ranasl62__ehr-risk-framework.json,S3,C1,4,6,4,1.0
+sample_rcnsnr__job-search-workflow.json,S3,ZERO-DI,0,0,0,1.0
+sample_ringlochid__banksia.json,S3,C1; C2; C3; C4,16,23,16,1.0
+sample_rmayen__cerberus.json,S1,C1; C4,50,30,49,12.74359
+sample_roberjo__roomba-telemetry.json,S2,C1; C4,4,5,4,6.370787
+sample_runovelhq__wolt.json,S2,C1,41,41,41,6.370787
+sample_sabihul2110__SafeSwipe.json,S1,C1; C4,3,4,3,12.74359
+sample_samsarone__samsar.json,S3,C1,3,4,3,1.0
+sample_sandraschi__calibremcp.json,S3,C1,24,0,0,1.0
+sample_satheeshds__bank-transactions.json,S1,ZERO-DI,0,0,0,12.74359
+sample_sautalwar__avid_training.json,S1,ZERO-DI,0,0,0,12.74359
+sample_schroneko__homebrew-nicevoice.json,S2,ZERO-DI,0,0,0,6.370787
+sample_sebderhy__shellteam.json,S2,C1,73,53,60,6.370787
+sample_serhatvs__Collective_MindGraph_desktop_app.json,S1,ZERO-DI,0,0,0,12.74359
+sample_sessojunior__silo.json,S1,C1; C3; C4,272,162,272,12.74359
+sample_shlokDS16__CITADEL.json,S2,C1,56,54,55,6.370787
+sample_shu0411__trade-lab.json,S1,C1,8,9,8,12.74359
+sample_sitara2007__CivicOs.json,S2,C1; C4,3,4,3,6.370787
+sample_skoruppa__docchi-stremio-addon.json,S3,ZERO-DI,0,0,0,1.0
+sample_skyones-0__kimi-mcp.json,S1,ZERO-DI,0,0,0,12.74359
+sample_smcgarrigle__ihavethereceipts.json,S2,C1; C4,97,98,97,6.370787
+sample_sofi-280__autorepair-voice-agent.json,S1,ZERO-DI,0,0,0,12.74359
+sample_sriram21-09__PhantomNet.json,S2,C1; C2; C4,128,95,124,6.370787
+sample_stevezau__shortlist.json,S3,C1,15,16,15,1.0
+sample_sudetufan__mebidai.json,S1,C1; C4,115,60,115,12.74359
+sample_suzu-devworks__examples-py.json,S1,C1; C3,8,9,6,12.74359
+sample_tanvir14012__JwtAuth.json,S2,C1; C4,38,21,37,6.370787
+sample_teaching-practice-lab-oral__oral.json,S1,C1; C4,197,105,197,12.74359
+sample_theSamPadilla__montaj.json,S3,C1,29,30,29,1.0
+sample_thulasidharan96__API-Gateway.json,S1,C1; C4,18,11,17,12.74359
+sample_ticket-vision__mapi.json,S2,C1; C3,6,9,6,6.370787
+sample_toddawhittaker__ipeds-oracle.json,S2,C1,29,30,29,6.370787
+sample_tramontano__fiap-ml-stock-price-prediction.json,S1,C1,13,12,11,12.74359
+sample_transformerlab__nebula-tower.json,S3,C1; C4,16,6,7,1.0
+sample_trghcj__TaskFlow.json,S1,C1; C4,35,21,34,12.74359
+sample_tsondo__StemForge.json,S3,C1,68,70,68,1.0
+sample_tuannguyen8531__novel-ai-trans.json,S1,C1; C3,3,6,3,12.74359
+sample_verticalpartnersai-sketch__haz-que-vuelva-lw-dr.json,S1,C1; C3,7,6,7,12.74359
+sample_vivekmisar__Saas_Sales_Application.json,S1,ZERO-DI,0,0,0,12.74359
+sample_volcano-sh__agentcube.json,S4,ZERO-DI,0,0,0,1.0
+sample_volcengine__vePhone.json,S3,C1; C3; C4,12,18,12,1.0
+sample_vortex469__atlas-os.json,S1,C1; C3,22,16,13,12.74359
+sample_vsem-azamat__teachers-catalog.json,S2,C1; C3; C4,7,14,7,6.370787
+sample_vstorm-co__agenticos.json,S2,C1; C3; C4,178,243,174,6.370787
+sample_vstorm-co__pydantic-ai-backend.json,S4,C1; C3,3,6,3,1.0
+sample_walternascimentobarroso__wquiz.json,S1,C1; C4,35,26,33,12.74359
+sample_whitebreadisu__hyperspacevault.json,S2,C1; C4,42,41,42,6.370787
+sample_wq147__bookmark-navigation.json,S2,C1; C3; C4,52,38,52,6.370787
+sample_xinvxueyuan__orbital-marketplace.json,S1,C1; C4,16,17,16,12.74359
+sample_y0sif__whisrs.json,S3,ZERO-DI,0,0,0,1.0
+sample_yag-im__accountsvc.json,S1,C1; C3; C4,6,10,6,12.74359
+sample_yezz123__ormdantic.json,S4,C1; C3,1,2,1,1.0
+sample_zeroday0619__KotonohaInterpreter.json,S2,ZERO-DI,0,0,0,6.370787
+sample_zskbot__clriks.json,S2,ZERO-DI,0,0,0,6.370787

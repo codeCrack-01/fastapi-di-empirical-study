@@ -1,0 +1,48 @@
+{
+  "full_name": "sriram21-09/PhantomNet",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/sriram21-09__PhantomNet.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 351,
+    "files_production": 224,
+    "files_test": 127,
+    "pct_production": 0.6382
+  },
+  "aggregate": {
+    "depends_total": 128,
+    "security_total": 1,
+    "annotated_depends_total": 0,
+    "yield_dep_total": 1
+  },
+  "known": [
+    "C1",
+    "C2",
+    "C4"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C2; C4",
+  "arg_shapes": {
+    "BARE": 128
+  },
+  "security_scopes": {
+    "<no-scopes>": 1
+  },
+  "yield_function_names": [
+    "get_db"
+  ],
+  "n_yield_functions": 1,
+  "dependency_graph": {
+    "nodes": 95,
+    "edges": 124,
+    "max_depth": 3,
+    "unresolved_depends": 4
+  },
+  "observations": [
+    "Uses traditional Depends() pattern extensively but no Annotated[..., Depends(...)]"
+  ],
+  "stratum": "S2",
+  "weight": 6.370787
+}

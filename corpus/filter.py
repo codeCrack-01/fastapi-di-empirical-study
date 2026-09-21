@@ -1,7 +1,7 @@
 """
 corpus/filter.py — Eligibility filtering for the FastAPI DI corpus.
 
-Stage 2 of the corpus methodology. Applies rules E1-E3 to the candidates
+Stage 2 of the corpus methodology. Applies rules E1-E4 to the candidates
 produced by finder.py, cloning repos that pass the cheap metadata rules.
 
 Rules (census v2)
@@ -9,8 +9,9 @@ Rules (census v2)
 E1  Imports FastAPI: files_importing_fastapi >= 1 in production code (extractor).
 E2  Origin: not a fork and not archived (GitHub metadata).
 E3  Window: pushed_at within the last 60 months (GitHub metadata; purely temporal).
+E4  Scale: files_importing_fastapi >= E4_MIN_FASTAPI_FILES (rejects single-file/demo projects).
 
-E2/E3 are metadata gates evaluated before cloning; E1 is evaluated from the
+E2/E3 are metadata gates evaluated before cloning; E1/E4 are evaluated from the
 extractor report after cloning. All rules are binary existence checks — no
 magnitude thresholds.
 
@@ -51,6 +52,7 @@ from settings import (
     CLONE_TIMEOUT_SECONDS,
     CORPUS_SCHEMA_VERSION,
     E3_MAX_AGE_MONTHS,
+    E4_MIN_FASTAPI_FILES,
     MAX_RETRY_ROUNDS,
     SAMPLE_SEED,
 )
@@ -140,7 +142,7 @@ def months_before(now: datetime, months: int) -> datetime:
 
 
 def evaluate(candidate: dict, repo_path: Optional[Path]) -> tuple[list[RuleResult], Optional[dict]]:
-    """Evaluate eligibility rules E1-E3.
+    """Evaluate eligibility rules E1-E4.
 
     E2/E3 are pure metadata rules and are always evaluated. When
     ``repo_path`` is None, evaluation stops there (metadata gate) so the
@@ -185,6 +187,13 @@ def evaluate(candidate: dict, repo_path: Optional[Path]) -> tuple[list[RuleResul
         0,
         RuleResult("E1", fastapi_files >= 1, f"files_importing_fastapi={fastapi_files}"),
     )
+    results.append(
+        RuleResult(
+            "E4",
+            fastapi_files >= E4_MIN_FASTAPI_FILES,
+            f"files_importing_fastapi={fastapi_files}",
+        )
+    )
 
     snapshot = report.model_dump(mode="json")
     return results, snapshot
@@ -203,7 +212,7 @@ def process_candidate(
     reports_dir: Path,
     retention: str = CLONE_RETENTION,
 ) -> tuple[Optional[dict], Optional[dict]]:
-    """Run the full E1-E3 pipeline for one candidate.
+    """Run the full E1-E4 pipeline for one candidate.
 
     Returns (accepted_entry, excluded_entry); exactly one is non-None.
 
@@ -532,7 +541,7 @@ def run_delta(
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Apply eligibility rules E1-E3")
+    parser = argparse.ArgumentParser(description="Apply eligibility rules E1-E4")
     parser.add_argument("--candidates", default=str(ROOT / "candidates.json"))
     parser.add_argument("--clone-dir", default=str(ROOT.parent / "study_repos" / "corpus"))
     parser.add_argument("--output", default=str(ROOT / "manifest.json"))

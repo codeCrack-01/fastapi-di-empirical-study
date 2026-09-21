@@ -1,0 +1,196 @@
+[
+  {
+    "id": "C1::c1_bare",
+    "label": "C1",
+    "category": "positive",
+    "source": "from fastapi import FastAPI, Depends\n\n\ndef get_db():\n    return \"db\"\n\nasync def read_item(item: str = Depends(get_db)):\n    return item\n",
+    "extractor_summary": {
+      "imports_fastapi": true,
+      "depends_calls": 1,
+      "security_calls": 0,
+      "annotated_depends": 0,
+      "yield_functions": 0,
+      "non_fastapi_depends_sources": {},
+      "fastapi_app_count": 0
+    },
+    "extractor_top": "C1|BARE|SIG"
+  },
+  {
+    "id": "C1::c1_call_inline",
+    "label": "C1",
+    "category": "near-miss",
+    "source": "from fastapi import FastAPI, Depends\n\n\ndef make_dep():\n    return \"d\"\n\n\nasync def read_item(x: str = Depends(make_dep())):\n    return x\n",
+    "extractor_summary": {
+      "imports_fastapi": true,
+      "depends_calls": 1,
+      "security_calls": 0,
+      "annotated_depends": 0,
+      "yield_functions": 0,
+      "non_fastapi_depends_sources": {},
+      "fastapi_app_count": 0
+    },
+    "extractor_top": "C1|BARE|SIG"
+  },
+  {
+    "id": "C1::c1_class",
+    "label": "C1",
+    "category": "near-miss",
+    "source": "from fastapi import FastAPI, Depends\n\n\nclass Settings:\n    def __init__(self):\n        self.app_name = \"x\"\n\n\nasync def read_item(settings: Settings = Depends(Settings)):\n    return settings.app_name\n",
+    "extractor_summary": {
+      "imports_fastapi": true,
+      "depends_calls": 1,
+      "security_calls": 0,
+      "annotated_depends": 0,
+      "yield_functions": 0,
+      "non_fastapi_depends_sources": {},
+      "fastapi_app_count": 0
+    },
+    "extractor_top": "C1|CLASS|SIG"
+  },
+  {
+    "id": "C1::c1_dotted",
+    "label": "C1",
+    "category": "positive",
+    "source": "from fastapi import FastAPI, Depends\n\n\ndef get_db():\n    return \"db\"\n\nimport core\ncore.get_db = get_db\nasync def read_item(item: str = Depends(core.get_db)):\n    return item\n",
+    "extractor_summary": {
+      "imports_fastapi": true,
+      "depends_calls": 1,
+      "security_calls": 0,
+      "annotated_depends": 0,
+      "yield_functions": 0,
+      "non_fastapi_depends_sources": {},
+      "fastapi_app_count": 0
+    },
+    "extractor_top": "C1|DOTTED|SIG"
+  },
+  {
+    "id": "C1::c1_empty",
+    "label": "C1",
+    "category": "near-miss",
+    "source": "from fastapi import FastAPI, Depends\n\nasync def read_item(x: str = Depends()):\n    return x\n",
+    "extractor_summary": {
+      "imports_fastapi": true,
+      "depends_calls": 1,
+      "security_calls": 0,
+      "annotated_depends": 0,
+      "yield_functions": 0,
+      "non_fastapi_depends_sources": {},
+      "fastapi_app_count": 0
+    },
+    "extractor_top": "C1|EMPTY|SIG"
+  },
+  {
+    "id": "C2::c2_scopes",
+    "label": "C2",
+    "category": "positive",
+    "source": "from fastapi import FastAPI, Security\nfrom fastapi.security import HTTPBearer\n\nbearer = HTTPBearer()\n\ndef require_admin(credentials = Security(bearer, scopes=[\"admin\"])):\n    return credentials\n\nasync def admin(cheese = Security(require_admin)):\n    return cheese\n",
+    "extractor_summary": {
+      "imports_fastapi": true,
+      "depends_calls": 0,
+      "security_calls": 2,
+      "annotated_depends": 0,
+      "yield_functions": 0,
+      "non_fastapi_depends_sources": {},
+      "fastapi_app_count": 0
+    },
+    "extractor_top": "C2|BARE|ascopes"
+  },
+  {
+    "id": "C3::c3_annotated",
+    "label": "C3",
+    "category": "positive",
+    "source": "from fastapi import FastAPI, Depends\nfrom typing import Annotated\n\n\ndef get_current_user():\n    return {\"id\": 1}\n\n\n# C3: Annotated metadata form\nasync def me(current: Annotated[dict, Depends(get_current_user)]):\n    return current\n",
+    "extractor_summary": {
+      "imports_fastapi": true,
+      "depends_calls": 1,
+      "security_calls": 0,
+      "annotated_depends": 2,
+      "yield_functions": 0,
+      "non_fastapi_depends_sources": {},
+      "fastapi_app_count": 0
+    },
+    "extractor_top": "C3|BARE|BARE"
+  },
+  {
+    "id": "C4::c4_generator_unused",
+    "label": "C4",
+    "category": "negative-ish",
+    "source": "from fastapi import FastAPI\n\n\ndef get_session():\n    yield \"session\"\n\n\nasync def read():\n    return \"nodb\"\n",
+    "extractor_summary": {
+      "imports_fastapi": true,
+      "depends_calls": 0,
+      "security_calls": 0,
+      "annotated_depends": 0,
+      "yield_functions": 1,
+      "non_fastapi_depends_sources": {},
+      "fastapi_app_count": 0
+    },
+    "extractor_top": "C4|DEF"
+  },
+  {
+    "id": "C4::c4_generator_used",
+    "label": "C4",
+    "category": "positive",
+    "source": "from fastapi import FastAPI, Depends\n\n\ndef get_session():\n    yield \"session\"\n\n\nasync def read(db = Depends(get_session)):\n    return db\n",
+    "extractor_summary": {
+      "imports_fastapi": true,
+      "depends_calls": 1,
+      "security_calls": 0,
+      "annotated_depends": 0,
+      "yield_functions": 1,
+      "non_fastapi_depends_sources": {},
+      "fastapi_app_count": 0
+    },
+    "extractor_top": "C4|USED"
+  },
+  {
+    "id": "EX2::ex2_non_fastapi_depends",
+    "label": "EX2",
+    "category": "positive",
+    "source": "from fastapi import FastAPI, Depends\nfrom redis import Depends as RedisDepends\n\ndef get_redis():\n    return \"redis\"\n\n\nasync def read(r = RedisDepends(get_redis)):\n    return r\n",
+    "extractor_summary": {
+      "imports_fastapi": true,
+      "depends_calls": 0,
+      "security_calls": 0,
+      "annotated_depends": 0,
+      "yield_functions": 0,
+      "non_fastapi_depends_sources": {
+        "RedisDepends": "redis"
+      },
+      "fastapi_app_count": 0
+    },
+    "extractor_top": "EX2|redis"
+  },
+  {
+    "id": "Z::z_zero_di",
+    "label": "Z",
+    "category": "positive",
+    "source": "from fastapi import FastAPI\n\napp = FastAPI()\n\n@app.get(\"/\")\nasync def root():\n    return {\"hello\": \"world\"}\n",
+    "extractor_summary": {
+      "imports_fastapi": true,
+      "depends_calls": 0,
+      "security_calls": 0,
+      "annotated_depends": 0,
+      "yield_functions": 0,
+      "non_fastapi_depends_sources": {},
+      "fastapi_app_count": 1
+    },
+    "extractor_top": null
+  },
+  {
+    "id": "external_di::external_di_injector",
+    "label": "external_di",
+    "category": "positive",
+    "source": "from fastapi import FastAPI\nfrom fastapi_injector import Injector, attach_injector, Injected\n\napp = FastAPI()\ninjector = Injector()\nattach_injector(app, injector)\n\nasync def read(db: Injector = Injected(DB)):\n    return db\n",
+    "extractor_summary": {
+      "imports_fastapi": true,
+      "depends_calls": 0,
+      "security_calls": 0,
+      "annotated_depends": 0,
+      "yield_functions": 0,
+      "non_fastapi_depends_sources": {},
+      "fastapi_app_count": 1
+    },
+    "extractor_top": null
+  }
+]

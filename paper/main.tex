@@ -1,11 +1,16 @@
-\documentclass{article}
-opencode -s ses_04d8f1cf0ffe3D6rVcos0M7qDs
+\documentclass[conference,12pt]{IEEEtran}
 \usepackage{graphicx}
+\usepackage{float}
 \usepackage{booktabs}
-\usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+\emergencystretch=3em
 
-\title{Working Title}
-\author{Zain Ahmed Khan}
+\title{Methods of Dependency Injection in FastAPI}
+\author{\IEEEauthorblockN{Zain Ahmed Khan, Yahya Ahmed, Hassan Tayyab, and Dr. Abdul Ali Bangash}
+\IEEEauthorblockA{Lahore University of Management Sciences, Lahore, Pakistan}}
 
 \begin{document}
 
@@ -13,14 +18,12 @@ opencode -s ses_04d8f1cf0ffe3D6rVcos0M7qDs
 
 \input{sections/abstract}
 \input{sections/introduction}
-\input{sections/background}
 \input{sections/methodology}
 \input{sections/results}
+\input{sections/analysis}
 \input{sections/threats}
-\input{sections/related_work}
-\input{sections/conclusion}
 
-\bibliographystyle{plain}
+\bibliographystyle{IEEEtran}
 \bibliography{references}
 
 \end{document}

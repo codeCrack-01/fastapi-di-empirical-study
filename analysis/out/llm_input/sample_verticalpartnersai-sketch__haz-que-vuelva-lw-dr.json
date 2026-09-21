@@ -1,0 +1,41 @@
+{
+  "full_name": "verticalpartnersai-sketch/haz-que-vuelva-lw-dr",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/verticalpartnersai-sketch__haz-que-vuelva-lw-dr.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 40,
+    "files_production": 32,
+    "files_test": 8,
+    "pct_production": 0.8
+  },
+  "aggregate": {
+    "depends_total": 7,
+    "security_total": 0,
+    "annotated_depends_total": 10,
+    "yield_dep_total": 0
+  },
+  "known": [
+    "C1",
+    "C3"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C3",
+  "arg_shapes": {
+    "BARE": 7
+  },
+  "security_scopes": {},
+  "yield_function_names": [],
+  "n_yield_functions": 0,
+  "dependency_graph": {
+    "nodes": 6,
+    "edges": 7,
+    "max_depth": 3,
+    "unresolved_depends": 0
+  },
+  "observations": [],
+  "stratum": "S1",
+  "weight": 12.74359
+}

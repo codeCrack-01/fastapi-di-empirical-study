@@ -1,0 +1,49 @@
+{
+  "full_name": "acgs-ai/enhanced-agent-bus",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/acgs-ai__enhanced-agent-bus.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 1808,
+    "files_production": 862,
+    "files_test": 946,
+    "pct_production": 0.4768
+  },
+  "aggregate": {
+    "depends_total": 134,
+    "security_total": 2,
+    "annotated_depends_total": 72,
+    "yield_dep_total": 0
+  },
+  "known": [
+    "C1",
+    "C2",
+    "C3"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C2; C3",
+  "arg_shapes": {
+    "BARE": 135,
+    "CLASS": 1,
+    "DOTTED": 3
+  },
+  "security_scopes": {
+    "<no-scopes>": 2
+  },
+  "yield_function_names": [],
+  "n_yield_functions": 0,
+  "dependency_graph": {
+    "nodes": 92,
+    "edges": 127,
+    "max_depth": 3,
+    "unresolved_depends": 7
+  },
+  "observations": [
+    "dependency_overrides found only in test code, not in production",
+    "No yield-based generator dependencies despite significant Depends usage"
+  ],
+  "stratum": "S2",
+  "weight": 6.370787
+}

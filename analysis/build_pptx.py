@@ -88,17 +88,12 @@ def _csv(path: str) -> list[dict]:
 # deck stays correct if the corpus or threshold ever changes.
 _CORE_KEYS = (
     "depends_total", "security_total", "annotated_depends_total", "yield_dep_total",
-    "router_dep_total", "app_dep_total", "override_total", "callable_class_dep_total",
 )
 _CONSTRUCT_LABELS = {
     "depends_total": "Depends",
     "security_total": "Security",
     "annotated_depends_total": "Annotated",
     "yield_dep_total": "Generator",
-    "router_dep_total": "Router",
-    "app_dep_total": "App-level",
-    "override_total": "Override",
-    "callable_class_dep_total": "Callable",
 }
 
 
@@ -413,7 +408,7 @@ def main():
     # ---- 8. RQ1 prevalence ----
     s = slide_title(prs, "RQ1 — which DI constructs do real projects use?", f"full-corpus census, n={_fmt(D['n_acc'])}")
     rows = _csv("rq1_constructs.csv")
-    clean = [r for r in rows if r["construct_id"] in ("C1","C2","C3","C4","C5","C6","C7","C8")]
+    clean = [r for r in rows if r["construct_id"] in ("C1","C2","C3","C4")]
     table_rows = [[r["construct"], r["repos_using"], r["pct_of_sample"]+"%", r["total_calls"], r["median_per_repo_using"]] for r in clean]
     add_table(s,
               ["Construct", "Repos", "% of corpus", "Total calls", "Median (users)"],
@@ -444,9 +439,9 @@ def main():
               col_widths=[Inches(4.8), Inches(1.3)])
     bullet_box(s, Inches(0.6), Inches(4.75), Inches(12.3), Inches(2.4), [
         (0, f"{100*two/n_total:.0f}% of repos mix two or more DI constructs — the per-construct rows on the previous slide are NOT mutually exclusive.", True, ACCENT2),
-        (0, "Depends (C1) is the 'host' construct: every user of Security, Annotated, Generator/yield or Router-level also uses Depends.", False, INK),
+        (0, "Depends (C1) is the 'host' construct: every user of Security, Annotated or Generator/yield also uses Depends.", False, INK),
         (0, "The dominant pairing is Depends + Generator/yield "
-            f"({_pairings(reports, top=1)[0][2]} repos) — the classic session-scope pattern `def foo(yield db)`; advanced constructs (Override, App-level, Callable-class) are essentially never combined.", False, WARN),
+            f"({_pairings(reports, top=1)[0][2]} repos) — the classic session-scope pattern `def foo(yield db)`.", False, WARN),
     ])
 
     # ---- 10. RQ1 interpretation + zero-DI ----
@@ -457,7 +452,6 @@ def main():
         (0, f"Depends (C1) is dominant but not universal: {P['C1']:.1f}% of real apps use it; the zero-DI cohort is {zero_core:.1f}%.", True, INK),
         (0, f"Generator/yield deps (C4, {P['C4']:.1f}%) outnumber the modern Annotated style (C3, {P['C3']:.1f}%) — the 'recommended' style is not the most common in the wild.", False, INK),
         (0, f"Security (C2, {P['C2']:.1f}%) is under-used despite being a headline auth feature; median just 1 call among users.", False, INK),
-        (0, f"Advanced constructs are rare in production: overrides {P['C7']:.1f}%, app-level deps {P['C6']:.1f}%, callable classes {P['C8']:.1f}%.", False, INK),
         (0, f"Zero-DI cohort = {zero_core:.1f}%: substantial FastAPI apps (\u2265 4 files, \u2265 1 app) that use no core DI construct at all.", True, ACCENT2),
     ])
     add_bigstat(s, Inches(0.9), Inches(5.0), Inches(5.6), Inches(1.8),
@@ -549,7 +543,7 @@ def main():
               top=Inches(1.5), font_size=11, col_widths=[Inches(6.2), Inches(6.1)])
     bullet_box(s, Inches(0.6), Inches(4.6), Inches(12.3), Inches(2.4), [
         (0, "The bug inflated node counts and could add spurious edges/density — it did not fabricate graphs where none existed.", False, INK),
-        (0, "Important: RQ1 construct counts (C1–C8) are read from call sites, not from graph nodes, so RQ1 was NOT affected by this bug.", True, ACCENT2),
+        (0, "Important: RQ1 construct counts (C1–C4) are read from call sites, not from graph nodes, so RQ1 was NOT affected by this bug.", True, ACCENT2),
         (0, "Only the RQ2 dependency-graph complexity metric needed correction.", False, INK),
     ])
 

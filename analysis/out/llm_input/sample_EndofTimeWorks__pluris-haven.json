@@ -1,0 +1,44 @@
+{
+  "full_name": "EndofTimeWorks/pluris-haven",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/EndofTimeWorks__pluris-haven.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 47,
+    "files_production": 35,
+    "files_test": 12,
+    "pct_production": 0.7447
+  },
+  "aggregate": {
+    "depends_total": 8,
+    "security_total": 0,
+    "annotated_depends_total": 11,
+    "yield_dep_total": 1
+  },
+  "known": [
+    "C1",
+    "C3",
+    "C4"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C3; C4",
+  "arg_shapes": {
+    "BARE": 8
+  },
+  "security_scopes": {},
+  "yield_function_names": [
+    "get_db"
+  ],
+  "n_yield_functions": 1,
+  "dependency_graph": {
+    "nodes": 8,
+    "edges": 7,
+    "max_depth": 3,
+    "unresolved_depends": 1
+  },
+  "observations": [],
+  "stratum": "S1",
+  "weight": 12.74359
+}

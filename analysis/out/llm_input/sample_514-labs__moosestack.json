@@ -1,0 +1,41 @@
+{
+  "full_name": "514-labs/moosestack",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/514-labs__moosestack.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 165,
+    "files_production": 130,
+    "files_test": 35,
+    "pct_production": 0.7879
+  },
+  "aggregate": {
+    "depends_total": 4,
+    "security_total": 0,
+    "annotated_depends_total": 0,
+    "yield_dep_total": 0
+  },
+  "known": [
+    "C1"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1",
+  "arg_shapes": {
+    "EMPTY": 1,
+    "BARE": 3
+  },
+  "security_scopes": {},
+  "yield_function_names": [],
+  "n_yield_functions": 0,
+  "dependency_graph": {
+    "nodes": 2,
+    "edges": 3,
+    "max_depth": 2,
+    "unresolved_depends": 0
+  },
+  "observations": [],
+  "stratum": "S4",
+  "weight": 1.0
+}

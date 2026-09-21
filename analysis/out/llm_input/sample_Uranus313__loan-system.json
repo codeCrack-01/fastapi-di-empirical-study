@@ -1,0 +1,46 @@
+{
+  "full_name": "Uranus313/loan-system",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/Uranus313__loan-system.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 8,
+    "files_production": 8,
+    "files_test": 0,
+    "pct_production": 1.0
+  },
+  "aggregate": {
+    "depends_total": 65,
+    "security_total": 0,
+    "annotated_depends_total": 64,
+    "yield_dep_total": 2
+  },
+  "known": [
+    "C1",
+    "C3",
+    "C4"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C3; C4",
+  "arg_shapes": {
+    "BARE": 34,
+    "EMPTY": 1,
+    "DOTTED": 30
+  },
+  "security_scopes": {},
+  "yield_function_names": [
+    "get_db"
+  ],
+  "n_yield_functions": 1,
+  "dependency_graph": {
+    "nodes": 32,
+    "edges": 33,
+    "max_depth": 2,
+    "unresolved_depends": 31
+  },
+  "observations": [],
+  "stratum": "S2",
+  "weight": 6.370787
+}

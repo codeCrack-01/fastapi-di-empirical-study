@@ -1,0 +1,47 @@
+{
+  "full_name": "bluesky/bluesky-httpserver",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/bluesky__bluesky-httpserver.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 48,
+    "files_production": 30,
+    "files_test": 18,
+    "pct_production": 0.625
+  },
+  "aggregate": {
+    "depends_total": 60,
+    "security_total": 69,
+    "annotated_depends_total": 0,
+    "yield_dep_total": 0
+  },
+  "known": [
+    "C1",
+    "C2"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C2",
+  "arg_shapes": {
+    "BARE": 59,
+    "EMPTY": 1
+  },
+  "security_scopes": {
+    "<no-scopes>": 69
+  },
+  "yield_function_names": [],
+  "n_yield_functions": 0,
+  "dependency_graph": {
+    "nodes": 32,
+    "edges": 57,
+    "max_depth": 3,
+    "unresolved_depends": 2
+  },
+  "observations": [
+    "Uses traditional Depends() pattern extensively but no Annotated[..., Depends(...)]",
+    "No yield-based generator dependencies despite significant Depends usage"
+  ],
+  "stratum": "S3",
+  "weight": 1.0
+}

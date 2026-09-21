@@ -1,0 +1,49 @@
+{
+  "full_name": "mic1on/onestep",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/mic1on__onestep.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 411,
+    "files_production": 256,
+    "files_test": 155,
+    "pct_production": 0.6229
+  },
+  "aggregate": {
+    "depends_total": 104,
+    "security_total": 2,
+    "annotated_depends_total": 0,
+    "yield_dep_total": 1
+  },
+  "known": [
+    "C1",
+    "C2",
+    "C4"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C2; C4",
+  "arg_shapes": {
+    "BARE": 104
+  },
+  "security_scopes": {
+    "<no-scopes>": 2
+  },
+  "yield_function_names": [
+    "get_db_session"
+  ],
+  "n_yield_functions": 1,
+  "dependency_graph": {
+    "nodes": 73,
+    "edges": 104,
+    "max_depth": 4,
+    "unresolved_depends": 0
+  },
+  "observations": [
+    "Uses traditional Depends() pattern extensively but no Annotated[..., Depends(...)]",
+    "dependency_overrides found only in test code, not in production"
+  ],
+  "stratum": "S3",
+  "weight": 1.0
+}

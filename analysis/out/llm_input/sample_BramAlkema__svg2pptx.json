@@ -1,0 +1,46 @@
+{
+  "full_name": "BramAlkema/svg2pptx",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/BramAlkema__svg2pptx.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 946,
+    "files_production": 608,
+    "files_test": 338,
+    "pct_production": 0.6427
+  },
+  "aggregate": {
+    "depends_total": 21,
+    "security_total": 1,
+    "annotated_depends_total": 2,
+    "yield_dep_total": 0
+  },
+  "known": [
+    "C1",
+    "C2",
+    "C3"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C2; C3",
+  "arg_shapes": {
+    "BARE": 21
+  },
+  "security_scopes": {
+    "<no-scopes>": 1
+  },
+  "yield_function_names": [],
+  "n_yield_functions": 0,
+  "dependency_graph": {
+    "nodes": 24,
+    "edges": 21,
+    "max_depth": 2,
+    "unresolved_depends": 0
+  },
+  "observations": [
+    "No yield-based generator dependencies despite significant Depends usage"
+  ],
+  "stratum": "S2",
+  "weight": 6.370787
+}

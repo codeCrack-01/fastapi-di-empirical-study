@@ -1,0 +1,43 @@
+{
+  "full_name": "bdjoseluis/b-devops",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/bdjoseluis__b-devops.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 55,
+    "files_production": 52,
+    "files_test": 3,
+    "pct_production": 0.9455
+  },
+  "aggregate": {
+    "depends_total": 20,
+    "security_total": 0,
+    "annotated_depends_total": 0,
+    "yield_dep_total": 0
+  },
+  "known": [
+    "C1"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1",
+  "arg_shapes": {
+    "BARE": 20
+  },
+  "security_scopes": {},
+  "yield_function_names": [],
+  "n_yield_functions": 0,
+  "dependency_graph": {
+    "nodes": 0,
+    "edges": 0,
+    "max_depth": 0,
+    "unresolved_depends": 20
+  },
+  "observations": [
+    "Uses traditional Depends() pattern extensively but no Annotated[..., Depends(...)]",
+    "No yield-based generator dependencies despite significant Depends usage"
+  ],
+  "stratum": "S1",
+  "weight": 12.74359
+}

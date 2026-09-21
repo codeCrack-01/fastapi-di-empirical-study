@@ -1,0 +1,44 @@
+{
+  "full_name": "huawei-noah/noah-research",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/huawei-noah__noah-research.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 2439,
+    "files_production": 2109,
+    "files_test": 330,
+    "pct_production": 0.8647
+  },
+  "aggregate": {
+    "depends_total": 33,
+    "security_total": 0,
+    "annotated_depends_total": 0,
+    "yield_dep_total": 0
+  },
+  "known": [
+    "C1"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1",
+  "arg_shapes": {
+    "BARE": 34
+  },
+  "security_scopes": {},
+  "yield_function_names": [],
+  "n_yield_functions": 0,
+  "dependency_graph": {
+    "nodes": 23,
+    "edges": 33,
+    "max_depth": 2,
+    "unresolved_depends": 0
+  },
+  "observations": [
+    "Uses traditional Depends() pattern extensively but no Annotated[..., Depends(...)]",
+    "dependency_overrides found only in test code, not in production",
+    "No yield-based generator dependencies despite significant Depends usage"
+  ],
+  "stratum": "S4",
+  "weight": 1.0
+}

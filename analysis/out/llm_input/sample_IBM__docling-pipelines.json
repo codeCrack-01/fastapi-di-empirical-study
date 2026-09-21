@@ -1,0 +1,44 @@
+{
+  "full_name": "IBM/docling-pipelines",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/IBM__docling-pipelines.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 747,
+    "files_production": 458,
+    "files_test": 289,
+    "pct_production": 0.6131
+  },
+  "aggregate": {
+    "depends_total": 42,
+    "security_total": 0,
+    "annotated_depends_total": 58,
+    "yield_dep_total": 0
+  },
+  "known": [
+    "C1",
+    "C3"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C3",
+  "arg_shapes": {
+    "BARE": 42
+  },
+  "security_scopes": {},
+  "yield_function_names": [],
+  "n_yield_functions": 0,
+  "dependency_graph": {
+    "nodes": 50,
+    "edges": 38,
+    "max_depth": 3,
+    "unresolved_depends": 4
+  },
+  "observations": [
+    "dependency_overrides found only in test code, not in production",
+    "No yield-based generator dependencies despite significant Depends usage"
+  ],
+  "stratum": "S3",
+  "weight": 1.0
+}

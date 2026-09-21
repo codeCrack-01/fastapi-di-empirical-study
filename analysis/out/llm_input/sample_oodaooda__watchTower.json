@@ -1,0 +1,47 @@
+{
+  "full_name": "oodaooda/watchTower",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/oodaooda__watchTower.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 117,
+    "files_production": 100,
+    "files_test": 17,
+    "pct_production": 0.8547
+  },
+  "aggregate": {
+    "depends_total": 60,
+    "security_total": 0,
+    "annotated_depends_total": 0,
+    "yield_dep_total": 2
+  },
+  "known": [
+    "C1",
+    "C4"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C4",
+  "arg_shapes": {
+    "BARE": 60
+  },
+  "security_scopes": {},
+  "yield_function_names": [
+    "get_db",
+    "get_qa_db"
+  ],
+  "n_yield_functions": 2,
+  "dependency_graph": {
+    "nodes": 60,
+    "edges": 60,
+    "max_depth": 2,
+    "unresolved_depends": 0
+  },
+  "observations": [
+    "Uses traditional Depends() pattern extensively but no Annotated[..., Depends(...)]",
+    "dependency_overrides found only in test code, not in production"
+  ],
+  "stratum": "S1",
+  "weight": 12.74359
+}

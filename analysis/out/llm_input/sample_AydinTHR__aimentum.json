@@ -1,0 +1,46 @@
+{
+  "full_name": "AydinTHR/aimentum",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/AydinTHR__aimentum.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 56,
+    "files_production": 37,
+    "files_test": 19,
+    "pct_production": 0.6607
+  },
+  "aggregate": {
+    "depends_total": 6,
+    "security_total": 0,
+    "annotated_depends_total": 6,
+    "yield_dep_total": 1
+  },
+  "known": [
+    "C1",
+    "C3",
+    "C4"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C3; C4",
+  "arg_shapes": {
+    "BARE": 6
+  },
+  "security_scopes": {},
+  "yield_function_names": [
+    "get_db"
+  ],
+  "n_yield_functions": 1,
+  "dependency_graph": {
+    "nodes": 12,
+    "edges": 6,
+    "max_depth": 2,
+    "unresolved_depends": 0
+  },
+  "observations": [
+    "dependency_overrides found only in test code, not in production"
+  ],
+  "stratum": "S1",
+  "weight": 12.74359
+}

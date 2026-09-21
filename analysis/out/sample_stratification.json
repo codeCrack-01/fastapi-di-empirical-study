@@ -1,0 +1,38 @@
+{
+  "schema_version": "0.2",
+  "generated_at": "2026-09-19T07:14:12.981210+00:00",
+  "target": 327,
+  "seed": 42,
+  "allocation": {
+    "S1": {
+      "population": 1491,
+      "allocated": 117,
+      "coverage_pct": 7.85
+    },
+    "S2": {
+      "population": 567,
+      "allocated": 89,
+      "coverage_pct": 15.7
+    },
+    "S3": {
+      "population": 87,
+      "allocated": 87,
+      "coverage_pct": 100.0
+    },
+    "S4": {
+      "population": 34,
+      "allocated": 34,
+      "coverage_pct": 100.0
+    }
+  },
+  "notes": {
+    "exhaustive_strata": [
+      "S3",
+      "S4"
+    ],
+    "oversample_factors": {
+      "S2": 2.0
+    },
+    "remainder_fix": "rounding drift assigned to largest fractional remainders"
+  }
+}

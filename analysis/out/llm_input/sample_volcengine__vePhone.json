@@ -1,0 +1,44 @@
+{
+  "full_name": "volcengine/vePhone",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/volcengine__vePhone.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 271,
+    "files_production": 187,
+    "files_test": 84,
+    "pct_production": 0.69
+  },
+  "aggregate": {
+    "depends_total": 12,
+    "security_total": 0,
+    "annotated_depends_total": 12,
+    "yield_dep_total": 2
+  },
+  "known": [
+    "C1",
+    "C3",
+    "C4"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C3; C4",
+  "arg_shapes": {
+    "BARE": 12
+  },
+  "security_scopes": {},
+  "yield_function_names": [
+    "get_db"
+  ],
+  "n_yield_functions": 1,
+  "dependency_graph": {
+    "nodes": 18,
+    "edges": 12,
+    "max_depth": 2,
+    "unresolved_depends": 0
+  },
+  "observations": [],
+  "stratum": "S3",
+  "weight": 1.0
+}

@@ -1,0 +1,49 @@
+{
+  "full_name": "AlphaHorizon-AI/Shogun",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/AlphaHorizon-AI__Shogun.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 557,
+    "files_production": 472,
+    "files_test": 85,
+    "pct_production": 0.8474
+  },
+  "aggregate": {
+    "depends_total": 568,
+    "security_total": 1,
+    "annotated_depends_total": 0,
+    "yield_dep_total": 3
+  },
+  "known": [
+    "C1",
+    "C2",
+    "C4"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C2; C4",
+  "arg_shapes": {
+    "BARE": 570
+  },
+  "security_scopes": {
+    "<no-scopes>": 1
+  },
+  "yield_function_names": [
+    "get_db"
+  ],
+  "n_yield_functions": 1,
+  "dependency_graph": {
+    "nodes": 480,
+    "edges": 568,
+    "max_depth": 3,
+    "unresolved_depends": 0
+  },
+  "observations": [
+    "Uses traditional Depends() pattern extensively but no Annotated[..., Depends(...)]",
+    "dependency_overrides found only in test code, not in production"
+  ],
+  "stratum": "S2",
+  "weight": 6.370787
+}

@@ -1,0 +1,49 @@
+{
+  "full_name": "GiZano/QuakeGuard",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/GiZano__QuakeGuard.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 49,
+    "files_production": 29,
+    "files_test": 20,
+    "pct_production": 0.5918
+  },
+  "aggregate": {
+    "depends_total": 28,
+    "security_total": 1,
+    "annotated_depends_total": 0,
+    "yield_dep_total": 1
+  },
+  "known": [
+    "C1",
+    "C2",
+    "C4"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C2; C4",
+  "arg_shapes": {
+    "BARE": 28
+  },
+  "security_scopes": {
+    "<no-scopes>": 1
+  },
+  "yield_function_names": [
+    "get_db"
+  ],
+  "n_yield_functions": 1,
+  "dependency_graph": {
+    "nodes": 18,
+    "edges": 28,
+    "max_depth": 3,
+    "unresolved_depends": 0
+  },
+  "observations": [
+    "Uses traditional Depends() pattern extensively but no Annotated[..., Depends(...)]",
+    "dependency_overrides found only in test code, not in production"
+  ],
+  "stratum": "S3",
+  "weight": 1.0
+}

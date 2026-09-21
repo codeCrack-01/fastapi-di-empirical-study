@@ -1,0 +1,36 @@
+{
+  "full_name": "capstone-nova-minds/main-repo",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/capstone-nova-minds__main-repo.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 61,
+    "files_production": 57,
+    "files_test": 4,
+    "pct_production": 0.9344
+  },
+  "aggregate": {
+    "depends_total": 0,
+    "security_total": 0,
+    "annotated_depends_total": 0,
+    "yield_dep_total": 0
+  },
+  "known": [],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": true,
+  "catalog_baseline": "ZERO-DI",
+  "arg_shapes": {},
+  "security_scopes": {},
+  "yield_function_names": [],
+  "n_yield_functions": 0,
+  "dependency_graph": {
+    "nodes": 0,
+    "edges": 0,
+    "max_depth": 0,
+    "unresolved_depends": 0
+  },
+  "observations": [],
+  "stratum": "S1",
+  "weight": 12.74359
+}

@@ -140,10 +140,13 @@ Raising the threshold only ever removes accepted repos already passing every lat
 ### 5.0 Construct catalogue reconciliation
 
 > The design catalogue (`docs/construct_catalogue.md`) originally defined ten
-> candidate constructs. **Eight (C1–C8) are operationalized** as per-repo
+> candidate constructs. **Four (C1–C4) are operationalized** as per-repo
 > prevalence counters and reported below. The catalogue has been renumbered so its
-> C1–C8 match this section exactly (and its C9/C10 are explicitly marked
-> *not operationalized*). Two constructs are intentionally not measured:
+> C1–C4 match this section exactly (and its C9/C10 are explicitly marked
+> *not operationalized*). Router-level wiring, app-level wiring, dependency
+> overrides and callable-class dependencies are **compositions of C1/C2** (see
+> §5.1 note) and are no longer reported as separate construct rows. Two
+> constructs are intentionally not measured:
 >
 > - **Nested dependency (C9)** — not a distinct syntactic construct but a
 >   graph-topological property (a dependency that is itself the target of another
@@ -155,7 +158,7 @@ Raising the threshold only ever removes accepted repos already passing every lat
 >   catalogue; factory-generated dependencies are not statically decidable from a
 >   call site, so counting them would risk false positives. Deferred.
 
-### 5.1 Primary constructs (C1–C8)
+### 5.1 Primary constructs (C1–C4)
 
 | ID | Construct | Repos (n/402) | % of corpus | Total calls | Median (users) | IQR (users) | Max |
 |----|-----------|---------------|-------------|-------------|----------------|-------------|-----|
@@ -163,10 +166,14 @@ Raising the threshold only ever removes accepted repos already passing every lat
 | C2 | `Security` | 42 | 10.4% | 163 | 1 | 1.0–3.0 | 69 |
 | C3 | `Annotated[..., Depends]` | 104 | 25.9% | 5,913 | 11.0 | 4.0–49.8 | 1,264 |
 | C4 | Generator/yield dep | 162 | 40.3% | 216 | 1.0 | 1.0–1.0 | 13 |
-| C5 | Router-level deps | 58 | 14.4% | 297 | 3.0 | 1.0–6.0 | 35 |
-| C6 | App-level deps | 10 | 2.5% | 10 | 1.0 | 1.0–1.0 | 1 |
-| C7 | Dependency overrides | 7 | 1.7% | 35 | 1.0 | 1.0–4.0 | 26 |
-| C8 | Callable class deps | 2 | 0.5% | 3 | 1.5 | 0.8–2.2 | 2 |
+
+> **Note (derived, non-construct placements).** Router-level wiring
+> (`APIRouter(dependencies=...)`), app-level wiring (`FastAPI(dependencies=...)`),
+> dependency overrides (`app.dependency_overrides[...]`) and callable-class
+> dependencies are *compositions* of the core constructs: their `Depends(...)`
+> call sites are already counted under C1/C2, and no repository uses them without
+> also using a core construct. They are therefore structural placements, not
+> standalone constructs, and are intentionally excluded from this table.
 
 ### 5.2 Additional observations
 
@@ -180,7 +187,7 @@ Raising the threshold only ever removes accepted repos already passing every lat
 1. **`Depends` is dominant but not universal.** 75.4% of real FastAPI apps use it; the zero-DI cohort (24.4%) does not. The DI system is clearly not mandatory for real-world usage.
 2. **Generator/yield deps are surprisingly common** (40.3%) — more common than `Annotated[..., Depends]` (25.9%), despite the latter being the "modern" recommended style.
 3. **`Security` is underused** (10.4%) despite being a headline FastAPI feature for authentication. Median usage among users is just 1 call — most apps have a single `Security()` site.
-4. **Advanced constructs are nearly absent.** Overrides (1.7%), callable classes (0.5%), app-level deps (2.5%) are almost never seen in production code. Overrides may be test-only (not captured by production-scope extraction).
+4. **The core DI surface is small.** Four constructs (C1–C4) cover essentially all framework DI in production FastAPI code; the derived placements (router/app wiring, overrides, callable classes) are compositions of C1/C2 and are not observed without a core construct.
 5. **The zero-DI cohort (24.4%) is a key finding.** These are real, substantial FastAPI applications (≥ 4 importing files, ≥ 1 app) that bypass the DI system entirely, using direct function calls or other patterns. This finding challenges the assumption that DI is the primary architectural pattern in the FastAPI ecosystem.
 
 ### 5.4 RQ1 covariate axis (folded application-class question) — DI prevalence by covariates
@@ -206,7 +213,7 @@ Folded from the (dropped) application-class question: who uses DI? Disaggregated
 
 **Interpretation:**
 - **DI prevalence is essentially flat across stars** (≈73–76% for the well-populated star buckets, with the small-volume higher buckets (10–99 = 85.7%, 100+ = 85.7%) driven by just 14 and 7 repos). Popularity does not predict DI adoption.
-- **The corpus skews very young:** 361/402 repos are under a year old. This is a direct consequence of the E4 recency gate (pushed within 60 months) combined with the fast-growing, largely new-repo GitHub dependency-graph population.
+- **The corpus skews very young:** 361/402 repos are under a year old. The E4 eligibility rule admits repositories up to 60 months old, so the young skew reflects the discovered population rather than an artifact of the gate.
 - **Oldest/starriest bucket bin counts are small (7–30 repos) for stable conclusions** — reported for completeness, not as a primary finding. The age axis would need RQ4's git history or a larger corpus to be conclusive.
 - Net: the covariate view supports the central finding that **DI use (and its absence) is a stable property across the population**, not skewed by popularity.
 
@@ -280,7 +287,7 @@ Filtered to the **294/402 repos with non-empty **clean** dependency graphs** (af
 |--------|--------|-----|-----|
 | Nodes (clean) | 19.5 | 8–54 | 1,444 |
 | Max depth | 2 | 2–3 | 7 |
-| Unresolved % | 0.0 | 0.0–3.4 | 100.0 |
+| Unresolved % | 0.0 | 0.0–3.6 | 100.0 |
 
 - **180/294 (61.2%)** of graph-bearing repos have a 0% unresolved rate — the resolver handles them cleanly.
 - **1 repo has 100% unresolved** — an outlier with a fully-unresolved graph, likely relying on patterns the resolver cannot follow.
@@ -294,7 +301,7 @@ The dependency graph construction had a genuine contamination bug. In `resolver.
 - **Effect:** Inflates node counts (median 22 raw → **19.5** clean for graph-bearing repos) and can add spurious edge/density values. All 294 graph-bearing repos retain a non-empty clean graph; the junk was additive, never the sole content.
 - **Fix:** `analysis/aggregate.py` now filters any node id containing a path separator or `file:line` anchor before computing RQ3 (both raw and clean columns are retained in `rq4_graphs.csv` for transparency).
 - **Reporting sentence:** *"We filtered resolver-emitted non-callable artifact nodes (file:line placeholders from module-scope dependency declarations) from the dependency graphs before computing complexity metrics."*
-- **RQ1 note:** RQ1 construct counts (C1–C8) come from `file_details`/aggregate call counts, not graph nodes, so RQ1 is unaffected by this bug.
+- **RQ1 note:** RQ1 construct counts (C1–C4) come from `file_details`/aggregate call counts, not graph nodes, so RQ1 is unaffected by this bug.
 
 ---
 
@@ -368,7 +375,7 @@ All artifacts are schema-versioned, byte-stable (sorted order), and fully reprod
 | `corpus/raw_dependents/` | Snapshotted GitHub dependents HTML — 167 pages (reproducibility) |
 | `corpus/topic_seed.json` | 1,000-topic benchmark seed snapshot |
 | `analysis/sample.json` | seed-42 sample of 100 from pool of 351 (frozen pilot/bug-audit sample; final tables are the census) |
-| `analysis/out/rq1_constructs.csv` | Construct prevalence table (C1–C8 + extras) |
+| `analysis/out/rq1_constructs.csv` | Construct prevalence table (C1–C4 + extras) |
 | `analysis/out/rq4_graphs.csv` | Per-repo graph statistics (legacy filename; feeds RQ3) |
 | `analysis/out/usage_patterns.csv` | RQ2 usage/relationship facets (arg shapes, scopes, graph topology, annotated roles) |
 | `analysis/out/usage_patterns_summary.md` | RQ2 mixed-methods write-up (Tier A quantitative + Tier B idiom catalog) |

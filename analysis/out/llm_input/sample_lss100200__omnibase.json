@@ -1,0 +1,48 @@
+{
+  "full_name": "lss100200/omnibase",
+  "report_path": "/home/zain_khan/Documents/Fall'26/research_fastapi/corpus/reports/lss100200__omnibase.json",
+  "schema_version": "0.2",
+  "extractor_version": "0.2.1",
+  "coverage": {
+    "files_total": 526,
+    "files_production": 336,
+    "files_test": 190,
+    "pct_production": 0.6388
+  },
+  "aggregate": {
+    "depends_total": 208,
+    "security_total": 0,
+    "annotated_depends_total": 18,
+    "yield_dep_total": 3
+  },
+  "known": [
+    "C1",
+    "C3",
+    "C4"
+  ],
+  "ex2_flag": false,
+  "ex2_sources": [],
+  "zero_di": false,
+  "catalog_baseline": "C1; C3; C4",
+  "arg_shapes": {
+    "BARE": 209
+  },
+  "security_scopes": {},
+  "yield_function_names": [
+    "get_current_principal",
+    "get_gateway_db",
+    "get_tenant_db"
+  ],
+  "n_yield_functions": 3,
+  "dependency_graph": {
+    "nodes": 105,
+    "edges": 208,
+    "max_depth": 4,
+    "unresolved_depends": 0
+  },
+  "observations": [
+    "dependency_overrides found only in test code, not in production"
+  ],
+  "stratum": "S3",
+  "weight": 1.0
+}

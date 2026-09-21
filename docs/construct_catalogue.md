@@ -17,20 +17,25 @@ between this catalogue and the measured results (see "Operationalization status"
 | C2 | Security | `Security(get_user)` | Yes |
 | C3 | Annotated dependency | `Annotated[User, Depends(...)]` | Yes |
 | C4 | Generator dependency | yield inside dependency | Yes |
-| C5 | Router dependency | `APIRouter(dependencies=...)` | Yes |
-| C6 | App dependency | `FastAPI(dependencies=...)` | Yes |
-| C7 | Dependency override | `app.dependency_overrides[...]` | Yes |
-| C8 | Callable class dependency | `Depends(MyDependency())` | Yes |
 | C9 | Nested dependency | dependency depending on another dependency | **No — captured at graph/usage level (RQ2/RQ3), see below** |
 | C10 | Parameterized dependency | factory-generated dependency | **No — deferred** |
 
 ## Operationalization status
 
-The catalogue originally defined ten candidate constructs. **Eight (C1–C8) are
+The catalogue originally defined ten candidate constructs. **Four (C1–C4) are
 operationalized** as per-repo prevalence counters in the extractor
 (`analysis/aggregate.py` `CONSTRUCTS`) and reported in `result_draft_01.md` §5.
-This is the single canonical numbering: C1–C8 in this table match the C1–C8
+This is the single canonical numbering: C1–C4 in this table match the C1–C4
 reported in the results.
+
+The remaining candidates were reclassified on review: router-level wiring
+(`APIRouter(dependencies=[...])`), app-level wiring (`FastAPI(dependencies=[...])`),
+dependency overrides (`app.dependency_overrides[...]`) and callable-class
+dependencies are **compositions of the core constructs** rather than standalone
+constructs — every repository that uses them also uses C1/C2, and their
+`Depends(...)` call sites are already counted under C1. They are therefore
+documented as derived/structural placements (see `result_draft_01.md` §5) and are
+no longer reported as separate construct rows.
 
 Two constructs are **not** operationalized. This is a deliberate, documented
 decision, stated so the gap is visible rather than silent:

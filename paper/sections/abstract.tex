@@ -1,3 +1,7 @@
 \begin{abstract}
-% TODO
+FastAPI provides built-in dependency injection (DI) widely adopted across Python web applications, yet how developers use its DI mechanisms in practice remains under-examined. In this paper, we present a census of FastAPI dependency-injection usage across 402 open-source repositories, filtered from 5,009 candidates identified through GitHub's dependency graph. Using static AST analysis, we measure the prevalence of four core DI constructs, characterize the dependency graphs they form, and examine these findings across repository stars and age. \texttt{Depends()} is the dominant construct (75.4\% of repositories), while 24.4\% of repositories use no core DI call at all. Extracted dependency graphs contain 16,494 function nodes and 23,223 edges, with a median maximum dependency depth of two. We then analyze the architectural and validity implications of these patterns, proposing directions for comparative and runtime evaluation.
 \end{abstract}
+
+\begin{IEEEkeywords}
+dependency injection, FastAPI, static analysis, dependency graphs, open-source software
+\end{IEEEkeywords}

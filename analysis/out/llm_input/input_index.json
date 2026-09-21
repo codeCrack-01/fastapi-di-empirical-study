@@ -1,0 +1,2629 @@
+{
+  "schema_version": "0.2",
+  "sample_pool": 2179,
+  "sample_size": 327,
+  "strata_weights": {
+    "S1": 12.74359,
+    "S2": 6.370787,
+    "S3": 1.0,
+    "S4": 1.0
+  },
+  "repos": {
+    "0x0021/Linkora": {
+      "file": "sample_0x0021__Linkora.json",
+      "stratum": "S2",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "22V01D/Key-Scraper": {
+      "file": "sample_22V01D__Key-Scraper.json",
+      "stratum": "S2",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "404GamerNotFound/TBC-camera-manager": {
+      "file": "sample_404GamerNotFound__TBC-camera-manager.json",
+      "stratum": "S3",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "4ch1m/pixoo-rest": {
+      "file": "sample_4ch1m__pixoo-rest.json",
+      "stratum": "S4",
+      "known_baseline": "C1; C3",
+      "depends_total": 2,
+      "nodes": 0,
+      "edges": 0
+    },
+    "514-labs/moosestack": {
+      "file": "sample_514-labs__moosestack.json",
+      "stratum": "S4",
+      "known_baseline": "C1",
+      "depends_total": 4,
+      "nodes": 2,
+      "edges": 3
+    },
+    "7-Blocks/Kepler": {
+      "file": "sample_7-Blocks__Kepler.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C4",
+      "depends_total": 23,
+      "nodes": 23,
+      "edges": 22
+    },
+    "7finger0x/ht": {
+      "file": "sample_7finger0x__ht.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C3",
+      "depends_total": 13,
+      "nodes": 13,
+      "edges": 11
+    },
+    "ActiveInferenceInstitute/ActiveInferAnts": {
+      "file": "sample_ActiveInferenceInstitute__ActiveInferAnts.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C4",
+      "depends_total": 16,
+      "nodes": 12,
+      "edges": 14
+    },
+    "Addrick/agent-orchestrator": {
+      "file": "sample_Addrick__agent-orchestrator.json",
+      "stratum": "S2",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "Adejare-ml/News-Intelligence-System": {
+      "file": "sample_Adejare-ml__News-Intelligence-System.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C4",
+      "depends_total": 5,
+      "nodes": 4,
+      "edges": 3
+    },
+    "AlphaHorizon-AI/Shogun": {
+      "file": "sample_AlphaHorizon-AI__Shogun.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C2; C4",
+      "depends_total": 568,
+      "nodes": 480,
+      "edges": 568
+    },
+    "Anubhav9/Yellow-Olive": {
+      "file": "sample_Anubhav9__Yellow-Olive.json",
+      "stratum": "S3",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "AristaLabs/smeme": {
+      "file": "sample_AristaLabs__smeme.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 52,
+      "nodes": 22,
+      "edges": 24
+    },
+    "ArtigenZ-IT-Solutions/artigenznewsite": {
+      "file": "sample_ArtigenZ-IT-Solutions__artigenznewsite.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "Axellum/vromvrom-engine": {
+      "file": "sample_Axellum__vromvrom-engine.json",
+      "stratum": "S1",
+      "known_baseline": "C1",
+      "depends_total": 11,
+      "nodes": 12,
+      "edges": 9
+    },
+    "AydinTHR/aimentum": {
+      "file": "sample_AydinTHR__aimentum.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 6,
+      "nodes": 12,
+      "edges": 6
+    },
+    "Azure-Samples/chat-with-your-data-solution-accelerator": {
+      "file": "sample_Azure-Samples__chat-with-your-data-solution-accelerator.json",
+      "stratum": "S4",
+      "known_baseline": "C1; C3",
+      "depends_total": 11,
+      "nodes": 22,
+      "edges": 11
+    },
+    "BennyKok/omg.dev": {
+      "file": "sample_BennyKok__omg.dev.json",
+      "stratum": "S4",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "Big-Sh0t114/NachoBot": {
+      "file": "sample_Big-Sh0t114__NachoBot.json",
+      "stratum": "S4",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "BlackIQ/amirhossein.info": {
+      "file": "sample_BlackIQ__amirhossein.info.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C4",
+      "depends_total": 45,
+      "nodes": 28,
+      "edges": 44
+    },
+    "BlackIQ/tgju-api": {
+      "file": "sample_BlackIQ__tgju-api.json",
+      "stratum": "S3",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "BlessedRebuS/Krawl": {
+      "file": "sample_BlessedRebuS__Krawl.json",
+      "stratum": "S4",
+      "known_baseline": "C1",
+      "depends_total": 1,
+      "nodes": 2,
+      "edges": 1
+    },
+    "BramAlkema/svg2pptx": {
+      "file": "sample_BramAlkema__svg2pptx.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C2; C3",
+      "depends_total": 21,
+      "nodes": 24,
+      "edges": 21
+    },
+    "BrentIO/SkyFollower": {
+      "file": "sample_BrentIO__SkyFollower.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "COS301-SE-2026/Gesture-Based-Drone-Control": {
+      "file": "sample_COS301-SE-2026__Gesture-Based-Drone-Control.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 27,
+      "nodes": 28,
+      "edges": 27
+    },
+    "CPL-Compliance/software-engineer-assessment-guardian-fastapi": {
+      "file": "sample_CPL-Compliance__software-engineer-assessment-guardian-fastapi.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 1,
+      "nodes": 2,
+      "edges": 1
+    },
+    "Ciiceronee/Ciiceronee": {
+      "file": "sample_Ciiceronee__Ciiceronee.json",
+      "stratum": "S4",
+      "known_baseline": "C1",
+      "depends_total": 5,
+      "nodes": 7,
+      "edges": 5
+    },
+    "CognitiveCodeAI/rag-main-2": {
+      "file": "sample_CognitiveCodeAI__rag-main-2.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C4",
+      "depends_total": 45,
+      "nodes": 31,
+      "edges": 45
+    },
+    "DGuckert/Butler": {
+      "file": "sample_DGuckert__Butler.json",
+      "stratum": "S3",
+      "known_baseline": "C1",
+      "depends_total": 53,
+      "nodes": 53,
+      "edges": 52
+    },
+    "Dadowatt/smarthelp-support-api": {
+      "file": "sample_Dadowatt__smarthelp-support-api.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "DavidFerj/agentic-platform-baseline": {
+      "file": "sample_DavidFerj__agentic-platform-baseline.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C3",
+      "depends_total": 2,
+      "nodes": 4,
+      "edges": 2
+    },
+    "DavidKrGH/Dockkeep": {
+      "file": "sample_DavidKrGH__Dockkeep.json",
+      "stratum": "S2",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "DenisKimskku/DenisKimskku.github.io": {
+      "file": "sample_DenisKimskku__DenisKimskku.github.io.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "DevOpsAIguru123/awesome-agentic-devops": {
+      "file": "sample_DevOpsAIguru123__awesome-agentic-devops.json",
+      "stratum": "S3",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "Devathmaj/VoucherBot": {
+      "file": "sample_Devathmaj__VoucherBot.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C4",
+      "depends_total": 3,
+      "nodes": 3,
+      "edges": 3
+    },
+    "Dhairya2289/Personal-AI-System": {
+      "file": "sample_Dhairya2289__Personal-AI-System.json",
+      "stratum": "S2",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "Dibyataru-Chakraborty/ASM-Tool": {
+      "file": "sample_Dibyataru-Chakraborty__ASM-Tool.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C4",
+      "depends_total": 344,
+      "nodes": 168,
+      "edges": 344
+    },
+    "DockVault/vault": {
+      "file": "sample_DockVault__vault.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C4",
+      "depends_total": 303,
+      "nodes": 151,
+      "edges": 298
+    },
+    "EOPF-Explorer/titiler-eopf": {
+      "file": "sample_EOPF-Explorer__titiler-eopf.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C3",
+      "depends_total": 44,
+      "nodes": 4,
+      "edges": 2
+    },
+    "EarthSpark/thundercloud": {
+      "file": "sample_EarthSpark__thundercloud.json",
+      "stratum": "S2",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "EndofTimeWorks/pluris-haven": {
+      "file": "sample_EndofTimeWorks__pluris-haven.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 8,
+      "nodes": 8,
+      "edges": 7
+    },
+    "EnkrateiaLucca/oreilly_live_training_getting_started_with_langchain": {
+      "file": "sample_EnkrateiaLucca__oreilly_live_training_getting_started_with_langchain.json",
+      "stratum": "S3",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "EpicEric/duper": {
+      "file": "sample_EpicEric__duper.json",
+      "stratum": "S3",
+      "known_baseline": "C1",
+      "depends_total": 1,
+      "nodes": 2,
+      "edges": 1
+    },
+    "EssenceSentry/relay": {
+      "file": "sample_EssenceSentry__relay.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C3",
+      "depends_total": 2,
+      "nodes": 0,
+      "edges": 0
+    },
+    "Fergana-Labs/stash": {
+      "file": "sample_Fergana-Labs__stash.json",
+      "stratum": "S4",
+      "known_baseline": "C1",
+      "depends_total": 423,
+      "nodes": 294,
+      "edges": 420
+    },
+    "FlintsXzzz/AGORA": {
+      "file": "sample_FlintsXzzz__AGORA.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C4",
+      "depends_total": 3,
+      "nodes": 4,
+      "edges": 3
+    },
+    "FlowElement-xinliuyuansu/m_flow": {
+      "file": "sample_FlowElement-xinliuyuansu__m_flow.json",
+      "stratum": "S4",
+      "known_baseline": "C1; C4",
+      "depends_total": 78,
+      "nodes": 79,
+      "edges": 75
+    },
+    "Fosnie/fosnie": {
+      "file": "sample_Fosnie__fosnie.json",
+      "stratum": "S2",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "Frjeil/cloistr": {
+      "file": "sample_Frjeil__cloistr.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "GG-Angel/overplayed": {
+      "file": "sample_GG-Angel__overplayed.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C4",
+      "depends_total": 40,
+      "nodes": 30,
+      "edges": 40
+    },
+    "Ganesh-403/semantic-plagiarism-detector": {
+      "file": "sample_Ganesh-403__semantic-plagiarism-detector.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C2",
+      "depends_total": 6,
+      "nodes": 7,
+      "edges": 5
+    },
+    "GiZano/QuakeGuard": {
+      "file": "sample_GiZano__QuakeGuard.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C2; C4",
+      "depends_total": 28,
+      "nodes": 18,
+      "edges": 28
+    },
+    "Git-me-Harish/Mentora": {
+      "file": "sample_Git-me-Harish__Mentora.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C3",
+      "depends_total": 100,
+      "nodes": 76,
+      "edges": 97
+    },
+    "GlacierEQ/ECHO": {
+      "file": "sample_GlacierEQ__ECHO.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C3",
+      "depends_total": 4,
+      "nodes": 5,
+      "edges": 4
+    },
+    "GolubchikovKirill/InfraScope": {
+      "file": "sample_GolubchikovKirill__InfraScope.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 91,
+      "nodes": 93,
+      "edges": 89
+    },
+    "GregB712/Loomi-Brain": {
+      "file": "sample_GregB712__Loomi-Brain.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 3,
+      "nodes": 6,
+      "edges": 3
+    },
+    "Hardonian/truthcore": {
+      "file": "sample_Hardonian__truthcore.json",
+      "stratum": "S1",
+      "known_baseline": "C1",
+      "depends_total": 17,
+      "nodes": 9,
+      "edges": 8
+    },
+    "Harshith-Shetty/data-validator-testing-tool": {
+      "file": "sample_Harshith-Shetty__data-validator-testing-tool.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "IBM/docling-pipelines": {
+      "file": "sample_IBM__docling-pipelines.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C3",
+      "depends_total": 42,
+      "nodes": 50,
+      "edges": 38
+    },
+    "IanShaw027/openmail": {
+      "file": "sample_IanShaw027__openmail.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 27,
+      "nodes": 33,
+      "edges": 27
+    },
+    "IbukunSanni/SudokuSensei": {
+      "file": "sample_IbukunSanni__SudokuSensei.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "IdealDestructor/RiskAtlas": {
+      "file": "sample_IdealDestructor__RiskAtlas.json",
+      "stratum": "S3",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "InfoSecInnovations/shabti": {
+      "file": "sample_InfoSecInnovations__shabti.json",
+      "stratum": "S4",
+      "known_baseline": "C1; C3",
+      "depends_total": 15,
+      "nodes": 15,
+      "edges": 14
+    },
+    "JafarMahmood123/IntelliLect": {
+      "file": "sample_JafarMahmood123__IntelliLect.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 38,
+      "nodes": 66,
+      "edges": 38
+    },
+    "Joshua-Ranish-T/AetherLearn.ai": {
+      "file": "sample_Joshua-Ranish-T__AetherLearn.ai.json",
+      "stratum": "S3",
+      "known_baseline": "C1",
+      "depends_total": 16,
+      "nodes": 16,
+      "edges": 15
+    },
+    "Joulenap/joulenap": {
+      "file": "sample_Joulenap__joulenap.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C4",
+      "depends_total": 79,
+      "nodes": 55,
+      "edges": 79
+    },
+    "Junping0645/TAB": {
+      "file": "sample_Junping0645__TAB.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "Jzy258/canteen-recommendation-agent": {
+      "file": "sample_Jzy258__canteen-recommendation-agent.json",
+      "stratum": "S2",
+      "known_baseline": "C1",
+      "depends_total": 25,
+      "nodes": 24,
+      "edges": 23
+    },
+    "Kevin-O-Hsu/Sealium": {
+      "file": "sample_Kevin-O-Hsu__Sealium.json",
+      "stratum": "S2",
+      "known_baseline": "C1",
+      "depends_total": 6,
+      "nodes": 5,
+      "edges": 6
+    },
+    "KikuAI-Lab/reliapi": {
+      "file": "sample_KikuAI-Lab__reliapi.json",
+      "stratum": "S2",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "Kirito161718/Obsidian-Learning-Agent": {
+      "file": "sample_Kirito161718__Obsidian-Learning-Agent.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C4",
+      "depends_total": 110,
+      "nodes": 106,
+      "edges": 110
+    },
+    "Kirov-Dynamics-Technology/kirov-secure-api-gateway": {
+      "file": "sample_Kirov-Dynamics-Technology__kirov-secure-api-gateway.json",
+      "stratum": "S2",
+      "known_baseline": "C1",
+      "depends_total": 2,
+      "nodes": 0,
+      "edges": 0
+    },
+    "Lawofall/AgentCore": {
+      "file": "sample_Lawofall__AgentCore.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 599,
+      "nodes": 374,
+      "edges": 599
+    },
+    "Leonidy431/klab_web": {
+      "file": "sample_Leonidy431__klab_web.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C4",
+      "depends_total": 35,
+      "nodes": 39,
+      "edges": 35
+    },
+    "LinzeColin/MetaDatabase": {
+      "file": "sample_LinzeColin__MetaDatabase.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C3",
+      "depends_total": 89,
+      "nodes": 50,
+      "edges": 47
+    },
+    "LogCoreTech/LogCoreOS": {
+      "file": "sample_LogCoreTech__LogCoreOS.json",
+      "stratum": "S2",
+      "known_baseline": "C1",
+      "depends_total": 776,
+      "nodes": 281,
+      "edges": 293
+    },
+    "Lukyyyyy/KairoCLI": {
+      "file": "sample_Lukyyyyy__KairoCLI.json",
+      "stratum": "S2",
+      "known_baseline": "C1",
+      "depends_total": 40,
+      "nodes": 40,
+      "edges": 39
+    },
+    "M2002HR/Speech_to_Text_FastAPI_Service": {
+      "file": "sample_M2002HR__Speech_to_Text_FastAPI_Service.json",
+      "stratum": "S2",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "MKRWW/wortlaut": {
+      "file": "sample_MKRWW__wortlaut.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 1,
+      "nodes": 2,
+      "edges": 1
+    },
+    "MSKazemi/kubeintellect": {
+      "file": "sample_MSKazemi__kubeintellect.json",
+      "stratum": "S2",
+      "known_baseline": "C1",
+      "depends_total": 1,
+      "nodes": 2,
+      "edges": 1
+    },
+    "Markhhyu/equipment-rag-agent": {
+      "file": "sample_Markhhyu__equipment-rag-agent.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C2; C3",
+      "depends_total": 41,
+      "nodes": 41,
+      "edges": 41
+    },
+    "Mdnow/curator-v3": {
+      "file": "sample_Mdnow__curator-v3.json",
+      "stratum": "S1",
+      "known_baseline": "C1",
+      "depends_total": 49,
+      "nodes": 49,
+      "edges": 48
+    },
+    "MitCaine/Nutrition-App": {
+      "file": "sample_MitCaine__Nutrition-App.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C4",
+      "depends_total": 95,
+      "nodes": 50,
+      "edges": 94
+    },
+    "Mmodarre/Lakehouse_Plumber": {
+      "file": "sample_Mmodarre__Lakehouse_Plumber.json",
+      "stratum": "S3",
+      "known_baseline": "C1",
+      "depends_total": 65,
+      "nodes": 60,
+      "edges": 65
+    },
+    "MoMoM101/RAG-ReActAgent": {
+      "file": "sample_MoMoM101__RAG-ReActAgent.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C4",
+      "depends_total": 35,
+      "nodes": 39,
+      "edges": 35
+    },
+    "MrGibbage/Python-Music-Video-Grabber": {
+      "file": "sample_MrGibbage__Python-Music-Video-Grabber.json",
+      "stratum": "S1",
+      "known_baseline": "C1",
+      "depends_total": 70,
+      "nodes": 35,
+      "edges": 70
+    },
+    "MrLappes/MrLappesPage": {
+      "file": "sample_MrLappes__MrLappesPage.json",
+      "stratum": "S1",
+      "known_baseline": "C1",
+      "depends_total": 19,
+      "nodes": 19,
+      "edges": 17
+    },
+    "NASA-IMPACT/veda-backend": {
+      "file": "sample_NASA-IMPACT__veda-backend.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C2; C3",
+      "depends_total": 17,
+      "nodes": 5,
+      "edges": 4
+    },
+    "NeuroticGamer99/healthspan": {
+      "file": "sample_NeuroticGamer99__healthspan.json",
+      "stratum": "S1",
+      "known_baseline": "C1",
+      "depends_total": 2,
+      "nodes": 3,
+      "edges": 2
+    },
+    "Nsh-GaMeS/Global-Vision": {
+      "file": "sample_Nsh-GaMeS__Global-Vision.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C4",
+      "depends_total": 8,
+      "nodes": 7,
+      "edges": 7
+    },
+    "Ocel-Labs/Osprey": {
+      "file": "sample_Ocel-Labs__Osprey.json",
+      "stratum": "S3",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "OpenBMB/StaffDeck": {
+      "file": "sample_OpenBMB__StaffDeck.json",
+      "stratum": "S4",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 706,
+      "nodes": 342,
+      "edges": 703
+    },
+    "PedroooAlmeida/something": {
+      "file": "sample_PedroooAlmeida__something.json",
+      "stratum": "S2",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "PetervanLunteren/AddaxAI": {
+      "file": "sample_PetervanLunteren__AddaxAI.json",
+      "stratum": "S4",
+      "known_baseline": "C1; C4",
+      "depends_total": 133,
+      "nodes": 133,
+      "edges": 133
+    },
+    "Phobetore/Evermind": {
+      "file": "sample_Phobetore__Evermind.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C4",
+      "depends_total": 48,
+      "nodes": 48,
+      "edges": 48
+    },
+    "PodZonePlatformEngineering/gitopsapi": {
+      "file": "sample_PodZonePlatformEngineering__gitopsapi.json",
+      "stratum": "S2",
+      "known_baseline": "C1",
+      "depends_total": 2,
+      "nodes": 4,
+      "edges": 2
+    },
+    "Pratzz14/Phys.io": {
+      "file": "sample_Pratzz14__Phys.io.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C4",
+      "depends_total": 23,
+      "nodes": 16,
+      "edges": 23
+    },
+    "PurpleAILAB/Decepticon": {
+      "file": "sample_PurpleAILAB__Decepticon.json",
+      "stratum": "S4",
+      "known_baseline": "C1; C3",
+      "depends_total": 12,
+      "nodes": 14,
+      "edges": 12
+    },
+    "Quantrail-Data/CH-AdNova": {
+      "file": "sample_Quantrail-Data__CH-AdNova.json",
+      "stratum": "S1",
+      "known_baseline": "C1",
+      "depends_total": 24,
+      "nodes": 22,
+      "edges": 24
+    },
+    "Raphasha27/secure-auth-rbac-template": {
+      "file": "sample_Raphasha27__secure-auth-rbac-template.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C4",
+      "depends_total": 16,
+      "nodes": 15,
+      "edges": 15
+    },
+    "ReidSurmeier/woodblock-reidsurmeier-wtf": {
+      "file": "sample_ReidSurmeier__woodblock-reidsurmeier-wtf.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "RightNow-AI/local-kimi": {
+      "file": "sample_RightNow-AI__local-kimi.json",
+      "stratum": "S3",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "SDM-TIB/Tool4Boxology": {
+      "file": "sample_SDM-TIB__Tool4Boxology.json",
+      "stratum": "S3",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "SHalimoosavi/SYJ-LaunchPad": {
+      "file": "sample_SHalimoosavi__SYJ-LaunchPad.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C4",
+      "depends_total": 2,
+      "nodes": 3,
+      "edges": 2
+    },
+    "STarLighTsMoveMenTs/European-Union-Complince-Portal": {
+      "file": "sample_STarLighTsMoveMenTs__European-Union-Complince-Portal.json",
+      "stratum": "S1",
+      "known_baseline": "C1",
+      "depends_total": 13,
+      "nodes": 15,
+      "edges": 13
+    },
+    "Saiteja02806/watermark": {
+      "file": "sample_Saiteja02806__watermark.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "Samarth-23-eng/scope-intelligence": {
+      "file": "sample_Samarth-23-eng__scope-intelligence.json",
+      "stratum": "S3",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "SanjeevaRDodlapati/OmicsOracle": {
+      "file": "sample_SanjeevaRDodlapati__OmicsOracle.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C2; C4",
+      "depends_total": 63,
+      "nodes": 43,
+      "edges": 61
+    },
+    "Sathvik33/OmniMind": {
+      "file": "sample_Sathvik33__OmniMind.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C4",
+      "depends_total": 24,
+      "nodes": 15,
+      "edges": 23
+    },
+    "Scorpio-meow/high-school-mock-api": {
+      "file": "sample_Scorpio-meow__high-school-mock-api.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "Shadowgar/SnakeTracker": {
+      "file": "sample_Shadowgar__SnakeTracker.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "ShaharBand/fluxly": {
+      "file": "sample_ShaharBand__fluxly.json",
+      "stratum": "S3",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "ShiBui2003/Type": {
+      "file": "sample_ShiBui2003__Type.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C4",
+      "depends_total": 18,
+      "nodes": 19,
+      "edges": 18
+    },
+    "Shivaninandyala/TaskTracker": {
+      "file": "sample_Shivaninandyala__TaskTracker.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C4",
+      "depends_total": 26,
+      "nodes": 15,
+      "edges": 24
+    },
+    "Skilluv/skilluv-ia": {
+      "file": "sample_Skilluv__skilluv-ia.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "Smart-AI-Memory/attune-ai": {
+      "file": "sample_Smart-AI-Memory__attune-ai.json",
+      "stratum": "S3",
+      "known_baseline": "C1",
+      "depends_total": 8,
+      "nodes": 9,
+      "edges": 8
+    },
+    "SquidSec/SquidC5": {
+      "file": "sample_SquidSec__SquidC5.json",
+      "stratum": "S3",
+      "known_baseline": "C1",
+      "depends_total": 133,
+      "nodes": 136,
+      "edges": 133
+    },
+    "Stane316/daba-pulse": {
+      "file": "sample_Stane316__daba-pulse.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "SteveGJones/ai-first-sdlc-practices": {
+      "file": "sample_SteveGJones__ai-first-sdlc-practices.json",
+      "stratum": "S3",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "Sthitadhi1/PharmaIQ": {
+      "file": "sample_Sthitadhi1__PharmaIQ.json",
+      "stratum": "S1",
+      "known_baseline": "C1",
+      "depends_total": 2,
+      "nodes": 2,
+      "edges": 1
+    },
+    "TECHLETES/techletes-tooling": {
+      "file": "sample_TECHLETES__techletes-tooling.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 10,
+      "nodes": 12,
+      "edges": 8
+    },
+    "Tanishpd/linkedin-insights-microservice": {
+      "file": "sample_Tanishpd__linkedin-insights-microservice.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C4",
+      "depends_total": 2,
+      "nodes": 3,
+      "edges": 2
+    },
+    "Tanush-Jain/kelan": {
+      "file": "sample_Tanush-Jain__kelan.json",
+      "stratum": "S2",
+      "known_baseline": "C1",
+      "depends_total": 11,
+      "nodes": 11,
+      "edges": 10
+    },
+    "Telefonica/AgentHound": {
+      "file": "sample_Telefonica__AgentHound.json",
+      "stratum": "S3",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "Thepizzapie/BuildersGate": {
+      "file": "sample_Thepizzapie__BuildersGate.json",
+      "stratum": "S3",
+      "known_baseline": "C1",
+      "depends_total": 13,
+      "nodes": 0,
+      "edges": 0
+    },
+    "TryCaspian/caspian-sdk": {
+      "file": "sample_TryCaspian__caspian-sdk.json",
+      "stratum": "S4",
+      "known_baseline": "C1; C4",
+      "depends_total": 109,
+      "nodes": 60,
+      "edges": 109
+    },
+    "Turing222/dewflow": {
+      "file": "sample_Turing222__dewflow.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 103,
+      "nodes": 68,
+      "edges": 83
+    },
+    "Upties/Geoatlas-x-NOS": {
+      "file": "sample_Upties__Geoatlas-x-NOS.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C2; C4",
+      "depends_total": 199,
+      "nodes": 110,
+      "edges": 195
+    },
+    "Uranus313/loan-system": {
+      "file": "sample_Uranus313__loan-system.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 65,
+      "nodes": 32,
+      "edges": 33
+    },
+    "Vist233/infinity_Agents": {
+      "file": "sample_Vist233__infinity_Agents.json",
+      "stratum": "S3",
+      "known_baseline": "C1",
+      "depends_total": 42,
+      "nodes": 44,
+      "edges": 42
+    },
+    "WiredMind2/AnimeManager": {
+      "file": "sample_WiredMind2__AnimeManager.json",
+      "stratum": "S2",
+      "known_baseline": "C1",
+      "depends_total": 8,
+      "nodes": 9,
+      "edges": 8
+    },
+    "Yakhyobek1997/yagu-wise-ai": {
+      "file": "sample_Yakhyobek1997__yagu-wise-ai.json",
+      "stratum": "S2",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "ZeroDayZ7/dev-stack": {
+      "file": "sample_ZeroDayZ7__dev-stack.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "aXtr1o1/ConvAgent": {
+      "file": "sample_aXtr1o1__ConvAgent.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "aadil-zikre/HelloAgain": {
+      "file": "sample_aadil-zikre__HelloAgain.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C4",
+      "depends_total": 67,
+      "nodes": 38,
+      "edges": 67
+    },
+    "abdeljalil-elg/ai-fraud-detection-platform": {
+      "file": "sample_abdeljalil-elg__ai-fraud-detection-platform.json",
+      "stratum": "S1",
+      "known_baseline": "C1",
+      "depends_total": 13,
+      "nodes": 13,
+      "edges": 12
+    },
+    "abhaythakur754-0/parwa": {
+      "file": "sample_abhaythakur754-0__parwa.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C4",
+      "depends_total": 1259,
+      "nodes": 638,
+      "edges": 1244
+    },
+    "acebmxer/beacon_pxe": {
+      "file": "sample_acebmxer__beacon_pxe.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C4",
+      "depends_total": 93,
+      "nodes": 48,
+      "edges": 93
+    },
+    "acgs-ai/ACGS": {
+      "file": "sample_acgs-ai__ACGS.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 20,
+      "nodes": 25,
+      "edges": 17
+    },
+    "acgs-ai/enhanced-agent-bus": {
+      "file": "sample_acgs-ai__enhanced-agent-bus.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C2; C3",
+      "depends_total": 134,
+      "nodes": 92,
+      "edges": 127
+    },
+    "agustinpic72/alphawave-taskd": {
+      "file": "sample_agustinpic72__alphawave-taskd.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C4",
+      "depends_total": 204,
+      "nodes": 110,
+      "edges": 204
+    },
+    "ailinone/collective-intelligence": {
+      "file": "sample_ailinone__collective-intelligence.json",
+      "stratum": "S4",
+      "known_baseline": "C1",
+      "depends_total": 2,
+      "nodes": 3,
+      "edges": 2
+    },
+    "aiuda-io/aiuda": {
+      "file": "sample_aiuda-io__aiuda.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C4",
+      "depends_total": 334,
+      "nodes": 155,
+      "edges": 334
+    },
+    "aliseylaneh/Python-Eventsourcing-CQRS": {
+      "file": "sample_aliseylaneh__Python-Eventsourcing-CQRS.json",
+      "stratum": "S3",
+      "known_baseline": "C1",
+      "depends_total": 12,
+      "nodes": 13,
+      "edges": 12
+    },
+    "amurark3/F1-AI": {
+      "file": "sample_amurark3__F1-AI.json",
+      "stratum": "S2",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "andrewtryder/unifi-netwatcher": {
+      "file": "sample_andrewtryder__unifi-netwatcher.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C4",
+      "depends_total": 39,
+      "nodes": 36,
+      "edges": 39
+    },
+    "anubhab7111/lawWeb": {
+      "file": "sample_anubhab7111__lawWeb.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C4",
+      "depends_total": 78,
+      "nodes": 45,
+      "edges": 78
+    },
+    "anupanujit/SAARTHI-AI": {
+      "file": "sample_anupanujit__SAARTHI-AI.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C4",
+      "depends_total": 51,
+      "nodes": 36,
+      "edges": 50
+    },
+    "apache/hudi": {
+      "file": "sample_apache__hudi.json",
+      "stratum": "S4",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "asadbutt64/OGS": {
+      "file": "sample_asadbutt64__OGS.json",
+      "stratum": "S2",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "asfrosche/VillageGameBot": {
+      "file": "sample_asfrosche__VillageGameBot.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C4",
+      "depends_total": 17,
+      "nodes": 11,
+      "edges": 10
+    },
+    "asklokesh/loki-mode": {
+      "file": "sample_asklokesh__loki-mode.json",
+      "stratum": "S4",
+      "known_baseline": "C1; C2; C4",
+      "depends_total": 247,
+      "nodes": 28,
+      "edges": 47
+    },
+    "auracarehq/auradefi": {
+      "file": "sample_auracarehq__auradefi.json",
+      "stratum": "S2",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "auth0/auth0-fastapi-api": {
+      "file": "sample_auth0__auth0-fastapi-api.json",
+      "stratum": "S3",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "automatika-robotics/roboml": {
+      "file": "sample_automatika-robotics__roboml.json",
+      "stratum": "S3",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "aws-samples/sample-agent-platform-with-agentcore": {
+      "file": "sample_aws-samples__sample-agent-platform-with-agentcore.json",
+      "stratum": "S3",
+      "known_baseline": "C1",
+      "depends_total": 76,
+      "nodes": 74,
+      "edges": 76
+    },
+    "aws-samples/sample-multiagent-multimodal-hcls": {
+      "file": "sample_aws-samples__sample-multiagent-multimodal-hcls.json",
+      "stratum": "S2",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "aws/context-ontology-accelerator": {
+      "file": "sample_aws__context-ontology-accelerator.json",
+      "stratum": "S4",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "b1rdmania/legalise": {
+      "file": "sample_b1rdmania__legalise.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 176,
+      "nodes": 93,
+      "edges": 94
+    },
+    "baDrsh531/matchiq": {
+      "file": "sample_baDrsh531__matchiq.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "backblaze-b2-samples/birdnet-passive-acoustic-monitoring": {
+      "file": "sample_backblaze-b2-samples__birdnet-passive-acoustic-monitoring.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "bdjoseluis/b-devops": {
+      "file": "sample_bdjoseluis__b-devops.json",
+      "stratum": "S1",
+      "known_baseline": "C1",
+      "depends_total": 20,
+      "nodes": 0,
+      "edges": 0
+    },
+    "beenycool/yotuubef": {
+      "file": "sample_beenycool__yotuubef.json",
+      "stratum": "S2",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "bluesky/bluesky-httpserver": {
+      "file": "sample_bluesky__bluesky-httpserver.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C2",
+      "depends_total": 60,
+      "nodes": 32,
+      "edges": 57
+    },
+    "brcampidelli/chimera-agent": {
+      "file": "sample_brcampidelli__chimera-agent.json",
+      "stratum": "S3",
+      "known_baseline": "C1",
+      "depends_total": 1,
+      "nodes": 2,
+      "edges": 1
+    },
+    "breim/TAlib-altcoins-api": {
+      "file": "sample_breim__TAlib-altcoins-api.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C3",
+      "depends_total": 1,
+      "nodes": 2,
+      "edges": 1
+    },
+    "capstone-nova-minds/main-repo": {
+      "file": "sample_capstone-nova-minds__main-repo.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "center-for-threat-informed-defense/attack-flow": {
+      "file": "sample_center-for-threat-informed-defense__attack-flow.json",
+      "stratum": "S4",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "ceraldicontabilita/AppDipendenti": {
+      "file": "sample_ceraldicontabilita__AppDipendenti.json",
+      "stratum": "S1",
+      "known_baseline": "C1",
+      "depends_total": 75,
+      "nodes": 72,
+      "edges": 70
+    },
+    "christian-meyndt/personal-finance-tracker": {
+      "file": "sample_christian-meyndt__personal-finance-tracker.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 56,
+      "nodes": 30,
+      "edges": 54
+    },
+    "cjbaxt/house-lights": {
+      "file": "sample_cjbaxt__house-lights.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C4",
+      "depends_total": 10,
+      "nodes": 11,
+      "edges": 10
+    },
+    "ckoenig673/recipe-clipper": {
+      "file": "sample_ckoenig673__recipe-clipper.json",
+      "stratum": "S2",
+      "known_baseline": "C1",
+      "depends_total": 52,
+      "nodes": 52,
+      "edges": 52
+    },
+    "cmu-sei/GHOSTS": {
+      "file": "sample_cmu-sei__GHOSTS.json",
+      "stratum": "S4",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "coinbase/cdp-sdk": {
+      "file": "sample_coinbase__cdp-sdk.json",
+      "stratum": "S4",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "commercialbrainz/CommercialBrainz": {
+      "file": "sample_commercialbrainz__CommercialBrainz.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C4",
+      "depends_total": 278,
+      "nodes": 155,
+      "edges": 276
+    },
+    "crygup/fish": {
+      "file": "sample_crygup__fish.json",
+      "stratum": "S2",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "cvtflam/skills-introduction-to-repository-management": {
+      "file": "sample_cvtflam__skills-introduction-to-repository-management.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "d4551/pekka": {
+      "file": "sample_d4551__pekka.json",
+      "stratum": "S1",
+      "known_baseline": "C1",
+      "depends_total": 1,
+      "nodes": 2,
+      "edges": 1
+    },
+    "danimall/file_migration": {
+      "file": "sample_danimall__file_migration.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "darkspock/ddd_python_sample": {
+      "file": "sample_darkspock__ddd_python_sample.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C4",
+      "depends_total": 10,
+      "nodes": 10,
+      "edges": 10
+    },
+    "darkspock/desksupportmonkey": {
+      "file": "sample_darkspock__desksupportmonkey.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C4",
+      "depends_total": 1154,
+      "nodes": 413,
+      "edges": 1093
+    },
+    "databricks-industry-solutions/care-manager": {
+      "file": "sample_databricks-industry-solutions__care-manager.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "databrickslabs/lakemeter-oss": {
+      "file": "sample_databrickslabs__lakemeter-oss.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C4",
+      "depends_total": 96,
+      "nodes": 79,
+      "edges": 96
+    },
+    "davidmonterocrespo24/DaveLovable": {
+      "file": "sample_davidmonterocrespo24__DaveLovable.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C4",
+      "depends_total": 34,
+      "nodes": 35,
+      "edges": 34
+    },
+    "davidmonterocrespo24/velxio": {
+      "file": "sample_davidmonterocrespo24__velxio.json",
+      "stratum": "S4",
+      "known_baseline": "C1",
+      "depends_total": 4,
+      "nodes": 5,
+      "edges": 4
+    },
+    "derekrivers/atlas": {
+      "file": "sample_derekrivers__atlas.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C2; C3",
+      "depends_total": 41,
+      "nodes": 82,
+      "edges": 41
+    },
+    "dmfenton/CodeMonet": {
+      "file": "sample_dmfenton__CodeMonet.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C3",
+      "depends_total": 11,
+      "nodes": 12,
+      "edges": 9
+    },
+    "dock108dev/money-map": {
+      "file": "sample_dock108dev__money-map.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 74,
+      "nodes": 64,
+      "edges": 74
+    },
+    "doctum-consilium/market_screener": {
+      "file": "sample_doctum-consilium__market_screener.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C4",
+      "depends_total": 14,
+      "nodes": 15,
+      "edges": 14
+    },
+    "doronz88/pymobiledevice3": {
+      "file": "sample_doronz88__pymobiledevice3.json",
+      "stratum": "S4",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "dzhalaevd/Donatello": {
+      "file": "sample_dzhalaevd__Donatello.json",
+      "stratum": "S4",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "erhel-czc/asco2": {
+      "file": "sample_erhel-czc__asco2.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C4",
+      "depends_total": 19,
+      "nodes": 17,
+      "edges": 19
+    },
+    "eseifert/altero": {
+      "file": "sample_eseifert__altero.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 15,
+      "nodes": 30,
+      "edges": 15
+    },
+    "exeaman/Atlanta-Banking": {
+      "file": "sample_exeaman__Atlanta-Banking.json",
+      "stratum": "S2",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "feliciatanxl/FlowGuard": {
+      "file": "sample_feliciatanxl__FlowGuard.json",
+      "stratum": "S1",
+      "known_baseline": "C1",
+      "depends_total": 8,
+      "nodes": 9,
+      "edges": 8
+    },
+    "freemocap/freemocap": {
+      "file": "sample_freemocap__freemocap.json",
+      "stratum": "S4",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "fwerkor/local-shell-mcp": {
+      "file": "sample_fwerkor__local-shell-mcp.json",
+      "stratum": "S3",
+      "known_baseline": "C1",
+      "depends_total": 1,
+      "nodes": 2,
+      "edges": 1
+    },
+    "fyfsxkh/TokBrain": {
+      "file": "sample_fyfsxkh__TokBrain.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C2; C4",
+      "depends_total": 51,
+      "nodes": 48,
+      "edges": 51
+    },
+    "gdb-mtx/fire-master": {
+      "file": "sample_gdb-mtx__fire-master.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C4",
+      "depends_total": 179,
+      "nodes": 93,
+      "edges": 178
+    },
+    "georgejieh/REED": {
+      "file": "sample_georgejieh__REED.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C3",
+      "depends_total": 33,
+      "nodes": 26,
+      "edges": 33
+    },
+    "gmlrep/tasker": {
+      "file": "sample_gmlrep__tasker.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C3",
+      "depends_total": 12,
+      "nodes": 2,
+      "edges": 1
+    },
+    "gnt-ai/gnt": {
+      "file": "sample_gnt-ai__gnt.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C4",
+      "depends_total": 140,
+      "nodes": 73,
+      "edges": 138
+    },
+    "google-gemini/robotics-samples": {
+      "file": "sample_google-gemini__robotics-samples.json",
+      "stratum": "S3",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "googleworkspace/devicetrustportal": {
+      "file": "sample_googleworkspace__devicetrustportal.json",
+      "stratum": "S2",
+      "known_baseline": "C1",
+      "depends_total": 9,
+      "nodes": 10,
+      "edges": 9
+    },
+    "gpojarvis-sudo/nagvijay-smart-monitoring-system": {
+      "file": "sample_gpojarvis-sudo__nagvijay-smart-monitoring-system.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C4",
+      "depends_total": 135,
+      "nodes": 75,
+      "edges": 134
+    },
+    "gradoslovar/la-vie-en-rose": {
+      "file": "sample_gradoslovar__la-vie-en-rose.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "grayhatdevelopers/vidxp": {
+      "file": "sample_grayhatdevelopers__vidxp.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C2; C3",
+      "depends_total": 81,
+      "nodes": 50,
+      "edges": 81
+    },
+    "guardana/guardana": {
+      "file": "sample_guardana__guardana.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C3",
+      "depends_total": 2,
+      "nodes": 2,
+      "edges": 2
+    },
+    "gzhu-team/deep-research": {
+      "file": "sample_gzhu-team__deep-research.json",
+      "stratum": "S2",
+      "known_baseline": "C1",
+      "depends_total": 44,
+      "nodes": 27,
+      "edges": 44
+    },
+    "habinrahman/MyCareer-AI": {
+      "file": "sample_habinrahman__MyCareer-AI.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 59,
+      "nodes": 27,
+      "edges": 58
+    },
+    "huawei-noah/noah-research": {
+      "file": "sample_huawei-noah__noah-research.json",
+      "stratum": "S4",
+      "known_baseline": "C1",
+      "depends_total": 33,
+      "nodes": 23,
+      "edges": 33
+    },
+    "i2ptuber/itubep": {
+      "file": "sample_i2ptuber__itubep.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C4",
+      "depends_total": 18,
+      "nodes": 19,
+      "edges": 18
+    },
+    "iadnanmukhtar/hadithdb": {
+      "file": "sample_iadnanmukhtar__hadithdb.json",
+      "stratum": "S2",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "ifelsedotonestd/lens": {
+      "file": "sample_ifelsedotonestd__lens.json",
+      "stratum": "S1",
+      "known_baseline": "C1",
+      "depends_total": 118,
+      "nodes": 64,
+      "edges": 118
+    },
+    "indranildchandra/cursor-session-tracer": {
+      "file": "sample_indranildchandra__cursor-session-tracer.json",
+      "stratum": "S3",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "infinite2004/LastknownGood": {
+      "file": "sample_infinite2004__LastknownGood.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C4",
+      "depends_total": 57,
+      "nodes": 58,
+      "edges": 57
+    },
+    "innova-space-edu/eduai-platform": {
+      "file": "sample_innova-space-edu__eduai-platform.json",
+      "stratum": "S2",
+      "known_baseline": "C1",
+      "depends_total": 4,
+      "nodes": 5,
+      "edges": 4
+    },
+    "its-spark-dev/toollayer-ai": {
+      "file": "sample_its-spark-dev__toollayer-ai.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 6,
+      "nodes": 11,
+      "edges": 6
+    },
+    "itsdaibend/proth": {
+      "file": "sample_itsdaibend__proth.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C4",
+      "depends_total": 38,
+      "nodes": 22,
+      "edges": 37
+    },
+    "itsdeepak59/AI-YouTube-Factory": {
+      "file": "sample_itsdeepak59__AI-YouTube-Factory.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "ivangor246/live_stream": {
+      "file": "sample_ivangor246__live_stream.json",
+      "stratum": "S1",
+      "known_baseline": "C1",
+      "depends_total": 8,
+      "nodes": 0,
+      "edges": 0
+    },
+    "jameswniu/multi-agent-rl-mapf-drone-navigation": {
+      "file": "sample_jameswniu__multi-agent-rl-mapf-drone-navigation.json",
+      "stratum": "S3",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "jasonleetucker-code/riskittogetthebrisket": {
+      "file": "sample_jasonleetucker-code__riskittogetthebrisket.json",
+      "stratum": "S2",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "joeynyc/hermes-hudui": {
+      "file": "sample_joeynyc__hermes-hudui.json",
+      "stratum": "S4",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "johnsonhk88/AI-Bank-Statement-Document-Automation-By-LLM-And-Personal-Finanical-Analysis-Prediction": {
+      "file": "sample_johnsonhk88__AI-Bank-Statement-Document-Automation-By-LLM-And-Personal-Finanical-Analysis-Prediction.json",
+      "stratum": "S4",
+      "known_baseline": "C1",
+      "depends_total": 25,
+      "nodes": 14,
+      "edges": 23
+    },
+    "kaizencycle/mobius-civic-ai-terminal": {
+      "file": "sample_kaizencycle__mobius-civic-ai-terminal.json",
+      "stratum": "S2",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "kimbrenekakande/orunos": {
+      "file": "sample_kimbrenekakande__orunos.json",
+      "stratum": "S2",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "klebgenomics/Kaptive-Web": {
+      "file": "sample_klebgenomics__Kaptive-Web.json",
+      "stratum": "S3",
+      "known_baseline": "C1",
+      "depends_total": 29,
+      "nodes": 18,
+      "edges": 28
+    },
+    "kouroshez/coding-os": {
+      "file": "sample_kouroshez__coding-os.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C4",
+      "depends_total": 152,
+      "nodes": 77,
+      "edges": 152
+    },
+    "kristovatlas/somnus": {
+      "file": "sample_kristovatlas__somnus.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C4",
+      "depends_total": 35,
+      "nodes": 35,
+      "edges": 35
+    },
+    "langwatch/langwatch": {
+      "file": "sample_langwatch__langwatch.json",
+      "stratum": "S4",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "latheeshmahendran/soloV1": {
+      "file": "sample_latheeshmahendran__soloV1.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C4",
+      "depends_total": 16,
+      "nodes": 17,
+      "edges": 16
+    },
+    "letya999/job_ftch": {
+      "file": "sample_letya999__job_ftch.json",
+      "stratum": "S3",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "lm-webui/lm-webui": {
+      "file": "sample_lm-webui__lm-webui.json",
+      "stratum": "S2",
+      "known_baseline": "C1",
+      "depends_total": 119,
+      "nodes": 117,
+      "edges": 119
+    },
+    "lss100200/omnibase": {
+      "file": "sample_lss100200__omnibase.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 208,
+      "nodes": 105,
+      "edges": 208
+    },
+    "maltewinckler/swen": {
+      "file": "sample_maltewinckler__swen.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 23,
+      "nodes": 25,
+      "edges": 22
+    },
+    "martinge17/codex-exporter": {
+      "file": "sample_martinge17__codex-exporter.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "masumi-network/Citadel": {
+      "file": "sample_masumi-network__Citadel.json",
+      "stratum": "S3",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "mathiaswb2901/Master_program": {
+      "file": "sample_mathiaswb2901__Master_program.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "mayldute/tour-pass-api": {
+      "file": "sample_mayldute__tour-pass-api.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 2,
+      "nodes": 4,
+      "edges": 2
+    },
+    "mic1on/onestep": {
+      "file": "sample_mic1on__onestep.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C2; C4",
+      "depends_total": 104,
+      "nodes": 73,
+      "edges": 104
+    },
+    "microsoft/Echoverse": {
+      "file": "sample_microsoft__Echoverse.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C4",
+      "depends_total": 177,
+      "nodes": 151,
+      "edges": 177
+    },
+    "microsoft/customer-chatbot-solution-accelerator": {
+      "file": "sample_microsoft__customer-chatbot-solution-accelerator.json",
+      "stratum": "S3",
+      "known_baseline": "C1",
+      "depends_total": 24,
+      "nodes": 20,
+      "edges": 24
+    },
+    "minhpham6/skills-introduction-to-repository-management": {
+      "file": "sample_minhpham6__skills-introduction-to-repository-management.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "misears/Storyteller-AI-Agent": {
+      "file": "sample_misears__Storyteller-AI-Agent.json",
+      "stratum": "S2",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "mizcausevic-dev/learner-intervention-ledger": {
+      "file": "sample_mizcausevic-dev__learner-intervention-ledger.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "mjebalidev/thedailymodel": {
+      "file": "sample_mjebalidev__thedailymodel.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C4",
+      "depends_total": 3,
+      "nodes": 4,
+      "edges": 3
+    },
+    "moranch/grok-register": {
+      "file": "sample_moranch__grok-register.json",
+      "stratum": "S1",
+      "known_baseline": "C1",
+      "depends_total": 34,
+      "nodes": 37,
+      "edges": 34
+    },
+    "morpheuslord/PICOTTY": {
+      "file": "sample_morpheuslord__PICOTTY.json",
+      "stratum": "S3",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "mrwogu/factory-droid-openai": {
+      "file": "sample_mrwogu__factory-droid-openai.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C2",
+      "depends_total": 8,
+      "nodes": 9,
+      "edges": 8
+    },
+    "muju0629/KB_Tune": {
+      "file": "sample_muju0629__KB_Tune.json",
+      "stratum": "S3",
+      "known_baseline": "C1",
+      "depends_total": 4,
+      "nodes": 6,
+      "edges": 4
+    },
+    "murillo-consulting/langgraph-resilient-agent": {
+      "file": "sample_murillo-consulting__langgraph-resilient-agent.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C3",
+      "depends_total": 8,
+      "nodes": 6,
+      "edges": 8
+    },
+    "muthuishere/cljgo": {
+      "file": "sample_muthuishere__cljgo.json",
+      "stratum": "S3",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "mypaios/mypaios": {
+      "file": "sample_mypaios__mypaios.json",
+      "stratum": "S3",
+      "known_baseline": "C1",
+      "depends_total": 139,
+      "nodes": 122,
+      "edges": 139
+    },
+    "nerdai/llm-agents-from-scratch": {
+      "file": "sample_nerdai__llm-agents-from-scratch.json",
+      "stratum": "S4",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "nkswalih/skyrict": {
+      "file": "sample_nkswalih__skyrict.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 1001,
+      "nodes": 428,
+      "edges": 735
+    },
+    "nmfs-ost/AA-SI_Workbench": {
+      "file": "sample_nmfs-ost__AA-SI_Workbench.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "odysseus-dev/odysseus": {
+      "file": "sample_odysseus-dev__odysseus.json",
+      "stratum": "S4",
+      "known_baseline": "C1",
+      "depends_total": 84,
+      "nodes": 81,
+      "edges": 84
+    },
+    "oodaooda/watchTower": {
+      "file": "sample_oodaooda__watchTower.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C4",
+      "depends_total": 60,
+      "nodes": 60,
+      "edges": 60
+    },
+    "openJiuwen-ai/agent-protocol": {
+      "file": "sample_openJiuwen-ai__agent-protocol.json",
+      "stratum": "S3",
+      "known_baseline": "C1",
+      "depends_total": 59,
+      "nodes": 63,
+      "edges": 59
+    },
+    "oracle/ai-optimizer": {
+      "file": "sample_oracle__ai-optimizer.json",
+      "stratum": "S3",
+      "known_baseline": "C1",
+      "depends_total": 17,
+      "nodes": 17,
+      "edges": 16
+    },
+    "orca-gamedev/orca-engine": {
+      "file": "sample_orca-gamedev__orca-engine.json",
+      "stratum": "S3",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "orqestraai/orqestra-demo": {
+      "file": "sample_orqestraai__orqestra-demo.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 10,
+      "nodes": 11,
+      "edges": 8
+    },
+    "pafful/fastapi-app-main": {
+      "file": "sample_pafful__fastapi-app-main.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 10,
+      "nodes": 11,
+      "edges": 8
+    },
+    "paperworkmg-arch/VOLT": {
+      "file": "sample_paperworkmg-arch__VOLT.json",
+      "stratum": "S2",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "paslaycorp/FAP-Core-v0.2.0": {
+      "file": "sample_paslaycorp__FAP-Core-v0.2.0.json",
+      "stratum": "S2",
+      "known_baseline": "C1",
+      "depends_total": 3,
+      "nodes": 3,
+      "edges": 2
+    },
+    "pmgraham/datagrunt-studio": {
+      "file": "sample_pmgraham__datagrunt-studio.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "pranee54/AgentDoctor": {
+      "file": "sample_pranee54__AgentDoctor.json",
+      "stratum": "S3",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "prdariomarques-ship-it/ship-it": {
+      "file": "sample_prdariomarques-ship-it__ship-it.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 51,
+      "nodes": 22,
+      "edges": 21
+    },
+    "pvchaitanya8/Synapse": {
+      "file": "sample_pvchaitanya8__Synapse.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C4",
+      "depends_total": 189,
+      "nodes": 148,
+      "edges": 189
+    },
+    "qiuziyan1998/LMCache": {
+      "file": "sample_qiuziyan1998__LMCache.json",
+      "stratum": "S2",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "quoeamaster/python_for_ai_prep": {
+      "file": "sample_quoeamaster__python_for_ai_prep.json",
+      "stratum": "S1",
+      "known_baseline": "C1",
+      "depends_total": 1,
+      "nodes": 2,
+      "edges": 1
+    },
+    "rajveer-makkar/DeepTrace": {
+      "file": "sample_rajveer-makkar__DeepTrace.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C4",
+      "depends_total": 10,
+      "nodes": 11,
+      "edges": 10
+    },
+    "ranasl62/ehr-risk-framework": {
+      "file": "sample_ranasl62__ehr-risk-framework.json",
+      "stratum": "S3",
+      "known_baseline": "C1",
+      "depends_total": 4,
+      "nodes": 6,
+      "edges": 4
+    },
+    "rcnsnr/job-search-workflow": {
+      "file": "sample_rcnsnr__job-search-workflow.json",
+      "stratum": "S3",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "ringlochid/banksia": {
+      "file": "sample_ringlochid__banksia.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C2; C3; C4",
+      "depends_total": 16,
+      "nodes": 23,
+      "edges": 16
+    },
+    "rmayen/cerberus": {
+      "file": "sample_rmayen__cerberus.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C4",
+      "depends_total": 50,
+      "nodes": 30,
+      "edges": 49
+    },
+    "roberjo/roomba-telemetry": {
+      "file": "sample_roberjo__roomba-telemetry.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C4",
+      "depends_total": 4,
+      "nodes": 5,
+      "edges": 4
+    },
+    "runovelhq/wolt": {
+      "file": "sample_runovelhq__wolt.json",
+      "stratum": "S2",
+      "known_baseline": "C1",
+      "depends_total": 41,
+      "nodes": 41,
+      "edges": 41
+    },
+    "sabihul2110/SafeSwipe": {
+      "file": "sample_sabihul2110__SafeSwipe.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C4",
+      "depends_total": 3,
+      "nodes": 4,
+      "edges": 3
+    },
+    "samsarone/samsar": {
+      "file": "sample_samsarone__samsar.json",
+      "stratum": "S3",
+      "known_baseline": "C1",
+      "depends_total": 3,
+      "nodes": 4,
+      "edges": 3
+    },
+    "sandraschi/calibremcp": {
+      "file": "sample_sandraschi__calibremcp.json",
+      "stratum": "S3",
+      "known_baseline": "C1",
+      "depends_total": 24,
+      "nodes": 0,
+      "edges": 0
+    },
+    "satheeshds/bank-transactions": {
+      "file": "sample_satheeshds__bank-transactions.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "sautalwar/avid_training": {
+      "file": "sample_sautalwar__avid_training.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "schroneko/homebrew-nicevoice": {
+      "file": "sample_schroneko__homebrew-nicevoice.json",
+      "stratum": "S2",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "sebderhy/shellteam": {
+      "file": "sample_sebderhy__shellteam.json",
+      "stratum": "S2",
+      "known_baseline": "C1",
+      "depends_total": 73,
+      "nodes": 53,
+      "edges": 60
+    },
+    "serhatvs/Collective_MindGraph_desktop_app": {
+      "file": "sample_serhatvs__Collective_MindGraph_desktop_app.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "sessojunior/silo": {
+      "file": "sample_sessojunior__silo.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 272,
+      "nodes": 162,
+      "edges": 272
+    },
+    "shlokDS16/CITADEL": {
+      "file": "sample_shlokDS16__CITADEL.json",
+      "stratum": "S2",
+      "known_baseline": "C1",
+      "depends_total": 56,
+      "nodes": 54,
+      "edges": 55
+    },
+    "shu0411/trade-lab": {
+      "file": "sample_shu0411__trade-lab.json",
+      "stratum": "S1",
+      "known_baseline": "C1",
+      "depends_total": 8,
+      "nodes": 9,
+      "edges": 8
+    },
+    "sitara2007/CivicOs": {
+      "file": "sample_sitara2007__CivicOs.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C4",
+      "depends_total": 3,
+      "nodes": 4,
+      "edges": 3
+    },
+    "skoruppa/docchi-stremio-addon": {
+      "file": "sample_skoruppa__docchi-stremio-addon.json",
+      "stratum": "S3",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "skyones-0/kimi-mcp": {
+      "file": "sample_skyones-0__kimi-mcp.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "smcgarrigle/ihavethereceipts": {
+      "file": "sample_smcgarrigle__ihavethereceipts.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C4",
+      "depends_total": 97,
+      "nodes": 98,
+      "edges": 97
+    },
+    "sofi-280/autorepair-voice-agent": {
+      "file": "sample_sofi-280__autorepair-voice-agent.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "sriram21-09/PhantomNet": {
+      "file": "sample_sriram21-09__PhantomNet.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C2; C4",
+      "depends_total": 128,
+      "nodes": 95,
+      "edges": 124
+    },
+    "stevezau/shortlist": {
+      "file": "sample_stevezau__shortlist.json",
+      "stratum": "S3",
+      "known_baseline": "C1",
+      "depends_total": 15,
+      "nodes": 16,
+      "edges": 15
+    },
+    "sudetufan/mebidai": {
+      "file": "sample_sudetufan__mebidai.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C4",
+      "depends_total": 115,
+      "nodes": 60,
+      "edges": 115
+    },
+    "suzu-devworks/examples-py": {
+      "file": "sample_suzu-devworks__examples-py.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C3",
+      "depends_total": 8,
+      "nodes": 9,
+      "edges": 6
+    },
+    "tanvir14012/JwtAuth": {
+      "file": "sample_tanvir14012__JwtAuth.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C4",
+      "depends_total": 38,
+      "nodes": 21,
+      "edges": 37
+    },
+    "teaching-practice-lab-oral/oral": {
+      "file": "sample_teaching-practice-lab-oral__oral.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C4",
+      "depends_total": 197,
+      "nodes": 105,
+      "edges": 197
+    },
+    "theSamPadilla/montaj": {
+      "file": "sample_theSamPadilla__montaj.json",
+      "stratum": "S3",
+      "known_baseline": "C1",
+      "depends_total": 29,
+      "nodes": 30,
+      "edges": 29
+    },
+    "thulasidharan96/API-Gateway": {
+      "file": "sample_thulasidharan96__API-Gateway.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C4",
+      "depends_total": 18,
+      "nodes": 11,
+      "edges": 17
+    },
+    "ticket-vision/mapi": {
+      "file": "sample_ticket-vision__mapi.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C3",
+      "depends_total": 6,
+      "nodes": 9,
+      "edges": 6
+    },
+    "toddawhittaker/ipeds-oracle": {
+      "file": "sample_toddawhittaker__ipeds-oracle.json",
+      "stratum": "S2",
+      "known_baseline": "C1",
+      "depends_total": 29,
+      "nodes": 30,
+      "edges": 29
+    },
+    "tramontano/fiap-ml-stock-price-prediction": {
+      "file": "sample_tramontano__fiap-ml-stock-price-prediction.json",
+      "stratum": "S1",
+      "known_baseline": "C1",
+      "depends_total": 13,
+      "nodes": 12,
+      "edges": 11
+    },
+    "transformerlab/nebula-tower": {
+      "file": "sample_transformerlab__nebula-tower.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C4",
+      "depends_total": 16,
+      "nodes": 6,
+      "edges": 7
+    },
+    "trghcj/TaskFlow": {
+      "file": "sample_trghcj__TaskFlow.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C4",
+      "depends_total": 35,
+      "nodes": 21,
+      "edges": 34
+    },
+    "tsondo/StemForge": {
+      "file": "sample_tsondo__StemForge.json",
+      "stratum": "S3",
+      "known_baseline": "C1",
+      "depends_total": 68,
+      "nodes": 70,
+      "edges": 68
+    },
+    "tuannguyen8531/novel-ai-trans": {
+      "file": "sample_tuannguyen8531__novel-ai-trans.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C3",
+      "depends_total": 3,
+      "nodes": 6,
+      "edges": 3
+    },
+    "verticalpartnersai-sketch/haz-que-vuelva-lw-dr": {
+      "file": "sample_verticalpartnersai-sketch__haz-que-vuelva-lw-dr.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C3",
+      "depends_total": 7,
+      "nodes": 6,
+      "edges": 7
+    },
+    "vivekmisar/Saas_Sales_Application": {
+      "file": "sample_vivekmisar__Saas_Sales_Application.json",
+      "stratum": "S1",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "volcano-sh/agentcube": {
+      "file": "sample_volcano-sh__agentcube.json",
+      "stratum": "S4",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "volcengine/vePhone": {
+      "file": "sample_volcengine__vePhone.json",
+      "stratum": "S3",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 12,
+      "nodes": 18,
+      "edges": 12
+    },
+    "vortex469/atlas-os": {
+      "file": "sample_vortex469__atlas-os.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C3",
+      "depends_total": 22,
+      "nodes": 16,
+      "edges": 13
+    },
+    "vsem-azamat/teachers-catalog": {
+      "file": "sample_vsem-azamat__teachers-catalog.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 7,
+      "nodes": 14,
+      "edges": 7
+    },
+    "vstorm-co/agenticos": {
+      "file": "sample_vstorm-co__agenticos.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 178,
+      "nodes": 243,
+      "edges": 174
+    },
+    "vstorm-co/pydantic-ai-backend": {
+      "file": "sample_vstorm-co__pydantic-ai-backend.json",
+      "stratum": "S4",
+      "known_baseline": "C1; C3",
+      "depends_total": 3,
+      "nodes": 6,
+      "edges": 3
+    },
+    "walternascimentobarroso/wquiz": {
+      "file": "sample_walternascimentobarroso__wquiz.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C4",
+      "depends_total": 35,
+      "nodes": 26,
+      "edges": 33
+    },
+    "whitebreadisu/hyperspacevault": {
+      "file": "sample_whitebreadisu__hyperspacevault.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C4",
+      "depends_total": 42,
+      "nodes": 41,
+      "edges": 42
+    },
+    "wq147/bookmark-navigation": {
+      "file": "sample_wq147__bookmark-navigation.json",
+      "stratum": "S2",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 52,
+      "nodes": 38,
+      "edges": 52
+    },
+    "xinvxueyuan/orbital-marketplace": {
+      "file": "sample_xinvxueyuan__orbital-marketplace.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C4",
+      "depends_total": 16,
+      "nodes": 17,
+      "edges": 16
+    },
+    "y0sif/whisrs": {
+      "file": "sample_y0sif__whisrs.json",
+      "stratum": "S3",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "yag-im/accountsvc": {
+      "file": "sample_yag-im__accountsvc.json",
+      "stratum": "S1",
+      "known_baseline": "C1; C3; C4",
+      "depends_total": 6,
+      "nodes": 10,
+      "edges": 6
+    },
+    "yezz123/ormdantic": {
+      "file": "sample_yezz123__ormdantic.json",
+      "stratum": "S4",
+      "known_baseline": "C1; C3",
+      "depends_total": 1,
+      "nodes": 2,
+      "edges": 1
+    },
+    "zeroday0619/KotonohaInterpreter": {
+      "file": "sample_zeroday0619__KotonohaInterpreter.json",
+      "stratum": "S2",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    },
+    "zskbot/clriks": {
+      "file": "sample_zskbot__clriks.json",
+      "stratum": "S2",
+      "known_baseline": "ZERO-DI",
+      "depends_total": 0,
+      "nodes": 0,
+      "edges": 0
+    }
+  }
+}
