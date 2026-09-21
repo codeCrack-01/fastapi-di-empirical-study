@@ -8,6 +8,7 @@
   "host": "",
   "pool": ["qwen3:14b"],
   "fingerprints": "analysis/novelty/out/novelty_fingerprints.json",
+  "repos": "analysis/novelty/out/novelty_repo_context.json",
   "out_dir": "analysis/novelty/out",
   "results_dir": "remote/results",
   "share_dir": "remote",

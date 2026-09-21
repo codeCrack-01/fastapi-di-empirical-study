@@ -149,6 +149,151 @@ def parse_response(text: str) -> dict:
     }
 
 
+def parse_repo_response(text: str) -> dict:
+    """Extract the top-level JSON object from a repo-check reply.
+
+    Handles nested ``{...}`` output (observations/reconciliations arrays with
+    inner objects) by raw-decoding every object start and keeping the one that
+    consumes the MOST text (the outermost object). Returns {} when the model
+    produced no parseable object (caller stores it verbatim anyway).
+    """
+    import re
+    clean = text.strip()
+    clean = re.sub(r"```[a-zA-Z0-9]*\n?|\n?```", "", clean)
+    decoder = json.JSONDecoder()
+    best: dict | None = None
+    best_end = -1
+    i = 0
+    while True:
+        i = clean.find("{", i)
+        if i == -1:
+            break
+        try:
+            obj, n = decoder.raw_decode(clean[i:])
+        except json.JSONDecodeError:
+            i += 1
+            continue
+        if isinstance(obj, dict) and i + n > best_end:
+            best = obj
+            best_end = i + n
+        i += 1
+    return best or {}
+
+
+REPO_PASS1_MARK = "__REPO_PASS1__"
+REPO_PASS2_MARK = "__REPO_PASS2__"
+
+REPO_PASS1_SYSTEM = (
+    "You are an independent code reviewer for an empirical study of FastAPI "
+    "dependency injection. You are looking at ONE repository from the study's "
+    "stratified sample. You have NOT been told what patterns to expect — your "
+    "job is to read the ACTUAL source code excerpts that follow and describe, "
+    "on your own terms, how dependency injection is used here. Cite exact "
+    "file:line for everything you claim. Do not invent certainty: if you see "
+    "no DI, say so explicitly."
+)
+
+REPO_PASS1_TEMPLATE = (
+    "REPOSITORY: {full_name} (stratum {stratum}, weight {weight})\n\n"
+    "STATIC SUMMARY (from a deterministic AST extractor — counts only, no "
+    "pattern labels):\n{summary}\n\n"
+    "REAL SOURCE EXCERPTS (code around every DI-adjacent AST node in this repo, "
+    "all pinned to commit {commit_sha}):\n{excerpts}\n\n"
+    "{mark}\n"
+    "Read the code. In JSON ONLY, answer:\n"
+    '{{"observations": [{{"pattern": "<your name for the DI pattern>", '
+    '"file": "<path>", "line": <int>, "why": "<reasoning with references>"}}], '
+    '"comment": "<anything you want flag stage 2 to reconsider>"}}'
+)
+
+REPO_PASS2_SYSTEM = (
+    "You are a second-pass DI reviewer. Another (static) instrument grouped "
+    "this repository's DI occurrences into canonical structural fingerprints "
+    "and a panel already labeled each fingerprint. You must now CONFRONT those "
+    "labels with the REAL code in THIS repo: for each fingerprint say whether "
+    "you AGREE. To OVERTURN a label you MUST cite the exact file:line in this "
+    "repo that contradicts it. Also report anything you noticed in your first "
+    "pass that the fingerprint inventory missed entirely."
+)
+
+REPO_PASS2_TEMPLATE = (
+    "REPOSITORY: {full_name} (stratum {stratum}, weight {weight}), commit "
+    "{commit_sha}.\n\n"
+    "PANEL LABELS PER FINGERPRINT (from an independent annotator pass):\n"
+    "{matches}\n\n"
+    "REAL SOURCE EXCERPTS (as in pass 1):\n{excerpts}\n\n"
+    "YOUR PASS-1 OBSERVATIONS (from reading the code fresh):\n{pass1}\n\n"
+    "{mark}\n"
+    "In JSON ONLY, answer:\n"
+    '{{"reconciliations": [{{"fingerprint": "<id>", "agree": true|false, '
+    '"label": "<your final label>", "reason": "<why>", '
+    '"citation": {{"file": "<path>", "line": <int>}}}}], '
+    '"missed_by_inventory": [{{"pattern": "...", "file": "...", "line": <int>, '
+    '"why": "..."}}], '
+    '"comment": "..."}}\n'
+    "Rules: leave a fingerprint's label unchanged unless code in THIS repo "
+    "contradicts it; every \"agree\": false must carry a citation."
+)
+
+
+def _format_summary(summary: dict) -> str:
+    return ", ".join(f"{k}={v}" for k, v in (summary or {}).items()) or "(none)"
+
+
+def _format_excerpts(excerpts: list[dict], cap: int = 60) -> str:
+    lines = []
+    for e in (excerpts or [])[:cap]:
+        where = f"{e['file']}:{e['line']} ({e['context_function'] or 'toplevel'})"
+        if e.get("github_url"):
+            where += f"  {e['github_url']}"
+        if not e.get("excerpt"):
+            lines.append(f"--- {where}  [source unavailable on this box] ---")
+            continue
+        lines.append(f"--- {where} ---")
+        lines.append(e["excerpt"].replace("\n", "\n        "))
+    return "\n".join(lines) if lines else "(this repo has no DI-adjacent AST nodes)"
+
+
+def _format_matches(repo: dict, labels: dict[str, str]) -> str:
+    lines = []
+    for m in (repo.get("matched_fingerprints") or []):
+        fid = m["fingerprint"]
+        label = labels.get(fid, "unlabeled")
+        lines.append(f"- {fid}  -> {label}   (n={m['n']} in this repo, "
+                     f"links: {', '.join(m.get('urls') or [])})")
+    return "\n".join(lines) if lines else "(none — extractor found no fingerprints here)"
+
+
+def render_repo_pass1(repo: dict) -> str:
+    return REPO_PASS1_TEMPLATE.format(
+        full_name=repo["full_name"],
+        stratum=repo.get("stratum"),
+        weight=repo.get("weight"),
+        summary=_format_summary(repo.get("summary")),
+        excerpts=_format_excerpts(repo.get("source_excerpts")),
+        commit_sha=(repo.get("commit_sha") or "HEAD")[:12],
+        mark=REPO_PASS1_MARK,
+    ).strip()
+
+
+def render_repo_pass2(repo: dict, labels: dict[str, str], pass1: dict) -> str:
+    observations = pass1.get("observations") or []
+    obs_lines = "\n".join(
+        f"- {o.get('pattern')} @ {o.get('file')}:{o.get('line')} — {o.get('why')}"
+        for o in observations
+    ) or "(none recorded)"
+    return REPO_PASS2_TEMPLATE.format(
+        full_name=repo["full_name"],
+        stratum=repo.get("stratum"),
+        weight=repo.get("weight"),
+        commit_sha=(repo.get("commit_sha") or "HEAD")[:12],
+        matches=_format_matches(repo, labels),
+        excerpts=_format_excerpts(repo.get("source_excerpts")),
+        pass1=obs_lines,
+        mark=REPO_PASS2_MARK,
+    ).strip()
+
+
 if __name__ == "__main__":
     demo = [
         {"repo": "a/b", "line": 12, "argument": "get_db", "context_function": "read_item"},

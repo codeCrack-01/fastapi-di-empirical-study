@@ -32,7 +32,7 @@ class OllamaClient:
     host: str = ""
     temperature: float = 0.0
     seed: int = 42
-    num_ctx: int = 8192
+    num_ctx: int = 16384
     max_tokens: int = 2048
     timeout: float = 600.0
     retries: int = 4

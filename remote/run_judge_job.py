@@ -29,7 +29,7 @@ import sys  # noqa: E402
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "analysis" / "novelty"))
 
-STAGES = ["profile", "select", "reverify", "annotate", "publish", "complete"]
+STAGES = ["profile", "select", "reverify", "annotate", "repo_check", "publish", "complete"]
 
 DEFAULT_JOB = {
     "version": 1,
@@ -41,6 +41,7 @@ DEFAULT_JOB = {
     "host": "",
     "pool": ["qwen3-coder:4b", "llama3.2:3b", "deepseek-coder:6.7b"],
     "fingerprints": "analysis/novelty/out/novelty_fingerprints.json",
+    "repos": "analysis/novelty/out/novelty_repo_context.json",
     "out_dir": "analysis/novelty/out",
     "results_dir": "analysis/novelty/out/results",
     "share_dir": "share",
@@ -141,6 +142,28 @@ def run_stage(stage: str, job: dict, state: dict, fake: bool,
             chunk_size=job["chunk_size"], host=host, rater_factory=rater_factory,
         )
         print(f"[job] annotate -> {summary}")
+    elif stage == "repo_check":
+        from analysis.novelty import repo_check as rc_mod
+        repo_path = Path(job.get("repos") or "")
+        if not repo_path.exists():
+            raise SystemExit(
+                "[job] repo_check: missing repo-context artifact at "
+                f"{repo_path!s}. Build it locally with:\n"
+                "    python analysis/novelty/excerpts.py\n"
+                "and include the generated novelty_repo_context.json in the handoff."
+            )
+        panel = json.loads((out_dir / "novelty_panel.json").read_text())
+        if not panel.get("panel"):
+            raise SystemExit("[job] repo_check: selected panel is empty")
+        contexts = rc_mod.load_context(repo_path)
+        labels = rc_mod.load_annotate_labels(results_dir)
+        model = panel["panel"][0] if panel["panel"] else (pool[0] if pool else "qwen3:14b")
+        chunk_size = int(job.get("repo_chunk_size", job.get("chunk_size", 10)))
+        summary = rc_mod.run_repo_check(
+            contexts, results_dir, chunk_size=chunk_size, host=host,
+            labels=labels, model=model, rater_factory=rater_factory,
+        )
+        print(f"[job] repo_check -> {summary}")
     elif stage == "publish":
         _publish(results_dir, job)
         _refresh_mtime(out_dir / "job.heartbeat")
@@ -199,17 +222,40 @@ def _finalize(results_dir: Path, job: dict) -> None:
 
 def _fake_factory(pool: list[str]) -> dict:
     """Deterministic hash-based fake raters; plumbing smoke test only."""
+    from analysis.novelty.prompt import REPO_PASS1_MARK, REPO_PASS2_MARK
+
     class FakeClient:
         def __init__(self, model: str):
             self.model = model
 
         def generate(self, system: str, user: str) -> dict:
             seed = int(hashlib.sha256((self.model + user).encode()).hexdigest()[:8], 16)
-            labels = ["C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "EX2", "Z",
-                      "known", "variant", "novel", "false_pos", "external_di"]
-            label = labels[seed % len(labels)]
+            if REPO_PASS1_MARK in user:
+                repo = user.splitlines()[0].replace("REPOSITORY: ", "").strip()
+                content = json.dumps({
+                    "observations": [
+                        {"pattern": "fake_observed_pattern", "file": "src/app.py",
+                         "line": seed % 900 + 1, "why": "fake"},
+                    ],
+                    "comment": "fake",
+                })
+            elif REPO_PASS2_MARK in user:
+                content = json.dumps({
+                    "reconciliations": [
+                        {"fingerprint": "C1|BARE|SIG", "agree": seed % 2 == 0,
+                         "label": "novel" if seed % 2 == 0 else "known",
+                         "reason": "fake", "citation": {"file": "src/app.py", "line": seed % 900 + 1}},
+                    ],
+                    "missed_by_inventory": [],
+                    "comment": "fake",
+                })
+            else:
+                labels = ["C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "EX2", "Z",
+                          "known", "variant", "novel", "false_pos", "external_di"]
+                label = labels[seed % len(labels)]
+                content = json.dumps({"label": label, "rule": None, "evidence": "fake"})
             return {
-                "content": json.dumps({"label": label, "rule": None, "evidence": "fake"}),
+                "content": content,
                 "latency_s": 0.0, "model": self.model,
             }
     return {m: FakeClient(m) for m in pool}

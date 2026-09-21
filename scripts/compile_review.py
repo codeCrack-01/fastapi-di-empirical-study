@@ -1,22 +1,24 @@
-"""scripts/compile_review.py — turn annotate chunks into a human-reviewable summary.
+"""scripts/compile_review.py — turn annotate + repo_check chunks into a human review.
 
-Run locally (NOT on the remote box): copy ``remote/results`` back together with
-the repo first, then::
+SCOPE IS THE 327-REPO STRATIFIED SAMPLE (not the full corpus). Run locally
+(NOT on the remote box): copy ``remote/results`` back together with the repo
+first, then::
 
     .venv/bin/python scripts/compile_review.py
 
 Inputs
 ------
-  remote/results/chunk_*.jsonl      annotated fingerprint records (only finalized chunks)
-  analysis/novelty/out/novelty_occurrences.json   per-(repo, fingerprint) counts + links
-  analysis/out/covariates.csv       sample star data (owner/repo, stars_gh, stars_libio)
-  .env                              GITHUB_TOKEN for star backfill (optional)
-  analysis/novelty/out/novelty_leaderboard.csv    anchor sanity score (optional)
+  remote/results/chunk_*.jsonl                  annotated fingerprint records (finalized chunks)
+  remote/results/chunk_1*.jsonl                 repo_check two-pass records (chunk ids >= 10000)
+  analysis/out/sample.json                      the 327-repo stratified sample (scope + stratum/weight)
+  analysis/novelty/out/novelty_occurrences.json per-(repo, fingerprint) counts + links
+  analysis/out/covariates.csv                   sample star data (covers all 327 -> no GitHub API needed)
 
 Outputs (analysis/out/review/)
-  review.tsv                       canonical table, one row per repo
+  review.tsv                       canonical table, one row per sample repo
   review.xlsx                      same table (openpyxl; skipped if unavailable)
-  Q1/../Q4/<owner__repo>/review.md per-repo evidence pages (Q?, if stars unknown)
+  Q1/../Q4/<owner__repo>/review.md per-repo evidence pages (pass-1 observations,
+                                    pass-2 reconciliation, labeled fingerprints)
 """
 
 from __future__ import annotations
@@ -33,6 +35,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 RESULTS_DIR = ROOT / "remote" / "results"
+SAMPLE = ROOT / "analysis" / "out" / "sample.json"
 OCCURRENCES = ROOT / "analysis" / "novelty" / "out" / "novelty_occurrences.json"
 COVARIATES = ROOT / "analysis" / "out" / "covariates.csv"
 OUT_DIR = ROOT / "analysis" / "out" / "review"
@@ -47,14 +50,39 @@ def norm(owner_repo: str | None) -> str:
     return v.replace("__", "/", 1)
 
 
-def load_chunks(results_dir: Path) -> list[dict]:
+def load_samples() -> dict[str, dict]:
+    """full_name -> {stratum, weight} for the 327 sampled repos (scope gate)."""
+    data = json.loads(SAMPLE.read_text())
+    sampled = data.get("sampled") if isinstance(data, dict) else data
+    out: dict[str, dict] = {}
+    for e in sampled or []:
+        name = norm(e.get("full_name"))
+        out[name] = {"stratum": e.get("stratum"), "weight": e.get("weight")}
+    if not out:
+        raise SystemExit(f"[compile] sample.json has no 'sampled' entries ({SAMPLE})")
+    return out
+
+
+def load_chunks(results_dir: Path, start_id: int = 0) -> list[dict]:
+    """Finalized chunk records with chunk_id >= start_id (annotate: 0; repo_check: 10000)."""
     recs: list[dict] = []
     for f in sorted(results_dir.glob("chunk_*.jsonl")):
+        sid = int(f.stem.split("_")[1])
+        if sid < start_id:
+            continue
         for line in f.read_text(encoding="utf-8").splitlines():
             line = line.strip()
             if line:
                 recs.append(json.loads(line))
     return recs
+
+
+def load_repo_check(results_dir: Path) -> dict[str, dict]:
+    """repo -> repo_check record (indexed by owner/repo)."""
+    out: dict[str, dict] = {}
+    for rec in load_chunks(results_dir, start_id=10000):
+        out[norm(rec.get("repo"))] = rec
+    return out
 
 
 def load_occurrences() -> dict[tuple[str, str], dict]:
@@ -147,14 +175,14 @@ def assign_quadrants(repos: dict[str, int | None]) -> dict[str, int | None]:
     for repo, stars in repos.items():
         if stars is None:
             out[repo] = None
-        elif stars >= q3:
-            out[repo] = 4
-        elif stars >= q2:
-            out[repo] = 3
-        elif stars >= q1:
-            out[repo] = 2
-        else:
+        elif stars <= q1:
             out[repo] = 1
+        elif stars <= q2:
+            out[repo] = 2
+        elif stars <= q3:
+            out[repo] = 3
+        else:
+            out[repo] = 4
     return out
 
 
@@ -163,13 +191,18 @@ def truncate(text: Any, n: int = 400) -> str:
     return s if len(s) <= n else s[: n - 3] + "..."
 
 
+COLS = ["repo", "stratum", "weight", "quadrant", "stars", "star_source", "github_url",
+        "n_di_nodes", "commit_sha",
+        "n_novel", "n_variant", "n_known", "n_false_pos", "n_external_di",
+        "n_unknown", "n_fingerprints", "n_occurrences",
+        "pass1_n_obs", "pass2_n_recon", "pass2_n_overturn", "pass2_n_missed",
+        "fingerprints"]
+
+
 def build_tsv(rows: list[dict]) -> str:
-    cols = ["repo", "quadrant", "stars", "star_source", "github_url",
-            "n_novel", "n_variant", "n_known", "n_false_pos", "n_external_di",
-            "n_unknown", "n_fingerprints", "n_occurrences", "fingerprints"]
-    lines = ["\t".join(cols)]
+    lines = ["\t".join(COLS)]
     for r in rows:
-        lines.append("\t".join("" if (v := r.get(c)) is None else str(v) for c in cols))
+        lines.append("\t".join("" if (v := r.get(c)) is None else str(v) for c in COLS))
     return "\n".join(lines) + "\n"
 
 
@@ -184,9 +217,7 @@ def write_xlsx(path: Path, rows: list[dict]) -> bool:
     wb = Workbook()
     ws = wb.active
     ws.title = "repos"
-    cols = ["repo", "quadrant", "stars", "star_source", "github_url",
-            "n_novel", "n_variant", "n_known", "n_false_pos", "n_external_di",
-            "n_unknown", "n_fingerprints", "n_occurrences", "fingerprints"]
+    cols = COLS
     header_fill = PatternFill("solid", fgColor="1F4E79")
     for c, name in enumerate(cols, 1):
         cell = ws.cell(row=1, column=c, value=name)
@@ -202,7 +233,7 @@ def write_xlsx(path: Path, rows: list[dict]) -> bool:
             cell.hyperlink = url
             cell.font = Font(color="0563C1", underline="single")
     for c in range(1, len(cols) + 1):
-        ws.column_dimensions[get_column_letter(c)].width = max(14, len(cols[c - 1]) + 4)
+        ws.column_dimensions[get_column_letter(c)].width = max(12, len(cols[c - 1]) + 3)
     ws.freeze_panes = "A2"
     wb.save(path)
     return True
@@ -212,25 +243,35 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--results", default=str(RESULTS_DIR))
     ap.add_argument("--out", default=str(OUT_DIR))
-    ap.add_argument("--no-net", action="store_true", help="never hit the GitHub API (stars: covariates only)")
+    ap.add_argument("--net", action="store_true",
+                    help="ATTENTION: not needed for the 327 sample (covariates covers 100%); "
+                         "only force a GitHub API star fetch for repos missing from covariates")
     args = ap.parse_args()
 
     results_dir = Path(args.results)
     out_dir = Path(args.out)
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    records = load_chunks(results_dir)
-    if not records:
-        raise SystemExit(f"[compile] no chunk_*.jsonl under {results_dir} — nothing to compile")
-    print(f"[compile] {len(records)} annotated fingerprints")
+    samples = load_samples()
+    records = load_chunks(results_dir, start_id=0)
+    annotate_only = [r for r in records if r.get("consensus")]
+    if not annotate_only:
+        raise SystemExit(f"[compile] no annotate chunk_*.jsonl under {results_dir} — nothing to compile")
+    print(f"[compile] {len(annotate_only)} annotated fingerprints; {len(records)} total chunk records")
+
+    rcs = load_repo_check(results_dir)
+    print(f"[compile] {len(rcs)} repo_check records ({len(rcs)}/327 sample repos covered)")
 
     occ_by = load_occurrences()
     cov_stars = load_covariate_stars()
 
-    # ---- label tallies + per-repo stats ----
+    # ---- label tallies + per-repo stats (sample scope) ----
     label_of: dict[str, dict] = {}          # fp -> {consensus, evidence, thinking, rule, executor}
     repo_stats: dict[str, dict] = {}
-    for rec in records:
+    for repo in samples:   # pre-seed EVERY sample repo (incl. zero-DI) with zeroed stats
+        repo_stats[repo] = {"label_counts": {l: 0 for l in LABEL_ORDER},
+                            "fps": {}, "occ_example": {}, "q": None, "stars": None}
+    for rec in annotate_only:
         fid = rec.get("fingerprint_id")
         dec = rec.get("consensus")
         label = (dec or {}).get("label") if isinstance(dec, dict) else None
@@ -248,8 +289,9 @@ def main() -> int:
         }
         for r in rec.get("repos") or []:
             key = norm(r)
-            st = repo_stats.setdefault(key, {"label_counts": {l: 0 for l in LABEL_ORDER},
-                                             "fps": {}, "occ_example": {}, "q": None, "stars": None})
+            if key not in repo_stats:   # out-of-sample repo from a fingerprint — ignore
+                continue
+            st = repo_stats[key]
             st["label_counts"][label] += 1
             st["fps"][fid] = st["fps"].get(fid, 0)
 
@@ -259,17 +301,17 @@ def main() -> int:
             repo_stats[repo]["fps"][fid] = om["n"]
             repo_stats[repo]["occ_example"][fid] = om
 
-    # ---- stars ----
+    # ---- stars: covariates covers all 327; API only on explicit --net ----
     cache: dict = {}
-    if STARS_CACHE.exists():
-        cache = json.loads(STARS_CACHE.read_text())
     for repo in repo_stats:
         gh, libio = cov_stars.get(repo, (None, None))
         if gh is not None:
             repo_stats[repo]["stars"], repo_stats[repo]["star_source"] = gh, "covariates"
         elif libio is not None:
             repo_stats[repo]["stars"], repo_stats[repo]["star_source"] = libio, "covariates:libio"
-    if not args.no_net:
+    if args.net:
+        if STARS_CACHE.exists():
+            cache = json.loads(STARS_CACHE.read_text())
         missing = {r for r, s in repo_stats.items()
                    if s["stars"] is None and "/" in r and r not in cache}
         if missing:
@@ -278,7 +320,7 @@ def main() -> int:
             for r in missing:
                 if cache.get(r) is not None:
                     repo_stats[r]["stars"], repo_stats[r]["star_source"] = cache[r], "github"
-        STARS_CACHE.write_text(json.dumps(cache, indent=2, sort_keys=True))
+            STARS_CACHE.write_text(json.dumps(cache, indent=2, sort_keys=True))
     for r, s in repo_stats.items():
         if s["stars"] is None:
             s["star_source"] = s.get("star_source") or "unset"
@@ -290,22 +332,35 @@ def main() -> int:
     for repo in sorted(repo_stats, key=lambda r: (repo_stats[r]["stars"] is None,
                                                   -(repo_stats[r]["stars"] or -1), r)):
         s = repo_stats[repo]
+        info = samples[repo]
         q = quad[repo]
         s["q"] = q
         counts = s["label_counts"]
         nfps = len(s["fps"])
         fp_ids = sorted(s["fps"], key=lambda f: (-s["fps"][f], f))
+        rc = rcs.get(repo) or {}
+        p1 = (rc.get("pass1") or {}).get("parsed") or {}
+        p2 = (rc.get("pass2") or {}).get("parsed") or {}
+        recons = p2.get("reconciliations") or []
         rows.append({
             "repo": repo,
+            "stratum": info.get("stratum"),
+            "weight": info.get("weight"),
             "quadrant": f"Q{q}" if q else "Q?",
             "stars": s["stars"] if s["stars"] is not None else "",
             "star_source": s["star_source"],
             "github_url": f"https://github.com/{repo}",
+            "n_di_nodes": rc.get("n_di_nodes"),
+            "commit_sha": (rc.get("commit_sha") or "")[:12],
             "n_novel": counts["novel"], "n_variant": counts["variant"], "n_known": counts["known"],
             "n_false_pos": counts["false_pos"], "n_external_di": counts["external_di"],
             "n_unknown": counts["unknown"],
             "n_fingerprints": nfps,
             "n_occurrences": sum(s["fps"].values()),
+            "pass1_n_obs": len(p1.get("observations") or []),
+            "pass2_n_recon": len(recons),
+            "pass2_n_overturn": sum(1 for x in recons if not x.get("agree")),
+            "pass2_n_missed": len(p2.get("missed_by_inventory") or []),
             "fingerprints": ", ".join(fp_ids),
         })
 
@@ -326,51 +381,107 @@ def main() -> int:
         d = out_dir / (f"Q{q}" if q else "Q?")
         d.mkdir(parents=True, exist_ok=True)
         review_md(d / f"{repo.replace('/', '__')}" / "review.md", repo, s, label_of,
-                  occ_by, s.get("star_source"))
+                  occ_by, s.get("star_source"), rcs.get(repo))
 
     n_novel_repos = sum(1 for r in rows if r["n_novel"])
-    print(f"[compile] done — {n_novel_repos} repos with >=1 novel fingerprint, {len(rows)} total")
+    n_p2 = sum(1 for r in rows if r["pass2_n_recon"])
+    print(f"[compile] done — {n_novel_repos} repos with >=1 novel fingerprint, "
+          f"{n_p2} with pass-2 reconciliation evidence, {len(rows)} sample repos total")
     return 0
 
 
-def review_md(path: Path, repo: str, s: dict, label_of: dict, occ_by: dict, star_source: str) -> None:
-    """Write one repo's evidence page: every labeled fingerprint touching it, with links + thinking."""
+def review_md(path: Path, repo: str, s: dict, label_of: dict, occ_by: dict,
+              star_source: str, rc: dict | None) -> None:
+    """Write one repo's evidence page: fingerprint labels, then pass-1/pass-2 quotes."""
     counts = s["label_counts"]
     fp_ids = sorted(s["fps"], key=lambda f: (-s["fps"][f], f))
     lines = [f"# {repo}", ""]
     lines.append(f"- GitHub: https://github.com/{repo}")
     lines.append(f"- Stars: {s['stars'] if s['stars'] is not None else 'n/a'} ({star_source})")
     lines.append(f"- Quadrant: {('Q' + str(s['q'])) if s['q'] else 'Q?'}")
+    if rc:
+        lines.append(f"- Stratum: {rc.get('stratum', s.get('stratum', '—'))} · "
+                     f"DI nodes: {rc.get('n_di_nodes', '—')} · "
+                     f"commit: `{(rc.get('commit_sha') or '—')[:12]}`")
     lines.append(f"- Fingerprints touching this repo: {len(fp_ids)}")
     lines.append(f"- Label mix: novel={counts['novel']} variant={counts['variant']} "
                  f"known={counts['known']} false_pos={counts['false_pos']} "
                  f"external_di={counts['external_di']} unknown={counts['unknown']}")
     lines.append("")
-    lines.append("| fingerprint | construct | #occs here | label | example |")
-    lines.append("|---|---|---|---|---|")
-    for fid in fp_ids:
-        info = label_of.get(fid, {})
-        ex = s.get("occ_example", {}).get(fid)
-        link = f"[{ex['file']}#L{ex.get('line', '')}]({ex['github_url']})" if ex and ex.get("github_url") else "—"
-        lines.append(f"| `{fid}` | {ex.get('construct', '') if ex else ''} "
-                     f"| {s['fps'][fid]} | **{info.get('label', '')}** | {link} |")
-    lines.append("")
-    for fid in fp_ids:
-        info = label_of.get(fid, {})
-        ex = s.get("occ_example", {}).get(fid)
-        lines.append(f"## `{fid}` — **{info.get('label', 'unknown')}**")
-        lines.append(f"> occurrences here: {s['fps'][fid]} · corpus total: {info.get('count', '—')} "
-                     f"· executor: {info.get('executor', '—')}")
-        if ex:
-            lines.append(f"> example: [{ex.get('file')}#L{ex.get('line', '')}]({ex['github_url']})")
-        if info.get("rule"):
-            lines.append(f"> **rule:** {truncate(info['rule'], 300)}")
-        if info.get("evidence"):
+    if rc:
+        lines.append("## Pass 1 — blind observations")
+        obs = (rc.get("pass1") or {}).get("parsed", {}).get("observations") or []
+        if obs:
+            lines.append("| # | pattern | location | why |")
+            lines.append("|---|---|---|---|")
+            for i, o in enumerate(obs, 1):
+                loc = f"{o.get('file')}#L{o.get('line', '')}"
+                lines.append(f"| {i} | `{o.get('pattern')}` | {loc} | {truncate(o.get('why'), 200)} |")
             lines.append("")
-            lines.append(f"> **evidence (model):** {truncate(info['evidence'], 900)}")
-        if info.get("thinking"):
+        # fingerprints shown in pass 2 (from the repo) — so reviewer can reconcile
+        lines.append(f"## Pass 2 — reconcile with inventory of {repo}")
+        lines.append("")
+        if fp_ids:
+            lines.append("_Presented fingerprints:_ `" + "`, `".join(fp_ids) + "`")
             lines.append("")
-            lines.append(f"**model grounds** (first 700 chars): `{truncate(info['thinking'], 700)}`")
+        p2 = (rc.get("pass2") or {}).get("parsed") or {}
+        recons = p2.get("reconciliations") or []
+        if recons:
+            lines.append("| fingerprint | model label | agree? | reason | citation |")
+            lines.append("|---|---|---|---|---|")
+            for x in recons:
+                cit = x.get("citation") or {}
+                cloc = f"{cit.get('file')}#L{cit.get('line', '')}" if cit else "—"
+                agree = "yes" if x.get("agree") else "**no (overturn)**"
+                lines.append(f"| `{x.get('fingerprint')}` | {x.get('label')} | {agree} "
+                             f"| {truncate(x.get('reason'), 200)} | {cloc} |")
+            lines.append("")
+        missed = p2.get("missed_by_inventory") or []
+        if missed:
+            lines.append(f"### Missed by inventory ({len(missed)})")
+            for m in missed:
+                loc = f"{m.get('file')}#L{m.get('line', '')}"
+                lines.append(f"- `{m.get('pattern')}` @ {loc} — {truncate(m.get('why'), 200)}")
+            lines.append("")
+        t1 = (rc.get("pass1") or {}).get("thinking")
+        if t1:
+            lines.append(f"**pass-1 thinking:** `{truncate(t1, 700)}`")
+            lines.append("")
+        t2 = (rc.get("pass2") or {}).get("thinking")
+        if t2:
+            lines.append(f"**pass-2 thinking:** `{truncate(t2, 700)}`")
+            lines.append("")
+    lines.append("## Fingerprint labels")
+    if fp_ids:
+        lines.append("| fingerprint | construct | #occs here | label | example |")
+        lines.append("|---|---|---|---|---|")
+        for fid in fp_ids:
+            info = label_of.get(fid, {})
+            ex = s.get("occ_example", {}).get(fid)
+            link = f"[{ex['file']}#L{ex.get('line', '')}]({ex['github_url']})" if ex and ex.get("github_url") else "—"
+            lines.append(f"| `{fid}` | {ex.get('construct', '') if ex else ''} "
+                         f"| {s['fps'][fid]} | **{info.get('label', '')}** | {link} |")
+        lines.append("")
+        for fid in fp_ids:
+            info = label_of.get(fid, {})
+            ex = s.get("occ_example", {}).get(fid)
+            lines.append(f"## `{fid}` — **{info.get('label', 'unknown')}**")
+            lines.append(f"> occurrences here: {s['fps'][fid]} · corpus total: {info.get('count', '—')} "
+                         f"· executor: {info.get('executor', '—')}")
+            if ex:
+                lines.append(f"> example: [{ex.get('file')}#L{ex.get('line', '')}]({ex['github_url']})")
+            if info.get("rule"):
+                lines.append(f"> **rule:** {truncate(info['rule'], 300)}")
+            if info.get("evidence"):
+                lines.append("")
+                lines.append(f"> **evidence (model):** {truncate(info['evidence'], 900)}")
+            if info.get("thinking"):
+                lines.append("")
+                lines.append(f"**model grounds** (first 700 chars): `{truncate(info['thinking'], 700)}`")
+            lines.append("")
+    else:
+        lines.append("_No matched fingerprints in this repo — pass-1 observations and "
+                     "pass-2 confirmation carry the evidence._")
         lines.append("")
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
