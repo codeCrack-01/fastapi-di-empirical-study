@@ -22,7 +22,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory)][string]$JobDir,
-    [string[]]$Models = @("qwen3-coder:4b", "llama3.2:3b", "deepseek-coder:6.7b"),
+    [string[]]$Models = @("qwen3:14b"),
     [switch]$InstallOllama,
     [switch]$SkipAutoLogon
 )
