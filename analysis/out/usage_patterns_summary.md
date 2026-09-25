@@ -1,8 +1,8 @@
 # RQ2 — usage & dynamic relationships (mixed methods)
 
-- **Corpus:** 402 accepted repos (census).
+- **Corpus:** 2179 accepted repos (census).
 
-- **Depends() call sites (production):** 25166 across 303 repos; 4 argument-shape categories
+- **Depends() call sites (production):** 98243 across 1371 repos; 4 argument-shape categories
 
 
 ## Tier A — quantitative facets
@@ -11,54 +11,54 @@
 
 | Shape | Calls | % calls | Repos |
 |---|---|---|---|
-| bare function | 24444 | 97.1% | 297 |
-| placeholder | 429 | 1.7% | 27 |
-| module alias (mod.x) | 266 | 1.1% | 11 |
-| title-case class | 21 | 0.1% | 7 |
-| classmethod (Cls.meth) | 6 | 0.0% | 1 |
+| bare function | 94889 | 96.6% | 1354 |
+| module alias (mod.x) | 2433 | 2.5% | 54 |
+| placeholder | 720 | 0.7% | 120 |
+| title-case class | 178 | 0.2% | 28 |
+| classmethod (Cls.meth) | 23 | 0.0% | 4 |
 
 ### Security() OAuth2 scopes
 
-- **163** `Security()` call sites across **42** repos; **0 (0.0%)** pass `scopes=[...]` (0.0% of Security-using repos). The OAuth2 scopes feature is effectively unadopted.
+- **620** `Security()` call sites across **104** repos; **0 (0.0%)** pass `scopes=[...]` (0.0% of Security-using repos). The OAuth2 scopes feature is effectively unadopted.
 
 ### Dependency-graph relationship topology
 
-- **294/402** repos have a non-empty graph; 16494 function nodes + 728 class nodes; 23223 directed edges.
+- **1338/2179** repos have a non-empty graph; 62200 function nodes + 2682 class nodes; 90863 directed edges.
 
-- **227** fan-in hub nodes with >=10 dependents. Top hubs: get_db (4683), get_session (1732), get_current_user (1471), require_admin (1175), require_user (635), get_db_session (537), get_current_active_user (463), require_role (454).
+- **708** fan-in hub nodes with >=10 dependents. Top hubs: get_db (24014), get_current_user (11432), get_session (5014), require_admin (3030), require_permission (1764), get_db_session (1390), require_role (1349), require_user (960).
 
-- Median graph depth 2.0, max 7; **114** repos have any unresolved dependency.
+- Median graph depth 2.0, max 7; **521** repos have any unresolved dependency.
 
 
 ### Annotated[...] type-role frequencies (top)
 
 | Type | Calls | Repos |
 |---|---|---|
-| User | 749 | 19 |
-| AsyncSession | 616 | 26 |
-| str | 458 | 21 |
-| Session | 355 | 19 |
-| Principal | 235 | 7 |
-| UserPrincipal | 180 | 1 |
-| ... | 169 | 36 |
-| Settings | 142 | 19 |
-| AuditSink | 142 | 1 |
-| AuthIdentity | 98 | 1 |
-| Any | 93 | 5 |
-| CurrentAdminUser | 76 | 1 |
+| AsyncSession | 2435 | 103 |
+| User | 2133 | 86 |
+| ActorContext | 1630 | 1 |
+| KernelContainer | 1312 | 1 |
+| Session | 1107 | 78 |
+| ... | 1104 | 148 |
+| Principal | 739 | 23 |
+| str | 734 | 77 |
+| AuthPrincipal | 613 | 2 |
+| Settings | 522 | 67 |
+| dict | 282 | 14 |
+| Actor | 247 | 6 |
 
 ## Tier B — qualitative idiom catalog (low n, not statistical)
 
 | Idiom | Repos | Evidence |
 |---|---|---|
-| classmethod-as-dependency (`.as_form`/`.as_dependency`) | 1 | .as_form |
-| class-as-dependency (`Depends(MyClass)`) | 14 distinct classes / 7 repos | API_KEY_HEADER, AttachmentRepo, AttachmentService, AttachmentStore, HTTPBearer, ImageRepo, ImageService, ImageStore ... |
-| `provide_*` service-locator dialect | 1 repos | provider namespace |
-| `current_*` context/request-scope injection | 15 repos | context objects |
-| `*Repository`-typed injection | 0 repos | repository pattern |
-| module-alias dependencies (`mod.dep`) | 11 repos | namespaced deps |
+| classmethod-as-dependency (`.as_form`/`.as_dependency`) | 6 | .as_form, .from_query_parameters, .has_permission, .is_authed, .is_authed_optional, .require_role |
+| class-as-dependency (`Depends(MyClass)`) | 38 distinct classes / 28 repos | APIKeyAuth, APIKeyHeader, API_KEY_HEADER, AdminOnly, ArrestService, AttachmentRepo, AttachmentService, AttachmentStore ... |
+| `provide_*` service-locator dialect | 3 repos | provider namespace |
+| `current_*` context/request-scope injection | 76 repos | context objects |
+| `*Repository`-typed injection | 1 repos | repository pattern |
+| module-alias dependencies (`mod.dep`) | 54 repos | namespaced deps |
 
 **Caveat (honest reporting):** Tier B idioms have very low counts and are reported as *discovered patterns with explicit n*, not as statistical findings. They are qualitative evidence of how practitioners extend the documented API.
 
-**Note on `.as_dependency`:** a second classmethod-DI variant (`Class.as_dependency`) exists in `mealie-recipes/mealie`, but that repo is not in the current 402-repo accepted census, so it is reported here as an observed out-of-corpus idiom rather than a census count.
+**Note on `.as_dependency`:** a second classmethod-DI variant (`Class.as_dependency`) exists in `mealie-recipes/mealie`, but that repo is not in the current 2179-repo accepted census, so it is reported here as an observed out-of-corpus idiom rather than a census count.
 

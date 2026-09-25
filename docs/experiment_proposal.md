@@ -11,9 +11,9 @@ write-up in `docs/methodology_journal.md`. This proposal extends the census
 
 ## 1. Abstract
 
-The census of 402 accepted FastAPI repositories established that real projects
+The census of 2,179 accepted FastAPI repositories established that real projects
 use mostly *framework-native* dependency injection (`Depends`), a substantial
-minority (24.4%) use **no DI construct at all**, and a handful of idioms
+minority (36.9%) use **no DI construct at all**, and a handful of idioms
 (class-based dependencies, `current_*` request-scope, module aliases,
 `provide_*` locators, `.as_form`) exist but are rare. This proposal turns the
 question "does the choice of **dependency-management strategy** cost anything at
@@ -41,6 +41,22 @@ database conditions, and software versions:
 - How does any measured effect scale with dependency-chain width/depth, request
   arrival rate (concurrency), and the share of request time spent in the
   resolver vs. in handler/business logic?
+
+### 2.1a Research question (RQ5 — "most used vs most effective")
+
+A second, complementary question, framed against the census:
+
+- For the spellings the census found in volume — C1 `Depends(fn)` (62.9% of
+  repos), C3 `Annotated[T, Depends(fn)]` (17.6%), C4 generator/yield (34.8%),
+  and S0 zero-DI/ direct construction (36.9%) — how do measured latency,
+  throughput, CPU, and memory differ at fixed load?
+- Is the most-used spelling (generator/yield, 34.8% of repos) also the
+  empirically best, and what is the change-cost (LOC diff) of moving an
+  application between spellings?
+
+RQ5 reuses RQ-E's harness (Section 4) with the construct-spelling arm from
+§3.2; it is answered *after* RQ-E's strategy results, on the same stay-locked
+preregistration.
 
 ### 2.2 Hypotheses
 
@@ -73,8 +89,8 @@ Treatments vary **how a handler acquires its dependencies per request**:
 
 | ID | Strategy | Census link | Semantics |
 |---|---|---|---|
-| S0 | Direct construction (zero-DI) | 98 repos (24.4%) | handler calls dependencies directly: `async with get_db() as session: ...`, explicit `get_current_user(token)`, explicit guard checks |
-| S1 | Framework-native DI | 304 repos (75.6%) | `Depends(get_db)`, `Depends(get_current_user)`, `Depends(require_admin)` — the corpus hub chain |
+| S0 | Direct construction (zero-DI) | 805 repos (36.9%) | handler calls dependencies directly: `async with get_db() as session: ...`, explicit `get_current_user(token)`, explicit guard checks |
+| S1 | Framework-native DI | 1,374 repos (63.1%) | `Depends(get_db)`, `Depends(get_current_user)`, `Depends(require_admin)` — the corpus hub chain |
 | S2 | Manual Python DI (explicit context) | `current_*` / manual-wiring flavor | middleware builds a `RequestContext` (session, user) in `request.state`; handlers receive `ctx` explicitly |
 | S3 | External DI container *(secondary)* | ~3–6 repos (~1%, indicative) | `dependency-injector` container, provider wired via `Depends(get_provider)` |
 
@@ -85,12 +101,22 @@ S3 is **mock-only** (§6) and framed explicitly as a synthetic-app question —
 
 These are **census observations within framework-native DI**, reported
 descriptively (`docs/methodology_journal.md` §4), and are **not** benchmark
-treatments: `Depends(fn)` vs `Annotated[Depends(...)]` vs `Security(...)` vs
-generator/yield dependencies vs class-as-dependency vs module aliases vs
-`provide_*` idioms. All are variations *inside* S1; making each a treatment
-would explode the matrix and over-weight patterns that appear in 1–15 of 402
-repos. Reviewer-facing guarantee: **the census observes; the experiment tests
-management strategies.**
+treatments *at the S-strategy level*: `Depends(fn)` vs `Annotated[Depends(...)]`
+vs `Security(...)` vs generator/yield dependencies vs class-as-dependency vs
+module aliases vs `provide_*` idioms. All are variations *inside* S1; making
+each a treatment would explode the matrix and over-weight patterns that appear
+in 1–104 of 2,179 repos. Reviewer-facing guarantee: **the census observes; the
+experiment tests management strategies.**
+
+**RQ5 extension (construct-spelling arm).** RQ5 ("most used vs most
+effective") adds one *focused* comparison inside S1, between the three
+high-frequency spellings the census actually found in volume — C1
+`Depends(fn)`, C3 `Annotated[T, Depends(fn)]`, and C4 generator/yield
+`def dep(yield db)` — plus the zero-DI S0 spelling. This is a deliberate,
+preregistered *exception* to the boundary above: 1,371 (62.9%), 384 (17.6%),
+759 (34.8%) and 805 zero-DI (36.9%) repos use spellings worth a head-to-head.
+Class-as-dependency (28 repos), module aliases (54) and `provide_*` (3)
+remain excluded as too rare.
 
 ---
 
@@ -117,11 +143,11 @@ dependency-acquisition adapter differs.
 | Aspect | Design | Corpus motivation |
 |---|---|---|
 | Endpoints | 20 across 3 routers (reviews, users, admin); distinct shapes: list/detail/write/guarded/export | heterogeneous real handlers |
-| `get_db` (yield session) | consumed by **all 20** endpoints | top hub — `get_db` 4,683 dependents |
-| `get_current_user` (Bearer token) | consumed by 14 | `get_current_user` 1,471 dependents |
-| `require_admin` / `require_editor` | 6 / 4 endpoints | `require_admin` 1,175, `require_role` 454 |
+| `get_db` (yield session) | consumed by **all 20** endpoints | top hub — `get_db` 24,014 dependents corpus-wide |
+| `get_current_user` (Bearer token) | consumed by 14 | `get_current_user` 11,432 dependents corpus-wide |
+| `require_admin` / `require_editor` | 6 / 4 endpoints | `require_admin` 3,030, `require_role` 1,349 corpus-wide |
 | Nested chain | `require_admin -> get_current_user -> get_db` (depth 3–4) | median depth 2, max 7 in census |
-| Dependency kinds | function-only (no class nodes) | 97.1% bare-function `Depends`; class nodes only 4.2% |
+| Dependency kinds | function-only (no class nodes) | 96.6% bare-function `Depends`; class nodes only 4.1% |
 | Auth | Bearer -> `get_current_user` + guard hubs; **no `Security()`** | census shows `Security()` is a flag with zero `scopes` usage; guards are `require_*` hubs |
 | Data | seeded in-memory SQLite (10 rows/table), fixed seed | deterministic, no network |
 

@@ -37,6 +37,7 @@ def run_reverify(
     from client import OllamaClient
     from executor import ExecutorProfile
     from prompt import parse_response, render_system, render_user
+    from select_panel import normalize_anchor_label
 
     panel = json.loads(Path(panel_path).read_text())
     sel = json.loads(Path(selection_path).read_text())
@@ -52,8 +53,9 @@ def run_reverify(
     for m, cli in clients.items():
         sel_pred = sel["rater_predictions"].get(m) or []
         cur_pred = [
-            parse_response(cli.generate(render_system(), render_user(a.get("extractor_top") or a["id"], [a]))
-                           .get("content", ""))["label"]
+            normalize_anchor_label(
+                parse_response(cli.generate(render_system(), render_user(a.get("extractor_top") or a["id"], [{k: v for k, v in a.items() if k != "source"}]))
+                               .get("content", ""))["label"])
             for a in anchors
         ]
         baseline = sel_pred[:len(cur_pred)]

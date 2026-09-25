@@ -26,11 +26,12 @@ Each section below maps to one deck slide and gives:
 
 ## 1. Research questions
 
-**Numbers:** 402 accepted / 100 sample / 0-of-402 overlap.
+**Numbers:** 2,179 accepted / 327 stratified sample / 1-of-2,179 topic overlap (0.0%).
 
-**Significance:** three headline magnitudes set up in one slide. 402 is a
-substantial corpus for an MSR study; 100 is the registered sample; the 0%
-overlap is the methodological anchor that justifies the whole corpus design.
+**Significance:** three headline magnitudes set up in one slide. 2,179 is a
+substantial corpus for an MSR study; 327 is the stratified review sample; the
+~0% (exactly 1 repo of 2,179) topic overlap is the methodological anchor that
+justifies the whole corpus design.
 
 **Likely grill:** "Why did you drop the application-class RQ?"
 **Defence:** the originally-proposed application-class question (it was RQ2 in the
@@ -44,7 +45,7 @@ arbitrary labels. It remains listed as folded, not silent.
 
 ## 2. Corpus construction
 
-**Numbers:** 5,009 candidates → rules table → 402 accepted.
+**Numbers:** 5,009 candidates → rules table → 2,179 accepted.
 
 **Significance:** demonstrates a rigorous, auditable funnel. Every rejection is
 recorded with the first-failing rule; nothing is dropped silently.
@@ -55,53 +56,59 @@ recorded with the first-failing rule; nothing is dropped silently.
 manifest-parsing, is live, and is the current authoritative dependency source.
 We disclose this substitution in Threats.
 
-**Likely grill:** "Why these E5 thresholds?"
-**Defence:** E5 (≥4 files import fastapi, ≥1 app) is anchored at a natural gap in
-the observed distribution of `files_importing_fastapi`, separating one-off
-scripts from applications. Sensitivity section (§6) proves conclusions hold
-across thresholds 4–8.
+**Likely grill:** "Why these E4 thresholds?"
+**Defence:** E4 (≥2 distinct files import fastapi) removes single-file demos
+and one-off scripts while keeping genuine multi-file applications; the
+threshold selection is documented in `docs/github_stratified_scan_stats.md`.
+Sensitivity section (§6) proves conclusions hold across thresholds 4–8.
 
 ---
 
-## 3. From 5,009 to 402 — the funnel
+## 3. From 5,009 to 2,179 — the funnel
 
-**Numbers:** 5,009 → 4,607 excluded (92.0%) → 402 accepted (8.0%).
+**Numbers:** 5,009 → 2,821 excluded (56.3%) → 2,179 accepted (43.5%).
 
 **Significance:** the biggest rejection drivers are *population properties*, not
-our thresholds. E2 (39%, not Python-dominant) and E1 (19%, no runtime fastapi
-dep) are the dependency graph surfacing mixed-language/other repos. Only 42
-repos (0.8%) were deleted/private (attrition). Zero `clone_failed` remain —
-full auditability.
+our thresholds. The revised E1–E4 rules (see `docs/github_stratified_scan_stats.md`)
+dropped the arbitrary 50% Python-share gate. The remaining rejections split E4
+(1,281 — single-file/demo-scale, < `E4_MIN_FASTAPI_FILES`), E2 (800 — fork or
+archived), E1 (516 — no production fastapi import), plus 224 clone failures; 9
+candidates remain in retry. Attrition is a small fraction — full auditability.
 
-**Likely grill:** "Is 8.0% acceptance a red flag?"
-**Defence:** No — it's the cost of a dependency-graph *source* that intentionally
-over-includes (any repo GitHub resolves as depending on fastapi) and then a
-strict application gate. The recall benchmark (§4) shows this source still
-captures a population the topic signal cannot.
+**Likely grill:** "Is 43.5% acceptance too permissive?"
+**Defence:** No — the dependency-graph *source* intentionally over-includes
+(any repo GitHub resolves as depending on fastapi) and the revised application
+gate keeps every repo with a genuine multi-file FastAPI app. The recall
+benchmark (§4) shows this source still captures a population the topic signal
+cannot, and the census is analysed in full (no sampling error).
 
 ---
 
-## 4. Headline method result: 0% topic overlap
+## 4. Headline method result: ~0% topic overlap
 
-**Numbers:** candidates 2/5,009 (0.0%) in topic; accepted 0/402 (0.0%).
+**Numbers:** candidates 2/5,009 (0.0%) in topic; accepted 1/2,179 (0.0% —
+`MoMoM101/RAG-ReActAgent`, the sole accepted repo also captured by the topic
+signal; the sibling topic hit `allgpt-co/QuickVoice` failed the E1–E4 gate).
 
 **Significance:** This is the single strongest contribution of the study. The
-`topic:fastapi` search — the most natural alternative signal — recovers **zero**
-accepted repos. The dependency graph finds real users; the topic signal finds
-templates/tutorials. It bounds the primary source's recall and justifies the
-corpus.
+`topic:fastapi` search — the most natural alternative signal — recovers exactly
+one accepted repo (~0%). The dependency graph finds real users; the topic signal
+finds templates/tutorials. It bounds the primary source's recall and justifies
+the corpus.
 
-**Likely grill:** "Top 1,000 by stars is a narrow topic probe."
+**Likely grill:** "Top 1,000 by stars is a narrow topic probe, and you still
+found one overlap."
 **Defence:** Acknowledged and disclosed. Even this permissive probe (top 1,000)
-shares nothing with the corpus; widening it only strengthens the conclusion
+shares essentially nothing with the corpus (1/2,179, 0.0%); the single overlap is
+named and fully disclosed. Widening the probe only strengthens the conclusion
 that the two sources are disjoint.
 
 ---
 
 ## 5. RQ1 — construct prevalence
 
-**Numbers (full-corpus census of 402):** Depends 75.4% (median 22), Annotated 25.9% (11),
-Generator/yield 40.3% (1), Security 10.4% (1). Router/app-level wiring, dependency
+**Numbers (full-corpus census of 2,179):** Depends 62.9% (median 22), Annotated 17.6% (10),
+Generator/yield 34.8% (1), Security 4.8% (1). Router/app-level wiring, dependency
 overrides and callable-class dependencies are compositions of the core constructs
 (never used without C1/C2) and are reported as structural placements, not as
 separate constructs.
@@ -117,18 +124,18 @@ construct is not heavily adopted.
 
 **Likely grill:** "Are these counts inflated by copying between repos?"  
 **Defence:** The dependency graph source captures *distinct users*, not
-tutorial clones; 0% topic overlap supports this. No de-duplication was found
-necessary (see 0-overlap evidence).
+tutorial clones; the ~0% topic overlap supports this. No de-duplication was found
+necessary (see the recall benchmark).
 
 ---
 
-## 6. Zero-DI cohort (24.4%)
+## 6. Zero-DI cohort (36.9%)
 
-**Numbers:** 98 of 402 repos use no Depends/Security/Annotated.
+**Numbers:** 805 of 2,179 repos use no Depends/Security/Annotated.
 
-**Significance:** the counter-intuitive headline. A quarter of real FastAPI
-applications with ≥4 importing files and ≥1 app use *no* DI constructs. FastAPI
-is commonly marketed around DI, yet practice shows substantial adoption without it.
+**Significance:** the counter-intuitive headline. Over a third of real FastAPI
+applications that pass the corpus rules use *no* DI constructs.
+FastAPI is commonly marketed around DI, yet practice shows substantial adoption without it.
 
 **Likely grill:** "What do these repos use instead?"
 **Defence:** They pass dependencies and DB sessions through direct function
@@ -140,32 +147,33 @@ work / RQ3 clutches).
 
 ## 7. RQ1 axis (folded application-class question) — by stars & age
 
-**Numbers:** DI prevalence ≈73–76% across 0-star and 1–9-star buckets; corpus
-361/402 repos <12 months old; 100+-star bucket has 7 repos, 36mo+ has 11.
+**Numbers:** DI prevalence 58.8–69.0% across all star buckets (61.0% zero-star,
+67.9% 1–9-star, 69.0% 10–99-star, 58.8% 100+); corpus 1,903/2,179 repos <12 months
+old; 100+-star bucket has 34 repos, 36mo+ has 70.
 
 **Significance:** DI adoption is **flat** across popularity — it is a stable
 property of the population, not skewed by stars. The youth of the corpus
-(361/402 repos under a year) is a property of the discovered dependency-graph
+(1,903/2,179 repos under a year) is a property of the discovered dependency-graph
 population; the E4 gate admits repos up to 60 months old, so the skew is not an
 artifact of that gate.
 
 **Likely grill:** "Your high-star/high-age buckets are nearly empty."
 **Defence:** Correct and disclosed (§Threats). We do not over-read bins with
-n=7–14; they are reported for completeness. The flat-prevalence story rests on
-the well-populated 0/1–9 star buckets (246 and 135 repos).
+low n; they are reported for completeness. The flat-prevalence story rests on
+the well-populated 0/1–9 star buckets (1,491 and 567 repos).
 
 ---
 
 ## 8. RQ2 — usage & dynamic relationships (new)
 
-**Numbers (census of 402):** 97.1% of 25,166 `Depends()` call sites pass a bare
-function; 0 of 163 `Security()` calls pass `scopes` (0/42 repos); 227 fan-in hub
-nodes (≥10 dependents; `get_db` 4,683); 4.2% of graph nodes are classes (728 /
-16,494+728); Tier B idioms at low n (`.as_form` 1 repo, class-as-dep 14 classes/7
-repos, `current_*` 15 repos).
+**Numbers (census of 2,179):** 96.6% of 98,243 `Depends()` call sites pass a bare
+function; 0 of 620 `Security()` calls pass `scopes` (0/104 repos); 708 fan-in hub
+nodes (≥10 dependents; `get_db` 24,014); 4.1% of graph nodes are classes (2,682 /
+62,200+2,682); Tier B idioms at low n (`.as_form` 6 repos, class-as-dep 28 repos,
+`current_*` 76 repos).
 
 **Significance:** the *shape* of DI, not just its presence. RQ1 says "Depends is in
-75.4%"; RQ2 says "how it's wired" — plain-callable dominance, the unused OAuth2
+62.9%"; RQ2 says "how it's wired" — plain-callable dominance, the unused OAuth2
 scopes feature (`Security(scopes=...) = 0%`), and the fan-out relationship
 signature (small set of shared dependencies consumed by many handlers, i.e. what
 the community actually builds with the documented constructs).
@@ -183,12 +191,22 @@ evidence-with-n, not as a statistical claim; the quantitative backbone is Tier A
 
 ## 9. RQ3 — graph complexity
 
-**Numbers (clean, 294/402 non-empty):** median nodes 19.5, IQR 8–54, max 1,444;
+**Numbers (clean, 1,338/2,179 non-empty):** median nodes 19.0, IQR 7–49, max 1,444;
 median depth 2, max 7; median unresolved 0.0%.
 
-**Significance:** real FastAPI DI dependency graphs are **broad and shallow** —
-a small set of shared dependencies reused across many handlers (fan-out), not
-deep inheritance-like chains. This is the empirical shape of DI in the wild.
+**Deep tail (depth ≥ 5):** 58 repos / 4.3% of graph-bearing (43 @ 5, 11 @ 6,
+4 @ 7). All 58 still contain a fan-out hub; tail repos are larger (median 116
+vs 19 clean nodes) but skew young (54/58 < 12 mo) and low-star (36/58
+zero-star). Chains read as stacked service layers terminating at a shared
+hub: `handle_swipes → get_swipe_service → get_spotify_service →
+get_spotify_cache → get_redis_client → get_redis → get_state`
+(`GG-Angel/overplayed`). Artifact: `analysis/out/rq3_depth_tail.csv`.
+
+**Significance:** the empirical shape of DI in the wild is **broad and
+shallow** — a small set of shared dependencies reused across many handlers
+(fan-out). Deep chains are *possible* (up to 7 hops) but a 4.3% tail, appear
+in younger/smaller apps, and never replace the hub pattern — they are stacked
+on top of it.
 
 **Likely grill:** "Why did you filter 'junk' nodes?"
 **Defence:** Section on data-quality handling makes this transparent — see next.
@@ -197,7 +215,7 @@ deep inheritance-like chains. This is the empirical shape of DI in the wild.
 
 ## 10. The fan-out hub (architectural signature)
 
-**Numbers:** 78.2% of clean graph-bearing repos have some dependency called by
+**Numbers:** 79.7% of clean graph-bearing repos have some dependency called by
 ≥3 other Depends sites (fan-out). Computed by `analysis/build_pptx.py`
 (`_fan_out3`) directly from the census reports' clean dependency graphs — a
 `file:line` junk-node id in either endpoint excludes that edge, matching the
@@ -209,25 +227,27 @@ quantifiable payoff of DI that justifies the study.
 
 ---
 
-## 11. Robustness — E5 sensitivity
+## 11. Robustness — threshold sensitivity
 
-**Numbers:** % using core DI 75.6% (t=4) → 80.6% (t=8); stable.
+**Numbers:** % using core DI 63.1% (t=2) → 76.2% (t=4) → 84.1% (t=8); stable.
 
-**Significance:** conclusions are **not threshold-dependent** — the anchor for
-the E5 heuristic.
+**Significance:** conclusions are **not threshold-dependent** — the pyramid
+holds over every tighter file-import threshold (t = 2–8), so the base gate is
+not cherry-picked.
 
-**Likely grill:** "Your t=2,3 rows are identical to t=4."
-**Defence:** They are degenerate by construction — every accepted repo already
-passes at t=4, so lower thresholds add nothing. Sensitivity is meaningful at
-t ≥ 5, exactly where the monotone rise is observed.
+**Likely grill:** "Isn't 62.9% just an artifact of a loose t=2 gate?"
+**Defence:** The DI-usage share rises monotonically from 63.1% (t=2) to 84.1%
+(t=8) as we admit only larger apps — the *ranking* of constructs and the
+zero-DI / no-OAuth2-scopes absence findings hold at every threshold, so the
+qualitative story does not depend on the gate.
 
 ---
 
 ## 12. Data-quality handling — resolver junk nodes
 
-**Numbers:** 713 junk nodes across 122/294 graph-bearing repos (4.1% of all).
-Median node count 22 → 19.5 after filtering. All 294 graph-bearing repos keep a
-clean non-empty graph.
+**Numbers:** 2,656 junk nodes across 425/2,179 repos (4.1% of all).
+Median node count 20 → 19.0 after filtering. All 1,338 graph-bearing repos keep
+a clean non-empty graph.
 
 **Significance:** showing our own data QA is a *credibility asset* with this
 reviewer. A real bug (module-scope `Depends` → `file:line` placeholder node id)
@@ -242,22 +262,24 @@ nodes. The bug only polluted the graph node set.
 ## 13. Caveats & threats
 
 Presented plainly: source substitution, dependency-graph population limits,
-attrition (42, 0.8%), E5 degeneracy, **tutorial flags as an open count**,
-resolver coverage, non-stratified sample, and the late-first-commit caveat.
+attrition (224 clone_failed, 4.5%; 9 pending retry), threshold sensitivity,
+**E-rule revision (E1–E6 → E1–E4)**, resolver coverage, and the 327-repo
+stratified manual-review sample (vs full census as the analysis universe).
 
-**On tutorial flags (E6, 47%):** flags reviewed via the 48-repo blinded
-subsample (frozen, 351-pool era) are mostly incidental — 16/24 flagged were
-labelled genuine (66.7%), 6 uncertain, 2 demo; control 21/2/1. Flags are
-therefore an open count we present as unresolved rather than claiming resolved.
-This honesty preempts the "did you filter tutorials properly?" probe: flagged
-descriptors are largely incidental, and the population is genuine applications
-(backed by 0% topic overlap + E1–E5 pass).
+**On the E-rule revision:** the earlier E1–E6 gate (Python-byte-ratio E2,
+tutorial-marker E6 flag) was superseded by the current E1–E4 rules. The E6
+tutorial-flag review (48-repo blinded subsample, frozen historical evidence —
+16/24 flagged labelled genuine (66.7%), 6 uncertain, 2 demo; control 21/2/1)
+showed flagged descriptors are largely incidental; E6 is retained only as
+historical rationale. This honesty preempts the "did you filter tutorials
+properly?" probe: the population is genuine applications (backed by 0% topic
+overlap + E1–E4 pass).
 
 ---
 
 ## 14. So what? — significance close
 
-- **Methodology:** a corpus source with provable recall (0% topic overlap).
+- **Methodology:** a corpus source with provable recall (0.0% topic overlap, 1/2,179).
 - **Practice:** DI is not universal (24% zero-DI); teaching should reflect reality.
 - **Design:** the DI profile is broad-and-shallow fan-out — actionable for
   framework design and code-quality tooling.

@@ -1,26 +1,26 @@
 # Extraction summary
 
-- Sample: 327 of pool 2179 (stratified_random, seed=42)
-- Reports loaded: 327
+- Sample: 2179 of pool 2179 (full-corpus census (not a sample))
+- Reports loaded: 2179
 
 ## RQ1 — construct prevalence (top rows)
 
 | Construct | Repos | % | Total calls | Median (users) |
 |---|---|---|---|---|
-| Depends | 222 | 67.9% | 16768 | 24.5 |
-| Security | 18 | 5.5% | 103 | 1.5 |
-| Annotated dependency | 67 | 20.5% | 1539 | 9 |
-| Generator/yield dependency | 116 | 35.5% | 153 | 1.0 |
-| Non-FastAPI Depends sources | 3 | 0.9% | 6 |  |
-| Repos using ZERO core DI constructs (no Depends/Security/Annotated) | 105 | 32.1% |  |  |
+| Depends | 1371 | 62.9% | 98243 | 22 |
+| Security | 104 | 4.8% | 620 | 1.0 |
+| Annotated dependency | 384 | 17.6% | 23241 | 10.0 |
+| Generator/yield dependency | 759 | 34.8% | 1003 | 1 |
+| Non-FastAPI Depends sources | 10 | 0.5% | 22 |  |
+| Repos using ZERO core DI constructs (no Depends/Security/Annotated) | 805 | 36.9% |  |  |
 
-**Zero-DI cohort:** 105 repos (32.1%) use no Depends/Security/Annotated at all.
+**Zero-DI cohort:** 805 repos (36.9%) use no Depends/Security/Annotated at all.
 
 ## RQ3 — dependency-graph complexity (clean nodes, non-empty graphs)
 
-- Graph-bearing repos (clean): 215 / 327
-- Nodes (clean): median 20, IQR (6.0, 50.0), max 636
-- Max depth: median 2, max 7
+- Graph-bearing repos (clean): 1338 / 2179
+- Nodes (clean): median 19.0, IQR (7.0, 49.0), max 1444
+- Max depth: median 2.0, max 7
 - Unresolved %: median 0.0
 
-- Junk nodes filtered: 560 across 76/327 repos (module-scope file:line placeholders from the resolver)
+- Junk nodes filtered: 2656 across 425/2179 repos (module-scope file:line placeholders from the resolver)

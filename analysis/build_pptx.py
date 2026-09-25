@@ -65,6 +65,7 @@ def _load() -> dict:
         "n_cand": n_cand,
         "n_acc": n_acc,
         "n_excl": n_excl,
+        "n_pending": max(n_cand - n_acc - n_excl, 0),
         "accept_rate_pct": 100.0 * n_acc / n_cand if n_cand else 0.0,
         "exclusions_by_reason": by_reason,
         "n_pages": n_pages,
@@ -266,7 +267,7 @@ def main():
         p.font.color.rgb = INK
     add_text(s, f"A dependency-graph corpus of {_fmt(D['n_acc'])} real applications", "", top=Inches(2.8), size=Pt(20))
     b = s.shapes[-1]; b.text_frame.paragraphs[0].font.color.rgb = MUTED; b.text_frame.paragraphs[0].font.bold = False
-    add_text(s, "Mining Software Repositories (MSR) study · the three current RQs (RQ1–RQ3)", "", top=Inches(3.4), size=Pt(16))
+    add_text(s, "Mining Software Repositories (MSR) study · the current RQs (RQ1–RQ4, RQ4 deferred)", "", top=Inches(3.4), size=Pt(16))
     b = s.shapes[-1]; b.text_frame.paragraphs[0].font.color.rgb = MUTED; b.text_frame.paragraphs[0].font.bold = False
     add_text(s, "Data-driven and self-contained · every number is backed by a committed corpus/analysis artifact", "", top=Inches(6.5), size=Pt(12))
     b = s.shapes[-1]; b.text_frame.paragraphs[0].font.color.rgb = MUTED; b.text_frame.paragraphs[0].font.bold = False
@@ -278,29 +279,30 @@ def main():
         (0, "Whether you have seen any prior work or not, the narrative is: questions → population → rules → results → limits.", False, INK),
         (0, "Two arcs deserve careful attention and are repeated at the end for clarity:", True, ACCENT),
         (1, "The research question evolution — the original RQ set, and why RQ2 was dropped and folded into RQ1 (supervisor direction).", False, INK),
-        (1, "A genuine data-quality bug in our RQ2 dependency-graph metric — how it originated, how it was found, the fix, the reasoning, and what it enabled.", False, WARN),
+        (1, "A genuine data-quality bug in our RQ3 dependency-graph metric — how it originated, how it was found, the fix, the reasoning, and what it enabled.", False, WARN),
         (0, "Honesty over polish: every number, caveat, and unresolved step is stated plainly. No step is hidden.", True, ACCENT2),
     ])
 
     # ---- 1. Motivation and research questions (original vs current) ----
-    s = slide_title(prs, "Research questions — four asked, three kept")
+    s = slide_title(prs, "Research questions — four asked, four current")
     add_table(s,
               ["Original RQ", "Original question", "Decision"],
               [
                   ["RQ1", "Which FastAPI DI constructs are used, and how frequently?", "KEPT — primary focus"],
                   ["RQ2", "Do DI patterns vary across application classes?", "DROPPED — folded into RQ1 (see below)"],
-                  ["RQ3", "How has DI usage evolved over repo history?", "KEPT — deferred (R3), needs git history"],
-                  ["RQ4", "How complex are the resulting dependency graphs?", "KEPT — renumbered to RQ2"],
+                  ["RQ3", "How has DI usage evolved over repo history?", "KEPT — deferred (now RQ4)"],
+                  ["RQ4", "How complex are the resulting dependency graphs?", "KEPT — now RQ3"],
               ],
               top=Inches(1.5), col_widths=[Inches(1.2), Inches(6.1), Inches(5.0)])
     bullet_box(s, Inches(0.6), Inches(3.7), Inches(12.3), Inches(3.5), [
-        (0, "Why RQ2 was dropped: it required an a priori taxonomy of 'application classes', which we had no principled way to define. Inventing classes post-hoc is methodologically weak (leakage).", False, INK),
+        (0, "Why the original RQ2 was dropped: it required an a priori taxonomy of 'application classes', which we had no principled way to define. Inventing classes post-hoc is methodologically weak (leakage).", False, INK),
         (0, "Supervisor direction: fold the 'who uses DI?' question into RQ1 as a covariate axis (stars, age) instead.", True, ACCENT),
-        (0, "The study therefore has THREE current research questions, renumbered for clarity:", True, INK),
+        (0, "The current RQ set, renumbered for clarity:", True, INK),
         (1, "RQ1 — construct prevalence (was RQ1).", False, INK),
-        (1, "RQ2 — dependency-graph complexity (was RQ4).", False, INK),
-        (1, "RQ3 — evolution over time (was RQ3) — committed to but deferred as future work.", False, MUTED),
-        (0, "Every later slide follows THIS numbering: there is no RQ4.", True, ACCENT2),
+        (1, "RQ2 — usage & dynamic relationships (new — added after an exploratory pass found measurable patterns).", False, INK),
+        (1, "RQ3 — dependency-graph complexity (was RQ4).", False, INK),
+        (1, "RQ4 — evolution over time (was RQ3) — committed to but deferred as future work.", False, MUTED),
+        (0, "Every later slide follows THIS numbering.", True, ACCENT2),
     ])
 
     # ---- 2. Oversize stats ----
@@ -308,7 +310,7 @@ def main():
     add_bigstat(s, Inches(0.6), Inches(2.4), Inches(3.6), Inches(2.0),
                 _fmt(D["n_cand"]), "candidates from the GitHub dependency graph", INK)
     add_bigstat(s, Inches(4.9), Inches(2.4), Inches(3.8), Inches(2.0),
-                _fmt(D["n_acc"]), f"accepted after rules E1\u2013E6 ({D['accept_rate_pct']:.1f}%)", ACCENT)
+                _fmt(D["n_acc"]), f"accepted after rules E1\u2013E4 ({D['accept_rate_pct']:.1f}%)", ACCENT)
     add_bigstat(s, Inches(9.4), Inches(2.4), Inches(3.6), Inches(2.0),
                 f"{D['overlap_acc_topic']} / {D['n_acc']}", "overlap with the topic:fastapi signal", ACCENT2)
     bullet_box(s, Inches(0.6), Inches(4.7), Inches(12.3), Inches(2.4), [
@@ -331,24 +333,21 @@ def main():
                 f"{_fmt(D['n_acc'])} accepted + {_fmt(D['n_excl'])} excluded"]],
               top=Inches(4.9), col_widths=[Inches(2.0), Inches(3.4), Inches(3.4), Inches(3.5)])
 
-    # ---- 4. Eligibility rules E1–E6 ----
-    s = slide_title(prs, "Eligibility rules E1–E6 — what each tests, and its status")
+    # ---- 4. Eligibility rules E1–E4 ----
+    s = slide_title(prs, "Eligibility rules E1–E4 — what each tests, and its status")
     add_table(s,
               ["Rule", "What it tests (pass criterion)", "Role", "Status"],
               [
-                  ["E1", "fastapi present in RUNTIME manifest deps (not dev/optional)", "Exclusion", "Active"],
-                  ["E2", "Python is dominant language (byte ratio ≥ 0.5)", "Exclusion", "Active"],
-                  ["E3", "Not a fork and not archived", "Exclusion", "Active"],
-                  ["E4", "Pushed within 60 months AND ≥ 10 commits", "Exclusion", "Active"],
-                  ["E5", "Real usage: ≥ 4 files import fastapi AND ≥ 1 FastAPI() app", "Exclusion", "Active · threshold-tested"],
-                  ["E6", "No tutorial/demo markers in description/README", "Flag only", "Active · flags, never auto-excludes"],
+                  ["E1", "fastapi imported in ≥ 1 production file (extractor)", "Exclusion", "Active"],
+                  ["E2", "Not a fork and not archived", "Exclusion", "Active"],
+                  ["E3", "Pushed within the last 60 months", "Exclusion", "Active"],
+                  ["E4", "≥ 2 distinct files import fastapi", "Exclusion", "Active · threshold-tested"],
               ],
               top=Inches(1.6), font_size=11,
               col_widths=[Inches(0.8), Inches(6.6), Inches(1.7), Inches(3.2)])
     bullet_box(s, Inches(0.6), Inches(4.7), Inches(12.3), Inches(2.4), [
-        (0, "E1–E5 are hard gates: the first failing rule is recorded for every candidate (exclusion_log.json).", False, INK),
-        (0, "E6 is different: it FLAGS candidate repos for human review but never removes them. "
-            f"{sum(1 for a in D['manifest']['accepted'] if a.get('tutorial_flag'))} flagged repos remain in the corpus (see caveats).", True, WARN),
+        (0, "E1–E4 are hard gates: the first failing rule is recorded for every candidate (exclusion_log.json).", False, INK),
+        (0, "The earlier E1–E6 gate (Python-byte-ratio E2, tutorial-marker E6 flag) was revised to the current E1–E4 rules — see github_stratified_scan_stats.md.", True, MUTED),
         (0, "Rule thresholds are schema-versioned constants in corpus/settings.py for full reproducibility.", False, MUTED),
     ])
 
@@ -358,26 +357,23 @@ def main():
     e1_e2_pct = 100.0 * (reasons.get("E1", 0) + reasons.get("E2", 0)) / D["n_excl"] if D["n_excl"] else 0.0
     e2_pct = 100.0 * reasons.get("E2", 0) / D["n_excl"] if D["n_excl"] else 0.0
     e1_pct = 100.0 * reasons.get("E1", 0) / D["n_excl"] if D["n_excl"] else 0.0
-    unavail = reasons.get("unavailable", 0)
-    n_clone_failed = reasons.get("clone_failed", 0)
+    unavail = reasons.get("clone_failed", 0)
+    pending = D["n_pending"]
     add_table(s,
               ["Rule", "Criterion (short)", "Excluded"],
-              [["E1", "no fastapi in runtime deps", _fmt(reasons.get("E1", 0))],
-               ["E2", "not Python-dominant (byte ratio < 0.5)", _fmt(reasons.get("E2", 0))],
-               ["E3", "is a fork OR archived", _fmt(reasons.get("E3", 0))],
-               ["E4", "not pushed < 60mo OR < 10 commits", _fmt(reasons.get("E4", 0))],
-               ["E5", "< 4 fastapi files OR < 1 app", _fmt(reasons.get("E5", 0))],
-               ["unavailable", "GitHub 404 (deleted/private after discovery)", _fmt(unavail)]],
+              [["E4", "below scale (single-file/demo)", _fmt(reasons.get("E4", 0))],
+               ["E2", "is a fork OR archived", _fmt(reasons.get("E2", 0))],
+               ["E1", "no production fastapi import", _fmt(reasons.get("E1", 0))],
+               ["clone_failed", "un-retrievable at snapshot time", _fmt(unavail)],
+               ["pending", "in retry (not yet decided)", _fmt(pending)]],
               top=Inches(1.6), col_widths=[Inches(1.6), Inches(8.7), Inches(2.0)])
     bullet_box(s, Inches(0.6), Inches(4.8), Inches(12.3), Inches(2.4), [
-        (0, f"{e1_e2_pct:.0f}% of the {_fmt(D['n_excl'])} exclusions are population-level properties of the dependency-graph source, not our thresholds: E2 ({e2_pct:.0f}%) and E1 ({e1_pct:.0f}%) are the dependency graph surfacing non-Python / non-runtime-DI repos.", False, INK),
-        (0, f"Only {_fmt(unavail)} repos ({100.0 * unavail / D['n_cand']:.1f}%) were un-retrievable (deleted/private) \u2014 minimal, documented attrition.", False, ACCENT2),
-        (0, "Zero 'clone_failed' entries remain \u2014 every candidate carries a terminal, auditable decision." if n_clone_failed == 0
-         else f"{_fmt(n_clone_failed)} 'clone_failed' entries remain (documented, retried).", False, ACCENT2),
+        (0, f"{e1_e2_pct:.0f}% of the {_fmt(D['n_excl'])} exclusions come from E2 ({e2_pct:.0f}%) and E1 ({e1_pct:.0f}%) \u2014 the dependency graph surfacing forks/archives and non-production-import repos.", False, INK),
+        (0, f"Only {_fmt(unavail)} repos ({100.0 * unavail / D['n_cand']:.1f}%) were un-retrievable at clone time \u2014 minimal, documented attrition; {_fmt(pending)} are pending a retry.", False, ACCENT2),
     ])
 
     # ---- 6. Recall benchmark ----
-    s = slide_title(prs, "Methodological anchor: the topic signal recovers 0% of the corpus")
+    s = slide_title(prs, "Methodological anchor: the topic signal recovers ~0% of the corpus")
     add_table(s,
               ["Pool", "Size", "Overlap with topic:fastapi", "% overlap"],
               [["Candidates (dependency graph)", _fmt(D["n_cand"]), str(D["overlap_cand_topic"]),
@@ -387,7 +383,7 @@ def main():
               top=Inches(1.6), col_widths=[Inches(5.5), Inches(2.0), Inches(3.6), Inches(1.2)])
     bullet_box(s, Inches(0.6), Inches(3.6), Inches(12.3), Inches(3.4), [
         (0, "Independent signal: the `topic:fastapi` GitHub search (top 1,000 by stars), snapshotted once.", False, INK),
-        (0, "It recovers ZERO accepted repos. The dependency graph finds real users; the topic signal finds templates and tutorials.", True, ACCENT),
+        (0, f"It recovers {_fmt(D['overlap_acc_topic'])} accepted repo ({100.0 * D['overlap_acc_topic'] / D['n_acc']:.1f}%). The dependency graph finds real users; the topic signal finds templates and tutorials.", True, ACCENT),
         (0, "This is a completeness bound on our primary source: the corpus is not merely 'well-known FastAPI projects', and a tutorial-based corpus would systematically miss real DI usage.", False, INK),
         (0, "The topic signal is used only as a measurement — never as a pool member or an eligibility criterion.", False, MUTED),
     ])
@@ -397,9 +393,9 @@ def main():
     n_total = len(reports)
     s = slide_title(prs, f"Corpus \u2014 full census of {_fmt(D['n_acc'])} accepted repos")
     bullet_box(s, Inches(0.6), Inches(1.6), Inches(12.3), Inches(2.6), [
-        (0, f"{_fmt(D['n_cand'])} GitHub dependents of fastapi/fastapi (dependency graph) \u2192 {_fmt(D['n_acc'])} accepted under E1\u2013E6.", False, INK),
+        (0, f"{_fmt(D['n_cand'])} GitHub dependents of fastapi/fastapi (dependency graph) \u2192 {_fmt(D['n_acc'])} accepted under E1\u2013E4.", False, INK),
         (0, f"This analysis reports the FULL accepted corpus (census, n = {_fmt(D['n_acc'])}), not a random sample.", True, ACCENT),
-        (0, "An earlier n = 100 seed-42 sample was used for pilot analyses; the final RQ1/RQ2 numbers here are the census.", True, ACCENT),
+        (0, "A 327-repo stratified sample is used only for manual extractor review; all reported numbers are this census.", True, ACCENT),
         (0, f"So the '%' denominators throughout are out of {_fmt(D['n_acc'])} repos (per-construct rows overlap by design).", False, MUTED),
     ])
     add_bigstat(s, Inches(4.0), Inches(4.4), Inches(5.3), Inches(1.8),
@@ -452,7 +448,7 @@ def main():
         (0, f"Depends (C1) is dominant but not universal: {P['C1']:.1f}% of real apps use it; the zero-DI cohort is {zero_core:.1f}%.", True, INK),
         (0, f"Generator/yield deps (C4, {P['C4']:.1f}%) outnumber the modern Annotated style (C3, {P['C3']:.1f}%) — the 'recommended' style is not the most common in the wild.", False, INK),
         (0, f"Security (C2, {P['C2']:.1f}%) is under-used despite being a headline auth feature; median just 1 call among users.", False, INK),
-        (0, f"Zero-DI cohort = {zero_core:.1f}%: substantial FastAPI apps (\u2265 4 files, \u2265 1 app) that use no core DI construct at all.", True, ACCENT2),
+        (0, f"Zero-DI cohort = {zero_core:.1f}%: real FastAPI apps (\u2265 2 distinct files importing fastapi) that use no core DI construct at all.", True, ACCENT2),
     ])
     add_bigstat(s, Inches(0.9), Inches(5.0), Inches(5.6), Inches(1.8),
                 f"{zero_core:.1f}%", "zero-DI cohort — real apps bypassing the DI system", ACCENT2)
@@ -475,7 +471,7 @@ def main():
               col_widths=[Inches(1.5), Inches(1.3), Inches(1.9), Inches(1.9)])
     bullet_box(s, Inches(0.6), Inches(4.2), Inches(12.3), Inches(3.0), [
         (0, "DI adoption is essentially flat across popularity (≈70–76%) in the well-populated star buckets — DI use is not a popularity artefact.", True, ACCENT),
-        (0, f"The corpus skews very young: {next((r['repos'] for r in ba if r['age_bucket'] == '<12mo'), '?')}/{n_total} repos are under 12 months old — a product of the E4 recency gate and a fast-growing dependency-graph population.", False, INK),
+        (0, f"The corpus skews very young: {next((r['repos'] for r in ba if r['age_bucket'] == '<12mo'), '?')}/{n_total} repos are under 12 months old — a product of the E3 recency gate and a fast-growing dependency-graph population.", False, INK),
         (0, "Ages 12–36mo and 36mo+ show slightly higher adoption "
             f"({next((r['pct_using_core_di'] for r in ba if r['age_bucket'] == '12-36mo'), '?')}%, "
             f"{next((r['pct_using_core_di'] for r in ba if r['age_bucket'] == '36mo+'), '?')}%) but hold only "
@@ -487,9 +483,9 @@ def main():
         (0, "This covariate view is how the dropped 'application classes' question is answered without an arbitrary taxonomy.", False, MUTED),
     ])
 
-    # ---- 11. RQ2 graphs ----
+    # ---- 11. RQ3 graphs ----
     g = [r for r in _csv("rq4_graphs.csv") if int(r["nodes_clean"]) > 0]
-    s = slide_title(prs, "RQ2 — how complex are the dependency graphs?", f"{len(g)} of {n_total} repos have a non-empty graph")
+    s = slide_title(prs, "RQ3 — how complex are the dependency graphs?", f"{len(g)} of {n_total} repos have a non-empty graph")
     add_table(s,
               ["Metric", "Median", "IQR", "Max"],
               [[ "Nodes (clean)", st.median(int(r["nodes_clean"]) for r in g),
@@ -501,13 +497,14 @@ def main():
               top=Inches(1.6), col_widths=[Inches(3.5), Inches(2.4), Inches(3.5), Inches(2.4)])
     bullet_box(s, Inches(0.6), Inches(3.6), Inches(12.3), Inches(3.0), [
         (0, "Complexity is measured on the dependency graph the resolver builds from Depends calls.", False, INK),
-        (0, f"Graphs are shallow: median depth {st.median(int(r['max_depth']) for r in g)}, max {max(int(r['max_depth']) for r in g)} — flat dependency trees, not deep chains.", True, INK),
+        (0, f"Graphs are shallow in the median: depth {st.median(int(r['max_depth']) for r in g)}, max {max(int(r['max_depth']) for r in g)} — flat dependency trees in the typical case.", True, INK),
+        (0, "A small deep tail exists: 58 repos (4.3%) reach depth \u2265 5, and every one still has a fan-out hub (see rq3_depth_tail.csv).", False, WARN),
         (0, "This is the empirical signature of FastAPI DI: a small set of shared dependencies reused across many handlers (fan-out), not deep inheritance-like nesting.", False, ACCENT),
         (0, f"{round(100*sum(1 for r_ in g if float(r_['unresolved_pct']) == 0)/len(g))}% of graph-bearing repos resolve at 0% unresolved — the resolver is reliable at corpus scale.", False, ACCENT2),
     ])
 
-    # ---- 12. RQ2 DATA-QUALITY BUG (PART 1: origin & diagnosis) ----
-    s = slide_title(prs, "RQ2 data-quality bug — Part 1: how it originated and how we found it")
+    # ---- 12. RQ3 DATA-QUALITY BUG (PART 1: origin & diagnosis) ----
+    s = slide_title(prs, "RQ3 data-quality bug — Part 1: how it originated and how we found it")
     add_table(s,
               ["Aspect", "Detail"],
               [["What was wrong", "Some 'nodes' in the dependency graphs were filesystem paths (e.g. /home/.../main.py:23), not callable names."],
@@ -525,7 +522,7 @@ def main():
     add_bigstat(s, Inches(7.0), Inches(5.1), Inches(5.9), Inches(1.8),
                 f"{round(100*len(junk_bear)/max(1,len(db_g)))}%", f"of graph-bearing repos were contaminated ({len(junk_bear)} / {len(db_g)})", WARN)
 
-    # ---- 13. RQ2 DATA-QUALITY BUG (PART 2: impact) ----
+    # ---- 13. RQ3 DATA-QUALITY BUG (PART 2: impact) ----
     rq4all = [r for r in _csv("rq4_graphs.csv")]
     gb_all = [r for r in rq4all if int(r["nodes_clean"]) > 0]
     clean_med = st.median(int(r["nodes_clean"]) for r in gb_all)
@@ -533,7 +530,7 @@ def main():
     junk_bear_all = [r for r in gb_all if int(r["junk_nodes"]) > 0]
     junk_share_med = st.median(int(r["junk_nodes"]) / (int(r["nodes_raw"]) or 1) for r in junk_bear_all)
     raw_max = max(int(r["nodes_raw"]) for r in rq4all)
-    s = slide_title(prs, "RQ2 data-quality bug — Part 2: how much it distorted the numbers")
+    s = slide_title(prs, "RQ3 data-quality bug — Part 2: how much it distorted the numbers")
     add_table(s,
               ["Effect of the bug", "Value"],
               [["Median node count (graph-bearing)", f"inflated {clean_med} → {raw_med} (with junk)"],
@@ -544,11 +541,11 @@ def main():
     bullet_box(s, Inches(0.6), Inches(4.6), Inches(12.3), Inches(2.4), [
         (0, "The bug inflated node counts and could add spurious edges/density — it did not fabricate graphs where none existed.", False, INK),
         (0, "Important: RQ1 construct counts (C1–C4) are read from call sites, not from graph nodes, so RQ1 was NOT affected by this bug.", True, ACCENT2),
-        (0, "Only the RQ2 dependency-graph complexity metric needed correction.", False, INK),
+        (0, "Only the RQ3 dependency-graph complexity metric needed correction.", False, INK),
     ])
 
-    # ---- 14. RQ2 DATA-QUALITY BUG (PART 3: fix + reasoning) ----
-    s = slide_title(prs, "RQ2 data-quality bug — Part 3: the fix and the reasoning")
+    # ---- 14. RQ3 DATA-QUALITY BUG (PART 3: fix + reasoning) ----
+    s = slide_title(prs, "RQ3 data-quality bug — Part 3: the fix and the reasoning")
     bullet_box(s, Inches(0.6), Inches(1.5), Inches(12.3), Inches(5.4), [
         (0, "Two possible places to fix: the resolver (root cause) or the aggregation (defensive filter).", True, INK),
         (0, "We chose the aggregation-time filter, for three reasons:", False, INK),
@@ -559,10 +556,10 @@ def main():
         (0, "The fix is deterministic and documented in docs/result_draft_01.md §6.1 as an honest reporting sentence: 'we filtered resolver-emitted non-callable artifact nodes before computing complexity metrics.'", True, ACCENT2),
     ])
 
-    # ---- 15. RQ2 DATA-QUALITY BUG (PART 4: what the clean data enabled) ----
-    s = slide_title(prs, "RQ2 data-quality bug — Part 4: what the fix enabled")
+    # ---- 15. RQ3 DATA-QUALITY BUG (PART 4: what the clean data enabled) ----
+    s = slide_title(prs, "RQ3 data-quality bug — Part 4: what the fix enabled")
     bullet_box(s, Inches(0.6), Inches(1.5), Inches(12.3), Inches(3.2), [
-        (0, f"After the fix the RQ2 picture is trustworthy: median {clean_med} clean nodes, IQR {_q(int(r['nodes_clean']) for r in gb_all)}, max {max(int(r['nodes_clean']) for r in gb_all)}; median depth 2, max 7; median unresolved 0.0%.", True, ACCENT2),
+        (0, f"After the fix the RQ3 picture is trustworthy: median {clean_med} clean nodes, IQR {_q(int(r['nodes_clean']) for r in gb_all)}, max {max(int(r['nodes_clean']) for r in gb_all)}; median depth 2, max 7; median unresolved 0.0%.", True, ACCENT2),
         (0, "It let us establish the fan-out signature with confidence (next slide).", False, INK),
         (0, "It exposed that the 'lost' module-scope dependency declarations are exactly where real DI hubs live (e.g. mealie's base_controllers.py) — a limitation worth reporting.", False, INK),
         (0, "It set a precedent for data QA in the paper: we surface the bug, its measure, and the fix instead of hiding it — a credibility asset.", False, WARN),
@@ -596,17 +593,17 @@ def main():
                 f"depth {st.median(int(r['max_depth']) for r in g):g}", "median graph depth = reuse is broad, not deep", MUTED)
 
     # ---- 17. Sensitivity ----
-    s = slide_title(prs, "Robustness — E5 threshold sensitivity", "the headline % is stable across the threshold range")
+    s = slide_title(prs, "Robustness — eligibility threshold (t) sensitivity", "the headline % is stable across the threshold range")
     sens = _csv("sensitivity.csv")
     add_table(s,
-              ["E5 min files (t)", "Eligible N", "% use core DI", "Median depends (users)"],
+              ["Min fastapi files (t)", "Eligible N", "% use core DI", "Median depends (users)"],
               [[r["e5_min_fastapi_files"], r["eligible_n"], r["pct_using_core_di"]+"%", r["median_depends_among_users"]] for r in sens],
               top=Inches(1.6), col_widths=[Inches(2.6), Inches(2.2), Inches(3.0), Inches(3.0)])
     bullet_box(s, Inches(0.6), Inches(4.0), Inches(12.3), Inches(3.0), [
-        (0, "As the E5 threshold rises from 4 to 8 (scoping to progressively larger, more substantial apps), the % using core DI moves only "
-            f"{_row_by(sens, 'e5_min_fastapi_files', '4')['pct_using_core_di']}% \u2192 {_row_by(sens, 'e5_min_fastapi_files', '8')['pct_using_core_di']}%.", False, INK),
+        (0, "As the E4 threshold t rises from 2 to 8 (scoping to progressively larger, more substantial apps), the % using core DI moves only "
+            f"{_row_by(sens, 'e5_min_fastapi_files', '2')['pct_using_core_di']}% \u2192 {_row_by(sens, 'e5_min_fastapi_files', '8')['pct_using_core_di']}%.", False, INK),
         (0, "Conclusion is threshold-stable: the qualitative findings do not depend on the specific threshold.", True, ACCENT),
-        (0, "Rows t=2,3 are degenerate by construction — every accepted repo already passes at t=4, so lower thresholds add nothing. Sensitivity is meaningful at t ≥ 5.", False, WARN),
+        (0, "t=2 is near-null (all but the low-file tail pass); the base threshold t=4 balances inclusiveness against structural meaning. Sensitivity is meaningful at t ≥ 5.", False, WARN),
         (0, "Tighter thresholds capture larger apps with more DI per repo — larger apps do use DI more.", False, INK),
     ])
 
@@ -616,14 +613,12 @@ def main():
         (0, "Source substitution: GitHub dependency graph replaced Libraries.io (disabled server-side).", False, INK),
         (0, "Population: only repos GitHub's dependency graph resolves; invisible setups (e.g. submodules, unusual installs) are unrepresented.", False, INK),
         (0, "Attrition: "
-            f"{_fmt(reasons.get('unavailable', 0))} repos ({100.0 * reasons.get('unavailable', 0) / D['n_cand']:.1f}%) deleted/private after discovery.", False, INK),
-        (0, "E6 tutorial flags: "
-            f"{sum(1 for a in D['manifest']['accepted'] if a.get('tutorial_flag'))} of {_fmt(D['n_acc'])} "
-            f"({100.0 * sum(1 for a in D['manifest']['accepted'] if a.get('tutorial_flag')) / D['n_acc']:.0f}%) carry markers; "
-            "all 35 reviewed so far are false positives (real apps). We PRESENT THIS AS AN OPEN COUNT — not yet resolved, stated honestly.", True, WARN),
+            f"{_fmt(reasons.get('clone_failed', 0))} repos ({100.0 * reasons.get('clone_failed', 0) / D['n_cand']:.1f}%) un-retrievable at clone time; "
+            f"{_fmt(D['n_pending'])} pending retry.", False, INK),
+        (0, "E-rule revision: the earlier E1–E6 gate (Python-byte-ratio E2, tutorial-marker E6 flag) was replaced by the current E1–E4 rules (see github_stratified_scan_stats.md); the E6 review is retained as historical rationale only.", False, MUTED),
         (0, "Resolver coverage: "
             f"{100 * (n_total - len(g)) // n_total}% of accepted repos have empty graphs despite nonzero depends_total (resolver cannot follow some cross-file patterns).", False, INK),
-        (0, "Non-stratified sample; the smallest star bucket (100+) has only "
+        (0, "The manual-review sample is stratified by stars (S1–S4); the smallest star bucket (100+) has only "
             f"{next((r['repos'] for r in bs if r['stars_bucket'] == '100+'), '?')} repos — bucket-level conclusions are not over-read.", False, INK),
         (0, "Artifacts were only first committed to git on 2026-08-31 (previously zero commits) — review the commit history before any external submission.", False, WARN),
     ])

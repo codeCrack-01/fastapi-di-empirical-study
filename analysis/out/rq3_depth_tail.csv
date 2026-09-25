@@ -1,0 +1,59 @@
+repo,depth,nodes_clean,edges_clean,unresolved_depends,unresolved_pct,has_fanout_hub>=3,is_fork,stars_gh,created_at,longest_clean_chain,chain,n_max_chains
+GG-Angel/overplayed,7,30,40,0,0.0,True,0,2,2026-04-30,7,handle_swipes -> get_swipe_service -> get_spotify_service -> get_spotify_cache -> get_redis_client -> get_redis -> get_state,1
+alok-bhadauria/ascendrite,7,175,361,0,0.0,True,0,1,2026-06-26,7,start_session -> get_assessment_runtime_service -> get_assessment_evaluation_service -> get_learning_attempt_service -> get_progress_service -> get_progress_repository -> get_database,20
+nkswalih/skyrict,7,412,719,266,27.0,True,0,4,2026-07-21,7,login -> get_authn_service -> get_token_service -> get_session_service -> get_audit_service -> get_audit_repo -> get_db,36
+sistema-evaluacion-docente/api.evd,7,197,351,1,0.3,True,0,0,2026-05-23,7,assign_director -> get_directors_controller -> get_director_service -> get_user_service -> get_audit_service -> get_audits_repository -> get_db,18
+OraclousAI/oraclous-backend,6,119,132,1,0.8,True,0,0,2026-05-27,5,get_job_service -> get_graph_service -> bind_org_context -> get_principal -> _bearer,165
+SanjeevaRDodlapati/OmicsOracle,6,43,61,2,3.2,True,0,0,2025-06-22,6,get_user_quota -> get_current_admin_user -> get_current_active_user -> get_current_user -> get_current_user_from_token -> get_db,16
+Turing222/dewflow,6,33,48,18,27.3,True,0,0,2025-12-14,6,debug_request -> get_current_superuser -> get_current_active_user -> get_current_user -> get_user_service -> get_uow,1
+codeprabhu/FedForge,6,38,42,0,0.0,True,0,0,2026-06-14,6,get_round_scheduler -> get_round_manager -> get_aggregation_service -> get_global_model_manager -> get_global_model_repository -> get_db,5
+commercialbrainz/CommercialBrainz,6,155,276,2,0.7,True,0,1,2026-07-01,6,admin_stats -> require_admin -> require_write_access -> get_current_user -> get_current_user_optional -> get_db,83
+connor-k-smith/faq,6,50,51,0,0.0,True,0,0,2026-07-27,5,invite_user -> require_csrf -> get_session_claims -> get_session_codec -> get_settings,32
+fhswf/DysarthriaTrainer,6,137,247,1,0.4,True,0,1,2026-06-11,6,analyze_session -> get_session_analysis_orchestrator -> get_result_analysis_service -> get_audio_segment_extractor -> get_storage_backend -> get_app_config,4
+maltewinckler/swen,6,16,13,1,7.1,True,0,11,2026-01-09,5,get_repository_factory -> get_current_user_swen_acl -> get_current_user -> get_identity_repository_factory -> get_db_session,2
+mayowaoladosu/devvpush,6,65,216,0,0.0,True,0,0,2026-07-24,6,project_index -> get_role -> get_optional_project_by_name -> get_team_by_slug -> get_current_user -> get_db,30
+siddharthpanda99/backend,6,1444,1720,10,0.6,True,0,0,2024-01-27,6,require_permission -> dependency -> get_authz_checker -> get_current_identity -> get_session -> get_db_session,1
+yutinglia/setlist,6,34,56,0,0.0,True,0,0,2025-11-22,6,create_channel -> require_management_admin -> require_admin_csrf -> require_admin_session -> get_auth_service -> get_container,4
+1semptify-arch/Semptify,5,765,1018,3,0.3,True,0,0,2026-04-29,5,get_state -> resolve_user_id -> get_optional_user_id -> get_current_user -> get_settings,81
+ALK-IT/hackathon-manager,5,62,110,7,6.0,True,0,0,2026-07-24,5,create_hackathon -> get_current_admin -> get_current_user -> get_user_service -> get_session,2
+CannonFodder151/autobrain,5,205,391,1,0.3,True,0,0,2026-08-02,5,create_issue -> require_premium_write -> require_premium -> get_current_user -> get_db,36
+DockVault/vault,5,151,298,5,1.7,True,0,4,2026-07-03,5,get_update_status_endpoint -> require_interactive_admin -> require_admin -> get_current_user -> get_db,768
+FrissBrot/hocX,5,226,443,0,0.0,True,0,0,2026-03-27,5,delete_domain -> require_admin_write -> get_current_admin -> get_optional_current_admin -> get_db,24
+Glitchedpixel-io/media-api,5,92,104,1,1.0,True,0,1,2026-07-28,5,stream_asset -> get_file_stream_service -> get_media_service -> get_media_repository -> get_db_session,1
+Hitesh709/titan-x,5,502,685,564,45.2,True,0,0,2026-07-27,5,run_backtest -> _require_backtest_owner -> get_current_active_user -> get_current_user -> request_session,28
+IHW-TS/pixfacture-open-source,5,491,1084,2,0.2,True,0,0,2026-08-02,5,submit_pdp -> require_active_subscription -> require_accountant_or_admin -> current_user -> get_db,30
+Lawofall/AgentCore,5,368,593,0,0.0,True,0,30,2026-06-14,5,reset_user_password -> get_auth_service -> get_admin_mfa_service -> get_admin_mfa_repo -> get_db,19
+NorthernLatitude40/onto-agent,5,22,36,2,5.3,True,0,1,2026-06-14,5,get_dashboard_overview -> allow_shop_manager -> get_current_staff -> get_current_user -> get_db,3
+OpenBMB/StaffDeck,5,333,694,3,0.4,True,0,1465,2026-07-13,5,list_general_skills -> require_agent_scope_viewer -> get_current_user -> get_session -> require_scopes,34
+Pobedych/Arvexo-Radar,5,64,117,0,0.0,True,0,1,2026-07-24,5,create_report -> get_generate_report_use_case -> get_run_queries -> get_analysis_repository -> get_session,1
+Pracxo/AOIN-OS,5,1079,1940,0,0.0,True,0,1,2026-06-06,5,create_regression_case -> get_regression_service -> get_replay_service -> get_snapshot_service -> get_audit_repository,21
+SernaEd/FirmsSimulationClass,5,110,211,1,0.5,True,0,0,2026-08-06,5,list_event_types -> get_current_admin -> get_current_active_user -> get_current_user -> get_db,69
+ZacharyArthur/tasterr,5,38,83,0,0.0,True,0,2,2026-07-26,5,put_admin_settings -> admin_rate_limit -> require_admin -> require_session -> get_db,2
+agustinpic72/alphawave-taskd,5,109,203,0,0.0,True,0,0,2026-07-27,5,system_diagnostics -> require_admin -> get_request_context -> get_current_user_required -> get_db,23
+akiamuradev/arduino-component-knowledge-base,5,75,132,65,33.0,True,0,4,2026-07-16,5,create_administrator -> csrf_principal -> current_principal -> auth_service -> database_session,42
+aliseylaneh/Python-Eventsourcing-CQRS,5,13,12,0,0.0,True,0,12,2024-04-25,5,reserve -> get_reserve_stock_command -> inventory_aggregate -> inventory_repository -> get_inventory_collection,4
+anud18/naass-prod-test,5,389,760,2,0.3,True,0,0,2026-07-26,5,get_all_configurations -> require_super_admin -> require_admin -> get_current_user -> get_db,12
+beeThinking/beeThinking,5,194,373,1,0.3,True,0,0,2026-05-08,5,list_admin_pages -> get_current_admin_user -> get_current_active_user -> get_current_user -> get_db,9
+dislovelhl/ai---,5,124,157,22,12.3,True,0,0,2026-01-09,5,run_workflow -> check_execution_rate_limit -> get_current_active_user -> get_current_user -> get_db,6
+favouritekid/QLTS,5,345,413,582,58.5,True,0,0,2025-11-06,5,resolve_exception -> get_backfill_exception_for_admin -> require_admin -> get_current_active_user -> get_current_user,17
+glorden/carpool-queue,5,37,60,0,0.0,True,0,0,2026-07-07,5,respond_to_order -> require_driver -> get_current_user_required -> get_current_user_optional -> get_session,11
+gnt-ai/gnt,5,73,138,2,1.4,True,0,10,2026-07-27,5,request_offboarding -> require_admin_session -> require_admin -> get_current_org -> get_session,6
+jm-sky/ai-workspace,5,188,229,9,3.8,True,0,0,2026-07-04,4,get_all_users -> get_admin_service -> get_admin_repository -> get_db,114
+jm-sky/career-hub,5,157,173,10,5.5,True,0,0,2025-09-19,5,list_cv_versions -> get_cv_version_service -> get_billing_service -> get_billing_repository -> get_db,7
+jm-sky/family-recipes,5,101,118,9,7.1,True,0,0,2026-07-03,4,get_all_users -> get_admin_service -> get_admin_repository -> get_db,78
+jm-sky/pulse-db,5,67,79,9,10.2,True,0,0,2026-07-30,4,get_all_users -> get_admin_service -> get_admin_repository -> get_db,71
+jm-sky/zbory-chwz,5,167,264,10,3.6,True,0,0,2025-12-28,5,update_congregation -> get_tenant_access_checker -> get_permission_service -> get_permission_cache -> get_redis,14
+kingggg5/deployguardai,5,66,118,2,1.7,True,0,1,2026-07-28,5,scenario_activate -> require_responder_scope -> get_legacy_scope -> get_legacy_user -> get_session,7
+lazaruslinux/dailybread,5,147,279,0,0.0,True,0,0,2026-06-26,5,server_overview -> require_admin -> require_family -> get_current_user -> get_db,72
+misterberns/kidschores,5,108,199,1,0.5,True,0,1,2026-02-17,5,get_allowance_settings -> require_kid_access -> require_auth -> get_current_user -> get_db,66
+nattaphonttcl-lab/affiliate-auto-poster,5,89,180,2,1.1,True,0,0,2026-07-20,5,parse_shopee_product -> get_shopee_product_service -> get_product_service -> get_marketplace_provider_registry -> get_settings_dependency,2
+neuer/enterprise-sms-platform-public,5,189,291,110,27.4,True,0,0,2026-07-29,5,cancel_batch -> get_scheduling_cancel_service -> require_batch_writer -> optional_api_app -> get_api_key_authenticator,3
+nguyenquoctoan190101-create/bana-smartlink-rc,5,111,227,0,0.0,True,0,0,2026-07-15,5,list_initiatives -> require_admin_or_leader -> require_authenticated_user -> get_supabase_admin -> get_settings,13
+philippe-tressard/5hostachy,5,290,577,0,0.0,True,0,1,2026-03-01,5,upload_import_excel -> require_cs_or_admin -> get_current_user -> _get_current_user -> get_session,194
+quaresma870/perchtail,5,91,121,55,31.2,True,0,1,2026-07-29,5,list_roles -> require_read -> get_current_active_user -> get_current_user -> get_session,2
+rShetty/hive,5,117,199,2,1.0,True,0,0,2026-04-08,5,get_metrics -> get_current_admin_user -> get_current_active_user -> get_current_user -> get_db,2
+salimc93/exiqus-oss,5,153,294,1,0.3,True,0,0,2026-07-20,5,grant_trial -> require_admin -> get_current_active_user -> get_current_user_id -> get_token_from_header,35
+shinsoyoung1085-netizen/skala-study-platform,5,81,126,1,0.8,True,0,0,2026-07-22,5,approve_admin_application -> get_current_main_admin -> get_current_admin -> get_current_user -> get_db,2
+smritisystems/smritiretail,5,598,1401,1,0.1,True,0,0,2026-07-19,5,get_chart_of_accounts -> get_company_db -> get_tenant_context -> get_current_user -> _get_db,350
+undash-cop/tetherfit,5,116,299,2,0.7,True,0,0,2026-07-28,5,generate_workout -> require_organization -> get_auth_principal -> get_current_user -> get_db,158
+wwending/math_knowledge_system,5,63,110,2,1.8,True,0,1,2025-12-30,5,create_user -> require_super_admin -> require_active_user -> get_auth_context -> get_db,11

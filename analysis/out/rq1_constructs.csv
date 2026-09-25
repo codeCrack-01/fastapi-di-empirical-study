@@ -1,7 +1,7 @@
 construct_id,construct,repos_using,pct_of_sample,total_calls,median_per_repo_using,q1_per_repo_using,q3_per_repo_using,max,source
-C1,Depends,222,67.9,16768,24.5,8.0,68.5,1259,aggregate
-C2,Security,18,5.5,103,1.5,1.0,3.0,69,aggregate
-C3,Annotated dependency,67,20.5,1539,9,3.0,24.0,334,aggregate
-C4,Generator/yield dependency,116,35.5,153,1.0,1.0,1.0,4,aggregate
-EX2,Non-FastAPI Depends sources,3,0.9,6,,,,,file_details
-Z,Repos using ZERO core DI constructs (no Depends/Security/Annotated),105,32.1,,,,,,derived
+C1,Depends,1371,62.9,98243,22,7.0,66.0,1940,aggregate
+C2,Security,104,4.8,620,1.0,1.0,2.8,305,aggregate
+C3,Annotated dependency,384,17.6,23241,10.0,4.0,44.8,3880,aggregate
+C4,Generator/yield dependency,759,34.8,1003,1,1.0,1.0,14,aggregate
+EX2,Non-FastAPI Depends sources,10,0.5,22,,,,,file_details
+Z,Repos using ZERO core DI constructs (no Depends/Security/Annotated),805,36.9,,,,,,derived

@@ -6,5 +6,6 @@ corpus/*.partial.json
 .env
 .venv/
 logs/
+pod_results/
 
 analysis/novelty/out/novelty_repo_context.json
