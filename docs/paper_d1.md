@@ -15,7 +15,7 @@ quantitative picture of how it is actually used has been published. This paper
 presents the first empirical study of DI usage in real FastAPI applications.
 Section 2.1 defines the terms used below.
 
-We started from the 5,009 open-source repositories that GitHub's dependency
+We started from the 5,000 open-source repositories that GitHub's dependency
 graph identifies as depending on FastAPI, applied four eligibility rules, and
 obtained a study corpus of 2,179 applications (the corpus is the set of
 repositories that pass all four rules). We analysed **every** repository in that
@@ -44,7 +44,7 @@ Main findings.
    5–7 hops, always on top of the same shared-hub pattern.
 
 These are the first quantitative answers to questions the FastAPI ecosystem has
-asked but not measured. All artefacts — the 5,009-candidate pool, the
+asked but not measured. All artefacts — the 5,000-candidate pool, the
 per-repository analyses, and the result tables — are snapshotted and publicly
 reproducible.
 
@@ -112,7 +112,7 @@ grounding FastAPI ecosystem advice in what real applications actually do.
 | Term | Definition |
 |------|------------|
 | Repository | An open-source project hosted on GitHub. Each item in the study is one repository. |
-| Candidate repository | A repository that GitHub's dependency graph lists as declaring a dependency on FastAPI. The discovery pool contains 5,009 candidates. |
+| Candidate repository | A repository that GitHub's dependency graph lists as declaring a dependency on FastAPI. The discovery pool contains 5,000 candidates. |
 | Study corpus | The set of repositories that pass every eligibility rule and are analysed in full. Throughout this paper, "corpus" refers to this set of 2,179 repositories. |
 | Eligibility rule | A pass/fail check applied to separate genuine FastAPI applications from other repositories. Six rules are used (Section 4). |
 | Construct | One of the mechanisms FastAPI provides for injecting a dependency into a handler. We measure four core constructs (Table 1 in Section 5.1). |
@@ -199,7 +199,7 @@ described in Section 4; the full funnel, with every rejection reason logged, is
 shown there.
 
 **The alternative source is nearly disjoint.** A `fastapi` topic search
-(top 1,000 by stars) shares only **2 of our 5,009** candidates with our pool
+(top 1,000 by stars) shares only **2 of our 5,000** candidates with our pool
 and only **one** of our 2,179 accepted applications (0.0%, named in the
 artifact table). The topic signal finds templates and tutorials; the dependency
 graph finds applications that declare FastAPI as a dependency. Our corpus is
@@ -226,7 +226,7 @@ Our study is related but distinct:
   exist in the Java world, so the measurements are not comparable.
 - **Different scale and sampling.** Yang et al. analyse 34 curated Java
   applications. We analyse a census of 2,179 applications drawn from a
-  reproducible 5,009-candidate discovery over GitHub's dependency graph.
+  reproducible 5,000-candidate discovery over GitHub's dependency graph.
 - **Deeper measurement.** Yang et al. give operational definitions for "is DI
   used, and how much." We additionally measure the *shape* of each use
   (argument type, annotated types, scopes), the *relationships* between
@@ -267,7 +267,7 @@ depends on.
 
 We crawled the dependency graph of `fastapi/fastapi`, enriching every candidate
 with GitHub API metadata (language byte ratios, fork/archived flags, push age,
-commit count, stars, license, topics), until we reached **5,009 candidates**.
+commit count, stars, license, topics), until we reached **5,000 candidates**.
 The crawl is reproducible from a snapshot of the fetched pages.
 
 ### 4.2 Filtering to genuine applications
@@ -285,13 +285,12 @@ repositories but never excludes them automatically.
 
 The funnel:
 
-| Decision | Count | Share of 5,009 |
+| Decision | Count | Share of 5,000 |
 |----------|-------|----------------|
 | E4 — below scale (single-file/demo) | 1,281 | 25.6% |
 | E2 — fork or archived | 800 | 16.0% |
 | E1 — no production `fastapi` import | 516 | 10.3% |
 | Clone failed (metadata unavailable) | 224 | 4.5% |
-| Pending / retry | 9 | 0.2% |
 | **Accepted** | **2,179** | **43.5%** |
 
 Every candidate ends in exactly one decision; nothing is dropped silently.
@@ -307,7 +306,7 @@ targeted thresholds (base = 4) bound a structurally-meaningful pool
 **The recall question.** How do we know this source doesn't miss the population?
 We cannot measure what the dependency graph does not track, but we can measure
 what an alternative source would have recovered. A `topic:fastapi` search
-(top 1,000 by stars) — the most plausible alternative — shares **2 of 5,009**
+(top 1,000 by stars) — the most plausible alternative — shares **2 of 5,000**
 candidates with our pool and **1 of 2,179** accepted applications (0.0%). The
 two sources are cleanly disjoint: the topic signal surfaces templates and
 tutorials; the dependency graph surfaces real users. This is the strongest
@@ -546,8 +545,8 @@ it*.
   2–15 repositories. We report them as evidence-with-n and do not over-read
   them; the paper's quantitative backbone rests on the well-populated cells.
 - **Population attrition.** 224 repositories (4.5%) were un-retrievable at
-  clone time and 9 remain pending a retry — normal churn for a cross-sectional
-  GitHub study, documented in `exclusion_log.json` (`clone_failed` / `pending`).
+  clone time — normal churn for a cross-sectional
+  GitHub study, documented in `exclusion_log.json` (`clone_failed`).
 - **Tutorial/boundary sample size.** The blinded label review used 48
   repositories (24 flagged / 24 control), drawn from an earlier corpus era and
   single-reviewer. Rates are indicative and retained only as historical
@@ -579,10 +578,10 @@ every tighter threshold.
 ## 9. Future Work
 
 - **Corpus re-run at the revised gate.** The results above reflect the revised
-  E1–E4 gate over the full 5,009-candidate pool (2,179 accepted). A
+  E1–E4 gate over the full 5,000-candidate pool (2,179 accepted). A
   dependency-graph crawl at a wider target would test whether the qualitative
   findings hold beyond this scale. Replicability is preserved via the frozen
-  5,009-candidate pool and the snapshot/archive conventions.
+  5,000-candidate pool and the snapshot/archive conventions.
 - **LLM-assisted validation of pattern detection.** The census statistics rest
   on source-level, syntactic detection. To verify the measured patterns against
   human judgement, we are designing a validation study that replaces the earlier

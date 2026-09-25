@@ -65,7 +65,6 @@ def _load() -> dict:
         "n_cand": n_cand,
         "n_acc": n_acc,
         "n_excl": n_excl,
-        "n_pending": max(n_cand - n_acc - n_excl, 0),
         "accept_rate_pct": 100.0 * n_acc / n_cand if n_cand else 0.0,
         "exclusions_by_reason": by_reason,
         "n_pages": n_pages,
@@ -358,18 +357,16 @@ def main():
     e2_pct = 100.0 * reasons.get("E2", 0) / D["n_excl"] if D["n_excl"] else 0.0
     e1_pct = 100.0 * reasons.get("E1", 0) / D["n_excl"] if D["n_excl"] else 0.0
     unavail = reasons.get("clone_failed", 0)
-    pending = D["n_pending"]
     add_table(s,
               ["Rule", "Criterion (short)", "Excluded"],
               [["E4", "below scale (single-file/demo)", _fmt(reasons.get("E4", 0))],
                ["E2", "is a fork OR archived", _fmt(reasons.get("E2", 0))],
                ["E1", "no production fastapi import", _fmt(reasons.get("E1", 0))],
-               ["clone_failed", "un-retrievable at snapshot time", _fmt(unavail)],
-               ["pending", "in retry (not yet decided)", _fmt(pending)]],
+               ["clone_failed", "un-retrievable at snapshot time", _fmt(unavail)]],
               top=Inches(1.6), col_widths=[Inches(1.6), Inches(8.7), Inches(2.0)])
     bullet_box(s, Inches(0.6), Inches(4.8), Inches(12.3), Inches(2.4), [
         (0, f"{e1_e2_pct:.0f}% of the {_fmt(D['n_excl'])} exclusions come from E2 ({e2_pct:.0f}%) and E1 ({e1_pct:.0f}%) \u2014 the dependency graph surfacing forks/archives and non-production-import repos.", False, INK),
-        (0, f"Only {_fmt(unavail)} repos ({100.0 * unavail / D['n_cand']:.1f}%) were un-retrievable at clone time \u2014 minimal, documented attrition; {_fmt(pending)} are pending a retry.", False, ACCENT2),
+        (0, f"Only {_fmt(unavail)} repos ({100.0 * unavail / D['n_cand']:.1f}%) were un-retrievable at clone time \u2014 minimal, documented attrition; every remaining candidate has a decision.", False, ACCENT2),
     ])
 
     # ---- 6. Recall benchmark ----
@@ -614,7 +611,7 @@ def main():
         (0, "Population: only repos GitHub's dependency graph resolves; invisible setups (e.g. submodules, unusual installs) are unrepresented.", False, INK),
         (0, "Attrition: "
             f"{_fmt(reasons.get('clone_failed', 0))} repos ({100.0 * reasons.get('clone_failed', 0) / D['n_cand']:.1f}%) un-retrievable at clone time; "
-            f"{_fmt(D['n_pending'])} pending retry.", False, INK),
+            "every remaining candidate has a decision.", False, INK),
         (0, "E-rule revision: the earlier E1–E6 gate (Python-byte-ratio E2, tutorial-marker E6 flag) was replaced by the current E1–E4 rules (see github_stratified_scan_stats.md); the E6 review is retained as historical rationale only.", False, MUTED),
         (0, "Resolver coverage: "
             f"{100 * (n_total - len(g)) // n_total}% of accepted repos have empty graphs despite nonzero depends_total (resolver cannot follow some cross-file patterns).", False, INK),

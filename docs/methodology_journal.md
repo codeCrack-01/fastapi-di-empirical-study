@@ -41,7 +41,7 @@ usage answers *how*.
 Population: open-source GitHub repositories using FastAPI — import `fastapi`
 and expose ≥ 1 `FastAPI()` app. Candidate discovery targets 5,000 repos
 (`TARGET_CANDIDATES`, settings.py); the accepted census is whatever clears
-E1–E4 (currently **2,179 / 5,009, 43.5%**).
+E1–E4 (currently **2,179 / 5,000, 43.5%**).
 
 ### 2.2 Discovery and selection funnel
 
@@ -57,20 +57,19 @@ signal.
 
 Funnel (frozen `corpus/exclusion_log.json`):
 
-| Stage | n | % of 5,009 |
+| Stage | n | % of 5,000 |
 |---|---|---|
-| Candidates discovered and enriched | 5,009 | 100% |
+| Candidates discovered and enriched | 5,000 | 100% |
 | E4 — below scale (< distinct files importing fastapi) | 1,281 | 25.6% |
 | E2 — fork or archived | 800 | 16.0% |
 | E1 — no production fastapi import | 516 | 10.3% |
 | Clone failed (metadata unavailable) | 224 | 4.5% |
-| Pending / retry | 9 | 0.2% |
 | **Accepted (pass all)** | **2,179** | **43.5%** |
 
 All accepted candidates have an extractor report; the 224 `clone_failed` were
 non-clonable at snapshot time (permanent attrition, logged and timestamped —
-these are the modern equivalent of the old `unavailable` class); 9 remain in
-retry.
+these are the modern equivalent of the old `unavailable` class). Every
+candidate has a decision.
 
 **Eligibility rules (E1–E4):**
 

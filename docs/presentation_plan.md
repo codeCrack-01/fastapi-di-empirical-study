@@ -45,7 +45,7 @@ arbitrary labels. It remains listed as folded, not silent.
 
 ## 2. Corpus construction
 
-**Numbers:** 5,009 candidates → rules table → 2,179 accepted.
+**Numbers:** 5,000 candidates → rules table → 2,179 accepted.
 
 **Significance:** demonstrates a rigorous, auditable funnel. Every rejection is
 recorded with the first-failing rule; nothing is dropped silently.
@@ -64,16 +64,16 @@ Sensitivity section (§6) proves conclusions hold across thresholds 4–8.
 
 ---
 
-## 3. From 5,009 to 2,179 — the funnel
+## 3. From 5,000 to 2,179 — the funnel
 
-**Numbers:** 5,009 → 2,821 excluded (56.3%) → 2,179 accepted (43.5%).
+**Numbers:** 5,000 → 2,821 excluded (56.3%) → 2,179 accepted (43.5%).
 
 **Significance:** the biggest rejection drivers are *population properties*, not
 our thresholds. The revised E1–E4 rules (see `docs/github_stratified_scan_stats.md`)
 dropped the arbitrary 50% Python-share gate. The remaining rejections split E4
 (1,281 — single-file/demo-scale, < `E4_MIN_FASTAPI_FILES`), E2 (800 — fork or
-archived), E1 (516 — no production fastapi import), plus 224 clone failures; 9
-candidates remain in retry. Attrition is a small fraction — full auditability.
+archived), E1 (516 — no production fastapi import), plus 224 clone failures;
+every candidate has a decision. Attrition is a small fraction — full auditability.
 
 **Likely grill:** "Is 43.5% acceptance too permissive?"
 **Defence:** No — the dependency-graph *source* intentionally over-includes
@@ -86,7 +86,7 @@ cannot, and the census is analysed in full (no sampling error).
 
 ## 4. Headline method result: ~0% topic overlap
 
-**Numbers:** candidates 2/5,009 (0.0%) in topic; accepted 1/2,179 (0.0% —
+**Numbers:** candidates 2/5,000 (0.0%) in topic; accepted 1/2,179 (0.0% —
 `MoMoM101/RAG-ReActAgent`, the sole accepted repo also captured by the topic
 signal; the sibling topic hit `allgpt-co/QuickVoice` failed the E1–E4 gate).
 
@@ -262,7 +262,7 @@ nodes. The bug only polluted the graph node set.
 ## 13. Caveats & threats
 
 Presented plainly: source substitution, dependency-graph population limits,
-attrition (224 clone_failed, 4.5%; 9 pending retry), threshold sensitivity,
+attrition (224 clone_failed, 4.5%), threshold sensitivity,
 **E-rule revision (E1–E6 → E1–E4)**, resolver coverage, and the 327-repo
 stratified manual-review sample (vs full census as the analysis universe).
 

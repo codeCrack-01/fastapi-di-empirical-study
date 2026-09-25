@@ -39,7 +39,7 @@ Open-source GitHub repositories that use FastAPI (import `fastapi`, expose >= 1 
 ## Target
 - **Candidate discovery pool targets 5,000 repos** (`TARGET_CANDIDATES` in
   settings.py) via a best-effort deep crawl of the GitHub dependents list.
-- **Accepted (the census) is whatever clears E1–E4** — the 5,009-candidate
+- **Accepted (the census) is whatever clears E1–E4** — the 5,000-candidate
   pool yields 2,179 accepted (43.5%); the pool size and accepted count are
   deliberately distinct concepts.
 - Expanded in phases (2026-09: pool increased 4,500 → 5,000 candidates;

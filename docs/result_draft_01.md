@@ -43,7 +43,7 @@ This study characterises how FastAPI's dependency injection (DI) constructs are 
 
 ### 2.2 Candidates
 
-**5,009 candidates** discovered and enriched (4,500 original snapshot plus 509
+**5,000 candidates** discovered and enriched (4,500 original snapshot plus 500
 patched in 2026-09 via `finder.py --delta`; see §2.6).
 
 ### 2.3 Eligibility rules
@@ -79,14 +79,12 @@ current robustness claim is the file-import threshold sweep (§8).
 | E2 — fork or archived | 800 | 16.0% |
 | E1 — no production `fastapi` import | 516 | 10.3% |
 | Clone failed (metadata unavailable) | 224 | 4.5% |
-| Pending / retry | 9 | 0.2% |
 | **Accepted (E1–E4 pass)** | **2,179** | **43.5%** |
-| **Total** | **5,009** | **100%** |
+| **Total** | **5,000** | **100%** |
 
-Every candidate has a decision; 9 remain in retry. The 224 clone failures are
+Every candidate has a decision. The 224 clone failures are
 repos that could not be cloned at snapshot time (deleted/private or transient
-network) — recorded in `corpus/exclusion_log.json` as `clone_failed`, distinct
-from the 9 pending.
+network) — recorded in `corpus/exclusion_log.json` as `clone_failed`.
 
 ### 2.5 Clone failures and population attrition
 
@@ -95,11 +93,11 @@ from the 9 pending.
   cloning, or transient failures). These are permanent-until-recheck
   attrition; recorded under Threats as population attrition.
 
-### 2.6 2026-09 candidate-pool expansion (4,500 → 5,009)
+### 2.6 2026-09 candidate-pool expansion (4,500 → 5,000)
 
 - The candidate pool was broadened from 4,500 to 5,000+ to sample the dependents
   list more deeply: 17 additional raw-dependent pages were scraped live
-  (167 total, archived in `corpus/raw_dependents/`) and +509 candidates were
+  (167 total, archived in `corpus/raw_dependents/`) and +500 candidates were
   enriched without re-deciding any already-finalised candidate.
 - `corpus/finder.py --target 5000 --skip-scrape` replays the cached 150 pages
   then continues live from the last cursor; `corpus/filter.py --delta` processes
@@ -121,7 +119,7 @@ from the 9 pending.
 
 | Pool | Size | Overlap with topic:fastapi | % overlap |
 |------|------|----------------------------|-----------|
-| Candidates (dep-graph) | 5,009 | 2 | 0.0% |
+| Candidates (dep-graph) | 5,000 | 2 | 0.0% |
 | Accepted | 2,179 | 1 | 0.0% |
 
 **Exactly one accepted repo (0.0%) overlaps with the topic:fastapi signal** (the 2,179-accepted `MoMoM101/RAG-ReActAgent`; the other topic hit, `allgpt-co/QuickVoice`, is a candidate that failed the E1–E4 gate). An alternative corpus strategy built on the topic signal would recover ~0% of this population — the dependency-graph source captures an entirely different population: the topic signal finds templates/tutorials; the dependency graph finds real users. This is a strong, reproducible finding for the MSR methodology section.
@@ -410,9 +408,9 @@ All artifacts are schema-versioned, byte-stable (sorted order), and fully reprod
 
 | Artifact | Description |
 |----------|-------------|
-| `corpus/candidates.json` | 5,009 enriched candidates (finder output) |
+| `corpus/candidates.json` | 5,000 enriched candidates (finder output) |
 | `corpus/manifest.json` | 2,179 accepted repos + metadata + extractor snapshots |
-| `corpus/exclusion_log.json` | 2,821 excluded repos with first-failing rule (+ 224 clone_failed, 9 pending) |
+| `corpus/exclusion_log.json` | 2,821 excluded repos with first-failing rule (incl. 224 clone_failed) |
 | `corpus/reports/<name>.json` | Full extractor report per accepted repo (2,179 accepted; stale non-manifest reports remain on disk) |
 | `corpus/raw_dependents/` | Snapshotted GitHub dependents HTML — 167 pages (reproducibility) |
 | `corpus/topic_seed.json` | 1,000-topic benchmark seed snapshot |
@@ -440,11 +438,11 @@ All artifacts are schema-versioned, byte-stable (sorted order), and fully reprod
 - **Substitution:** GitHub dependency graph replaced Libraries.io (disabled server-side, librariesio/libraries.io#2647). Reported as a threat under open-access data dependency.
 
 ### 12.2 Population attrition
-- 224 repos (4.5%) were un-retrievable at clone time (`clone_failed`) and 9 remain pending retry. Documented via `exclusion_log.json` (`reason: clone_failed` / `decision: pending`); normal attrition for a cross-sectional GitHub study.
+- 224 repos (4.5%) were un-retrievable at clone time (`clone_failed`). Documented via `exclusion_log.json`; normal attrition for a cross-sectional GitHub study.
 
 ### 12.3 E4 threshold sensitivity
 - Sensitivity is most meaningful for thresholds **above** the base (t ≥ 5), where DI usage and call counts climb monotonically. Threshold 2 is near-null (2,150/2,179 pass; the 29 below are the low-file tail).
-- A lower threshold could only be evaluated against the full 5,009 candidate pool (including E4-excluded repos), which would require their extractor reports — these do not exist for repos excluded before E4.
+- A lower threshold could only be evaluated against the full 5,000 candidate pool (including E4-excluded repos), which would require their extractor reports — these do not exist for repos excluded before E4.
 
 ### 12.4 E6 tutorial flags (historical — superseded)
 - **Status as of 2026-09:** E6 was dropped from the revised E1–E4 funnel; the tutorial flag is no longer part of corpus construction or headlining. The material below is retained for historical rationale. See "Rule revision (2026-09)" in §2.

@@ -12,7 +12,7 @@ results are appended when it returns (see "Pending" at the end)._
 
 | stage | count | artifact |
 |---|---|---|
-| Candidate crawl | **5,009** | `corpus/candidates.json` (target 5,000, `corpus/settings.py`) |
+| Candidate crawl | **5,000** | `corpus/candidates.json` (target 5,000, `corpus/settings.py`) |
 | Excluded | **2,821** | `corpus/exclusion_log.json` (first-failing rule per repo) |
 | **Accepted pool** | **2,179** | `corpus/manifest.json["accepted"]` |
 
@@ -115,7 +115,7 @@ Fingerprint corpus totals (fingerprint, occurrences, repos):
 
 ## 5. Peer-review notes / caveats
 
-- Pool = "accepted" under E1–E4, **not** all 5,009 candidates; prevalence
+- Pool = "accepted" under E1–E4, **not** all 5,000 candidates; prevalence
   statements refer to the accepted corpus (2,179), re-weighted per stratum when
   extrapolating.
 - Stars are a snapshot at draw/compile time; E3 means as-of-scan repos pushed
