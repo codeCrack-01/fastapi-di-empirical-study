@@ -73,6 +73,7 @@ const ADMIN = { Authorization: 'Bearer admin-token' };
 const EDITOR = { Authorization: 'Bearer editor-token' };
 const USER = { Authorization: 'Bearer user-token' };
 const BAD = { Authorization: 'Bearer definitely-not-a-token' };
+const EXPECT_401 = http.expectedStatuses(401);
 
 // Workload mix (all bodies/auth valid) matching the route table shape:
 // ~10% health, ~20% public read, ~20% authed read, ~10% export (needs admin),
@@ -111,7 +112,10 @@ export default function () {
   let r;
   const headers = Object.assign({}, h || {});
   if (body) headers['Content-Type'] = 'application/json';
+  // The BAD-token probe intentionally exercises a 401; mark it as an expected
+  // response so http_req_failed reflects only genuine anomalies (>=500).
   const params = { headers };
+  if (h === BAD) params.responseCallback = EXPECT_401;
   if (m === 'get') r = http.get(TARGET + path, params);
   else if (body) r = http.post(TARGET + path, body, params);
   else r = http.post(TARGET + path, null, params);

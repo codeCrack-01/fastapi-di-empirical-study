@@ -33,10 +33,26 @@ HERE = Path(__file__).resolve().parent
 RESULTS = HERE / "results"
 K6 = "k6"
 
+from core import db  # noqa: E402  (import after HERE/RESULTS setup)
+
 WARMUP_S = 10.0
 WINDOW_S = 30.0
 COOLDOWN_S = 12.0
 STARTUP_REPS = 5
+
+
+def fresh_db(label: str) -> Path:
+    """Create and return a path to a pristine, unshared seed database.
+
+    Each cell gets its own database file (initialized from nothing, seeded
+    exactly once by core.db.init_database), so every run sees byte-identical
+    schema + seed regardless of how many earlier runs wrote. This removes
+    DB-size drift from the measurement.
+    """
+    p = RESULTS / "db" / f"{label}.db"
+    p.parent.mkdir(parents=True, exist_ok=True)
+    db.init_database(p)
+    return p
 
 
 def start_server(strategy: str, mode: str, port: int, core: str, seed_db: Path) -> tuple[subprocess.Popen, float]:
@@ -178,9 +194,6 @@ def main() -> None:
     args = ap.parse_args()
 
     RESULTS.mkdir(exist_ok=True)
-    seed_db = RESULTS / "matrix_seed.db"
-    from core import db
-    db.init_database(seed_db)
 
     modes = ["A", "B"]
     strategies = ["s0", "s1", "s2", "s3"]
@@ -220,25 +233,34 @@ def main() -> None:
         cell = args.cell.split(" ")
         cells = [(cell[0], cell[1], float(cell[2]))]
 
-    # --- startup timing (5 reps, S0, both modes) --------------------------
+    # --- startup timing (STARTUP_REPS, all strategies, both modes) ---------
     startup_rows = []
-    for m in modes:
-        for i in range(STARTUP_REPS):
-            port = args.port0 + i
-            proc, t0 = start_server("s0", m, port, args.server_core, seed_db)
-            try:
-                wait_ready(port)
-                startup_rows.append({"mode": m, "rep": i,
-                                     "startup_ms": round((time.monotonic() - t0) * 1000, 1)})
-            finally:
-                proc.terminate(); proc.wait(timeout=20)
+    for s in strategies:
+        for m in modes:
+            for i in range(STARTUP_REPS):
+                port = args.port0 + i
+                sdb = fresh_db(f"startup-{s}-{m}-{i}")
+                try:
+                    proc, t0 = start_server(s, m, port, args.server_core, sdb)
+                    try:
+                        wait_ready(port)
+                        startup_rows.append({"strategy": s, "mode": m, "rep": i,
+                                             "startup_ms": round((time.monotonic() - t0) * 1000, 1)})
+                    finally:
+                        proc.terminate(); proc.wait(timeout=20)
+                finally:
+                    sdb.unlink(missing_ok=True)
     with open(RESULTS / "startup.csv", "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=["mode", "rep", "startup_ms"])
+        w = csv.DictWriter(f, fieldnames=["strategy", "mode", "rep", "startup_ms"])
         w.writeheader(); w.writerows(startup_rows)
 
     if args.cell:
-        run_cell(*cells[0], args.port0, args.server_core, args.sampler_core,
-                 args.k6_core, RESULTS / "cell", seed_db)
+        sdb = fresh_db(f"cell-{cell_label(cells[0])}")
+        try:
+            run_cell(*cells[0], args.port0, args.server_core, args.sampler_core,
+                     args.k6_core, RESULTS / "cell", sdb)
+        finally:
+            sdb.unlink(missing_ok=True)
         print("[orchestrator] single-cell done")
         return 0
 
@@ -251,8 +273,12 @@ def main() -> None:
         print(f"[orchestrator] superblock {rep} ({len(block)} runs)", flush=True)
         for i, (s, m, lvl) in enumerate(block):
             run_dir = RESULTS / "steady" / f"{rep:02d}-{cell_label((s, m, lvl))}"
-            meta = run_cell(s, m, lvl, args.port0, args.server_core, args.sampler_core,
-                            args.k6_core, run_dir, seed_db)
+            sdb = fresh_db(f"run-{rep:02d}-{cell_label((s, m, lvl))}")
+            try:
+                meta = run_cell(s, m, lvl, args.port0, args.server_core, args.sampler_core,
+                                args.k6_core, run_dir, sdb)
+            finally:
+                sdb.unlink(missing_ok=True)
             runs_meta.append(meta)
             run_i += 1
             print(f"  [{rep}.{i}] {cell_label((s, m, lvl))} p50={meta.get('window_p50')}ms "

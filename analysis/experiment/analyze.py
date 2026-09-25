@@ -33,7 +33,6 @@ def bootstrap_ci(diffs, n=10000, seed=42, alpha=0.05):
     for _ in range(n):
         s = rng.choices(diffs, k=len(diffs))
         means.append(sum(s) / len(s))
-    lo = sum(means) / n
     lo = sorted(means)[int(alpha / 2 * n)]
     hi = sorted(means)[int((1 - alpha / 2) * n)]
     return lo, hi
@@ -64,6 +63,7 @@ def main() -> None:
     runs = load_runs(Path(args.runs))
     cells = defaultdict(list)
     for r in runs:
+        r["rate"] = float(r["rate"])
         cells[(r["strategy"], r["mode"], r["rate"])].append(r)
 
     strategies = ["s0", "s1", "s2", "s3"]

@@ -4,6 +4,13 @@ Runs a ramping-arrival-rate k6 profile once per mode against a fresh server
 process and reports the knee: the arrival rate (req/s) where p95 latency departs
 the low-load slope. Saves results/knee_<mode>.json for the full matrix.
 
+Pre-registered knee rule (do not change after data collection):
+- bucket request durations into 2 s windows over the 300 s ramp;
+- baseline = median of p95 over the first 3 buckets;
+- knee    = the rate at the first bucket whose p95 exceeds max(3*base, 1 ms)
+  AND that stays crossed for >= half the remaining buckets (a durable
+  departure, not a transient spike).
+
 Usage (from analysis/experiment, in .venv):
     python pilot_knee.py [--mode A|B] [--max-a N] [--max-b N]
 """
@@ -67,13 +74,15 @@ def run_k6_ramp(mode: str, port: int, max_rps: int, out_csv: Path) -> dict:
 def detect_knee(csv_path: Path, max_rps: int, mode: str) -> dict:
     """Bucket arrival rate + p95 latency over the ramp; find slope departure.
 
-    The ramp reaches max_rps at 300s; buckets are 2s wide, so bucket b ends at
-    time (b+1)*2 and the arrival rate at that point is approx max_rps*(b+1)/150.
-    Knee = first bucket where p95 latency exceeds 3x the low-load baseline and
-    stays above that threshold from then on.
+    The k6 CSV `timestamp` column is unix epoch seconds; we normalize to elapsed
+    time from the first row. The ramp reaches max_rps at 300s; buckets are 2s
+    wide, so bucket b ends at elapsed ~(b+1)*2 and the arrival rate at that
+    point is approx max_rps*(b+1)/150. Knee = first bucket where p95 latency
+    exceeds 3x the low-load baseline and stays above that threshold.
     """
     import statistics
     buckets: dict[int, list[float]] = {}
+    t0 = None
     with open(csv_path) as f:
         header = f.readline()
         for line in f:
@@ -83,8 +92,11 @@ def detect_knee(csv_path: Path, max_rps: int, mode: str) -> dict:
             metric, ts, val = p[0], float(p[1]), float(p[2])
             if metric != "http_req_duration":
                 continue
-            b = int(ts // 2)  # 2 s buckets
-            buckets.setdefault(b, []).append(val / 1000.0)  # us -> ms
+            if t0 is None:
+                t0 = ts
+            elapsed = ts - t0
+            b = int(elapsed // 2)  # 2 s buckets
+            buckets.setdefault(b, []).append(val)  # k6 CSV duration is already ms
     if not buckets:
         return {"knee_rps": None, "note": "no request buckets"}
 
@@ -93,12 +105,15 @@ def detect_knee(csv_path: Path, max_rps: int, mode: str) -> dict:
         return s[int(len(s) * 0.95)]
 
     base = statistics.median(p95(buckets[b]) for b in sorted(buckets)[:3])
+    # knee = rate where p95 latency durably departs low-load level.
+    # Use an absolute floor (1 ms) -- 3x of a sub-ms base triggers on noise.
+    departure = max(3 * base, 1.0)
     knee_rps = None
     crossed_at = []
     for b in sorted(buckets):
         r = p95(buckets[b])
         rate_now = max_rps * (b + 1) / 150.0
-        if r > 3 * base:
+        if r > departure:
             crossed_at.append((b, rate_now))
     for i, (b, rate_now) in enumerate(crossed_at):
         # confirm it stays crossed (not a transient spike)
@@ -106,7 +121,8 @@ def detect_knee(csv_path: Path, max_rps: int, mode: str) -> dict:
         if len(later) >= max(2, int(0.5 * len(crossed_at))):
             knee_rps = rate_now
             break
-    return {"knee_rps": knee_rps, "base_p95_ms": round(base, 3)}
+    return {"knee_rps": knee_rps, "base_p95_ms": round(base, 3),
+            "departure_ms": round(departure, 3)}
 
 
 def main() -> None:
