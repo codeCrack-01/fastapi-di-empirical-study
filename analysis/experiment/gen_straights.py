@@ -38,6 +38,7 @@ def module_s0() -> str:
          "from core.auth import ROLES, current_user, require_role",
          "from core.db import session",
          "from core.routes import ROUTES",
+         "from core.runtime import io_sleep",
          "",
          "@asynccontextmanager",
          "async def lifespan(app):",
@@ -70,6 +71,7 @@ def module_s1() -> str:
          "from core.db import get_db",
          "from core.di_spine import get_current_user, require_admin, require_editor",
          "from core.routes import ROUTES",
+         "from core.runtime import io_sleep",
          "",
          "@asynccontextmanager",
          "async def lifespan(app):",
@@ -97,6 +99,7 @@ def module_s2() -> str:
          "from core.auth import ROLES, require_role",
          "from core.db import session",
          "from core.routes import ROUTES",
+         "from core.runtime import io_sleep",
          "",
          "class _Ctx:",
          "    __slots__ = ('conn', 'user')",
@@ -138,6 +141,7 @@ def module_s3() -> str:
          "from core import auth, db, models as m, runtime, services",
          "from core.auth import ROLES",
          "from core.routes import ROUTES",
+         "from core.runtime import io_sleep",
          "from straights.s3.container import Container",
          "",
          "@asynccontextmanager",
@@ -156,7 +160,8 @@ def module_s3() -> str:
         inner += ["return services.%s%s" % (svc, call)]
         L += ["", "@app.%s('%s')" % (_method.lower(), _path),
               "def %s(request: Request%s):" % (name, ", " + sig if sig else "")]
-        L += _indent(["io_sleep()", "with c.conn_factory() as conn:"], 4)
+        L += _indent(["io_sleep()", "c = request.app.state.container",
+                      "with c.conn_factory() as conn:"], 4)
         L += _indent(inner, 8)
     return HEADER + "\n".join(L) + "\n"
 

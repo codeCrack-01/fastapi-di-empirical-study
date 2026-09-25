@@ -4,6 +4,7 @@ from contextlib import asynccontextmanager
 from core import auth, db, models as m, runtime, services
 from core.auth import ROLES
 from core.routes import ROUTES
+from core.runtime import io_sleep
 from straights.s3.container import Container
 
 @asynccontextmanager
@@ -18,24 +19,28 @@ app = FastAPI(title='ReviewGate-S3', lifespan=lifespan)
 @app.get('/reviews')
 def list_reviews(request: Request, limit: int = 20, offset: int = 0):
     io_sleep()
+    c = request.app.state.container
     with c.conn_factory() as conn:
         return services.list_reviews(conn, limit, offset)
 
 @app.get('/reviews/search')
 def search_reviews(request: Request, q: str, limit: int = 20):
     io_sleep()
+    c = request.app.state.container
     with c.conn_factory() as conn:
         return services.search_reviews(conn, q, limit)
 
 @app.get('/reviews/stats')
 def review_stats(request: Request):
     io_sleep()
+    c = request.app.state.container
     with c.conn_factory() as conn:
         return services.review_stats(conn)
 
 @app.get('/reviews/export')
 def export_reviews(request: Request):
     io_sleep()
+    c = request.app.state.container
     with c.conn_factory() as conn:
         user = c.user_service().current_user(conn, request)
         c.user_service().require_role(user, ROLES["admin"])
@@ -44,6 +49,7 @@ def export_reviews(request: Request):
 @app.get('/users/me')
 def my_profile(request: Request):
     io_sleep()
+    c = request.app.state.container
     with c.conn_factory() as conn:
         user = c.user_service().current_user(conn, request)
         c.user_service().require_role(user, ROLES["user"])
@@ -52,6 +58,7 @@ def my_profile(request: Request):
 @app.get('/users/admins')
 def list_admins(request: Request):
     io_sleep()
+    c = request.app.state.container
     with c.conn_factory() as conn:
         user = c.user_service().current_user(conn, request)
         c.user_service().require_role(user, ROLES["user"])
@@ -60,6 +67,7 @@ def list_admins(request: Request):
 @app.post('/users/me/api-token')
 def rotate_token(request: Request):
     io_sleep()
+    c = request.app.state.container
     with c.conn_factory() as conn:
         user = c.user_service().current_user(conn, request)
         c.user_service().require_role(user, ROLES["user"])
@@ -68,6 +76,7 @@ def rotate_token(request: Request):
 @app.get('/admin/dashboard')
 def admin_dashboard(request: Request):
     io_sleep()
+    c = request.app.state.container
     with c.conn_factory() as conn:
         user = c.user_service().current_user(conn, request)
         c.user_service().require_role(user, ROLES["admin"])
@@ -76,6 +85,7 @@ def admin_dashboard(request: Request):
 @app.get('/admin/config')
 def get_config(request: Request):
     io_sleep()
+    c = request.app.state.container
     with c.conn_factory() as conn:
         user = c.user_service().current_user(conn, request)
         c.user_service().require_role(user, ROLES["admin"])
@@ -84,6 +94,7 @@ def get_config(request: Request):
 @app.post('/admin/backup')
 def trigger_backup(request: Request):
     io_sleep()
+    c = request.app.state.container
     with c.conn_factory() as conn:
         user = c.user_service().current_user(conn, request)
         c.user_service().require_role(user, ROLES["admin"])
@@ -92,6 +103,7 @@ def trigger_backup(request: Request):
 @app.post('/reviews')
 def create_review(request: Request, body: m.ReviewIn):
     io_sleep()
+    c = request.app.state.container
     with c.conn_factory() as conn:
         user = c.user_service().current_user(conn, request)
         c.user_service().require_role(user, ROLES["editor"])
@@ -100,18 +112,21 @@ def create_review(request: Request, body: m.ReviewIn):
 @app.get('/reviews/{rid}')
 def get_review(request: Request, rid: int):
     io_sleep()
+    c = request.app.state.container
     with c.conn_factory() as conn:
         return services.get_review(conn, rid)
 
 @app.get('/reviews/{rid}/comments')
 def list_comments(request: Request, rid: int):
     io_sleep()
+    c = request.app.state.container
     with c.conn_factory() as conn:
         return services.list_comments(conn, rid)
 
 @app.post('/reviews/{rid}/votes')
 def vote(request: Request, rid: int, body: m.VoteIn):
     io_sleep()
+    c = request.app.state.container
     with c.conn_factory() as conn:
         user = c.user_service().current_user(conn, request)
         c.user_service().require_role(user, ROLES["user"])
@@ -120,6 +135,7 @@ def vote(request: Request, rid: int, body: m.VoteIn):
 @app.post('/reviews/{rid}/flag')
 def flag_review(request: Request, rid: int):
     io_sleep()
+    c = request.app.state.container
     with c.conn_factory() as conn:
         user = c.user_service().current_user(conn, request)
         c.user_service().require_role(user, ROLES["editor"])
@@ -128,6 +144,7 @@ def flag_review(request: Request, rid: int):
 @app.post('/reviews/{rid}/approve')
 def approve_review(request: Request, rid: int):
     io_sleep()
+    c = request.app.state.container
     with c.conn_factory() as conn:
         user = c.user_service().current_user(conn, request)
         c.user_service().require_role(user, ROLES["admin"])
@@ -136,6 +153,7 @@ def approve_review(request: Request, rid: int):
 @app.patch('/reviews/{rid}')
 def update_review(request: Request, rid: int, body: m.ReviewIn):
     io_sleep()
+    c = request.app.state.container
     with c.conn_factory() as conn:
         user = c.user_service().current_user(conn, request)
         c.user_service().require_role(user, ROLES["editor"])
@@ -144,6 +162,7 @@ def update_review(request: Request, rid: int, body: m.ReviewIn):
 @app.delete('/reviews/{rid}')
 def delete_review(request: Request, rid: int):
     io_sleep()
+    c = request.app.state.container
     with c.conn_factory() as conn:
         user = c.user_service().current_user(conn, request)
         c.user_service().require_role(user, ROLES["editor"])
@@ -152,6 +171,7 @@ def delete_review(request: Request, rid: int):
 @app.post('/users/{uid}/suspend')
 def suspend_user(request: Request, uid: str):
     io_sleep()
+    c = request.app.state.container
     with c.conn_factory() as conn:
         user = c.user_service().current_user(conn, request)
         c.user_service().require_role(user, ROLES["admin"])
@@ -160,6 +180,7 @@ def suspend_user(request: Request, uid: str):
 @app.get('/users/{uid}/audit')
 def audit_trail(request: Request, uid: str):
     io_sleep()
+    c = request.app.state.container
     with c.conn_factory() as conn:
         user = c.user_service().current_user(conn, request)
         c.user_service().require_role(user, ROLES["admin"])
