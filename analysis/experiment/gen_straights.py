@@ -117,7 +117,10 @@ def module_s2() -> str:
          "@app.middleware('http')",
          "async def build_ctx(request: Request, call_next):",
          "    with session() as conn:",
-         "        request.state.ctx = _Ctx(conn, auth.lookup_user(conn, auth.bearer_token(request.headers)))",
+         "        _usr = auth.lookup_user(conn, auth.bearer_token(request.headers))",
+         "        if _usr and _usr['suspended']:",
+         "            _usr = None  # suspended users are unauthenticated (matches current_user)",
+         "        request.state.ctx = _Ctx(conn, _usr)",
          "        response = await call_next(request)",
          "    return response",
          ""]
