@@ -16,6 +16,13 @@ async def lifespan(app):
 app = FastAPI(title='ReviewGate-S3', lifespan=lifespan)
 
 
+@app.get('/health')
+def health_check(request: Request):
+    io_sleep()
+    c = request.app.state.container
+    with c.conn_factory() as conn:
+        return services.health_check(conn)
+
 @app.get('/reviews')
 def list_reviews(request: Request, limit: int = 20, offset: int = 0):
     io_sleep()

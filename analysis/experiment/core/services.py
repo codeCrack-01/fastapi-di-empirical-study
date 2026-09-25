@@ -17,6 +17,11 @@ def _review(row) -> dict:
     return dict(row)
 
 
+def health_check(conn) -> dict:
+    conn.execute("SELECT 1").fetchone()
+    return {"ok": True}
+
+
 def list_reviews(conn, limit: int, offset: int) -> dict:
     rows = conn.execute(
         "SELECT id, title, body, author, status, rating, votes FROM reviews "

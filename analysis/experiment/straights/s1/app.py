@@ -15,6 +15,11 @@ async def lifespan(app):
 app = FastAPI(title='ReviewGate-S1', lifespan=lifespan)
 
 
+@app.get('/health')
+def health_check(conn=Depends(get_db)):
+    io_sleep()
+    return services.health_check(conn)
+
 @app.get('/reviews')
 def list_reviews(limit: int = 20, offset: int = 0, conn=Depends(get_db)):
     io_sleep()

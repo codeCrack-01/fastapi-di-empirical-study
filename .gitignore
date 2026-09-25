@@ -8,4 +8,7 @@ corpus/*.partial.json
 logs/
 pod_results/
 
+analysis/experiment/results/
+analysis/experiment/.venv/
+
 analysis/novelty/out/novelty_repo_context.json

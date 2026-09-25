@@ -31,6 +31,13 @@ async def build_ctx(request: Request, call_next):
     return response
 
 
+@app.get('/health')
+def health_check(request: Request):
+    io_sleep()
+    ctx = request.state.ctx
+    user = ctx.user
+    return services.health_check(ctx.conn)
+
 @app.get('/reviews')
 def list_reviews(request: Request, limit: int = 20, offset: int = 0):
     io_sleep()

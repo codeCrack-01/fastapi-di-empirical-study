@@ -1,4 +1,4 @@
-"""ReviewGate — route table (single source of truth for the 20 endpoints).
+"""ReviewGate — route table (single source of truth for the 21 endpoints).
 
 Each entry fully describes the endpoint. The strategy generator renders the
 handler bodies from this table, so all four strategies expose identical
@@ -18,6 +18,8 @@ from . import models as m
 
 ROUTES = [
     # method, path, name, auth, service, response_model, sig, call
+    ("GET", "/health", "health_check", "public", "health_check", m.OkOut,
+     "", "(conn)"),
     ("GET", "/reviews", "list_reviews", "public", "list_reviews", m.ReviewListOut,
      "limit: int = 20, offset: int = 0", "(conn, limit, offset)"),
     ("GET", "/reviews/search", "search_reviews", "public", "search_reviews", m.ReviewListOut,

@@ -1,6 +1,6 @@
 """gen_straights.py — render the 4 strategy apps from the shared ReviewGate core.
 
-Each strategy is a self-contained FastAPI app exposing the identical 20 routes,
+Each strategy is a self-contained FastAPI app exposing the identical 21 routes,
 params, auth levels, and response models (from core/routes.py). Only the
 dependency-acquisition layer differs:
 
