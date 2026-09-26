@@ -29,23 +29,28 @@ Inclusion rules E1–E4 (`corpus/filter.py`), binary existence checks:
 stratification by GitHub stars; deterministic draw `random.Random(42)` over
 sorted names; sample **frozen** (schema 0.2; the script refuses to re-draw).
 
-| stratum | stars | population | sample | weight (pop/sample) | coverage |
+| star stratum | stars | population | sample | weight (pop/sample) | coverage |
 |---|---|---|---|---|---|
-| S1 | 0 | 1,491 | **117** | 12.74359 | 7.8% |
-| S2 | 1–9 | 567 | **89** | 6.370787 | 15.7% |
-| S3 | 10–99 | 87 | **87** | 1.0 | **exhaustive** |
-| S4 | 100+ | 34 | **34** | 1.0 | **exhaustive** |
+| st0 | 0 | 1,491 | **117** | 12.74359 | 7.8% |
+| st1 | 1–9 | 567 | **89** | 6.370787 | 15.7% |
+| st2 | 10–99 | 87 | **87** | 1.0 | **exhaustive** |
+| st3 | 100+ | 34 | **34** | 1.0 | **exhaustive** |
 | **total** | | **2,179** | **327** | | 15.0% |
 
 Allocation reasoning (`STRATA`, `EXHAUSTIVE`, `OVERSAMPLE` in
 `sample_stratified.py`):
 
-- S3/S4 are the high-complexity tail and taken **exhaustively** (87 + 34 = 121).
-- The remaining 206 slots split S1:S2 proportional to population with **S2
+- st2/st3 (10–99★, 100+★) are the high-complexity tail and taken
+  **exhaustively** (87 + 34 = 121).
+- The remaining 206 slots split st0:st1 proportional to population with **st1
   oversampled 2.0x** relative to proportional: proportions 1491 / (1491 + 2·567)
   => 117.0 and 2·567 / 2625 => 89.0; integer-perfect via largest-remainder.
 - Each member carries a **reporting weight** population/sample so raw sample
   counts are never mistaken for population prevalence.
+
+> Note: star strata are labelled `st0`–`st3` in this document to avoid
+> collision with the experiment's **strategy** taxonomy (S1–S4, defined in
+> `experiment_proposal.md` §3.1). Both are independent axes.
 
 ## 3. In-sample static scan
 
@@ -62,8 +67,8 @@ commit). DI occurrences canonicalized to structural fingerprints
 | DI-adjacent AST nodes total | **28,089** (mean 85.9, median 26, max 1,654) |
 | exported source excerpts (capped 48/repo) | **8,840** rows (12.8 MB context file) |
 
-Stratum DI-node volume (sample): S1 7,421 · S2 8,427 · S3 8,866 · S4 3,375.
-Zero-DI by stratum: S1 12 · S2 5 · S3 6 · S4 2.
+Stratum DI-node volume (sample): st0 7,421 · st1 8,427 · st2 8,866 · st3 3,375.
+Zero-DI by stratum: st0 12 · st1 5 · st2 6 · st3 2.
 
 Fingerprint inventory: **27** distinct structural DI fingerprints across
 **187,443 occurrences in 2,797 repos** corpus-wide. **24 of 27 occur
@@ -199,7 +204,10 @@ repos. Outputs: `analysis/swappable/out/catalog.json`,
   canonical shapes read as false_pos over-capture (e.g. `C3|CLASS|BARE`,
   `C4|USED`), so the screen treats them as a signal, not ground truth;
   Swappable count is the benchmark-ready *interchangeable pairs* candidate, to
-  be validated on the S0–S3 arms of `experiment_proposal.md` §3.1.
+  be validated against the human-review verdicts on the S1–S4 arms of
+  `experiment_proposal.md` §3.1 (the strategy-attribution census is complete —
+  S1 1,188 / S2 712 / S3 268 / S4 11, `methodology_journal.md` §3.2 — and 58
+  S3/S4 repos fall inside the 327-review sample).
 - **Reviewer-facing artifacts** (peer-review kit): `pattern_gallery.md` (real
   DI code exemplars per type), `peer_review.xlsx` (327-row verdict workbook with
   MY/PEER/FINAL columns), `rendered_prompts.md` (verbatim prompts), and

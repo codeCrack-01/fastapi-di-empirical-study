@@ -40,9 +40,17 @@ resolved via the FINAL column and a re-check.
 .venv/bin/python peer_review_kit/scripts/cohens_kappa.py --xlsx peer_review_kit/peer_review.xlsx
 ```
 
-Reports the 2×2 agreement matrix, Cohen's κ, z/p, and the Landis & Koch (1977)
-band. **Landis & Koch bands:** <0 poor · 0–0.20 slight · 0.21–0.40 fair ·
-0.41–0.60 moderate · 0.61–0.80 substantial · 0.81–1.00 almost perfect.
+Reports the 2×2 agreement matrix, observed agreement po, **both** Cohen's κ and
+**Gwet's AC1** (with z/p), and the Landis & Koch (1977) band. **Landis & Koch
+bands:** <0 poor · 0–0.20 slight · 0.21–0.40 fair · 0.41–0.60 moderate ·
+0.61–0.80 substantial · 0.81–1.00 almost perfect.
+
+AC1 is reported because the verdict split is dominated by "Agree with LLM" —
+a prevalence skew that mechanically deflates Cohen's κ (1−pe in the
+denominator grows with the dominant category). **Preregistered pass rule:** raw
+agreement po ≥ 0.90 **and** κ ≥ 0.40 (moderate). AC1 is the robustness check:
+a "moderate κ + high AC1" pair is the *expected* outcome under a dominant
+agree-majority, not a failure.
 
 ## Method note (for the methods section)
 

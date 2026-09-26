@@ -363,7 +363,11 @@ Across the 2,179-repository census:
   `abushanisro/emithran`, `ATphobia22/PTDT-v33`) use `Annotated` but no
   `Depends`. Within the 36.9% none uses a generator/yield dependency either, so
   the classification as "no DI at all" is conservative with respect to the full
-  construct set.
+  construct set. *(These are construct-presence counts. The companion LLM
+  strategy-attribution census — `methodology_journal.md` §3.2 — assigns each
+  repo a dominant wiring strategy; e.g. S1 direct construction = 1,188 repos,
+  54.5%. The experiment's S1–S4 taxonomy uses those strategy counts, not the
+  extractor construct buckets.)*
 - **The documentation-preferred style is not the most common one.** The
   `Annotated[..., Depends]` form that the documentation states a preference for
   appears in 18% of repositories; generator/yield dependencies appear in 35%

@@ -21,7 +21,7 @@ The swappable-pattern catalog (`analysis/swappable/out/catalog.json`;
 1,142 swap instances, 933 of them pure `C1|C3`) operationalizes the claim at the
 provider level: a provider written in two or more constructs within one repo is
 an *observed swap instance*. This interchangeability is also the premise of the
-S1-strategy renders in `experiment_proposal.md` §3.1, which re-write real
+S2-strategy renders in `experiment_proposal.md` §3.1, which re-write real
 dependencies across construct forms without changing behavior.
 
 ## Base patterns
@@ -119,7 +119,7 @@ from the corpus (§6.2 of `result_draft_01.md`), all low-frequency:
 
 | Idiom | Repos | Note |
 |---|---|---|
-| zero-DI / direct call | 805 (36.9%) | real apps that never invoke the DI system at all — the headline finding |
+| zero-DI / direct call | 805 (36.9%) | real apps that never invoke the DI system at all — the headline finding *(construct-presence; the strategy-attribution census — `methodology_journal.md` §3.2 — buckets S1 direct construction at 1,188 repos, 54.5%)* |
 | `current_*` request-scope injection | 76 | request-scoped context objects injected via DI |
 | class-as-dependency `Depends(MyClass)` | 28 | constructor-injected classes (38 distinct classes) |
 | module-alias deps `deps.get_x` | 54 | namespaced dependency getters |

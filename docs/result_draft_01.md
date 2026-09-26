@@ -188,7 +188,7 @@ one repo** (an *observed swap instance*), 933 of them as pure `C1|C3` pairs.
 | Observation | Count | Notes |
 |-------------|-------|-------|
 | Non-FastAPI Depends sources | 10 repos (0.5%), 22 calls | Depends on non-FastAPI callables (external middleware, etc.) — rare. |
-| **Zero-DI cohort** | **805 repos (36.9%)** | Repos where `depends_total + security_total + annotated_depends_total = 0`. These pass E4 (≥ 2 distinct files import fastapi) and the corpus rules but use no core DI constructs at all. A genuine population of real FastAPI apps without DI. |
+| **Zero-DI cohort** | **805 repos (36.9%)** | Repos where `depends_total + security_total + annotated_depends_total = 0`. These pass E4 (≥ 2 distinct files import fastapi) and the corpus rules but use no core DI constructs at all. A genuine population of real FastAPI apps without DI. *Construct-presence measure* — the LLM strategy-attribution census (`methodology_journal.md` §3.2) re-sorts repos by dominant wiring strategy (S1 direct construction = 1,188, 54.5%), so this 805 figure describes *absence of framework constructs*, not the S1 strategy bucket. |
 
 ### 5.3 Key trends and interpretations
 

@@ -615,7 +615,7 @@ def main():
         (0, "E-rule revision: the earlier E1–E6 gate (Python-byte-ratio E2, tutorial-marker E6 flag) was replaced by the current E1–E4 rules (see github_stratified_scan_stats.md); the E6 review is retained as historical rationale only.", False, MUTED),
         (0, "Resolver coverage: "
             f"{100 * (n_total - len(g)) // n_total}% of accepted repos have empty graphs despite nonzero depends_total (resolver cannot follow some cross-file patterns).", False, INK),
-        (0, "The manual-review sample is stratified by stars (S1–S4); the smallest star bucket (100+) has only "
+        (0, "The manual-review sample is stratified by stars (0★ / 1–9★ / 10–99★ / 100+★); the smallest star bucket (100+) has only "
             f"{next((r['repos'] for r in bs if r['stars_bucket'] == '100+'), '?')} repos — bucket-level conclusions are not over-read.", False, INK),
         (0, "Artifacts were only first committed to git on 2026-08-31 (previously zero commits) — review the commit history before any external submission.", False, WARN),
     ])

@@ -12,10 +12,13 @@ write-up in `docs/methodology_journal.md`. This proposal extends the census
 ## 1. Abstract
 
 The census of 2,179 accepted FastAPI repositories established that real projects
-use mostly *framework-native* dependency injection (`Depends`), a substantial
-minority (36.9%) use **no DI construct at all**, and a handful of idioms
+use mostly *framework-native* dependency injection (`Depends`) or direct
+construction, and a handful of idioms
 (class-based dependencies, `current_*` request-scope, module aliases,
-`provide_*` locators, `.as_form`) exist but are rare. This proposal turns the
+`provide_*` locators, `.as_form`) exist but are rare. On the S1–S4 strategy
+taxonomy used here (§3.1), the dominant strategies are S1 direct construction
+(54.5%) and S2 framework-native DI (32.7%), with S3 manual context wiring
+(12.3%) and S4 external containers (0.5%). This proposal turns the
 question "does the choice of **dependency-management strategy** cost anything at
 runtime?" into a controlled experiment. Using one corpus-grounded mock
 application in two workload modes plus wiring-only transformations of two real
@@ -35,8 +38,8 @@ are *measurable* and *practically meaningful*, and reports them as bounds.
 For functionally equivalent FastAPI applications, at fixed hardware, workload,
 database conditions, and software versions:
 
-- Does the dependency-management strategy (S0 direct construction / S1
-  framework-native DI / S2 manual Python DI / S3 external DI container)
+- Does the dependency-management strategy (S1 direct construction / S2
+  framework-native DI / S3 manual Python DI / S4 external DI container)
   measurably change latency, throughput, CPU utilization, and memory usage?
 - How does any measured effect scale with dependency-chain width/depth, request
   arrival rate (concurrency), and the share of request time spent in the
@@ -48,8 +51,9 @@ A second, complementary question, framed against the census:
 
 - For the spellings the census found in volume — C1 `Depends(fn)` (62.9% of
   repos), C3 `Annotated[T, Depends(fn)]` (17.6%), C4 generator/yield (34.8%),
-  and S0 zero-DI/ direct construction (36.9%) — how do measured latency,
-  throughput, CPU, and memory differ at fixed load?
+  and S1 zero-DI/ direct construction (36.9% by construct presence; 54.5% of
+  repos are S1-dominant under §3.1 strategy attribution) — how do measured
+  latency, throughput, CPU, and memory differ at fixed load?
 - Is the most-used spelling (generator/yield, 34.8% of repos) also the
   empirically best, and what is the change-cost (LOC diff) of moving an
   application between spellings?
@@ -64,7 +68,7 @@ All four preregistered (fixed before data collection):
 
 - **H1 (resolvable differences):** under a DI-dominated workload (Mode A), mean
   per-request latency and CPU time differ across strategies, at the microsecond
-  scale, with S0 fastest.
+  scale, with S1 fastest.
 - **H2 (diminishing returns):** under a realistic workload (Mode B), the
   strategy difference is smaller than the run-level measurement error — i.e.
   the resolver overhead is *practically negligible* relative to handler work.
@@ -89,13 +93,18 @@ Treatments vary **how a handler acquires its dependencies per request**:
 
 | ID | Strategy | Census link | Semantics |
 |---|---|---|---|
-| S0 | Direct construction (zero-DI) | 805 repos (36.9%) | handler calls dependencies directly: `async with get_db() as session: ...`, explicit `get_current_user(token)`, explicit guard checks |
-| S1 | Framework-native DI | 1,374 repos (63.1%) | `Depends(get_db)`, `Depends(get_current_user)`, `Depends(require_admin)` — the corpus hub chain |
-| S2 | Manual Python DI (explicit context) | `current_*` / manual-wiring flavor | middleware builds a `RequestContext` (session, user) in `request.state`; handlers receive `ctx` explicitly |
-| S3 | External DI container *(secondary)* | ~3–6 repos (~1%, indicative) | `dependency-injector` container, provider wired via `Depends(get_provider)` |
+| S1 | Direct construction (zero-DI) | **1,188 repos (54.5%)** | handler calls dependencies directly: `async with get_db() as session: ...`, explicit `get_current_user(token)`, explicit guard checks |
+| S2 | Framework-native DI | **712 repos (32.7%)** | `Depends(get_db)`, `Depends(get_current_user)`, `Depends(require_admin)` — the corpus hub chain |
+| S3 | Manual Python DI (explicit context) | **268 repos (12.3%)** | middleware builds a `RequestContext` (session, user) in `request.state`; handlers receive `ctx` explicitly |
+| S4 | External DI container *(secondary)* | **11 repos (0.5%)** | `dependency-injector` container (9), `DIContainer` (1), `injector` (1); provider wired via `Depends(get_provider)` |
 
-S3 is **mock-only** (§6) and framed explicitly as a synthetic-app question —
-"what does a container cost in a small app?" — not a population claim.
+S1–S4 counts come from the **LLM strategy-attribution census** (`analysis/llm_census.py`, qwen3:14b over all 2,179 repos, 100% coverage after repair; see `docs/methodology_journal.md` §3.2). These *replace* the earlier extractor-based "Census link" estimates of 805 (36.9%) / 1,374 (63.1%) / "~3–6" in the strategy rows — the extractor counted **construct presence** (any `Depends` call site ⇒ "native"), while the LLM census attributes the repo's **dominant wiring strategy**, so repos using both idioms sort into the strategy that governs how handlers acquire dependencies. The extractor numbers remain valid for *construct-prevalence* claims (see §3.2 note and `result_draft_01.md`); the three known external-DI anchor repos (`darkspock/CareerPython`, `darkspock/renfeserver`, `gostgmaer/langchain-knoledgebase-rag`) all landed S4/dependency-injector.
+
+S4 is **mock-only** (§6) and framed explicitly as a synthetic-app question —
+"what does a container cost in a small app?" — not a population claim. Even so,
+the census found 11 real external-DI-container repos (see §3.1 table), up from
+the earlier "~3–6 indicative" probe; the peer-review sample (§5) now contains
+5 of them as S4 rows to be verified by reviewers.
 
 ### 3.2 What is *not* a treatment (explicit boundary)
 
@@ -103,20 +112,26 @@ These are **census observations within framework-native DI**, reported
 descriptively (`docs/methodology_journal.md` §4), and are **not** benchmark
 treatments *at the S-strategy level*: `Depends(fn)` vs `Annotated[Depends(...)]`
 vs `Security(...)` vs generator/yield dependencies vs class-as-dependency vs
-module aliases vs `provide_*` idioms. All are variations *inside* S1; making
+module aliases vs `provide_*` idioms. All are variations *inside* S2; making
 each a treatment would explode the matrix and over-weight patterns that appear
 in 1–104 of 2,179 repos. Reviewer-facing guarantee: **the census observes; the
 experiment tests management strategies.**
 
 **RQ5 extension (construct-spelling arm).** RQ5 ("most used vs most
-effective") adds one *focused* comparison inside S1, between the three
+effective") adds one *focused* comparison inside S2, between the three
 high-frequency spellings the census actually found in volume — C1
 `Depends(fn)`, C3 `Annotated[T, Depends(fn)]`, and C4 generator/yield
-`def dep(yield db)` — plus the zero-DI S0 spelling. This is a deliberate,
+`def dep(yield db)` — plus the zero-DI S1 spelling. This is a deliberate,
 preregistered *exception* to the boundary above: 1,371 (62.9%), 384 (17.6%),
 759 (34.8%) and 805 zero-DI (36.9%) repos use spellings worth a head-to-head.
 Class-as-dependency (28 repos), module aliases (54) and `provide_*` (3)
 remain excluded as too rare.
+The 1,371/384/759/805 figures are **extractor construct-counts** (presence of
+`Depends(fn)`/`Annotated`/generator spellings); the LLM strategy census
+§3.1 re-sorts these repos by dominant wiring strategy (S2=712, S1=1,188),
+so an RQ5 cell may draw from repos the attribution census calls S1 — the arm
+compares *spellings*, not strategy membership, and the sample spread is
+validated against both.
 
 ---
 
@@ -124,7 +139,7 @@ remain excluded as too rare.
 
 ### 4.1 Design summary
 
-- **Factors:** Strategy (S0–S3) × Workload mode (A/B) × Arrival-rate level
+- **Factors:** Strategy (S1–S4) × Workload mode (A/B) × Arrival-rate level
   (sub-knee / at-knee / over-knee).
 - **Layout:** blocked, single machine; **randomized treatment order within
   superblocks** to cancel time drift; R = 5 fresh-process runs per cell.
@@ -132,7 +147,7 @@ remain excluded as too rare.
   serialization, database (identical SQLite seed, same session factory),
   Python 3.12.13, uvicorn, k6, hardware, payloads, auth semantics, seed.
 - **Unit of analysis:** run-level median per cell; paired difference
-  strategy-vs-S0.
+  strategy-vs-S1.
 
 ### 4.2 Mock application ("ReviewGate")
 
@@ -171,13 +186,13 @@ variants, run before any timing, and again after any change.
 ## 5. Real-repository tier (external validity)
 
 Wiring-only transformation of two small, hub-rich census repos; handler logic
-stays byte-identical; strategies S0/S1/S2 only (external-DI transforms of real
+stays byte-identical; strategies S1/S2/S3 only (external-DI transforms of real
 repos are disproportionate effort for a secondary treatment).
 
 | Repo | Size | Hub structure (from frozen reports) | Strategy set |
 |---|---|---|---|
-| `mbvgua/fastapi-primer` | 24 files / 3,015 LOC / 31 `Depends` | `get_db` hub ×20 | S0 / S1 / S2 |
-| `krazywarez/hutch-notify` | 14 files / 418 LOC / 6 `Depends` | `get_db` ×3 + `require_api_key` ×3 | S0 / S1 / S2 |
+| `mbvgua/fastapi-primer` | 24 files / 3,015 LOC / 31 `Depends` | `get_db` hub ×20 | S1 / S2 / S3 |
+| `krazywarez/hutch-notify` | 14 files / 418 LOC / 6 `Depends` | `get_db` ×3 + `require_api_key` ×3 | S1 / S2 / S3 |
 
 Selection criteria (pre-screened from `analysis/out/pattern_features.csv` +
 graph hubs): small, wiring-centralized, graph-bearing, fan-out >= 3, hub names
@@ -247,9 +262,9 @@ eliminated), memory, disk; the **same machine runs the entire matrix**.
 ## 8. Statistical analysis plan
 
 - Unit = run-level median (not per-request, which inflates n).
-- Primary contrast: strategy vs S0, **paired within session** (randomized order
+- Primary contrast: strategy vs S1, **paired within session** (randomized order
   makes sessions comparable), bootstrap 95% CI on the median difference.
-- Preregistered effect threshold: if the S1-S0 latency delta at Mode B is below
+- Preregistered effect threshold: if the S2-S1 latency delta at Mode B is below
   the run-level standard error, H2 is accepted as "negligible" and reported as
   a bound (`delta < x ms`), not a zero.
 - H4 is evaluated on RSS/CPU deltas with a 5% boundary; multiple-comparison
@@ -274,7 +289,7 @@ eliminated), memory, disk; the **same machine runs the entire matrix**.
 | Conclusion validity / power | effects may be tiny; over-interpretation of CIs | run-level units; preregistered threshold; bounds, not point claims |
 | Mock realism | in-memory SQLite + fixed `sleep` stand in for real DB/network | DB conditions constant by construction; flagged, not hidden |
 | Single-machine benchmarking | turbo/scheduler noise not fully removable without root | pinning + randomization + repeats + documented governor; stated as residual |
-| Small external-DI evidence | S3's ~1% census motive is weak | S3 kept secondary, mock-only, framed as synthetic-app cost |
+| Small external-DI evidence | S4 is a small population (11 repos, 0.5%) | S4 kept secondary, mock-only, framed as synthetic-app cost; the 11-repo census count is now exact (peer-reviewed sample includes 5 S4 rows) |
 | GIL / single-worker choice | reviewer may ask about multi-worker behavior | declared out of scope; process-scaling is OS scheduling, not DI resolution |
 
 **Weaknesses a reviewer will likely challenge (stated preemptively):** (a) the
@@ -289,7 +304,7 @@ software + raw outputs + full protocol disclosure.
 
 - We will **not** claim a universal "best DI approach".
 - We will report: measurable vs negligible (bounded) runtime differences,
-  direction (S0 relative ordering), and scaling behavior with concurrency.
+  direction (S1 relative ordering), and scaling behavior with concurrency.
 - Ordering claims are limited to this machine, these workloads, these versions.
 - The practical takeaway is allowed to be: "under realistic handler work the
   management strategy does not matter at runtime; under DI-only work it is
@@ -306,8 +321,8 @@ calibration ≈ 3-4 h wall clock. Real tier = 2 repos x 3 strategies x 3 levels 
 
 | Week | Work |
 |---|---|
-| 1 | ReviewGate core + S0/S1; equivalence suite; seed DB |
-| 2 | S2/S3 renders; real-repo transforms (fastapi-primer, hutch-notify); extend suite |
+| 1 | ReviewGate core + S1/S2; equivalence suite; seed DB |
+| 2 | S3/S4 renders; real-repo transforms (fastapi-primer, hutch-notify); extend suite |
 | 3 | k6 harness + scenarios; pilot to calibrate knee levels; sampler + randomization; analysis script pre-registered |
 | 4 | Full matrix runs; generate tables; write results + limitations |
 
@@ -316,7 +331,7 @@ calibration ≈ 3-4 h wall clock. Real tier = 2 repos x 3 strategies x 3 levels 
 ```
 docs/experiment_proposal.md            <- this document (design)
 analysis/experiment/mock_app/core/     <- authoritative core (models, services, routers)
-analysis/experiment/mock_app/straights/  <- S0-S3 rendered variants + get_deps seam
+analysis/experiment/mock_app/straights/  <- S1-S4 rendered variants + get_deps seam
 analysis/experiment/mock_app/tests/    <- functional-equivalence suite
 analysis/experiment/real/              <- wiring-only transforms of the 2 repos
 analysis/experiment/k6/                <- harness.js + scenarios (steady, ramp)

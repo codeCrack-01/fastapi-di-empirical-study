@@ -55,6 +55,7 @@ class OllamaClient:
                 {"role": "user", "content": user},
             ],
             "stream": False,
+            "think": False,
             "options": {
                 "temperature": self.temperature,
                 "seed": self.seed,

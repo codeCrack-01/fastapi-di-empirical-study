@@ -151,7 +151,7 @@ repo level are **not disjoint** (a repo can use several).
 | — `Depends(Cls)` class-as-dependency | 28 | 1.3% | constructor-injected classes (38 distinct classes) |
 | — module-alias deps (`mod.dep`) | 54 | 2.5% | namespaced dependency getters |
 | **Hand-rolled "ground-up" Python DI** | ~76–79 | ~3.5% | DIY idioms outside the resolver: `current_*` request-scope (76), `provide_*` service-locator (3); overlaps rows above |
-| **External DI library** | ~3–6 | ~0.2–0.3% | **indicative (post-hoc probe, not a census facet):** confirmed `dependency-injector` in darkspock/CareerPython (+`inject`), gostgmaer/langchain-knoledgebase-rag, darkspock/renfeserver; ~3 more unverified |
+| **External DI library** | 11 | 0.5% | **confirmed by LLM attribution census (§3.2), supersedes the ~3–6 probe:** `dependency-injector` 9 (incl. darkspock/CareerPython, gostgmaer/langchain-knoledgebase-rag, darkspock/renfeserver), `DIContainer` 1, `injector` 1 |
 
 **Graph topology context:** 1,338/2,179 (61.4%) have a non-empty dependency graph;
 1,066 (79.7% of graph-bearing) contain at least one hub with ≥ 3 consumers —
@@ -163,8 +163,52 @@ have a fan-out hub; tail repos skew young (54/58 < 12 mo) and larger (median
 
 **Caveat.** Hand-rolled and external-library DI are not first-class extractor
 facets; the two numbers above come from read-only probes over the corpus and
-should be treated as order-of-magnitude signals. The measured backbone is
-FastAPI-native (63.1%) vs. no-DI (36.9%).
+should be treated as order-of-magnitude signals for *construct prevalence*. The
+measured backbone is FastAPI-native (63.1%) vs. no-DI (36.9%) by **construct
+presence**. The LLM strategy-attribution census (§3.2) supersedes the "~3–6"
+external-DI estimate (11 confirmed) and re-sorts repos by dominant wiring
+strategy, which is the taxonomy the benchmark uses.
+
+---
+
+### 3.2 LLM strategy-attribution census (S1–S4, supersedes S3/S4 estimates)
+
+**Purpose.** The extractor rows above measure *construct presence*. To drive
+the experiment's S1–S4 strategy taxonomy, we ran a full-corpus attribution
+census assigning each of the 2,179 repos one strategy.
+
+| Strategy | Repos | % of 2,179 | Definition |
+|---|---|---|---|
+| S1 Direct construction (zero/native-only) | **1,188** | **54.5%** | handlers construct/call dependencies directly; no container, no manual wiring |
+| S2 Framework-native DI | **712** | **32.7%** | `Depends`/`Security`/`Annotated` machinery is the dominant wiring path |
+| S3 Manual Python DI (explicit context) | **268** | **12.3%** | `app.state`/`request.state` context, explicit wiring of a `RequestContext`, hand-rolled providers |
+| S4 External DI container | **11** | **0.5%** | `dependency-injector`-family container: 9 `dependency_injector`, 1 `DIContainer`, 1 `injector` |
+
+**Method.** qwen3:14b (Q4_K_M, 14 GB) over per-repo evidence built by
+`analysis/render_census_inputs.py` (manifest, import table, DI-vocab excerpt
+from a local clone); one label per repo with evidence + `s3_mechanism` /
+`s4_library`. Driver `analysis/llm_census.py` is resumable and records raw
+responses. 8 records initially failed strict JSON parse; all were recovered
+(re-run, then JSON re-emit fix) → **2,179/2,179 labeled, 0 parse-error rows**.
+Executed on a dedicated RTX 4090 node (ollama 0.34.4; RTX 4090 24 GB, driver
+595.91.07, CUDA 13.2, Ryzen 7 5700X, 62 Gi RAM); env snapshot + run/setup logs
+archived under `analysis/out/executor/`.
+
+**Reliability checks.**
+- All three known external-DI anchors (`darkspock/CareerPython`,
+  `darkspock/renfeserver`, `gostgmaer/langchain-knoledgebase-rag`) → S4 /
+  `dependency-injector` ✓.
+- `morpheuslord/PICOTTY` (S4, `injector`) is a **known false-positive seed** —
+  its "injector" is a CircuitPython firmware import, not DI; it is flagged in
+  the review workbook's S4 rows for the reviewers to adjudicate.
+- 58 S3/S4 repos fall inside the frozen 327-sample (5 of them S4): these are the
+  rows the human reviewers check against the LLM (§5 of `experiment_proposal.md`).
+
+**Why S1/S2 differ from the extractor rows.** The extractor counts a repo
+"native" if it has ≥ 1 `Depends` call site (63.1%). The attribution census asks
+which strategy *governs handler dependency acquisition*, so repos mixing idioms
+sort by the dominant one — hence 1,188 S1 (not 805) and 712 S2 (not 1,374). The
+experiment's treatments use the S1–S4 taxonomy, so §3.1 references these counts.
 
 ---
 
@@ -246,7 +290,10 @@ functions to `Depends` as shared, fan-in hubs (DB sessions, auth guards,
 current-user providers); over a third of legit apps (36.9%) use **no** DI
 construct at all; class-based, namespaced, and typed-injection styles exist but
 at single-digit prevalence; `Security`'s scopes feature is unused; and external
-DI libraries are near-absent (~1%). The exploratory comparison finds no style
+DI libraries are near-absent (11 repos, 0.5%, per the attribution census §3.2).
+By dominant wiring strategy the picture is S1 direct construction (54.5%),
+S2 framework-native (32.7%), S3 manual context (12.3%), S4 external (0.5%).
+The exploratory comparison finds no style
 robustly "better" once maturity/size are controlled, and the runtime cost of
 `Depends()` (~0.25 ms over a trivial body) is negligible against any real
 handler work — so the defensible recommendation is the community default
