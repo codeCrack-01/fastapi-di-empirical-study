@@ -41,6 +41,36 @@ COOLDOWN_S = 12.0
 STARTUP_REPS = 5
 
 
+def snapshot_machine(out: Path) -> None:
+    """Capture ambient-machine state (noise census) for later contamination checks.
+
+    Writes a plain-text snapshot of load average, CPU governor/frequencies,
+    and the most CPU-hungry processes not owned by this experiment. Intended to
+    be run immediately before the first cell so analysis can see whether the
+    machine was quiet at measurement time.
+    """
+    lines = [f"# machine snapshot {time.strftime('%Y-%m-%dT%H:%M:%S%z')}",
+             f"uptime: {open('/proc/loadavg').read().strip()}"]
+    govs = {}
+    for p in sorted(Path("/sys/devices/system/cpu").glob("cpu*/cpufreq/scaling_governor")):
+        govs[open(p).read().strip()] = govs.get(open(p).read().strip(), 0) + 1
+    lines.append(f"governor_counts: {govs}")
+    try:
+        import subprocess as sp
+        lines.append("top_cpu_procs:")
+        top = sp.run(
+            ["ps", "-eo", "pid,pcpu,rss,comm,args", "--sort=-pcpu"],
+            capture_output=True, text=True, timeout=10,
+        ).stdout.splitlines()[:16]
+        for ln in top[1:]:
+            parts = ln.split(None, 4)
+            if len(parts) == 5:
+                lines.append(f"  pid={parts[0]} pcpu={parts[1]} rss_kb={parts[2]} cmd={parts[4][:120]}")
+    except Exception as e:
+        lines.append(f"ps failed: {e}")
+    out.write_text("\n".join(lines) + "\n")
+
+
 def fresh_db(label: str) -> Path:
     """Create and return a path to a pristine, unshared seed database.
 
@@ -103,11 +133,20 @@ def run_k6(port: int, rate: float, summary_file: Path, csv_file: Path, core: str
     return {"rc": r.returncode, "stderr_tail": r.stderr[-400:]}
 
 
+def ambient_load() -> float:
+    """Current 1-min load average from /proc/loadavg (ambient noise gauge)."""
+    try:
+        return float(open("/proc/loadavg").read().split()[0])
+    except Exception:
+        return -1.0
+
+
 def run_cell(strategy: str, mode: str, rate: float, port: int, server_core: str,
              sampler_core: str, k6_core: str, run_dir: Path, seed_db: Path) -> dict:
     run_dir.mkdir(parents=True, exist_ok=True)
     proc, t_start = start_server(strategy, mode, port, server_core, seed_db)
-    meta = {"strategy": strategy, "mode": mode, "rate": rate, "run_dir": str(run_dir)}
+    meta = {"strategy": strategy, "mode": mode, "rate": rate, "run_dir": str(run_dir),
+            "ambient_load": ambient_load()}
     try:
         wait_ready(port)
         startup_ms = (time.monotonic() - t_start) * 1000.0
@@ -123,19 +162,21 @@ def run_cell(strategy: str, mode: str, rate: float, port: int, server_core: str,
             summary = json.loads((run_dir / "run.json").read_text())
         except Exception:
             summary = {"_parse_error": True}
+        w = summary.get("window") or {}
+        hd = summary.get("http_req_duration") or {}
         sampler = (run_dir / "sampler.csv").read_text() if (run_dir / "sampler.csv").exists() else ""
         cpu, rss = summarize_sampler(sampler)
         meta.update({
             "startup_ms": round(startup_ms, 1),
             "k6_rc": summ["rc"],
-            "window_p50": summary.get("window_p50"),
-            "window_p95": summary.get("window_p95"),
-            "window_p99": summary.get("window_p99"),
-            "window_mean": summary.get("window_mean"),
-            "window_count": summary.get("windowCount"),
-            "http_avg": (summary.get("http_req_duration") or {}).get("avg"),
-            "http_p95": (summary.get("http_req_duration") or {}).get("p95"),
-            "http_count": (summary.get("http_req_duration") or {}).get("count"),
+            "window_p50": w.get("p50"),
+            "window_p95": w.get("p95"),
+            "window_p99": w.get("p99"),
+            "window_mean": w.get("mean"),
+            "window_count": w.get("count"),
+            "http_avg": hd.get("avg"),
+            "http_p95": hd.get("p95"),
+            "http_count": hd.get("count"),
             "check_failures": summary.get("checkFailures"),
             "http_error_rate": summary.get("httpErrors"),
             "cpu_usr_pct": cpu[0], "cpu_sys_pct": cpu[1],
@@ -209,10 +250,9 @@ def main() -> None:
         for m in modes:
             knee_json = RESULTS / f"knee_{m}.json"
             if args.no_knee or not knee_json.exists():
-                # fallback defaults
-                knee = 160.0 if m == "B" else 900.0
+                knee = 160.0 if m == "B" else 900.0  # fallback defaults
             else:
-                knee = json.loads(knee_json.read_text()).get("knee_rps") or 160.0 if m == "B" else 900.0
+                knee = json.loads(knee_json.read_text()).get("knee_rps")
                 if not knee:
                     knee = 160.0 if m == "B" else 900.0
             levels[m] = [round(knee * args.sub_frac), round(knee), round(knee * args.over_frac)]
@@ -232,6 +272,12 @@ def main() -> None:
     if args.cell:
         cell = args.cell.split(" ")
         cells = [(cell[0], cell[1], float(cell[2]))]
+
+    # --- machine baseline snapshot (noise census for contamination checks) ---
+    snap_ts = time.strftime("%Y%m%dT%H%M%S")
+    baseline = RESULTS / f"baseline_{snap_ts}.txt"
+    snapshot_machine(baseline)
+    print(f"[orchestrator] baseline snapshot: {baseline}", flush=True)
 
     # --- startup timing (STARTUP_REPS, all strategies, both modes) ---------
     startup_rows = []
@@ -288,7 +334,7 @@ def main() -> None:
         cols = ["strategy", "mode", "rate", "startup_ms", "window_p50", "window_p95",
                 "window_p99", "window_mean", "window_count", "http_avg", "http_p95",
                 "http_count", "check_failures", "http_error_rate", "cpu_usr_pct",
-                "cpu_sys_pct", "rss_avg_mb", "rss_peak_mb", "k6_rc", "run_dir"]
+                "cpu_sys_pct", "rss_avg_mb", "rss_peak_mb", "ambient_load", "k6_rc", "run_dir"]
         w = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore")
         w.writeheader()
         w.writerows(runs_meta)

@@ -82,6 +82,7 @@ def main() -> None:
             "rss_peak": [float(r["rss_peak_mb"]) for r in rows if r.get("rss_peak_mb")],
             "cpu_usr": [float(r["cpu_usr_pct"]) for r in rows if r.get("cpu_usr_pct")],
             "http_err": [float(r["http_error_rate"]) for r in rows if r.get("http_error_rate")],
+            "ambient": [float(r["ambient_load"]) for r in rows if r.get("ambient_load")],
         }
 
     lines = ["# ReviewGate matrix — pre-registered analysis", "",
@@ -125,8 +126,8 @@ def main() -> None:
 
     # ---- resource table ---------------------------------------------------
     lines += ["## Resources (avg over runs)", ""]
-    lines += ["| mode | rate | strategy | rss_avg(MB) | rss_peak(MB) | cpu_usr% |"]
-    lines += ["|-----|-----|-----|-----|-----|-----|"]
+    lines += ["| mode | rate | strategy | rss_avg(MB) | rss_peak(MB) | cpu_usr% | ambient_load |"]
+    lines += ["|-----|-----|-----|-----|-----|-----|-----|"]
     for mode in modes:
         rates = sorted({float(k[2]) for k in cells if k[1] == mode})
         for rate in rates:
@@ -135,11 +136,13 @@ def main() -> None:
                 ra = sum(d.get("rss_avg", [])) / len(d["rss_avg"]) if d.get("rss_avg") else None
                 rp = sum(d.get("rss_peak", [])) / len(d["rss_peak"]) if d.get("rss_peak") else None
                 cu = sum(d.get("cpu_usr", [])) / len(d["cpu_usr"]) if d.get("cpu_usr") else None
+                am = sum(d.get("ambient", [])) / len(d["ambient"]) if d.get("ambient") else None
                 lines.append(
                     f"| {mode} | {rate:g} | {s} | "
                     + (f"{ra:.1f}" if ra is not None else "–") + " | "
                     + (f"{rp:.1f}" if rp is not None else "–") + " | "
-                    + (f"{cu:.1f}" if cu is not None else "–") + " |"
+                    + (f"{cu:.1f}" if cu is not None else "–") + " | "
+                    + (f"{am:.2f}" if am is not None else "–") + " |"
                 )
     lines += [""]
 

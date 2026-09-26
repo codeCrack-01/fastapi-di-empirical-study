@@ -6,11 +6,11 @@ from core.auth import ROLES, require_role
 from core.db import session
 from core.routes import ROUTES
 from core.runtime import io_sleep
+from starlette.concurrency import run_in_threadpool
 
 class _Ctx:
-    __slots__ = ('conn', 'user')
-    def __init__(self, conn, user):
-        self.conn = conn
+    __slots__ = ('user',)
+    def __init__(self, user):
         self.user = user
 
 @asynccontextmanager
@@ -20,15 +20,20 @@ async def lifespan(app):
 
 app = FastAPI(title='ReviewGate-S2', lifespan=lifespan)
 
+def _resolve_user(request: Request) -> dict | None:
+    token = auth.bearer_token(request.headers)
+    if not token:
+        return None
+    with session() as conn:
+        user = auth.lookup_user(conn, token)
+        if user and user['suspended']:
+            user = None  # suspended users are unauthenticated (matches current_user)
+        return user
+
 @app.middleware('http')
 async def build_ctx(request: Request, call_next):
-    with session() as conn:
-        _usr = auth.lookup_user(conn, auth.bearer_token(request.headers))
-        if _usr and _usr['suspended']:
-            _usr = None  # suspended users are unauthenticated (matches current_user)
-        request.state.ctx = _Ctx(conn, _usr)
-        response = await call_next(request)
-    return response
+    request.state.ctx = _Ctx(await run_in_threadpool(_resolve_user, request))
+    return await call_next(request)
 
 
 @app.get('/health')
@@ -36,28 +41,32 @@ def health_check(request: Request):
     io_sleep()
     ctx = request.state.ctx
     user = ctx.user
-    return services.health_check(ctx.conn)
+    with session() as conn:
+        return services.health_check(conn)
 
 @app.get('/reviews')
 def list_reviews(request: Request, limit: int = 20, offset: int = 0):
     io_sleep()
     ctx = request.state.ctx
     user = ctx.user
-    return services.list_reviews(ctx.conn, limit, offset)
+    with session() as conn:
+        return services.list_reviews(conn, limit, offset)
 
 @app.get('/reviews/search')
 def search_reviews(request: Request, q: str, limit: int = 20):
     io_sleep()
     ctx = request.state.ctx
     user = ctx.user
-    return services.search_reviews(ctx.conn, q, limit)
+    with session() as conn:
+        return services.search_reviews(conn, q, limit)
 
 @app.get('/reviews/stats')
 def review_stats(request: Request):
     io_sleep()
     ctx = request.state.ctx
     user = ctx.user
-    return services.review_stats(ctx.conn)
+    with session() as conn:
+        return services.review_stats(conn)
 
 @app.get('/reviews/export')
 def export_reviews(request: Request):
@@ -67,7 +76,8 @@ def export_reviews(request: Request):
     if ctx.user is None:
         raise HTTPException(status_code=401, detail="Not authenticated")
     require_role(ctx.user, ROLES["admin"])
-    return services.export_reviews(ctx.conn)
+    with session() as conn:
+        return services.export_reviews(conn)
 
 @app.get('/users/me')
 def my_profile(request: Request):
@@ -77,7 +87,8 @@ def my_profile(request: Request):
     if ctx.user is None:
         raise HTTPException(status_code=401, detail="Not authenticated")
     require_role(ctx.user, ROLES["user"])
-    return services.me(ctx.conn, user)
+    with session() as conn:
+        return services.me(conn, user)
 
 @app.get('/users/admins')
 def list_admins(request: Request):
@@ -87,7 +98,8 @@ def list_admins(request: Request):
     if ctx.user is None:
         raise HTTPException(status_code=401, detail="Not authenticated")
     require_role(ctx.user, ROLES["user"])
-    return services.list_admins(ctx.conn)
+    with session() as conn:
+        return services.list_admins(conn)
 
 @app.post('/users/me/api-token')
 def rotate_token(request: Request):
@@ -97,7 +109,8 @@ def rotate_token(request: Request):
     if ctx.user is None:
         raise HTTPException(status_code=401, detail="Not authenticated")
     require_role(ctx.user, ROLES["user"])
-    return services.rotate_api_token(ctx.conn, user)
+    with session() as conn:
+        return services.rotate_api_token(conn, user)
 
 @app.get('/admin/dashboard')
 def admin_dashboard(request: Request):
@@ -107,7 +120,8 @@ def admin_dashboard(request: Request):
     if ctx.user is None:
         raise HTTPException(status_code=401, detail="Not authenticated")
     require_role(ctx.user, ROLES["admin"])
-    return services.admin_dashboard(ctx.conn)
+    with session() as conn:
+        return services.admin_dashboard(conn)
 
 @app.get('/admin/config')
 def get_config(request: Request):
@@ -117,7 +131,8 @@ def get_config(request: Request):
     if ctx.user is None:
         raise HTTPException(status_code=401, detail="Not authenticated")
     require_role(ctx.user, ROLES["admin"])
-    return services.get_config(ctx.conn)
+    with session() as conn:
+        return services.get_config(conn)
 
 @app.post('/admin/backup')
 def trigger_backup(request: Request):
@@ -127,7 +142,8 @@ def trigger_backup(request: Request):
     if ctx.user is None:
         raise HTTPException(status_code=401, detail="Not authenticated")
     require_role(ctx.user, ROLES["admin"])
-    return services.trigger_backup(ctx.conn)
+    with session() as conn:
+        return services.trigger_backup(conn)
 
 @app.post('/reviews')
 def create_review(request: Request, body: m.ReviewIn):
@@ -137,21 +153,24 @@ def create_review(request: Request, body: m.ReviewIn):
     if ctx.user is None:
         raise HTTPException(status_code=401, detail="Not authenticated")
     require_role(ctx.user, ROLES["editor"])
-    return services.create_review(ctx.conn, body.title, body.body, body.rating, user)
+    with session() as conn:
+        return services.create_review(conn, body.title, body.body, body.rating, user)
 
 @app.get('/reviews/{rid}')
 def get_review(request: Request, rid: int):
     io_sleep()
     ctx = request.state.ctx
     user = ctx.user
-    return services.get_review(ctx.conn, rid)
+    with session() as conn:
+        return services.get_review(conn, rid)
 
 @app.get('/reviews/{rid}/comments')
 def list_comments(request: Request, rid: int):
     io_sleep()
     ctx = request.state.ctx
     user = ctx.user
-    return services.list_comments(ctx.conn, rid)
+    with session() as conn:
+        return services.list_comments(conn, rid)
 
 @app.post('/reviews/{rid}/votes')
 def vote(request: Request, rid: int, body: m.VoteIn):
@@ -161,7 +180,8 @@ def vote(request: Request, rid: int, body: m.VoteIn):
     if ctx.user is None:
         raise HTTPException(status_code=401, detail="Not authenticated")
     require_role(ctx.user, ROLES["user"])
-    return services.vote(ctx.conn, rid, body.value, user)
+    with session() as conn:
+        return services.vote(conn, rid, body.value, user)
 
 @app.post('/reviews/{rid}/flag')
 def flag_review(request: Request, rid: int):
@@ -171,7 +191,8 @@ def flag_review(request: Request, rid: int):
     if ctx.user is None:
         raise HTTPException(status_code=401, detail="Not authenticated")
     require_role(ctx.user, ROLES["editor"])
-    return services.flag_review(ctx.conn, rid, user)
+    with session() as conn:
+        return services.flag_review(conn, rid, user)
 
 @app.post('/reviews/{rid}/approve')
 def approve_review(request: Request, rid: int):
@@ -181,7 +202,8 @@ def approve_review(request: Request, rid: int):
     if ctx.user is None:
         raise HTTPException(status_code=401, detail="Not authenticated")
     require_role(ctx.user, ROLES["admin"])
-    return services.approve_review(ctx.conn, rid, user)
+    with session() as conn:
+        return services.approve_review(conn, rid, user)
 
 @app.patch('/reviews/{rid}')
 def update_review(request: Request, rid: int, body: m.ReviewIn):
@@ -191,7 +213,8 @@ def update_review(request: Request, rid: int, body: m.ReviewIn):
     if ctx.user is None:
         raise HTTPException(status_code=401, detail="Not authenticated")
     require_role(ctx.user, ROLES["editor"])
-    return services.update_review(ctx.conn, rid, body, user)
+    with session() as conn:
+        return services.update_review(conn, rid, body, user)
 
 @app.delete('/reviews/{rid}')
 def delete_review(request: Request, rid: int):
@@ -201,7 +224,8 @@ def delete_review(request: Request, rid: int):
     if ctx.user is None:
         raise HTTPException(status_code=401, detail="Not authenticated")
     require_role(ctx.user, ROLES["editor"])
-    return services.delete_review(ctx.conn, rid, user)
+    with session() as conn:
+        return services.delete_review(conn, rid, user)
 
 @app.post('/users/{uid}/suspend')
 def suspend_user(request: Request, uid: str):
@@ -211,7 +235,8 @@ def suspend_user(request: Request, uid: str):
     if ctx.user is None:
         raise HTTPException(status_code=401, detail="Not authenticated")
     require_role(ctx.user, ROLES["admin"])
-    return services.suspend_user(ctx.conn, uid, user)
+    with session() as conn:
+        return services.suspend_user(conn, uid, user)
 
 @app.get('/users/{uid}/audit')
 def audit_trail(request: Request, uid: str):
@@ -221,4 +246,5 @@ def audit_trail(request: Request, uid: str):
     if ctx.user is None:
         raise HTTPException(status_code=401, detail="Not authenticated")
     require_role(ctx.user, ROLES["admin"])
-    return services.audit_trail(ctx.conn, uid)
+    with session() as conn:
+        return services.audit_trail(conn, uid)

@@ -100,11 +100,11 @@ def module_s2() -> str:
          "from core.db import session",
          "from core.routes import ROUTES",
          "from core.runtime import io_sleep",
+         "from starlette.concurrency import run_in_threadpool",
          "",
          "class _Ctx:",
-         "    __slots__ = ('conn', 'user')",
-         "    def __init__(self, conn, user):",
-         "        self.conn = conn",
+         "    __slots__ = ('user',)",
+         "    def __init__(self, user):",
          "        self.user = user",
          "",
          "@asynccontextmanager",
@@ -114,24 +114,29 @@ def module_s2() -> str:
          "",
          "app = FastAPI(title='ReviewGate-S2', lifespan=lifespan)",
          "",
+         "def _resolve_user(request: Request) -> dict | None:",
+         "    token = auth.bearer_token(request.headers)",
+         "    if not token:",
+         "        return None",
+         "    with session() as conn:",
+         "        user = auth.lookup_user(conn, token)",
+         "        if user and user['suspended']:",
+         "            user = None  # suspended users are unauthenticated (matches current_user)",
+         "        return user",
+         "",
          "@app.middleware('http')",
          "async def build_ctx(request: Request, call_next):",
-         "    with session() as conn:",
-         "        _usr = auth.lookup_user(conn, auth.bearer_token(request.headers))",
-         "        if _usr and _usr['suspended']:",
-         "            _usr = None  # suspended users are unauthenticated (matches current_user)",
-         "        request.state.ctx = _Ctx(conn, _usr)",
-         "        response = await call_next(request)",
-         "    return response",
+         "    request.state.ctx = _Ctx(await run_in_threadpool(_resolve_user, request))",
+         "    return await call_next(request)",
          ""]
     for _method, _path, name, aauth, svc, _resp, sig, call in ROUTES:
-        call2 = call.replace("(conn", "(ctx.conn", 1)
         body = ["ctx = request.state.ctx", "user = ctx.user"]
         if aauth != "public":
             body += ['if ctx.user is None:',
                      '    raise HTTPException(status_code=401, detail="Not authenticated")',
                      'require_role(ctx.user, ROLES["%s"])' % aauth]
-        body += ["return services.%s%s" % (svc, call2)]
+        body += ["with session() as conn:",
+                 "    return services.%s%s" % (svc, call)]
         L += ["", "@app.%s('%s')" % (_method.lower(), _path),
               "def %s(request: Request%s):" % (name, ", " + sig if sig else "")]
         L += _indent(["io_sleep()"] + body, 4)
