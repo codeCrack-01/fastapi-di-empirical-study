@@ -1,7 +1,11 @@
 """analyze.py — pre-registered analysis of the ReviewGate matrix (spec §8).
 
 Unit of analysis = run-level median (per strategy x mode x level).
-Primary contrast  = strategy vs S0, paired within session (randomized order).
+Primary contrast  = strategy vs S0 arm, paired within session (randomized order).
+
+Machine keys s0-s3 == published strategies S1-S4 (experiment_proposal.md §3.1):
+s0->S1 (direct/zero-DI), s1->S2 (native), s2->S3 (manual), s3->S4 (external).
+Keys stay fixed so committed result data remains reproducible.
 Outputs to results/:
   tables_<ts>.md      Markdown tables: latency, CPU/RSS, error rate
   ci_<ts>.csv         bootstrap 95% CIs on median difference vs S0

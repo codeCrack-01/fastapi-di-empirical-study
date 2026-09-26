@@ -1,4 +1,4 @@
-"""ReviewGate — S1 framework-native DI spine (only strategy S1 uses this).
+"""ReviewGate — S2 framework-native DI spine (only strategy S2 uses this).
 
 Mirrors the corpus hub chain: get_db -> get_current_user -> require_* guards.
 """

@@ -13,7 +13,7 @@ async def lifespan(app):
     app.state.container = Container()
     yield
 
-app = FastAPI(title='ReviewGate-S3', lifespan=lifespan)
+app = FastAPI(title='ReviewGate-S4', lifespan=lifespan)
 
 
 @app.get('/health')

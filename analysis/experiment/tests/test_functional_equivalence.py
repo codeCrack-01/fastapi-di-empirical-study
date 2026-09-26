@@ -1,11 +1,11 @@
 """Functional-equivalence suite: all four strategy renders must behave identically.
 
-S0 is the oracle. Two layers:
+S1 (machine key s0) is the oracle. Two layers:
 
 1. Read-only equality: for every idempotent probe (method, path, headers) the
-   status code + JSON body produced by s1/s2/s3 must match s0 exactly, on
-   isolated per-strategy DBs. No probe below mutates state, so module-scoped
-   clients are safe to share.
+   status code + JSON body produced by s1/s2/s3 (machine keys) must match s0
+   exactly, on isolated per-strategy DBs. No probe below mutates state, so
+   module-scoped clients are safe to share.
 
 2. Stateful write parity: identical write sequences applied to *fresh, isolated*
    per-strategy DBs must produce identical results and identical follow-up

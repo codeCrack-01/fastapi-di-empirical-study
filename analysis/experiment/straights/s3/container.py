@@ -1,12 +1,12 @@
-"""ReviewGate-S3 — external DI container (dependency-injector).
+"""ReviewGate-S4 — external DI container (dependency-injector).
 
-The S3 strategy routes dependency acquisition through a
+The S4 strategy routes dependency acquisition through a
 `dependency_injector.DeclarativeContainer`: every request pulls a fresh
 per-request session from the container and auth decisions from a UserService.
 Handlers pull from the same core modules the other strategies call — only the
 acquisition layer differs. (A `providers.Resource` would be singleton-scoped
 and share one connection across the whole worker; `providers.Factory` keeps
-per-request lifetimes identical to S0/S2.)
+per-request lifetimes identical to S1/S3.)
 """
 
 from __future__ import annotations
@@ -17,7 +17,7 @@ from core import auth, db
 
 
 class UserService:
-    """Thin adapter over core.auth so the S3 render can use a container object."""
+    """Thin adapter over core.auth so the S4 render can use a container object."""
 
     def current_user(self, conn, request):
         return auth.current_user(conn, request)

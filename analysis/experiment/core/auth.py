@@ -50,7 +50,7 @@ def require_role(user: dict | None, roles: list[str]) -> dict:
 
 
 def current_user(conn, request: Request) -> dict:
-    """Authenticate from the request headers. Shared by S0/S2/S3."""
+    """Authenticate from the request headers. Shared by S1/S3/S4."""
     user = lookup_user(conn, bearer_token(request.headers))
     if not user or user["suspended"]:
         raise HTTPException(status_code=401, detail="Not authenticated")

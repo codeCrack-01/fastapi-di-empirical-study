@@ -94,7 +94,7 @@ def header_lines() -> list[str]:
              "(e.g. `get_db`) written in two or more constructs within one repo is an "
              "*observed swap instance* (1,142 across the corpus; 933 of them pure "
              "`C1|C3`). That interference-free re-writing across constructs is exactly "
-             "what lets the S1 benchmark renders in `experiment_proposal.md` §3.1 stay "
+             "what lets the S2 benchmark renders in `experiment_proposal.md` §3.1 stay "
              "behavior-preserving.")
     L.append("")
     L.append("## Part B — Fingerprints: every spelling of C1–C4, nothing more")

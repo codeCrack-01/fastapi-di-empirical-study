@@ -18,7 +18,7 @@ async def lifespan(app):
     _ = db.init_database()
     yield
 
-app = FastAPI(title='ReviewGate-S2', lifespan=lifespan)
+app = FastAPI(title='ReviewGate-S3', lifespan=lifespan)
 
 def _resolve_user(request: Request) -> dict | None:
     token = auth.bearer_token(request.headers)

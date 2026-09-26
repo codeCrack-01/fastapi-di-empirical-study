@@ -27,7 +27,7 @@ def make_connection(path=None) -> sqlite3.Connection:
 
 @contextmanager
 def session(path=None):
-    """Per-request session context (S0/S2/S3 acquisition primitive)."""
+    """Per-request session context (S1/S3/S4 acquisition primitive)."""
     conn = make_connection(path)
     try:
         yield conn
@@ -36,7 +36,7 @@ def session(path=None):
 
 
 def get_db():
-    """FastAPI-style generator dependency for the S1 spine."""
+    """FastAPI-style generator dependency for the S2 spine."""
     with session() as conn:
         yield conn
 

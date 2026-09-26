@@ -4,11 +4,11 @@ Each strategy is a self-contained FastAPI app exposing the identical 21 routes,
 params, auth levels, and response models (from core/routes.py). Only the
 dependency-acquisition layer differs:
 
-  S0  direct construction (zero-DI):      handlers open session() + call auth funcs
-  S1  framework-native DI:                Depends(get_db/get_current_user/require_*)
-  S2  manual Python DI:                   middleware assembles RequestContext; handlers
+  S1  direct construction (zero-DI):      handlers open session() + call auth funcs
+  S2  framework-native DI:                Depends(get_db/get_current_user/require_*)
+  S3  manual Python DI:                   middleware assembles RequestContext; handlers
                                           read it from request.state (explicit threading)
-  S3  external container (dependency-injector): services + connections built by a
+  S4  external container (dependency-injector): services + connections built by a
                                           DeclarativeContainer; handlers pull from it
 
 Run from analysis/experiment:  python gen_straights.py
@@ -45,7 +45,7 @@ def module_s0() -> str:
          "    _ = db.init_database()",
          "    yield",
          "",
-         "app = FastAPI(title='ReviewGate-S0', lifespan=lifespan)",
+         "app = FastAPI(title='ReviewGate-S1', lifespan=lifespan)",
          ""]
     for _method, _path, name, aauth, svc, _resp, sig, call in ROUTES:
         inner = []
@@ -78,7 +78,7 @@ def module_s1() -> str:
          "    _ = db.init_database()",
          "    yield",
          "",
-         "app = FastAPI(title='ReviewGate-S1', lifespan=lifespan)",
+         "app = FastAPI(title='ReviewGate-S2', lifespan=lifespan)",
          ""]
     for _method, _path, name, aauth, svc, _resp, sig, call in ROUTES:
         deps = ["conn=Depends(get_db)"]
@@ -112,7 +112,7 @@ def module_s2() -> str:
          "    _ = db.init_database()",
          "    yield",
          "",
-         "app = FastAPI(title='ReviewGate-S2', lifespan=lifespan)",
+         "app = FastAPI(title='ReviewGate-S3', lifespan=lifespan)",
          "",
          "def _resolve_user(request: Request) -> dict | None:",
          "    token = auth.bearer_token(request.headers)",
@@ -158,7 +158,7 @@ def module_s3() -> str:
          "    app.state.container = Container()",
          "    yield",
          "",
-         "app = FastAPI(title='ReviewGate-S3', lifespan=lifespan)",
+         "app = FastAPI(title='ReviewGate-S4', lifespan=lifespan)",
          ""]
     for _method, _path, name, aauth, svc, _resp, sig, call in ROUTES:
         inner = []

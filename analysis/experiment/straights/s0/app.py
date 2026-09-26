@@ -12,7 +12,7 @@ async def lifespan(app):
     _ = db.init_database()
     yield
 
-app = FastAPI(title='ReviewGate-S0', lifespan=lifespan)
+app = FastAPI(title='ReviewGate-S1', lifespan=lifespan)
 
 
 @app.get('/health')

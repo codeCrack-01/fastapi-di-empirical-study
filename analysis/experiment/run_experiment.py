@@ -1,4 +1,8 @@
-"""run_experiment.py — orchestrator for the ReviewGate S0-S3 matrix.
+"""run_experiment.py — orchestrator for the ReviewGate strategy matrix.
+
+Strategy arms are keyed s0-s3 for legacy/stable reasons; the published
+taxonomy (experiment_proposal.md §3.1) maps s0->S1, s1->S2, s2->S3, s3->S4.
+Machine keys stay fixed because the committed result data is keyed s0-s3.
 
 Per protocol (§7 of docs/experiment_proposal.md):
 
