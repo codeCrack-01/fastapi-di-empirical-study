@@ -1,0 +1,19 @@
+{
+  "seed": 20260928,
+  "arm1": {
+    "frame_size": 804,
+    "frame_sha256_16": "fb466c1883a28fb7",
+    "n": 80,
+    "draw_sha256_16": "3763e311dad256e2"
+  },
+  "arm2a": {
+    "frame_size": 23,
+    "frame_sha256_16": "e1f34ea893fb2cde"
+  },
+  "arm2b": {
+    "frame_size": 1375,
+    "frame_sha256_16": "fc7c5c6295899972",
+    "n": 200,
+    "draw_sha256_16": "d497401503766ea6"
+  }
+}
