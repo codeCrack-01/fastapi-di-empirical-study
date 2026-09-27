@@ -29,6 +29,11 @@ from openpyxl import load_workbook
 ROOT = Path(__file__).resolve().parents[1]
 KIT = ROOT / "peer_review_kit"
 
+# Column headers carry rater names (see analysis/build_review_workbooks.py).
+# Falls back to the abstract A/B names so a pre-rename workbook still scores.
+RATER_A = "Zain Ahmed Khan"
+RATER_B = "Yahya Ahmed"
+
 ARMS = {
     "arm1": {
         "file": KIT / "AUDIT_80.xlsx",
@@ -108,10 +113,16 @@ def read(path: Path, sheet: str) -> list[dict]:
     hdr = [c.value for c in ws[1]]
     try:
         i_repo = hdr.index("REPO")
-        i_a = hdr.index("VERDICT_A")
-        i_b = hdr.index("VERDICT_B")
+        i_a = hdr.index(RATER_A) if RATER_A in hdr else hdr.index("VERDICT_A")
+        i_b = hdr.index(RATER_B) if RATER_B in hdr else hdr.index("VERDICT_B")
+        # Report whatever the file actually calls them, not the constants.
+        name_a, name_b = hdr[i_a], hdr[i_b]
     except ValueError:
-        raise SystemExit(f"{path.name}/{sheet}: expected REPO, VERDICT_A, VERDICT_B in the header")
+        raise SystemExit(
+            f"{path.name}/{sheet}: expected REPO plus the rater columns "
+            f"{RATER_A!r} and {RATER_B!r} (or VERDICT_A/VERDICT_B). "
+            f"Header is: {hdr}"
+        )
     rows = []
     for r in range(2, ws.max_row + 1):
         repo = ws.cell(row=r, column=i_repo + 1).value
@@ -124,6 +135,8 @@ def read(path: Path, sheet: str) -> list[dict]:
             "a": (a or "").strip() or None,
             "b": (b or "").strip() or None,
         })
+    for r in rows:
+        r["name_a"], r["name_b"] = name_a, name_b
     return rows
 
 
@@ -138,8 +151,8 @@ def report(arm: str) -> None:
     blank_a = [r for r in rows if r["a"] is None]
     blank_b = [r for r in rows if r["b"] is None]
     if blank_a or blank_b:
-        print(f"  INCOMPLETE: {len(blank_a)} rows missing VERDICT_A, "
-              f"{len(blank_b)} missing VERDICT_B")
+        print(f"  INCOMPLETE: {len(blank_a)} rows missing {rows[0]['name_a']}, "
+              f"{len(blank_b)} missing {rows[0]['name_b']}")
         print(f"  first missing rows: "
               f"{[r['row'] for r in (blank_a or blank_b)[:8]]}")
         print("  scoring what is filled in; rerun when both columns are complete.")
@@ -180,7 +193,7 @@ def report(arm: str) -> None:
     print(f"  observed agreement: {kp['agree']:.3f}   chance: {kp['expected']:.3f}")
     print(f"  n={kp['n']}   z={kp['z']:.2f}   p={kp['p']:.2g}")
 
-    print(f"\n  agreement matrix (rows = rater A, cols = rater B)")
+    print(f"\n  agreement matrix (rows = {rows[0]['name_a']}, cols = {rows[0]['name_b']})")
     labels = kp["labels"]
     print("      " + "".join(f"{l:>10}" for l in labels) + f"{'total':>10}")
     for i, l in enumerate(labels):
@@ -191,7 +204,7 @@ def report(arm: str) -> None:
     if disagree:
         print(f"\n  disagreements ({len(disagree)}):")
         for r in disagree[:40]:
-            print(f"    row {r['row']:<4} {r['repo']:<44} A={r['a']:<8} B={r['b']}")
+            print(f"    row {r['row']:<4} {r['repo']:<44} {r['name_a']}={r['a']:<8} {r['name_b']}={r['b']}")
         if len(disagree) > 40:
             print(f"    ... and {len(disagree) - 40} more")
 
@@ -205,7 +218,7 @@ def report(arm: str) -> None:
         print(f"  disagreements involving '{pos}': {unres} "
               f"(unresolved — the gate is not applied to them automatically)")
         for r in one:
-            print(f"    row {r['row']:<4} {r['repo']:<44} A={r['a']:<8} B={r['b']}")
+            print(f"    row {r['row']:<4} {r['repo']:<44} {r['name_a']}={r['a']:<8} {r['name_b']}={r['b']}")
         k = len(agreed)
         ub = wilson_upper(k, len(rows))
         print(f"\n  k = {k} of {len(rows)}   95% Wilson upper bound = {100 * ub:.1f}%")

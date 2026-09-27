@@ -33,6 +33,15 @@ OUT = ROOT / "peer_review_kit"
 SEED = 20260928
 CORE_KEYS = ("depends_total", "security_total", "annotated_depends_total", "yield_dep_total")
 
+# The two raters, by name. Column headers carry these names so nobody has to
+# remember which abstract letter is theirs. Order is load-bearing: the first
+# name is the first verdict column, the second is the second.
+RATERS = ("Zain Ahmed Khan", "Yahya Ahmed")
+
+# Arm 2a is single-rater by design (rubric development, no reliability check).
+# Flip this to the other name to reassign it.
+RATER_2A = RATERS[0]
+
 # The wider list used only to *find candidates*; never to assign a verdict.
 CANDIDATE_LIBS = {
     "dependency_injector", "injector", "punq", "lagom", "wired", "svcs", "antidote",
@@ -166,8 +175,8 @@ def build_arm1(corpus: dict[str, dict], draw: list[str]) -> Path:
     ws.title = "audit"
     cols = [
         ("#", 5), ("REPO", 30), ("COMMIT", 9), ("LINK", 34), ("AST_VERDICT", 11),
-        ("TRIAGE HINT (not a verdict)", 52), ("VERDICT_A", 12),
-        ("VERDICT_B", 12), ("FINAL", 11), ("NOTE", 40),
+        ("TRIAGE HINT (not a verdict)", 52), (RATERS[0], 17),
+        (RATERS[1], 17), ("FINAL", 11), ("NOTE", 40),
     ]
     ws.append([c[0] for c in cols])
     for i, (name, width) in enumerate(cols, start=1):
@@ -232,7 +241,8 @@ def build_arm1(corpus: dict[str, dict], draw: list[str]) -> Path:
     for line in [
         ["ARM 1 — HOW TO FILL THIS IN"],
         [""],
-        ["1", "Fill ONLY your own column: rater A uses VERDICT_A, rater B uses VERDICT_B."],
+        ["1", f"Fill ONLY your own column. {RATERS[0]} fills the '{RATERS[0]}' column; "
+         f"{RATERS[1]} fills the '{RATERS[1]}' column. Do not touch the other."],
         ["2", "Do not look at the other rater's column until both of you have finished all 80 rows."],
         ["3", "Read the repository, then record your own answer. Only afterwards compare with AST_VERDICT."],
         ["4", "The TRIAGE HINT column lists signals the extractor already noticed. It is a starting point, NOT an answer."],
@@ -271,8 +281,8 @@ def build_arm2b(corpus: dict[str, dict], draw: list[str]) -> Path:
     ws.title = "prevalence"
     cols = [
         ("#", 5), ("REPO", 30), ("COMMIT", 9), ("LINK", 34), ("AST_VERDICT", 11),
-        ("TRIAGE HINT (not a verdict)", 46), ("VERDICT_A", 12),
-        ("VERDICT_B", 12), ("FINAL", 11), ("NOTE", 40),
+        ("TRIAGE HINT (not a verdict)", 46), (RATERS[0], 17),
+        (RATERS[1], 17), ("FINAL", 11), ("NOTE", 40),
     ]
     ws.append([c[0] for c in cols])
     for i, (_, width) in enumerate(cols, start=1):
@@ -304,7 +314,8 @@ def build_arm2b(corpus: dict[str, dict], draw: list[str]) -> Path:
     for line in [
         ["ARM 2b — HOW TO FILL THIS IN"],
         [""],
-        ["1", "Fill ONLY your own column: rater A uses VERDICT_A, rater B uses VERDICT_B."],
+        ["1", f"Fill ONLY your own column. {RATERS[0]} fills the '{RATERS[0]}' column; "
+         f"{RATERS[1]} fills the '{RATERS[1]}' column. Do not touch the other."],
         ["2", "Do not look at the other rater's column until both of you have finished all 200 rows."],
         ["3", "Every repo here already uses FastAPI DI. The question is whether it ALSO does"],
         ["", "something else — a container, or hand-rolled wiring. Most of these are plain S2."],
@@ -375,6 +386,8 @@ def build_arm2a(corpus: dict[str, dict], frame: list[str]) -> Path:
     inst = wb.create_sheet("how_to")
     for line in [
         ["ARM 2a — CANDIDATE CHARACTERISATION (one rater, no second opinion)"],
+        [""],
+        [f"Assigned to: {RATER_2A}"],
         [""],
         ["This arm has a different job from the others. You are not confirming a count;"],
         ["you are building the vocabulary the other arms will use. Work through the rows"],

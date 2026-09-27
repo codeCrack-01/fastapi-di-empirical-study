@@ -21,6 +21,11 @@ OUT = ROOT / "peer_review_kit" / "REVIEWER_GUIDE.docx"
 NAVY = RGBColor(0x1F, 0x38, 0x64)
 GREY = RGBColor(0x55, 0x55, 0x55)
 
+# The two raters, in workbook column order. Keep in step with
+# analysis/build_review_workbooks.py.
+RATER_A = "Zain Ahmed Khan"
+RATER_B = "Yahya Ahmed"
+
 
 def setup(doc: Document) -> None:
     st = doc.styles["Normal"]
@@ -180,8 +185,7 @@ def build() -> Path:
 
     # ---------------------------------------------------------------- arm 1
     doc.add_heading("Part 1 — AUDIT_80.xlsx (80 repositories)", level=1)
-    para(doc, "Two people, both doing all 80 rows. This is the most important workbook.",
-         bold=True)
+    para(doc, "Two people, both doing all 80 rows. This is the most important workbook.", bold=True)
     para(
         doc,
         "These 80 were drawn at random from the 804 repositories the analyser called S1 — "
@@ -202,7 +206,8 @@ def build() -> Path:
     )
     doc.add_heading("How to fill it in", level=3)
     bullets(doc, [
-        ("VERDICT_A ", "is yours if you are rater A. VERDICT_B if you are rater B."),
+        (RATER_A, f" — Zain: fill this column. Yahya: leave it alone."),
+        (RATER_B, f" — Yahya: fill this column. Zain: leave it alone."),
         ("yes ", "— some DI mechanism is present, even if the analyser found nothing."),
         ("no ", "— no DI mechanism is present."),
         ("unclear ", "— you cannot tell."),
@@ -250,6 +255,7 @@ def build() -> Path:
     # --------------------------------------------------------------- arm 2b
     doc.add_heading("Part 2 — S3S4_200.xlsx (200 repositories)", level=1)
     para(doc, "Two people, both doing all 200 rows.", bold=True)
+    para(doc, f"Same split as Part 1: {RATER_A} and {RATER_B} each fill their own column.", italic=True)
     para(
         doc,
         "These 200 were drawn at random from the 1,375 repositories the analyser found "
@@ -282,6 +288,7 @@ def build() -> Path:
     # --------------------------------------------------------------- arm 2a
     doc.add_heading("Part 3 — S3S4_CANDIDATES.xlsx (23 repositories)", level=1)
     para(doc, "One person only. No second opinion needed here.", bold=True)
+    para(doc, "Assigned to Zain Ahmed Khan.", italic=True)
     para(
         doc,
         "These 23 repositories raised some signal — an unusual import, a non-FastAPI "

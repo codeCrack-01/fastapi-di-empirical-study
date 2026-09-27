@@ -10,6 +10,28 @@ Three workbooks and one guide for the review fixed in
 | `S3S4_200.xlsx` | 200 | 2 | **Arm 2b.** Random draw from the 1,375 detected-has-DI repos. Gives manual/external DI prevalence with a CI. |
 | `S3S4_CANDIDATES.xlsx` | 23 | 1 | **Arm 2a.** Exhaustive, signal-bearing repos. Builds the rubric and a lower bound. |
 
+## Who does what
+
+The verdict columns are named, not lettered, so there is nothing to remember and
+nothing to get backwards.
+
+| Arm | Zain Ahmed Khan | Yahya Ahmed |
+|---|---|---|
+| 1 — `AUDIT_80.xlsx` | all 80 rows | all 80 rows |
+| 2b — `S3S4_200.xlsx` | all 200 rows | all 200 rows |
+| 2a — `S3S4_CANDIDATES.xlsx` | all 23 rows | — |
+
+Fill **only** the column bearing your own name. Do not read or fill the other
+person's column, and do not fill `FINAL` — that is a formula, and the merge step
+regenerates it.
+
+Each rater works from a **separate copy of the folder**. Nothing is sent between
+you until both copies are finished, so neither rating is visible to the other
+while it is being formed.
+
+When both are done, hand the two files over to be merged. They are joined on
+`REPO` — never on row order, which a sort or filter in Excel can silently change.
+
 ## What was retired
 
 An earlier 327-row kit in this directory validated the labels of a 14B LLM
