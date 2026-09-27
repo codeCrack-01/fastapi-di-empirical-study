@@ -1,5 +1,25 @@
 # DI Patterns explored in the FastAPI literature
 
+> **SUPERSEDED IN PART (2026-09-28).** This document predates the retirement of
+> the LLM strategy-attribution census. That census assigned S1-S4 to all 2,179
+> repositories using `qwen3:14b`; it matched the deterministic extractor on only
+> **56.4%** of repositories, and inspection showed the evidence packs it read
+> contained a real `Depends` call in just **8%** of cases -- the token `settings`
+> in the pack builder's keyword vocabulary matched benign configuration
+> identifiers and consumed 63% of all excerpt slots. Its strategy counts
+> (S1 1,188 / S2 712 / S3 268 / S4 11) are **withdrawn** and appear below only
+> as a record of prior belief. The 327-repository peer review that was built to
+> validate them is also retired and has been deleted.
+>
+> Still valid: any figure described as **construct presence** (does the extractor
+> find `Depends`/`Security`/`Annotated` call sites), which is a statement about
+> the extractor's output rather than about a repository's dominant strategy.
+> **Not valid:** any statement that a strategy population has a known share.
+> Manual (S3) and external (S4) strategy prevalence is currently *unquantified*.
+>
+> Authoritative replacement: `docs/audit_preregistration.md`
+> (branch `prereg/census-validation`, commit `670af3b`).
+
 > Draft for a paper subsection defining the dependency-injection patterns this
 > study explores. **Base patterns only** — derived/composite variants are
 > intentionally excluded from the catalog below. Counts are from the 2,179-repo
@@ -119,7 +139,7 @@ from the corpus (§6.2 of `result_draft_01.md`), all low-frequency:
 
 | Idiom | Repos | Note |
 |---|---|---|
-| zero-DI / direct call | 805 (36.9%) | real apps that never invoke the DI system at all — the headline finding *(construct-presence; the strategy-attribution census — `methodology_journal.md` §3.2 — buckets S1 direct construction at 1,188 repos, 54.5%)* |
+| zero-DI / direct call | 805 (36.9%) | real apps that never invoke the DI system at all — the headline finding *(construct-presence: no `Depends`/`Security`/`Annotated` call site detected. This is **not** the S1 strategy population — the retired strategy-attribution census that supplied that number disagreed with the extractor on 56.4% of repositories and has been withdrawn; see `methodology_journal.md` §3.2. How much undetected DI hides in this cohort is bounded by the pre-registered audit in `docs/audit_preregistration.md`.)* |
 | `current_*` request-scope injection | 76 | request-scoped context objects injected via DI |
 | class-as-dependency `Depends(MyClass)` | 28 | constructor-injected classes (38 distinct classes) |
 | module-alias deps `deps.get_x` | 54 | namespaced dependency getters |

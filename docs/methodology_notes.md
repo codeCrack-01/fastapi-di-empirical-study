@@ -1,5 +1,25 @@
 # Corpus Methodology (FINALIZED 2026-08-06)
 
+> **SUPERSEDED IN PART (2026-09-28).** This document predates the retirement of
+> the LLM strategy-attribution census. That census assigned S1-S4 to all 2,179
+> repositories using `qwen3:14b`; it matched the deterministic extractor on only
+> **56.4%** of repositories, and inspection showed the evidence packs it read
+> contained a real `Depends` call in just **8%** of cases -- the token `settings`
+> in the pack builder's keyword vocabulary matched benign configuration
+> identifiers and consumed 63% of all excerpt slots. Its strategy counts
+> (S1 1,188 / S2 712 / S3 268 / S4 11) are **withdrawn** and appear below only
+> as a record of prior belief. The 327-repository peer review that was built to
+> validate them is also retired and has been deleted.
+>
+> Still valid: any figure described as **construct presence** (does the extractor
+> find `Depends`/`Security`/`Annotated` call sites), which is a statement about
+> the extractor's output rather than about a repository's dominant strategy.
+> **Not valid:** any statement that a strategy population has a known share.
+> Manual (S3) and external (S4) strategy prevalence is currently *unquantified*.
+>
+> Authoritative replacement: `docs/audit_preregistration.md`
+> (branch `prereg/census-validation`, commit `670af3b`).
+
 > **Correction (2026-08-29):** E4 applies a **60-month** recency gate, matching
 > `corpus/settings.py` (`E4_MAX_AGE_MONTHS = 60`) and the reported results
 > (709 E4 exclusions). An earlier draft here stated 36 months; 60 is what was

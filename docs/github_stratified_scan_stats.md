@@ -1,5 +1,25 @@
 # GitHub Stratified-Scan Statistics
 
+> **SUPERSEDED IN PART (2026-09-28).** This document predates the retirement of
+> the LLM strategy-attribution census. That census assigned S1-S4 to all 2,179
+> repositories using `qwen3:14b`; it matched the deterministic extractor on only
+> **56.4%** of repositories, and inspection showed the evidence packs it read
+> contained a real `Depends` call in just **8%** of cases -- the token `settings`
+> in the pack builder's keyword vocabulary matched benign configuration
+> identifiers and consumed 63% of all excerpt slots. Its strategy counts
+> (S1 1,188 / S2 712 / S3 268 / S4 11) are **withdrawn** and appear below only
+> as a record of prior belief. The 327-repository peer review that was built to
+> validate them is also retired and has been deleted.
+>
+> Still valid: any figure described as **construct presence** (does the extractor
+> find `Depends`/`Security`/`Annotated` call sites), which is a statement about
+> the extractor's output rather than about a repository's dominant strategy.
+> **Not valid:** any statement that a strategy population has a known share.
+> Manual (S3) and external (S4) strategy prevalence is currently *unquantified*.
+>
+> Authoritative replacement: `docs/audit_preregistration.md`
+> (branch `prereg/census-validation`, commit `670af3b`).
+
 Numbers and reasoning for peer review of the GitHub-scan sampling and the
 in-sample static scan. Every number below re-read directly from the artifacts
 (file paths given so the claim is verifiable).
@@ -203,12 +223,14 @@ repos. Outputs: `analysis/swappable/out/catalog.json`,
 - **Caveats**: labels are single-rater (qwen3:14b, nondeterministic) and some
   canonical shapes read as false_pos over-capture (e.g. `C3|CLASS|BARE`,
   `C4|USED`), so the screen treats them as a signal, not ground truth;
-  Swappable count is the benchmark-ready *interchangeable pairs* candidate, to
-  be validated against the human-review verdicts on the S1–S4 arms of
-  `experiment_proposal.md` §3.1 (the strategy-attribution census is complete —
-  S1 1,188 / S2 712 / S3 268 / S4 11, `methodology_journal.md` §3.2 — and 58
-  S3/S4 repos fall inside the 327-review sample).
-- **Reviewer-facing artifacts** (peer-review kit): `pattern_gallery.md` (real
-  DI code exemplars per type), `peer_review.xlsx` (327-row verdict workbook with
-  MY/PEER/FINAL columns), `rendered_prompts.md` (verbatim prompts), and
-  `scripts/cohens_kappa.py` (Landis–Koch agreement).
+  Swappable count is the benchmark-ready *interchangeable pairs* candidate.
+  **This validation path is retired.** It depended on validating against the
+  human-review verdicts of the 327-sample and on the LLM strategy-attribution
+  census (S1 1,188 / S2 712 / S3 268 / S4 11), both of which are withdrawn
+  (`methodology_journal.md` §3.2). No peer-review verdicts exist for the S1–S4
+  arms, and no strategy populations are quantified. The pre-registered audit in
+  `docs/audit_preregistration.md` replaces this.
+- **Reviewer-facing artifacts (peer-review kit): DELETED.** The 327-row workbook,
+  the per-repo evidence pages, `pattern_gallery.md`, and the verdict tables have
+  all been removed from the repository. They validated an LLM's output, not a
+  classifier. Nothing in this section is a current deliverable.

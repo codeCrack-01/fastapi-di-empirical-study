@@ -151,7 +151,7 @@ repo level are **not disjoint** (a repo can use several).
 | — `Depends(Cls)` class-as-dependency | 28 | 1.3% | constructor-injected classes (38 distinct classes) |
 | — module-alias deps (`mod.dep`) | 54 | 2.5% | namespaced dependency getters |
 | **Hand-rolled "ground-up" Python DI** | ~76–79 | ~3.5% | DIY idioms outside the resolver: `current_*` request-scope (76), `provide_*` service-locator (3); overlaps rows above |
-| **External DI library** | 11 | 0.5% | **confirmed by LLM attribution census (§3.2), supersedes the ~3–6 probe:** `dependency-injector` 9 (incl. darkspock/CareerPython, gostgmaer/langchain-knoledgebase-rag, darkspock/renfeserver), `DIContainer` 1, `injector` 1 |
+| **External DI library** | 7 | 0.3% | **import-table match against the 11-name `DI_LIBS` list** (`analysis/render_census_inputs.py`): 7 repos. A wider 27-name list raises this to 11. The 11-repo figure previously given here came from the retired LLM census (§3.2) and is not independently confirmed. Name matching is not exhaustive — an in-house or unpublished container is unreachable by this method. |
 
 **Graph topology context:** 1,338/2,179 (61.4%) have a non-empty dependency graph;
 1,066 (79.7% of graph-bearing) contain at least one hub with ≥ 3 consumers —
@@ -165,50 +165,74 @@ have a fan-out hub; tail repos skew young (54/58 < 12 mo) and larger (median
 facets; the two numbers above come from read-only probes over the corpus and
 should be treated as order-of-magnitude signals for *construct prevalence*. The
 measured backbone is FastAPI-native (63.1%) vs. no-DI (36.9%) by **construct
-presence**. The LLM strategy-attribution census (§3.2) supersedes the "~3–6"
-external-DI estimate (11 confirmed) and re-sorts repos by dominant wiring
-strategy, which is the taxonomy the benchmark uses.
+presence**.
+
+**These construct-presence rows are not the S1–S4 strategy taxonomy.** "No DI
+constructs detected" is a statement about the extractor's output, not a claim
+about which strategy governs a repository's dependency acquisition. The strategy
+taxonomy previously cited here (§3.2) has been retired; see that section and
+`docs/audit_preregistration.md`.
 
 ---
 
-### 3.2 LLM strategy-attribution census (S1–S4, supersedes S3/S4 estimates)
+### 3.2 Strategy-attribution census — RETIRED, replaced by a pre-registered audit
 
-**Purpose.** The extractor rows above measure *construct presence*. To drive
-the experiment's S1–S4 strategy taxonomy, we ran a full-corpus attribution
-census assigning each of the 2,179 repos one strategy.
+> **Status: RETIRED (2026-09-28).** The figures in this subsection are withdrawn.
+> They are retained here only so the reasoning that produced them remains on the
+> record. The authoritative design is `docs/audit_preregistration.md`
+> (branch `prereg/census-validation`, commit `670af3b`).
 
-| Strategy | Repos | % of 2,179 | Definition |
+**What was done.** qwen3:14b (Q4_K_M, 14 GB) was run over per-repository evidence
+built by `analysis/render_census_inputs.py`, assigning each of the 2,179 accepted
+repositories one wiring strategy. Driver `analysis/llm_census.py`; raw responses in
+`analysis/out/census_out.jsonl`; environment snapshot in `analysis/out/executor/`.
+2,179/2,179 rows parsed, 0 parse errors.
+
+**The resulting table — withdrawn:**
+
+| Strategy | Repos | % of 2,179 | Status |
 |---|---|---|---|
-| S1 Direct construction (zero/native-only) | **1,188** | **54.5%** | handlers construct/call dependencies directly; no container, no manual wiring |
-| S2 Framework-native DI | **712** | **32.7%** | `Depends`/`Security`/`Annotated` machinery is the dominant wiring path |
-| S3 Manual Python DI (explicit context) | **268** | **12.3%** | `app.state`/`request.state` context, explicit wiring of a `RequestContext`, hand-rolled providers |
-| S4 External DI container | **11** | **0.5%** | `dependency-injector`-family container: 9 `dependency_injector`, 1 `DIContainer`, 1 `injector` |
+| S1 Direct construction (zero/native-only) | 1,188 | 54.5% | **withdrawn** |
+| S2 Framework-native DI | 712 | 32.7% | **withdrawn** |
+| S3 Manual Python DI (explicit context) | 268 | 12.3% | **withdrawn** |
+| S4 External DI container | 11 | 0.5% | **withdrawn** |
 
-**Method.** qwen3:14b (Q4_K_M, 14 GB) over per-repo evidence built by
-`analysis/render_census_inputs.py` (manifest, import table, DI-vocab excerpt
-from a local clone); one label per repo with evidence + `s3_mechanism` /
-`s4_library`. Driver `analysis/llm_census.py` is resumable and records raw
-responses. 8 records initially failed strict JSON parse; all were recovered
-(re-run, then JSON re-emit fix) → **2,179/2,179 labeled, 0 parse-error rows**.
-Executed on a dedicated RTX 4090 node (ollama 0.34.4; RTX 4090 24 GB, driver
-595.91.07, CUDA 13.2, Ryzen 7 5700X, 62 Gi RAM); env snapshot + run/setup logs
-archived under `analysis/out/executor/`.
+**Why it was withdrawn.** Two independent findings.
 
-**Reliability checks.**
-- All three known external-DI anchors (`darkspock/CareerPython`,
-  `darkspock/renfeserver`, `gostgmaer/langchain-knoledgebase-rag`) → S4 /
-  `dependency-injector` ✓.
-- `morpheuslord/PICOTTY` (S4, `injector`) is a **known false-positive seed** —
-  its "injector" is a CircuitPython firmware import, not DI; it is flagged in
-  the review workbook's S4 rows for the reviewers to adjudicate.
-- 58 S3/S4 repos fall inside the frozen 327-sample (5 of them S4): these are the
-  rows the human reviewers check against the LLM (§5 of `experiment_proposal.md`).
+1. *The model does not agree with the deterministic classifier.* It matched on
+   1,230 of 2,179 repositories — **56.4%**, against a 55% majority-class baseline.
+   Where the two disagreed, the model was wrong at least as often as it was right.
+   The 327-repository peer review built to adjudicate those disagreements is
+   likewise retired; it validated an input, not a classifier.
 
-**Why S1/S2 differ from the extractor rows.** The extractor counts a repo
-"native" if it has ≥ 1 `Depends` call site (63.1%). The attribution census asks
-which strategy *governs handler dependency acquisition*, so repos mixing idioms
-sort by the dominant one — hence 1,188 S1 (not 805) and 712 S2 (not 1,374). The
-experiment's treatments use the S1–S4 taxonomy, so §3.1 references these counts.
+2. *The evidence packs were defective, and this is the more serious finding.* The
+   pack builder drew excerpts using a keyword vocabulary in which the token
+   `settings` matched benign configuration identifiers (`gensui_settings`,
+   `get_settings`, `Settings`). `settings` consumed 6,997 of roughly 11,000 excerpt
+   slots. Only **8% of evidence packs contained a single real `Depends` call**.
+   Repositories with hundreds of `Depends` sites were presented to the model as
+   20 lines of configuration plumbing, and the model correctly reported "no evidence
+   of framework-native DI" — because its input contained none. The headline
+   disagreement was substantially a defect in the pipeline feeding the model, not a
+   measurement of the model.
+
+**What replaces it.** A pre-registered, LLM-free audit
+(`docs/audit_preregistration.md`), committed before any rating occurred:
+
+- **Arm 1** — 80 repositories drawn from the 804 detected-zero-DI frame, each
+  independently rated for whether *any* DI mechanism is present. Bounds the
+  extractor's false-negative rate. A gate of ≥ 4 misses in 80 stops all headline
+  reporting until the detector is extended.
+- **Arm 2a** — targeted characterisation of repositories carrying a manual- or
+  external-DI signal; produces a rubric and a lower bound.
+- **Arm 2b** — 200 repositories drawn from the 1,375 detected-has-DI frame, rated
+  S2/S3/S4, giving a prevalence estimate with a Wilson 95% interval.
+
+**Current defensible census statement.** By construct presence: 804 repositories
+(36.9%) have no detected DI construct; 1,375 do; 7 carry a detected external
+container import. **The S3 and S4 strategy populations are currently unquantified**
+and remain so until Arms 2a and 2b report. Any document citing the withdrawn
+1,188 / 712 / 268 / 11 split as a current result is wrong.
 
 ---
 
@@ -290,9 +314,13 @@ functions to `Depends` as shared, fan-in hubs (DB sessions, auth guards,
 current-user providers); over a third of legit apps (36.9%) use **no** DI
 construct at all; class-based, namespaced, and typed-injection styles exist but
 at single-digit prevalence; `Security`'s scopes feature is unused; and external
-DI libraries are near-absent (11 repos, 0.5%, per the attribution census §3.2).
-By dominant wiring strategy the picture is S1 direct construction (54.5%),
-S2 framework-native (32.7%), S3 manual context (12.3%), S4 external (0.5%).
+DI libraries are rare (7 repos by import-table match over an 11-name list, 0.3%).
+The manual/external strategy populations (S3, S4) are **not currently
+quantified** — the census that previously claimed 12.3% and 0.5% for them was
+retired (§3.2), and the pre-registered audit in `docs/audit_preregistration.md`
+is what will measure them. Until it reports, the defensible statement is that
+the FastAPI-native / no-construct split is 63.1% / 36.9% by construct presence,
+and the strategy-level split is unknown.
 The exploratory comparison finds no style
 robustly "better" once maturity/size are controlled, and the runtime cost of
 `Depends()` (~0.25 ms over a trivial body) is negligible against any real

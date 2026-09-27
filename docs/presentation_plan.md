@@ -1,5 +1,25 @@
 # Presentation Plan for Dr. Abdul Ali Bangash
 
+> **SUPERSEDED IN PART (2026-09-28).** This document predates the retirement of
+> the LLM strategy-attribution census. That census assigned S1-S4 to all 2,179
+> repositories using `qwen3:14b`; it matched the deterministic extractor on only
+> **56.4%** of repositories, and inspection showed the evidence packs it read
+> contained a real `Depends` call in just **8%** of cases -- the token `settings`
+> in the pack builder's keyword vocabulary matched benign configuration
+> identifiers and consumed 63% of all excerpt slots. Its strategy counts
+> (S1 1,188 / S2 712 / S3 268 / S4 11) are **withdrawn** and appear below only
+> as a record of prior belief. The 327-repository peer review that was built to
+> validate them is also retired and has been deleted.
+>
+> Still valid: any figure described as **construct presence** (does the extractor
+> find `Depends`/`Security`/`Annotated` call sites), which is a statement about
+> the extractor's output rather than about a repository's dominant strategy.
+> **Not valid:** any statement that a strategy population has a known share.
+> Manual (S3) and external (S4) strategy prevalence is currently *unquantified*.
+>
+> Authoritative replacement: `docs/audit_preregistration.md`
+> (branch `prereg/census-validation`, commit `670af3b`).
+
 **Paper title:** Empirical Study of Dependency Injection (DI) Usage Patterns in FastAPI Applications
 
 **Purpose:** Preparation guide for the RQ1/RQ2/RQ3/RQ4 corpus presentation. The deck

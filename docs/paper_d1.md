@@ -1,5 +1,25 @@
 # Empirical Study of DI Usage Patterns in FastAPI Applications
 
+> **SUPERSEDED IN PART (2026-09-28).** This document predates the retirement of
+> the LLM strategy-attribution census. That census assigned S1-S4 to all 2,179
+> repositories using `qwen3:14b`; it matched the deterministic extractor on only
+> **56.4%** of repositories, and inspection showed the evidence packs it read
+> contained a real `Depends` call in just **8%** of cases -- the token `settings`
+> in the pack builder's keyword vocabulary matched benign configuration
+> identifiers and consumed 63% of all excerpt slots. Its strategy counts
+> (S1 1,188 / S2 712 / S3 268 / S4 11) are **withdrawn** and appear below only
+> as a record of prior belief. The 327-repository peer review that was built to
+> validate them is also retired and has been deleted.
+>
+> Still valid: any figure described as **construct presence** (does the extractor
+> find `Depends`/`Security`/`Annotated` call sites), which is a statement about
+> the extractor's output rather than about a repository's dominant strategy.
+> **Not valid:** any statement that a strategy population has a known share.
+> Manual (S3) and external (S4) strategy prevalence is currently *unquantified*.
+>
+> Authoritative replacement: `docs/audit_preregistration.md`
+> (branch `prereg/census-validation`, commit `670af3b`).
+
 > Draft 3 — for review. Census results are final for the 2,179-repository corpus
 > (revised E1–E4 gate, schema 0.2). The earlier 402-repository results (pure
 > Python-gate era) are superseded; see `docs/result_draft_01.md` for the full
@@ -363,11 +383,15 @@ Across the 2,179-repository census:
   `abushanisro/emithran`, `ATphobia22/PTDT-v33`) use `Annotated` but no
   `Depends`. Within the 36.9% none uses a generator/yield dependency either, so
   the classification as "no DI at all" is conservative with respect to the full
-  construct set. *(These are construct-presence counts. The companion LLM
-  strategy-attribution census — `methodology_journal.md` §3.2 — assigns each
-  repo a dominant wiring strategy; e.g. S1 direct construction = 1,188 repos,
-  54.5%. The experiment's S1–S4 taxonomy uses those strategy counts, not the
-  extractor construct buckets.)*
+  construct set. *(These are construct-presence counts. They are not a strategy
+  taxonomy: "no detected DI construct" is a statement about the extractor's
+  output, not about which mechanism governs a repository's handlers. An
+  LLM strategy-attribution census once supplied those counts
+  (`methodology_journal.md` §3.2); it was retired on 2026-09-28 because the
+  model agreed with the deterministic extractor on only 56.4% of repositories,
+  and the evidence packs it read contained a real `Depends` call in just 8% of
+  cases. The strategy populations are currently unquantified; see
+  `docs/audit_preregistration.md`.)*
 - **The documentation-preferred style is not the most common one.** The
   `Annotated[..., Depends]` form that the documentation states a preference for
   appears in 18% of repositories; generator/yield dependencies appear in 35%

@@ -1,5 +1,25 @@
 # Result Draft 01: FastAPI Dependency Injection Corpus Study
 
+> **SUPERSEDED IN PART (2026-09-28).** This document predates the retirement of
+> the LLM strategy-attribution census. That census assigned S1-S4 to all 2,179
+> repositories using `qwen3:14b`; it matched the deterministic extractor on only
+> **56.4%** of repositories, and inspection showed the evidence packs it read
+> contained a real `Depends` call in just **8%** of cases -- the token `settings`
+> in the pack builder's keyword vocabulary matched benign configuration
+> identifiers and consumed 63% of all excerpt slots. Its strategy counts
+> (S1 1,188 / S2 712 / S3 268 / S4 11) are **withdrawn** and appear below only
+> as a record of prior belief. The 327-repository peer review that was built to
+> validate them is also retired and has been deleted.
+>
+> Still valid: any figure described as **construct presence** (does the extractor
+> find `Depends`/`Security`/`Annotated` call sites), which is a statement about
+> the extractor's output rather than about a repository's dominant strategy.
+> **Not valid:** any statement that a strategy population has a known share.
+> Manual (S3) and external (S4) strategy prevalence is currently *unquantified*.
+>
+> Authoritative replacement: `docs/audit_preregistration.md`
+> (branch `prereg/census-validation`, commit `670af3b`).
+
 **Date:** 2026-08-21 (rev. 2026-09-25, census refresh to the E1–E4 gate)
 **Status:** Corpus finalized. RQ1/RQ2/RQ3 results are the FULL-CORPUS CENSUS over all 2,179 accepted repos. Pre-paper draft.
 
@@ -188,7 +208,7 @@ one repo** (an *observed swap instance*), 933 of them as pure `C1|C3` pairs.
 | Observation | Count | Notes |
 |-------------|-------|-------|
 | Non-FastAPI Depends sources | 10 repos (0.5%), 22 calls | Depends on non-FastAPI callables (external middleware, etc.) — rare. |
-| **Zero-DI cohort** | **805 repos (36.9%)** | Repos where `depends_total + security_total + annotated_depends_total = 0`. These pass E4 (≥ 2 distinct files import fastapi) and the corpus rules but use no core DI constructs at all. A genuine population of real FastAPI apps without DI. *Construct-presence measure* — the LLM strategy-attribution census (`methodology_journal.md` §3.2) re-sorts repos by dominant wiring strategy (S1 direct construction = 1,188, 54.5%), so this 805 figure describes *absence of framework constructs*, not the S1 strategy bucket. |
+| **Zero-DI cohort** | **805 repos (36.9%)** | Repos where `depends_total + security_total + annotated_depends_total = 0`. These pass E4 (≥ 2 distinct files import fastapi) and the corpus rules but use no core DI constructs at all. A genuine population of real FastAPI apps without DI. *Construct-presence measure.* This says the extractor detected no DI construct — it does **not** say the repository has no dependency-injection strategy. The retired LLM strategy-attribution census claimed this cohort was 1,188 repos (54.5%) under an S1 label; that number is **withdrawn** (56.4% agreement with the deterministic extractor, and the evidence packs it read contained a real `Depends` call in only 8% of cases). The share of this cohort that in fact uses some DI mechanism is bounded by the pre-registered audit in `docs/audit_preregistration.md` — a gate of ≥4 undetected-DI repositories in 80 forces that cohort to be reported as a range. |
 
 ### 5.3 Key trends and interpretations
 

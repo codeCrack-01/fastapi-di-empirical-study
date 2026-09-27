@@ -1,5 +1,25 @@
 # Experiment Proposal — Dependency-Management Strategy × Runtime Resources
 
+> **SUPERSEDED IN PART (2026-09-28).** This document predates the retirement of
+> the LLM strategy-attribution census. That census assigned S1-S4 to all 2,179
+> repositories using `qwen3:14b`; it matched the deterministic extractor on only
+> **56.4%** of repositories, and inspection showed the evidence packs it read
+> contained a real `Depends` call in just **8%** of cases -- the token `settings`
+> in the pack builder's keyword vocabulary matched benign configuration
+> identifiers and consumed 63% of all excerpt slots. Its strategy counts
+> (S1 1,188 / S2 712 / S3 268 / S4 11) are **withdrawn** and appear below only
+> as a record of prior belief. The 327-repository peer review that was built to
+> validate them is also retired and has been deleted.
+>
+> Still valid: any figure described as **construct presence** (does the extractor
+> find `Depends`/`Security`/`Annotated` call sites), which is a statement about
+> the extractor's output rather than about a repository's dominant strategy.
+> **Not valid:** any statement that a strategy population has a known share.
+> Manual (S3) and external (S4) strategy prevalence is currently *unquantified*.
+>
+> Authoritative replacement: `docs/audit_preregistration.md`
+> (branch `prereg/census-validation`, commit `670af3b`).
+
 **Status:** design-only (phase 1). No benchmark code ships with this document;
 implementation and execution are separate, gated phases (§11).
 
@@ -12,13 +32,20 @@ write-up in `docs/methodology_journal.md`. This proposal extends the census
 ## 1. Abstract
 
 The census of 2,179 accepted FastAPI repositories established that real projects
-use mostly *framework-native* dependency injection (`Depends`) or direct
-construction, and a handful of idioms
+use mostly *framework-native* dependency injection (`Depends`) or no DI construct
+at all, and a handful of idioms
 (class-based dependencies, `current_*` request-scope, module aliases,
-`provide_*` locators, `.as_form`) exist but are rare. On the S1–S4 strategy
-taxonomy used here (§3.1), the dominant strategies are S1 direct construction
-(54.5%) and S2 framework-native DI (32.7%), with S3 manual context wiring
-(12.3%) and S4 external containers (0.5%). This proposal turns the
+`provide_*` locators, `.as_form`) exist but are rare. By **construct presence**,
+63.1% of the corpus has a detected DI construct and 36.9% has none.
+
+The S1–S4 strategy taxonomy used here (§3.1) is a *treatment taxonomy for this
+experiment*, not a measured distribution. The census that previously assigned a
+strategy to each repository (S1 54.5%, S2 32.7%, S3 12.3%, S4 0.5%) was
+**retired on 2026-09-28** — it rested on a 14B LLM that agreed with the
+deterministic extractor on only 56.4% of repositories, fed evidence packs in
+which 92% contained no real `Depends` call. The prevalence of the manual and
+external strategies is therefore **currently unquantified**; a pre-registered
+audit (`docs/audit_preregistration.md`) will measure it. This proposal turns the
 question "does the choice of **dependency-management strategy** cost anything at
 runtime?" into a controlled experiment. Using one corpus-grounded mock
 application in two workload modes plus wiring-only transformations of two real
@@ -51,9 +78,8 @@ A second, complementary question, framed against the census:
 
 - For the spellings the census found in volume — C1 `Depends(fn)` (62.9% of
   repos), C3 `Annotated[T, Depends(fn)]` (17.6%), C4 generator/yield (34.8%),
-  and S1 zero-DI/ direct construction (36.9% by construct presence; 54.5% of
-  repos are S1-dominant under §3.1 strategy attribution) — how do measured
-  latency, throughput, CPU, and memory differ at fixed load?
+  and zero-DI / direct construction (36.9% by construct presence) — how do
+  measured latency, throughput, CPU, and memory differ at fixed load?
 - Is the most-used spelling (generator/yield, 34.8% of repos) also the
   empirically best, and what is the change-cost (LOC diff) of moving an
   application between spellings?
@@ -91,20 +117,38 @@ and it had no load-testing rigor. This experiment generalizes it.
 
 Treatments vary **how a handler acquires its dependencies per request**:
 
-| ID | Strategy | Census link | Semantics |
+| ID | Strategy | Census status | Semantics |
 |---|---|---|---|
-| S1 | Direct construction (zero-DI) | **1,188 repos (54.5%)** | handler calls dependencies directly: `async with get_db() as session: ...`, explicit `get_current_user(token)`, explicit guard checks |
-| S2 | Framework-native DI | **712 repos (32.7%)** | `Depends(get_db)`, `Depends(get_current_user)`, `Depends(require_admin)` — the corpus hub chain |
-| S3 | Manual Python DI (explicit context) | **268 repos (12.3%)** | middleware builds a `RequestContext` (session, user) in `request.state`; handlers receive `ctx` explicitly |
-| S4 | External DI container *(secondary)* | **11 repos (0.5%)** | `dependency-injector` container (9), `DIContainer` (1), `injector` (1); provider wired via `Depends(get_provider)` |
+| S1 | Direct construction (zero-DI) | **unquantified** | handler calls dependencies directly: `async with get_db() as session: ...`, explicit `get_current_user(token)`, explicit guard checks |
+| S2 | Framework-native DI | **1,375 repos (63.1%) by construct presence** | `Depends(get_db)`, `Depends(get_current_user)`, `Depends(require_admin)` — the corpus hub chain |
+| S3 | Manual Python DI (explicit context) | **unquantified** | middleware builds a `RequestContext` (session, user) in `request.state`; handlers receive `ctx` explicitly |
+| S4 | External DI container *(secondary)* | **7 repos (0.3%) by import match** | `dependency_injector` and similar container libraries; provider wired via `Depends(get_provider)` |
 
-S1–S4 counts come from the **LLM strategy-attribution census** (`analysis/llm_census.py`, qwen3:14b over all 2,179 repos, 100% coverage after repair; see `docs/methodology_journal.md` §3.2). These *replace* the earlier extractor-based "Census link" estimates of 805 (36.9%) / 1,374 (63.1%) / "~3–6" in the strategy rows — the extractor counted **construct presence** (any `Depends` call site ⇒ "native"), while the LLM census attributes the repo's **dominant wiring strategy**, so repos using both idioms sort into the strategy that governs how handlers acquire dependencies. The extractor numbers remain valid for *construct-prevalence* claims (see §3.2 note and `result_draft_01.md`); the three known external-DI anchor repos (`darkspock/CareerPython`, `darkspock/renfeserver`, `gostgmaer/langchain-knoledgebase-rag`) all landed S4/dependency-injector.
+> **The population shares for S1, S3 and S4 are not known.** The counts in this
+> table were previously given as 1,188 / 712 / 268 / 11 from an LLM
+> strategy-attribution census. That census was **retired on 2026-09-28**: the model
+> matched the deterministic extractor on 56.4% of repositories, and the evidence
+> packs it read contained a real `Depends` call in only 8% of cases. Those figures
+> are withdrawn and appear nowhere as results. See
+> `docs/methodology_journal.md` §3.2 and `docs/audit_preregistration.md`.
+
+S1–S4 are **treatment arms of this experiment**. They are chosen to span the
+mechanisms that exist in the ecosystem; the experiment does not require them to be
+equally common. The only corpus-grounded number here is S2's, and even that is a
+*construct-presence* count (any `Depends`/`Security`/`Annotated` call site), not a
+statement about which mechanism governs a given handler.
+
+The extractor's construct-presence split — 805/1,374 by its own accounting, or
+804/1,375 under the strict frame used by the pre-registration — remains valid for
+construct-prevalence claims. `di_lib_hits` is an import-table membership test
+against a finite list of library names, so the S4 count is a floor, not an
+estimate of the true prevalence.
 
 S4 is **mock-only** (§6) and framed explicitly as a synthetic-app question —
-"what does a container cost in a small app?" — not a population claim. Even so,
-the census found 11 real external-DI-container repos (see §3.1 table), up from
-the earlier "~3–6 indicative" probe; the peer-review sample (§5) now contains
-5 of them as S4 rows to be verified by reviewers.
+"what does a container cost in a small app?" — not a population claim. The
+external-DI repository count is small under every method tried; the retired
+census's claim of 11 is not independently confirmed, and the pre-registration's
+Arm 2a will characterise what these repositories actually do.
 
 ### 3.2 What is *not* a treatment (explicit boundary)
 
@@ -127,11 +171,12 @@ preregistered *exception* to the boundary above: 1,371 (62.9%), 384 (17.6%),
 Class-as-dependency (28 repos), module aliases (54) and `provide_*` (3)
 remain excluded as too rare.
 The 1,371/384/759/805 figures are **extractor construct-counts** (presence of
-`Depends(fn)`/`Annotated`/generator spellings); the LLM strategy census
-§3.1 re-sorts these repos by dominant wiring strategy (S2=712, S1=1,188),
-so an RQ5 cell may draw from repos the attribution census calls S1 — the arm
-compares *spellings*, not strategy membership, and the sample spread is
-validated against both.
+`Depends(fn)`/`Annotated`/generator spellings). An RQ5 cell may therefore draw
+from repositories that use no DI construct at all under the strategy taxonomy:
+the arm compares *spellings*, not strategy membership. The pre-registration's
+Arm 1 audit bounds how much undetected DI may be hiding in that zero-construct
+cohort, and the sample spread should be validated against the construct counts
+rather than against the retired strategy counts.
 
 ---
 
@@ -289,7 +334,7 @@ eliminated), memory, disk; the **same machine runs the entire matrix**.
 | Conclusion validity / power | effects may be tiny; over-interpretation of CIs | run-level units; preregistered threshold; bounds, not point claims |
 | Mock realism | in-memory SQLite + fixed `sleep` stand in for real DB/network | DB conditions constant by construction; flagged, not hidden |
 | Single-machine benchmarking | turbo/scheduler noise not fully removable without root | pinning + randomization + repeats + documented governor; stated as residual |
-| Small external-DI evidence | S4 is a small population (11 repos, 0.5%) | S4 kept secondary, mock-only, framed as synthetic-app cost; the 11-repo census count is now exact (peer-reviewed sample includes 5 S4 rows) |
+| Small external-DI evidence | S4 is a small population (7 repos by import match, 0.3%) | S4 kept secondary, mock-only, framed as synthetic-app cost. The retired census's "11 repos, exact, peer-reviewed" claim is **withdrawn**; 7 is an import-table name match and is a floor, not a measurement of prevalence |
 | GIL / single-worker choice | reviewer may ask about multi-worker behavior | declared out of scope; process-scaling is OS scheduling, not DI resolution |
 
 **Weaknesses a reviewer will likely challenge (stated preemptively):** (a) the
