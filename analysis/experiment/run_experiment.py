@@ -126,7 +126,7 @@ def run_k6(port: int, rate: float, summary_file: Path, csv_file: Path, core: str
            scenario: str = "steady") -> dict:
     cmd = [K6, "run", "--quiet",
            f"--out=csv={csv_file}", "-e", f"TARGET_URL=http://127.0.0.1:{port}",
-           "-e", f"SCENARIO={scenario}", "-e", f"RATE={rate}",
+           "-e", f"SCENARIO={scenario}", "-e", f"RATE={int(rate)}",
            "-e", f"WARMUP_MS={int(WARMUP_S * 1000)}", "-e", f"DURATION_MS={int(WINDOW_S * 1000)}",
            "-e", f"COOLDOWN_MS={int(COOLDOWN_S * 1000)}",
            "-e", f"RAMP_MAX_RPS={int(rate * 3)}",
@@ -248,7 +248,7 @@ def main() -> None:
         levels = {}
         for spec in args.levels.split(";"):
             m, rates = spec.strip().split(":")
-            levels[m.strip()] = [float(x) for x in rates.split(",") if x.strip()]
+            levels[m.strip()] = [round(float(x)) for x in rates.split(",") if x.strip()]
     else:
         levels = {}
         for m in modes:
