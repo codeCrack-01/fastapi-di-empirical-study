@@ -264,6 +264,148 @@ def build_arm1(corpus: dict[str, dict], draw: list[str]) -> Path:
     return path
 
 
+def build_arm2b(corpus: dict[str, dict], draw: list[str]) -> Path:
+    """200 repos from the detected-has-DI frame, classified S2/S3/S4."""
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "prevalence"
+    cols = [
+        ("#", 5), ("REPO", 30), ("COMMIT", 9), ("LINK", 34), ("AST_VERDICT", 11),
+        ("TRIAGE HINT (not a verdict)", 46), ("VERDICT_A", 12),
+        ("VERDICT_B", 12), ("FINAL", 11), ("NOTE", 40),
+    ]
+    ws.append([c[0] for c in cols])
+    for i, (_, width) in enumerate(cols, start=1):
+        ws.column_dimensions[get_column_letter(i)].width = width
+    style_header(ws, len(cols))
+
+    for i, fn in enumerate(draw, start=1):
+        d = corpus[fn]
+        sha = (d.get("commit_sha") or "")[:8]
+        link = f"https://github.com/{fn}/tree/{sha}" if sha else f"https://github.com/{fn}"
+        ws.append([i, fn, sha, link, "S2", triage_hint(fn, d, report_for(fn)), "", "", "", ""])
+        r = ws.max_row
+        for c in (1, 3, 5, 7, 8, 9):
+            ws.cell(row=r, column=c).alignment = Alignment(horizontal="center", vertical="center")
+        ws.cell(row=r, column=5).fill = LOCKED_FILL
+        ws.cell(row=r, column=6).fill = TRIAGE_FILL
+        ws.cell(row=r, column=4).hyperlink = link
+        ws.cell(row=r, column=4).font = Font(color="0563C1", underline="single")
+        ws.cell(row=r, column=10).alignment = Alignment(vertical="top", wrap_text=True)
+        for c in range(1, len(cols) + 1):
+            ws.cell(row=r, column=c).border = BORDER
+        ws.cell(row=r, column=9).value = f'=IF(OR(G{r}="",H{r}=""),"",IF(G{r}=H{r},G{r},"DISAGREE"))'
+
+    last = ws.max_row
+    add_dropdown(ws, "G", "S2,S3,S4,unclear", 2, last)
+    add_dropdown(ws, "H", "S2,S3,S4,unclear", 2, last)
+
+    inst = wb.create_sheet("how_to")
+    for line in [
+        ["ARM 2b — HOW TO FILL THIS IN"],
+        [""],
+        ["1", "Fill ONLY your own column: rater A uses VERDICT_A, rater B uses VERDICT_B."],
+        ["2", "Do not look at the other rater's column until both of you have finished all 200 rows."],
+        ["3", "Every repo here already uses FastAPI DI. The question is whether it ALSO does"],
+        ["", "something else — a container, or hand-rolled wiring. Most of these are plain S2."],
+        ["4", "The TRIAGE HINT column is a starting point, not an answer. A repo can have DI"],
+        ["", "without any of the signals listed, and a listed signal can be a false lead."],
+        ["", ""],
+        ["WHAT TO CHOOSE", ""],
+        ["S2", "Framework-native only. Depends / Security / Annotated, and nothing else."],
+        ["S3", "Also has manual Python DI. A hand-rolled Depends equivalent, a service"],
+        ["", "locator, or a request-scoped context object assembled in app.state or"],
+        ["", "request.state and passed to handlers. The handler receives it explicitly."],
+        ["S4", "Also imports an external container library (dependency_injector,"],
+        ["", "injector, punq, dishka, ...). An import alone is enough for S4."],
+        ["unclear", "You cannot tell from the code. A real answer, not a failure."],
+        ["", ""],
+        ["NOTE", "Record the file and construct that decided it. If a repo does both S3 and"],
+        ["", "S4, choose S4 and say so in NOTE."],
+    ]:
+        inst.append(line)
+    inst.column_dimensions["A"].width = 14
+    inst.column_dimensions["B"].width = 88
+    inst["A1"].font = Font(bold=True, size=12)
+    inst["A9"].font = Font(bold=True)
+
+    OUT.mkdir(parents=True, exist_ok=True)
+    path = OUT / "S3S4_200.xlsx"
+    wb.save(path)
+    return path
+
+
+def build_arm2a(corpus: dict[str, dict], frame: list[str]) -> Path:
+    """The signal-bearing repos, exhaustively. One rater, open taxonomy."""
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "candidates"
+    cols = [
+        ("#", 5), ("REPO", 30), ("COMMIT", 9), ("LINK", 34), ("WHY FLAGGED", 40),
+        ("MECHANISM", 22), ("IS THIS DI?", 13), ("LIBRARY / MECHANISM NAME", 24),
+        ("EVIDENCE (file:line)", 26), ("NOTE", 40),
+    ]
+    ws.append([c[0] for c in cols])
+    for i, (_, width) in enumerate(cols, start=1):
+        ws.column_dimensions[get_column_letter(i)].width = width
+    style_header(ws, len(cols))
+
+    for i, fn in enumerate(sorted(frame), start=1):
+        d = corpus[fn]
+        sha = (d.get("commit_sha") or "")[:8]
+        link = f"https://github.com/{fn}/tree/{sha}" if sha else f"https://github.com/{fn}"
+        hint = triage_hint(fn, d, report_for(fn))
+        ws.append([i, fn, sha, link, hint, "", "", "", "", ""])
+        r = ws.max_row
+        for c in (1, 3, 7):
+            ws.cell(row=r, column=c).alignment = Alignment(horizontal="center", vertical="center")
+        ws.cell(row=r, column=5).fill = TRIAGE_FILL
+        ws.cell(row=r, column=4).hyperlink = link
+        ws.cell(row=r, column=4).font = Font(color="0563C1", underline="single")
+        for c in (6, 8, 9, 10):
+            ws.cell(row=r, column=c).alignment = Alignment(vertical="top", wrap_text=True)
+        for c in range(1, len(cols) + 1):
+            ws.cell(row=r, column=c).border = BORDER
+
+    last = ws.max_row
+    add_dropdown(ws, "F", "external container,hand-rolled Depends,service locator,"
+                         "request-scoped context,callable class,DI framework,not DI,unclear", 2, last)
+    add_dropdown(ws, "G", "yes,no,unclear", 2, last)
+
+    inst = wb.create_sheet("how_to")
+    for line in [
+        ["ARM 2a — CANDIDATE CHARACTERISATION (one rater, no second opinion)"],
+        [""],
+        ["This arm has a different job from the others. You are not confirming a count;"],
+        ["you are building the vocabulary the other arms will use. Work through the rows"],
+        ["and, for each one, say what the mechanism actually IS."],
+        [""],
+        ["The row is in this sheet because the extractor or the import table raised a"],
+        ["signal. Signals are cheap and imprecise: most of these will be 'not DI'."],
+        ["That is a useful result. Do not stretch to find DI."],
+        ["", ""],
+        ["FILL IN", ""],
+        ["MECHANISM", "The single best description of what you found."],
+        ["IS THIS DI?", "yes if it genuinely injects dependencies; no if the signal was a false lead."],
+        ["LIBRARY / NAME", "The container package, or the hand-rolled class/function name."],
+        ["EVIDENCE", "file path and line, so the claim can be checked later."],
+        ["NOTE", "Anything surprising, or why a signal did not pan out."],
+        ["", ""],
+        ["There is no kappa here and no second rater. This arm produces a rubric and a"],
+        ["lower bound on prevalence — not a prevalence estimate. The 200-repo random"],
+        ["draw (Arm 2b) is what gives a number with a confidence interval."],
+    ]:
+        inst.append(line)
+    inst.column_dimensions["A"].width = 22
+    inst.column_dimensions["B"].width = 86
+    inst["A1"].font = Font(bold=True, size=12)
+
+    OUT.mkdir(parents=True, exist_ok=True)
+    path = OUT / "S3S4_CANDIDATES.xlsx"
+    wb.save(path)
+    return path
+
+
 def main() -> None:
     print("Loading census packs...")
     corpus = load_corpus()
@@ -281,9 +423,14 @@ def main() -> None:
     print()
     assert_preregistered("arm1", d1, "draw")
     assert_preregistered("arm2b", d2, "draw")
+    print()
 
-    path = build_arm1(corpus, d1)
-    print(f"\nWrote {path.relative_to(ROOT)}  ({path.stat().st_size:,} bytes)")
+    for label, path in [
+        ("Arm 1  audit  (80)", build_arm1(corpus, d1)),
+        ("Arm 2a candidates (23)", build_arm2a(corpus, arm2a)),
+        ("Arm 2b prevalence (200)", build_arm2b(corpus, d2)),
+    ]:
+        print(f"  {label:<26} {path.relative_to(ROOT)}  ({path.stat().st_size:,} bytes)")
 
 
 if __name__ == "__main__":
