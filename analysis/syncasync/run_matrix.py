@@ -55,12 +55,24 @@ FIELDS = [
 ]
 
 
-def load_rates(knee_file: Path) -> dict:
-    """{arm: (capacity_rate, overload_rate)} from the knee medians."""
+def load_rates(knee_file: Path, smoke: bool) -> dict:
+    """{arm: (capacity_rate, overload_rate)} from the knee medians.
+
+    `smoke` is the run's own mode, and is enforced against the knee source: the
+    640-cell main run may never use single-probe smoke knees, and the smoke may
+    never silently use the 3-probe study knees without saying so.
+    """
     if not knee_file.exists():
         raise SystemExit(
             f"FATAL: {knee_file} not found. Every app needs its own knee before the "
             "grid can run: 1.0x and 1.5x of a shared rate would not be 'capacity'."
+        )
+    # The primary guard. Directory name is the mode tag written by knee.py.
+    if not smoke and knee_file.name == "smoke_knees":
+        raise SystemExit(
+            f"FATAL: refusing to run the MAIN grid from {knee_file}. Those are "
+            "single-probe SMOKE knees; the main run requires the 3-probe medians "
+            "the pre-registration defines. Run the 24 study knees first."
         )
     out = {}
     for pattern in PATTERNS:
@@ -72,10 +84,8 @@ def load_rates(knee_file: Path) -> dict:
             k = doc.get("knee_median")
             if not k:
                 raise SystemExit(f"FATAL: {f} has no knee_median (probe failed)")
-            # Cross-check the recorded provenance against the directory it came
-            # from. A smoke knee is a single probe; the study knee is the median
-            # of three. Mixing them up would silently change what 'capacity'
-            # means, so refuse rather than warn.
+            # Second guard: the per-file mode tag must agree with the directory.
+            # Catches a knee file copied between directories by hand.
             mode = doc.get("mode", "study")
             if knee_file.name == "smoke_knees" and mode != "smoke":
                 raise SystemExit(
@@ -83,9 +93,8 @@ def load_rates(knee_file: Path) -> dict:
                 )
             if mode == "smoke" and knee_file.name != "smoke_knees":
                 raise SystemExit(
-                    f"FATAL: {f} is a single-probe SMOKE knee. It may only be used "
-                    "via --knee-dir results/smoke_knees --smoke. The main grid needs "
-                    "the 3-probe median the pre-registration specifies."
+                    f"FATAL: {f} is a single-probe SMOKE knee and may not be used "
+                    "as a study knee. Move it to results/smoke_knees/ for smoke use."
                 )
             out[f"{pattern}/{model}"] = (float(k), float(k) * 1.5)
     return out
@@ -126,7 +135,7 @@ def main() -> int:
     outdir = HERE / "results" / tag
     outdir.mkdir(parents=True, exist_ok=True)
 
-    rates = load_rates(args.knee_dir)
+    rates = load_rates(args.knee_dir, smoke)
     cells = build_plan(rates, reps)
     if args.only:
         cells = [c for c in cells if args.only in c["condition"]]

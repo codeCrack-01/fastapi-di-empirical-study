@@ -13,7 +13,7 @@ box's topology. **Amendment 2** (§4b) records the final host, corrects the
 environment, and fixes two harness defects found during bring-up. Both are dated
 before any measured cell, and the config hash below is the one that includes both.
 
-**Config hash.** `5b7b0ff69d8a0d2d2dbfd5afaa1ddcf41978bdb38fb844b9cee126aed894f4ea`
+**Config hash.** `a5b80c41dfb77d105389eed9c41b58052006f04b599e10553c404ddb168b40f6`
 (amendment 2, §4a + §4b; supersedes `986f8e69...`)
 
 Covering: `core_read.py` (service), `routes_read.py` (routes), `gen_apps.py`
@@ -161,7 +161,7 @@ fact oversubscribed, the recorded data would show it. The designation is
 disclosed background, not a premise; the pre-registered analysis in §7 is
 unchanged.
 
-**Three harness defects, all found and fixed during bring-up.** All three would
+**Four harness defects, all found and fixed during bring-up.** All four would
 have produced wrong metadata or a wrong knee rather than an error, and all are
 in files covered by the config hash:
 
@@ -179,6 +179,12 @@ in files covered by the config hash:
    per-cell metadata while `REVIEWGATE_PLAN_TYPE` was unset on the box, so every
    cell would have been recorded against the wrong plan and the wrong plan tier.
    The default is now the real plan, `voc-c-8c-16gb-150s-amd`.
+4. The smoke/main knee guard in `run_matrix.py` was incomplete. It compared each
+   knee file's `mode` tag against its directory, but never checked the run's own
+   mode against the directory, so `--main --knee-dir results/smoke_knees` was
+   **allowed** and would have run the 640-cell grid on single-probe rates. Caught
+   by a dry-run test before any grid cell ran. `load_rates()` now takes the run
+   mode and refuses a main run from `smoke_knees`; verified on the box.
 
 A consequence of the first two: the very first knee probe reported
 `knee median None`, which was a harness bug and **not** evidence about capacity.
@@ -203,7 +209,7 @@ writes `rates.json` recording which knee directory and mode produced its rates.
 Smoke data is discarded and never analysed (§9); the study knees remain the
 3-probe medians.
 
-**Config hash** for amendment 2: `5b7b0ff69d8a0d2d2dbfd5afaa1ddcf41978bdb38fb844b9cee126aed894f4ea`,
+**Config hash** for amendment 2: `a5b80c41dfb77d105389eed9c41b58052006f04b599e10553c404ddb168b40f6`,
 computed on the study host and covering the 13 files listed at the head of this
 document, including `run_matrix.py`, `prepare_box.py` and `smoke_knees.py`, which
 amendment 1 omitted.
