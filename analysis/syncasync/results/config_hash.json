@@ -1,0 +1,54 @@
+{
+  "config_sha256": "53d78bb7f1d3b42e2f87bb9756495fcfc90bdc754a1d53112b9536a8a3604d41",
+  "files": {
+    "service": {
+      "file": "core_read.py",
+      "sha256": "e941aa8217fb51c73d4ff3a57686a703a31bbf13805b55480c163929d8467ac1"
+    },
+    "routes": {
+      "file": "routes_read.py",
+      "sha256": "38ecaa6cf6383ef436c17200c158cf2a3e5c9df197407e4d75546a47132906c3"
+    },
+    "generator": {
+      "file": "gen_apps.py",
+      "sha256": "a1e5b9c28035bfb2bd77b6f66e1264a5e82d97debdccde0516b60ecafd00d69f"
+    },
+    "pool+runner": {
+      "file": "runner.py",
+      "sha256": "3fddafb8c374b000a635c07655afdbdb55d946a6ba5a32feb30c9374c9f27cb3"
+    },
+    "knee": {
+      "file": "knee.py",
+      "sha256": "6c489f76a6195104770354ca724dff3c5e7e6aef1cda6f5d66cfae71d91b1a14"
+    },
+    "harness": {
+      "file": "k6/harness.js",
+      "sha256": "c4dae6c9ae02f75b2eeed43a9855fb85f7f53492de09c8045479056b1b956fbd"
+    },
+    "database": {
+      "file": "build_db.py",
+      "sha256": "4d13557b46abc316871a5071f48f2fee73927d3b48510e96b97ff58527789fda"
+    },
+    "smoke": {
+      "file": "smoke.py",
+      "sha256": "70bd6ce75aa9d6e57d479f16496c719cdfe216fe4de9d3f3ad234caea3b1ad46"
+    },
+    "analysis": {
+      "file": "analyze.py",
+      "sha256": "9d9cca5781a3c54c9238265d90546e467cccf3e3906fea041e494fd8adecd44d"
+    }
+  },
+  "versions": {
+    "python": "3.12.13",
+    "platform": "Linux-7.2.5-200.fc44.x86_64-x86_64-with-glibc2.43",
+    "fastapi": "0.141.1",
+    "starlette": "1.6.0",
+    "anyio": "unknown",
+    "pydantic": "2.13.2",
+    "uvicorn": "0.52.4",
+    "aiosqlite": "0.22.1",
+    "dependency_injector": "4.49.1",
+    "k6": "v2.2.0"
+  },
+  "database_sha256": "ec432e8211b9767a114d9ff60f584e94038217bb3aa7a6590faecc38ed67fec8"
+}

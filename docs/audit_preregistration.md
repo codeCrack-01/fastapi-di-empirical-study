@@ -190,9 +190,21 @@ resolve in ~3 minutes; 18 repositories carry a signal and require a deep read. M
 
 - Two raters, working **independently**. Each receives a private copy; no rater sees
   the other's responses before both are complete.
+- **Raters.** Zain Ahmed Khan and Yahya Ahmed.
+- **Per-arm assignment.**
+
+  | Arm | Zain Ahmed Khan | Yahya Ahmed | κ |
+  |---|---|---|---|
+  | 1 — `AUDIT_80.xlsx` (80) | all 80 | all 80 | yes |
+  | 2b — `S3S4_200.xlsx` (200) | all 200 | all 200 | yes |
+  | 2a — `S3S4_CANDIDATES.xlsx` (23) | all 23 | — | no (rubric development) |
+
+  Arm 2a is single-rater by design (§4): it develops the rubric that Arm 2b applies,
+  so its purpose is coverage, not reliability. κ rests on Arm 1 and Arm 2b, which are
+  both double-rated — see the next bullet.
 - **κ is computed on Arm 1 (yes/no) and Arm 2b (S2/S3/S4).** Both arms were selected
   for a prevalence claim, and a poorly-reliable verdict on a headline number is a
-  liability.
+  liability. Neither arm is single-rater, so the κ claim does not rest on one person.
 - Raters see the extractor's verdict but are instructed to record their own decision
   from the repository source first, and only then compare. The guide states this
   explicitly; anchoring on the machine's answer would inflate agreement without
@@ -221,18 +233,15 @@ resolve in ~3 minutes; 18 repositories carry a signal and require a deep read. M
 
 ---
 
-## 8. The retired LLM experiment, as a reported result
+## 8. A note on prior LLM-based work
 
-"We evaluated whether a 14B LLM (`qwen3:14b`, temperature 0, prompt v0.3) given
-repository evidence packs could reproduce the deterministic classifier's labels. It
-agreed on 1,230 of 2,179 repositories (56.4%), against a 55% majority-class baseline.
-Inspection of the evidence packs showed the discrepancy was driven substantially by a
-defect in the pack construction — a keyword vocabulary in which `settings` matched
-benign configuration identifiers consumed 63% of all excerpt slots, and only 8% of
-packs contained a real `Depends` call. We therefore did not use an LLM-based
-classification pipeline for the census."
-
-This is a finding, reported once, load-bearing nowhere.
+An earlier iteration of this project tested whether an LLM could label repositories
+directly. That pipeline was withdrawn, together with all of its outputs, on the grounds
+that agreement with the deterministic classifier was no better than a majority-class
+baseline and the inputs it consumed were itself defective. Its results are not carried
+into this document, into the evidence chain, or into any claim this study makes, and
+should be treated as never having been produced. No LLM output contributes to any
+figure reported here.
 
 ---
 

@@ -11,6 +11,14 @@ pod_results/
 analysis/experiment/results/
 analysis/experiment/.venv/
 
+# --- ReviewGate-R execution-model study (analysis/syncasync) ---
+# The read-only seed DB is rebuilt byte-identically by build_db.py and its
+# sha256 is recorded in the pre-registration, so the binary is not tracked.
+# Smoke cell output is provenance only and is never analysed.
+analysis/syncasync/results/reviewgate_ro.db
+analysis/syncasync/results/cells/
+analysis/syncasync/results/smoke/
+
 analysis/novelty/out/novelty_repo_context.json
 
 # --- R=40 experiment raw artifacts (2026-09-28) ---
