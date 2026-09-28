@@ -33,54 +33,158 @@ K6_SCRIPT = HERE / "k6" / "harness.js"
 # ---- study constants (see docs/prereg_execution_model.md) ----
 WORKERS = 1
 
-# Core allocation is THREE disjoint sets, never overlapping.
+# Core allocation, per preregistration 4a.
 #
-# The server, the load generator, and the resource sampler must not share cores:
-# k6 competing with the process it measures inflates latency and steals CPU, and
-# the earlier sanity run demonstrated it (p4_container at 1 ms p50 while every
-# other arm sat at 2-3 ms, with 40% lower CPU/req -- an artefact of k6 running
-# on the server's cores, not a finding).
+# The server, the load generator, and the resource sampler must not share physical
+# cores: k6 competing with the process it measures inflates latency and steals CPU,
+# and the earlier sanity run demonstrated it (p4_container at 1 ms p50 while every
+# other arm sat at 2-3 ms, with 40% lower CPU/req -- an artefact of k6 running on
+# the server's cores, not a finding).
 #
-# Defaults assume the 8-vCPU study box. Override for a different core count:
-#   REVIEWGATE_SERVER_CORES=0-5 REVIEWGATE_K6_CORES=6 REVIEWGATE_SAMPLER_CORE=7
-SERVER_CORES = os.environ.get("REVIEWGATE_SERVER_CORES", "0-5")
+# The 8-vCPU study box is 4 PHYSICAL cores x 2 SMT threads, with siblings
+# 0-1 / 2-3 / 4-5 / 6-7. Pinning the server to "0-5" would have spanned three
+# physical cores plus one SMT sibling, and k6 on cpu 6 would have shared a physical
+# core with the sampler -- the same interference defect in subtler form. So the
+# default takes ONE logical CPU per physical core and leaves the siblings offline
+# (see take_siblings_offline), which makes the layout verifiable rather than
+# merely requested.
+#
+#   server  0,2,4  -> physical cores 0,1,2
+#   k6      6      -> physical core 3
+#   sampler 6      -> physical core 3, low priority, co-located with k6
+#   offline 1,3,5,7
+#
+# The server is ONE uvicorn worker and is GIL-bound in both arms, so 3 physical
+# cores is not a downgrade in practice; see preregistration 4a.
+#
+# Override for a different topology:
+#   REVIEWGATE_SERVER_CORES=0,2,4 REVIEWGATE_K6_CORES=6 REVIEWGATE_SAMPLER_CORE=6
+SERVER_CORES = os.environ.get("REVIEWGATE_SERVER_CORES", "0,2,4")
 K6_CORES = os.environ.get("REVIEWGATE_K6_CORES", "6")
-SAMPLER_CORE = os.environ.get("REVIEWGATE_SAMPLER_CORE", "7")
+SAMPLER_CORE = os.environ.get("REVIEWGATE_SAMPLER_CORE", "6")
+OFFLINE_CORES = os.environ.get("REVIEWGATE_OFFLINE_CORES", "1,3,5,7")
 
 WARMUP_S = 10
 WINDOW_S = 30
 COOLDOWN_S = 12
 
 
-def assert_disjoint() -> None:
-    """Refuse to run if the three core sets overlap."""
-    def expand(spec: str) -> set[int]:
-        out: set[int] = set()
-        for part in spec.split(","):
-            part = part.strip()
-            if not part:
-                continue
-            if "-" in part:
-                a, b = part.split("-")
-                out |= set(range(int(a), int(b) + 1))
-            else:
-                out.add(int(part))
-        return out
+def expand_cores(spec: str) -> set[int]:
+    """Expand a core spec like "0,2,4" or "0-3" into a set of ints."""
+    out: set[int] = set()
+    for part in spec.split(","):
+        part = part.strip()
+        if not part:
+            continue
+        if "-" in part:
+            a, b = part.split("-")
+            out |= set(range(int(a), int(b) + 1))
+        else:
+            out.add(int(part))
+    return out
 
-    server, k6, sampler = expand(SERVER_CORES), expand(K6_CORES), expand(SAMPLER_CORE)
-    for name, a, b in (("server/k6", server, k6), ("server/sampler", server, sampler),
-                       ("k6/sampler", k6, sampler)):
-        if a & b:
+
+def sibling_groups() -> dict[int, list[int]]:
+    """Map each online cpu to its SMT siblings, from sysfs."""
+    groups: dict[int, list[int]] = {}
+    for cpu in sorted(expand_cores(f"0-{os.cpu_count() - 1}")):
+        path = Path(f"/sys/devices/system/cpu/cpu{cpu}/topology/thread_siblings_list")
+        try:
+            sibs = sorted(expand_cores(path.read_text().strip()))
+        except OSError:
+            sibs = [cpu]
+        groups[cpu] = sibs
+    return groups
+
+
+def take_siblings_offline() -> dict:
+    """Take unused SMT siblings offline so nothing can be scheduled onto them.
+
+    taskset only restricts a process; it does not stop anything else from landing
+    on the sibling thread. With the server pinned to 0,2,4 and k6 to 6, the
+    siblings 1,3,5,7 have no legitimate user, so they are taken offline and the
+    result is recorded per cell.
+    """
+    offline = expand_cores(OFFLINE_CORES)
+    result: dict = {"requested": sorted(offline), "changed": [], "already": [],
+                    "failed": [], "online_after": {}}
+    for cpu in sorted(offline):
+        f = Path(f"/sys/devices/system/cpu/cpu{cpu}/online")
+        try:
+            before = f.read_text().strip()
+            if before == "1":
+                f.write_text("0")
+                result["changed"].append(cpu)
+            else:
+                result["already"].append(cpu)
+        except OSError as exc:
+            result["failed"].append({"cpu": cpu, "error": str(exc)})
+    for cpu in sorted(expand_cores(f"0-{os.cpu_count() - 1}")):
+        f = Path(f"/sys/devices/system/cpu/cpu{cpu}/online")
+        try:
+            result["online_after"][str(cpu)] = f.read_text().strip()
+        except OSError:
+            result["online_after"][str(cpu)] = "absent"
+    return result
+
+
+def steal_from_proc_stat() -> int | None:
+    """Steal time (jiffies) from /proc/stat line 8, or None if unavailable.
+
+    The study box is Vultr shared Cloud Compute, so a noisy neighbour can take
+    CPU time. Recorded per cell as a threat to validity rather than filtered out.
+    """
+    try:
+        line = Path("/proc/stat").read_text().splitlines()[0].split()
+        return int(line[7])
+    except (OSError, IndexError, ValueError):
+        return None
+
+
+def assert_disjoint() -> None:
+    """Refuse to run if the server shares a PHYSICAL core with k6 or the sampler.
+
+    The sampler is deliberately co-located with k6 (a 100 ms ticker), so
+    k6/sampler overlap is allowed. Server overlap with either is not: they must
+    not share a physical core, which is checked via sysfs sibling lists, not just
+    by comparing logical CPU numbers.
+    """
+    server, k6, sampler = (expand_cores(SERVER_CORES), expand_cores(K6_CORES),
+                          expand_cores(SAMPLER_CORE))
+    sibs = sibling_groups()
+
+    def physical(cpus: set[int]) -> set[int]:
+        phys = set()
+        for c in cpus:
+            phys.update(sibs.get(c, [c]))
+        return phys
+
+    for name, other in (("k6", k6), ("sampler", sampler)):
+        shared = physical(server) & physical(other)
+        if shared:
             raise SystemExit(
-                f"FATAL: core sets overlap ({name}): {sorted(a & b)}. "
-                "The server, k6, and the sampler must not share cores."
+                f"FATAL: server shares a PHYSICAL core with {name}: {sorted(shared)}. "
+                "SMT siblings count as the same core; see preregistration 4a."
             )
+    offline = expand_cores(OFFLINE_CORES)
+    if physical(server) & physical(offline) or physical(k6) & physical(offline):
+        raise SystemExit(
+            "FATAL: a core marked offline is a sibling of a core in use; "
+            f"offline={sorted(offline)}"
+        )
     # stderr, not stdout: stdout carries the machine-readable JSON result
-    print(f"cores: server={sorted(server)} k6={sorted(k6)} sampler={sorted(sampler)}",
-          file=sys.stderr)
+    print(f"cores: server={sorted(server)} k6={sorted(k6)} sampler={sorted(sampler)} "
+          f"offline={sorted(offline)}", file=sys.stderr)
+    print(f"physical cores: server={sorted(physical(server))} "
+          f"k6={sorted(physical(k6))}", file=sys.stderr)
 
 # cells per condition, fixed in advance
 REPS = 40
+
+# The sync arm's handlers are plain `def`, so Starlette dispatches them to the
+# anyio threadpool. That pool size is framework default and is recorded as fixed
+# configuration, per preregistration 4a. It is NOT tuned in response to a result.
+ANYIO_THREADPOOL_SIZE = 40
 
 # CPU-seconds are reported per completed request, so a slower arm is not
 # rewarded for serving fewer requests at the same offered rate.
@@ -293,14 +397,27 @@ def main() -> int:
     args = ap.parse_args()
 
     assert_disjoint()
+    offline_state = take_siblings_offline()
+    print(f"offline siblings: {json.dumps(offline_state)}", file=sys.stderr)
+    steal_before = steal_from_proc_stat()
     before = sha256_db()
     res = run_ramp(ARM(args.pattern, args.model), args.port, args.rate,
                    args.window, args.warmup, args.cooldown, tag=args.tag)
+    steal_after = steal_from_proc_stat()
     payload = {
         "pattern": args.pattern, "model": args.model, "rate": args.rate,
         "workers": WORKERS,
         "server_cores": SERVER_CORES, "k6_cores": K6_CORES,
-        "sampler_core": SAMPLER_CORE,
+        "sampler_core": SAMPLER_CORE, "offline_cores": OFFLINE_CORES,
+        # recorded per cell so the topology is verifiable, not just asserted
+        "offline_state": offline_state,
+        "sibling_groups": {str(k): v for k, v in sibling_groups().items()},
+        # shared-plan host noise; reported, never filtered
+        "steal_jiffies": (steal_after - steal_before)
+                         if (steal_before is not None and steal_after is not None)
+                         else None,
+        "plan_type": os.environ.get("REVIEWGATE_PLAN_TYPE", "vc2-8c-32gb(shared)"),
+        "anyio_threadpool_size": ANYIO_THREADPOOL_SIZE,
         "warmup_s": args.warmup, "window_s": args.window, "cooldown_s": args.cooldown,
         "db_unchanged": res.db_unchanged,
         "result": res.__dict__,
