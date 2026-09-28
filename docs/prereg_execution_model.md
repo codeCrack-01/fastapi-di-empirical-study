@@ -13,7 +13,7 @@ box's topology. **Amendment 2** (§4b) records the final host, corrects the
 environment, and fixes two harness defects found during bring-up. Both are dated
 before any measured cell, and the config hash below is the one that includes both.
 
-**Config hash.** `a5b80c41dfb77d105389eed9c41b58052006f04b599e10553c404ddb168b40f6`
+**Config hash.** `082b3f24800028b82e7d6ac14467882a6eae891a99fe26a08abf45ec9f007cac`
 (amendment 2, §4a + §4b; supersedes `986f8e69...`)
 
 Covering: `core_read.py` (service), `routes_read.py` (routes), `gen_apps.py`
@@ -161,9 +161,9 @@ fact oversubscribed, the recorded data would show it. The designation is
 disclosed background, not a premise; the pre-registered analysis in §7 is
 unchanged.
 
-**Four harness defects, all found and fixed during bring-up.** All four would
-have produced wrong metadata or a wrong knee rather than an error, and all are
-in files covered by the config hash:
+**Five harness defects, all found and fixed during bring-up.** All five would
+have produced wrong metadata, a wrong knee, or a crashed run rather than a
+visible error, and all are in files covered by the config hash:
 
 1. `knee.py` tested `window["count"]` for sample sufficiency. The k6 summary
    stores the window request count as a top-level `window_requests`; the `window`
@@ -185,6 +185,17 @@ in files covered by the config hash:
    **allowed** and would have run the 640-cell grid on single-probe rates. Caught
    by a dry-run test before any grid cell ran. `load_rates()` now takes the run
    mode and refuses a main run from `smoke_knees`; verified on the box.
+5. `run_matrix.py` built per-cell log paths from the condition name
+   `p4_container/sync@capacity`, whose `/` made the log path a directory that
+   does not exist. The grid died with `FileNotFoundError` on the first cell.
+   Condition names are now sanitised where the tag is built, and `start_server`
+   sanitises and creates the parent directory as a second layer, so no caller can
+   lose a whole run to a log path.
+
+All five were found before any grid cell was measured. Defects 1, 2, 4 and 5
+would each have silently invalidated a full run; they are recorded here rather
+than quietly patched because the pre-registration's own rule is that any edit to
+these files requires an amendment.
 
 A consequence of the first two: the very first knee probe reported
 `knee median None`, which was a harness bug and **not** evidence about capacity.
@@ -209,7 +220,7 @@ writes `rates.json` recording which knee directory and mode produced its rates.
 Smoke data is discarded and never analysed (§9); the study knees remain the
 3-probe medians.
 
-**Config hash** for amendment 2: `a5b80c41dfb77d105389eed9c41b58052006f04b599e10553c404ddb168b40f6`,
+**Config hash** for amendment 2: `082b3f24800028b82e7d6ac14467882a6eae891a99fe26a08abf45ec9f007cac`,
 computed on the study host and covering the 13 files listed at the head of this
 document, including `run_matrix.py`, `prepare_box.py` and `smoke_knees.py`, which
 amendment 1 omitted.

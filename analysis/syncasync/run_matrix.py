@@ -26,6 +26,7 @@ import argparse
 import csv
 import json
 import random
+import re
 import sys
 import time
 from pathlib import Path
@@ -188,9 +189,12 @@ def main() -> int:
         key = (cell["condition"], str(cell["rep"]))
         if key in done:
             continue
+        # condition is "<pattern>/<model>@<load>"; the slash would turn the log
+        # path into a directory that does not exist
+        safe = re.sub(r"[^A-Za-z0-9._@+-]", "-", cell["condition"])
         res = run_ramp(ARM(cell["pattern"], cell["model"]), args.port0,
                        cell["rate"], WINDOW_S, WARMUP_S, COOLDOWN_S,
-                       tag=f"{tag}-{cell['condition']}")
+                       tag=f"{tag}-{safe}")
         w = res.window or {}
         e = res.extra or {}
         row = {

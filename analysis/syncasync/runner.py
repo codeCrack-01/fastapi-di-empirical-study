@@ -18,6 +18,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import resource
 import shutil
 import signal
@@ -426,6 +427,12 @@ def start_server(module: str, port: int, log: Path) -> subprocess.Popen:
         "--log-level", "warning",
         "--no-access-log",
     ]
+    # A tag like "smoke-p4_container/sync@capacity" contains a slash, so writing
+    # it as a filename either creates a nonexistent directory or escapes the
+    # intended folder. Sanitise here, at the point of use, so no caller can crash
+    # the whole grid on a log path.
+    log = Path(re.sub(r"[^A-Za-z0-9._@+-]", "-", log.name)).with_suffix(log.suffix)
+    log.parent.mkdir(parents=True, exist_ok=True)
     fh = open(log, "w")
     proc = subprocess.Popen(cmd, cwd=str(HERE), env=_env(), stdout=fh, stderr=subprocess.STDOUT)
 
