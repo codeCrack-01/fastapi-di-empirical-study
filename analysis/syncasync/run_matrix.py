@@ -63,7 +63,7 @@ DRIFT_REF_COUNT = 5
 DRIFT_REF_CONDITION = f"driftref/{DRIFT_REF_ARM}@capacity"
 
 FIELDS = [
-    "condition", "pattern", "model", "load", "rep", "rate",
+    "condition", "pattern", "model", "load", "rep", "rate", "rate_exact",
     "is_drift", "drift_index", "after_cell", "steal_jiffies",
     "window_p50", "window_p95", "window_mean", "window_max",
     "window_requests", "window_errors", "window_error_rate",
@@ -129,7 +129,15 @@ def build_plan(rates: dict, reps: int) -> list[dict]:
                     cells.append({
                         "condition": f"{arm}@{load}",
                         "pattern": pattern, "model": model,
-                        "load": load, "rep": rep, "rate": rate,
+                        "load": load, "rep": rep,
+                        # k6's arrival-rate stages take an INT64 target; a
+                        # fractional rate makes k6 fail to parse its options,
+                        # exit immediately, and yield a cell with zero requests
+                        # and no error. A study knee is a median of 3 probes and
+                        # can be odd, which makes knee*1.5 fractional, so the
+                        # rate is rounded to the nearest whole rps here and the
+                        # exact value is kept for provenance.
+                        "rate": int(round(rate)), "rate_exact": rate,
                     })
     return cells
 
@@ -143,12 +151,33 @@ def make_drift_cell(idx: int, after_cell: int, n_study: int, rates: dict) -> dic
     """
     pattern, model = DRIFT_REF_ARM.split("/")
     cap = rates[DRIFT_REF_ARM][0]
+    exact = cap * DRIFT_REF_FRACTION
     return {
         "condition": DRIFT_REF_CONDITION, "pattern": pattern, "model": model,
-        "load": "capacity", "rep": idx, "rate": round(cap * DRIFT_REF_FRACTION, 2),
+        "load": "capacity", "rep": idx,
+        # integer for the same k6 reason as build_plan(); 25% of a knee is
+        # frequently fractional (e.g. 0.25 * 950 = 237.5) and k6 rejects it
+        "rate": int(round(exact)), "rate_exact": exact,
         "is_drift": 1, "drift_index": idx, "after_cell": after_cell,
         "n_study": n_study,
     }
+
+
+def check_rate_is_usable(cell: dict) -> None:
+    """Fail loudly on a rate k6 cannot run.
+
+    A fractional or non-positive rate is not an error k6 reports usefully: it
+    exits during option parsing, the cell records zero requests and a null
+    window, and the failure only surfaces later as a mysterious missing result.
+    Refuse it up front instead.
+    """
+    rate = cell.get("rate")
+    if not isinstance(rate, int) or rate <= 0:
+        raise ValueError(
+            f"unusable rate {rate!r} for cell {cell.get('condition')!r} "
+            f"(rep {cell.get('rep')}): k6 arrival-rate stages require a "
+            f"positive integer rps; exact value was {cell.get('rate_exact')!r}"
+        )
 
 
 def interleave_drift(cells: list[dict], rates: dict) -> list[dict]:
@@ -207,11 +236,12 @@ def main() -> int:
     n_study = len(cells)
     if not args.no_drift:
         cells = interleave_drift(cells, rates)
+        _dr = make_drift_cell(0, 0, n_study, rates)
         print(f"NOTE: {DRIFT_REF_COUNT} host-drift reference cells added "
-              f"({DRIFT_REF_CONDITION} @ "
-              f"{round(rates[DRIFT_REF_ARM][0] * DRIFT_REF_FRACTION, 1)} rps), "
-              f"interleaved into {n_study} study cells; diagnostics only, never "
-              f"analysed and never used to set a rate")
+              f"({DRIFT_REF_CONDITION} @ {_dr['rate']} rps, i.e. "
+              f"{DRIFT_REF_FRACTION:.0%} of the {_dr['rate_exact']:.2f} rps exact "
+              f"quarter-knee), interleaved into {n_study} study cells; "
+              f"diagnostics only, never analysed and never used to set a rate")
 
     print(f"run  tag={tag}  reps={reps}  study_cells={n_study} total={len(cells)}")
     print(f"out  {outdir}")
@@ -224,7 +254,11 @@ def main() -> int:
 
     if args.dry_run:
         for c in cells:
-            print(f"  {c['condition']:34s} rep={c['rep']:2d} rate={c['rate']:8.1f}")
+            ex = c.get("rate_exact")
+            note = "" if ex is None or float(ex) == float(c["rate"]) else \
+                   f"  (exact {float(ex):.2f} rounded)"
+            print(f"  {c['condition']:34s} rep={c['rep']:2d} "
+                  f"rate={c['rate']:8d}{note}")
         return 0
 
     # provenance: the rates this run used, and where they came from
@@ -267,6 +301,8 @@ def main() -> int:
         key = (cell["condition"], str(cell["rep"]))
         if key in done:
             continue
+        # refuse a rate k6 cannot run, before a cell is spent on it
+        check_rate_is_usable(cell)
         # condition is "<pattern>/<model>@<load>"; the slash would turn the log
         # path into a directory that does not exist
         safe = re.sub(r"[^A-Za-z0-9._@+-]", "-", cell["condition"])
@@ -278,7 +314,7 @@ def main() -> int:
         row = {
             "condition": cell["condition"], "pattern": cell["pattern"],
             "model": cell["model"], "load": cell["load"], "rep": cell["rep"],
-            "rate": round(cell["rate"], 2),
+            "rate": cell["rate"], "rate_exact": cell.get("rate_exact", ""),
             "is_drift": cell.get("is_drift", 0),
             "drift_index": cell.get("drift_index", ""),
             "after_cell": cell.get("after_cell", ""),

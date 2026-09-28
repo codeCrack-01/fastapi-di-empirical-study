@@ -12,12 +12,15 @@ performance measurement from the study grid has been produced.
 box's topology. **Amendment 2** (§4b) records the final host, corrects the
 environment, and fixes two harness defects found during bring-up. **Amendment 3**
 (§4c) bounds the async connection pool after a file-descriptor leak invalidated
-all four async arms at 19 of 80 cells into a smoke run. All three are dated
-before any valid measured cell.
+all four async arms at 19 of 80 cells into a smoke run. **Amendment 4** (§4d) adds
+host-drift reference cells, because a single-session design on one host needs its
+host measured, not assumed. **Amendment 5** (§4e) makes rate derivation integral
+and refuses an unrunnable rate instead of silently recording a null cell. All
+five are dated before any valid measured cell.
 
-**Config hash.** `4e288aefff814721343e90649ae9d04cbae92a72b21fcd0f84cb939fe2278e38`
-(amendment 4, §4a + §4b + §4c + §4d; supersedes
-`9c2c0e243a560fdf8b5d90740a4377d52dd485db501bdb739f9ebc4c8626ddd0`)
+**Config hash.** `5550afe4c438387e45b0a91f8f827227a7479be619e7b53981c1f9b63b0b6adc`
+(amendment 5, §4a + §4b + §4c + §4d + §4e; supersedes
+`4e288aefff814721343e90649ae9d04cbae92a72b21fcd0f84cb939fe2278e38`)
 
 Covering: `core_read.py` (service), `routes_read.py` (routes), `gen_apps.py`
 (generator), `runner.py` (pool + cell loop + pinning + topology checks),
@@ -402,6 +405,59 @@ this change is applied on the study host and **before any measured cell is
 run**. `drift_report.py` is added to the covered file list for the same reason
 `run_matrix.py` was added in amendment 2: it participates in interpreting a
 measurement, so a change to it has to invalidate the hash.
+
+### 4e. Amendment 5 — integer rate derivation, and a loud failure instead of a silent one (2026-09-28, before any measured cell)
+
+**What was found.** The first host-drift reference cell of §4d was scheduled at
+25% of `p1_direct/sync`'s capacity knee. With a knee of 950 rps that is
+**237.5 rps**, and k6 rejected it:
+
+```
+cannot unmarshal number 237.5 into Go struct field
+Options.scenarios.stages.target of type int64
+```
+
+k6 exits during option parsing. The cell then records **zero requests, a null
+window, and `achieved=0.0`** — and because that is a null result rather than a
+non-zero exit status, the grid does not stop. The run was halted after the first
+cell. No measured cell was produced.
+
+**Why this matters beyond the reference cell.** `k6`'s arrival-rate stages take
+an `int64` target, so **every** rate the study derives must be a whole number
+of requests per second. The pre-registration defines the overload rate as
+`1.5 x knee`, and a study knee is the **median of three probes**, so an odd knee
+is entirely possible. An odd knee makes `1.5 x knee` fractional, and that cell
+would have failed in exactly the same silent way during the main run. All eight
+re-measured knees happened to be even, so no study rate was at risk *this* time,
+but nothing in the design prevented it.
+
+**The fix, in two parts.**
+
+1. **Rates are integers by construction.** `build_plan()` rounds every rate to
+   the nearest whole rps. The exact pre-rounding value is kept in a new
+   `rate_exact` column and written to `cells.csv`, so the rounding is visible
+   and auditable rather than silent. The largest rounding any rate in this study
+   can incur is 0.5 rps, which is under 0.05% of the smallest rate used
+   (1035 rps).
+2. **A fractional rate is refused, not attempted.** `check_rate_is_usable()`
+   raises before a cell is spent if a rate is not a positive integer, naming the
+   condition, the rep, and the exact value. A cell that cannot produce a
+   measurement now stops the run instead of quietly producing a null.
+
+**The earlier `p2_depends/sync` empty-window cells are not explained by this.**
+Those cells carried an integer rate (1155 rps), so the cause is different and is
+**still unresolved**. It is recorded as an open harness question. The reference
+cell is valuable partly because it made a *different* silent failure cheap to
+reproduce and isolate: the same symptom, a different cause.
+
+**Effect on the design.** None. Rates are integers, as they must have been all
+along. §3's load definitions are unchanged; only the representation is now
+explicit and checked.
+
+**Config hash for amendment 5:**
+`5550afe4c438387e45b0a91f8f827227a7479be619e7b53981c1f9b63b0b6adc`, recorded after
+this change is applied on the study host and **before any measured cell is
+run**.
 
 ## 5. Read paths only
 
