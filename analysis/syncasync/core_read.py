@@ -30,6 +30,7 @@ difference is sync-vs-async execution.
 
 from __future__ import annotations
 
+import asyncio
 import os
 import queue
 import sqlite3
@@ -151,18 +152,54 @@ def sync_conn(path=None):
         q.put(conn)
 
 
-# ---- async pool: single event loop, so a plain free list needs no lock ----
+# ---- async pool -------------------------------------------------------------
+# Bounded at exactly POOL, matching the sync pool above, because §4 of the
+# pre-registration requires the connection-pool size to be held constant across
+# both execution models. Acquisition WAITS for a free connection rather than
+# opening a new one, so async blocks under contention exactly as sync does.
+#
+# This previously read:
+#     conn = _async_free.pop() if _async_free else await make_async_conn(path)
+# which opened a new connection whenever the free list was empty, with no upper
+# bound. Because aiosqlite spawns one OS thread per Connection *and* holds a real
+# file descriptor (core.py:90), the free list grew 1:1 with request concurrency:
+# 200 concurrent requests produced 200 connections and 207 fds. At the measured
+# knee the server reached ~880 concurrent requests against `ulimit -n 1024`, so
+# every async arm died with OSError(EINVAL/EMFILE) "Too many open files" and its
+# measurements were invalid. See preregistration §4c.
+#
+# aiosqlite offers no pooling of its own (zero references to pool/maxsize/
+# semaphore in 0.22.1), so the bound has to live here.
 
-_async_free: list = []
+_async_pool: "asyncio.Queue | None" = None
+
+
+def _get_async_pool(path=None):
+    """Create the pool once, lazily, with exactly POOL connections.
+
+    Mirrors _get_sync_pool so the two models hold the same number of database
+    handles. Must be called from the event loop (not a thread).
+    """
+    global _async_pool
+    if _async_pool is None:
+        _async_pool = asyncio.Queue()
+        for _ in range(POOL):
+            _async_pool.put_nowait(None)  # None = a slot not yet filled
+    return _async_pool
 
 
 @asynccontextmanager
 async def async_conn(path=None):
-    conn = _async_free.pop() if _async_free else await make_async_conn(path)
+    q = _get_async_pool(path)
+    # Blocks while all POOL connections are in use, which is the intended
+    # behaviour: the wait is part of what the sync model also pays.
+    slot = await q.get()
+    if slot is None:
+        slot = await make_async_conn(path)
     try:
-        yield conn
+        yield slot
     finally:
-        _async_free.append(conn)
+        q.put_nowait(slot)
 
 
 async def close_async_pool() -> None:
@@ -172,12 +209,18 @@ async def close_async_pool() -> None:
     process hangs at exit instead of terminating. Call from the app lifespan
     teardown and at the end of any in-process test.
     """
-    while _async_free:
-        conn = _async_free.pop()
+    global _async_pool
+    if _async_pool is None:
+        return
+    while not _async_pool.empty():
+        conn = _async_pool.get_nowait()
+        if conn is None:
+            continue
         try:
             await conn.close()
         except Exception:  # noqa: BLE001 -- teardown must not mask a test result
             pass
+    _async_pool = None
 
 
 def close_sync_pool() -> None:

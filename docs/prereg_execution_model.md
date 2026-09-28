@@ -10,11 +10,14 @@ performance measurement from the study grid has been produced.
 
 **Amendment 1** (§4a) changes the core pinning after inspecting the provisioned
 box's topology. **Amendment 2** (§4b) records the final host, corrects the
-environment, and fixes two harness defects found during bring-up. Both are dated
-before any measured cell, and the config hash below is the one that includes both.
+environment, and fixes two harness defects found during bring-up. **Amendment 3**
+(§4c) bounds the async connection pool after a file-descriptor leak invalidated
+all four async arms at 19 of 80 cells into a smoke run. All three are dated
+before any valid measured cell.
 
-**Config hash.** `082b3f24800028b82e7d6ac14467882a6eae891a99fe26a08abf45ec9f007cac`
-(amendment 2, §4a + §4b; supersedes `986f8e69...`)
+**Config hash.** `9c2c0e243a560fdf8b5d90740a4377d52dd485db501bdb739f9ebc4c8626ddd0`
+(amendment 3, §4a + §4b + §4c; supersedes
+`082b3f24800028b82e7d6ac14467882a6eae891a99fe26a08abf45ec9f007cac`)
 
 Covering: `core_read.py` (service), `routes_read.py` (routes), `gen_apps.py`
 (generator), `runner.py` (pool + cell loop + pinning + topology checks),
@@ -259,6 +262,89 @@ because the archived study is not used as a result in this work; it is
 background only. The eight knees measured here are the only knees this study
 refers to.
 
+### 4c. Amendment 3 — async connection-pool bound (2026-09-28, before any valid measured cell)
+
+**Reason for the change.** Amendment 2's statement that no measured study cell
+had been produced was true when it was written. Nineteen cells into a smoke grid
+run, **before any valid cell was produced**, every async arm began failing with
+`OSError: [Errno 24] Too many open files`. The run was stopped at 19 of 80 cells.
+The defect is described here because it is a property of the code under
+measurement, found by the harness before any study data existed, and fixed
+before it could bias a result.
+
+**Root cause.** `core_read.py` bounded the sync pool at `POOL = 8` using a
+`queue.Queue` of pre-opened connections, but the async pool was an unbounded
+free list:
+
+```python
+conn = _async_free.pop() if _async_free else await make_async_conn(path)
+```
+
+When the free list was empty the async path opened a **new** connection, with no
+upper bound. Because `aiosqlite` runs one non-daemon OS thread per `Connection`
+*and* holds a real file descriptor, the free list grew 1:1 with request
+concurrency. Measured directly on the study host under `ulimit -n 1024`:
+
+| concurrent requests | connections | open fds |
+|---|---|---|
+| 1 | 1 | 8 |
+| 16 | 16 | 23 |
+| 64 | 64 | 71 |
+| 200 | 200 | 207 |
+
+At the measured knee the server reached roughly 880 concurrent requests, so
+exhaustion was arithmetically certain rather than incidental. All four async
+knees and the async smoke cells are **invalid** and are discarded. The sync
+arms never took this path and their behavior is unaffected by the bug.
+
+**Is this our bug or a library limitation?** It is our bug, with a library
+property that makes it a known footgun rather than a surprising one. `aiosqlite`
+0.22.1 contains **no pooling mechanism at all** (zero references to pool,
+maxsize, or semaphore in `core.py`), and it presents itself as a drop-in
+asynchronous replacement for `sqlite3.connect()`, for which the idiomatic pattern
+is to open a connection per request. That pattern is cheap against a networked
+database, where a connection costs a TCP handshake, and expensive against
+SQLite, where it costs a file descriptor and a thread. The bound is ours to
+enforce, and it is now enforced where the sync bound already was. We record the
+mechanism because any researcher using `aiosqlite` in this way will hit it.
+
+**Fix.** The async pool is now a fixed `asyncio.Queue` of exactly `POOL = 8`
+slots, created lazily and acquired by **waiting** for a free slot, so the async
+arm blocks under contention exactly as the sync arm does. The pre-registration's
+"identical connection-pool size, held constant across both execution models" is
+therefore satisfied by construction rather than by convention. Verified after
+the fix under the same `ulimit -n 1024`: 1, 4, 16, 64, 200, and 500 concurrent
+requests all settle at **8 connections and 15 open fds**, and
+`close_async_pool()` returns the process to its 7-fd baseline.
+
+**The sync path was not modified.** `make_sync_conn`, `_get_sync_pool`,
+`sync_conn`, and `close_sync_pool` are byte-identical to their state at
+amendment 2, verified by symbol-level diff against the committed revision. The
+only changed symbols are `async_conn`, `close_async_pool`, and the newly added
+`_get_async_pool`.
+
+**Consequence for the study: all eight knees are re-measured.** A pool bound was
+added to the async path, so the async arms are no longer the same code as the
+arms whose sync knees were measured. Re-measuring only the async arms would
+leave a set of knees split across two code revisions, which a reader could not
+distinguish from a genuine sync/async difference. All eight arms are therefore
+re-measured under the single post-fix revision, in one run, so the eight knees
+that §2 refers to come from one codebase. The cost is roughly 35 minutes of
+knee probing plus the smoke re-run; it is accepted deliberately.
+
+**Validity of the discarded run.** The 19 partial cells and the eight first-pass
+one-probe knees are retained as provenance but are **not analyzed** and are not
+reported as results. They are not spliced with the re-measured set, and the
+re-measured knees are not adjusted or compared against them. This run is the
+first time the harness has surfaced a defect that would have produced an unfair
+sync-versus-async result silently, and it is reported as such rather than
+discarded quietly.
+
+**Config hash for amendment 3:**
+`9c2c0e243a560fdf8b5d90740a4377d52dd485db501bdb739f9ebc4c8626ddd0`, recorded after
+the fix above is applied on the study host and **before any re-measured knee is
+run**.
+
 ## 5. Read paths only
 
 The app exposes the **12 read routes** of the original 21-route app. The 9 write
@@ -371,11 +457,21 @@ the unit under study and void the pinned configuration in §4.
 
 1. Provision the box. Take SMT siblings `1,3,5,7` offline, verify core count,
    topology, and disjoint pinning per §4a, and record the plan type.
-2. **Smoke on the box** (5 reps x 16 conditions). Harness only; discarded.
-3. Knee probes: 8 apps x 3.
-4. Report knees and the smoke outcome. **Stop.**
-5. On explicit approval: the 640-cell main run.
+2. **Smoke knee probes on the box** (8 arms x 1, one-probe, discarded) to supply
+   per-arm rates. Per §4c these are re-measured from scratch, not reused from the
+   invalidated first pass.
+3. **Smoke on the box** (5 reps x 16 conditions). Harness only; discarded.
+4. Knee probes: 8 apps x 3.
+5. Report knees and the smoke outcome. **Stop.**
+6. On explicit approval: the 640-cell main run.
 
-Steps 1-4 are cheap. Step 5 is the expensive commitment and is gated on
+Steps 1-5 are cheap. Step 6 is the expensive commitment and is gated on
 approval after the knees are known, because the knees determine the 16 rates
 that everything else depends on.
+
+**Current state: at step 2, re-running from a clean revision.** Steps 1 and the
+functional smoke in §9 are complete. The first pass through steps 2 and 3
+produced 8 one-probe knees and 19 of 80 smoke cells, all invalidated by the
+async connection-pool defect in §4c; the smoke was stopped at 19 cells and
+nothing from that pass is analyzed. Steps 2 and 3 are re-run under the
+amendment-3 config hash before the study proceeds.

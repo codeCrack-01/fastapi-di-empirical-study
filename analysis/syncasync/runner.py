@@ -427,11 +427,17 @@ def start_server(module: str, port: int, log: Path) -> subprocess.Popen:
         "--log-level", "warning",
         "--no-access-log",
     ]
-    # A tag like "smoke-p4_container/sync@capacity" contains a slash, so writing
-    # it as a filename either creates a nonexistent directory or escapes the
-    # intended folder. Sanitise here, at the point of use, so no caller can crash
-    # the whole grid on a log path.
-    log = Path(re.sub(r"[^A-Za-z0-9._@+-]", "-", log.name)).with_suffix(log.suffix)
+    # Cell log names come from a caller-supplied tag, e.g. "smoke-p4_container/
+    # sync@capacity". That tag contains a slash, so the slash lands in the log
+    # path's PARENT component ("results/cells/smoke-p4_container/sync@...log"),
+    # where sanitising only the filename cannot reach it. An earlier fix did
+    # exactly that and dropped the parent entirely, scattering 909 MB of cell
+    # logs into the working directory; the version before it crashed on cell 1.
+    #
+    # So: flatten the name, then assert the parent is the cell-log directory and
+    # rebuild flat if not. Logs can only ever land in results/cells/.
+    cells_dir = HERE / "results" / "cells"
+    log = cells_dir / re.sub(r"[^A-Za-z0-9._@+-]", "-", log.name)
     log.parent.mkdir(parents=True, exist_ok=True)
     fh = open(log, "w")
     proc = subprocess.Popen(cmd, cwd=str(HERE), env=_env(), stdout=fh, stderr=subprocess.STDOUT)
