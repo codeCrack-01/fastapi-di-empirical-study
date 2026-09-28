@@ -15,16 +15,16 @@ environment, and fixes two harness defects found during bring-up. **Amendment 3*
 all four async arms at 19 of 80 cells into a smoke run. All three are dated
 before any valid measured cell.
 
-**Config hash.** `9c2c0e243a560fdf8b5d90740a4377d52dd485db501bdb739f9ebc4c8626ddd0`
-(amendment 3, §4a + §4b + §4c; supersedes
-`082b3f24800028b82e7d6ac14467882a6eae891a99fe26a08abf45ec9f007cac`)
+**Config hash.** `4e288aefff814721343e90649ae9d04cbae92a72b21fcd0f84cb939fe2278e38`
+(amendment 4, §4a + §4b + §4c + §4d; supersedes
+`9c2c0e243a560fdf8b5d90740a4377d52dd485db501bdb739f9ebc4c8626ddd0`)
 
 Covering: `core_read.py` (service), `routes_read.py` (routes), `gen_apps.py`
 (generator), `runner.py` (pool + cell loop + pinning + topology checks),
 `prepare_box.py` (pinning), `run_matrix.py` (orchestrator), `knee.py`,
 `smoke_knees.py`, `k6/harness.js`, `build_db.py`, `_seed_source.py`, `smoke.py`,
-`analyze.py`. Any edit to any of these invalidates this pre-registration and
-requires an amendment with a new hash.
+`analyze.py`, `drift_report.py`. Any edit to any of these invalidates this
+pre-registration and requires an amendment with a new hash.
 
 Amendment 2 adds `run_matrix.py`, `prepare_box.py` and `smoke_knees.py` to this
 list. Amendment 1's list omitted `run_matrix.py`, which selects each arm's rate
@@ -344,6 +344,64 @@ discarded quietly.
 `9c2c0e243a560fdf8b5d90740a4377d52dd485db501bdb739f9ebc4c8626ddd0`, recorded after
 the fix above is applied on the study host and **before any re-measured knee is
 run**.
+
+### 4d. Amendment 4 — host-drift reference cells (2026-09-28, before any measured cell)
+
+**The limitation being addressed.** This is a single-session design on a single
+host. Conditions are measured at different times within that session, so any
+change in the host's own behaviour over the session is confounded with
+condition. That is a real threat to validity, and the honest options are to
+measure it or to acknowledge it. The pre-registration previously did neither: it
+recorded per-cell steal and the plan type (§4b) but had no direct check on
+whether the host drifted.
+
+**What was added.** The grid repeats **one fixed reference cell** at fixed
+positions: `p1_direct/sync` at **25% of its own capacity knee**. Same app, same
+load, same pinning, every time; only its position in the run changes. It is
+chosen to be the simplest arm and comfortably inside the linear region, so a
+change in its latency is far more likely to be the host than the application.
+
+**Positions.** `DRIFT_REF_COUNT = 5` reference cells: after study cell 0, then at
+evenly spaced intervals, and **one after the final study cell**, so the session
+is bracketed at both ends. For the 80-cell smoke that is after cells 0, 16, 32,
+48, 80; for the 640-cell main run, 0, 128, 256, 384, 640.
+
+**These cells are diagnostics and cannot become results.** They are written with
+`is_drift=1`, and `analyze.py` **drops every such row** before any aggregation,
+in addition to the condition-name filter that would already exclude them. They
+are never used to set a rate, never used to compute a knee, and never reported
+as a measurement of the application. `drift_report.py` summarises them.
+
+**Cost.** Five extra cells of ~52 s each, about **4 minutes** added to a ~1.2 h
+smoke and a ~9 h main run. No measurement plan changes.
+
+**What is reported, and how.** `drift_report.py` prints the reference cell's
+p50, p95, mean, achieved rate and steal jiffies at each of the five positions,
+and reduces them to a number: the p95 spread as a percentage of the median, and
+the first-half to second-half p95 change. The tolerance is **10%**. The outcome
+is decided in advance:
+
+- **Spread ≤ 10%:** report that no material host drift was detected over this
+  session. This is evidence that the single-session design was adequate *here*.
+  It is not a claim that the host is stable in general, and it does not license
+  comparison across sessions.
+- **Spread > 10%:** report the drift as a **limitation, with these numbers
+  attached**, name the affected cells by `after_cell`, and state that condition
+  effects are confounded with time to that extent. Drift is **not** corrected
+  for, and no cell is dropped for it.
+
+**Effect on the design.** None on the randomised study order. Reference cells
+are spliced in *after* the shuffle, so the study cells keep exactly the order
+fixed by `SEED = 20260928`; verified by asserting the study-cell sequence is
+unchanged by the interleave. The study's conclusions rest on the study cells;
+the reference cells only calibrate the host they were measured on.
+
+**Config hash for amendment 4:**
+`4e288aefff814721343e90649ae9d04cbae92a72b21fcd0f84cb939fe2278e38`, recorded after
+this change is applied on the study host and **before any measured cell is
+run**. `drift_report.py` is added to the covered file list for the same reason
+`run_matrix.py` was added in amendment 2: it participates in interpreting a
+measurement, so a change to it has to invalidate the hash.
 
 ## 5. Read paths only
 

@@ -46,8 +46,25 @@ LOADS = ["capacity", "overload"]
 SMOKE_REPS = 5
 SEED = 20260928
 
+# ---- host-drift reference cells (amendment 4d) ------------------------------
+# The study is a single session on one host. If the host itself drifts over the
+# session -- neighbouring load, thermal throttling, a noisy neighbour, provider
+# migration -- then condition effects measured at different times are confounded
+# with time, and the whole single-session design is quietly weakened. Measuring
+# that directly is cheap, so the grid repeats ONE fixed cell at fixed positions.
+#
+# The reference is p1_direct/sync at 25% of its own capacity knee: the simplest
+# arm, comfortably in the linear region, so a change in its latency is far more
+# likely to be the host than the application. It is a diagnostic, not a result:
+# analyze.py excludes these rows, and they are never used to set a rate.
+DRIFT_REF_ARM = "p1_direct/sync"
+DRIFT_REF_FRACTION = 0.25
+DRIFT_REF_COUNT = 5
+DRIFT_REF_CONDITION = f"driftref/{DRIFT_REF_ARM}@capacity"
+
 FIELDS = [
     "condition", "pattern", "model", "load", "rep", "rate",
+    "is_drift", "drift_index", "after_cell", "steal_jiffies",
     "window_p50", "window_p95", "window_mean", "window_max",
     "window_requests", "window_errors", "window_error_rate",
     "achieved", "check_fails",
@@ -117,6 +134,48 @@ def build_plan(rates: dict, reps: int) -> list[dict]:
     return cells
 
 
+def make_drift_cell(idx: int, after_cell: int, n_study: int, rates: dict) -> dict:
+    """Build one host-drift reference cell.
+
+    Same app, same load, every time. Only its position in the run changes, so
+    any trend across the drift cells is a property of the host, not of the
+    application.
+    """
+    pattern, model = DRIFT_REF_ARM.split("/")
+    cap = rates[DRIFT_REF_ARM][0]
+    return {
+        "condition": DRIFT_REF_CONDITION, "pattern": pattern, "model": model,
+        "load": "capacity", "rep": idx, "rate": round(cap * DRIFT_REF_FRACTION, 2),
+        "is_drift": 1, "drift_index": idx, "after_cell": after_cell,
+        "n_study": n_study,
+    }
+
+
+def interleave_drift(cells: list[dict], rates: dict) -> list[dict]:
+    """Splice DRIFT_REF_COUNT reference cells into the shuffled study order.
+
+    Called AFTER the shuffle, so the study cells keep exactly the randomised
+    order fixed by SEED. Reference cells are added at evenly spaced positions
+    from the first to near the last study cell.
+    """
+    if DRIFT_REF_COUNT <= 0 or not cells:
+        return cells
+    n = len(cells)
+    step = max(1, n // DRIFT_REF_COUNT)
+    out: list[dict] = []
+    d = 0
+    # the last reference is placed after the final study cell, so the session is
+    # bracketed by reference measurements at both ends rather than trailing off
+    for i, c in enumerate(cells):
+        if i % step == 0 and d < DRIFT_REF_COUNT - 1:
+            out.append(make_drift_cell(d, i, n, rates))
+            d += 1
+        out.append(c)
+    if d < DRIFT_REF_COUNT:
+        out.append(make_drift_cell(d, n, n, rates))
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     g = ap.add_mutually_exclusive_group(required=True)
@@ -126,6 +185,8 @@ def main() -> int:
     ap.add_argument("--port0", type=int, default=8900)
     ap.add_argument("--only", default=None, help="substring filter on condition")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--no-drift", action="store_true",
+                    help="disable the host-drift reference cells (amendment 4d)")
     args = ap.parse_args()
 
     assert_disjoint()
@@ -143,7 +204,16 @@ def main() -> int:
 
     random.Random(SEED).shuffle(cells)
 
-    print(f"run  tag={tag}  reps={reps}  cells={len(cells)}")
+    n_study = len(cells)
+    if not args.no_drift:
+        cells = interleave_drift(cells, rates)
+        print(f"NOTE: {DRIFT_REF_COUNT} host-drift reference cells added "
+              f"({DRIFT_REF_CONDITION} @ "
+              f"{round(rates[DRIFT_REF_ARM][0] * DRIFT_REF_FRACTION, 1)} rps), "
+              f"interleaved into {n_study} study cells; diagnostics only, never "
+              f"analysed and never used to set a rate")
+
+    print(f"run  tag={tag}  reps={reps}  study_cells={n_study} total={len(cells)}")
     print(f"out  {outdir}")
     print(f"knees {args.knee_dir}")
     if smoke:
@@ -163,6 +233,14 @@ def main() -> int:
         "knee_mode": "smoke (1 probe)" if args.knee_dir.name == "smoke_knees"
                      else "study (median of 3)",
         "tag": tag, "reps": reps, "seed": SEED,
+        "study_cells": n_study,
+        "drift_ref": {
+            "enabled": not args.no_drift,
+            "condition": DRIFT_REF_CONDITION,
+            "count": DRIFT_REF_COUNT,
+            "fraction_of_capacity": DRIFT_REF_FRACTION,
+            "role": "host-drift diagnostic only; excluded from analysis",
+        } if not args.no_drift else {"enabled": False},
         "workers": WORKERS, "warmup_s": WARMUP_S, "window_s": WINDOW_S,
         "cooldown_s": COOLDOWN_S,
         "rates": {k: {"capacity": v[0], "overload": v[1]} for k, v in rates.items()},
@@ -201,6 +279,10 @@ def main() -> int:
             "condition": cell["condition"], "pattern": cell["pattern"],
             "model": cell["model"], "load": cell["load"], "rep": cell["rep"],
             "rate": round(cell["rate"], 2),
+            "is_drift": cell.get("is_drift", 0),
+            "drift_index": cell.get("drift_index", ""),
+            "after_cell": cell.get("after_cell", ""),
+            "steal_jiffies": e.get("steal_jiffies"),
             "window_p50": w.get("p50"), "window_p95": w.get("p95"),
             "window_mean": w.get("mean"), "window_max": w.get("max"),
             "window_requests": e.get("window_requests"),
@@ -223,12 +305,20 @@ def main() -> int:
             print("FATAL: database hash changed mid-run; stopping", file=sys.stderr)
             fh.close()
             return 2
-        if n % 10 == 0 or n == 1:
+        if n % 10 == 0 or n == 1 or row["is_drift"]:
             el = time.time() - t_start
             eta = (el / n) * (len(cells) - n)
-            print(f"  [{n}/{len(cells)}] {row['condition']} p95={row['window_p95']}ms "
-                  f"ach={row['achieved']:.3f} elapsed={el / 60:.1f}m eta={eta / 60:.0f}m",
-                  flush=True)
+            if row["is_drift"]:
+                # printed at full volume: this is the drift time series
+                print(f"  [{n}/{len(cells)}] DRIFT-REF #{row['drift_index']} "
+                      f"after_cell={row['after_cell']} p50={row['window_p50']}ms "
+                      f"p95={row['window_p95']}ms ach={row['achieved']:.3f} "
+                      f"steal={row['steal_jiffies']} elapsed={el / 60:.1f}m",
+                      flush=True)
+            else:
+                print(f"  [{n}/{len(cells)}] {row['condition']} "
+                      f"p95={row['window_p95']}ms ach={row['achieved']:.3f} "
+                      f"elapsed={el / 60:.1f}m eta={eta / 60:.0f}m", flush=True)
 
     fh.close()
     db_after = sha256_db()

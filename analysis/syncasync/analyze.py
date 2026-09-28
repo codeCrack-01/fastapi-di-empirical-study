@@ -55,7 +55,14 @@ def read_cells(path: Path) -> list[dict]:
     with open(path) as fh:
         rows = list(csv.DictReader(fh))
     out = []
+    n_drift = 0
     for r in rows:
+        # Host-drift reference cells (amendment 4d) are diagnostics. They are
+        # dropped here so they cannot reach a result even if the condition-name
+        # filter below were ever widened.
+        if r.get("is_drift", "0") not in ("0", "", None):
+            n_drift += 1
+            continue
         rec = {
             "condition": r["condition"], "pattern": r["pattern"], "model": r["model"],
             "load": r["load"], "rep": int(r["rep"]), "rate": float(r["rate"]),
@@ -65,6 +72,8 @@ def read_cells(path: Path) -> list[dict]:
             rec[m] = float(v) if v not in ("", None) else None
         rec["db_unchanged"] = r.get("db_unchanged") == "True"
         out.append(rec)
+    if n_drift:
+        print(f"excluded {n_drift} host-drift reference cells (diagnostic only)")
     return out
 
 

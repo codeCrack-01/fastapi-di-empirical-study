@@ -53,6 +53,7 @@ CONFIG_FILES = [
     ("seed", "_seed_source.py"),
     ("smoke", "smoke.py"),
     ("analysis", "analyze.py"),
+    ("drift", "drift_report.py"),
 ]
 
 
