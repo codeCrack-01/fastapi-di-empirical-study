@@ -64,6 +64,10 @@ K6_CORES = os.environ.get("REVIEWGATE_K6_CORES", "6")
 SAMPLER_CORE = os.environ.get("REVIEWGATE_SAMPLER_CORE", "6")
 OFFLINE_CORES = os.environ.get("REVIEWGATE_OFFLINE_CORES", "1,3,5,7")
 
+# Provisioned host for amendment 2: Vultr voc-c-8c-16gb-150s-amd in ord, AMD EPYC
+# (Milan), 4 physical cores x 2 SMT threads. Recorded in per-cell metadata.
+PLAN_TYPE = os.environ.get("REVIEWGATE_PLAN_TYPE", "voc-c-8c-16gb-150s-amd")
+
 WARMUP_S = 10
 WINDOW_S = 30
 COOLDOWN_S = 12
@@ -84,17 +88,110 @@ def expand_cores(spec: str) -> set[int]:
     return out
 
 
-def sibling_groups() -> dict[int, list[int]]:
-    """Map each online cpu to its SMT siblings, from sysfs."""
+def cpu_online(cpu: int) -> bool:
+    """True if the cpu is online. cpu0 has no `online` file and cannot be offlined."""
+    f = Path(f"/sys/devices/system/cpu/cpu{cpu}/online")
+    if not f.exists():
+        return True
+    try:
+        return f.read_text().strip() == "1"
+    except OSError:
+        return False
+
+
+TOPOLOGY_CACHE = HERE / "results" / "topology.json"
+
+
+def all_cpu_ids() -> list[int]:
+    """Every cpu the kernel knows about, from the sysfs directories.
+
+    NOT os.cpu_count(): that returns the number of ONLINE cpus, which drops to 4
+    once the siblings are offlined and would truncate the topology to 0-3. The
+    cpuN directories persist while offline, so they are the reliable source.
+    """
+    root = Path("/sys/devices/system/cpu")
+    cpus = []
+    for d in root.glob("cpu[0-9]*"):
+        try:
+            cpus.append(int(d.name[3:]))
+        except ValueError:
+            pass
+    return sorted(cpus)
+
+
+def read_sysfs_siblings() -> dict[int, list[int]]:
+    """Map each cpu to its SMT siblings straight from sysfs."""
     groups: dict[int, list[int]] = {}
-    for cpu in sorted(expand_cores(f"0-{os.cpu_count() - 1}")):
+    for cpu in all_cpu_ids():
         path = Path(f"/sys/devices/system/cpu/cpu{cpu}/topology/thread_siblings_list")
         try:
-            sibs = sorted(expand_cores(path.read_text().strip()))
+            groups[cpu] = sorted(expand_cores(path.read_text().strip()))
         except OSError:
-            sibs = [cpu]
-        groups[cpu] = sibs
+            # an offline cpu has no topology directory
+            groups[cpu] = [cpu]
     return groups
+
+
+def capture_topology() -> dict[int, list[int]]:
+    """Record the true SMT topology. Must be called while the machine is online.
+
+    An offline cpu has no topology directory, so a map read afterwards reports
+    every cpu as its own physical core. That is not a cosmetic problem: it would
+    make assert_disjoint()'s "offline cpu is a sibling of a core in use" guard
+    pass on a misconfigured layout, e.g. server on cpu0 with cpu1 marked offline
+    silently disables the server's own sibling. So the real map is captured once
+    from a fully online machine and cached; everything afterwards reads the
+    cache and refuses to fall back to a live read.
+    """
+    groups = read_sysfs_siblings()
+    offline = [c for c in groups if not cpu_online(c)]
+    missing = [c for c in groups
+               if len(groups[c]) == 1 and c in expand_cores(
+                   ",".join(str(x) for x in sorted(groups)))]
+    if offline:
+        raise SystemExit(
+            f"FATAL: cannot capture topology, cpus {offline} are offline. "
+            "Re-enable them (see enable_all_cpus) and capture before offlining."
+        )
+    # every cpu in a real SMT box shares a core with at least one other
+    if len(groups) > 1 and all(len(v) == 1 for v in groups.values()):
+        raise SystemExit(
+            "FATAL: captured topology reports no SMT siblings at all, which means "
+            f"it was read while cpus were offline. Got {groups}."
+        )
+    TOPOLOGY_CACHE.parent.mkdir(parents=True, exist_ok=True)
+    TOPOLOGY_CACHE.write_text(json.dumps(
+        {str(k): v for k, v in sorted(groups.items())}, indent=2))
+    return groups
+
+
+def enable_all_cpus() -> list[int]:
+    """Bring every cpu online. Used to restore a box after a study run."""
+    brought = []
+    for cpu in all_cpu_ids():
+        f = Path(f"/sys/devices/system/cpu/cpu{cpu}/online")
+        if f.exists():
+            try:
+                if f.read_text().strip() == "0":
+                    f.write_text("1")
+                    brought.append(cpu)
+            except OSError:
+                pass
+    return brought
+
+
+def sibling_groups() -> dict[int, list[int]]:
+    """The cached pre-offline SMT sibling map.
+
+    Raises if it was never captured, rather than reading sysfs live: a live read
+    after offlining is wrong, and guessing would defeat the point of the check.
+    """
+    if not TOPOLOGY_CACHE.exists():
+        raise SystemExit(
+            f"FATAL: {TOPOLOGY_CACHE} missing. Run prepare_box.py, which captures "
+            "the topology while the machine is online, before any cell runs."
+        )
+    return {int(k): v for k, v in json.loads(TOPOLOGY_CACHE.read_text()).items()}
 
 
 def take_siblings_offline() -> dict:
@@ -110,6 +207,9 @@ def take_siblings_offline() -> dict:
                     "failed": [], "online_after": {}}
     for cpu in sorted(offline):
         f = Path(f"/sys/devices/system/cpu/cpu{cpu}/online")
+        if not f.exists():
+            result["failed"].append({"cpu": cpu, "error": "no online file (cpu0?)"})
+            continue
         try:
             before = f.read_text().strip()
             if before == "1":
@@ -119,7 +219,7 @@ def take_siblings_offline() -> dict:
                 result["already"].append(cpu)
         except OSError as exc:
             result["failed"].append({"cpu": cpu, "error": str(exc)})
-    for cpu in sorted(expand_cores(f"0-{os.cpu_count() - 1}")):
+    for cpu in all_cpu_ids():
         f = Path(f"/sys/devices/system/cpu/cpu{cpu}/online")
         try:
             result["online_after"][str(cpu)] = f.read_text().strip()
@@ -131,14 +231,66 @@ def take_siblings_offline() -> dict:
 def steal_from_proc_stat() -> int | None:
     """Steal time (jiffies) from /proc/stat line 8, or None if unavailable.
 
-    The study box is Vultr shared Cloud Compute, so a noisy neighbour can take
-    CPU time. Recorded per cell as a threat to validity rather than filtered out.
+    Recorded per cell as a threat to validity rather than filtered out. It is
+    recorded whether or not the plan is dedicated, so the data can falsify the
+    dedicated claim in the pre-registration.
     """
     try:
         line = Path("/proc/stat").read_text().splitlines()[0].split()
         return int(line[7])
     except (OSError, IndexError, ValueError):
         return None
+
+
+def host_facts() -> dict:
+    """What this machine actually is, read from the machine, per cell.
+
+    Deliberately not hardcoded: if the box is ever replaced, the per-cell
+    metadata shows the new CPU, and the pre-registration's topology claim
+    becomes checkable rather than assumed.
+
+    Note on counts: os.cpu_count() reports ONLINE processors, so with siblings
+    1,3,5,7 offlined it returns 4 and would misreport an 8-CPU host. The CPU
+    counts here come from sysfs cpu* directories instead, and the online count is
+    recorded separately.
+    """
+    cpu_ids = all_cpu_ids()
+    groups = sibling_groups()
+    online = [c for c in cpu_ids if cpu_online(c)]
+
+    def procinfo(key: str) -> set[str]:
+        vals = set()
+        try:
+            for line in Path("/proc/cpuinfo").read_text().splitlines():
+                if line.startswith(key):
+                    vals.add(line.split(":", 1)[1].strip())
+        except OSError:
+            pass
+        return vals
+
+    def meminfo(key: str) -> str | None:
+        try:
+            for line in Path("/proc/meminfo").read_text().splitlines():
+                if line.startswith(key):
+                    return line.split(":", 1)[1].strip()
+        except OSError:
+            return None
+        return None
+
+    uname = os.uname()
+    return {
+        "cpu_model": (sorted(procinfo("model name")) or [None])[0],
+        "logical_cpus_present": len(cpu_ids),
+        "logical_cpus_online": len(online),
+        "online_cpus": online,
+        "physical_cores": len({min(v) for v in groups.values()}),
+        "sockets": len(procinfo("physical id")) or None,
+        "thread_siblings_per_core": max((len(v) for v in groups.values()), default=0),
+        "mem_total": meminfo("MemTotal"),
+        "kernel": uname.release,
+        "arch": uname.machine,
+        "sibling_groups": {str(k): v for k, v in groups.items()},
+    }
 
 
 def assert_disjoint() -> None:
@@ -166,12 +318,36 @@ def assert_disjoint() -> None:
                 f"FATAL: server shares a PHYSICAL core with {name}: {sorted(shared)}. "
                 "SMT siblings count as the same core; see preregistration 4a."
             )
+    # The offline set is SUPPOSED to be the unused SMT siblings of the cores in
+    # use, so "offline cpu shares a physical core with the server" is the
+    # intended design, not a fault. What would be a fault is a cpu that is
+    # BOTH pinned and offline: that disables a core in use instead of isolating
+    # one, and would silently halve the server's capacity. Checked against the
+    # cached PRE-offline topology, since sysfs no longer reports sibling lists
+    # once a cpu is offline.
     offline = expand_cores(OFFLINE_CORES)
-    if physical(server) & physical(offline) or physical(k6) & physical(offline):
+    for name, used in (("server", server), ("k6", k6), ("sampler", sampler)):
+        both = used & offline
+        if both:
+            raise SystemExit(
+                f"FATAL: cpus {sorted(both)} are pinned to the {name} AND marked "
+                f"offline (server={sorted(server)} k6={sorted(k6)} "
+                f"offline={sorted(offline)}). A cpu cannot be both in use and "
+                "offlined; that disables a core instead of isolating one."
+            )
+    # And confirm the offline set really is offline, so a stale layout cannot pass.
+    not_offline = [c for c in sorted(offline) if cpu_online(c)]
+    if not_offline:
         raise SystemExit(
-            "FATAL: a core marked offline is a sibling of a core in use; "
-            f"offline={sorted(offline)}"
+            f"FATAL: cpus {not_offline} are marked offline in the layout but are "
+            "still online. take_siblings_offline() must run before any cell."
         )
+    for name, used in (("server", server), ("k6", k6)):
+        down = [c for c in sorted(used) if not cpu_online(c)]
+        if down:
+            raise SystemExit(
+                f"FATAL: {name} cpus {down} are offline; they cannot be pinned to."
+            )
     # stderr, not stdout: stdout carries the machine-readable JSON result
     print(f"cores: server={sorted(server)} k6={sorted(k6)} sampler={sorted(sampler)} "
           f"offline={sorted(offline)}", file=sys.stderr)
@@ -396,8 +572,9 @@ def main() -> int:
     ap.add_argument("--json-out", type=Path, default=None)
     args = ap.parse_args()
 
-    assert_disjoint()
+    siblings = sibling_groups()
     offline_state = take_siblings_offline()
+    assert_disjoint()
     print(f"offline siblings: {json.dumps(offline_state)}", file=sys.stderr)
     steal_before = steal_from_proc_stat()
     before = sha256_db()
@@ -411,12 +588,17 @@ def main() -> int:
         "sampler_core": SAMPLER_CORE, "offline_cores": OFFLINE_CORES,
         # recorded per cell so the topology is verifiable, not just asserted
         "offline_state": offline_state,
-        "sibling_groups": {str(k): v for k, v in sibling_groups().items()},
-        # shared-plan host noise; reported, never filtered
+        "sibling_groups": {str(k): v for k, v in siblings.items()},
+        # host noise is reported, never filtered -- recorded whether or not the
+        # plan is dedicated, so the data can falsify the dedicated claim
         "steal_jiffies": (steal_after - steal_before)
                          if (steal_before is not None and steal_after is not None)
                          else None,
-        "plan_type": os.environ.get("REVIEWGATE_PLAN_TYPE", "vc2-8c-32gb(shared)"),
+        # The pre-registered plan for amendment 2. Previously this defaulted to
+        # the old shared "vc2-8c-32gb" and REVIEWGATE_PLAN_TYPE was unset on the
+        # box, so every cell would have been mislabelled with the wrong plan.
+        "plan_type": os.environ.get("REVIEWGATE_PLAN_TYPE", PLAN_TYPE),
+        "host": host_facts(),
         "anyio_threadpool_size": ANYIO_THREADPOOL_SIZE,
         "warmup_s": args.warmup, "window_s": args.window, "cooldown_s": args.cooldown,
         "db_unchanged": res.db_unchanged,

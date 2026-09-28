@@ -1,5 +1,5 @@
 {
-  "config_sha256": "986f8e69b1972a86b61fbc4d7859cbd10a1a63c6318700cce4e75d7f55e76605",
+  "config_sha256": "5b7b0ff69d8a0d2d2dbfd5afaa1ddcf41978bdb38fb844b9cee126aed894f4ea",
   "files": {
     "service": {
       "file": "core_read.py",
@@ -15,19 +15,35 @@
     },
     "pool+runner": {
       "file": "runner.py",
-      "sha256": "d646e31f56e9abd781be61abf31947cd54fce5b594e3ca4695b112d5b9e75919"
+      "sha256": "778d189909f6ecb76674e1410bd8a0016fa821ca54df92092d303e835aeb9759"
+    },
+    "pinning": {
+      "file": "prepare_box.py",
+      "sha256": "804fd60afb17d042e4ec7db08aec7ceda90778047b8af5e7e11be925940eec52"
+    },
+    "orchestrator": {
+      "file": "run_matrix.py",
+      "sha256": "9bf24ad1c45191a9cb7a343484c4b6fe96f8de1f0d537ece93c609f539750dc6"
     },
     "knee": {
       "file": "knee.py",
-      "sha256": "6c489f76a6195104770354ca724dff3c5e7e6aef1cda6f5d66cfae71d91b1a14"
+      "sha256": "0b2b7c0609f8299c7d86a6d6f21d0e51944be1b885dff517d84e4d8b2cb2fa87"
+    },
+    "smoke-knees": {
+      "file": "smoke_knees.py",
+      "sha256": "8d54624d5b2a54718bdacb22ac8f23facd325a18f54c5be8d004ba7efa46afda"
     },
     "harness": {
       "file": "k6/harness.js",
-      "sha256": "c4dae6c9ae02f75b2eeed43a9855fb85f7f53492de09c8045479056b1b956fbd"
+      "sha256": "e1aeb8ce24ad01d2c46b05f5537083ff97582d287f0b130908b5745143a9a901"
     },
     "database": {
       "file": "build_db.py",
-      "sha256": "4d13557b46abc316871a5071f48f2fee73927d3b48510e96b97ff58527789fda"
+      "sha256": "59290d7056f3f13b835f4454a59f517d3c223742b307e66790bcae93300b94f4"
+    },
+    "seed": {
+      "file": "_seed_source.py",
+      "sha256": "725f8d359f693638d8dc6e45d7b3df113e8d20ba33138193fb440607be1bdedb"
     },
     "smoke": {
       "file": "smoke.py",
@@ -39,15 +55,16 @@
     }
   },
   "versions": {
-    "python": "3.12.13",
-    "platform": "Linux-7.2.5-200.fc44.x86_64-x86_64-with-glibc2.43",
+    "python": "3.12.14",
+    "platform": "Linux-5.15.0-191-generic-x86_64-with-glibc2.35",
     "fastapi": "0.141.1",
     "starlette": "1.6.0",
-    "anyio": "unknown",
+    "anyio": "4.15.1",
     "pydantic": "2.13.2",
     "uvicorn": "0.52.4",
     "aiosqlite": "0.22.1",
-    "dependency_injector": "4.49.1",
+    "dependency-injector": "4.49.1",
+    "anyio_backend": "asyncio (uvicorn default)",
     "k6": "v2.2.0"
   },
   "database_sha256": "ec432e8211b9767a114d9ff60f584e94038217bb3aa7a6590faecc38ed67fec8"

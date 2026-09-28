@@ -22,9 +22,14 @@ import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-sys.path.insert(0, str(HERE.parent / "experiment"))
+# The seed schema lives in the archived experiment tree on the laptop, which is
+# not synced to the box (the box gets only analysis/syncasync). So the schema and
+# seed data are vendored here as a literal, making the box self-contained and the
+# database byte-identical wherever it is built. The vendored copy is checked
+# against the pre-registration's recorded database sha256 by --verify.
+sys.path.insert(0, str(HERE))
 
-from core.db import _SCHEMA, _seed  # noqa: E402
+from _seed_source import SCHEMA, SEED_ROWS  # noqa: E402
 
 RO_DB = HERE / "results" / "reviewgate_ro.db"
 
@@ -43,9 +48,16 @@ def build(dest: Path) -> Path:
         dest.chmod(0o644)
         dest.unlink()
     conn = sqlite3.connect(str(dest))
-    conn.row_factory = sqlite3.Row
-    conn.executescript(_SCHEMA)
-    _seed(conn)
+    conn.executescript(SCHEMA)
+    for table, rows in SEED_ROWS.items():
+        if not rows:
+            continue
+        cols = list(rows[0])
+        ph = ",".join("?" * len(cols))
+        conn.executemany(
+            f'INSERT INTO "{table}" ({",".join(cols)}) VALUES ({ph})',
+            [tuple(r[c] for c in cols) for r in rows],
+        )
     conn.commit()
     conn.execute("VACUUM")
     conn.close()

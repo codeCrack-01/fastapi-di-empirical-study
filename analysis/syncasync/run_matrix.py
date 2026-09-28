@@ -68,9 +68,25 @@ def load_rates(knee_file: Path) -> dict:
             f = knee_file / f"knee_{pattern}_{model}.json"
             if not f.exists():
                 raise SystemExit(f"FATAL: missing knee result {f}")
-            k = json.loads(f.read_text()).get("knee_median")
+            doc = json.loads(f.read_text())
+            k = doc.get("knee_median")
             if not k:
                 raise SystemExit(f"FATAL: {f} has no knee_median (probe failed)")
+            # Cross-check the recorded provenance against the directory it came
+            # from. A smoke knee is a single probe; the study knee is the median
+            # of three. Mixing them up would silently change what 'capacity'
+            # means, so refuse rather than warn.
+            mode = doc.get("mode", "study")
+            if knee_file.name == "smoke_knees" and mode != "smoke":
+                raise SystemExit(
+                    f"FATAL: {f} is mode={mode!r} but lives in smoke_knees/"
+                )
+            if mode == "smoke" and knee_file.name != "smoke_knees":
+                raise SystemExit(
+                    f"FATAL: {f} is a single-probe SMOKE knee. It may only be used "
+                    "via --knee-dir results/smoke_knees --smoke. The main grid needs "
+                    "the 3-probe median the pre-registration specifies."
+                )
             out[f"{pattern}/{model}"] = (float(k), float(k) * 1.5)
     return out
 
@@ -119,13 +135,28 @@ def main() -> int:
 
     print(f"run  tag={tag}  reps={reps}  cells={len(cells)}")
     print(f"out  {outdir}")
+    print(f"knees {args.knee_dir}")
     if smoke:
         print("NOTE: smoke data is written for provenance and NEVER analysed")
+        if args.knee_dir.name != "smoke_knees":
+            print("NOTE: smoke rates are not necessarily single-probe; record the "
+                  "knee source in the run log", file=sys.stderr)
 
     if args.dry_run:
         for c in cells:
             print(f"  {c['condition']:34s} rep={c['rep']:2d} rate={c['rate']:8.1f}")
         return 0
+
+    # provenance: the rates this run used, and where they came from
+    (outdir / "rates.json").write_text(json.dumps({
+        "knee_dir": str(args.knee_dir),
+        "knee_mode": "smoke (1 probe)" if args.knee_dir.name == "smoke_knees"
+                     else "study (median of 3)",
+        "tag": tag, "reps": reps, "seed": SEED,
+        "workers": WORKERS, "warmup_s": WARMUP_S, "window_s": WINDOW_S,
+        "cooldown_s": COOLDOWN_S,
+        "rates": {k: {"capacity": v[0], "overload": v[1]} for k, v in rates.items()},
+    }, indent=2))
 
     csv_path = outdir / "cells.csv"
     done = set()

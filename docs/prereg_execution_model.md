@@ -9,21 +9,29 @@ smoke and the harness plumbing have been run and are reported in §9; no
 performance measurement from the study grid has been produced.
 
 **Amendment 1** (§4a) changes the core pinning after inspecting the provisioned
-box's topology. It is dated before any measured cell, and the config hash above
-is the one that includes it.
+box's topology. **Amendment 2** (§4b) records the final host, corrects the
+environment, and fixes two harness defects found during bring-up. Both are dated
+before any measured cell, and the config hash below is the one that includes both.
 
-**Config hash.** `986f8e69b1972a86b61fbc4d7859cbd10a1a63c6318700cce4e75d7f55e76605`
-(amendment 1, §4a; supersedes `53d78bb7...`)
+**Config hash.** `5b7b0ff69d8a0d2d2dbfd5afaa1ddcf41978bdb38fb844b9cee126aed894f4ea`
+(amendment 2, §4a + §4b; supersedes `986f8e69...`)
 
 Covering: `core_read.py` (service), `routes_read.py` (routes), `gen_apps.py`
 (generator), `runner.py` (pool + cell loop + pinning + topology checks),
-`knee.py`, `k6/harness.js`, `build_db.py`, `smoke.py`, `analyze.py`. Any edit
-to any of these invalidates this pre-registration and requires an amendment
-with a new hash.
+`prepare_box.py` (pinning), `run_matrix.py` (orchestrator), `knee.py`,
+`smoke_knees.py`, `k6/harness.js`, `build_db.py`, `_seed_source.py`, `smoke.py`,
+`analyze.py`. Any edit to any of these invalidates this pre-registration and
+requires an amendment with a new hash.
 
-Environment: Python 3.12.13, FastAPI 0.141.1, Starlette 1.6.0, Pydantic 2.13.2,
-Uvicorn 0.52.4, aiosqlite 0.22.1, dependency-injector 4.49.1, k6 v2.2.0, one
-worker. Database sha256 `ec432e8211b9767a...`, verified read-only.
+Amendment 2 adds `run_matrix.py`, `prepare_box.py` and `smoke_knees.py` to this
+list. Amendment 1's list omitted `run_matrix.py`, which selects each arm's rate
+and defines the grid, so that pre-registration was not in fact pinning everything
+that determines a measurement. That gap is closed here.
+
+Environment (measured on the study host, not the development machine): Python
+3.12.14, FastAPI 0.141.1, Starlette 1.6.0, Pydantic 2.13.2, Uvicorn 0.52.4,
+AnyIO 4.15.1 (asyncio backend), aiosqlite 0.22.1, dependency-injector 4.49.1,
+k6 v2.2.0, one worker. Database sha256 `ec432e8211b9767a...`, verified read-only.
 
 ---
 
@@ -100,7 +108,10 @@ it is the same class of defect as the k6-on-server-cores bug caught during
 harness bring-up. The change is made **before any measured cell exists**, so no
 result is affected by it.
 
-**Topology.** 4 physical cores, 8 logical CPUs, Intel Xeon (Skylake), 1 socket.
+**Topology.** 4 physical cores, 8 logical CPUs, 1 socket. Amendment 1 recorded
+this against the box that was provisionally inspected at the time; the *final*
+host is recorded in §4b, and its sibling groups are identical, so the pinning
+layout below is unchanged.
 
 **Pinning layout, final:**
 
@@ -116,6 +127,86 @@ merely left unused, so no process can be scheduled onto them. The online/offline
 state and the sibling lists are captured per cell and recorded in the cell
 metadata, so the topology is verifiable per cell rather than asserted once.
 `runner.py` refuses to start if the server and k6 core sets overlap.
+
+### 4b. Amendment 2 — final host, environment, and two harness fixes (2026-09-28, before any measured cell)
+
+No measured study cell has been produced at the time of this amendment. One
+knee probe was run and stopped mid-probe; it is harness validation, not a
+measurement, and is excluded.
+
+**Host.** The provisioned host is Vultr **`voc-c-8c-16gb-150s-amd`** in `ord`,
+instance `e992ab49-a130-44ef-95db-d01e38ebe372`, 8 vCPU / 16 GB / 150 GB NVMe,
+AMD EPYC (Milan), 1 socket, 4 physical cores x 2 SMT threads, 8 logical CPUs,
+32 MiB L3, Ubuntu 22.04.5, kernel `5.15.0-191-generic`, `MemTotal`
+16365880 kB. Listed at $0.219/h, $160/month.
+
+This is a **dedicated-CPU** plan. Vultr's own documentation for Optimized Cloud
+Compute states: *"Vultr Optimized Cloud Compute instances are dedicated virtual
+machines"*; *"Choose **Dedicated CPU** as the instance type"*; and, for the
+`-c` (CPU Optimized) category, *"Support compute-bound applications that require
+proportionally more CPU than RAM (memory) and storage."*
+(<https://docs.vultr.com/products/compute/instances/optimized-cloud-compute/provisioning>,
+updated 26 May 2026). The `voc-c-*` plan ID is an Optimized Cloud Compute plan
+code, and the observed host has 4 physical cores backing 8 vCPU threads, which is
+consistent with dedicated vCPUs rather than oversubscribed shared ones.
+
+Amendment 1 was written against the box inspected at the time and recorded an
+Intel part; the sibling groups are identical, so the pinning layout is unchanged,
+but the vendor and RAM are corrected here. RAM is **16 GB, not the 32 GB** of the
+earlier provisional host.
+
+**The dedicated designation is not load-bearing for any claim.** Steal time is
+still read from `/proc/stat` and recorded per cell (§4a), so if the host were in
+fact oversubscribed, the recorded data would show it. The designation is
+disclosed background, not a premise; the pre-registered analysis in §7 is
+unchanged.
+
+**Three harness defects, all found and fixed during bring-up.** All three would
+have produced wrong metadata or a wrong knee rather than an error, and all are
+in files covered by the config hash:
+
+1. `knee.py` tested `window["count"]` for sample sufficiency. The k6 summary
+   stores the window request count as a top-level `window_requests`; the `window`
+   object holds only percentiles and has no `count` key. Every probe therefore
+   aborted with "reference run produced no samples" on runs that had produced
+   hundreds of good requests. Corrected to test the actual request count.
+2. The k6 `ramp` scenario ran a single 8 s stage, shorter than the 10 s warmup, so
+   all traffic fell inside warmup and the measured `window` came back `null` with
+   `window_requests` 0. Corrected to ramp and then hold at `RAMP_MAX` across the
+   full warmup + window + cooldown, so the qualifying steady window exists at the
+   rate under test.
+3. `runner.py` wrote `"plan_type": "vc2-8c-32gb(shared)"` as the default for
+   per-cell metadata while `REVIEWGATE_PLAN_TYPE` was unset on the box, so every
+   cell would have been recorded against the wrong plan and the wrong plan tier.
+   The default is now the real plan, `voc-c-8c-16gb-150s-amd`.
+
+A consequence of the first two: the very first knee probe reported
+`knee median None`, which was a harness bug and **not** evidence about capacity.
+No capacity conclusion was drawn from it.
+
+**Per-cell host facts.** Every cell now also records, read from the machine at
+run time rather than asserted: CPU model, logical CPUs present and online, online
+CPU list, physical-core count, socket count, threads per core, `MemTotal`, kernel,
+arch, and the full sibling map. The counts come from sysfs `cpu*` directories
+rather than `os.cpu_count()`, which reports *online* processors and so returns 4
+on this 8-CPU host once siblings `1,3,5,7` are offlined. This makes the §4a/§4b
+topology claim checkable from the data after the fact, and would expose a
+silently replaced host.
+
+**Smoke knees are single-probe and are not study knees.** §3 defines a knee as
+the median of three probes. The 5-rep smoke needs capacity rates before the grid
+can run, so it uses **one** probe per arm, written to `results/smoke_knees/` and
+labelled `mode: smoke`. `run_matrix.py` refuses to run `--main` from that
+directory, and refuses `--smoke` from a directory containing `mode: study` files,
+so a single-probe rate cannot be substituted for a 3-probe median. Every run
+writes `rates.json` recording which knee directory and mode produced its rates.
+Smoke data is discarded and never analysed (§9); the study knees remain the
+3-probe medians.
+
+**Config hash** for amendment 2: `5b7b0ff69d8a0d2d2dbfd5afaa1ddcf41978bdb38fb844b9cee126aed894f4ea`,
+computed on the study host and covering the 13 files listed at the head of this
+document, including `run_matrix.py`, `prepare_box.py` and `smoke_knees.py`, which
+amendment 1 omitted.
 
 The sampler is co-located with k6 deliberately: it is a 100 ms ticker whose cost
 is negligible, and keeping it off the server's cores preserves all three server
@@ -134,12 +225,15 @@ measured on the final layout and reported as-is.
 framework default and is **recorded as fixed configuration**. It is not raised,
 lowered, or tuned in response to any result.
 
-**Plan type and host noise.** The provisioned plan is `vc2-8c-32gb`, which is
-Vultr's **shared** Cloud Compute tier, not a dedicated-CPU plan. Steal time is
-read from `/proc/stat` and recorded **per cell**; high-steal cells are reported
-as a threat to validity rather than silently dropped. Any dedicated-CPU
-alternative and its cost delta are reported to the sponsor before the main run,
-and switching plans requires explicit approval.
+**Plan type and host noise.** The provisioned plan is `voc-c-8c-16gb-150s-amd`
+(dedicated-CPU Optimized Cloud Compute; see §4b for the provider citation). The
+earlier provisional host used the **shared** `vc2-8c-32gb` tier, and was replaced
+before any measured cell. Steal time is read from `/proc/stat` and recorded **per
+cell**; high-steal cells are reported as a threat to validity rather than
+silently dropped. Because steal is recorded regardless, the analysis does not
+depend on the dedicated designation being correct. Any further plan change and
+its cost delta would be reported to the sponsor before the main run, and
+switching plans requires explicit approval.
 
 **Not comparable to archived numbers.** Absolute knees and latencies from this
 study are **not comparable** to the archived R=40 study, which used a different

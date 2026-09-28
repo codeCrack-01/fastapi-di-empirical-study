@@ -18,6 +18,13 @@ analysis/experiment/.venv/
 analysis/syncasync/results/reviewgate_ro.db
 analysis/syncasync/results/cells/
 analysis/syncasync/results/smoke/
+analysis/syncasync/results/main/
+# Single-probe smoke knees: throwaway rates, provenance only.
+analysis/syncasync/results/smoke_knees/
+# Per-host topology cache. Machine-specific (core count, sibling groups, which
+# siblings are offlined) and captured on the box by prepare_box.py, so a copy
+# from another machine would silently misreport the pinning layout.
+analysis/syncasync/results/topology.json
 
 analysis/novelty/out/novelty_repo_context.json
 

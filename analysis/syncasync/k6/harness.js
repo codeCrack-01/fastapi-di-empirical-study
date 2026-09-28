@@ -26,6 +26,15 @@ const COOLDOWN = Number(__ENV.COOLDOWN_MS || 10000);
 const RAMP_MAX = Number(__ENV.RAMP_MAX || 800);
 const RAMP_MS = Number(__ENV.RAMP_MS || 8000);
 
+// The ramp scenario must span the same three phases as the steady one, or the
+// window buckets never fill. Previously it ran a single RAMP_MS stage (8 s by
+// default), which is shorter than the 10 s warmup, so every sample landed in
+// warmup and `window` came back null with window_requests 0 -- the knee search
+// then read that as "no samples" and reported no knee at all.
+//
+// The ramp itself is only the discovery mechanism: it climbs to RAMP_MAX over
+// RAMP_MS. The qualifying measurement is the STEADY window that follows at
+// RAMP_MAX, which is what `qualifies()` scores.
 export const options = SCENARIO === 'ramp'
   ? {
       scenarios: {
@@ -33,9 +42,13 @@ export const options = SCENARIO === 'ramp'
           executor: 'ramping-arrival-rate',
           startRate: 10,
           timeUnit: '1s',
-          stages: [{ target: RAMP_MAX, duration: RAMP_MS + 'ms' }],
+          stages: [
+            { target: RAMP_MAX, duration: RAMP_MS + 'ms' },
+            { target: RAMP_MAX, duration: (WARMUP + WINDOW + COOLDOWN) + 'ms' },
+          ],
           preAllocatedVUs: 200,
           maxVUs: 600,
+          gracefulStop: '0s',
         },
       },
       discardResponseBodies: true,

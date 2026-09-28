@@ -34,7 +34,8 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
-from runner import ARM, DB_PATH, RampResult, run_ramp, sha256_db  # noqa: E402
+from core_read import DB_PATH  # noqa: E402
+from runner import ARM, RampResult, run_ramp, sha256_db  # noqa: E402
 
 REF_RPS = 10.0
 REF_WINDOW_S = 30
@@ -47,13 +48,33 @@ REPS = 3
 LADDER = [10, 20, 40, 80, 160, 320, 640, 1280, 2560, 3200]
 
 
+def has_window(r: RampResult) -> bool:
+    """True if the measured window actually recorded requests.
+
+    The k6 summary carries the request count as a top-level `window_requests`;
+    the `window` object holds only the latency percentiles (p50/p95/mean/min/max)
+    and has no `count` key. Checking for a `count` there silently reports "no
+    samples" for a perfectly good run.
+    """
+    if r.window is None:
+        return False
+    if r.window.get("p95") is None:
+        return False
+    return r.extra.get("window_requests", 0) > 0
+
+
 def qualifies(r: RampResult, p95_ref: float) -> tuple[bool, str]:
-    if r.window is None or r.window.get("count", 0) == 0:
+    if not has_window(r):
         return False, "no window samples"
     if r.checks and r.checks["fails"] > 0:
         return False, f"check failures {r.checks['fails']}"
-    if r.http_error_rate is not None and r.http_error_rate > MAX_ERR:
-        return False, f"error rate {r.http_error_rate:.4f} > {MAX_ERR}"
+    # window-scoped error rate, not the top-level httpErrors which also counts
+    # warmup and cooldown; the criterion is about the measured window.
+    err = r.window_error_rate
+    if err is None:
+        err = r.extra.get("window_error_rate")
+    if err is not None and err > MAX_ERR:
+        return False, f"window error rate {err:.4f} > {MAX_ERR}"
     if r.achieved < MIN_ACHIEVED:
         return False, f"achieved {r.achieved:.3f} < {MIN_ACHIEVED}"
     p95 = r.window["p95"]
@@ -68,7 +89,7 @@ def probe_once(pattern: str, model: str, port: int, verbose: bool) -> dict:
         rate=REF_RPS, window_s=REF_WINDOW_S, warmup_s=5, cooldown_s=0,
         ramp=False, tag="knee-ref",
     )
-    if ref.window is None or ref.window.get("count", 0) == 0:
+    if not has_window(ref):
         return {"knee": None, "reason": "reference run produced no samples", "ref": None}
     p95_ref = ref.window["p95"]
     if verbose:
@@ -147,13 +168,18 @@ def main() -> int:
     ap.add_argument("--reps", type=int, default=REPS)
     ap.add_argument("--port", type=int, default=8900)
     ap.add_argument("--out", type=Path, default=None)
+    ap.add_argument("--smoke", action="store_true",
+                    help="single probe, written to the smoke knee dir; never a study knee")
     args = ap.parse_args()
 
     before = sha256_db()
-    print(f"knee probe {args.pattern}/{args.model}  reps={args.reps}")
+    reps = 1 if args.smoke else args.reps
+    tag = "SMOKE " if args.smoke else ""
+    print(f"knee probe {args.pattern}/{args.model}  reps={reps}  {tag}")
     print(f"  db sha256 before {before[:16]}")
 
-    result = measure(args.pattern, args.model, args.port, args.reps)
+    result = measure(args.pattern, args.model, args.port, reps)
+    result["mode"] = "smoke" if args.smoke else "study"
 
     after = sha256_db()
     result["db_sha256_before"] = before
@@ -162,7 +188,11 @@ def main() -> int:
     print(f"  db sha256 after  {after[:16]}  unchanged={before == after}")
     print(f"  knee median      {result['knee_median']}")
 
-    out = args.out or (HERE / "results" / f"knee_{args.pattern}_{args.model}.json")
+    # Smoke knees go to their own directory so they can never be picked up by
+    # run_matrix.py --main, which would silently substitute single-probe rates for
+    # the 3-probe medians the pre-registration specifies.
+    default_dir = HERE / "results" / ("smoke_knees" if args.smoke else "")
+    out = args.out or (default_dir / f"knee_{args.pattern}_{args.model}.json")
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(result, indent=2, default=str))
     print(f"  written {out}")
