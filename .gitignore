@@ -12,3 +12,12 @@ analysis/experiment/results/
 analysis/experiment/.venv/
 
 analysis/novelty/out/novelty_repo_context.json
+
+# --- R=40 experiment raw artifacts (2026-09-28) ---
+# The per-request k6 output and the knee ramp CSVs are 21GB / 260MB. The
+# run-level aggregates they reduce to ARE tracked, so the analysis is
+# reproducible from the repo without the raw per-request dumps.
+analysis/out/experiment/standalone_R40/knee_A.csv
+analysis/out/experiment/standalone_R40/knee_B.csv
+analysis/out/experiment/standalone_R40/steady/
+analysis/experiment/results/steady/

@@ -1,0 +1,36 @@
+{
+  "knee_rps": 320.0,
+  "base_p95_ms": 2.327,
+  "departure_ms": 6.98,
+  "mode": "A",
+  "summary": {
+    "scenario": "ramp",
+    "target": "http://127.0.0.1:8500",
+    "rate": 100,
+    "window_ms": 30000,
+    "warmup_ms": 0,
+    "window": {
+      "p50": 1415,
+      "p95": 3073.7999999999993,
+      "mean": 1377.656030754445,
+      "min": 0,
+      "max": 4296
+    },
+    "warmup": null,
+    "cooldown": {
+      "p50": 3597,
+      "p95": 5901,
+      "mean": 3229.0423855589906,
+      "min": 0,
+      "max": 7939
+    },
+    "http_req_duration": {
+      "avg": 2989.9926633202745,
+      "p95": 5850.410362299998,
+      "max": 7939.008551
+    },
+    "checkFailures": 12240,
+    "httpErrors": 0.08805866441670596,
+    "_rc": 0
+  }
+}
