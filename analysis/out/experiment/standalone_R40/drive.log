@@ -1,0 +1,17 @@
+[2026-09-27T14:08:28Z] driver start
+[2026-09-27T14:08:28Z] waiting for A.480 to finish
+[2026-09-27T14:08:28Z] A.480 complete: 161 lines in runs.csv
+[2026-09-27T14:08:28Z] benching A.480
+[2026-09-27T14:08:28Z] benched: steady_A480/ + runs_A480.csv
+[2026-09-27T14:08:28Z] measuring mode-B knee
+[pilot] mode B: server up in 0.30s, ramping to 400 rps
+[pilot] mode B: knee_rps=178.66666666666666 base_p95_ms=7.411
+[2026-09-27T14:13:33Z] mode-B knee = 178.66666666666666 rps
+[2026-09-27T14:13:33Z] mode-A knee = 320.0 rps
+[2026-09-27T14:13:33Z] levels: A:160,320; B:89,178.66666666666666,268
+[2026-09-27T14:13:33Z] launching full matrix leg (R=40): A:160,320; B:89,178.66666666666666,268
+[2026-09-27T14:13:33Z] leg PID=32326
+[2026-09-27T14:13:33Z] DRIVER_DONE
+,178.66666666666666,268
+[2026-09-27T14:13:33Z] leg PID=32326
+[2026-09-27T14:13:33Z] DRIVER_DONE
