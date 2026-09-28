@@ -21,3 +21,7 @@ analysis/out/experiment/standalone_R40/knee_A.csv
 analysis/out/experiment/standalone_R40/knee_B.csv
 analysis/out/experiment/standalone_R40/steady/
 analysis/experiment/results/steady/
+
+# 3.1GB per-request dump for the two failing A.480 cells; the diagnosis
+# derived from it is in A480_failure_diagnosis.md, which IS tracked.
+analysis/out/experiment/standalone_R40/raw_A480_failing/
