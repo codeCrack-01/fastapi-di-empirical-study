@@ -15,10 +15,15 @@ environment, and fixes two harness defects found during bring-up. **Amendment 3*
 all four async arms at 19 of 80 cells into a smoke run. **Amendment 4** (§4d) adds
 host-drift reference cells, because a single-session design on one host needs its
 host measured, not assumed. **Amendment 5** (§4e) makes rate derivation integral
-and refuses an unrunnable rate instead of silently recording a null cell. All
-five are dated before any valid measured cell.
+and refuses an unrunnable rate instead of silently recording a null cell.
+**Amendment 6** (§4f) records the thread-limiter emission defect, the
+`p2_depends/sync` threadpool-starvation deadlock it exposed, and the
+admission-control fix — including what that fix changes about what the sync
+arm measures. All six are dated before any valid measured cell.
 
 **Config hash.** `5550afe4c438387e45b0a91f8f827227a7479be619e7b53981c1f9b63b0b6adc`
+for amendments 1–5; `63a541fdc641813468fd514182792f3bd6b38cf816c987308023dbe81b37e716`
+after amendment 6.
 (amendment 5, §4a + §4b + §4c + §4d + §4e; supersedes
 `4e288aefff814721343e90649ae9d04cbae92a72b21fcd0f84cb939fe2278e38`)
 
@@ -459,6 +464,119 @@ explicit and checked.
 this change is applied on the study host and **before any measured cell is
 run**.
 
+### 4f. Amendment 6 — thread limiter emission, and the p2_depends/sync deadlock (2026-09-29, before any valid measured cell)
+
+**Two defects, one consequence.** Recorded together because the second is only
+visible once the first is fixed.
+
+**Defect 1 — the limiter was never in force.** `gen_apps.py` emitted
+
+```python
+anyio.to_thread.current_default_thread_limiter().total_tokens = POOL
+```
+
+*after* the lifespan `yield`, which placed the assignment on the shutdown path.
+During serving, the limiter therefore sat at anyio's default of 40 and the
+intended bound of 8 was never applied. This was confirmed at runtime rather
+than by reading source: a frozen server had 40 threads simultaneously inside
+`get_db`, which cannot happen if a limit of 8 is being enforced. The line now
+sits before the `yield`, and the `/__diag` endpoint reads `total_tokens: 8`
+during load.
+
+**Defect 2 — threadpool starvation in `p2_depends/sync`.** With the bound
+genuinely enforced, this arm deadlocked 7 out of 7 consecutive runs
+(`reqs=0 fails=600`, 62 s timeout each). The mechanism:
+
+1. `p2_depends/sync` is the only arm whose routes take a generator
+   dependency, `conn=Depends(get_db)`, 13 times. `get_db` holds a pooled
+   connection across the `yield` for the whole request.
+2. FastAPI suspends the generator at the yield and releases the worker thread.
+   Returning the connection requires *resuming* that generator, which requires
+   a thread.
+3. Meanwhile, other requests call `sync_conn`, which blocks in an unbounded
+   `queue.Queue.get()` — **while holding** a threadpool token.
+4. Once all 8 tokens are held by such waiters, no cleanup can ever be
+   scheduled. No connection is returned. Every later request blocks forever.
+
+At the frozen moment: `pool_free=0`, `in_body_now=8`, `unreturned=8`, and 40
+threads parked in `core_read.py:148`. No connection was orphaned, which is why
+this is starvation and not a leak; a sequential control ran 960 checkouts and
+960 returns with zero unreturned.
+
+**Why only this arm.** `p1_direct`, `p3_middleware` and `p4_container` open
+the connection with a plain `with conn_ctx()` *inside* the handler, so no
+generator is suspended across the yield and no cleanup needs a reacquired
+thread. Each ran 3/3 clean at the enforced limit. The async arms use an
+`asyncio.Queue`, so waiting holds no thread token at all. The defect is a
+property of generator dependencies in a threadpool-bound sync app, not of the
+sync execution model in general.
+
+**The fix — admission bounded to `POOL` before the sync dependency runs.**
+Scoped to `p2_depends/sync` only:
+
+```python
+async def _slot():
+    async with _slots:          # _slots = asyncio.Semaphore(POOL)
+        yield
+
+def get_db(_slot_dep=Depends(_slot)):
+    with conn_ctx() as conn:
+        yield conn
+```
+
+`_slot` is an async generator dependency, so the event loop resolves and tears
+it down and it never consumes a threadpool token. Because `get_db` depends on
+it, admission is bounded before the sync generator is entered, and the
+semaphore is held across the entire lifetime of the `get_db` generator —
+released only when `get_db` resumes and closes. The hold therefore spans the
+whole window in which the connection is checked out.
+
+The cap at `POOL` is load-bearing: a slot-holder must always be able to obtain
+a connection, so the wait-for-connection edge can never be closed by someone
+already holding a slot. This breaks the cycle rather than reordering it. A
+larger cap would reintroduce the deadlock at a higher arrival rate; a smaller
+one would idle the pool.
+
+**What this changes about what is measured — disclosed, not footnoted.**
+The arm is now back-pressured rather than unbounded. Time spent waiting for a
+semaphore slot lands in `p2_depends/sync`'s measured latency, so the sync arm
+carries an admission-control queueing cost that the other three sync arms do
+not. This is a real change to the thing being measured, in the one arm whose
+absolute latency is the least favourable of the eight, and it cannot be
+hidden behind a constant. Concretely: at 2x the offered rate, p95 moves from
+6 ms to 796 ms with throughput held near the knee — that difference is
+semaphore queueing, not service time.
+
+**Effect on the design.** The independent variable — the dependency-acquisition
+layer — is unchanged for the other seven arms, which are byte-identical before
+and after (verified by hash, not by inspection). `p2_depends/sync` is
+therefore no longer a pure "framework-native DI, unbounded" cell. Any
+comparison of its latency against another sync arm is a comparison of two
+different admission-control regimes and is labelled as such in the results.
+
+**Gate before any main-run data.** 20 consecutive runs of the real
+`apps.p2_depends.sync.app:app` at rate 750 (the p2 capacity knee), limiter 8,
+on a fresh `voc-c-8c-16gb-150s-amd` with the §4a pinning re-applied: **20/20
+clean**, every cell `reqs≈22,530 fails=0 dur=52s`, against a pre-fix signature
+of `reqs=0 fails=600 dur=62s`. A soak at 2x is recorded as a measurement with
+no pass/fail verdict attached, since slower throughput under overload is the
+expected behaviour of bounded admission and is not evidence of a deadlock.
+Equivalence re-verified on that box: 8 arms x 13 probes, byte-identical.
+
+**Open question, unchanged.** The `p4_container/sync` "1/3 partial failure"
+(§4e) is **withdrawn**, not resolved. `cells.csv` shows 10/10 clean cells with
+zero check failures, and the quoted figures appear in no archived log, so they
+cannot be reproduced or refuted from the evidence and may be an artifact of the
+pre-amendment-5 fractional-rate bug. There is no evidence linking
+`p4_container` to the deadlock above, and none is claimed.
+
+**Config hash for amendment 6:**
+`63a541fdc641813468fd514182792f3bd6b38cf816c987308023dbe81b37e716`, recorded on the
+study host after both changes are applied and **before any cell that will be
+treated as main-run data**. The hash differs from amendment 5's because
+`gen_apps.py` and `apps/p2_depends/sync/app.py` changed; the database is
+untouched and still hashes to `ec432e8211b9767a…` as in §4b.
+
 ## 5. Read paths only
 
 The app exposes the **12 read routes** of the original 21-route app. The 9 write
@@ -589,3 +707,13 @@ produced 8 one-probe knees and 19 of 80 smoke cells, all invalidated by the
 async connection-pool defect in §4c; the smoke was stopped at 19 cells and
 nothing from that pass is analyzed. Steps 2 and 3 are re-run under the
 amendment-3 config hash before the study proceeds.
+
+**Current state: at step 2, again.** The amendment-3 re-run produced 8
+one-probe knees and then 76 of 85 smoke cells, the remaining 9 being
+`p2_depends/sync` nulls from the §4f deadlock; the drift controls did not run,
+so that pass carries no host-stability evidence. It is retained as provenance
+in `analysis/syncasync/results/evidence/` and is **not analyzed**. Amendment 6
+fixes the deadlock and passed its 20-run gate, so steps 2 and 3 are re-run a
+third time under config hash `63a541fd…`. The one-probe knees and the
+`p2_depends/sync` capacity rate of 750 used in the §4f gate are harness
+inputs only, and the 8 knees from the discarded pass are not reused.

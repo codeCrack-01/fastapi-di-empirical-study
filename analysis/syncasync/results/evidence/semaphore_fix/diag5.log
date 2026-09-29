@@ -1,0 +1,8 @@
+cell 01: reqs=22546  fails=0    dur=52s ok
+cell 02: reqs=22537  fails=0    dur=52s ok
+cell 03: reqs=22537  fails=0    dur=52s ok
+cell 04: reqs=22528  fails=0    dur=52s ok
+cell 05: reqs=22533  fails=0    dur=52s ok
+
+module=diag_app:app rate=750  clean=5  wedge=0  of 5
+DONE

@@ -1,0 +1,8 @@
+cell 01: reqs=24677  fails=0    dur=53s ok
+cell 02: reqs=24260  fails=0    dur=53s ok
+cell 03: reqs=25244  fails=0    dur=53s ok
+cell 04: reqs=24183  fails=0    dur=53s ok
+cell 05: reqs=26034  fails=0    dur=53s ok
+
+module=apps.p2_depends.sync.app:app rate=1500  clean=5  wedge=0  of 5
+DONE
