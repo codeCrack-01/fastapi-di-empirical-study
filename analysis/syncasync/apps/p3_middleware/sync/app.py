@@ -18,8 +18,8 @@ def _check_db() -> None:
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     _check_db()
-    yield
     anyio.to_thread.current_default_thread_limiter().total_tokens = POOL
+    yield
 
 # docs_url/redoc_url/openapi_url are off so the exposed surface is exactly
 # the 12 read routes and nothing else -- verified by smoke.py

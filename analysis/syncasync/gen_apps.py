@@ -87,6 +87,14 @@ def _preamble(model: str, title: str, container: bool = False) -> list[str]:
         "async def lifespan(app: FastAPI):",
         "    _check_db()",
     ]
+    if model == "sync":
+        # symmetric bound: at most POOL sync handlers run at once, matching the
+        # async arm's pool of POOL connections.
+        #
+        # This must be set BEFORE the yield. It used to be emitted after it, which
+        # put it on the shutdown path, so the limiter stayed at anyio's default of
+        # 40 for the whole run and the intended bound was never in effect.
+        L.append("    anyio.to_thread.current_default_thread_limiter().total_tokens = POOL")
     if container:
         L += [
             "    app.state.container = build_container()",
@@ -95,11 +103,7 @@ def _preamble(model: str, title: str, container: bool = False) -> list[str]:
         ]
     else:
         L += ["    yield"]
-    if model == "sync":
-        # symmetric bound: at most POOL sync handlers run at once, matching the
-        # async arm's pool of POOL connections.
-        L.append("    anyio.to_thread.current_default_thread_limiter().total_tokens = POOL")
-    else:
+    if model != "sync":
         # aiosqlite keeps one non-daemon thread per connection; without this the
         # server process would not exit
         L += [
