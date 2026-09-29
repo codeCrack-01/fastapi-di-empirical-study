@@ -1,0 +1,121 @@
+{
+  "pattern": "p4_container",
+  "model": "async",
+  "reps": 1,
+  "probes": [
+    {
+      "knee": 950.0,
+      "reason": "ok",
+      "ref": 3,
+      "trace": [
+        {
+          "rate": 10.0,
+          "p95": 3,
+          "achieved": 1.0,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 20.0,
+          "p95": 3,
+          "achieved": 1.0,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 40.0,
+          "p95": 2,
+          "achieved": 1.0,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 80.0,
+          "p95": 2,
+          "achieved": 1.0,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 160.0,
+          "p95": 1,
+          "achieved": 1.0,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 320.0,
+          "p95": 2,
+          "achieved": 1.0001041666666668,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 640.0,
+          "p95": 1,
+          "achieved": 1.0,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 1280.0,
+          "p95": 2088,
+          "achieved": 0.776328125,
+          "ok": false,
+          "why": "achieved 0.776 < 0.98"
+        },
+        {
+          "rate": 960.0,
+          "p95": 10,
+          "achieved": 0.9997222222222223,
+          "ok": false,
+          "why": "p95 10.00 > 3.0x ref 3.00"
+        },
+        {
+          "rate": 800.0,
+          "p95": 2,
+          "achieved": 1.0,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 880.0,
+          "p95": 2,
+          "achieved": 0.9998484848484849,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 920.0,
+          "p95": 7,
+          "achieved": 1.0001811594202898,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 940.0,
+          "p95": 3,
+          "achieved": 1.0003900709219857,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 950.0,
+          "p95": 9,
+          "achieved": 1.0009473684210526,
+          "ok": true,
+          "why": "ok"
+        }
+      ],
+      "censored": false,
+      "index": 0,
+      "seconds": 885.6
+    }
+  ],
+  "knee_median": 950.0,
+  "knees": [
+    950.0
+  ],
+  "mode": "smoke",
+  "arm": "p4_container/async"
+}

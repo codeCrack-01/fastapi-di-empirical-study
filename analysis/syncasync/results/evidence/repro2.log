@@ -1,0 +1,15 @@
+--- attempt 1: rc=0 dur=52.2s
+    window_requests=22525 window_errors=0 checks=78002 checkFailures=0 iterations=39001
+    httpErrors=0 p50=1 p95=9
+    warmup={'p50': 1, 'p95': 7, 'mean': 2.339989279013669, 'min': 0, 'max': 144} window={'p50': 1, 'p95': 9, 'mean': 2.11480577136515, 'min': 0, 'max': 111} cooldown={'p50': 1, 'p95': 4, 'mean': 1.604393166185933, 'min': 0, 'max': 58}
+    SERVER LOG: 
+--- attempt 2: rc=0 dur=52.2s
+    window_requests=22520 window_errors=0 checks=78002 checkFailures=0 iterations=39001
+    httpErrors=0 p50=1 p95=7
+    warmup={'p50': 1, 'p95': 13, 'mean': 2.9807022246046637, 'min': 0, 'max': 133} window={'p50': 1, 'p95': 7, 'mean': 1.744005328596803, 'min': 0, 'max': 61} cooldown={'p50': 1, 'p95': 6, 'mean': 1.7419891340503382, 'min': 0, 'max': 59}
+    SERVER LOG: 
+--- attempt 3: rc=0 dur=82.2s
+    window_requests=20118 window_errors=0 checks=55138 checkFailures=0 iterations=27569
+    httpErrors=0 p50=1 p95=13
+    warmup={'p50': 1, 'p95': 12, 'mean': 2.462756676956113, 'min': 0, 'max': 88} window={'p50': 1, 'p95': 13, 'mean': 2.7801968386519533, 'min': 0, 'max': 155} cooldown=None
+    SERVER LOG: 

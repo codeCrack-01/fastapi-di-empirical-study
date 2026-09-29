@@ -1,0 +1,7 @@
+cell 01: reqs=0      fails=600  dur=62s <== WEDGE
+cell 02: reqs=0      fails=600  dur=62s <== WEDGE
+cell 03: reqs=0      fails=600  dur=62s <== WEDGE
+cell 04: reqs=0      fails=600  dur=62s <== WEDGE
+cell 05: reqs=0      fails=600  dur=62s <== WEDGE
+cell 06: reqs=0      fails=600  dur=62s <== WEDGE
+cell 07: reqs=0      fails=600  dur=62s <== WEDGE

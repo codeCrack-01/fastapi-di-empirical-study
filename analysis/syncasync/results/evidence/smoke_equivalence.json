@@ -1,0 +1,444 @@
+{
+  "arms": {
+    "p1_direct/sync": {
+      "/health": {
+        "status": 200,
+        "body_sha256": "6bc0da1f42f96fc3"
+      },
+      "/reviews?limit=20&offset=0": {
+        "status": 200,
+        "body_sha256": "82da603f714994d5"
+      },
+      "/reviews/search?q=Review&limit=10": {
+        "status": 200,
+        "body_sha256": "d39e85b02857ea33"
+      },
+      "/reviews/stats": {
+        "status": 200,
+        "body_sha256": "7c002ae4e03d309b"
+      },
+      "/reviews/export": {
+        "status": 200,
+        "body_sha256": "33a81e4f038aa278"
+      },
+      "/users/me": {
+        "status": 200,
+        "body_sha256": "fc9353b53941c6d9"
+      },
+      "/users/admins": {
+        "status": 200,
+        "body_sha256": "91390db966538a69"
+      },
+      "/admin/dashboard": {
+        "status": 200,
+        "body_sha256": "3f2eedec1ca0d179"
+      },
+      "/admin/config": {
+        "status": 200,
+        "body_sha256": "78966aefe02e539e"
+      },
+      "/reviews/1": {
+        "status": 200,
+        "body_sha256": "186d5aabd4af1a12"
+      },
+      "/reviews/1/comments": {
+        "status": 200,
+        "body_sha256": "0589463dced0fb2f"
+      },
+      "/users/alice/audit": {
+        "status": 200,
+        "body_sha256": "eeb85c2675888473"
+      },
+      "401:/users/me": {
+        "status": 401,
+        "body_sha256": "cfec9feffbcc0dab"
+      }
+    },
+    "p1_direct/async": {
+      "/health": {
+        "status": 200,
+        "body_sha256": "6bc0da1f42f96fc3"
+      },
+      "/reviews?limit=20&offset=0": {
+        "status": 200,
+        "body_sha256": "82da603f714994d5"
+      },
+      "/reviews/search?q=Review&limit=10": {
+        "status": 200,
+        "body_sha256": "d39e85b02857ea33"
+      },
+      "/reviews/stats": {
+        "status": 200,
+        "body_sha256": "7c002ae4e03d309b"
+      },
+      "/reviews/export": {
+        "status": 200,
+        "body_sha256": "33a81e4f038aa278"
+      },
+      "/users/me": {
+        "status": 200,
+        "body_sha256": "fc9353b53941c6d9"
+      },
+      "/users/admins": {
+        "status": 200,
+        "body_sha256": "91390db966538a69"
+      },
+      "/admin/dashboard": {
+        "status": 200,
+        "body_sha256": "3f2eedec1ca0d179"
+      },
+      "/admin/config": {
+        "status": 200,
+        "body_sha256": "78966aefe02e539e"
+      },
+      "/reviews/1": {
+        "status": 200,
+        "body_sha256": "186d5aabd4af1a12"
+      },
+      "/reviews/1/comments": {
+        "status": 200,
+        "body_sha256": "0589463dced0fb2f"
+      },
+      "/users/alice/audit": {
+        "status": 200,
+        "body_sha256": "eeb85c2675888473"
+      },
+      "401:/users/me": {
+        "status": 401,
+        "body_sha256": "cfec9feffbcc0dab"
+      }
+    },
+    "p2_depends/sync": {
+      "/health": {
+        "status": 200,
+        "body_sha256": "6bc0da1f42f96fc3"
+      },
+      "/reviews?limit=20&offset=0": {
+        "status": 200,
+        "body_sha256": "82da603f714994d5"
+      },
+      "/reviews/search?q=Review&limit=10": {
+        "status": 200,
+        "body_sha256": "d39e85b02857ea33"
+      },
+      "/reviews/stats": {
+        "status": 200,
+        "body_sha256": "7c002ae4e03d309b"
+      },
+      "/reviews/export": {
+        "status": 200,
+        "body_sha256": "33a81e4f038aa278"
+      },
+      "/users/me": {
+        "status": 200,
+        "body_sha256": "fc9353b53941c6d9"
+      },
+      "/users/admins": {
+        "status": 200,
+        "body_sha256": "91390db966538a69"
+      },
+      "/admin/dashboard": {
+        "status": 200,
+        "body_sha256": "3f2eedec1ca0d179"
+      },
+      "/admin/config": {
+        "status": 200,
+        "body_sha256": "78966aefe02e539e"
+      },
+      "/reviews/1": {
+        "status": 200,
+        "body_sha256": "186d5aabd4af1a12"
+      },
+      "/reviews/1/comments": {
+        "status": 200,
+        "body_sha256": "0589463dced0fb2f"
+      },
+      "/users/alice/audit": {
+        "status": 200,
+        "body_sha256": "eeb85c2675888473"
+      },
+      "401:/users/me": {
+        "status": 401,
+        "body_sha256": "cfec9feffbcc0dab"
+      }
+    },
+    "p2_depends/async": {
+      "/health": {
+        "status": 200,
+        "body_sha256": "6bc0da1f42f96fc3"
+      },
+      "/reviews?limit=20&offset=0": {
+        "status": 200,
+        "body_sha256": "82da603f714994d5"
+      },
+      "/reviews/search?q=Review&limit=10": {
+        "status": 200,
+        "body_sha256": "d39e85b02857ea33"
+      },
+      "/reviews/stats": {
+        "status": 200,
+        "body_sha256": "7c002ae4e03d309b"
+      },
+      "/reviews/export": {
+        "status": 200,
+        "body_sha256": "33a81e4f038aa278"
+      },
+      "/users/me": {
+        "status": 200,
+        "body_sha256": "fc9353b53941c6d9"
+      },
+      "/users/admins": {
+        "status": 200,
+        "body_sha256": "91390db966538a69"
+      },
+      "/admin/dashboard": {
+        "status": 200,
+        "body_sha256": "3f2eedec1ca0d179"
+      },
+      "/admin/config": {
+        "status": 200,
+        "body_sha256": "78966aefe02e539e"
+      },
+      "/reviews/1": {
+        "status": 200,
+        "body_sha256": "186d5aabd4af1a12"
+      },
+      "/reviews/1/comments": {
+        "status": 200,
+        "body_sha256": "0589463dced0fb2f"
+      },
+      "/users/alice/audit": {
+        "status": 200,
+        "body_sha256": "eeb85c2675888473"
+      },
+      "401:/users/me": {
+        "status": 401,
+        "body_sha256": "cfec9feffbcc0dab"
+      }
+    },
+    "p3_middleware/sync": {
+      "/health": {
+        "status": 200,
+        "body_sha256": "6bc0da1f42f96fc3"
+      },
+      "/reviews?limit=20&offset=0": {
+        "status": 200,
+        "body_sha256": "82da603f714994d5"
+      },
+      "/reviews/search?q=Review&limit=10": {
+        "status": 200,
+        "body_sha256": "d39e85b02857ea33"
+      },
+      "/reviews/stats": {
+        "status": 200,
+        "body_sha256": "7c002ae4e03d309b"
+      },
+      "/reviews/export": {
+        "status": 200,
+        "body_sha256": "33a81e4f038aa278"
+      },
+      "/users/me": {
+        "status": 200,
+        "body_sha256": "fc9353b53941c6d9"
+      },
+      "/users/admins": {
+        "status": 200,
+        "body_sha256": "91390db966538a69"
+      },
+      "/admin/dashboard": {
+        "status": 200,
+        "body_sha256": "3f2eedec1ca0d179"
+      },
+      "/admin/config": {
+        "status": 200,
+        "body_sha256": "78966aefe02e539e"
+      },
+      "/reviews/1": {
+        "status": 200,
+        "body_sha256": "186d5aabd4af1a12"
+      },
+      "/reviews/1/comments": {
+        "status": 200,
+        "body_sha256": "0589463dced0fb2f"
+      },
+      "/users/alice/audit": {
+        "status": 200,
+        "body_sha256": "eeb85c2675888473"
+      },
+      "401:/users/me": {
+        "status": 401,
+        "body_sha256": "cfec9feffbcc0dab"
+      }
+    },
+    "p3_middleware/async": {
+      "/health": {
+        "status": 200,
+        "body_sha256": "6bc0da1f42f96fc3"
+      },
+      "/reviews?limit=20&offset=0": {
+        "status": 200,
+        "body_sha256": "82da603f714994d5"
+      },
+      "/reviews/search?q=Review&limit=10": {
+        "status": 200,
+        "body_sha256": "d39e85b02857ea33"
+      },
+      "/reviews/stats": {
+        "status": 200,
+        "body_sha256": "7c002ae4e03d309b"
+      },
+      "/reviews/export": {
+        "status": 200,
+        "body_sha256": "33a81e4f038aa278"
+      },
+      "/users/me": {
+        "status": 200,
+        "body_sha256": "fc9353b53941c6d9"
+      },
+      "/users/admins": {
+        "status": 200,
+        "body_sha256": "91390db966538a69"
+      },
+      "/admin/dashboard": {
+        "status": 200,
+        "body_sha256": "3f2eedec1ca0d179"
+      },
+      "/admin/config": {
+        "status": 200,
+        "body_sha256": "78966aefe02e539e"
+      },
+      "/reviews/1": {
+        "status": 200,
+        "body_sha256": "186d5aabd4af1a12"
+      },
+      "/reviews/1/comments": {
+        "status": 200,
+        "body_sha256": "0589463dced0fb2f"
+      },
+      "/users/alice/audit": {
+        "status": 200,
+        "body_sha256": "eeb85c2675888473"
+      },
+      "401:/users/me": {
+        "status": 401,
+        "body_sha256": "cfec9feffbcc0dab"
+      }
+    },
+    "p4_container/sync": {
+      "/health": {
+        "status": 200,
+        "body_sha256": "6bc0da1f42f96fc3"
+      },
+      "/reviews?limit=20&offset=0": {
+        "status": 200,
+        "body_sha256": "82da603f714994d5"
+      },
+      "/reviews/search?q=Review&limit=10": {
+        "status": 200,
+        "body_sha256": "d39e85b02857ea33"
+      },
+      "/reviews/stats": {
+        "status": 200,
+        "body_sha256": "7c002ae4e03d309b"
+      },
+      "/reviews/export": {
+        "status": 200,
+        "body_sha256": "33a81e4f038aa278"
+      },
+      "/users/me": {
+        "status": 200,
+        "body_sha256": "fc9353b53941c6d9"
+      },
+      "/users/admins": {
+        "status": 200,
+        "body_sha256": "91390db966538a69"
+      },
+      "/admin/dashboard": {
+        "status": 200,
+        "body_sha256": "3f2eedec1ca0d179"
+      },
+      "/admin/config": {
+        "status": 200,
+        "body_sha256": "78966aefe02e539e"
+      },
+      "/reviews/1": {
+        "status": 200,
+        "body_sha256": "186d5aabd4af1a12"
+      },
+      "/reviews/1/comments": {
+        "status": 200,
+        "body_sha256": "0589463dced0fb2f"
+      },
+      "/users/alice/audit": {
+        "status": 200,
+        "body_sha256": "eeb85c2675888473"
+      },
+      "401:/users/me": {
+        "status": 401,
+        "body_sha256": "cfec9feffbcc0dab"
+      }
+    },
+    "p4_container/async": {
+      "/health": {
+        "status": 200,
+        "body_sha256": "6bc0da1f42f96fc3"
+      },
+      "/reviews?limit=20&offset=0": {
+        "status": 200,
+        "body_sha256": "82da603f714994d5"
+      },
+      "/reviews/search?q=Review&limit=10": {
+        "status": 200,
+        "body_sha256": "d39e85b02857ea33"
+      },
+      "/reviews/stats": {
+        "status": 200,
+        "body_sha256": "7c002ae4e03d309b"
+      },
+      "/reviews/export": {
+        "status": 200,
+        "body_sha256": "33a81e4f038aa278"
+      },
+      "/users/me": {
+        "status": 200,
+        "body_sha256": "fc9353b53941c6d9"
+      },
+      "/users/admins": {
+        "status": 200,
+        "body_sha256": "91390db966538a69"
+      },
+      "/admin/dashboard": {
+        "status": 200,
+        "body_sha256": "3f2eedec1ca0d179"
+      },
+      "/admin/config": {
+        "status": 200,
+        "body_sha256": "78966aefe02e539e"
+      },
+      "/reviews/1": {
+        "status": 200,
+        "body_sha256": "186d5aabd4af1a12"
+      },
+      "/reviews/1/comments": {
+        "status": 200,
+        "body_sha256": "0589463dced0fb2f"
+      },
+      "/users/alice/audit": {
+        "status": 200,
+        "body_sha256": "eeb85c2675888473"
+      },
+      "401:/users/me": {
+        "status": 401,
+        "body_sha256": "cfec9feffbcc0dab"
+      }
+    }
+  },
+  "coroutine_offset": {
+    "calls": 50000,
+    "plain_def_us": 0.0305,
+    "resolve_async_def_us": 0.2077,
+    "offset_us": 0.1772
+  },
+  "failures": [],
+  "passed": true
+}

@@ -1,0 +1,121 @@
+{
+  "pattern": "p2_depends",
+  "model": "sync",
+  "reps": 1,
+  "probes": [
+    {
+      "knee": 750.0,
+      "reason": "ok",
+      "ref": 3,
+      "trace": [
+        {
+          "rate": 10.0,
+          "p95": 3,
+          "achieved": 1.0,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 20.0,
+          "p95": 3,
+          "achieved": 1.0,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 40.0,
+          "p95": 2,
+          "achieved": 1.0,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 80.0,
+          "p95": 2,
+          "achieved": 1.0,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 160.0,
+          "p95": 2,
+          "achieved": 1.0,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 320.0,
+          "p95": 2,
+          "achieved": 1.0,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 640.0,
+          "p95": 2,
+          "achieved": 1.0001041666666668,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 1280.0,
+          "p95": null,
+          "achieved": 0.0,
+          "ok": false,
+          "why": "no window samples"
+        },
+        {
+          "rate": 960.0,
+          "p95": 25,
+          "achieved": 0.10024305555555556,
+          "ok": false,
+          "why": "achieved 0.100 < 0.98"
+        },
+        {
+          "rate": 800.0,
+          "p95": 63,
+          "achieved": 0.04845833333333333,
+          "ok": false,
+          "why": "achieved 0.048 < 0.98"
+        },
+        {
+          "rate": 720.0,
+          "p95": 3,
+          "achieved": 1.0,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 760.0,
+          "p95": 7,
+          "achieved": 0.7029385964912281,
+          "ok": false,
+          "why": "achieved 0.703 < 0.98"
+        },
+        {
+          "rate": 740.0,
+          "p95": 7,
+          "achieved": 1.000045045045045,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 750.0,
+          "p95": 2,
+          "achieved": 0.9997333333333333,
+          "ok": true,
+          "why": "ok"
+        }
+      ],
+      "censored": false,
+      "index": 0,
+      "seconds": 959.3
+    }
+  ],
+  "knee_median": 750.0,
+  "knees": [
+    750.0
+  ],
+  "mode": "smoke",
+  "arm": "p2_depends/sync"
+}
