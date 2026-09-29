@@ -71,9 +71,21 @@ stayed open, the log stayed empty, and `/health` stopped answering. Diagnosis
   and every later request blocks forever.
 - **Why it is confined to one arm.** `p1_direct/sync` and `p3_middleware/sync`
   open the connection with a plain `with conn_ctx()` inside the handler, so no
-  generator is suspended; both ran 3/3 clean. `p4_container/sync` showed 1/3
-  partial failures and is unexplained. The async arms are unaffected: their pool
-  is an `asyncio.Queue`, so waiting holds no thread token.
+  generator is suspended; both ran 3/3 clean. The async arms are unaffected:
+  their pool is an `asyncio.Queue`, so waiting holds no thread token.
+- **Correction re: `p4_container/sync`.** An earlier note here reported 1/3
+  partial failures (`reqs=381`, `checkFailures=1364`) and called them
+  unexplained. That claim does not survive checking and is withdrawn. The
+  `smoke/cells.csv` in this directory shows `p4_container/sync` **10/10 clean**:
+  `check_fails=0` and `window_errors=0` in every cell, with overload cells
+  reaching achieved rates of 0.64-0.76, which is the expected shape for an
+  overload condition. The 381/1364 figures appear nowhere in this archive -- not
+  in `cells.csv`, not in the `wedge*.log`, `repro*.log` or `loop_fixed.log`
+  files here. They came from an isolation run that was never archived, so they
+  cannot be reproduced or refuted from the evidence, and they may be an
+  artifact of the pre-`9522d0d` fractional-rate bug rather than a property of
+  this arm. There is no evidence that `p4_container` shares the p2 deadlock
+  mechanism, and it must not be described as having one.
 
 ### The limiter finding (important, and counter-intuitive)
 

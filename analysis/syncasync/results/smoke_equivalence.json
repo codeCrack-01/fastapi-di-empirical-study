@@ -435,9 +435,9 @@
   },
   "coroutine_offset": {
     "calls": 50000,
-    "plain_def_us": 0.0358,
-    "resolve_async_def_us": 0.2122,
-    "offset_us": 0.1764
+    "plain_def_us": 0.0701,
+    "resolve_async_def_us": 0.5248,
+    "offset_us": 0.4547
   },
   "failures": [],
   "passed": true

@@ -26,7 +26,20 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title='ReviewGate-R-P2-sync', lifespan=lifespan,
               docs_url=None, redoc_url=None, openapi_url=None)
 
-def get_db():
+import asyncio
+
+_slots = None
+
+
+async def _slot():
+    global _slots
+    if _slots is None:
+        _slots = asyncio.Semaphore(POOL)
+    async with _slots:
+        yield
+
+
+def get_db(_slot_dep=Depends(_slot)):
     with conn_ctx() as conn:
         yield conn
 

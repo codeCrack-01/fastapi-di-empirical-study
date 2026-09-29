@@ -149,8 +149,44 @@ def p1(pattern: str, model: str) -> str:
 def p2(pattern: str, model: str) -> str:
     L = _preamble(model, f"ReviewGate-R-P2-{model}")
     if model == "sync":
+        # This is the ONLY arm that takes a generator dependency, and the only
+        # one that can deadlock. get_db holds a pooled connection across the
+        # yield for the whole request; FastAPI suspends the generator there and
+        # releases the worker thread, but returning the connection needs the
+        # generator to resume, which needs a thread. Other handlers meanwhile
+        # block in sync_conn's unbounded queue.get() WHILE HOLDING threadpool
+        # tokens. Once the tokens are all held by waiters, no cleanup can ever be
+        # scheduled, so no connection is ever returned and every later request
+        # blocks forever. Measured at limiter=8: 7/7 wedges.
+        #
+        # _slot is an async generator dependency, so it is resolved and torn
+        # down by the event loop and never consumes a threadpool token. Making
+        # get_db depend on it means admission is bounded BEFORE the sync
+        # generator is entered. The semaphore is held across the entire
+        # lifetime of the get_db generator -- released only when get_db resumes
+        # and closes -- so the hold covers the whole window in which the
+        # connection is checked out.
+        #
+        # Capped at POOL deliberately: a slot-holder must always be able to get
+        # a connection, so the wait-for-connection edge can never be closed by a
+        # slot-holder. This breaks the cycle rather than reordering it.
         L += [
-            "def get_db():",
+            # imported here rather than in _preamble so the other seven arms stay
+            # byte-identical; only this arm uses asyncio
+            "import asyncio",
+            "",
+            "_slots = None",
+            "",
+            "",
+            "async def _slot():",
+            "    global _slots",
+            "    if _slots is None:",
+            "        _slots = asyncio.Semaphore(POOL)",
+            "    async with _slots:",
+            "        yield",
+            "",
+            "",
+            "def get_db(_slot_dep=Depends(_slot)):",
             "    with conn_ctx() as conn:",
             "        yield conn",
             "",
