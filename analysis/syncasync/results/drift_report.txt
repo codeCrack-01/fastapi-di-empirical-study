@@ -1,22 +1,29 @@
-host-drift report: box6_snapshot/results/main/cells.csv
+host-drift report: analysis/syncasync/box6_snapshot/results/main/cells.csv
 reference cell: driftref/s1_direct/sync@200 @ 200 rps
 
- # after_cell      p50      p95     mean  ach_rate  steal  db_ok
- 0          0     1.00     1.00     0.60   200.000      0   True
- 1         96     1.00     1.00     0.61   200.000      0   True
- 2        192     1.00     1.00     0.65   200.000      0   True
- 3        288     1.00     1.00     0.64   200.000      0   True
- 4        480     1.00     1.00     0.67   200.000      0   True
+ # after_cell      p50      p95      p99     mean  ach_rate  steal  db_ok
+ 0          0    0.512    0.885    1.264    0.598   200.000      0   True
+ 1         96    0.510    0.883    1.331    0.610   200.000      0   True
+ 2        192    0.554    0.922    1.357    0.646   200.000      0   True
+ 3        288    0.517    0.893    1.404    0.642   200.000      0   True
+ 4        480    0.557    0.956    1.395    0.665   200.000      0   True
 
 reference cells usable : 5 of 5
-p95 median             : 1.00 ms
-p95 min / max          : 1.00 / 1.00 ms
-p95 spread (max-min)   : 0.00 ms (0.0% of median)
-first-half -> second-half p95: 1.00 -> 1.00 ms (+0.0%)
-p50 min / max          : 1.00 / 1.00 ms
+p95 median             : 0.893 ms
+p95 min / max          : 0.883 / 0.956 ms
+p95 spread (max-min)   : 0.073 ms (8.1% of median)
+first-half -> second-half p95: 0.884 -> 0.922 ms (+4.3%)
+p50 min / max          : 0.510 / 0.557 ms
+p99 median             : 1.357 ms  (primary metric family)
+p99 spread (max-min)   : 0.140 ms (10.3% of median)
+first-half -> second-half p99: 1.297 -> 1.395 ms (+7.5%)
+absolute p99 drift     : 0.140 ms across the session
 steal jiffies min / max: 0 / 0
 
-VERDICT: no material host drift (p95 spread 0.0% <= 10%).
-The single-session design is not undermined by host drift over this
-session. This bounds drift for THIS session only; it is not a claim
-that the host is stable in general or across sessions.
+VERDICT: no material host drift at p95 (spread 8.1% <= 10%).
+This bounds drift for THIS session only; it is not a claim that the host is
+stable in general or across sessions. Because the run is rate-major, time is
+confounded with offered rate rather than with arm, and the two arms of every
+pair occupy adjacent slots roughly 30 s apart, so a drift of this size acts as
+common-mode inflation of absolute latencies at later rates rather than as a
+bias in any paired difference.
