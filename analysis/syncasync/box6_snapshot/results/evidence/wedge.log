@@ -1,0 +1,34 @@
+k6 done rc=0 reqs=22536 fails=0
+  diag: {"pool_free": 8, "checkouts": 39002, "returns": 39002, "unreturned": 0, "in_body_now": 0, "max_in_body": 8}
+  diag: {"pool_free": 8, "checkouts": 39002, "returns": 39002, "unreturned": 0, "in_body_now": 0, "max_in_body": 8}
+  diag: {"pool_free": 8, "checkouts": 39002, "returns": 39002, "unreturned": 0, "in_body_now": 0, "max_in_body": 8}
+  diag: {"pool_free": 8, "checkouts": 39002, "returns": 39002, "unreturned": 0, "in_body_now": 0, "max_in_body": 8}
+  diag: {"pool_free": 8, "checkouts": 39002, "returns": 39002, "unreturned": 0, "in_body_now": 0, "max_in_body": 8}
+  diag: {"pool_free": 8, "checkouts": 39002, "returns": 39002, "unreturned": 0, "in_body_now": 0, "max_in_body": 8}
+  diag: {"pool_free": 8, "checkouts": 39002, "returns": 39002, "unreturned": 0, "in_body_now": 0, "max_in_body": 8}
+  diag: {"pool_free": 8, "checkouts": 39002, "returns": 39002, "unreturned": 0, "in_body_now": 0, "max_in_body": 8}
+  diag: {"pool_free": 8, "checkouts": 39002, "returns": 39002, "unreturned": 0, "in_body_now": 0, "max_in_body": 8}
+  diag: {"pool_free": 8, "checkouts": 39002, "returns": 39002, "unreturned": 0, "in_body_now": 0, "max_in_body": 8}
+  diag: {"pool_free": 8, "checkouts": 39002, "returns": 39002, "unreturned": 0, "in_body_now": 0, "max_in_body": 8}
+  diag: {"pool_free": 8, "checkouts": 39002, "returns": 39002, "unreturned": 0, "in_body_now": 0, "max_in_body": 8}
+  diag: {"pool_free": 8, "checkouts": 39002, "returns": 39002, "unreturned": 0, "in_body_now": 0, "max_in_body": 8}
+  diag: {"pool_free": 8, "checkouts": 39002, "returns": 39002, "unreturned": 0, "in_body_now": 0, "max_in_body": 8}
+  diag: {"pool_free": 8, "checkouts": 39002, "returns": 39002, "unreturned": 0, "in_body_now": 0, "max_in_body": 8}
+  diag: {"pool_free": 8, "checkouts": 39002, "returns": 39002, "unreturned": 0, "in_body_now": 0, "max_in_body": 8}
+  diag: {"pool_free": 8, "checkouts": 39002, "returns": 39002, "unreturned": 0, "in_body_now": 0, "max_in_body": 8}
+  diag: {"pool_free": 8, "checkouts": 39002, "returns": 39002, "unreturned": 0, "in_body_now": 0, "max_in_body": 8}
+  diag: {"pool_free": 8, "checkouts": 39002, "returns": 39002, "unreturned": 0, "in_body_now": 0, "max_in_body": 8}
+  diag: {"pool_free": 8, "checkouts": 39002, "returns": 39002, "unreturned": 0, "in_body_now": 0, "max_in_body": 8}
+  diag: {"pool_free": 8, "checkouts": 39002, "returns": 39002, "unreturned": 0, "in_body_now": 0, "max_in_body": 8}
+  diag: {"pool_free": 8, "checkouts": 39002, "returns": 39002, "unreturned": 0, "in_body_now": 0, "max_in_body": 8}
+  diag: {"pool_free": 8, "checkouts": 39002, "returns": 39002, "unreturned": 0, "in_body_now": 0, "max_in_body": 8}
+  diag: {"pool_free": 8, "checkouts": 39002, "returns": 39002, "unreturned": 0, "in_body_now": 0, "max_in_body": 8}
+  diag: {"pool_free": 8, "checkouts": 39002, "returns": 39002, "unreturned": 0, "in_body_now": 0, "max_in_body": 8}
+  diag: {"pool_free": 8, "checkouts": 39002, "returns": 39002, "unreturned": 0, "in_body_now": 0, "max_in_body": 8}
+  diag: {"pool_free": 8, "checkouts": 39002, "returns": 39002, "unreturned": 0, "in_body_now": 0, "max_in_body": 8}
+  diag: {"pool_free": 8, "checkouts": 39002, "returns": 39002, "unreturned": 0, "in_body_now": 0, "max_in_body": 8}
+  diag: {"pool_free": 8, "checkouts": 39002, "returns": 39002, "unreturned": 0, "in_body_now": 0, "max_in_body": 8}
+  diag: {"pool_free": 8, "checkouts": 39002, "returns": 39002, "unreturned": 0, "in_body_now": 0, "max_in_body": 8}
+=== wedged; SIGABRT for full thread dump ===
+dump bytes: 13813
+DONE

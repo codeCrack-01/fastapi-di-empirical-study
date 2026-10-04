@@ -1,0 +1,7 @@
+  1 p4_container/sync      dur=   53.1s win_req=11999 iters=20801 max_ms=47.424103 fails=0
+  2 p1_direct/sync         dur=   52.9s win_req=11997 iters=20801 max_ms=71.723149 fails=0
+  3 p4_container/sync      dur=   53.1s win_req=11997 iters=20801 max_ms=53.039582 fails=0
+  4 p1_direct/sync         dur=   53.1s win_req=11999 iters=20801 max_ms=50.072242 fails=0
+  5 p4_container/sync      dur=   53.0s win_req=11998 iters=20801 max_ms=51.155453 fails=0
+  6 p1_direct/async        dur=   52.8s win_req=11999 iters=20801 max_ms=38.432571 fails=0
+DONE

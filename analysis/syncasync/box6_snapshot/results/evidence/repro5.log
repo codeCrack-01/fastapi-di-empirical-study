@@ -1,0 +1,141 @@
+[01] reqs=     0 fails= 600 health=ERR TimeoutError diag=ERR TimeoutError  <== HUNG
+=== hung; probing again, then SIGABRT for thread dump ===
+    health=ERR TimeoutError
+    diag  =ERR TimeoutError
+--- server log 43327 bytes; top frames ---
+     80x contextlib.py:__enter__
+     42x threading.py:wait
+     42x queue.py:get
+     42x _asyncio.py:run
+     42x threading.py:_bootstrap_inner
+     42x threading.py:_bootstrap
+     40x core_read.py:sync_conn
+     40x app.py:get_db
+      2x runners.py:run
+      2x core.py:invoke
+      1x selectors.py:select
+      1x base_events.py:_run_once
+--- queue.get / limiter lines ---
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+    File "/root/study/core_read.py", line 148 in sync_conn
+    File "/root/study/apps/p2_depends/sync/app.py", line 30 in get_db
+    File "/root/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/queue.py", line 171 in get
+DONE

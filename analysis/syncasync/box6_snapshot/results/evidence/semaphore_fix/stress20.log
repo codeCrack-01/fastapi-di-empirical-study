@@ -1,0 +1,23 @@
+cell 01: reqs=22548  fails=0    dur=52s ok
+cell 02: reqs=22534  fails=0    dur=52s ok
+cell 03: reqs=22554  fails=0    dur=52s ok
+cell 04: reqs=22541  fails=0    dur=52s ok
+cell 05: reqs=22532  fails=0    dur=52s ok
+cell 06: reqs=22540  fails=0    dur=52s ok
+cell 07: reqs=22535  fails=0    dur=52s ok
+cell 08: reqs=22530  fails=0    dur=52s ok
+cell 09: reqs=22528  fails=0    dur=52s ok
+cell 10: reqs=22545  fails=0    dur=52s ok
+cell 11: reqs=22527  fails=0    dur=52s ok
+cell 12: reqs=22538  fails=0    dur=52s ok
+cell 13: reqs=22526  fails=0    dur=52s ok
+cell 14: reqs=22535  fails=0    dur=52s ok
+cell 15: reqs=22542  fails=0    dur=52s ok
+cell 16: reqs=22536  fails=0    dur=52s ok
+cell 17: reqs=22527  fails=0    dur=52s ok
+cell 18: reqs=22530  fails=0    dur=52s ok
+cell 19: reqs=22536  fails=0    dur=52s ok
+cell 20: reqs=22529  fails=0    dur=52s ok
+
+module=apps.p2_depends.sync.app:app rate=750  clean=20  wedge=0  of 20
+DONE

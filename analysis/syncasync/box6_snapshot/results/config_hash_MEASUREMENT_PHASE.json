@@ -1,0 +1,72 @@
+{
+  "config_sha256": "9dc294034d4a7b10dd2e1f7a530d9c402053610f04131621f30b3fdb4b1a4869",
+  "files": {
+    "service": {
+      "file": "core_read.py",
+      "sha256": "397e7ad62b032f940f9beb496103ae4598aef50618ab946236448574c496bd16"
+    },
+    "routes": {
+      "file": "routes_read.py",
+      "sha256": "38ecaa6cf6383ef436c17200c158cf2a3e5c9df197407e4d75546a47132906c3"
+    },
+    "generator": {
+      "file": "gen_apps.py",
+      "sha256": "bd9d06a3394f1ca08040c5b16a2daebd91a17134ba55ca3dc79bffcd7571e164"
+    },
+    "pool+runner": {
+      "file": "runner.py",
+      "sha256": "3be0c9d9171323551858072d6e3bb8d79de02f0f5e85daa02c45c5ab6f3d5c2d"
+    },
+    "pinning": {
+      "file": "prepare_box.py",
+      "sha256": "9849e382645c7355021be258f12ee8cb68575dc0fabf4f1eafbb83a45b4a4d06"
+    },
+    "orchestrator": {
+      "file": "run_matrix.py",
+      "sha256": "795113a11728e8e513cda51da98e609b14c616d723a66292728c02d58c4a27d9"
+    },
+    "harness": {
+      "file": "k6/harness.js",
+      "sha256": "d89865d25b8a1660eb3d031e12acfca9ffb346d9793b189f958d5af4e254078f"
+    },
+    "database": {
+      "file": "build_db.py",
+      "sha256": "59290d7056f3f13b835f4454a59f517d3c223742b307e66790bcae93300b94f4"
+    },
+    "seed": {
+      "file": "_seed_source.py",
+      "sha256": "725f8d359f693638d8dc6e45d7b3df113e8d20ba33138193fb440607be1bdedb"
+    },
+    "smoke": {
+      "file": "smoke.py",
+      "sha256": "fc26fcf045e66b745995cc35a693fb0a6916a8be99301abb8a27beef2c5f11a2"
+    },
+    "analysis": {
+      "file": "analyze.py",
+      "sha256": "22df30f2694690c3f9b01300012a152c671a36ad56880c172a88c13dfb79255d"
+    },
+    "drift": {
+      "file": "drift_report.py",
+      "sha256": "9035f40895e775fbceeda7a7fe79a1259541e948c17942a44111db5f46ba7984"
+    },
+    "bootstrap": {
+      "file": "bootstrap_box.sh",
+      "sha256": "0c37e07849e4ab221a8812f7970ef81f9a3b68f43b87dd0377bb983fcd159802"
+    }
+  },
+  "versions": {
+    "python": "3.14.7",
+    "platform": "Linux-7.2.5-200.fc44.x86_64-x86_64-with-glibc2.43",
+    "fastapi": "0.139.0",
+    "starlette": "1.0.0",
+    "anyio": "4.13.0",
+    "pydantic": "2.13.2",
+    "uvicorn": "0.47.0",
+    "aiosqlite": "not installed",
+    "dependency-injector": "not installed",
+    "dishka": "not installed",
+    "anyio_backend": "asyncio (uvicorn default)",
+    "k6": "v2.2.0"
+  },
+  "database_sha256": "ec432e8211b9767a114d9ff60f584e94038217bb3aa7a6590faecc38ed67fec8"
+}

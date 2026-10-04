@@ -1,0 +1,75 @@
+{
+  "config_sha256": "63a541fdc641813468fd514182792f3bd6b38cf816c987308023dbe81b37e716",
+  "files": {
+    "service": {
+      "file": "core_read.py",
+      "sha256": "397e7ad62b032f940f9beb496103ae4598aef50618ab946236448574c496bd16"
+    },
+    "routes": {
+      "file": "routes_read.py",
+      "sha256": "38ecaa6cf6383ef436c17200c158cf2a3e5c9df197407e4d75546a47132906c3"
+    },
+    "generator": {
+      "file": "gen_apps.py",
+      "sha256": "98af5abec32583aed9db596412e0e7ae06ab61efd559bc7ae6b0f2a081127652"
+    },
+    "pool+runner": {
+      "file": "runner.py",
+      "sha256": "fd40578c750aa429cdbcffa23875828bcf048d4c0a12304884d80c50f572461d"
+    },
+    "pinning": {
+      "file": "prepare_box.py",
+      "sha256": "804fd60afb17d042e4ec7db08aec7ceda90778047b8af5e7e11be925940eec52"
+    },
+    "orchestrator": {
+      "file": "run_matrix.py",
+      "sha256": "925a1bb874ac924e35cad59bbe08c4cac50a4f137e6f86f083d6540b4ea64f39"
+    },
+    "knee": {
+      "file": "knee.py",
+      "sha256": "0b2b7c0609f8299c7d86a6d6f21d0e51944be1b885dff517d84e4d8b2cb2fa87"
+    },
+    "smoke-knees": {
+      "file": "smoke_knees.py",
+      "sha256": "8d54624d5b2a54718bdacb22ac8f23facd325a18f54c5be8d004ba7efa46afda"
+    },
+    "harness": {
+      "file": "k6/harness.js",
+      "sha256": "e1aeb8ce24ad01d2c46b05f5537083ff97582d287f0b130908b5745143a9a901"
+    },
+    "database": {
+      "file": "build_db.py",
+      "sha256": "59290d7056f3f13b835f4454a59f517d3c223742b307e66790bcae93300b94f4"
+    },
+    "seed": {
+      "file": "_seed_source.py",
+      "sha256": "725f8d359f693638d8dc6e45d7b3df113e8d20ba33138193fb440607be1bdedb"
+    },
+    "smoke": {
+      "file": "smoke.py",
+      "sha256": "70bd6ce75aa9d6e57d479f16496c719cdfe216fe4de9d3f3ad234caea3b1ad46"
+    },
+    "analysis": {
+      "file": "analyze.py",
+      "sha256": "35866c1f6208f5ead75eb4bdd2a6bb425fbb2abf196a6fd5723f3ea9f3f65444"
+    },
+    "drift": {
+      "file": "drift_report.py",
+      "sha256": "c040d54c75f565e3793c6f42a03f030a57fa3f15b9857a08f90d92c4f483e4dc"
+    }
+  },
+  "versions": {
+    "python": "3.12.14",
+    "platform": "Linux-5.15.0-191-generic-x86_64-with-glibc2.35",
+    "fastapi": "0.141.1",
+    "starlette": "1.6.0",
+    "anyio": "4.15.1",
+    "pydantic": "2.13.2",
+    "uvicorn": "0.52.4",
+    "aiosqlite": "0.22.1",
+    "dependency-injector": "4.49.1",
+    "anyio_backend": "asyncio (uvicorn default)",
+    "k6": "v2.2.0"
+  },
+  "database_sha256": "ec432e8211b9767a114d9ff60f584e94038217bb3aa7a6590faecc38ed67fec8"
+}

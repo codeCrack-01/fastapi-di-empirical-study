@@ -1,0 +1,46 @@
+cells file      box6_snapshot/results/main/cells.csv
+successful      480 unique (condition, rep)
+excluded        5 host-drift reference cells (diagnostic only)
+
+cell                         n     async      sync      diff          exact 95% CI    cov  verdict
+------------------------------------------------------------------------------------------------------------
+s1_direct@600               12      5.28      4.61      0.59          [0.02, 1.16]   0.96  inconclusive vs margin
+s1_direct@700               12      6.83      5.60      1.33         [-0.01, 2.51]   0.96  inconclusive vs margin
+s1_direct@800               12      8.83      7.78      0.78          [0.42, 2.52]   0.96  inconclusive vs margin
+s1_direct@900               12     11.88      9.34      2.45          [0.83, 4.23]   0.96  inconclusive vs margin
+s2_depends@600              12      5.89      7.84     -2.07        [-2.89, -1.11]   0.96  meaningful: a is better beyond margin
+s2_depends@700              12      8.02     10.63     -2.67        [-3.96, -1.36]   0.96  meaningful: a is better beyond margin
+s2_depends@800              12     10.34     16.85     -6.08        [-8.16, -2.69]   0.96  meaningful: a is better beyond margin
+s2_depends@900              12     12.66     24.40    -10.76       [-17.93, -2.73]   0.96  meaningful: a is better beyond margin
+s3_middleware@600           12      8.53      9.21     -0.48         [-1.65, 1.04]   0.96  inconclusive vs margin
+s3_middleware@700           12     13.23     13.05      0.90         [-1.11, 2.29]   0.96  inconclusive vs margin
+s3_middleware@800           12     17.01     16.06      0.08         [-1.30, 3.41]   0.96  inconclusive vs margin
+s3_middleware@900           12     29.10     29.13      1.12        [-97.43, 7.00]   0.96  inconclusive vs margin
+s4_container@600            12      4.80      4.40      0.71         [-0.29, 1.25]   0.96  inconclusive vs margin
+s4_container@700            12      5.86      5.29      0.53         [-0.09, 1.44]   0.96  inconclusive vs margin
+s4_container@800            12      8.57      7.51      1.00          [0.45, 2.42]   0.96  inconclusive vs margin
+s4_container@900            12     10.89      8.66      2.50          [0.53, 4.14]   0.96  inconclusive vs margin
+s4_dishka@600               12     20.27     20.61      0.63         [-0.83, 1.60]   0.96  practically equivalent
+s4_dishka@700               12     27.89     23.59      3.52          [2.85, 5.12]   0.96  meaningful: a is worse beyond margin
+s4_dishka@800               12     35.12     28.00      4.78         [3.29, 10.14]   0.96  inconclusive vs margin
+s4_dishka@900               12     40.80     30.62     10.10         [4.35, 13.02]   0.96  meaningful: a is worse beyond margin
+
+* = attained coverage below the nominal 95%; interval is the widest this n allows
+practical-delta margin on http_p99: 0.1 x each pair's own baseline (relative, so it scales with the regime)
+
+!! DISPERSION WARNING -- 1 cell(s) have at least one arm whose reps are dispersed by more than 2.5x its own median:
+     s3_middleware@900: async 16.19/29.10/190.80 (min/med/max, 6.6x)   sync 19.31/29.13/494.89 (17.0x)
+     The median stays usable and the verdict above is reported as computed, but for these cells the wide interval reflects a
+     bimodal / collapsing arm rather than ordinary sampling noise. Do not read the verdict as 'no difference detected': the
+     arms are not stably distributed at this rate, and no central-tendency
+     claim about them is supported. Report the per-rep values alongside.
+
+bootstrap sensitivity (10000 resamples) -- NOT primary; degenerate at n<=5
+  s1_direct@600              n=12 [    0.05,     1.16]
+  s1_direct@700              n=12 [    0.03,     2.50]
+  s1_direct@800              n=12 [    0.43,     2.50]
+  s1_direct@900              n=12 [    0.98,     3.85]
+  s2_depends@600             n=12 [   -2.82,    -1.37]
+  s2_depends@700             n=12 [   -3.88,    -1.90]
+
+written results/final_r2.json

@@ -1,0 +1,107 @@
+{
+  "pattern": "p1_direct",
+  "model": "sync",
+  "reps": 1,
+  "probes": [
+    {
+      "knee": 630.0,
+      "reason": "ok",
+      "ref": 5,
+      "trace": [
+        {
+          "rate": 10.0,
+          "p95": 5,
+          "achieved": 1.0033333333333334,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 20.0,
+          "p95": 5,
+          "achieved": 1.0,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 40.0,
+          "p95": 5,
+          "achieved": 1.0,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 80.0,
+          "p95": 4,
+          "achieved": 1.0,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 160.0,
+          "p95": 4,
+          "achieved": 1.0,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 320.0,
+          "p95": 3,
+          "achieved": 1.0,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 640.0,
+          "p95": 28,
+          "achieved": 1.0,
+          "ok": false,
+          "why": "p95 28.00 > 3.0x ref 5.00"
+        },
+        {
+          "rate": 480.0,
+          "p95": 5,
+          "achieved": 0.9998611111111111,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 560.0,
+          "p95": 5,
+          "achieved": 0.9999404761904762,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 600.0,
+          "p95": 6,
+          "achieved": 1.0,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 620.0,
+          "p95": 8,
+          "achieved": 0.9978494623655914,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 630.0,
+          "p95": 14,
+          "achieved": 0.9947619047619048,
+          "ok": true,
+          "why": "ok"
+        }
+      ],
+      "censored": false,
+      "index": 0,
+      "seconds": 784.3
+    }
+  ],
+  "knee_median": 630.0,
+  "knees": [
+    630.0
+  ],
+  "mode": "smoke",
+  "arm": "p1_direct/sync"
+}

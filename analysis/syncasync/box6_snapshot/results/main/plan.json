@@ -1,0 +1,74 @@
+{
+  "design": "amendment-7 shared ladder",
+  "ladder": [
+    600,
+    700,
+    800,
+    900
+  ],
+  "ladder_full": [
+    200,
+    300,
+    400,
+    500,
+    600,
+    700,
+    800,
+    900,
+    1000,
+    1100,
+    1200
+  ],
+  "rates_scope_reduction": [
+    600,
+    700,
+    800,
+    900
+  ],
+  "bands": {
+    "flat": [
+      200,
+      500
+    ],
+    "graded": [
+      600,
+      900
+    ],
+    "saturated": [
+      1000,
+      1200
+    ]
+  },
+  "reps": {
+    "flat": 6,
+    "graded": 12,
+    "saturated": 8
+  },
+  "ordering": "rate-major, rep-minor, arm-innermost",
+  "arms": [
+    "s1_direct",
+    "s2_depends",
+    "s3_middleware",
+    "s4_container",
+    "s4_dishka"
+  ],
+  "models": [
+    "sync",
+    "async"
+  ],
+  "smoke": false,
+  "design_cells": 480,
+  "study_cells": 480,
+  "only_filter": null,
+  "drift_ref": {
+    "arm": "s1_direct/sync",
+    "rate": 200,
+    "count": 5,
+    "enabled": true,
+    "role": "host-drift diagnostic only; excluded from analysis"
+  },
+  "workers": 1,
+  "warmup_s": 10,
+  "window_s": 30,
+  "cooldown_s": 12
+}

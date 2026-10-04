@@ -1,0 +1,22 @@
+host-drift report: box6_snapshot/results/main/cells.csv
+reference cell: driftref/s1_direct/sync@200 @ 200 rps
+
+ # after_cell      p50      p95     mean  ach_rate  steal  db_ok
+ 0          0     1.00     1.00     0.60   200.000      0   True
+ 1         96     1.00     1.00     0.61   200.000      0   True
+ 2        192     1.00     1.00     0.65   200.000      0   True
+ 3        288     1.00     1.00     0.64   200.000      0   True
+ 4        480     1.00     1.00     0.67   200.000      0   True
+
+reference cells usable : 5 of 5
+p95 median             : 1.00 ms
+p95 min / max          : 1.00 / 1.00 ms
+p95 spread (max-min)   : 0.00 ms (0.0% of median)
+first-half -> second-half p95: 1.00 -> 1.00 ms (+0.0%)
+p50 min / max          : 1.00 / 1.00 ms
+steal jiffies min / max: 0 / 0
+
+VERDICT: no material host drift (p95 spread 0.0% <= 10%).
+The single-session design is not undermined by host drift over this
+session. This bounds drift for THIS session only; it is not a claim
+that the host is stable in general or across sessions.

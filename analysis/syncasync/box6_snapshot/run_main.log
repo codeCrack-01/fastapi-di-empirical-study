@@ -1,0 +1,38 @@
+cores: server=[0, 2, 4] k6=[6] sampler=[6] offline=[1, 3, 5, 7]
+physical cores: server=[0, 2, 4] k6=[6]
+run  tag=main  rates=600-900 step100  graded_reps=12
+    study_cells=480 total=485 bands={'graded': 480}
+out  /root/study/results/main
+  [1/485] DRIFT-REF #0 after_cell=0 p99=1.264084ms fid=1 elapsed=0.9m
+  [20/485] s4_dishka/sync@600 p99=19.011087ms fid=0.9999444444444444 elapsed=17.5m eta=408m
+  [40/485] s4_dishka/sync@600 p99=18.628461ms fid=0.9999444444444444 elapsed=35.1m eta=390m
+  [60/485] s4_dishka/sync@600 p99=19.386604ms fid=0.9998888888888889 elapsed=52.6m eta=373m
+  [80/485] s4_dishka/sync@600 p99=19.080786ms fid=1 elapsed=70.1m eta=355m
+  [98/485] DRIFT-REF #1 after_cell=96 p99=1.330623ms fid=1 elapsed=85.9m
+  [100/485] s4_container/async@600 p99=5.867224ms fid=1.000388888888889 elapsed=87.7m eta=338m
+  [120/485] s4_container/async@600 p99=4.261792ms fid=0.9998333333333334 elapsed=105.2m eta=320m
+  [140/485] s4_container/async@700 p99=5.941298ms fid=0.9999047619047619 elapsed=122.8m eta=302m
+  [160/485] s4_container/async@700 p99=5.741886ms fid=0.9999523809523809 elapsed=140.3m eta=285m
+  [180/485] s4_container/async@700 p99=6.654338ms fid=1 elapsed=157.8m eta=267m
+  [195/485] DRIFT-REF #2 after_cell=192 p99=1.357385ms fid=1 elapsed=171.0m
+  [200/485] s4_container/sync@700 p99=5.328045ms fid=1 elapsed=175.4m eta=250m
+  [220/485] s4_container/sync@700 p99=5.215878ms fid=0.9998571428571429 elapsed=192.9m eta=232m
+  [240/485] s4_container/sync@700 p99=5.754837ms fid=0.9998095238095238 elapsed=210.4m eta=215m
+  [260/485] s4_container/sync@800 p99=7.68967ms fid=1 elapsed=228.0m eta=197m
+  [280/485] s4_container/sync@800 p99=6.702389ms fid=1 elapsed=245.5m eta=180m
+  [292/485] DRIFT-REF #3 after_cell=288 p99=1.403863ms fid=1 elapsed=256.0m
+  [300/485] s3_middleware/async@800 p99=16.810069ms fid=0.9999166666666667 elapsed=263.0m eta=162m
+  [320/485] s3_middleware/async@800 p99=21.426252ms fid=0.9999166666666667 elapsed=280.6m eta=145m
+  [340/485] s3_middleware/async@800 p99=12.017122ms fid=1 elapsed=298.1m eta=127m
+  [360/485] s3_middleware/async@800 p99=15.976872ms fid=0.9999166666666667 elapsed=315.6m eta=110m
+  [380/485] s3_middleware/async@900 p99=26.918792ms fid=0.9998518518518519 elapsed=333.2m eta=92m
+  [400/485] s3_middleware/async@900 p99=23.449369ms fid=0.9996666666666667 elapsed=350.7m eta=75m
+  [420/485] s3_middleware/async@900 p99=34.461425ms fid=1.0004814814814815 elapsed=368.3m eta=57m
+  [440/485] s3_middleware/async@900 p99=122.096928ms fid=0.9987777777777778 elapsed=385.9m eta=39m
+  [460/485] s3_middleware/async@900 p99=70.146466ms fid=1.000037037037037 elapsed=403.5m eta=22m
+  [480/485] s3_middleware/async@900 p99=31.285544ms fid=0.9997407407407407 elapsed=421.0m eta=4m
+  [485/485] DRIFT-REF #4 after_cell=480 p99=1.394615ms fid=1 elapsed=425.4m
+
+done  ran=485 ok=485 failed=0 skipped_already_done=0 in 7.09h
+db    ec432e8211b9767a -> ec432e8211b9767a unchanged=True
+csv   /root/study/results/main/cells.csv

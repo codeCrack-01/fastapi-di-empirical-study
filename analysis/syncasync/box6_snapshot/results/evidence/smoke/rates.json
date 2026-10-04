@@ -1,0 +1,53 @@
+{
+  "knee_dir": "results/smoke_knees",
+  "knee_mode": "smoke (1 probe)",
+  "tag": "smoke",
+  "reps": 5,
+  "seed": 20260928,
+  "study_cells": 80,
+  "drift_ref": {
+    "enabled": true,
+    "condition": "driftref/s1_direct/sync@capacity",
+    "count": 5,
+    "fraction_of_capacity": 0.25,
+    "role": "host-drift diagnostic only; excluded from analysis"
+  },
+  "workers": 1,
+  "warmup_s": 10,
+  "window_s": 30,
+  "cooldown_s": 12,
+  "rates": {
+    "s1_direct/sync": {
+      "capacity": 950.0,
+      "overload": 1425.0
+    },
+    "s1_direct/async": {
+      "capacity": 960.0,
+      "overload": 1440.0
+    },
+    "s2_depends/sync": {
+      "capacity": 750.0,
+      "overload": 1125.0
+    },
+    "s2_depends/async": {
+      "capacity": 870.0,
+      "overload": 1305.0
+    },
+    "s3_middleware/sync": {
+      "capacity": 750.0,
+      "overload": 1125.0
+    },
+    "s3_middleware/async": {
+      "capacity": 690.0,
+      "overload": 1035.0
+    },
+    "s4_container/sync": {
+      "capacity": 1040.0,
+      "overload": 1560.0
+    },
+    "s4_container/async": {
+      "capacity": 950.0,
+      "overload": 1425.0
+    }
+  }
+}

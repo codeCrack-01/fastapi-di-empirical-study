@@ -1,0 +1,121 @@
+{
+  "pattern": "s3_middleware",
+  "model": "async",
+  "reps": 1,
+  "probes": [
+    {
+      "knee": 690.0,
+      "reason": "ok",
+      "ref": 3,
+      "trace": [
+        {
+          "rate": 10.0,
+          "p95": 3,
+          "achieved": 1.0,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 20.0,
+          "p95": 3,
+          "achieved": 1.0,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 40.0,
+          "p95": 2,
+          "achieved": 1.0,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 80.0,
+          "p95": 2,
+          "achieved": 1.0,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 160.0,
+          "p95": 2,
+          "achieved": 1.0,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 320.0,
+          "p95": 2,
+          "achieved": 1.0,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 640.0,
+          "p95": 2,
+          "achieved": 0.9999479166666667,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 1280.0,
+          "p95": 2182.3499999999985,
+          "achieved": 0.58109375,
+          "ok": false,
+          "why": "achieved 0.581 < 0.98"
+        },
+        {
+          "rate": 960.0,
+          "p95": 2049.0499999999993,
+          "achieved": 0.8104166666666667,
+          "ok": false,
+          "why": "achieved 0.810 < 0.98"
+        },
+        {
+          "rate": 800.0,
+          "p95": 1751,
+          "achieved": 1.1117083333333333,
+          "ok": false,
+          "why": "p95 1751.00 > 3.0x ref 3.00"
+        },
+        {
+          "rate": 720.0,
+          "p95": 17,
+          "achieved": 0.9997685185185186,
+          "ok": false,
+          "why": "p95 17.00 > 3.0x ref 3.00"
+        },
+        {
+          "rate": 680.0,
+          "p95": 2,
+          "achieved": 1.000686274509804,
+          "ok": true,
+          "why": "ok"
+        },
+        {
+          "rate": 700.0,
+          "p95": 22,
+          "achieved": 1.0005714285714284,
+          "ok": false,
+          "why": "p95 22.00 > 3.0x ref 3.00"
+        },
+        {
+          "rate": 690.0,
+          "p95": 2,
+          "achieved": 0.9983091787439614,
+          "ok": true,
+          "why": "ok"
+        }
+      ],
+      "censored": false,
+      "index": 0,
+      "seconds": 885.6
+    }
+  ],
+  "knee_median": 690.0,
+  "knees": [
+    690.0
+  ],
+  "mode": "smoke",
+  "arm": "s3_middleware/async"
+}

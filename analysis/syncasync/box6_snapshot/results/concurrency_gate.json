@@ -1,0 +1,108 @@
+{
+  "concurrency": 64,
+  "pool": 8,
+  "request_timeout": 5.0,
+  "results": [
+    {
+      "ok": 256,
+      "timeouts": 0,
+      "server_errors": 0,
+      "other": {},
+      "completed": 256,
+      "wedged": false,
+      "arm": "s1_direct/sync",
+      "seconds": 1.03
+    },
+    {
+      "ok": 256,
+      "timeouts": 0,
+      "server_errors": 0,
+      "other": {},
+      "completed": 256,
+      "wedged": false,
+      "arm": "s1_direct/async",
+      "seconds": 0.76
+    },
+    {
+      "ok": 256,
+      "timeouts": 0,
+      "server_errors": 0,
+      "other": {},
+      "completed": 256,
+      "wedged": false,
+      "arm": "s2_depends/sync",
+      "seconds": 0.87
+    },
+    {
+      "ok": 256,
+      "timeouts": 0,
+      "server_errors": 0,
+      "other": {},
+      "completed": 256,
+      "wedged": false,
+      "arm": "s2_depends/async",
+      "seconds": 0.54
+    },
+    {
+      "ok": 256,
+      "timeouts": 0,
+      "server_errors": 0,
+      "other": {},
+      "completed": 256,
+      "wedged": false,
+      "arm": "s3_middleware/sync",
+      "seconds": 0.83
+    },
+    {
+      "ok": 256,
+      "timeouts": 0,
+      "server_errors": 0,
+      "other": {},
+      "completed": 256,
+      "wedged": false,
+      "arm": "s3_middleware/async",
+      "seconds": 0.7
+    },
+    {
+      "ok": 256,
+      "timeouts": 0,
+      "server_errors": 0,
+      "other": {},
+      "completed": 256,
+      "wedged": false,
+      "arm": "s4_container/sync",
+      "seconds": 0.91
+    },
+    {
+      "ok": 256,
+      "timeouts": 0,
+      "server_errors": 0,
+      "other": {},
+      "completed": 256,
+      "wedged": false,
+      "arm": "s4_container/async",
+      "seconds": 0.86
+    },
+    {
+      "ok": 256,
+      "timeouts": 0,
+      "server_errors": 0,
+      "other": {},
+      "completed": 256,
+      "wedged": false,
+      "arm": "s4_dishka/sync",
+      "seconds": 0.9
+    },
+    {
+      "ok": 256,
+      "timeouts": 0,
+      "server_errors": 0,
+      "other": {},
+      "completed": 256,
+      "wedged": false,
+      "arm": "s4_dishka/async",
+      "seconds": 0.94
+    }
+  ],
+  "failures": []
+}
