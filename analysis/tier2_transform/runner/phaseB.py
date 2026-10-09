@@ -95,6 +95,19 @@ def timewait_count() -> int:
     return n
 
 
+def proc_age_s(pid: int) -> float | None:
+    """Age of the server process (seconds since exec), from /proc/<pid>/stat
+    starttime + system uptime. This is the per-cell 'time since boot'."""
+    try:
+        fields = Path(f"/proc/{pid}/stat").read_text().split()
+        start_ticks = int(fields[21])
+        hz = os.sysconf("SC_CLK_TCK")
+        uptime = float(Path("/proc/uptime").read_text().split()[0])
+        return round(uptime - start_ticks / hz, 3)
+    except (OSError, IndexError, ValueError):
+        return None
+
+
 def run_one(k6p, base, route, rate, workdir, auth, auth_header, stage, probe, server_allowed):
     sf = workdir / f"{stage}_{int(rate)}_{probe}.json"
     sf.unlink(missing_ok=True)
@@ -212,21 +225,20 @@ def run_grid_fresh(arms, repo_dir, out, s2knee, seed) -> list[list]:
             pro, auth, header = boot(arm, repo_dir, workdir)
             sall = KNEE.read_allowed(pro.pid)
             base = f"http://127.0.0.1:{arm['port']}"
-            t_boot = time.monotonic()
+            boot_age = proc_age_s(pro.pid)
             tw0 = timewait_count()
             try:
                 row, _ = run_one(K6, base, arm["route"], rate, workdir, auth, header, "grid", probe, sall)
             except CellFailed:
                 rows.append([arm["repo"], arm["arm"], "grid", rate, probe,
                              "", "", "", "", "", "", "ERRk6", "", sall, "",
-                             "", tw0, tw0, label])
+                             boot_age, tw0, tw0, label])
                 print(f"   [{idx}/{total}] {arm['arm']}@{rate} p{probe}: ERRk6 tw={tw0}", flush=True)
                 continue
             tw1 = timewait_count()
-            boot_age = time.monotonic() - t_boot
-            rows.append([arm["repo"], arm["arm"], "grid"] + row + [round(boot_age, 2), tw0, tw1, label])
+            rows.append([arm["repo"], arm["arm"], "grid"] + row + [boot_age, tw0, tw1, label])
             print(f"   [{idx}/{total}] {arm['arm']}@{rate} p{probe}: p95={row[3]} fid={row[7]} "
-                  f"cell={row[5]:.1f}s boot+{boot_age:.1f}s tw0={tw0} tw1={tw1}", flush=True)
+                  f"cell={row[5]:.1f}s age={boot_age}s tw0={tw0} tw1={tw1}", flush=True)
         except Exception as exc:  # noqa: BLE001 — one bad boot must not kill the run
             rows.append([arm["repo"], arm["arm"], "grid", rate, probe,
                          "", "", "", "", "", "", "ERRboot", "", "", "", "", "", "", label])
