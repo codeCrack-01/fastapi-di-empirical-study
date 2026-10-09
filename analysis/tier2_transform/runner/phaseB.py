@@ -43,6 +43,7 @@ sys.path.insert(0, str(HERE))
 import knee as KNEE  # noqa: E402
 from bench import (  # noqa: E402
     K6,
+    OUTDIR_REL,
     arm_env,
     boot,
     load_plan,
@@ -89,14 +90,21 @@ def run_one(k6p, base, route, rate, workdir, auth, auth_header, stage, probe, se
 
 
 def median_summary(cells) -> dict:
-    def med(key, pick=None):
-        vals = sorted(pick(c) if pick else (c.get("window") or {}).get(key) for c in cells)
+    def med(vals):
+        vals = sorted(vals)
         return vals[len(vals) // 2]
+
+    def p95(c):
+        return (c.get("window") or {}).get("p95")
+
+    def err(c):
+        return (c.get("window_errors") or 0) / max(1, c.get("window_requests") or 1)
+
     return {
-        "p95": med("p95"),
-        "err": med("window_errors", lambda c: (c["window_errors"] or 0) / max(1, c["window_requests"] or 1)),
-        "fid": med("load_fidelity"),
-        "ref_p95": med("p95"),
+        "p95": med(p95(c) for c in cells),
+        "err": med(err(c) for c in cells),
+        "fid": med(c.get("load_fidelity") for c in cells),
+        "ref_p95": med(p95(c) for c in cells),
     }
 
 
@@ -132,7 +140,7 @@ def discover_s2_knee(arm, repo_dir, workdir, out):
         ref_cells = []
         for i in range(3):
             row, s = run_one(K6, base, route, REF_RPS, workdir, auth, header, "ref", i, sall)
-            row_f = [arm["repo"], arm["arm"], "ref", REF_RPS, i] + row[0][1:]
+            row_f = [arm["repo"], arm["arm"], "ref"] + row
             rows.append(row_f)
             ref_cells.append(s)
         ref_p95 = median_summary(ref_cells)["ref_p95"]
@@ -147,7 +155,7 @@ def discover_s2_knee(arm, repo_dir, workdir, out):
                 except CellFailed:
                     failed = True
                     break
-                rows.append([arm["repo"], arm["arm"], "knee", rate, i] + row[0][1:])
+                rows.append([arm["repo"], arm["arm"], "knee"] + row)
                 cells.append(s)
             if failed:
                 print(f"   rung {rate}: FAIL (k6 cell error — treated as non-qualifying)", flush=True)
@@ -177,7 +185,7 @@ def run_grid(arm, repo_dir, workdir, s2knee, out, print_prefix=""):
                                  "", "", "", "", "", "", "ERRk6", "", sall, ""])
                     print(f"   !! grid cell {rate} probe {probe} failed (k6 error)", flush=True)
                     continue
-                rows.append([arm["repo"], arm["arm"], "grid", rate, probe] + row[0][1:])
+                rows.append([arm["repo"], arm["arm"], "grid"] + row)
         print(f"   grid {len(rows)} cells done", flush=True)
     return rows
 
@@ -195,7 +203,7 @@ def main() -> int:
         print(f"no arms for repo {a.app}")
         return 1
     repo_dir = HERE.parent / "repos" / a.app
-    out = HERE.parent / "results" / "v2" / "bench" / a.app
+    out = HERE.parent / "results" / OUTDIR_REL / a.app
     out.mkdir(parents=True, exist_ok=True)
     raw_f = out / "raw.tsv"
     pin = "pinned" if (os.environ.get("TIER2_PIN", "1") != "0") else "unpinned"
@@ -208,10 +216,10 @@ def main() -> int:
         (workdir / "server.log").unlink(missing_ok=True)
         with boot_ctx(arm, repo_dir, workdir) as (pro, pid, base, route, auth, header, sall):
             row, _ = run_one(K6, base, route, 2560, workdir, auth, header, "probe2560", 0, sall)
-            print(f"   {arm['arm']} @2560 [{pin}] p50={row[0][2]} p95={row[0][3]} p99={row[0][4]} "
-                  f"err={row[0][8]} reqs={row[0][9]} fid={row[0][7]} "
-                  f"server_cpus={row[0][10]} k6_cpus={row[0][11]}", flush=True)
-            full = [a.app, arm["arm"], f"probe2560_{pin}", 2560, 0] + row[0][1:]
+            print(f"   {arm['arm']} @2560 [{pin}] p50={row[2]} p95={row[3]} p99={row[4]} "
+                  f"err={row[8]} reqs={row[9]} fid={row[7]} "
+                  f"server_cpus={row[10]} k6_cpus={row[11]}", flush=True)
+            full = [a.app, arm["arm"], f"probe2560_{pin}"] + row
         write_rows(out / f"probe2560_{pin}_raw.tsv", [full])
         return 0
 
