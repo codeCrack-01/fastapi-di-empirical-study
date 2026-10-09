@@ -1,0 +1,70 @@
+{
+ "app": "ciiceronee",
+ "box_plan": "voc-c-8c-16gb-150s-amd",
+ "instance_id": "e8cd6321-daa8-4f44-9ad6-da6adedc114a",
+ "s2_knee_rps": 2560,
+ "ref_p95_ms": 2,
+ "ladder_probes": {
+  "20": {
+   "med_p95": 2,
+   "med_err": 0.0,
+   "med_fid": 1
+  },
+  "40": {
+   "med_p95": 1,
+   "med_err": 0.0,
+   "med_fid": 1
+  },
+  "80": {
+   "med_p95": 1,
+   "med_err": 0.0,
+   "med_fid": 1
+  },
+  "160": {
+   "med_p95": 1,
+   "med_err": 0.0,
+   "med_fid": 1
+  },
+  "320": {
+   "med_p95": 1,
+   "med_err": 0.0,
+   "med_fid": 1
+  },
+  "640": {
+   "med_p95": 1,
+   "med_err": 0.0,
+   "med_fid": 0.9998958333333333
+  },
+  "1280": {
+   "med_p95": 1,
+   "med_err": 0.0,
+   "med_fid": 0.9998697916666667
+  },
+  "2560": {
+   "med_p95": 1,
+   "med_err": 0.0,
+   "med_fid": 1.0002473958333333
+  }
+ },
+ "grid": [
+  {
+   "frac": 0.75,
+   "K": 3
+  },
+  {
+   "frac": 1.0,
+   "K": 5
+  },
+  {
+   "frac": 1.25,
+   "K": 5
+  },
+  {
+   "frac": 1.5,
+   "K": 5
+  }
+ ],
+ "pinning": "pinned",
+ "server_cores": "0,2,4",
+ "k6_cores": "6"
+}
