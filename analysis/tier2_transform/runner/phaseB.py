@@ -285,6 +285,8 @@ def main() -> int:
     ap.add_argument("--seed", type=int, default=20261009)
     ap.add_argument("--probe2560", metavar="ARM", default=None,
                     help="run the single cell rate=2560 for ARM once (pinned/unpinned per TIER2_PIN); boots the arm and exits")
+    ap.add_argument("--arms", metavar="ARMS", default=None,
+                    help="comma list of arm ids to run, e.g. S1,S2,S3 (default: all arms for the app)")
     a = ap.parse_args()
 
     plan = load_plan()
@@ -292,6 +294,11 @@ def main() -> int:
     if not arms:
         print(f"no arms for repo {a.app}")
         return 1
+    if a.arms:
+        arms = [x for x in arms if x["arm"] in set(a.arms.split(","))]
+        if not arms:
+            print(f"no matching arms for {a.app}: {a.arms}")
+            return 1
     repo_dir = HERE.parent / "repos" / a.app
     out = HERE.parent / "results" / OUTDIR_REL / a.app
     out.mkdir(parents=True, exist_ok=True)
@@ -341,7 +348,7 @@ def main() -> int:
         indent=1))
 
     if a.freshboot:
-        print(f"  -- fresh-boot randomised grid (seed={a.seed}) --", flush=True)
+        print(f"  -- fresh-boot randomised grid (seed={a.seed}), arms={[x['arm'] for x in arms]} --", flush=True)
         all_rows += run_grid_fresh(arms, repo_dir, out, s2knee, a.seed)
     else:
         all_rows += run_grid_single_boot(arms, repo_dir, out, s2knee)
