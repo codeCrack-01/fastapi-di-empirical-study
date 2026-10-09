@@ -28,6 +28,7 @@ Cpus_allowed_list as pinning evidence.
 from __future__ import annotations
 
 import argparse
+import contextlib
 import json
 import os
 import statistics
@@ -105,6 +106,7 @@ def qualifies(med, ref_p95) -> bool:
             and med["fid"] >= MIN_FID)
 
 
+@contextlib.contextmanager
 def boot_ctx(arm, repo_dir, workdir):
     pro, auth, auth_header = boot(arm, repo_dir, workdir)
     server_allowed = KNEE.read_allowed(pro.pid)
