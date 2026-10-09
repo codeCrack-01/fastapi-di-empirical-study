@@ -138,11 +138,18 @@ def discover_s2_knee(arm, repo_dir, workdir, out):
         knee = REF_RPS
         for rate in LADDER:
             cells = []
-            ok_rate = True
+            failed = False
             for i in range(3):
-                row, s = run_one(K6, base, route, rate, workdir, auth, header, "knee", i, sall)
+                try:
+                    row, s = run_one(K6, base, route, rate, workdir, auth, header, "knee", i, sall)
+                except CellFailed:
+                    failed = True
+                    break
                 rows.append([arm["repo"], arm["arm"], "knee", rate, i] + row[0][1:])
                 cells.append(s)
+            if failed:
+                print(f"   rung {rate}: FAIL (k6 cell error — treated as non-qualifying)", flush=True)
+                break
             med = median_summary(cells)
             if not qualifies(med, ref_p95):
                 print(f"   rung {rate}: FAIL (p95 med {med['p95']:.1f} err {med['err']:.4f} fid {med['fid']:.4f})", flush=True)
@@ -161,7 +168,13 @@ def run_grid(arm, repo_dir, workdir, s2knee, out, print_prefix=""):
         for frac, k in MULT:
             rate = int(round(s2knee * frac))
             for probe in range(k):
-                row, _ = run_one(K6, base, route, rate, workdir, auth, header, "grid", probe, sall)
+                try:
+                    row, _ = run_one(K6, base, route, rate, workdir, auth, header, "grid", probe, sall)
+                except CellFailed:
+                    rows.append([arm["repo"], arm["arm"], "grid", rate, probe,
+                                 "", "", "", "", "", "", "ERRk6", "", sall, ""])
+                    print(f"   !! grid cell {rate} probe {probe} failed (k6 error)", flush=True)
+                    continue
                 rows.append([arm["repo"], arm["arm"], "grid", rate, probe] + row[0][1:])
         print(f"   grid {len(rows)} cells done", flush=True)
     return rows
