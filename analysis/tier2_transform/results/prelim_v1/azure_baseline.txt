@@ -1,0 +1,173 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-9.0.3, pluggy-1.6.0
+rootdir: /home/zain_khan/Documents/Fall'26/research_fastapi/analysis/tier2_transform/repos/azure-samples
+configfile: pyproject.toml
+testpaths: tests
+plugins: asyncio-1.3.0, pytest_httpserver-1.1.5, cov-7.1.0, anyio-4.13.0, langsmith-0.10.15
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
+collected 2536 items / 19 deselected / 2517 selected
+
+tests/backend/core/agents/test_definitions.py ...................        [  0%]
+tests/backend/core/agents/test_presets.py ...........                    [  1%]
+tests/backend/core/pipelines/test_chat.py ..................             [  1%]
+tests/backend/core/providers/agents/test_agents_registry.py ..           [  1%]
+tests/backend/core/providers/agents/test_base.py ....................... [  2%]
+..                                                                       [  2%]
+tests/backend/core/providers/agents/test_foundry.py .............        [  3%]
+tests/backend/core/providers/credentials/test_credentials.py ........... [  3%]
+                                                                         [  3%]
+tests/backend/core/providers/databases/test_base.py ................     [  4%]
+tests/backend/core/providers/databases/test_cosmosdb.py ................ [  5%]
+.....................................                                    [  6%]
+tests/backend/core/providers/databases/test_factory.py ...               [  6%]
+tests/backend/core/providers/databases/test_postgres.py ................ [  7%]
+........................................                                 [  9%]
+tests/backend/core/providers/databases/test_registry.py ..               [  9%]
+tests/backend/core/providers/embedders/test_azure_openai.py ........     [  9%]
+tests/backend/core/providers/embedders/test_embedders_registry.py ...... [  9%]
+........                                                                 [  9%]
+tests/backend/core/providers/llm/test_base.py ..                         [ 10%]
+tests/backend/core/providers/llm/test_foundry_iq.py .................... [ 10%]
+................                                                         [ 11%]
+tests/backend/core/providers/llm/test_llm_registry.py ..                 [ 11%]
+tests/backend/core/providers/orchestrators/test_agent_framework.py ..... [ 11%]
+......................................                                   [ 13%]
+tests/backend/core/providers/orchestrators/test_base.py ......           [ 13%]
+tests/backend/core/providers/orchestrators/test_langgraph.py ........... [ 13%]
+..........                                                               [ 14%]
+tests/backend/core/providers/orchestrators/test_orchestrators_registry.py . [ 14%]
+.                                                                        [ 14%]
+tests/backend/core/providers/parsers/test_base.py ........               [ 14%]
+tests/backend/core/providers/parsers/test_parsers_registry.py .........  [ 15%]
+tests/backend/core/providers/search/test_azure_search.py ............... [ 15%]
+...................                                                      [ 16%]
+tests/backend/core/providers/search/test_base.py ................        [ 17%]
+tests/backend/core/providers/search/test_pgvector.py ................... [ 17%]
+............                                                             [ 18%]
+tests/backend/core/providers/search/test_registry.py ..                  [ 18%]
+tests/backend/core/providers/search/test_writer.py .......               [ 18%]
+tests/backend/core/test_discovery.py ......                              [ 18%]
+tests/backend/core/test_paths.py .....                                   [ 19%]
+tests/backend/core/test_registry.py ...........                          [ 19%]
+tests/backend/core/test_settings.py .................................... [ 20%]
+...............................                                          [ 22%]
+tests/backend/core/test_speech_helper.py ..                              [ 22%]
+tests/backend/core/test_types.py ....................................... [ 23%]
+.........                                                                [ 24%]
+tests/backend/core/tools/test_citations.py ............................. [ 25%]
+..........                                                               [ 25%]
+tests/backend/core/tools/test_content_safety.py .....................    [ 26%]
+tests/backend/core/tools/test_post_prompt.py ..............              [ 27%]
+tests/backend/core/tools/test_qa.py .............                        [ 27%]
+tests/backend/core/tools/test_text_processing.py .........               [ 28%]
+tests/backend/routers/test_files.py ........                             [ 28%]
+tests/backend/routers/test_speech.py .....                               [ 28%]
+tests/backend/test_admin.py ............................................ [ 30%]
+........................................................................ [ 33%]
+.                                                                        [ 33%]
+tests/backend/test_app_exception_handlers.py .........                   [ 33%]
+tests/backend/test_app_lifespan.py .......................               [ 34%]
+tests/backend/test_conversation.py ............................          [ 35%]
+tests/backend/test_dependencies.py ....................                  [ 36%]
+tests/backend/test_errors_model.py ..                                    [ 36%]
+tests/backend/test_health.py ...................................         [ 37%]
+tests/backend/test_history.py ........................                   [ 38%]
+tests/backend/test_openapi_field_descriptions.py .                       [ 38%]
+tests/backend/test_openapi_responses.py ......                           [ 39%]
+tests/backend/test_services_admin.py ...................                 [ 39%]
+tests/backend/test_services_conversation.py .........................    [ 40%]
+tests/backend/test_services_files.py .................                   [ 41%]
+tests/backend/test_services_health.py ...............                    [ 42%]
+tests/backend/test_services_ingestion.py ..............................  [ 43%]
+tests/backend/test_services_sse.py ..............                        [ 43%]
+tests/frontend_app/test_frontend_app.py ........                         [ 44%]
+tests/functions/add_url/test_blueprint.py ..................             [ 44%]
+tests/functions/add_url/test_handler.py ........                         [ 45%]
+tests/functions/add_url/test_url_fetcher.py ........                     [ 45%]
+tests/functions/batch_push/test_blob_fetcher.py .....                    [ 45%]
+tests/functions/batch_push/test_blueprint.py .........                   [ 46%]
+tests/functions/batch_push/test_handler.py ...                           [ 46%]
+tests/functions/batch_push/test_queue_reader.py ......                   [ 46%]
+tests/functions/batch_start/test_blob_listing.py .....                   [ 46%]
+tests/functions/batch_start/test_blueprint.py ........                   [ 46%]
+tests/functions/batch_start/test_handler.py .....                        [ 47%]
+tests/functions/batch_start/test_models.py .....                         [ 47%]
+tests/functions/batch_start/test_queue_writer.py ....                    [ 47%]
+tests/functions/blob_event/test_blueprint.py .......                     [ 47%]
+tests/functions/blob_event/test_event_parser.py ......................   [ 48%]
+tests/functions/blob_event/test_handler.py ........                      [ 48%]
+tests/functions/core/parsers/test_document_intelligence_parser.py ...... [ 49%]
+............................                                             [ 50%]
+tests/functions/core/parsers/test_html_parser.py .....                   [ 50%]
+tests/functions/core/parsers/test_supported_extensions.py .............. [ 51%]
+.....                                                                    [ 51%]
+tests/functions/core/parsers/test_text_parser.py .........               [ 51%]
+tests/functions/core/test_contracts.py .........                         [ 51%]
+tests/functions/core/test_exception_mapping.py ..............            [ 52%]
+tests/functions/core/test_http.py .............                          [ 53%]
+tests/functions/core/test_pgvector_pool.py ...........                   [ 53%]
+tests/functions/core/test_search_resolution.py ....                      [ 53%]
+tests/functions/core/test_storage_clients.py ....                        [ 53%]
+tests/functions/core/test_storage_endpoints.py .....                     [ 53%]
+tests/functions/core/test_telemetry.py ..                                [ 54%]
+tests/functions/search_skill/test_blueprint.py ...........               [ 54%]
+tests/functions/search_skill/test_handler.py ........                    [ 54%]
+tests/functions/search_skill/test_models.py ............................ [ 55%]
+....                                                                     [ 56%]
+tests/functions/test_agent_framework_core_not_meta.py ..                 [ 56%]
+tests/functions/test_azure_yaml_hooks.py .                               [ 56%]
+tests/functions/test_dockerfile_subpackages.py .                         [ 56%]
+tests/functions/test_function_app.py .....                               [ 56%]
+tests/scripts/test_post_provision.py ..................                  [ 57%]
+tests/shared/test_imports_at_top_only.py ............................... [ 58%]
+........................................................................ [ 61%]
+........................................................................ [ 64%]
+.....................................................................    [ 66%]
+tests/shared/test_init_files_are_marker_only.py ........................ [ 67%]
+.......                                                                  [ 68%]
+tests/shared/test_no_anonymous_dict_returns.py s..                       [ 68%]
+tests/shared/test_no_env_specific_content.py s....                       [ 68%]
+tests/shared/test_no_legacy_shared_imports.py .......................... [ 69%]
+........................................................................ [ 72%]
+........................................................................ [ 75%]
+........................................................................ [ 78%]
+..                                                                       [ 78%]
+tests/shared/test_no_process_narrative_in_src.py ....................... [ 79%]
+........................................................................ [ 81%]
+........................................................................ [ 84%]
+.....                                                                    [ 84%]
+tests/shared/test_no_type_checking_or_future_annotations.py ............ [ 85%]
+........................................................................ [ 88%]
+........................................................................ [ 91%]
+........................................................................ [ 94%]
+................                                                         [ 94%]
+tests/shared/test_routers_contain_only_routes.py .......                 [ 94%]
+tests/test_no_silent_excepts.py ........................................ [ 96%]
+........................................................................ [ 99%]
+................                                                         [100%]
+
+=============================== warnings summary ===============================
+.venv/lib64/python3.14/site-packages/agent_framework/_skills.py:116
+  /home/zain_khan/Documents/Fall'26/research_fastapi/analysis/tier2_transform/repos/azure-samples/.venv/lib64/python3.14/site-packages/agent_framework/_skills.py:116: ExperimentalWarning: [SKILLS] SkillResource is experimental and may change or be removed in future versions without notice.
+
+.venv/lib64/python3.14/site-packages/agent_framework/_harness/_memory.py:651
+  /home/zain_khan/Documents/Fall'26/research_fastapi/analysis/tier2_transform/repos/azure-samples/.venv/lib64/python3.14/site-packages/agent_framework/_harness/_memory.py:651: ExperimentalWarning: [HARNESS] MemoryStore is experimental and may change or be removed in future versions without notice.
+
+.venv/lib64/python3.14/site-packages/fastapi/testclient.py:1
+  /home/zain_khan/Documents/Fall'26/research_fastapi/analysis/tier2_transform/repos/azure-samples/.venv/lib64/python3.14/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+tests/backend/test_admin.py::test_patch_config_rejects_unknown_field_with_422
+tests/backend/test_admin.py::test_patch_config_rejects_wrong_type_with_422
+tests/backend/test_admin.py::test_patch_config_rejects_unknown_ai_assistant_type_with_422
+tests/backend/test_admin.py::test_patch_config_rejects_non_string_cwyd_agent_instructions
+tests/backend/test_admin.py::test_patch_config_rejects_non_bool_post_answering_enabled
+tests/backend/test_admin.py::test_patch_config_does_not_touch_app_state_on_validation_failure
+tests/backend/test_admin.py::test_patch_config_does_not_audit_on_validation_failure
+tests/backend/test_admin.py::test_patch_config_rejects_prompt_that_fails_rai_with_422
+tests/backend/test_admin.py::test_patch_config_rejects_post_answering_prompt_that_fails_rai
+  /home/zain_khan/Documents/Fall'26/research_fastapi/analysis/tier2_transform/repos/azure-samples/.venv/lib64/python3.14/site-packages/fastapi/routing.py:313: StarletteDeprecationWarning: 'HTTP_422_UNPROCESSABLE_ENTITY' is deprecated. Use 'HTTP_422_UNPROCESSABLE_CONTENT' instead.
+    return await dependant.call(**values)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+========= 2515 passed, 2 skipped, 19 deselected, 12 warnings in 33.60s =========

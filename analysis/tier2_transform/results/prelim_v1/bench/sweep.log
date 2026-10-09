@@ -1,0 +1,33 @@
+=== vstorm-co/S2 ===
+  done in 1410s
+=== vstorm-co/S1 ===
+  done in 1461s
+=== vstorm-co/S3 ===
+  done in 1461s
+=== vstorm-co/S4 ===
+  done in 1410s
+=== ciiceronee/S2 ===
+  done in 1461s
+=== ciiceronee/S1 ===
+  done in 1464s
+=== ciiceronee/S3 ===
+  done in 1465s
+=== ciiceronee/S4 ===
+  done in 1411s
+=== azure-samples/S2 ===
+  done in 1473s
+=== azure-samples/S1 ===
+  done in 1475s
+=== azure-samples/S3 ===
+  done in 1423s
+=== azure-samples/S4 ===
+  FAIL azure-samples/S4: server on :8703 exited early (rc=1); port may be held by a stray
+  done in 9s
+=== johnsonhk88/S2 ===
+  done in 1282s
+=== johnsonhk88/S1 ===
+  done in 1283s
+=== johnsonhk88/S3 ===
+  done in 1281s
+=== johnsonhk88/S4 ===
+  done in 1281s

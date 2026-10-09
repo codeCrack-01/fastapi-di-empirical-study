@@ -1,0 +1,22 @@
+{
+  "repo": "azure-samples",
+  "arm": "S4",
+  "rate": 2560,
+  "anchor": "1.0x",
+  "reps": 5,
+  "cdf_points": [
+    {
+      "p": 50,
+      "v": 0.0
+    },
+    {
+      "p": 95,
+      "v": 1.0
+    },
+    {
+      "p": 99,
+      "v": 1.0
+    }
+  ],
+  "count_per_rep": 76800.0
+}

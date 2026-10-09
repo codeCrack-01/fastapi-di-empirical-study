@@ -1,0 +1,1 @@
+{"repo": "azure-samples", "arm": "S2", "branch": "main", "knee_rps": 2560, "ref_p95": 2, "import_s": 1.1024378839993005, "cold_idle_rss_kb": 190788}

@@ -1,0 +1,6 @@
+repo	status	install_s	test_s	passed	failed	error	note
+vstorm	green	33	49.5	1716	0	0	MIT/117s/1 DI file (manual)
+azure	green	854	43	2515	0	0	MIT/1172s/central deps.py
+ciiceronee	red	2131	86	460	2	25	MIT/544s/1 DI file
+shabti	red	420	7	0	0	2	Apache/197s/2 DI files
+krawl	crashed	44	4	0	0	0	MIT/556s/fallback

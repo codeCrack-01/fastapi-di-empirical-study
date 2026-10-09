@@ -1,0 +1,22 @@
+{
+  "repo": "ciiceronee",
+  "arm": "S1",
+  "rate": 5120,
+  "anchor": "1.0x",
+  "reps": 5,
+  "cdf_points": [
+    {
+      "p": 50,
+      "v": 0.0
+    },
+    {
+      "p": 95,
+      "v": 1.0
+    },
+    {
+      "p": 99,
+      "v": 4.0
+    }
+  ],
+  "count_per_rep": 153599.0
+}

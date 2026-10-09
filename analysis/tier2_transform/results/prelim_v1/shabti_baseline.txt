@@ -1,0 +1,26 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/zain_khan/Documents/Fall'26/research_fastapi/analysis/tier2_transform/repos/infosecinnovations/docker_containers/shabti_api
+configfile: pyproject.toml
+plugins: anyio-4.13.0, asyncio-1.2.0, langsmith-0.7.33
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
+collected 2 items / 2 errors
+
+==================================== ERRORS ====================================
+___________________ ERROR collecting tests/security_disabled ___________________
+tests/security_disabled/conftest.py:3: in <module>
+    from ...src.app.app import create_app
+src/app/app.py:4: in <module>
+    from shabti_util import auth_enabled
+E   ModuleNotFoundError: No module named 'shabti_util'
+___________________ ERROR collecting tests/security_enabled ____________________
+tests/security_enabled/conftest.py:4: in <module>
+    from ...src.app.app import create_app
+src/app/app.py:4: in <module>
+    from shabti_util import auth_enabled
+E   ModuleNotFoundError: No module named 'shabti_util'
+=========================== short test summary info ============================
+ERROR tests/security_disabled - ModuleNotFoundError: No module named 'shabti_...
+ERROR tests/security_enabled - ModuleNotFoundError: No module named 'shabti_u...
+!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!!
+============================== 2 errors in 2.09s ===============================

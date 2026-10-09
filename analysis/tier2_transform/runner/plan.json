@@ -1,0 +1,421 @@
+{
+ "$comment": "Tier-2 bench-box plan. 4 apps x 4 arms. bench.py: open-loop k6 (harness_t2.js) at the arm's knee grid {0.25,0.5,0.75,1.0,1.25} x knee; K=5 reps at 1.0x/1.25x, K=3 at the lower cells; median+min-max reporting; RSS/VmHWM/io sidecar + cold-start import probe per arm. setup=commands run before boot (excluding the bench itself).",
+ "box": {
+  "image": "Ubuntu 22.04.5",
+  "plan": "voc-c-8c-16gb-150s-amd",
+  "region": "ord",
+  "cpus": 8,
+  "ram_mb": 16384,
+  "instance_id": "e8cd6321-daa8-4f44-9ad6-da6adedc114a",
+  "needs": [
+   "docker",
+   "k6",
+   "git",
+   "uv"
+  ],
+  "plus": "8 vCPU / 16 GB AMD EPYC (same box class as Tier 1; brief B0 requirement)"
+ },
+ "arms": [
+  {
+   "repo": "vstorm-co",
+   "arm": "S2",
+   "branch": "main",
+   "cwd": ".",
+   "venv": ".venv",
+   "module": "vstorm_remote",
+   "serve_args": "",
+   "port": 8701,
+   "route": "/sessions",
+   "env": {
+    "PYTHONPATH": "<RUNNER>/apps"
+   },
+   "setup": [],
+   "note": "baseline Depends chain (bench entry: runner/apps/vstorm_remote.py -> GET /sessions)",
+   "attr": "app",
+   "auth_header": "X-Sandbox-Token",
+   "auth_token": "bench-token"
+  },
+  {
+   "repo": "vstorm-co",
+   "arm": "S1",
+   "branch": "arm_s1",
+   "cwd": ".",
+   "venv": ".venv",
+   "module": "vstorm_remote",
+   "serve_args": "",
+   "port": 8701,
+   "route": "/sessions",
+   "env": {
+    "PYTHONPATH": "<RUNNER>/apps"
+   },
+   "setup": [],
+   "note": "no Depends, imperative resolution (bench entry: runner/apps/vstorm_remote.py -> GET /sessions)",
+   "attr": "app",
+   "auth_header": "X-Sandbox-Token",
+   "auth_token": "bench-token"
+  },
+  {
+   "repo": "vstorm-co",
+   "arm": "S3",
+   "branch": "arm_s3",
+   "cwd": ".",
+   "venv": ".venv",
+   "module": "vstorm_remote",
+   "serve_args": "",
+   "port": 8701,
+   "route": "/sessions",
+   "env": {
+    "PYTHONPATH": "<RUNNER>/apps"
+   },
+   "setup": [],
+   "note": "middleware-managed providers (bench entry: runner/apps/vstorm_remote.py -> GET /sessions)",
+   "attr": "app",
+   "auth_header": "X-Sandbox-Token",
+   "auth_token": "bench-token"
+  },
+  {
+   "repo": "vstorm-co",
+   "arm": "S4",
+   "branch": "arm_s4",
+   "cwd": ".",
+   "venv": ".venv",
+   "module": "vstorm_remote",
+   "serve_args": "",
+   "port": 8701,
+   "route": "/sessions",
+   "env": {
+    "PYTHONPATH": "<RUNNER>/apps"
+   },
+   "setup": [],
+   "note": "dependency-injector container (bench entry: runner/apps/vstorm_remote.py -> GET /sessions)",
+   "attr": "app",
+   "auth_header": "X-Sandbox-Token",
+   "auth_token": "bench-token"
+  },
+  {
+   "repo": "ciiceronee",
+   "arm": "S2",
+   "branch": "master",
+   "cwd": ".",
+   "venv": ".venv",
+   "module": "ciicerone.api.main",
+   "serve_args": "",
+   "port": 8702,
+   "route": "/simulations/active",
+   "env": {},
+   "setup": [],
+   "note": "baseline Depends chain"
+  },
+  {
+   "repo": "ciiceronee",
+   "arm": "S1",
+   "branch": "arm_s1",
+   "cwd": ".",
+   "venv": ".venv",
+   "module": "ciicerone.api.main",
+   "serve_args": "",
+   "port": 8702,
+   "route": "/simulations/active",
+   "env": {},
+   "setup": [],
+   "note": "no Depends"
+  },
+  {
+   "repo": "ciiceronee",
+   "arm": "S3",
+   "branch": "arm_s3",
+   "cwd": ".",
+   "venv": ".venv",
+   "module": "ciicerone.api.main",
+   "serve_args": "",
+   "port": 8702,
+   "route": "/simulations/active",
+   "env": {},
+   "setup": [],
+   "note": "middleware-managed providers"
+  },
+  {
+   "repo": "ciiceronee",
+   "arm": "S4",
+   "branch": "arm_s4",
+   "cwd": ".",
+   "venv": ".venv",
+   "module": "ciicerone.api.main",
+   "serve_args": "",
+   "port": 8702,
+   "route": "/simulations/active",
+   "env": {},
+   "setup": [],
+   "note": "dependency-injector container"
+  },
+  {
+   "repo": "azure-samples",
+   "arm": "S2",
+   "branch": "main",
+   "cwd": ".",
+   "venv": ".venv",
+   "module": "azure_bench",
+   "serve_args": "",
+   "port": 8703,
+   "route": "/api/health",
+   "env": {
+    "PYTHONPATH": "<RUNNER>/apps:src",
+    "AZURE_DB_TYPE": "postgresql",
+    "AZURE_POSTGRES_ENDPOINT": "postgresql://cwyd:cwyd@127.0.0.1:5433/cwyd?sslmode=disable",
+    "AZURE_INDEX_STORE": "pgvector",
+    "CWYD_ORCHESTRATOR_NAME": "langgraph",
+    "AZURE_POSTGRES_ADMIN_PRINCIPAL_NAME": "cwyd"
+   },
+   "setup": [
+    "docker start azure-pg 2>/dev/null || docker run -d --name azure-pg -e POSTGRES_USER=cwyd -e POSTGRES_PASSWORD=cwyd -e POSTGRES_DB=cwyd -p 5433:5432 pgvector/pgvector:pg16",
+    "sleep 8"
+   ],
+   "note": "baseline Depends chain | bench entry: runner/apps/azure_bench.py (AAD cred stub -> local pg)",
+   "attr": "app"
+  },
+  {
+   "repo": "azure-samples",
+   "arm": "S1",
+   "branch": "arm_s1",
+   "cwd": ".",
+   "venv": ".venv",
+   "module": "azure_bench",
+   "serve_args": "",
+   "port": 8703,
+   "route": "/api/health",
+   "env": {
+    "PYTHONPATH": "<RUNNER>/apps:src",
+    "AZURE_DB_TYPE": "postgresql",
+    "AZURE_POSTGRES_ENDPOINT": "postgresql://cwyd:cwyd@127.0.0.1:5433/cwyd?sslmode=disable",
+    "AZURE_INDEX_STORE": "pgvector",
+    "CWYD_ORCHESTRATOR_NAME": "langgraph",
+    "AZURE_POSTGRES_ADMIN_PRINCIPAL_NAME": "cwyd"
+   },
+   "setup": [
+    "docker start azure-pg 2>/dev/null || docker run -d --name azure-pg -e POSTGRES_USER=cwyd -e POSTGRES_PASSWORD=cwyd -e POSTGRES_DB=cwyd -p 5433:5432 pgvector/pgvector:pg16",
+    "sleep 8"
+   ],
+   "note": "no Depends | bench entry: runner/apps/azure_bench.py (AAD cred stub -> local pg)",
+   "attr": "app"
+  },
+  {
+   "repo": "azure-samples",
+   "arm": "S3",
+   "branch": "arm_s3",
+   "cwd": ".",
+   "venv": ".venv",
+   "module": "azure_bench",
+   "serve_args": "",
+   "port": 8703,
+   "route": "/api/health",
+   "env": {
+    "PYTHONPATH": "<RUNNER>/apps:src",
+    "AZURE_DB_TYPE": "postgresql",
+    "AZURE_POSTGRES_ENDPOINT": "postgresql://cwyd:cwyd@127.0.0.1:5433/cwyd?sslmode=disable",
+    "AZURE_INDEX_STORE": "pgvector",
+    "CWYD_ORCHESTRATOR_NAME": "langgraph",
+    "AZURE_POSTGRES_ADMIN_PRINCIPAL_NAME": "cwyd"
+   },
+   "setup": [
+    "docker start azure-pg 2>/dev/null || docker run -d --name azure-pg -e POSTGRES_USER=cwyd -e POSTGRES_PASSWORD=cwyd -e POSTGRES_DB=cwyd -p 5433:5432 pgvector/pgvector:pg16",
+    "sleep 8"
+   ],
+   "note": "middleware-managed providers | bench entry: runner/apps/azure_bench.py (AAD cred stub -> local pg)",
+   "attr": "app"
+  },
+  {
+   "repo": "azure-samples",
+   "arm": "S4",
+   "branch": "arm_s4",
+   "cwd": ".",
+   "venv": ".venv",
+   "module": "azure_bench",
+   "serve_args": "",
+   "port": 8703,
+   "route": "/api/health",
+   "env": {
+    "PYTHONPATH": "<RUNNER>/apps:src",
+    "AZURE_DB_TYPE": "postgresql",
+    "AZURE_POSTGRES_ENDPOINT": "postgresql://cwyd:cwyd@127.0.0.1:5433/cwyd?sslmode=disable",
+    "AZURE_INDEX_STORE": "pgvector",
+    "CWYD_ORCHESTRATOR_NAME": "langgraph",
+    "AZURE_POSTGRES_ADMIN_PRINCIPAL_NAME": "cwyd"
+   },
+   "setup": [
+    "docker start azure-pg 2>/dev/null || docker run -d --name azure-pg -e POSTGRES_USER=cwyd -e POSTGRES_PASSWORD=cwyd -e POSTGRES_DB=cwyd -p 5433:5432 pgvector/pgvector:pg16",
+    "sleep 8"
+   ],
+   "note": "dependency-injector container | bench entry: runner/apps/azure_bench.py (AAD cred stub -> local pg)",
+   "attr": "app"
+  },
+  {
+   "repo": "johnsonhk88",
+   "arm": "S2",
+   "branch": "main",
+   "cwd": "api",
+   "venv": ".venv",
+   "module": "app.main",
+   "serve_args": "",
+   "port": 8704,
+   "route": "/api/auth/me",
+   "env": {
+    "POSTGRES_PASSWORD": "bankai",
+    "JWT_SECRET": "bench-secret",
+    "ADMIN_EMAIL": "admin@bankai.dev",
+    "ADMIN_PASSWORD_HASH": "bench",
+    "APP_ENV": "prod",
+    "JWT_TTL_MINUTES": "1440"
+   },
+   "auth": "bearer-token",
+   "setup": [
+    "docker start jhk-postgres 2>/dev/null || docker run -d --name jhk-postgres -e POSTGRES_USER=bankai -e POSTGRES_PASSWORD=bankai -e POSTGRES_DB=bankai -p 5432:5432 postgres:16-alpine",
+    "sleep 8",
+    "<PY> -m alembic upgrade head"
+   ],
+   "note": "baseline Depends chain; DB-backed auth route"
+  },
+  {
+   "repo": "johnsonhk88",
+   "arm": "S1",
+   "branch": "arm_s1",
+   "cwd": "api",
+   "venv": ".venv",
+   "module": "app.main",
+   "serve_args": "",
+   "port": 8704,
+   "route": "/api/auth/me",
+   "env": {
+    "POSTGRES_PASSWORD": "bankai",
+    "JWT_SECRET": "bench-secret",
+    "ADMIN_EMAIL": "admin@bankai.dev",
+    "ADMIN_PASSWORD_HASH": "bench",
+    "APP_ENV": "prod",
+    "JWT_TTL_MINUTES": "1440"
+   },
+   "auth": "bearer-token",
+   "setup": [
+    "docker start jhk-postgres 2>/dev/null || docker run -d --name jhk-postgres -e POSTGRES_USER=bankai -e POSTGRES_PASSWORD=bankai -e POSTGRES_DB=bankai -p 5432:5432 postgres:16-alpine",
+    "sleep 8",
+    "<PY> -m alembic upgrade head"
+   ],
+   "note": "no Depends"
+  },
+  {
+   "repo": "johnsonhk88",
+   "arm": "S3",
+   "branch": "arm_s3",
+   "cwd": "api",
+   "venv": ".venv",
+   "module": "app.main",
+   "serve_args": "",
+   "port": 8704,
+   "route": "/api/auth/me",
+   "env": {
+    "POSTGRES_PASSWORD": "bankai",
+    "JWT_SECRET": "bench-secret",
+    "ADMIN_EMAIL": "admin@bankai.dev",
+    "ADMIN_PASSWORD_HASH": "bench",
+    "APP_ENV": "prod",
+    "JWT_TTL_MINUTES": "1440"
+   },
+   "auth": "bearer-token",
+   "setup": [
+    "docker start jhk-postgres 2>/dev/null || docker run -d --name jhk-postgres -e POSTGRES_USER=bankai -e POSTGRES_PASSWORD=bankai -e POSTGRES_DB=bankai -p 5432:5432 postgres:16-alpine",
+    "sleep 8",
+    "<PY> -m alembic upgrade head"
+   ],
+   "note": "middleware-managed providers"
+  },
+  {
+   "repo": "johnsonhk88",
+   "arm": "S4",
+   "branch": "arm_s4",
+   "cwd": "api",
+   "venv": ".venv",
+   "module": "app.main",
+   "serve_args": "",
+   "port": 8704,
+   "route": "/api/auth/me",
+   "env": {
+    "POSTGRES_PASSWORD": "bankai",
+    "JWT_SECRET": "bench-secret",
+    "ADMIN_EMAIL": "admin@bankai.dev",
+    "ADMIN_PASSWORD_HASH": "bench",
+    "APP_ENV": "prod",
+    "JWT_TTL_MINUTES": "1440"
+   },
+   "auth": "bearer-token",
+   "setup": [
+    "docker start jhk-postgres 2>/dev/null || docker run -d --name jhk-postgres -e POSTGRES_USER=bankai -e POSTGRES_PASSWORD=bankai -e POSTGRES_DB=bankai -p 5432:5432 postgres:16-alpine",
+    "sleep 8",
+    "<PY> -m alembic upgrade head"
+   ],
+   "note": "dependency-injector container"
+  }
+ ],
+ "phaseB_preflight": {
+  "box_plan_id": "voc-c-8c-16gb-150s-amd",
+  "region": "ord",
+  "instance_id": "e8cd6321-daa8-4f44-9ad6-da6adedc114a",
+  "topology_siblings": {
+   "0": [
+    0,
+    1
+   ],
+   "1": [
+    0,
+    1
+   ],
+   "2": [
+    2,
+    3
+   ],
+   "3": [
+    2,
+    3
+   ],
+   "4": [
+    4,
+    5
+   ],
+   "5": [
+    4,
+    5
+   ],
+   "6": [
+    6,
+    7
+   ],
+   "7": [
+    6,
+    7
+   ]
+  },
+  "layout_tier1": {
+   "server": "0,2,4",
+   "k6": "6",
+   "sampler": "6",
+   "offline": "1,3,5,7",
+   "online_after_prep": "[0,2,4,6]",
+   "nproc": 4
+  },
+  "os": "Ubuntu 22.04.5 LTS",
+  "kernel": "5.15.0-198-generic",
+  "cpumodel": "AMD EPYC-Milan, 8 vCPU / 16 GB, 1 NUMA node",
+  "python_venvs": {
+   "johnsonhk88": "3.12.15",
+   "vstorm-co": "3.12.15",
+   "ciiceronee": "3.12.15",
+   "azure-samples": "3.14.8"
+  },
+  "k6": {
+   "version": "v2.2.0",
+   "commit": "00a9a1b7f5",
+   "go": "1.26.5",
+   "sha256": "9fced9ff140d73bf3d69b3cde2493adce3807b35ab210a5cb0771045d0ad5a29"
+  },
+  "docker": "29.1.3",
+  "git": "2.34.1",
+  "bench_core_pinning": "pending \u2014 bench.py launches uvicorn/k6 without taskset; Tier-1 comparability requires wiring taskset (uvicorn 0,2,4; k6 6) before any Phase B cell"
+ }
+}

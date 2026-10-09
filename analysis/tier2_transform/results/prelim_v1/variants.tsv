@@ -1,0 +1,19 @@
+repo	arm	branch	commit	suite	status	notes
+vstorm	S2	main	8ac7b67	1716	green	baseline (framework DI, 19 Depends)
+vstorm	S1	arm_s1	e202504	1716	green	no Depends; 19 handlers explicit token checks
+vstorm	S3	arm_s3	0e767c3	1716	green	middleware + request.state; JSONResponse conversion
+vstorm	S4	arm_s4	6b17d06	1716	green	dependency-injector container + Depends retained
+ciiceronee	S2	master	acc7fec	460	green	baseline (5 handler Depends, 2 getters)
+ciiceronee	S1	arm_s1	ac33281	460	green	no Depends; explicit getter calls (recovered orphan commit)
+ciiceronee	S3	arm_s3	b36fab1	460	green	middleware + request.state; inline handler param swap
+ciiceronee	S4	arm_s4	6ccd6fc	460	green	container + lifespan overrides + Depends retained
+azure	S2	main	b5848ec	2515	green	baseline (central deps.py aliases, 127 use-sites, 42 test override sites)
+azure	S1	arm_s1	2481fe5	2515	green	aliases deleted; handlers call resolve_settings/resolve_* getters; 42 overrides -> app.state seeds
+azure	S3	arm_s3	1387226	2520	green	middleware seeds request.state (copies app.state + builds guard/validator); bare-app tests attach middleware
+azure	S4	arm_s4	f610924	2518	green	container replaces app.state seam; PATCH live-reload thru container; seam tests converted
+krawl	-	-	-	-	dropped	no pytest suite (standalone CLI script)
+shabti	-	-	-	-	dropped	unit gate hangs w/o local OpenSearch/LangSmith infra
+johnsonhk88	S2	main	60e6739	12	green	baseline (get_db/get_current_user Depends chain, 24 use-sites, PG-backed)
+johnsonhk88	S1	arm_s1	557e95e	12	green	no Depends; db_scope + resolve_current_user seams; handlers wrap bodies
+johnsonhk88	S3	arm_s3	f5bd629	12	green	middleware owns session lifetime; handlers read request.state.db
+johnsonhk88	S4	arm_s4	de3ac7b	12	green	dependency-injector container + Depends retained through container providers

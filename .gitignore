@@ -40,3 +40,13 @@ analysis/experiment/results/steady/
 # 3.1GB per-request dump for the two failing A.480 cells; the diagnosis
 # derived from it is in A480_failure_diagnosis.md, which IS tracked.
 analysis/out/experiment/standalone_R40/raw_A480_failing/
+
+# --- Tier-2 DI-pattern study (analysis/tier2_transform) ---
+# Raw uvicorn access logs are ~1.8GB (dominated by ciiceronee S1 and azure S1)
+# and are provenance only. The per-cell aggregates in raw.tsv are what the
+# analysis reads, so the raw logs are never tracked.
+analysis/tier2_transform/results/**/server.log
+# The four cloned app repos (3.1GB, incl. .git and node_modules) and the
+# 24MB tool venv under scripts/ are build inputs, not study artifacts.
+analysis/tier2_transform/repos/
+analysis/tier2_transform/scripts/.toolenv/

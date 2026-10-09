@@ -1,0 +1,20 @@
+=== [vstorm] start 22:29:40
+=== [vstorm] start 22:32:55
+error: Failed to create virtual environment
+  Caused by: A virtual environment already exists at: .venv
+
+hint: Use the `--clear` flag or set `UV_VENV_CLEAR=1` to replace the existing virtual environment
+=== [vstorm] INSTALL FAILED (0 s)
+=== [azure] start 22:32:55
+=== [azure] installed in 854s; running tests
+=== [azure] green passed=2515 failed=0 error=0 (43s)
+=== [ciiceronee] start 22:47:52
+=== [ciiceronee] installed in 2131s; running tests
+=== [ciiceronee] red passed=460 failed=2 error=25 (86s)
+=== [shabti] start 23:24:49
+=== [shabti] installed in 420s; running tests
+=== [shabti] red passed=0 failed=0 error=2 (7s)
+=== [krawl] start 23:31:56
+=== [krawl] installed in 44s; running tests
+=== [krawl] crashed passed=0 failed=0 error=0 (4s)
+=== preflight done 23:32:44

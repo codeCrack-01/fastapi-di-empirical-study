@@ -1,0 +1,1195 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.1.1, pluggy-1.6.0
+rootdir: /home/zain_khan/Documents/Fall'26/research_fastapi/analysis/tier2_transform/repos/ciiceronee
+configfile: pytest.ini (WARNING: ignoring pytest config in pyproject.toml!)
+testpaths: tests
+plugins: respx-0.23.1, mock-3.16.0, asyncio-1.4.0, cov-7.1.0, xdist-3.8.0, platformdirs-4.12.3, anyio-4.15.1, Faker-40.41.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 487 items
+
+tests/integration/test_postgres_event_store.py FEFEEEEEEEEEEEEEEEEEEEEEE [  5%]
+EE                                                                       [  5%]
+tests/unit/test_batch_processor.py .................................     [ 12%]
+tests/unit/test_cli.py .....                                             [ 13%]
+tests/unit/test_content_filter.py ...................................... [ 21%]
+....                                                                     [ 21%]
+tests/unit/test_content_filter_edge_cases.py ........................... [ 27%]
+...............                                                          [ 30%]
+tests/unit/test_detection_rules.py ..................................... [ 38%]
+................................                                         [ 44%]
+tests/unit/test_event_sourcing.py ........................               [ 49%]
+tests/unit/test_guardrails.py .......................................... [ 58%]
+................                                                         [ 61%]
+tests/unit/test_issue_125_delegation_refactor.py ....................... [ 66%]
+...                                                                      [ 66%]
+tests/unit/test_mitre_attack_engine.py ................................. [ 73%]
+..                                                                       [ 74%]
+tests/unit/test_model_fallback_chain.py ................................ [ 80%]
+....................                                                     [ 84%]
+tests/unit/test_template_security.py ................................... [ 91%]
+.......................................                                  [100%]
+
+==================================== ERRORS ====================================
+_______ ERROR at setup of TestConnectionAndSetup.test_schema_initialized _______
+tests/integration/test_postgres_event_store.py:61: in event_store
+    store = await PostgresEventStore.create(
+ciicerone/core/postgres_event_store.py:168: in create
+    pool = await asyncpg.create_pool(
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:496: in _async__init__
+    await self._initialize()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:530: in _initialize
+    await first_ch.connect()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:172: in connect
+    con = await self._pool._get_new_connection()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:655: in _get_new_connection
+    con = await self._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connection.py:2498: in connect
+    return await connect_utils._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1307: in _connect
+    raise last_error or exceptions.TargetServerAttributeNotMatched(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1278: in _connect
+    conn = await _connect_addr(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1092: in _connect_addr
+    return await __connect_addr(params, True, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1162: in __connect_addr
+    tr, pr = await connector
+             ^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:996: in _create_ssl_connection
+    tr, pr = await loop.create_connection(
+/home/zain_khan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:1140: in create_connection
+    raise OSError('Multiple exceptions: {}'.format(
+E   OSError: Multiple exceptions: [Errno 111] Connect call failed ('::1', 5432, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 5432)
+
+During handling of the above exception, another exception occurred:
+tests/integration/test_postgres_event_store.py:69: in event_store
+    async with store._acquire() as conn:
+               ^^^^^
+E   UnboundLocalError: cannot access local variable 'store' where it is not associated with a value
+_______ ERROR at setup of TestAppendOperations.test_append_single_event ________
+tests/integration/test_postgres_event_store.py:61: in event_store
+    store = await PostgresEventStore.create(
+ciicerone/core/postgres_event_store.py:168: in create
+    pool = await asyncpg.create_pool(
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:496: in _async__init__
+    await self._initialize()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:530: in _initialize
+    await first_ch.connect()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:172: in connect
+    con = await self._pool._get_new_connection()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:655: in _get_new_connection
+    con = await self._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connection.py:2498: in connect
+    return await connect_utils._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1307: in _connect
+    raise last_error or exceptions.TargetServerAttributeNotMatched(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1278: in _connect
+    conn = await _connect_addr(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1092: in _connect_addr
+    return await __connect_addr(params, True, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1162: in __connect_addr
+    tr, pr = await connector
+             ^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:996: in _create_ssl_connection
+    tr, pr = await loop.create_connection(
+/home/zain_khan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:1140: in create_connection
+    raise OSError('Multiple exceptions: {}'.format(
+E   OSError: Multiple exceptions: [Errno 111] Connect call failed ('::1', 5432, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 5432)
+
+During handling of the above exception, another exception occurred:
+tests/integration/test_postgres_event_store.py:69: in event_store
+    async with store._acquire() as conn:
+               ^^^^^
+E   UnboundLocalError: cannot access local variable 'store' where it is not associated with a value
+__ ERROR at setup of TestAppendOperations.test_append_returns_sequence_number __
+tests/integration/test_postgres_event_store.py:61: in event_store
+    store = await PostgresEventStore.create(
+ciicerone/core/postgres_event_store.py:168: in create
+    pool = await asyncpg.create_pool(
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:496: in _async__init__
+    await self._initialize()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:530: in _initialize
+    await first_ch.connect()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:172: in connect
+    con = await self._pool._get_new_connection()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:655: in _get_new_connection
+    con = await self._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connection.py:2498: in connect
+    return await connect_utils._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1307: in _connect
+    raise last_error or exceptions.TargetServerAttributeNotMatched(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1278: in _connect
+    conn = await _connect_addr(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1092: in _connect_addr
+    return await __connect_addr(params, True, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1162: in __connect_addr
+    tr, pr = await connector
+             ^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:996: in _create_ssl_connection
+    tr, pr = await loop.create_connection(
+/home/zain_khan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:1140: in create_connection
+    raise OSError('Multiple exceptions: {}'.format(
+E   OSError: Multiple exceptions: [Errno 111] Connect call failed ('::1', 5432, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 5432)
+
+During handling of the above exception, another exception occurred:
+tests/integration/test_postgres_event_store.py:69: in event_store
+    async with store._acquire() as conn:
+               ^^^^^
+E   UnboundLocalError: cannot access local variable 'store' where it is not associated with a value
+___________ ERROR at setup of TestAppendOperations.test_append_batch ___________
+tests/integration/test_postgres_event_store.py:61: in event_store
+    store = await PostgresEventStore.create(
+ciicerone/core/postgres_event_store.py:168: in create
+    pool = await asyncpg.create_pool(
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:496: in _async__init__
+    await self._initialize()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:530: in _initialize
+    await first_ch.connect()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:172: in connect
+    con = await self._pool._get_new_connection()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:655: in _get_new_connection
+    con = await self._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connection.py:2498: in connect
+    return await connect_utils._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1307: in _connect
+    raise last_error or exceptions.TargetServerAttributeNotMatched(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1278: in _connect
+    conn = await _connect_addr(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1092: in _connect_addr
+    return await __connect_addr(params, True, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1162: in __connect_addr
+    tr, pr = await connector
+             ^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:996: in _create_ssl_connection
+    tr, pr = await loop.create_connection(
+/home/zain_khan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:1140: in create_connection
+    raise OSError('Multiple exceptions: {}'.format(
+E   OSError: Multiple exceptions: [Errno 111] Connect call failed ('::1', 5432, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 5432)
+
+During handling of the above exception, another exception occurred:
+tests/integration/test_postgres_event_store.py:69: in event_store
+    async with store._acquire() as conn:
+               ^^^^^
+E   UnboundLocalError: cannot access local variable 'store' where it is not associated with a value
+__ ERROR at setup of TestAppendOperations.test_append_with_simulation_events ___
+tests/integration/test_postgres_event_store.py:61: in event_store
+    store = await PostgresEventStore.create(
+ciicerone/core/postgres_event_store.py:168: in create
+    pool = await asyncpg.create_pool(
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:496: in _async__init__
+    await self._initialize()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:530: in _initialize
+    await first_ch.connect()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:172: in connect
+    con = await self._pool._get_new_connection()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:655: in _get_new_connection
+    con = await self._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connection.py:2498: in connect
+    return await connect_utils._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1307: in _connect
+    raise last_error or exceptions.TargetServerAttributeNotMatched(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1278: in _connect
+    conn = await _connect_addr(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1092: in _connect_addr
+    return await __connect_addr(params, True, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1162: in __connect_addr
+    tr, pr = await connector
+             ^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:996: in _create_ssl_connection
+    tr, pr = await loop.create_connection(
+/home/zain_khan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:1140: in create_connection
+    raise OSError('Multiple exceptions: {}'.format(
+E   OSError: Multiple exceptions: [Errno 111] Connect call failed ('::1', 5432, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 5432)
+
+During handling of the above exception, another exception occurred:
+tests/integration/test_postgres_event_store.py:69: in event_store
+    async with store._acquire() as conn:
+               ^^^^^
+E   UnboundLocalError: cannot access local variable 'store' where it is not associated with a value
+______ ERROR at setup of TestReadOperations.test_get_events_for_aggregate ______
+tests/integration/test_postgres_event_store.py:61: in event_store
+    store = await PostgresEventStore.create(
+ciicerone/core/postgres_event_store.py:168: in create
+    pool = await asyncpg.create_pool(
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:496: in _async__init__
+    await self._initialize()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:530: in _initialize
+    await first_ch.connect()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:172: in connect
+    con = await self._pool._get_new_connection()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:655: in _get_new_connection
+    con = await self._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connection.py:2498: in connect
+    return await connect_utils._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1307: in _connect
+    raise last_error or exceptions.TargetServerAttributeNotMatched(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1278: in _connect
+    conn = await _connect_addr(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1092: in _connect_addr
+    return await __connect_addr(params, True, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1162: in __connect_addr
+    tr, pr = await connector
+             ^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:996: in _create_ssl_connection
+    tr, pr = await loop.create_connection(
+/home/zain_khan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:1140: in create_connection
+    raise OSError('Multiple exceptions: {}'.format(
+E   OSError: Multiple exceptions: [Errno 111] Connect call failed ('::1', 5432, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 5432)
+
+During handling of the above exception, another exception occurred:
+tests/integration/test_postgres_event_store.py:69: in event_store
+    async with store._acquire() as conn:
+               ^^^^^
+E   UnboundLocalError: cannot access local variable 'store' where it is not associated with a value
+______ ERROR at setup of TestReadOperations.test_get_events_version_range ______
+tests/integration/test_postgres_event_store.py:61: in event_store
+    store = await PostgresEventStore.create(
+ciicerone/core/postgres_event_store.py:168: in create
+    pool = await asyncpg.create_pool(
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:496: in _async__init__
+    await self._initialize()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:530: in _initialize
+    await first_ch.connect()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:172: in connect
+    con = await self._pool._get_new_connection()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:655: in _get_new_connection
+    con = await self._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connection.py:2498: in connect
+    return await connect_utils._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1307: in _connect
+    raise last_error or exceptions.TargetServerAttributeNotMatched(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1278: in _connect
+    conn = await _connect_addr(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1092: in _connect_addr
+    return await __connect_addr(params, True, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1162: in __connect_addr
+    tr, pr = await connector
+             ^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:996: in _create_ssl_connection
+    tr, pr = await loop.create_connection(
+/home/zain_khan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:1140: in create_connection
+    raise OSError('Multiple exceptions: {}'.format(
+E   OSError: Multiple exceptions: [Errno 111] Connect call failed ('::1', 5432, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 5432)
+
+During handling of the above exception, another exception occurred:
+tests/integration/test_postgres_event_store.py:69: in event_store
+    async with store._acquire() as conn:
+               ^^^^^
+E   UnboundLocalError: cannot access local variable 'store' where it is not associated with a value
+_________ ERROR at setup of TestReadOperations.test_get_events_by_type _________
+tests/integration/test_postgres_event_store.py:61: in event_store
+    store = await PostgresEventStore.create(
+ciicerone/core/postgres_event_store.py:168: in create
+    pool = await asyncpg.create_pool(
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:496: in _async__init__
+    await self._initialize()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:530: in _initialize
+    await first_ch.connect()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:172: in connect
+    con = await self._pool._get_new_connection()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:655: in _get_new_connection
+    con = await self._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connection.py:2498: in connect
+    return await connect_utils._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1307: in _connect
+    raise last_error or exceptions.TargetServerAttributeNotMatched(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1278: in _connect
+    conn = await _connect_addr(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1092: in _connect_addr
+    return await __connect_addr(params, True, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1162: in __connect_addr
+    tr, pr = await connector
+             ^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:996: in _create_ssl_connection
+    tr, pr = await loop.create_connection(
+/home/zain_khan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:1140: in create_connection
+    raise OSError('Multiple exceptions: {}'.format(
+E   OSError: Multiple exceptions: [Errno 111] Connect call failed ('::1', 5432, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 5432)
+
+During handling of the above exception, another exception occurred:
+tests/integration/test_postgres_event_store.py:69: in event_store
+    async with store._acquire() as conn:
+               ^^^^^
+E   UnboundLocalError: cannot access local variable 'store' where it is not associated with a value
+_____ ERROR at setup of TestReadOperations.test_get_events_empty_aggregate _____
+tests/integration/test_postgres_event_store.py:61: in event_store
+    store = await PostgresEventStore.create(
+ciicerone/core/postgres_event_store.py:168: in create
+    pool = await asyncpg.create_pool(
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:496: in _async__init__
+    await self._initialize()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:530: in _initialize
+    await first_ch.connect()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:172: in connect
+    con = await self._pool._get_new_connection()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:655: in _get_new_connection
+    con = await self._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connection.py:2498: in connect
+    return await connect_utils._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1307: in _connect
+    raise last_error or exceptions.TargetServerAttributeNotMatched(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1278: in _connect
+    conn = await _connect_addr(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1092: in _connect_addr
+    return await __connect_addr(params, True, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1162: in __connect_addr
+    tr, pr = await connector
+             ^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:996: in _create_ssl_connection
+    tr, pr = await loop.create_connection(
+/home/zain_khan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:1140: in create_connection
+    raise OSError('Multiple exceptions: {}'.format(
+E   OSError: Multiple exceptions: [Errno 111] Connect call failed ('::1', 5432, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 5432)
+
+During handling of the above exception, another exception occurred:
+tests/integration/test_postgres_event_store.py:69: in event_store
+    async with store._acquire() as conn:
+               ^^^^^
+E   UnboundLocalError: cannot access local variable 'store' where it is not associated with a value
+_______ ERROR at setup of TestReadOperations.test_get_aggregate_version ________
+tests/integration/test_postgres_event_store.py:61: in event_store
+    store = await PostgresEventStore.create(
+ciicerone/core/postgres_event_store.py:168: in create
+    pool = await asyncpg.create_pool(
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:496: in _async__init__
+    await self._initialize()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:530: in _initialize
+    await first_ch.connect()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:172: in connect
+    con = await self._pool._get_new_connection()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:655: in _get_new_connection
+    con = await self._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connection.py:2498: in connect
+    return await connect_utils._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1307: in _connect
+    raise last_error or exceptions.TargetServerAttributeNotMatched(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1278: in _connect
+    conn = await _connect_addr(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1092: in _connect_addr
+    return await __connect_addr(params, True, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1162: in __connect_addr
+    tr, pr = await connector
+             ^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:996: in _create_ssl_connection
+    tr, pr = await loop.create_connection(
+/home/zain_khan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:1140: in create_connection
+    raise OSError('Multiple exceptions: {}'.format(
+E   OSError: Multiple exceptions: [Errno 111] Connect call failed ('::1', 5432, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 5432)
+
+During handling of the above exception, another exception occurred:
+tests/integration/test_postgres_event_store.py:69: in event_store
+    async with store._acquire() as conn:
+               ^^^^^
+E   UnboundLocalError: cannot access local variable 'store' where it is not associated with a value
+_ ERROR at setup of TestConcurrencyControl.test_concurrency_error_on_version_conflict _
+tests/integration/test_postgres_event_store.py:61: in event_store
+    store = await PostgresEventStore.create(
+ciicerone/core/postgres_event_store.py:168: in create
+    pool = await asyncpg.create_pool(
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:496: in _async__init__
+    await self._initialize()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:530: in _initialize
+    await first_ch.connect()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:172: in connect
+    con = await self._pool._get_new_connection()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:655: in _get_new_connection
+    con = await self._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connection.py:2498: in connect
+    return await connect_utils._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1307: in _connect
+    raise last_error or exceptions.TargetServerAttributeNotMatched(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1278: in _connect
+    conn = await _connect_addr(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1092: in _connect_addr
+    return await __connect_addr(params, True, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1162: in __connect_addr
+    tr, pr = await connector
+             ^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:996: in _create_ssl_connection
+    tr, pr = await loop.create_connection(
+/home/zain_khan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:1140: in create_connection
+    raise OSError('Multiple exceptions: {}'.format(
+E   OSError: Multiple exceptions: [Errno 111] Connect call failed ('::1', 5432, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 5432)
+
+During handling of the above exception, another exception occurred:
+tests/integration/test_postgres_event_store.py:69: in event_store
+    async with store._acquire() as conn:
+               ^^^^^
+E   UnboundLocalError: cannot access local variable 'store' where it is not associated with a value
+____ ERROR at setup of TestConcurrencyControl.test_concurrency_error_on_gap ____
+tests/integration/test_postgres_event_store.py:61: in event_store
+    store = await PostgresEventStore.create(
+ciicerone/core/postgres_event_store.py:168: in create
+    pool = await asyncpg.create_pool(
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:496: in _async__init__
+    await self._initialize()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:530: in _initialize
+    await first_ch.connect()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:172: in connect
+    con = await self._pool._get_new_connection()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:655: in _get_new_connection
+    con = await self._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connection.py:2498: in connect
+    return await connect_utils._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1307: in _connect
+    raise last_error or exceptions.TargetServerAttributeNotMatched(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1278: in _connect
+    conn = await _connect_addr(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1092: in _connect_addr
+    return await __connect_addr(params, True, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1162: in __connect_addr
+    tr, pr = await connector
+             ^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:996: in _create_ssl_connection
+    tr, pr = await loop.create_connection(
+/home/zain_khan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:1140: in create_connection
+    raise OSError('Multiple exceptions: {}'.format(
+E   OSError: Multiple exceptions: [Errno 111] Connect call failed ('::1', 5432, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 5432)
+
+During handling of the above exception, another exception occurred:
+tests/integration/test_postgres_event_store.py:69: in event_store
+    async with store._acquire() as conn:
+               ^^^^^
+E   UnboundLocalError: cannot access local variable 'store' where it is not associated with a value
+___ ERROR at setup of TestConcurrencyControl.test_append_with_retry_success ____
+tests/integration/test_postgres_event_store.py:61: in event_store
+    store = await PostgresEventStore.create(
+ciicerone/core/postgres_event_store.py:168: in create
+    pool = await asyncpg.create_pool(
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:496: in _async__init__
+    await self._initialize()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:530: in _initialize
+    await first_ch.connect()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:172: in connect
+    con = await self._pool._get_new_connection()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:655: in _get_new_connection
+    con = await self._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connection.py:2498: in connect
+    return await connect_utils._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1307: in _connect
+    raise last_error or exceptions.TargetServerAttributeNotMatched(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1278: in _connect
+    conn = await _connect_addr(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1092: in _connect_addr
+    return await __connect_addr(params, True, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1162: in __connect_addr
+    tr, pr = await connector
+             ^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:996: in _create_ssl_connection
+    tr, pr = await loop.create_connection(
+/home/zain_khan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:1140: in create_connection
+    raise OSError('Multiple exceptions: {}'.format(
+E   OSError: Multiple exceptions: [Errno 111] Connect call failed ('::1', 5432, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 5432)
+
+During handling of the above exception, another exception occurred:
+tests/integration/test_postgres_event_store.py:69: in event_store
+    async with store._acquire() as conn:
+               ^^^^^
+E   UnboundLocalError: cannot access local variable 'store' where it is not associated with a value
+_______ ERROR at setup of TestConcurrencyControl.test_concurrent_appends _______
+tests/integration/test_postgres_event_store.py:61: in event_store
+    store = await PostgresEventStore.create(
+ciicerone/core/postgres_event_store.py:168: in create
+    pool = await asyncpg.create_pool(
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:496: in _async__init__
+    await self._initialize()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:530: in _initialize
+    await first_ch.connect()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:172: in connect
+    con = await self._pool._get_new_connection()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:655: in _get_new_connection
+    con = await self._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connection.py:2498: in connect
+    return await connect_utils._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1307: in _connect
+    raise last_error or exceptions.TargetServerAttributeNotMatched(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1278: in _connect
+    conn = await _connect_addr(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1092: in _connect_addr
+    return await __connect_addr(params, True, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1162: in __connect_addr
+    tr, pr = await connector
+             ^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:996: in _create_ssl_connection
+    tr, pr = await loop.create_connection(
+/home/zain_khan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:1140: in create_connection
+    raise OSError('Multiple exceptions: {}'.format(
+E   OSError: Multiple exceptions: [Errno 111] Connect call failed ('::1', 5432, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 5432)
+
+During handling of the above exception, another exception occurred:
+tests/integration/test_postgres_event_store.py:69: in event_store
+    async with store._acquire() as conn:
+               ^^^^^
+E   UnboundLocalError: cannot access local variable 'store' where it is not associated with a value
+_____________ ERROR at setup of TestEventReplay.test_replay_events _____________
+tests/integration/test_postgres_event_store.py:61: in event_store
+    store = await PostgresEventStore.create(
+ciicerone/core/postgres_event_store.py:168: in create
+    pool = await asyncpg.create_pool(
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:496: in _async__init__
+    await self._initialize()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:530: in _initialize
+    await first_ch.connect()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:172: in connect
+    con = await self._pool._get_new_connection()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:655: in _get_new_connection
+    con = await self._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connection.py:2498: in connect
+    return await connect_utils._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1307: in _connect
+    raise last_error or exceptions.TargetServerAttributeNotMatched(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1278: in _connect
+    conn = await _connect_addr(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1092: in _connect_addr
+    return await __connect_addr(params, True, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1162: in __connect_addr
+    tr, pr = await connector
+             ^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:996: in _create_ssl_connection
+    tr, pr = await loop.create_connection(
+/home/zain_khan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:1140: in create_connection
+    raise OSError('Multiple exceptions: {}'.format(
+E   OSError: Multiple exceptions: [Errno 111] Connect call failed ('::1', 5432, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 5432)
+
+During handling of the above exception, another exception occurred:
+tests/integration/test_postgres_event_store.py:69: in event_store
+    async with store._acquire() as conn:
+               ^^^^^
+E   UnboundLocalError: cannot access local variable 'store' where it is not associated with a value
+_______ ERROR at setup of TestEventReplay.test_replay_with_sync_handler ________
+tests/integration/test_postgres_event_store.py:61: in event_store
+    store = await PostgresEventStore.create(
+ciicerone/core/postgres_event_store.py:168: in create
+    pool = await asyncpg.create_pool(
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:496: in _async__init__
+    await self._initialize()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:530: in _initialize
+    await first_ch.connect()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:172: in connect
+    con = await self._pool._get_new_connection()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:655: in _get_new_connection
+    con = await self._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connection.py:2498: in connect
+    return await connect_utils._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1307: in _connect
+    raise last_error or exceptions.TargetServerAttributeNotMatched(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1278: in _connect
+    conn = await _connect_addr(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1092: in _connect_addr
+    return await __connect_addr(params, True, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1162: in __connect_addr
+    tr, pr = await connector
+             ^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:996: in _create_ssl_connection
+    tr, pr = await loop.create_connection(
+/home/zain_khan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:1140: in create_connection
+    raise OSError('Multiple exceptions: {}'.format(
+E   OSError: Multiple exceptions: [Errno 111] Connect call failed ('::1', 5432, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 5432)
+
+During handling of the above exception, another exception occurred:
+tests/integration/test_postgres_event_store.py:69: in event_store
+    async with store._acquire() as conn:
+               ^^^^^
+E   UnboundLocalError: cannot access local variable 'store' where it is not associated with a value
+____________ ERROR at setup of TestStatistics.test_get_event_count _____________
+tests/integration/test_postgres_event_store.py:61: in event_store
+    store = await PostgresEventStore.create(
+ciicerone/core/postgres_event_store.py:168: in create
+    pool = await asyncpg.create_pool(
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:496: in _async__init__
+    await self._initialize()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:530: in _initialize
+    await first_ch.connect()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:172: in connect
+    con = await self._pool._get_new_connection()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:655: in _get_new_connection
+    con = await self._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connection.py:2498: in connect
+    return await connect_utils._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1307: in _connect
+    raise last_error or exceptions.TargetServerAttributeNotMatched(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1278: in _connect
+    conn = await _connect_addr(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1092: in _connect_addr
+    return await __connect_addr(params, True, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1162: in __connect_addr
+    tr, pr = await connector
+             ^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:996: in _create_ssl_connection
+    tr, pr = await loop.create_connection(
+/home/zain_khan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:1140: in create_connection
+    raise OSError('Multiple exceptions: {}'.format(
+E   OSError: Multiple exceptions: [Errno 111] Connect call failed ('::1', 5432, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 5432)
+
+During handling of the above exception, another exception occurred:
+tests/integration/test_postgres_event_store.py:69: in event_store
+    async with store._acquire() as conn:
+               ^^^^^
+E   UnboundLocalError: cannot access local variable 'store' where it is not associated with a value
+__________ ERROR at setup of TestStatistics.test_get_latest_sequence ___________
+tests/integration/test_postgres_event_store.py:61: in event_store
+    store = await PostgresEventStore.create(
+ciicerone/core/postgres_event_store.py:168: in create
+    pool = await asyncpg.create_pool(
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:496: in _async__init__
+    await self._initialize()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:530: in _initialize
+    await first_ch.connect()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:172: in connect
+    con = await self._pool._get_new_connection()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:655: in _get_new_connection
+    con = await self._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connection.py:2498: in connect
+    return await connect_utils._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1307: in _connect
+    raise last_error or exceptions.TargetServerAttributeNotMatched(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1278: in _connect
+    conn = await _connect_addr(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1092: in _connect_addr
+    return await __connect_addr(params, True, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1162: in __connect_addr
+    tr, pr = await connector
+             ^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:996: in _create_ssl_connection
+    tr, pr = await loop.create_connection(
+/home/zain_khan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:1140: in create_connection
+    raise OSError('Multiple exceptions: {}'.format(
+E   OSError: Multiple exceptions: [Errno 111] Connect call failed ('::1', 5432, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 5432)
+
+During handling of the above exception, another exception occurred:
+tests/integration/test_postgres_event_store.py:69: in event_store
+    async with store._acquire() as conn:
+               ^^^^^
+E   UnboundLocalError: cannot access local variable 'store' where it is not associated with a value
+____________ ERROR at setup of TestStatistics.test_aggregate_exists ____________
+tests/integration/test_postgres_event_store.py:61: in event_store
+    store = await PostgresEventStore.create(
+ciicerone/core/postgres_event_store.py:168: in create
+    pool = await asyncpg.create_pool(
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:496: in _async__init__
+    await self._initialize()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:530: in _initialize
+    await first_ch.connect()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:172: in connect
+    con = await self._pool._get_new_connection()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:655: in _get_new_connection
+    con = await self._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connection.py:2498: in connect
+    return await connect_utils._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1307: in _connect
+    raise last_error or exceptions.TargetServerAttributeNotMatched(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1278: in _connect
+    conn = await _connect_addr(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1092: in _connect_addr
+    return await __connect_addr(params, True, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1162: in __connect_addr
+    tr, pr = await connector
+             ^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:996: in _create_ssl_connection
+    tr, pr = await loop.create_connection(
+/home/zain_khan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:1140: in create_connection
+    raise OSError('Multiple exceptions: {}'.format(
+E   OSError: Multiple exceptions: [Errno 111] Connect call failed ('::1', 5432, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 5432)
+
+During handling of the above exception, another exception occurred:
+tests/integration/test_postgres_event_store.py:69: in event_store
+    async with store._acquire() as conn:
+               ^^^^^
+E   UnboundLocalError: cannot access local variable 'store' where it is not associated with a value
+_________ ERROR at setup of TestStatistics.test_get_all_aggregate_ids __________
+tests/integration/test_postgres_event_store.py:61: in event_store
+    store = await PostgresEventStore.create(
+ciicerone/core/postgres_event_store.py:168: in create
+    pool = await asyncpg.create_pool(
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:496: in _async__init__
+    await self._initialize()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:530: in _initialize
+    await first_ch.connect()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:172: in connect
+    con = await self._pool._get_new_connection()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:655: in _get_new_connection
+    con = await self._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connection.py:2498: in connect
+    return await connect_utils._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1307: in _connect
+    raise last_error or exceptions.TargetServerAttributeNotMatched(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1278: in _connect
+    conn = await _connect_addr(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1092: in _connect_addr
+    return await __connect_addr(params, True, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1162: in __connect_addr
+    tr, pr = await connector
+             ^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:996: in _create_ssl_connection
+    tr, pr = await loop.create_connection(
+/home/zain_khan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:1140: in create_connection
+    raise OSError('Multiple exceptions: {}'.format(
+E   OSError: Multiple exceptions: [Errno 111] Connect call failed ('::1', 5432, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 5432)
+
+During handling of the above exception, another exception occurred:
+tests/integration/test_postgres_event_store.py:69: in event_store
+    async with store._acquire() as conn:
+               ^^^^^
+E   UnboundLocalError: cannot access local variable 'store' where it is not associated with a value
+________ ERROR at setup of TestDataIntegrity.test_event_data_preserved _________
+tests/integration/test_postgres_event_store.py:61: in event_store
+    store = await PostgresEventStore.create(
+ciicerone/core/postgres_event_store.py:168: in create
+    pool = await asyncpg.create_pool(
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:496: in _async__init__
+    await self._initialize()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:530: in _initialize
+    await first_ch.connect()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:172: in connect
+    con = await self._pool._get_new_connection()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:655: in _get_new_connection
+    con = await self._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connection.py:2498: in connect
+    return await connect_utils._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1307: in _connect
+    raise last_error or exceptions.TargetServerAttributeNotMatched(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1278: in _connect
+    conn = await _connect_addr(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1092: in _connect_addr
+    return await __connect_addr(params, True, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1162: in __connect_addr
+    tr, pr = await connector
+             ^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:996: in _create_ssl_connection
+    tr, pr = await loop.create_connection(
+/home/zain_khan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:1140: in create_connection
+    raise OSError('Multiple exceptions: {}'.format(
+E   OSError: Multiple exceptions: [Errno 111] Connect call failed ('::1', 5432, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 5432)
+
+During handling of the above exception, another exception occurred:
+tests/integration/test_postgres_event_store.py:69: in event_store
+    async with store._acquire() as conn:
+               ^^^^^
+E   UnboundLocalError: cannot access local variable 'store' where it is not associated with a value
+_________ ERROR at setup of TestDataIntegrity.test_metadata_preserved __________
+tests/integration/test_postgres_event_store.py:61: in event_store
+    store = await PostgresEventStore.create(
+ciicerone/core/postgres_event_store.py:168: in create
+    pool = await asyncpg.create_pool(
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:496: in _async__init__
+    await self._initialize()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:530: in _initialize
+    await first_ch.connect()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:172: in connect
+    con = await self._pool._get_new_connection()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:655: in _get_new_connection
+    con = await self._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connection.py:2498: in connect
+    return await connect_utils._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1307: in _connect
+    raise last_error or exceptions.TargetServerAttributeNotMatched(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1278: in _connect
+    conn = await _connect_addr(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1092: in _connect_addr
+    return await __connect_addr(params, True, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1162: in __connect_addr
+    tr, pr = await connector
+             ^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:996: in _create_ssl_connection
+    tr, pr = await loop.create_connection(
+/home/zain_khan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:1140: in create_connection
+    raise OSError('Multiple exceptions: {}'.format(
+E   OSError: Multiple exceptions: [Errno 111] Connect call failed ('::1', 5432, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 5432)
+
+During handling of the above exception, another exception occurred:
+tests/integration/test_postgres_event_store.py:69: in event_store
+    async with store._acquire() as conn:
+               ^^^^^
+E   UnboundLocalError: cannot access local variable 'store' where it is not associated with a value
+_________ ERROR at setup of TestDataIntegrity.test_timestamp_preserved _________
+tests/integration/test_postgres_event_store.py:61: in event_store
+    store = await PostgresEventStore.create(
+ciicerone/core/postgres_event_store.py:168: in create
+    pool = await asyncpg.create_pool(
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:496: in _async__init__
+    await self._initialize()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:530: in _initialize
+    await first_ch.connect()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:172: in connect
+    con = await self._pool._get_new_connection()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:655: in _get_new_connection
+    con = await self._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connection.py:2498: in connect
+    return await connect_utils._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1307: in _connect
+    raise last_error or exceptions.TargetServerAttributeNotMatched(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1278: in _connect
+    conn = await _connect_addr(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1092: in _connect_addr
+    return await __connect_addr(params, True, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1162: in __connect_addr
+    tr, pr = await connector
+             ^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:996: in _create_ssl_connection
+    tr, pr = await loop.create_connection(
+/home/zain_khan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:1140: in create_connection
+    raise OSError('Multiple exceptions: {}'.format(
+E   OSError: Multiple exceptions: [Errno 111] Connect call failed ('::1', 5432, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 5432)
+
+During handling of the above exception, another exception occurred:
+tests/integration/test_postgres_event_store.py:69: in event_store
+    async with store._acquire() as conn:
+               ^^^^^
+E   UnboundLocalError: cannot access local variable 'store' where it is not associated with a value
+__________ ERROR at setup of TestPerformance.test_append_1000_events ___________
+tests/integration/test_postgres_event_store.py:61: in event_store
+    store = await PostgresEventStore.create(
+ciicerone/core/postgres_event_store.py:168: in create
+    pool = await asyncpg.create_pool(
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:496: in _async__init__
+    await self._initialize()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:530: in _initialize
+    await first_ch.connect()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:172: in connect
+    con = await self._pool._get_new_connection()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:655: in _get_new_connection
+    con = await self._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connection.py:2498: in connect
+    return await connect_utils._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1307: in _connect
+    raise last_error or exceptions.TargetServerAttributeNotMatched(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1278: in _connect
+    conn = await _connect_addr(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1092: in _connect_addr
+    return await __connect_addr(params, True, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1162: in __connect_addr
+    tr, pr = await connector
+             ^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:996: in _create_ssl_connection
+    tr, pr = await loop.create_connection(
+/home/zain_khan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:1140: in create_connection
+    raise OSError('Multiple exceptions: {}'.format(
+E   OSError: Multiple exceptions: [Errno 111] Connect call failed ('::1', 5432, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 5432)
+
+During handling of the above exception, another exception occurred:
+tests/integration/test_postgres_event_store.py:69: in event_store
+    async with store._acquire() as conn:
+               ^^^^^
+E   UnboundLocalError: cannot access local variable 'store' where it is not associated with a value
+________ ERROR at setup of TestPerformance.test_replay_large_aggregate _________
+tests/integration/test_postgres_event_store.py:61: in event_store
+    store = await PostgresEventStore.create(
+ciicerone/core/postgres_event_store.py:168: in create
+    pool = await asyncpg.create_pool(
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:496: in _async__init__
+    await self._initialize()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:530: in _initialize
+    await first_ch.connect()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:172: in connect
+    con = await self._pool._get_new_connection()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:655: in _get_new_connection
+    con = await self._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connection.py:2498: in connect
+    return await connect_utils._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1307: in _connect
+    raise last_error or exceptions.TargetServerAttributeNotMatched(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1278: in _connect
+    conn = await _connect_addr(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1092: in _connect_addr
+    return await __connect_addr(params, True, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1162: in __connect_addr
+    tr, pr = await connector
+             ^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:996: in _create_ssl_connection
+    tr, pr = await loop.create_connection(
+/home/zain_khan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:1140: in create_connection
+    raise OSError('Multiple exceptions: {}'.format(
+E   OSError: Multiple exceptions: [Errno 111] Connect call failed ('::1', 5432, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 5432)
+
+During handling of the above exception, another exception occurred:
+tests/integration/test_postgres_event_store.py:69: in event_store
+    async with store._acquire() as conn:
+               ^^^^^
+E   UnboundLocalError: cannot access local variable 'store' where it is not associated with a value
+=================================== FAILURES ===================================
+______________ TestConnectionAndSetup.test_create_connection_pool ______________
+tests/integration/test_postgres_event_store.py:112: in test_create_connection_pool
+    store = await PostgresEventStore.create(database_url)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ciicerone/core/postgres_event_store.py:168: in create
+    pool = await asyncpg.create_pool(
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:496: in _async__init__
+    await self._initialize()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:530: in _initialize
+    await first_ch.connect()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:172: in connect
+    con = await self._pool._get_new_connection()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:655: in _get_new_connection
+    con = await self._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connection.py:2498: in connect
+    return await connect_utils._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1307: in _connect
+    raise last_error or exceptions.TargetServerAttributeNotMatched(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1278: in _connect
+    conn = await _connect_addr(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1092: in _connect_addr
+    return await __connect_addr(params, True, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1162: in __connect_addr
+    tr, pr = await connector
+             ^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:996: in _create_ssl_connection
+    tr, pr = await loop.create_connection(
+/home/zain_khan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:1140: in create_connection
+    raise OSError('Multiple exceptions: {}'.format(
+E   OSError: Multiple exceptions: [Errno 111] Connect call failed ('::1', 5432, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 5432)
+------------------------------ Captured log call -------------------------------
+INFO     ciicerone.core.postgres_event_store:postgres_event_store.py:166 Creating connection pool (min=2, max=10)
+_________________ TestConnectionAndSetup.test_context_manager __________________
+tests/integration/test_postgres_event_store.py:137: in test_context_manager
+    async with await PostgresEventStore.create(database_url) as store:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ciicerone/core/postgres_event_store.py:168: in create
+    pool = await asyncpg.create_pool(
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:496: in _async__init__
+    await self._initialize()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:530: in _initialize
+    await first_ch.connect()
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:172: in connect
+    con = await self._pool._get_new_connection()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/pool.py:655: in _get_new_connection
+    con = await self._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connection.py:2498: in connect
+    return await connect_utils._connect(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1307: in _connect
+    raise last_error or exceptions.TargetServerAttributeNotMatched(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1278: in _connect
+    conn = await _connect_addr(
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1092: in _connect_addr
+    return await __connect_addr(params, True, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:1162: in __connect_addr
+    tr, pr = await connector
+             ^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/asyncpg/connect_utils.py:996: in _create_ssl_connection
+    tr, pr = await loop.create_connection(
+/home/zain_khan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:1140: in create_connection
+    raise OSError('Multiple exceptions: {}'.format(
+E   OSError: Multiple exceptions: [Errno 111] Connect call failed ('::1', 5432, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 5432)
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.12.13-final-0 _______________
+
+Name                                               Stmts   Miss Branch BrPart  Cover   Missing
+----------------------------------------------------------------------------------------------
+ciicerone/__init__.py                                  8      0      0      0   100%
+ciicerone/__main__.py                                  8      8      0      0     0%   4-14
+ciicerone/analytics/__init__.py                      466     90    154     31    77%   25-30, 137, 190-192, 198-222, 231-257, 262-296, 304, 313, 326->347, 335->347, 353->363, 401, 420, 426, 531, 551-558, 645, 657, 661-662, 671, 705, 743, 783->782, 844, 853, 859, 875, 882, 896, 912, 916, 938, 969-979, 989, 995->1016, 1018-1035, 1068->1081
+ciicerone/analytics/detection_rules/__init__.py        8      0      0      0   100%
+ciicerone/analytics/detection_rules/elastic.py       146     70     70     16    45%   72, 83-122, 136, 158->162, 163, 167, 187->191, 192-194, 197, 214->212, 218, 239-242, 266, 268, 270, 273, 320, 372, 398-448, 456-484, 498
+ciicerone/analytics/detection_rules/generator.py     122     99     40      0    14%   153, 165, 173, 182, 196-236, 256-297, 313-342, 353-365, 381-400, 414-481, 496-500, 520-561
+ciicerone/analytics/detection_rules/models.py        130      6     10      2    93%   76-78, 86->88, 133, 257-264
+ciicerone/analytics/detection_rules/sentinel.py      211    111     90     18    41%   94, 105-131, 142-171, 182-200, 219-220, 231-233, 238, 261-279, 291-301, 316->314, 338-348, 372, 374, 376, 378, 382, 422-442, 459-460, 520, 528, 576-577, 586, 604, 618
+ciicerone/analytics/detection_rules/sigma.py         136     34     62     20    72%   63-64, 70, 73->81, 76, 78, 81->89, 84, 86, 91, 96, 100-105, 131, 135, 139->143, 165->167, 167->169, 169->171, 172, 176-177, 193, 316->327, 378-433
+ciicerone/analytics/detection_rules/splunk.py        221     59     94     22    68%   240, 244-247, 285-286, 314-315, 319, 325, 330, 334, 355->359, 360-362, 368-369, 388, 429->425, 433->425, 437, 471-475, 502, 504, 531-554, 573, 582, 636-645, 664-671, 685-697, 711-718
+ciicerone/analytics/detection_rules/validator.py     143     56     54     15    53%   42, 47, 51-58, 81, 144, 157-166, 177-186, 197-206, 212, 220, 227->exit, 239, 245->252, 252->exit, 264, 272, 281->290, 292, 303, 322-334, 353-354, 363, 378-379, 392-405
+ciicerone/api/__init__.py                              2      2      0      0     0%   7-9
+ciicerone/api/main.py                                152    152      4      0     0%   7-393
+ciicerone/api/routers/__init__.py                      4      4      0      0     0%   3-9
+ciicerone/api/routers/feedback.py                    331    331     52      0     0%   9-1036
+ciicerone/api/routers/knowledge.py                   366    366     90      0     0%   8-886
+ciicerone/api/routers/manuals.py                     309    309     50      0     0%   7-799
+ciicerone/cli/__init__.py                              2      0      0      0   100%
+ciicerone/cli/blue_team.py                             7      7      0      0     0%   3-15
+ciicerone/cli/client_data.py                           7      7      0      0     0%   3-15
+ciicerone/cli/datasets.py                            167    132     32      0    18%   21, 34-88, 103-153, 167-219, 246-300, 307-318
+ciicerone/cli/deploy.py                              276    213     54      0    19%   39-57, 82-170, 181-200, 211-218, 227-260, 270-287, 297-302, 308-322, 328-370, 376-421, 427-516, 523-558, 564-565
+ciicerone/cli/detect.py                              414    362    130      0    10%   44, 105-330, 368-454, 483-568, 578-625, 661-745, 785-942, 947-954, 959-965, 971-978
+ciicerone/cli/feedback.py                            413    366     98      0     9%   28, 35-93, 103-168, 173-214, 219-258, 263-274, 284-337, 346-417, 427-466, 474-520, 526-568, 587-706
+ciicerone/cli/intelligence.py                        239    197     82      0    13%   29, 63-105, 125-181, 200-281, 293-317, 322-374, 379-424, 429-433, 438-447, 452-499, 505
+ciicerone/cli/llm.py                                 246    208     70      0    12%   35, 45-236, 268-445, 452-477, 485-521, 527
+ciicerone/cli/logs.py                                205    170     54      0    14%   23, 33-79, 87-164, 170-217, 226-245, 254-308
+ciicerone/cli/main.py                                383    285     84      3    22%   32->40, 37-38, 67-68, 110-435, 457-561, 587-593, 607-613, 639-644, 707-715
+ciicerone/cli/manuals.py                             129     98     26      0    20%   28, 129-231, 237-263, 270-327, 334-349, 354-362
+ciicerone/cli/mcp.py                                 123    100     38      0    14%   33, 68-95, 104-153, 162-196, 206-237, 247-274
+ciicerone/cli/quantum.py                               7      7      0      0     0%   3-15
+ciicerone/cli/rag.py                                 225    182     46      0    16%   24, 30-91, 99-193, 202-229, 234-246, 256-276, 281-302, 331-364, 369-411, 419-472, 478-490, 495-505, 511
+ciicerone/cli/red_team.py                              7      7      0      0     0%   3-15
+ciicerone/cli/templates.py                           415    361    132      1    10%   39-52, 57-59, 64-103, 108-141, 150-191, 196-242, 247-255, 262-311, 320-366, 372-396, 404-464, 472-491, 497-562, 568-658
+ciicerone/cli/validate.py                            213    173     86      0    13%   38-49, 66, 127-179, 238-317, 326-347, 382-420, 426-500, 511-567, 573
+ciicerone/cli/vm.py                                  280    239     60      0    12%   29, 53-65, 70-242, 247-291, 301-392, 398-420, 426-438, 472-501, 506-554, 559-573, 583-616, 626-689, 694-707
+ciicerone/config/__init__.py                           6      0      0      0   100%
+ciicerone/config/exceptions.py                         6      0      0      0   100%
+ciicerone/config/loader.py                           196    115     70      0    30%   121-122, 126-128, 132-145, 169-197, 210-271, 280-312, 325-328, 340-364
+ciicerone/config/models.py                           174     26     18      0    77%   161-163, 197-202, 233-235, 268-291
+ciicerone/config/validate_env.py                     117     71     56     10    35%   42, 46-49, 53-54, 149, 155, 159-162, 166-175, 182-183, 186-187, 191-199, 207-263, 272-282
+ciicerone/config/validator.py                          3      1      0      0    67%   10
+ciicerone/config/yaml_loader.py                      132    102     34      0    18%   38-39, 52-54, 59-62, 66-70, 89-125, 129-141, 155-174, 178-200, 215-218, 229-272, 287-288, 301-302, 315-316
+ciicerone/core/__init__.py                            12      0      0      0   100%
+ciicerone/core/ai_enhanced_playbooks.py              186    127     40      0    27%   936-991, 1012-1090, 1102-1119, 1123-1145, 1200-1213, 1312-1330, 1334-1343, 1347-1349, 1353-1375, 1379-1409, 1441-1451, 1468-1482
+ciicerone/core/audit_logger.py                       179     95     30      0    40%   81-94, 112-113, 117, 132, 135, 142-144, 147-150, 154-155, 158-159, 168-175, 182-184, 187-190, 194, 211-213, 218-219, 222-223, 227-228, 234, 238, 254, 271-282, 286-292, 297-298, 301-302, 305-306, 309-310, 315-319, 322-326, 345-359, 365-368
+ciicerone/core/batch_processor.py                    345     33     60     14    88%   91->exit, 118, 124, 154, 189, 194, 198, 217, 223, 227, 397-400, 451, 465->exit, 481, 484->479, 499->exit, 508->exit, 514->exit, 520, 541-548, 551->555, 556-571, 620-623, 759-761
+ciicerone/core/event_sourcing.py                     140     19     12      1    86%   160, 228, 265, 332, 431-454, 473-474, 495-496, 512-519, 583
+ciicerone/core/exceptions.py                          38     16      0      0    58%   11-13, 21-23, 31-32, 40-41, 49-50, 58-59, 67-68
+ciicerone/core/mitigation_generator.py                74     37     20      0    39%   46-47, 431-471, 475-487, 498-568, 572-574, 578-580, 606-613
+ciicerone/core/models.py                              91     16     18      6    76%   51, 54, 57->exit, 60-62, 67, 102, 104, 128->exit, 133-137, 141-145
+ciicerone/core/output_models.py                      151     43      4      0    70%   64-66, 148-152, 157-159, 163-164, 168-170, 174-178, 182, 186-187, 191-192, 201-204, 209-214, 219-224, 230
+ciicerone/core/playbook_validator.py                 385    300    140      0    16%   75, 99, 117, 139-219, 417-422, 440-488, 508-581, 595-696, 710-811, 824-851, 860-948, 962-1101, 1110-1119, 1126-1163, 1174-1188, 1202-1216, 1238-1250, 1262-1272
+ciicerone/core/postgres_event_store.py               160    115     42      2    23%   24-28, 121-128, 155, 162, 175-177, 181-183, 187, 191, 196-197, 201-215, 234-272, 289-334, 352-376, 398-413, 433-448, 459-460, 464-472, 476-481, 503-512, 526-541, 553-570, 574-578, 586, 625-645
+ciicerone/core/simulation_logger.py                  191    170     62      0     8%   31-36, 40-52, 71-112, 116-128, 132-146, 150-175, 187-224, 246-286, 298-339, 347-397
+ciicerone/core/simulator.py                          235    206     76      0     9%   34-38, 53-84, 94-156, 169-252, 260-291, 295-309, 313-393, 397-469, 540-545, 647-652, 781, 798, 817-822, 957-1032, 1052, 1064-1099, 1103-1106, 1146-1149, 1202-1232, 1243-1250
+ciicerone/core/team_playbooks.py                     186    136     40      0    22%   842-859, 879-888, 899-911, 915-946, 993-1026, 1080-1120, 1171-1204, 1258-1291, 1357-1389, 1458-1482, 1539-1585, 1640, 1681-1690, 1710-1717
+ciicerone/core/template_manager_pro.py               302    268     76      0     9%   53-55, 60-90, 94-106, 119-156, 160-202, 218-235, 246-281, 285-330, 358-361, 380-383, 391-449, 453-525, 530-603, 607-612, 616-620, 625-652, 657-698
+ciicerone/datasets/manager.py                        243    151     54      0    31%   127-133, 137-145, 155-163, 167-176, 188-216, 227-244, 248-269, 273-283, 295-319, 338-361, 379-401, 420-461, 465-466, 470-488, 501
+ciicerone/deployment/__init__.py                     349    223     72      0    30%   76, 148-150, 154-169, 176-177, 187, 192, 197, 204-206, 216-258, 279-287, 301-317, 331-356, 360-385, 389-401, 416-436, 448, 453, 463, 472, 485, 490, 504-535, 554-565, 574-598, 602-634, 638-664, 668-680, 686, 689, 696-697, 706-713, 718-751, 755, 760-764, 791-797, 807-838, 843-846, 857-865
+ciicerone/deployment/base.py                          54     33     10      0    33%   38-40, 51-58, 82-106, 125, 150, 167, 188, 196-199, 208-210, 214
+ciicerone/deployment/integrations.py                 207    172     36      0    14%   21-26, 31-46, 58-118, 139-145, 157-167, 174-176, 180-186, 195-234, 254-275, 282-284, 288-294, 303-340, 360-381, 388-390, 395-405, 417-471, 499, 511-525, 530-539, 549-558, 563-573, 577, 582-599
+ciicerone/feedback/__init__.py                         6      6      0      0     0%   53-87
+ciicerone/feedback/analyzer.py                       264    264    116      0     0%   9-704
+ciicerone/feedback/enhancer.py                       169    169     76      0     0%   9-579
+ciicerone/feedback/models.py                         199    199     34      0     0%   8-392
+ciicerone/feedback/orchestrator.py                   235    235     56      0     0%   11-701
+ciicerone/intelligence/__init__.py                     5      0      0      0   100%
+ciicerone/intelligence/compliance.py                 152    152     60      0     0%   7-419
+ciicerone/intelligence/integrations.py               140    111     52      0    15%   22-24, 35-49, 59-64, 74-127, 134, 146-169, 173-217, 227-240, 244-272, 276-292, 299-300, 310-320, 324-326, 336-353, 363-367, 371-376, 387, 391-400
+ciicerone/intelligence/mitre_attack.py               593    127    214     58    74%   373-374, 378, 382-385, 404, 410, 413-414, 434-437, 460-462, 469, 477, 480-482, 491, 512-530, 538-569, 576-577, 591->594, 603, 605, 606->587, 616, 621, 633->632, 639, 644->643, 686->689, 694, 698, 710, 714, 718, 731, 735, 749-763, 767-782, 808-813, 820->796, 829->833, 834->796, 842->796, 845->796, 847->851, 852->796, 860->796, 863-865, 907->906, 909, 918-919, 935, 941, 947, 953, 970-971, 993, 1019-1025, 1062-1063, 1075-1076, 1092-1093, 1105-1106, 1122-1123, 1135-1136, 1151-1152, 1175, 1191, 1235, 1281->1284, 1295, 1457
+ciicerone/intelligence/models.py                     172      6      4      0    94%   362-364, 370-372
+ciicerone/intelligence/services.py                   280    213     78      0    19%   35-37, 41-43, 47-48, 52-64, 69, 76-78, 82-90, 96, 107-108, 118, 131, 135-143, 160-179, 184, 194, 202, 211-224, 229-248, 255-256, 260-276, 281, 291-309, 313, 326-327, 336-350, 354-361, 366, 380, 393, 409, 413-432, 437, 447-456, 461, 470, 479, 486-502, 514-559, 563-569, 573-578, 582-588, 592-598, 602-610, 614, 618-620, 624-636, 640-650
+ciicerone/llm/__init__.py                             10      0      0      0   100%
+ciicerone/llm/advanced_integration.py                172    172     54      0     0%   7-609
+ciicerone/llm/advanced_prompts.py                     96     96     12      0     0%   12-329
+ciicerone/llm/advanced_reasoning.py                  234    234     68      0     0%   10-710
+ciicerone/llm/base.py                                 32      5      0      0    84%   24-25, 59, 63, 67
+ciicerone/llm/enhanced_prompts.py                    114     51     12      0    50%   84-86, 98-130, 134, 198, 205, 227-229, 233, 276-290, 297-312, 316-334, 352, 360-362, 392-422, 429-431, 453-568, 574, 597-617
+ciicerone/llm/exceptions.py                           10      0      0      0   100%
+ciicerone/llm/fallback_chain.py                      435     32    108     20    90%   192, 193->exit, 294, 371-373, 528, 551->559, 565, 579->exit, 600-601, 635, 682-686, 711, 723-724, 736-737, 747->755, 759->exit, 763, 808, 816-823, 830, 833, 898-907, 964->970, 1037, 1041
+ciicerone/llm/generation.py                          115     93     28      0    15%   36-42, 60-174, 193-195, 231-255, 266-287, 291, 305, 316-372, 376
+ciicerone/llm/guardrails.py                          444     41    112     27    87%   121-122, 137-140, 146, 152, 190, 195, 198, 220-221, 255-264, 281, 321, 323, 343-344, 450->453, 539->exit, 774, 785->787, 798, 805->804, 820, 887-888, 901-902, 908-909, 928->927, 938->937, 949, 959-960, 1069-1070, 1095-1096, 1113->1116, 1116->1118, 1124, 1187->1197
+ciicerone/llm/manager.py                             346    346    116      0     0%   7-608
+ciicerone/llm/model_manager.py                       190    190     64      0     0%   7-513
+ciicerone/llm/models.py                              156     10      4      1    92%   18, 90-91, 127, 167, 173-184, 189, 288
+ciicerone/llm/prompts.py                              81     60     32      0    19%   281-312, 336-338, 342-350, 354, 358-361, 367-392, 399-403, 407-431, 435
+ciicerone/llm/providers/__init__.py                    6      1      0      0    83%   9
+ciicerone/llm/providers/anthropic_provider.py         50     38      4      0    22%   22-29, 33-41, 61-110, 114-129, 133
+ciicerone/llm/providers/huggingface_provider.py      158    158     38      0     0%   7-423
+ciicerone/llm/providers/llamacpp_provider.py         237    237     74      0     0%   7-479
+ciicerone/llm/providers/local_base.py                149    110     28      0    22%   22, 42-51, 54, 63, 68-77, 82-112, 124-144, 149, 154, 165, 185-239, 243-288, 292, 296-298, 302-305, 316-321
+ciicerone/llm/providers/ollama_provider.py           196    168     36      0    12%   30-41, 45-48, 52-68, 72-92, 102-140, 144-158, 162-177, 181-189, 193-218, 222-242, 246-272, 276-281, 285-294, 298-328, 332, 336-340
+ciicerone/llm/providers/openai_provider.py            50     38      4      0    22%   22-29, 33-44, 64-113, 117-131, 135
+ciicerone/llm/providers/openrouter_provider.py       119    101     30      0    12%   26-53, 57-67, 71-75, 79-80, 84, 88-91, 113-217, 221-272, 276, 286, 290-305
+ciicerone/llm/providers_new.py                       229    179     56      0    18%   34-40, 44-69, 76-81, 86-88, 92-94, 114, 131, 136, 141, 145-179, 197-198, 202, 206, 210-285, 304-305, 309, 313, 317-389, 401-404, 408-473, 483, 488, 495-496, 500-513, 517-525, 529-530, 534-535, 539, 543-553
+ciicerone/llm/rlhf_multiagent.py                     254    254     32      0     0%   8-786
+ciicerone/llm/validation.py                          271    222    146      0    12%   98-99, 109-158, 168-175, 179-192, 196-213, 217-235, 239-264, 268-275, 280-285, 289, 293-294, 301, 317-356, 366-394, 398-432, 436-452, 456-474, 478-493, 497-530, 534-562
+ciicerone/mcp/__init__.py                              6      6      0      0     0%   37-44
+ciicerone/mcp/agents/__init__.py                     160    160     28      0     0%   14-545
+ciicerone/mcp/config.py                               72     72     10      0     0%   10-282
+ciicerone/mcp/providers/__init__.py                    2      2      0      0     0%   10-12
+ciicerone/mcp/providers/proxmox.py                   192    192     44      0     0%   26-725
+ciicerone/mcp/safety/__init__.py                       2      2      0      0     0%   7-9
+ciicerone/mcp/safety/controller.py                   133    133     50      0     0%   29-397
+ciicerone/mcp/server.py                              115    115     22      0     0%   8-306
+ciicerone/mcp/tools/__init__.py                       12     12      0      0     0%   14-28
+ciicerone/mcp/tools/attack_tools.py                  105    105     32      0     0%   9-503
+ciicerone/mcp/tools/computer_use.py                   85     85     26      0     0%   8-420
+ciicerone/mcp/tools/vm_execute.py                     81     81     22      0     0%   7-360
+ciicerone/mcp/tools/vm_lifecycle.py                   54     54     14      0     0%   7-276
+ciicerone/mcp/tools/vm_snapshot.py                    63     63     24      0     0%   7-299
+ciicerone/rag/__init__.py                              8      8      0      0     0%   57-123
+ciicerone/rag/config.py                              207    207     20      0     0%   9-532
+ciicerone/rag/generator.py                           186    186     30      0     0%   9-773
+ciicerone/rag/ingest.py                              352    352    118      0     0%   9-743
+ciicerone/rag/models.py                              273    273     44      0     0%   9-572
+ciicerone/rag/retriever.py                           252    252     80      0     0%   9-615
+ciicerone/rag/vectorstore.py                         426    426    112      0     0%   15-1118
+ciicerone/safety/__init__.py                           4      0      0      0   100%
+ciicerone/safety/content_filter.py                   297      8     88      3    97%   404-405, 586-587, 599-600, 615->617, 688->691, 697-698
+ciicerone/safety/exceptions.py                         8      0      0      0   100%
+ciicerone/safety/models.py                             8      1      0      0    88%   19
+ciicerone/security/__init__.py                         2      0      0      0   100%
+ciicerone/security/template_validator.py             925    356    304     39    62%   125-147, 168-189, 223-237, 282, 310, 317-319, 383-398, 404-408, 409->exit, 412, 416-437, 444-445, 449-450, 461-467, 539, 556-557, 561-562, 566-591, 595-604, 633-642, 694, 738, 809, 815, 839-868, 883-915, 939-963, 979, 1002-1004, 1013-1014, 1022, 1029-1030, 1035-1052, 1057-1061, 1076-1080, 1088-1089, 1100-1101, 1113, 1125-1139, 1149-1181, 1220-1227, 1246-1266, 1281-1295, 1314-1327, 1345-1355, 1366-1401, 1694, 1723-1725, 1749-1754, 1782-1792, 1832-1872, 1888, 1906-1934, 1939-1949, 1956-1965, 1968-1977, 1981-2003, 2047-2058, 2138, 2256-2265, 2316->2315, 2341->2352, 2352->2293, 2412->2424, 2424->2440, 2452-2454, 2563, 2571, 2648->2664, 2690, 2701-2713, 2729-2740, 2749-2760, 2769-2780
+ciicerone/utils/__init__.py                            2      2      0      0     0%   9-11
+ciicerone/utils/auto_content_saver.py                201    201     76      0     0%   4-565
+ciicerone/utils/logging.py                             5      5      0      0     0%   6-16
+ciicerone/vm/__init__.py                               5      5      0      0     0%   24-37
+ciicerone/vm/agent.py                                204    204     62      0     0%   7-678
+ciicerone/vm/models.py                               162    162      0      0     0%   7-266
+ciicerone/vm/operator.py                             340    340     88      0     0%   7-869
+ciicerone/vm/safety.py                               123    123     56      0     0%   7-362
+----------------------------------------------------------------------------------------------
+TOTAL                                              22124  15797   5830    309    26%
+Coverage HTML written to dir htmlcov
+Coverage XML written to file coverage.xml
+=========================== short test summary info ============================
+ERROR tests/integration/test_postgres_event_store.py::TestConnectionAndSetup::test_schema_initialized
+ERROR tests/integration/test_postgres_event_store.py::TestAppendOperations::test_append_single_event
+ERROR tests/integration/test_postgres_event_store.py::TestAppendOperations::test_append_returns_sequence_number
+ERROR tests/integration/test_postgres_event_store.py::TestAppendOperations::test_append_batch
+ERROR tests/integration/test_postgres_event_store.py::TestAppendOperations::test_append_with_simulation_events
+ERROR tests/integration/test_postgres_event_store.py::TestReadOperations::test_get_events_for_aggregate
+ERROR tests/integration/test_postgres_event_store.py::TestReadOperations::test_get_events_version_range
+ERROR tests/integration/test_postgres_event_store.py::TestReadOperations::test_get_events_by_type
+ERROR tests/integration/test_postgres_event_store.py::TestReadOperations::test_get_events_empty_aggregate
+ERROR tests/integration/test_postgres_event_store.py::TestReadOperations::test_get_aggregate_version
+ERROR tests/integration/test_postgres_event_store.py::TestConcurrencyControl::test_concurrency_error_on_version_conflict
+ERROR tests/integration/test_postgres_event_store.py::TestConcurrencyControl::test_concurrency_error_on_gap
+ERROR tests/integration/test_postgres_event_store.py::TestConcurrencyControl::test_append_with_retry_success
+ERROR tests/integration/test_postgres_event_store.py::TestConcurrencyControl::test_concurrent_appends
+ERROR tests/integration/test_postgres_event_store.py::TestEventReplay::test_replay_events
+ERROR tests/integration/test_postgres_event_store.py::TestEventReplay::test_replay_with_sync_handler
+ERROR tests/integration/test_postgres_event_store.py::TestStatistics::test_get_event_count
+ERROR tests/integration/test_postgres_event_store.py::TestStatistics::test_get_latest_sequence
+ERROR tests/integration/test_postgres_event_store.py::TestStatistics::test_aggregate_exists
+ERROR tests/integration/test_postgres_event_store.py::TestStatistics::test_get_all_aggregate_ids
+ERROR tests/integration/test_postgres_event_store.py::TestDataIntegrity::test_event_data_preserved
+ERROR tests/integration/test_postgres_event_store.py::TestDataIntegrity::test_metadata_preserved
+ERROR tests/integration/test_postgres_event_store.py::TestDataIntegrity::test_timestamp_preserved
+ERROR tests/integration/test_postgres_event_store.py::TestPerformance::test_append_1000_events
+ERROR tests/integration/test_postgres_event_store.py::TestPerformance::test_replay_large_aggregate
+FAILED tests/integration/test_postgres_event_store.py::TestConnectionAndSetup::test_create_connection_pool
+FAILED tests/integration/test_postgres_event_store.py::TestConnectionAndSetup::test_context_manager
+============= 2 failed, 460 passed, 25 errors in 78.04s (0:01:18) ==============
