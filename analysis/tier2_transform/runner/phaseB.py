@@ -1,28 +1,30 @@
 """phaseB.py — revised Tier-2 Phase B runner (per user brief, POST-A preflight).
 
-Per app (invoked as  `python phaseB.py <repo>`, e.g. ciiceronee):
+Protocol v1 (default for the grid, `--freshboot`):
+  * FRESH server process for EVERY measured grid cell (no single-boot sequence),
+  * randomised cell order (fixed seed), and
+  * per cell record: time since boot, TIME_WAIT count, Cpus_allowed_list.
 
-  1. S2 arm only: 3-probe knee discovery. Every ladder rung is probed 3 times
-     and qualified on the MEDIAN (tier-1 protocol: p95 <= 3*p95_ref, err <= 1%,
-     fidelity >= 0.98); knee = last qualifying rung.
-  2. Matched absolute-rate grid for ALL FOUR arms at
-        S2knee x {0.75: K=3, 1.0: K=5, 1.25: K=5, 1.5: K=5}
-     pinned (offset via TIER2_PIN/TIER2_SERVER_CORES/TIER2_K6_CORES). Reps are
-     min-max only.
+Knee (S2 only): 3 probes per ladder rung, qualified on the MEDIAN
+(tier-1 protocol: p95 <= 3*p95_ref, err <= 1%, fidelity >= 0.98); knee = last
+qualifying rung. Pass `--knee N` to reuse a previously measured knee and skip
+discovery (used when re-running an app whose knee is known).
 
-Plus a one-cell probe for the S3@2560 pinned-vs-unpinned comparison:
+Matched absolute-rate grid for ALL FOUR arms at
+    S2knee x {0.75: K=3, 1.0: K=5, 1.25: K=5, 1.5: K=5}
+pinned via TIER2_PIN/TIER2_SERVER_CORES/TIER2_K6_CORES. Reps are min-max only.
 
+S3 @ 2560 pinned-vs-unpinned one-cell probe (BACK-COMPAT, fresh boot):
     TIER2_PIN=1 python phaseB.py <repo> --probe2560 <arm>
     TIER2_PIN=0 python phaseB.py <repo> --probe2560 <arm>
-
 Run pinned/unpinned as TWO back-to-back processes (constants bind at import).
 
 azure: report S1/S2/S3 only on its bench route (/api/health does not cross the
 container); if a route DOES cross, include S4.
 
-Rows written to results/v2/bench/<app>/raw.tsv (append; header on first run)
-plus knee.json. Every cell records both processes' /proc/<pid>/status
-Cpus_allowed_list as pinning evidence.
+Rows -> results/<TIER2_OUTDIR>/<app>/raw.tsv (append; header on first run) plus
+knee.json. S4 rows carry the label "container instantiated per call, as
+transformed" in `arm_label`.
 """
 
 from __future__ import annotations
@@ -31,6 +33,7 @@ import argparse
 import contextlib
 import json
 import os
+import random
 import statistics
 import subprocess
 import sys
@@ -53,22 +56,43 @@ from bench import (  # noqa: E402
 
 # Matched absolute-rate grid: S2knee x {frac: K}
 MULT = [(0.75, 3), (1.0, 5), (1.25, 5), (1.5, 5)]
+if os.environ.get("TIER2_FAST") == "1":
+    MULT = [(0.75, 1), (1.0, 1)]  # smoke only
 LADDER = KNEE.LADDER
 REF_RPS = KNEE.REF_RPS  # 10.0
 P95_MULT = KNEE.P95_MULT  # 3.0
 MAX_ERR = KNEE.MAX_ERR
 MIN_FID = KNEE.MIN_ACHIEVED
 
+ARM_LABEL = {
+    "S4": "container instantiated per call, as transformed",
+}
+
 HEADER = [
     "repo", "arm", "stage", "rate", "probe",
     "p50_ms", "p95_ms", "p99_ms", "cell_s",
     "achieved_rate", "fidelity", "window_errors", "window_requests",
     "cpus_allowed_server", "cpus_allowed_k6",
+    "time_since_boot_s", "timewait_start", "timewait_end", "arm_label",
 ]
 
 
 class CellFailed(Exception):
     pass
+
+
+def timewait_count() -> int:
+    """Count sockets in TCP TIME_WAIT (state 06) across IPv4 + IPv6."""
+    n = 0
+    for p in ("/proc/net/tcp", "/proc/net/tcp6"):
+        try:
+            for line in open(p):
+                parts = line.split()
+                if len(parts) > 3 and parts[3] == "06":
+                    n += 1
+        except OSError:
+            pass
+    return n
 
 
 def run_one(k6p, base, route, rate, workdir, auth, auth_header, stage, probe, server_allowed):
@@ -130,18 +154,14 @@ def boot_ctx(arm, repo_dir, workdir):
             pro.wait(timeout=10)
 
 
-def discover_s2_knee(arm, repo_dir, workdir, out):
-    py = venv_python(arm, repo_dir)
-    env = {**os.environ, **arm_env(arm)}
+def discover_s2_knee(arm, repo_dir, workdir):
     rows = []
     probes_by_rate = {}
     with boot_ctx(arm, repo_dir, workdir) as (pro, pid, base, route, auth, header, sall):
-        # reference: 3 probes @10 rps, median p95
         ref_cells = []
         for i in range(3):
             row, s = run_one(K6, base, route, REF_RPS, workdir, auth, header, "ref", i, sall)
-            row_f = [arm["repo"], arm["arm"], "ref"] + row
-            rows.append(row_f)
+            rows.append([arm["repo"], arm["arm"], "ref"] + row)
             ref_cells.append(s)
         ref_p95 = median_summary(ref_cells)["ref_p95"]
         print(f"   ref_p95 (median of 3 @ {REF_RPS} rps) = {ref_p95:.2f} ms", flush=True)
@@ -170,31 +190,89 @@ def discover_s2_knee(arm, repo_dir, workdir, out):
     return knee, ref_p95, rows, probes_by_rate
 
 
-def run_grid(arm, repo_dir, workdir, s2knee, out, print_prefix=""):
-    py = venv_python(arm, repo_dir)
-    env = {**os.environ, **arm_env(arm)}
-    rows = []
-    with boot_ctx(arm, repo_dir, workdir) as (pro, pid, base, route, auth, header, sall):
+def run_grid_fresh(arms, repo_dir, out, s2knee, seed) -> list[list]:
+    """Protocol v1: fresh server process per cell, randomised order."""
+    rng = random.Random(seed)
+    cells = []
+    for arm in arms:
         for frac, k in MULT:
             rate = int(round(s2knee * frac))
             for probe in range(k):
+                cells.append((arm, rate, probe))
+    rng.shuffle(cells)
+    rows: list[list] = []
+    total = len(cells)
+    for idx, (arm, rate, probe) in enumerate(cells, 1):
+        label = ARM_LABEL.get(arm["arm"], "")
+        workdir = out / arm["arm"] / f"fresh_{rate}_{probe}"
+        workdir.mkdir(parents=True, exist_ok=True)
+        (workdir / "server.log").unlink(missing_ok=True)
+        pro = None
+        try:
+            pro, auth, header = boot(arm, repo_dir, workdir)
+            sall = KNEE.read_allowed(pro.pid)
+            base = f"http://127.0.0.1:{arm['port']}"
+            t_boot = time.monotonic()
+            tw0 = timewait_count()
+            try:
+                row, _ = run_one(K6, base, arm["route"], rate, workdir, auth, header, "grid", probe, sall)
+            except CellFailed:
+                rows.append([arm["repo"], arm["arm"], "grid", rate, probe,
+                             "", "", "", "", "", "", "ERRk6", "", sall, "",
+                             "", tw0, tw0, label])
+                print(f"   [{idx}/{total}] {arm['arm']}@{rate} p{probe}: ERRk6 tw={tw0}", flush=True)
+                continue
+            tw1 = timewait_count()
+            boot_age = time.monotonic() - t_boot
+            rows.append([arm["repo"], arm["arm"], "grid"] + row + [round(boot_age, 2), tw0, tw1, label])
+            print(f"   [{idx}/{total}] {arm['arm']}@{rate} p{probe}: p95={row[3]} fid={row[7]} "
+                  f"cell={row[5]:.1f}s boot+{boot_age:.1f}s tw0={tw0} tw1={tw1}", flush=True)
+        except Exception as exc:  # noqa: BLE001 — one bad boot must not kill the run
+            rows.append([arm["repo"], arm["arm"], "grid", rate, probe,
+                         "", "", "", "", "", "", "ERRboot", "", "", "", "", "", "", label])
+            print(f"   [{idx}/{total}] {arm['arm']}@{rate} p{probe}: ERRboot {exc}", flush=True)
+        finally:
+            if pro is not None:
+                pro.terminate()
                 try:
-                    row, _ = run_one(K6, base, route, rate, workdir, auth, header, "grid", probe, sall)
-                except CellFailed:
-                    rows.append([arm["repo"], arm["arm"], "grid", rate, probe,
-                                 "", "", "", "", "", "", "ERRk6", "", sall, ""])
-                    print(f"   !! grid cell {rate} probe {probe} failed (k6 error)", flush=True)
-                    continue
-                rows.append([arm["repo"], arm["arm"], "grid"] + row)
-        print(f"   grid {len(rows)} cells done", flush=True)
+                    pro.wait(timeout=20)
+                except subprocess.TimeoutExpired:
+                    pro.kill()
+                    pro.wait(timeout=10)
+    return rows
+
+
+def run_grid_single_boot(arms, repo_dir, out, s2knee) -> list[list]:
+    """Legacy single-boot ascending grid (kept for reference only)."""
+    rows = []
+    for arm in arms:
+        workdir = out / arm["arm"]
+        workdir.mkdir(parents=True, exist_ok=True)
+        (workdir / "server.log").unlink(missing_ok=True)
+        label = ARM_LABEL.get(arm["arm"], "")
+        with boot_ctx(arm, repo_dir, workdir) as (pro, pid, base, route, auth, header, sall):
+            for frac, k in MULT:
+                rate = int(round(s2knee * frac))
+                for probe in range(k):
+                    try:
+                        row, _ = run_one(K6, base, route, rate, workdir, auth, header, "grid", probe, sall)
+                    except CellFailed:
+                        rows.append([arm["repo"], arm["arm"], "grid", rate, probe,
+                                     "", "", "", "", "", "", "ERRk6", "", sall, "", "", "", "", label])
+                        continue
+                    rows.append([arm["repo"], arm["arm"], "grid"] + row + ["", "", "", label])
+        print(f"   {arm['arm']} single-boot grid done", flush=True)
     return rows
 
 
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("app", help="repo key e.g. ciiceronee")
+    ap.add_argument("--freshboot", action="store_true", help="protocol v1: fresh process per grid cell + randomised order")
+    ap.add_argument("--knee", type=int, default=None, help="reuse this S2 knee (skip discovery)")
+    ap.add_argument("--seed", type=int, default=20261009)
     ap.add_argument("--probe2560", metavar="ARM", default=None,
-                    help="run the single cell rate=2560 for ARM once (pinned or unpinned per TIER2_PIN env); boots the arm and exits")
+                    help="run the single cell rate=2560 for ARM once (pinned/unpinned per TIER2_PIN); boots the arm and exits")
     a = ap.parse_args()
 
     plan = load_plan()
@@ -219,38 +297,42 @@ def main() -> int:
             print(f"   {arm['arm']} @2560 [{pin}] p50={row[2]} p95={row[3]} p99={row[4]} "
                   f"err={row[8]} reqs={row[9]} fid={row[7]} "
                   f"server_cpus={row[10]} k6_cpus={row[11]}", flush=True)
-            full = [a.app, arm["arm"], f"probe2560_{pin}"] + row
+            full = [a.app, arm["arm"], f"probe2560_{pin}"] + row + ["", "", "", ARM_LABEL.get(arm["arm"], "")]
         write_rows(out / f"probe2560_{pin}_raw.tsv", [full])
         return 0
 
-    # main design: S2 3-probe knee, then matched grid for all four arms
-    s2 = next(x for x in arms if x["arm"] == "S2")
-    workdir = out / "S2"
-    workdir.mkdir(parents=True, exist_ok=True)
-    (workdir / "server.log").unlink(missing_ok=True)
-    print(f"  -- S2 knee (3-probe) --", flush=True)
-    s2knee, ref_p95, knee_rows, by_rate = discover_s2_knee(s2, repo_dir, workdir, out)
-    print(f"  S2 knee = {s2knee} rps (ref_p95={ref_p95:.2f} ms)", flush=True)
+    all_rows: list[list] = []
+    if a.knee is not None:
+        s2knee, ref_p95, by_rate = a.knee, None, {}
+        print(f"  reusing S2 knee = {s2knee} rps (--knee)", flush=True)
+    else:
+        s2 = next(x for x in arms if x["arm"] == "S2")
+        workdir = out / "S2"
+        workdir.mkdir(parents=True, exist_ok=True)
+        (workdir / "server.log").unlink(missing_ok=True)
+        print(f"  -- S2 knee (3-probe) --", flush=True)
+        s2knee, ref_p95, knee_rows, by_rate = discover_s2_knee(s2, repo_dir, workdir)
+        all_rows += knee_rows
+        print(f"  S2 knee = {s2knee} rps (ref_p95={ref_p95:.2f} ms)", flush=True)
+
     (out / "knee.json").write_text(json.dumps({
         "app": a.app, "box_plan": "voc-c-8c-16gb-150s-amd",
         "instance_id": "e8cd6321-daa8-4f44-9ad6-da6adedc114a",
         "s2_knee_rps": s2knee, "ref_p95_ms": ref_p95,
         "ladder_probes": {str(k): v for k, v in by_rate.items()},
         "grid": [{"frac": f, "K": k} for f, k in MULT],
+        "protocol": "fresh-boot-per-cell, randomised order" if a.freshboot else "single-boot ascending",
+        "seed": a.seed if a.freshboot else None,
+        "s4_label": ARM_LABEL["S4"],
         "pinning": pin, "server_cores": os.environ.get("TIER2_SERVER_CORES", "0,2,4"),
         "k6_cores": os.environ.get("TIER2_K6_CORES", "6")},
         indent=1))
 
-    all_rows = list(knee_rows)
-    for arm in arms:  # S1..S4 in plan order
-        print(f"  -- {arm['arm']} matched grid @ S2knee={s2knee} --", flush=True)
-        arm_work = out / arm["arm"]
-        arm_work.mkdir(parents=True, exist_ok=True)
-        (arm_work / "server.log").unlink(missing_ok=True)
-        try:
-            all_rows += run_grid(arm, repo_dir, arm_work, s2knee, out)
-        except CellFailed as e:
-            print(f"   !! cell failed at {e}", flush=True)
+    if a.freshboot:
+        print(f"  -- fresh-boot randomised grid (seed={a.seed}) --", flush=True)
+        all_rows += run_grid_fresh(arms, repo_dir, out, s2knee, a.seed)
+    else:
+        all_rows += run_grid_single_boot(arms, repo_dir, out, s2knee)
 
     write_rows(raw_f, all_rows)
     print(f"  wrote {len(all_rows)} rows to {raw_f}", flush=True)
