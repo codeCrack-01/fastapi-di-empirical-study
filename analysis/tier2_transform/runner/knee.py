@@ -81,8 +81,13 @@ def run_cell(
     """Run one open-loop steady cell; return harness summary dict or None.
 
     The summary is augmented with `cpus_allowed_k6` (the load generator's
-    /proc/<pid>/status Cpus_allowed_list), recorded right after spawn so the
+    /proc/<pid>/status Cpus_allowed_list), recorded just after spawn so the
     pinning is evidenced per cell. k6 is confined to K6_CORES when set.
+
+    The read waits briefly first: `taskset -c 6 k6 ...` spawns as the taskset
+    pid, which calls sched_setaffinity then execs k6 in the SAME pid. Reading
+    before that exec returns the wrapper's inherited affinity (e.g. 0,2,4,6),
+    not the confined one (6).
     """
     cmd = [k6, "run", "--quiet", str(HARNESS)]
     if K6_CORES:
@@ -106,6 +111,7 @@ def run_cell(
     if auth:
         cmd += ["-e", f"AUTH_HEADER={auth_header}", "-e", f"AUTH_BEARER={auth}"]
     opp = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    time.sleep(0.5)  # let taskset exec k6 so /proc shows the confined set
     allowed = read_allowed(opp.pid)
     try:
         _, _ = opp.communicate(timeout=TIMEOUT_S)

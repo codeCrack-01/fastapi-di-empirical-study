@@ -87,8 +87,11 @@ def resolve_auth(arm: dict, py: Path, env: dict, cwd: Path) -> tuple[str | None,
 
 
 def boot(arm: dict, repo_dir: Path, workdir: Path) -> tuple[subprocess.Popen, str | None, str]:
-    """setup + preseed, then boot uvicorn. Kills the server if readiness fails."""
+    """checkout the arm branch, setup + preseed, then boot uvicorn. Kills the
+    server if readiness fails. The checkout lives here (not only in run_arm) so
+    every caller — bench, phaseB, parity — measures the intended arm branch."""
     py = venv_python(arm, repo_dir)
+    git(repo_dir, "checkout", "-q", arm["branch"])
     env = {**os.environ, **arm_env(arm)}
     for cmd in arm.get("setup", []):
         subprocess.run(
