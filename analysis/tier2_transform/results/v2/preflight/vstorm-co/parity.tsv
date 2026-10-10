@@ -1,0 +1,5 @@
+app	arm	status	body_sha1	bytes	equal_to_S2
+vstorm-co	S2	200	ce4e863dd1fd	64	OK
+vstorm-co	S1	200	ce4e863dd1fd	64	OK
+vstorm-co	S3	200	ce4e863dd1fd	64	OK
+vstorm-co	S4	200	ce4e863dd1fd	64	OK

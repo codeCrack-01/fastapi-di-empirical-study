@@ -1,0 +1,5 @@
+app	arm	status	body_sha1	bytes	equal_to_S2
+ciiceronee	S2	200	bdfb3aa851f0	41	OK
+ciiceronee	S1	200	bdfb3aa851f0	41	OK
+ciiceronee	S3	200	bdfb3aa851f0	41	OK
+ciiceronee	S4	200	bdfb3aa851f0	41	OK

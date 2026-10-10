@@ -1,0 +1,5 @@
+app	arm	status	body_sha1	bytes	equal_to_S2
+azure-samples	S2	200	9cd3c9d865ee	291	OK
+azure-samples	S1	200	9cd3c9d865ee	291	OK
+azure-samples	S3	200	9cd3c9d865ee	291	OK
+azure-samples	S4	200	9cd3c9d865ee	291	OK

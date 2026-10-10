@@ -1,0 +1,2 @@
+app	arm	rate	p50	p95	p99	window_errors	window_requests	fidelity	cpus_allowed_server	cpus_allowed_k6
+johnsonhk88	S2	10	3	4	4.009999999999991	0	300	1	0,2,4	6

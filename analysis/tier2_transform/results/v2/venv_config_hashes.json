@@ -1,0 +1,22 @@
+{
+ "ciiceronee": {
+  "dist_count": 166,
+  "sha256": "202ee45b7655f5e3d116689d77b2f5892a87481a1ea4a9e678757426db204bd3",
+  "python": "repos/ciiceronee/.venv/bin/python"
+ },
+ "vstorm-co": {
+  "dist_count": 83,
+  "sha256": "1facb18b58556092cffb8c56fb48e03454a643fda33cf3bcb679ac912a1b44b3",
+  "python": "repos/vstorm-co/.venv/bin/python"
+ },
+ "johnsonhk88": {
+  "dist_count": 183,
+  "sha256": "f79f47db3397252b1b32504375bd3199488fef17f1404a91b544a20f0d62bd07",
+  "python": "repos/johnsonhk88/api/.venv/bin/python"
+ },
+ "azure-samples": {
+  "dist_count": 151,
+  "sha256": "59e4f08480d537f473a004ddc7cac0b7b5f2f43d6ff5114f88b74d43c886c445",
+  "python": "repos/azure-samples/.venv/bin/python"
+ }
+}

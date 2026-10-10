@@ -1,0 +1,5 @@
+app	arm	status	body_sha1	bytes	equal_to_S2
+johnsonhk88	S2	200	2176aacc2d83	88	OK
+johnsonhk88	S1	200	2176aacc2d83	88	OK
+johnsonhk88	S3	200	2176aacc2d83	88	OK
+johnsonhk88	S4	200	2176aacc2d83	88	OK
