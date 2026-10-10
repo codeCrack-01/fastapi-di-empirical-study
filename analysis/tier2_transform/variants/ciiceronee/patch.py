@@ -139,9 +139,12 @@ def get_llm_manager() -> LLMManager:
     llm_manager = providers.Object()
 
 
+_CONTAINER = CiiceroneContainer()
+
+
 def get_simulator() -> Simulator:
     """Get the threat simulator instance from the container."""
-    value = CiiceroneContainer().simulator()
+    value = _CONTAINER.simulator()
     if value is None:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
@@ -152,7 +155,7 @@ def get_simulator() -> Simulator:
 
 def get_llm_manager() -> LLMManager:
     """Get the LLM manager instance from the container."""
-    value = CiiceroneContainer().llm_manager()
+    value = _CONTAINER.llm_manager()
     if value is None:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
@@ -169,8 +172,8 @@ def get_llm_manager() -> LLMManager:
     old_start = "        llm_manager = LLMManager()\n        simulator = Simulator(llm_provider=llm_manager)"
     new_start = ("        llm_manager = LLMManager()\n"
                  "        simulator = Simulator(llm_provider=llm_manager)\n"
-                 "        CiiceroneContainer.simulator.override(providers.Object(simulator))\n"
-                 "        CiiceroneContainer.llm_manager.override(providers.Object(llm_manager))")
+                 "        _CONTAINER.simulator.override(providers.Object(simulator))\n"
+                 "        _CONTAINER.llm_manager.override(providers.Object(llm_manager))")
     assert old_start in src
     src = src.replace(old_start, new_start)
     return src

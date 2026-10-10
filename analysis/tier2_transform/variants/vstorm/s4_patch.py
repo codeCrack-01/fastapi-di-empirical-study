@@ -48,9 +48,12 @@ class SandboxContainer(containers.DeclarativeContainer):
     service = providers.Object()
 
 
+_CONTAINER = SandboxContainer()
+
+
 def _service_of(request: Request) -> _Service:
     """Pull the service out of the dependency-injector container."""
-    service: _Service = SandboxContainer().service()
+    service: _Service = _CONTAINER.service()
     return service
 
 
@@ -96,7 +99,7 @@ def main(server_path: str, pyproject_path: str) -> None:
     assert override_needle in src
     src = src.replace(
         override_needle,
-        override_needle + "    SandboxContainer.service.override(providers.Object(service))\n",
+        override_needle + "    _CONTAINER.service.override(providers.Object(service))\n",
     )
     open(server_path, "w").write(src)
     print(f"patched {server_path}")

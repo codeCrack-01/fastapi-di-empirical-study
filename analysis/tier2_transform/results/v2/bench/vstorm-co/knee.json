@@ -1,7 +1,7 @@
 {
  "app": "vstorm-co",
  "box_plan": "voc-c-8c-16gb-150s-amd",
- "instance_id": "e8cd6321-daa8-4f44-9ad6-da6adedc114a",
+ "instance_id": "d60aee01-a3e0-4b74-b489-509780617d32",
  "s2_knee_rps": 1280,
  "ref_p95_ms": null,
  "ladder_probes": {},
@@ -25,7 +25,7 @@
  ],
  "protocol": "fresh-boot-per-cell, randomised order",
  "seed": 20261009,
- "s4_label": "container instantiated per call, as transformed",
+ "s4_label": "container, built once (idiomatic)",
  "pinning": "pinned",
  "server_cores": "0,2,4",
  "k6_cores": "6"

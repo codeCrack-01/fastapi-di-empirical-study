@@ -1,26 +1,25 @@
 {
  "box_plan": "voc-c-8c-16gb-150s-amd",
- "instance_id": "e8cd6321-daa8-4f44-9ad6-da6adedc114a",
+ "instance_id": "d60aee01-a3e0-4b74-b489-509780617d32",
  "os": "Ubuntu 22.04.5 LTS",
  "kernel": "5.15.0-198-generic",
  "cpu": "AMD EPYC-Milan Processor",
- "online_cpus": "0,2,4,6",
- "nproc": 4,
+ "online_cpus": "0-7",
+ "nproc": 8,
  "isolcpus": null,
- "pinning": "taskset user-space on isolated host (nproc 4, online 0,2,4,6); server cores 0,2,4 workers=1; k6 core 6",
- "docker_version": "29.1.3",
+ "pinning": "taskset user-space (all 8 online on this box; old box had 4 online 0,2,4,6); server cores 0,2,4 workers=1; k6 core 6",
+ "docker_version": "29.1.3, build 29.1.3-0ubuntu3~22.04.2",
  "git_version": "2.34.1",
  "k6": {
   "version": "v2.2.0",
-  "commit": "00a9a1b7f5",
-  "go": "1.26.5",
-  "sha256": "9fced9ff140d73bf3d69b3cde2493adce3807b35ab210a5cb0771045d0ad5a29"
+  "commit": "commit/00a9a1b7f5",
+  "go": "go1.26.5"
  },
  "python_venvs": {
-  "johnsonhk88": "3.12.15",
-  "vstorm-co": "3.12.15",
-  "ciiceronee": "3.12.15",
-  "azure-samples": "3.14.8"
+  "johnsonhk88": "Python 3.12.15",
+  "vstorm-co": "Python 3.12.15",
+  "ciiceronee": "Python 3.12.15",
+  "azure-samples": "Python 3.14.8"
  },
- "captured": "pre-destroy from box /root/study_tier2"
+ "captured": "post-run from box /root/study_tier2 (run2)"
 }

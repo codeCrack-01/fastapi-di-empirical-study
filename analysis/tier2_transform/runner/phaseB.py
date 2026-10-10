@@ -23,8 +23,8 @@ azure: report S1/S2/S3 only on its bench route (/api/health does not cross the
 container); if a route DOES cross, include S4.
 
 Rows -> results/<TIER2_OUTDIR>/<app>/raw.tsv (append; header on first run) plus
-knee.json. S4 rows carry the label "container instantiated per call, as
-transformed" in `arm_label`.
+knee.json. S4 rows carry the label "container, built once (idiomatic)" in
+`arm_label`.
 """
 
 from __future__ import annotations
@@ -65,7 +65,7 @@ MAX_ERR = KNEE.MAX_ERR
 MIN_FID = KNEE.MIN_ACHIEVED
 
 ARM_LABEL = {
-    "S4": "container instantiated per call, as transformed",
+    "S4": "container, built once (idiomatic)",
 }
 
 HEADER = [
@@ -336,7 +336,7 @@ def main() -> int:
 
     (out / "knee.json").write_text(json.dumps({
         "app": a.app, "box_plan": "voc-c-8c-16gb-150s-amd",
-        "instance_id": "e8cd6321-daa8-4f44-9ad6-da6adedc114a",
+        "instance_id": os.environ.get("TIER2_INSTANCE_ID", "e8cd6321-daa8-4f44-9ad6-da6adedc114a"),
         "s2_knee_rps": s2knee, "ref_p95_ms": ref_p95,
         "ladder_probes": {str(k): v for k, v in by_rate.items()},
         "grid": [{"frac": f, "K": k} for f, k in MULT],
