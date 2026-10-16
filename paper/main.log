@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.7.17)  16 SEP 2026 21:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.7.17)  16 OCT 2026 15:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -452,19 +452,1307 @@ Underfull \hbox (badness 1968) in paragraph at lines 9--10
 []\OT1/ptm/m/n/12 (+20) The dependency-based ap-proach starts from
  []
 
+
+Underfull \hbox (badness 3179) in paragraph at lines 39--40
+[]\OT1/ptm/b/n/12 (+20) Step 4 --- Static Anal-y-sis on The Fi-
+ []
+
+
+Underfull \hbox (badness 5878) in paragraph at lines 39--40
+\OT1/ptm/b/n/12 (+20) nal Cor-pus. \OT1/ptm/m/n/12 (+20) Ev-ery ac-cepted repo'
+s Python
+ []
+
 [2]) (./sections/results.tex
-Underfull \hbox (badness 2205) in paragraph at lines 53--54
+Underfull \hbox (badness 2205) in paragraph at lines 49--50
 \OT1/ptm/m/n/12 (+20) repository-age cat-e-gories, rang-ing from 74.8%
  []
 
-[3]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+[3] [4]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.112 ...{ERR*} rows and no \texttt{window_errors}
+                                                   occurred.
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+<recently read> \egroup 
+                        
+l.112 ...{ERR*} rows and no \texttt{window_errors}
+                                                   occurred.
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.113 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
 
 
-Underfull \vbox (badness 1584) has occurred while \output is active []
+! LaTeX Error: Unicode character ≤ (U+2264)
+               not set up for use with LaTeX.
 
- [4])
-(./sections/analysis.tex) (./sections/threats.tex [5]) (./main.bbl)
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.114 Below capacity (≤
+                         1.25× knee), \texttt{S1} is fastest, \texttt{S2} e...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+LaTeX Font Info:    Trying to load font information for TS1+pcr on input line 1
+14.
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1pcr.fd
+File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `pcr' (encoding: TS1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.114 ...ier2_real_world_replacement_benchmark.md}
+                                                  .
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+<recently read> \egroup 
+                        
+l.114 ...ier2_real_world_replacement_benchmark.md}
+                                                  .
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.115 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--115
+[]\OT1/pcr/m/n/12 Below capacity (1.25\TS1/pcr/m/n/12 � \OT1/pcr/m/n/12 knee),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--115
+\OT1/pcr/m/n/12 S1 is fastest, S2 equals S1
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--115
+\OT1/pcr/m/n/12 at nearly all points, and S4
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--115
+\OT1/pcr/m/n/12 (build-once dependency-injector)
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--115
+\OT1/pcr/m/n/12 is statistically indistinguishable
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--115
+\OT1/pcr/m/n/12 from S1/S2. S3 is app-dependent
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--115
+\OT1/pcr/m/n/12 and can be the highest-cost arm on
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--115
+\OT1/pcr/m/n/12 DB-heavy routes. At or above  1.25\TS1/pcr/m/n/12 �
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--115
+\OT1/pcr/m/n/12 knee, capacity dominates and tails
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--115
+\OT1/pcr/m/n/12 converge across arms. Full per-repo
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--115
+\OT1/pcr/m/n/12 latency tables and fidelity are in
+ []
+
+
+Overfull \hbox (10.87762pt too wide) in paragraph at lines 114--115
+\OT1/pcr/m/n/12 docs/tier2$[]\OML/cmm/m/it/12 eal[]orld[]eplacement[]enchmark:m
+d:$ 
+ []
+
+LaTeX Info: Symbol \textrightarrow not provided by
+            font family pcr in TS1 encoding.
+            Default family used instead on input line 118.
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `cmtt' (encoding: OT1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `cmtt' (encoding: TS1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+
+! LaTeX Error: Unicode character − (U+2212)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.118 ...ation v0.4→v0.5 moves +241 into S3 (−
+                                                  240 S1, −1 S2). Ecologic...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character − (U+2212)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.118 ...��v0.5 moves +241 into S3 (−240 S1, −
+                                                  1 S2). Ecological groups b...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.118 ...ly in the no-core group (\texttt{c0_none}
+                                                  ); \texttt{S4} remains rar...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+<recently read> \egroup 
+                        
+l.118 ...ly in the no-core group (\texttt{c0_none}
+                                                  ); \texttt{S4} remains rar...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+! LaTeX Error: Unicode character ≤ (U+2264)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.118 ...{c0_none}); \texttt{S4} remains rare (≤
+                                                  1\%). Detailed crosswalk: ...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.118 ... \texttt{docs/s1s4_reviewgate_results.md}
+                                                  , generator \texttt{analys...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+\mbox  #1->\leavevmode \hbox {#1}
+                                 
+l.118 ... \texttt{docs/s1s4_reviewgate_results.md}
+                                                  , generator \texttt{analys...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Extra }, or forgotten $.
+\nfss@text #1->{\mbox {#1}}
+                           
+l.118 ... \texttt{docs/s1s4_reviewgate_results.md}
+                                                  , generator \texttt{analys...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.118 ...tt{analysis/s1s4_reviewgate_crosswalk.py}
+                                                  .
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+\mbox  #1->\leavevmode \hbox {#1}
+                                 
+l.118 ...tt{analysis/s1s4_reviewgate_crosswalk.py}
+                                                  .
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Extra }, or forgotten $.
+\nfss@text #1->{\mbox {#1}}
+                           
+l.118 ...tt{analysis/s1s4_reviewgate_crosswalk.py}
+                                                  .
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+) (./sections/analysis.tex
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1 \section
+            {Analysis}
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+! LaTeX Error: Not allowed in LR mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \section
+            {Analysis}
+You've lost some text.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Not allowed in LR mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \section
+            {Analysis}
+You've lost some text.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.1 \section
+            {Analysis}
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1 \section
+            {Analysis}
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.1 \section
+            {Analysis}
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.1 \section
+            {Analysis}
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1 \section
+            {Analysis}
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.1 \section
+            {Analysis}
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--1
+[]\OT1/pcr/m/n/12 Strategy labels follow precedence
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--1
+\OT1/pcr/m/n/12 S4 > S2 > S3 > S1. Using the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--1
+\OT1/pcr/m/n/12 v0.5 parser, corpus-level S1--S4
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--1
+\OT1/pcr/m/n/12 are 518/1368/286/7 ($\OML/cmm/m/it/12 n \OT1/cmr/m/n/12 = 2179$
+\OT1/pcr/m/n/12 );
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--1
+\OT1/pcr/m/n/12 v0.4 gives 758/1369/45/7.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--1
+\OT1/pcr/m/n/12 Reclassification v0.4\TS1/cmtt/m/n/12 ^^Y\OT1/pcr/m/n/12 v0.5
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--1
+\OT1/pcr/m/n/12 moves +241 into S3 (240 S1,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--1
+\OT1/pcr/m/n/12 1 S2). Ecological groups by
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--1
+\OT1/pcr/m/n/12 C1--C4 bitmask are nearly stable
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--1
+\OT1/pcr/m/n/12 (4 repos change). Any group
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--1
+\OT1/pcr/m/n/12 containing core constructs is
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--1
+\OT1/pcr/m/n/12 overwhelmingly S2 ($\OMS/cmsy/m/n/12 ^^Y$\OT1/pcr/m/n/12 100%);
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--1
+\OT1/pcr/m/n/12 manual-only S3 occurs almost
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--1
+\OT1/pcr/m/n/12 exclusively in the no-core group
+ []
+
+
+Overfull \hbox (14.66492pt too wide) in paragraph at lines 118--1
+\OT1/pcr/m/n/12 (c0$[]\OML/cmm/m/it/12 one\OT1/cmr/m/n/12 ); []\OML/cmm/m/it/12
+ remainsrare\OT1/cmr/m/n/12 (1%)\OML/cmm/m/it/12 :Detailedcrosswalk \OT1/cmr/m/
+n/12 :
+ []
+
+
+Overfull \hbox (201.06726pt too wide) in paragraph at lines 118--1
+[]$ 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+[]\OT1/pcr/m/n/12 The dataset provides us with an
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+\OT1/pcr/m/n/12 in-depth view of the different
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+\OT1/pcr/m/n/12 patterns of dependency injection
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+\OT1/pcr/m/n/12 across the 402 repositories. It
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+\OT1/pcr/m/n/12 demonstrates the variance in
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+\OT1/pcr/m/n/12 the usage of different FastAPI
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+\OT1/pcr/m/n/12 dependency mechanisms, the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+\OT1/pcr/m/n/12 underlying characteristics of
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+\OT1/pcr/m/n/12 the repository involved and the
+ []
+
+) (./sections/threats.tex
+Underfull \hbox (badness 10000) in paragraph at lines 7--1
+[]\OT1/pcr/m/n/12 Nevertheless, the motives about
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--1
+\OT1/pcr/m/n/12 why such patterns occur are
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--1
+\OT1/pcr/m/n/12 relatively unexplored (ground for
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--1
+\OT1/pcr/m/n/12 future work), questioning whether
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--1
+\OT1/pcr/m/n/12 the difference in usage of the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--1
+\OT1/pcr/m/n/12 different structures for dependency
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--1
+\OT1/pcr/m/n/12 injection really is due to better
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--1
+\OT1/pcr/m/n/12 power consumption, less run-time,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--1
+\OT1/pcr/m/n/12 better developer experience or
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--1
+\OT1/pcr/m/n/12 just developer preference. Also,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--1
+\OT1/pcr/m/n/12 114 repositories (28.3% of corpus)
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--1
+\OT1/pcr/m/n/12 contained at least one unresolved
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--1
+\OT1/pcr/m/n/12 dependency reference. Although the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--1
+\OT1/pcr/m/n/12 current AST analysis provides a
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--1
+\OT1/pcr/m/n/12 way to test untrusted repositories
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--1
+\OT1/pcr/m/n/12 through static analysis, it
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--1
+\OT1/pcr/m/n/12 introduces limitations in resolving
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--1
+\OT1/pcr/m/n/12 dynamic behavior and other
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--1
+\OT1/pcr/m/n/12 run-time mechanisms hindering its
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--1
+\OT1/pcr/m/n/12 constructor from reproducing every
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--1
+\OT1/pcr/m/n/12 dependency relationship leading to
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+[]\OT1/pcr/m/n/12 The top concern is defining
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+\OT1/pcr/m/n/12 what a ``meaningfully real''
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+\OT1/pcr/m/n/12 FastAPI application means. The
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+\OT1/pcr/m/n/12 current criteria use observable
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+\OT1/pcr/m/n/12 source-level indicators, including
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+\OT1/pcr/m/n/12 FastAPI imports and application
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+\OT1/pcr/m/n/12 instantiation. These provide
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+\OT1/pcr/m/n/12 reproducible inclusion criteria
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+\OT1/pcr/m/n/12 but cannot perfectly capture the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+\OT1/pcr/m/n/12 semantic importance of FastAPI
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+\OT1/pcr/m/n/12 within every application. For this
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+\OT1/pcr/m/n/12 reason, we propose that for future
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+\OT1/pcr/m/n/12 work, we can use a more broader
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+\OT1/pcr/m/n/12 filter than E5 to check if the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+\OT1/pcr/m/n/12 results we propose are affected
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+\OT1/pcr/m/n/12 in a significant way and whether
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+\OT1/pcr/m/n/12 or not our results apply to the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+\OT1/pcr/m/n/12 broader, more general corpus of the
+ []
+
+[5{/usr/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+Underfull \hbox (badness 10000) in paragraph at lines 7--8
+[]\OT1/pcr/m/n/12 Similarly, the AST analyzer
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--8
+\OT1/pcr/m/n/12 identifies dependency-injection
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--8
+\OT1/pcr/m/n/12 constructs through syntactic
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--8
+\OT1/pcr/m/n/12 patterns. Different source-level
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--8
+\OT1/pcr/m/n/12 forms may represent similar
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--8
+\OT1/pcr/m/n/12 dependency-management behavior,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--8
+\OT1/pcr/m/n/12 while similar syntax may have
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--8
+\OT1/pcr/m/n/12 different runtime semantics.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--8
+\OT1/pcr/m/n/12 The census should therefore be
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--8
+\OT1/pcr/m/n/12 understood as a characterization
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--8
+\OT1/pcr/m/n/12 of detectable source-level DI
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--8
+\OT1/pcr/m/n/12 usage, rather than a complete
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--8
+\OT1/pcr/m/n/12 representation of all runtime
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--12
+[]\OT1/pcr/m/n/12 The planned comparative
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--12
+\OT1/pcr/m/n/12 experiment introduces additional
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--12
+\OT1/pcr/m/n/12 threats to internal validity.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--12
+\OT1/pcr/m/n/12 Runtime performance can
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--12
+\OT1/pcr/m/n/12 be influenced by hardware,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--12
+\OT1/pcr/m/n/12 operating-system scheduling,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--12
+\OT1/pcr/m/n/12 Python version, FastAPI version,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--12
+\OT1/pcr/m/n/12 database configuration, workload
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--12
+\OT1/pcr/m/n/12 characteristics, concurrency, and
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 13--14
+[]\OT1/pcr/m/n/12 The controlled experiment
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 13--14
+\OT1/pcr/m/n/12 will mitigate these factors by
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 13--14
+\OT1/pcr/m/n/12 keeping the application logic,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 13--14
+\OT1/pcr/m/n/12 workload, execution environment,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 13--14
+\OT1/pcr/m/n/12 and benchmark configuration
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 13--14
+\OT1/pcr/m/n/12 constant while changing the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 13--14
+\OT1/pcr/m/n/12 dependency-management strategy.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 13--14
+\OT1/pcr/m/n/12 Measurements will be repeated
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 13--14
+\OT1/pcr/m/n/12 across multiple trials, with
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 13--14
+\OT1/pcr/m/n/12 appropriate summary statistics
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 13--14
+\OT1/pcr/m/n/12 and statistical comparisons used
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 13--14
+\OT1/pcr/m/n/12 instead of relying on individual
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 15--16
+[]\OT1/pcr/m/n/12 For the real-project evaluation,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 15--16
+\OT1/pcr/m/n/12 an additional threat is
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 15--16
+\OT1/pcr/m/n/12 that replacing a project's
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 15--16
+\OT1/pcr/m/n/12 dependency-management strategy
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 15--16
+\OT1/pcr/m/n/12 may inadvertently alter its
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 15--16
+\OT1/pcr/m/n/12 behavior. Existing project tests
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 15--16
+\OT1/pcr/m/n/12 and additional behavioral checks
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 15--16
+\OT1/pcr/m/n/12 will therefore be used where
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 15--16
+\OT1/pcr/m/n/12 possible to establish functional
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 15--16
+\OT1/pcr/m/n/12 equivalence before performance
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 19--20
+[]\OT1/pcr/m/n/12 The corpus consists exclusively
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 19--20
+\OT1/pcr/m/n/12 of publicly accessible GitHub
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 19--20
+\OT1/pcr/m/n/12 repositories and may not represent
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 19--20
+\OT1/pcr/m/n/12 private, proprietary, or internally
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--22
+[]\OT1/pcr/m/n/12 Similarly, a controlled benchmark
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--22
+\OT1/pcr/m/n/12 necessarily simplifies real-world
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--22
+\OT1/pcr/m/n/12 applications. Results from the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--22
+\OT1/pcr/m/n/12 synthetic experiment should
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--22
+\OT1/pcr/m/n/12 therefore not be generalized
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--22
+\OT1/pcr/m/n/12 directly to all FastAPI systems.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--22
+\OT1/pcr/m/n/12 This motivates the second
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--22
+\OT1/pcr/m/n/12 experimental stage, in which
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--22
+\OT1/pcr/m/n/12 alternative dependency-management
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--22
+\OT1/pcr/m/n/12 strategies will be evaluated on a
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--22
+\OT1/pcr/m/n/12 small sample of real applications
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--26
+[]\OT1/pcr/m/n/12 Several constructs and idioms
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--26
+\OT1/pcr/m/n/12 occur at very low frequencies.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--26
+\OT1/pcr/m/n/12 These observations are insufficient
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--26
+\OT1/pcr/m/n/12 to support strong population-level
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--26
+\OT1/pcr/m/n/12 conclusions and will therefore
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--26
+\OT1/pcr/m/n/12 remain descriptive. In the future,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--26
+\OT1/pcr/m/n/12 we plan to expand the corpus used
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--26
+\OT1/pcr/m/n/12 in this paper in order to establish
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--26
+\OT1/pcr/m/n/12 a more meaningful relationship
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--26
+\OT1/pcr/m/n/12 between the observations and the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--26
+\OT1/pcr/m/n/12 conclusions by including projects
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--26
+\OT1/pcr/m/n/12 that may not necessarily have the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--26
+\OT1/pcr/m/n/12 majority of their code in Python
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--26
+\OT1/pcr/m/n/12 (E2) but still use FastAPI in a
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--28
+[]\OT1/pcr/m/n/12 The comparative experiment
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--28
+\OT1/pcr/m/n/12 will also require appropriate
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--28
+\OT1/pcr/m/n/12 statistical treatment. Small
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--28
+\OT1/pcr/m/n/12 measured differences should not
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--28
+\OT1/pcr/m/n/12 automatically be interpreted
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--28
+\OT1/pcr/m/n/12 as practically meaningful, even
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--28
+\OT1/pcr/m/n/12 where statistical significance
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--28
+\OT1/pcr/m/n/12 is observed. Effect sizes and
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--28
+\OT1/pcr/m/n/12 variability should therefore be
+ []
+
+[6]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.29 ...{analysis/syncasync/results_5arm_final.md}
+                                                  ) and the archived pre-cor...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+<recently read> \egroup 
+                        
+l.29 ...{analysis/syncasync/results_5arm_final.md}
+                                                  ) and the archived pre-cor...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+)
+! Missing $ inserted.
+<inserted text> 
+                $
+l.25 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--25
+ \OT1/ptm/m/it/12 (+20) a) Cor-rected five-arm bench-mark.: [][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--25
+\OT1/pcr/m/n/12 An initial run of the controlled
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--25
+\OT1/pcr/m/n/12 five-arm benchmark was confounded:
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--25
+\OT1/pcr/m/n/12 three arms leased the pooled
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--25
+\OT1/pcr/m/n/12 database connection twice per
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--25
+\OT1/pcr/m/n/12 request where the other two leased
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--25
+\OT1/pcr/m/n/12 it once, while issuing identical
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--25
+\OT1/pcr/m/n/12 SQL and returning byte-identical
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--25
+\OT1/pcr/m/n/12 responses. Under pool saturation,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--25
+\OT1/pcr/m/n/12 this shortened hold times and
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--25
+\OT1/pcr/m/n/12 produced an artefactual speedup.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--25
+\OT1/pcr/m/n/12 After correcting to exactly one
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--25
+\OT1/pcr/m/n/12 lease per request across all
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--25
+\OT1/pcr/m/n/12 arms and fixing a role-check
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--25
+\OT1/pcr/m/n/12 mismatch in s2_depends, the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--25
+\OT1/pcr/m/n/12 corrected graded-band re-run
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--25
+\OT1/pcr/m/n/12 (600--900 req/s, 480 study cells,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--25
+\OT1/pcr/m/n/12 0 failed) found s4_container
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--25
+\OT1/pcr/m/n/12 statistically indistinguishable
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--25
+\OT1/pcr/m/n/12 from the no-DI baseline;
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--25
+\OT1/pcr/m/n/12 s2_depends is meaningfully
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--25
+\OT1/pcr/m/n/12 worse than baseline in sync but
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--25
+\OT1/pcr/m/n/12 not distinguishable in async;
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--25
+\OT1/pcr/m/n/12 s3_middleware is meaningfully
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--25
+\OT1/pcr/m/n/12 worse in both models; s4_dishka
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--25
+\OT1/pcr/m/n/12 is the costliest. Full details
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--25
+\OT1/pcr/m/n/12 are in the corrected analysis
+ []
+
+
+Overfull \hbox (126.45149pt too wide) in paragraph at lines 29--25
+\OT1/pcr/m/n/12 (analysis/syncasync/results$[]\OML/cmm/m/it/12 arm[]inal:md\OT1
+/cmr/m/n/12 )\OML/cmm/m/it/12 andthearchivedpre \OMS/cmsy/m/n/12 ^^@
+ []
+
+
+Overfull \hbox (56.06696pt too wide) in paragraph at lines 29--25
+\OML/cmm/m/it/12 correctionrecord\OT1/cmr/m/n/12 ([])\OML/cmm/m/it/12 :$ 
+ []
+
+(./main.bbl
+Underfull \hbox (badness 10000) in paragraph at lines 25--27
+[]\OT1/pcr/m/n/9 Stack Overflow, ``Stack overflow
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--27
+\OT1/pcr/m/n/9 developer survey 2025,'' []$https : / / survey .
+ []
+
+)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -476,7 +1764,7 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[6
+[7
 
 ] (./main.aux)
  ***********
@@ -484,28 +1772,41 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2026-03-20>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 05CC83C2CB93DE780551A41E0DADE282;2821.
- ) 
+(rerunfilecheck)             Checksum: 2DEFF19041BFB524069F4D49AFE3CB79;3422.
+ )
+(\end occurred inside a group at level 4)
+
+### simple group (level 4) entered at line 29 ({)
+### simple group (level 3) entered at line 118 ({)
+### simple group (level 2) entered at line 114 ({)
+### simple group (level 1) entered at line 112 ({)
+### bottom level 
 Here is how much of TeX's memory you used:
- 11899 strings out of 469296
- 191650 string characters out of 5465561
+ 11942 strings out of 469296
+ 192375 string characters out of 5465561
  647468 words of memory out of 6000000
- 40344 multiletter control sequences out of 15000+600000
- 672918 words of font info for 242 fonts, out of 8000000 for 9000
+ 40384 multiletter control sequences out of 15000+600000
+ 674429 words of font info for 242 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 75i,10n,79p,1276b,445s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf
--dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/
-utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (6 pages, 124273 bytes).
+ 75i,10n,79p,1276b,783s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/cm-super/sftt1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw
+/courier/ucrb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr
+8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (7 pages, 188916 bytes).
 PDF statistics:
- 163 PDF objects out of 1000 (max. 8388607)
- 135 compressed objects within 2 object streams
- 30 named destinations out of 1000 (max. 500000)
- 50313 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 210 PDF objects out of 1000 (max. 8388607)
+ 169 compressed objects within 2 object streams
+ 34 named destinations out of 1000 (max. 500000)
+ 52889 words of extra memory for PDF output out of 61914 (max. 10000000)
 

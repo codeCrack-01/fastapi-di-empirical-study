@@ -107,3 +107,12 @@ Several additional DI idioms were detected, although most occurred at low freque
 \subsection{Data Quality Issue (Resolved Now)}
 
 The resolver generated file:line-style placeholder nodes when a Depends() call occurred outside an identifiable function context. Such nodes occurred in 122 of 294 graph-bearing repositories and accounted for 713 of 17,222 raw nodes (4.1\%). These nodes were removed before computing the cleaned graph-size statistics.
+\subsection{Tier-2: Replacement benchmark on real repositories}
+
+We replaced DI wiring in four real FastAPI repositories to evaluate S1, S2, S3, and S4 against the original (\texttt{Depends}-based) code. Each arm preserved response bodies and behaviour; measurements followed a randomised fresh-process grid at S2-knee rates (Phase B). Across all 454 cells, no \texttt{ERR*} rows and no \texttt{window_errors} occurred.
+
+Below capacity (≤1.25× knee), \texttt{S1} is fastest, \texttt{S2} equals \texttt{S1} at nearly all points, and \texttt{S4} (build-once dependency-injector) is statistically indistinguishable from \texttt{S1}/\texttt{S2}. \texttt{S3} is app-dependent and can be the highest-cost arm on DB-heavy routes. At or above ~1.25× knee, capacity dominates and tails converge across arms. Full per-repo latency tables and fidelity are in \texttt{docs/tier2_real_world_replacement_benchmark.md}.
+
+\subsection{S1--S4 classification over ecological arms}
+
+Strategy labels follow precedence \texttt{S4 > S2 > S3 > S1}. Using the v0.5 parser, corpus-level S1--S4 are 518/1368/286/7 ($n=2179$); v0.4 gives 758/1369/45/7. Reclassification v0.4→v0.5 moves +241 into S3 (−240 S1, −1 S2). Ecological groups by C1--C4 bitmask are nearly stable (4 repos change). Any group containing core constructs is overwhelmingly \texttt{S2} ($\approx$100\%); manual-only \texttt{S3} occurs almost exclusively in the no-core group (\texttt{c0_none}); \texttt{S4} remains rare (≤1\%). Detailed crosswalk: \texttt{docs/s1s4_reviewgate_results.md}, generator \texttt{analysis/s1s4_reviewgate_crosswalk.py}.
