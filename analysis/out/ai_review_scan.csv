@@ -1,0 +1,281 @@
+arm,repo,commit,ai_label,ast_verdict,depends,security,annotated,yield_dep,containers,container_used,ambient,local_alias,ctor,service_locator,evidence
+Arm 1,0x0021/Linkora,ba6d5438,S3,S1,0,0,0,0,,False,0,0,True,2,"locator in src/dws_adapter/media.py; locator in src/skills/intent_generator.py; ctor injection ['ApprovalGetDetailTool', 'ApprovalListExecutedTool', 'ApprovalListFormsTool', 'ApprovalListInitiatedTool', 'ApprovalListPendingTool']"
+Arm 1,0xrezza/ai_meeting_assistant,6eeab0ce,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,3s10/sage-postgres,2f164ce4,S2,S1,0,1,0,0,,False,0,0,False,0,
+Arm 1,ACANX/FinvQuant,b9c09626,S3,S1,0,0,0,0,,False,3,0,True,0,"ambient provider ['_serve', 'requestIdFromState', 'traceIdFromState'] in VeritasQuant/src/veritasquant/apps/server/ApiServer.py; ctor injection ['AccountGroupWorkerV1', 'AccountIsolatedAllocatorV1', 'AccountSnapshotBuilderV1', 'BoundedQueueHandler', 'BrokerReconcilerV1']"
+Arm 1,AhmedOuf19/LatexOS,7de1df67,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,AnukaMithara/deploy-skills,47810595,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,AsusFarstrider/oracle-core,ffb2ee99,S3,S1,0,0,0,0,,False,2,0,True,2,"ambient provider ['canonical_command', 'register_conversation_routes'] in server/oracle_app/conversation_routes.py; locator in server/oracle_app/system_help.py; locator in server/oracle_app/handlers/system.py; ctor injection ['CalendarCapability', 'CalendarHandler', 'CanonicalAudiobookExecution', 'CanonicalMusicExecution', 'ConfigurationService']"
+Arm 1,Bootcamp-IA-MAD-P7/Proyecto6-Grupo3,983396c3,S3,S1,0,0,0,0,,False,0,0,True,0,ctor injection ['PolicyDataset']
+Arm 1,ClearGlassInc/Opal-Koboi,40c0dc74,S3,S1,0,0,0,0,,False,0,0,True,0,"ctor injection ['AlertRouter', 'ClearglassMarketAnalyzer', 'ClearglassPredictiveEngine', 'DayRunner', 'TrackingAgent']"
+Arm 1,DoubabiAli/careerlaunch-ai,525901a3,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,EU-UNION-AI-PACT/-3-Z3r0CL0cK.R0cK2,6c4602fe,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,Endor-Solutions-Architecture/scripts,7aa0450b,S3,S1,0,0,0,0,,False,0,0,True,1,"locator in export_dependencies/main.py; ctor injection ['LinearClient', '_LicenseNormalizer']"
+Arm 1,Expert-Institute/candidate_python_challenge,c42bd56a,S3,S1,0,0,0,0,,False,0,0,True,0,ctor injection ['ExpertService']
+Arm 1,LiXuanyaun/cross-border-ecommerce-analysis,bdb4cb45,S3,S1,0,0,0,0,,False,0,0,True,0,"ctor injection ['AgentContextBuilder', 'AgentToolRegistry', 'AnalysisQueryService', 'CustomerModule', 'DatasetCapabilityService']"
+Arm 1,MIT-Assistive-Technology/Bearings,74f08fad,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,Manikandan1511/Memora-OS,e28ccf6a,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,Mireyyub/zenthon,7236bd76,S3,S1,0,0,0,0,,False,0,0,True,1,"locator in core/bootstrap.py; ctor injection ['KnowledgeRetrieval', 'LeonApp', 'ModelPredictor', 'OllamaProvider', 'SupervisedTrainer']"
+Arm 1,Native-254/IrieTrade,a30a7cd3,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,ParminderSinghGithub/SpectralReader,4a631365,S3,S1,0,0,0,0,,False,0,0,True,0,ctor injection ['ReportGenerator']
+Arm 1,Project-IRA/interactive-robotic-arm,a339b00b,S3,S1,0,0,0,0,,False,0,0,True,0,"ctor injection ['ActionReceiver', 'ObservationSender', 'RobotController', 'VLAClient', 'VLAGRPCConnection']"
+Arm 1,Quantum-L9/Cognitive.Engine.Graphs,53144271,S3,S1,0,0,0,0,,False,0,0,True,1,"locator in engine/auth/capabilities.py; ctor injection ['AttributionCalculator', 'AutonomyController', 'CausalSubgraphSerializer', 'ConfigurationMatcher', 'CounterfactualGenerator']"
+Arm 1,RoseWrightdev/Video-Conferencing,2f906e64,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,SWHee/finbom-agent,afc4cf29,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,Saiteja02806/watermark,2e001986,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,Samarth-23-eng/scope-intelligence,56ec42f1,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,Serate/spatial-agent,21bdc603,S3,S1,0,0,0,0,,False,0,0,True,11,locator in result_contract.py; locator in agent/action_identity.py; locator in agent/domain_selector.py; locator in agent/general_capability_host.py; locator in agent/result_summary.py; locator in agent/application/async_runs.py
+Arm 1,SithumRaigamage/IdeaHub,b4740a7d,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,SupravoCoder/NIELIT_PRROJECT,fcaeb173,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,Timex2429/tmxquantum-,d67419bd,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,Ujwal8156v/SoundWave_App.com,738c2c5e,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,ahernsean/driving-record,32f29efd,S3,S1,0,0,0,0,,False,2,0,True,0,"ambient provider ['_actor', '_is_read_only'] in driving_log/web.py; ctor injection ['Database', 'DmvExportService', 'LiveDriveService', 'RecordService', 'SavedLocationService']"
+Arm 1,almondsun/nutshellm,c8748749,S3,S1,0,0,0,0,,False,0,0,True,0,"ctor injection ['BodySizeLimitMiddleware', 'OpenAICompatibleClient', 'ParitokClient', 'RecordedEngine', 'RunEngine']"
+Arm 1,apolito53/youtube-transcript-extractor,7ea6f34b,S3,S1,0,0,0,0,,False,3,0,False,0,"ambient provider ['_request_context', 'create_app', 'health'] in src/youtube_transcript_extractor/app.py"
+Arm 1,araujofrancisco/ai-infographic,c50ed597,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,arthaszyb/bright-talent,acfd2455,S2,S1,0,1,0,0,,False,0,0,True,1,"locator in scaffold/builder/builder/skills.py; ctor injection ['DraftService', 'FixtureServer']"
+Arm 1,atharva21-stack/helios-gpu-placement-optimizer,a7c00f31,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,bob88p/library_kafr_project,50e0464b,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,coinbase/cdp-sdk,193fab81,S3,S1,0,0,0,0,,False,0,0,True,0,"ctor injection ['AccountsApi', 'ApiClient', 'Configuration', 'CustomersApi', 'DepositDestinationsApi']"
+Arm 1,coval-ai/coval-examples,4e03f42f,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,danimall/file_migration,15cda8d3,S3,S1,0,0,0,0,,False,3,0,True,0,"ambient provider ['dashboard', 'settings', 'svc'] in src/filemig/web/routes.py; ctor injection ['AuthManager', 'DriveClient', 'DropboxClient', 'FolderManager', 'MigrationService']"
+Arm 1,dmux/minilake,93645a2f,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,fadfasfa/claude-code-test,91f87e64,S3,S1,0,0,0,0,,False,0,0,True,0,"ctor injection ['CachedDataFrameLoader', 'DesktopWindowPresentation', 'EmailSource', 'FailureEvidenceCollector', 'FixedUrlSource']"
+Arm 1,gibtran/skills-introduction-to-repository-management,b552115c,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,godear6959-creator/PNLIO-Kernel-Neuromorfico,d8930ca9,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,ilan4ever/Dflash-Console,b8d0926d,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,irfanalam13/hostel,e342790e,S2,S1,0,2,0,0,,False,0,0,True,0,"ctor injection ['DRModeMiddleware', 'EdgeGuardMiddleware', 'IdempotencyMiddleware', 'RequestTimingMiddleware', 'SecurityConfig']"
+Arm 1,jikuja/skills-copilot-code-review,daa6848a,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,kt2saint-sec/braincell,1cb7f4e0,S3,S1,0,0,0,0,,False,4,0,True,4,"locator in braincell/cli.py; ambient provider ['_store', 'create_app'] in braincell/gui.py; locator in braincell/gui_ingest.py; ambient provider ['api_skills_status', 'mount_skill_status_api'] in braincell/gui_install.py; locator in braincell/pool.py; locator in braincell/project_registry.py"
+Arm 1,lazaruslinux/upperroom,c0cfa675,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,liviubucel/zebrabyte-darkweb-scan,7c74bb49,S2,S1,0,2,0,0,,False,0,0,False,0,
+Arm 1,lmcorp-it/RuPochta,87230170,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,martin82private/UniFi-Insights-Plus,5db51c04,S3,S1,0,0,0,0,,False,0,0,True,0,"ctor injection ['AbuseIPDBEnricher', 'BackfillTask', 'BlacklistFetcher', 'Enricher', 'PiHolePoller']"
+Arm 1,michaeldejournett/BannanaHacks,2ba96c19,S3,S1,0,0,0,0,,False,0,0,True,0,ctor injection ['BananaDataset']
+Arm 1,miou1107/llm-api-switch,25e07d11,S3,S1,0,0,0,0,,False,0,0,True,0,"ctor injection ['AutoManager', 'DiscoveryDiffer', 'DiscoveryScanner', 'HealthChecker', 'MonitorScheduler']"
+Arm 1,mizcausevic-dev/lead-routing-command-center,1052928e,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,mshe2089/Personal-Website,2a9e7597,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,muthuishere/cljgo,da73311c,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,nicglazkov/Chalkboard,81a15c10,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,nvphuoc-fit-hcmus/CQ_2025-AI_Sentiment_Support-Private,0bcedf1a,S3,S1,0,0,0,0,,False,0,0,True,0,"ctor injection ['MultiObjectiveLoss', 'SAFEAlertTrainer']"
+Arm 1,parsanikookalam/Embedded_Project,5cda883d,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,preciousajuru/skills-expand-your-team-with-copilot,0e33d9ce,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,qiuziyan1998/LMCache,cb193c74,S3,S1,0,0,0,0,,False,0,0,True,7,locator in lmcache/lmcache_frontend/app.py; locator in lmcache/v1/internal_api_server/common/periodic_thread_api.py; locator in lmcache/v1/mp_observability/subscribers/tracing/cb_server.py; locator in lmcache/v1/mp_observability/subscribers/tracing/mp_server.py; locator in lmcache/v1/multiprocess/engine_context.py; locator in lmcache/v1/multiprocess/native_completion.py
+Arm 1,raminmohammadi/CGX,f00c434d,S3,S1,0,0,0,0,,False,0,0,True,0,"ctor injection ['CodeGraphBackend', 'GovernedProvider', 'Monitor', 'SessionRunner', 'ToolWrapper']"
+Arm 1,robotx-ai/brand_creator_website,16e02d4a,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,romland/itemLens,76820060,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,satheeshds/bank-transactions,1ccec637,S3,S1,0,0,0,0,,False,0,0,True,0,"ctor injection ['TransactionImportService', '_ConnWrapper', '_WrappedCursor']"
+Arm 1,sautalwar/avid_training,8f06ab8f,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,schizophrenia-app/speech_schizophrenia_app,41f2d4c1,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,soksanichenko/vless-config-generator,1b4f305c,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,spectrumx/sds-code,9c601dd8,S3,S1,0,0,0,0,,False,1,0,True,1,"ambient provider ['_http_client'] in federation/sds_federation/routes/webhooks.py; locator in federation/sds_federation/services/peer_sync.py; ctor injection ['FederatedAssetIndexer', 'SocialAccountFallbackMiddleware', '_ProgressFileReader']"
+Arm 1,tamangbadrirch/resumeAnalyzer,fc81faf0,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,tavily-ai/tavily-industry-demos,ace830ff,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,tekflox/aw-mcp-gateway,4b072cf7,S3,S1,0,0,0,0,,False,0,0,True,0,"ctor injection ['ConfigGateway', 'RemoteUpstream']"
+Arm 1,the-mace/aquarium-tracker,8211f5ca,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,weecici/project-x,adc50c26,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,wenjiayi123/port-energy-carbon-cockpit,75d18a4a,S3,S1,0,0,0,0,,False,1,0,True,0,"ambient provider ['get_security_context'] in backend/app/api/routes_security.py; ctor injection ['DispatchSwitcherV7', 'RequestBodyLimitMiddleware']"
+Arm 1,zacniewski/RPi-cluster-2025,6f31ca66,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 1,zetaalphavector/zeta-alpha-challenge,2ccaa110,S3,S1,0,0,0,0,,False,2,0,False,0,"ambient provider ['get_document', 'list_documents'] in connector/pipeline_mock.py"
+Arm 1,zhuyuc/Second-Person,d6e3ae57,S3,S1,0,0,0,0,,False,0,0,True,3,"locator in agent/tool_executor.py; locator in agent/turn_runtime_tools.py; locator in app/routes/projects.py; ctor injection ['AdapterManager', 'BackupManager', 'ConflictDetector', 'ConnectorManager', 'CredentialStore']"
+Arm 1,zskbot/dashboard-cli,01c84d99,S1,S1,0,0,0,0,,False,0,0,False,0,
+Arm 2b,0x3e4/pflanzn,05f2968c,S2,S2,146,0,0,0,,False,0,0,False,0,Depends in backend/app/api/routes/audit.py
+Arm 2b,3571949306/GameMatrixApp,82f36d98,S2,S2,3,0,0,0,,False,0,0,True,0,"Depends in server/wrongbook-service/app/api/wrongbook_routes.py; ctor injection ['ADBManager', 'BaseTest', 'Explorer']"
+Arm 2b,88866888/MoviePilot,1336b213,S2,S2,252,0,0,0,,False,0,0,True,0,"Depends in app/api/servarr.py; ctor injection ['FormatParser', 'TmdbScraper', 'TorrentLeech', 'TorrentSpider', 'Tvdb']"
+Arm 2b,ALK-IT/hackathon-manager,08db7a46,S2,S2,118,0,15,0,,False,0,0,True,0,"Depends in backend/src/attendance/dependencies.py; ctor injection ['AttendanceRepository', 'AttendanceService', 'HackathonRepository', 'HackathonService', 'RegistrationQuestionRepository']"
+Arm 2b,Adejare-ml/News-Intelligence-System,d1215b5c,S2,S2,5,0,0,0,,False,0,0,False,0,Depends in backend/app/api/routes.py
+Arm 2b,AlbanAndrieu/fastapi-sample,c52c9e35,S2,S2,18,0,3,0,,False,0,0,False,0,Depends in nabla/main.py
+Arm 2b,AliSK81/ckw,d9a0e205,S2,S2,17,0,2,0,,False,1,0,False,0,ambient provider ['carrying_instructions'] in app/conversation/answering.py; Depends in app/conversation/routes.py
+Arm 2b,Alig1493/that-special-moment,f37140b9,S2,S2,9,0,0,0,,False,0,0,False,0,Depends in backend/app/api/boards.py
+Arm 2b,Alighaemi9731/hiddify-invoice-system,4a491f9b,S2,S2,336,0,0,0,,False,0,0,False,0,Depends in backend/app/api/auth.py
+Arm 2b,Alirockman1/matsim-withinday-python,b1e1ec4b,S2,S2,5,0,0,0,,False,0,0,False,0,Depends in src/main/python/withinday/networking/main.py
+Arm 2b,AlphaHorizon-AI/Shogun,9f80f4d1,S2,S2,568,1,0,23,,False,0,0,True,6,Depends in gensui/api/alerts.py; locator in shogun/office/adapters/outlook_adapter.py; locator in shogun/ronin/core/capabilities_registry.py; locator in shogun/services/file_formats.py; locator in shogun/services/mado_hardening.py; locator in shogun/services/mado_service.py
+Arm 2b,CatholicOS/martyrology-api,88eb5b56,S2,S2,24,0,0,0,,False,4,0,True,0,"ambient provider ['create_app', 'healthz'] in src/martyrology_api/app.py; ambient provider ['texts_allowed'] in src/martyrology_api/licensing.py; Depends in src/martyrology_api/routers/admin.py; ambient provider ['resolve_request'] in src/martyrology_api/routers/read.py; ctor injection ['CurationService', 'Registry']"
+Arm 2b,ChhabraSanyam/Acrylican,961a2f3b,S2,S2,206,0,0,0,,False,0,0,True,0,"Depends in backend/app/dependencies.py; ctor injection ['AnalyticsService', 'EtsyIntegration', 'FacebookIntegration', 'FacebookOAuthIntegration', 'InstagramIntegration']"
+Arm 2b,Coding-Temple-Tech-Residency/MedBridge-B,2d70a85f,S2,S2,63,0,0,0,,False,0,0,False,0,Depends in app-backend/app/middleware/auth.py
+Arm 2b,Daniel1Maymon/israel-flights-etl,ea3dbec9,S2,S2,41,0,0,0,,False,0,0,True,0,"Depends in backend/app/endpoints_backup.py; ctor injection ['AirlineAggregationService', 'RateLimitMiddleware']"
+Arm 2b,DansiDanutz/MoneyPrint,7e636e9a,S2,S2,3,1,0,0,,False,0,0,False,0,Depends in app/controllers/v1/llm.py
+Arm 2b,DeepuNarayana/Lumina-AI-Enterprise-Assistant,cb278ab8,S2,S2,10,0,0,0,,False,0,0,True,0,"Depends in backend/app/api/auth_api.py; ctor injection ['DocumentRepository', 'UserRepository']"
+Arm 2b,DockVault/vault,cf65c2cb,S2,S2,303,0,0,0,,False,1,0,True,0,"Depends in app/api/api_server.py; ambient provider ['_get_client_identifier'] in app/core/rate_limiter.py; ctor injection ['ApiRateLimitPolicyCache', 'AuditLogger', 'AuthService', 'BoundedDownload', 'DockVault']"
+Arm 2b,Fatalerorr69/starcore-platform,207fd981,S2,S2,10,0,2,0,,False,0,0,False,8,locator in platform/packages/blueprints/executor.py; locator in platform/packages/blueprints/template_resolver.py; Depends in platform/packages/core/auth.py; locator in platform/packages/core/diagnostics.py; locator in platform/packages/core/discovery.py; locator in platform/packages/core/resource_actions.py
+Arm 2b,FlowElement-xinliuyuansu/fanjing-face-recognition,4dae83b5,S2,S2,65,0,0,1,,False,0,0,True,0,"Depends in m_flow-main/m_flow/api/v1/activity/routers/get_activity_router.py; ctor injection ['BamlAsyncClient', 'BamlHttpRequestClient', 'BamlHttpStreamRequestClient', 'BamlStreamClient', 'BamlSyncClient']"
+Arm 2b,GayanthaVishwa123/LogPulse,573b077c,S2,S2,1,0,0,0,,False,0,0,False,0,Depends in logpulse_backend/scripts/services/processor-service/app/main.py
+Arm 2b,GiZano/QuakeGuard,90d678bd,S2,S2,28,2,0,0,,False,0,0,False,0,Depends in backend/src/main.py
+Arm 2b,GiftlyKSA/giftly_backend,1acfb3c3,S2,S2,48,0,12,0,,False,6,0,True,0,"Depends in app/admin/router.py; ambient provider ['_fulfillment'] in app/routers/admin_api.py; ambient provider ['_check_redis'] in app/routers/health.py; ambient provider ['_service'] in app/routers/media.py; ambient provider ['_fulfillment', '_notifier', '_service'] in app/routers/orders.py; ctor injection ['AdminReadRepository', 'AdminSessionRepository', 'AuditRepository', 'AuthRepository', 'ChatRepository']"
+Arm 2b,GiraffeTechnology/aivan,890117a8,S2,S2,88,0,0,0,,False,0,0,True,1,"Depends in src/aivan/api/main.py; locator in src/aivan/sourcing/supplier_registry.py; ctor injection ['AccountRepository', 'CaseDomainRepository', 'DraftRepository', 'EventReversalRepository', 'ExecutionEventRepository']"
+Arm 2b,Gustavo-Falci/SCPI,bfa7c599,S2,S2,56,1,0,0,,False,0,0,True,0,Depends in BackEnd/core/security.py; ctor injection ['DictCursorWrapper']
+Arm 2b,Harborfield-suite/PortLog,2de515b4,S2,S2,33,0,0,0,,False,0,0,True,0,"Depends in pydexpi_datalog/web/review_api.py; ctor injection ['AuthoredRulePackStore', 'ProviderKeyStore', 'SessionCatalog', 'TurnLifecycleStore', '_SceneBuilder']"
+Arm 2b,HardikKhandal01/agency-saas,8fe9d485,S2,S2,12,0,0,0,,False,0,0,False,0,Depends in backend/app/api/deps.py
+Arm 2b,Harqer/skillmaker,5b4dc8f3,S2,S2,13,0,0,0,,False,0,0,True,10,locator in Raven/benchmarks/proactivity_eval/runners/longrun_scorecard.py; locator in Raven/benchmarks/proactivity_eval/runners/_common/openclaw.py; locator in Raven/benchmarks/skill_evals/run_eval.py; locator in Raven/raven/agent/tools/skill_hub.py; locator in Raven/raven/agent/tools/tool_search.py; locator in Raven/raven/channels/adapters/mochat/channel.py
+Arm 2b,ISEU-Cloud-Dev/Team-Delta-,9ba9a8be,S2,S2,24,0,0,0,,False,0,0,False,0,Depends in auth/auth_utils.py
+Arm 2b,ITCEN-CENergy/Passed,bb716e82,S2,S2,2,0,1,2,,False,0,0,True,0,"Depends in passed-ai/api/features/roadmap/router.py; ctor injection ['KakaoBookProvider', 'KmoocProvider']"
+Arm 2b,InfoSecInnovations/shabti,c1c65aef,S2,S2,15,0,1,0,,False,0,0,False,0,Depends in docker_containers/shabti_api/src/app/secure_routes.py
+Arm 2b,JerryX2007/isitdown,71a75620,S2,S2,3,0,0,0,,False,0,0,False,0,Depends in backend/routes/monitors.py
+Arm 2b,John-Varghese-EH/Quantitative-Trading,8a0ca41e,S2,S2,63,0,0,0,,False,0,0,True,0,"Depends in server/api/admin.py; ctor injection ['LSTMWrapper', 'TransformerWrapper']"
+Arm 2b,Jzy258/canteen-recommendation-agent,13cbf44a,S2,S2,25,0,0,0,,False,0,0,True,0,Depends in backend/main.py; ctor injection ['RequestMetricsMiddleware']
+Arm 2b,K1LLLAGT/FileForge,7f901311,S2,S2,4,0,0,0,,False,0,0,True,10,locator in android2/app/src/main/python/ffbridge.py; locator in backend/engine.py; locator in cloud-api/app/api.py; Depends in cloud-api/app/main.py; locator in cloud-api/app/main.py; locator in desktop/fileforge_gui.py
+Arm 2b,KKNOBUG/KeenRunner,3a93ab75,S2,S2,169,0,0,0,,False,0,0,True,0,"Depends in backend/applications/autotest/views/autotest_case_transfer_view.py; ctor injection ['AsyncHttpUtils', 'AsyncTcpUtils', 'BaseStepExecutor', 'QueryBuilder', 'ScaffoldCrud']"
+Arm 2b,Kirov-Dynamics-Technology/kirov-secure-api-gateway,4ad255b5,S2,S2,2,0,0,0,,False,0,0,False,0,Depends in server/middleware/auth.py
+Arm 2b,Krishcalin/AWS-Security-Scanner,3c60a0e0,S2,S2,116,1,0,0,,False,0,0,True,2,"locator in engine/aws_mcp.py; locator in engine/aws_offline_scanner.py; Depends in hub/cnapp_api.py; ctor injection ['AWSLiveScanner', 'AccountRegistry', 'ApplicationStore', 'BackendResultStore', 'ConnectorStore']"
+Arm 2b,Krumqnkata/AI-TV-COMPUTER_VISION,ed6bdf81,S2,S2,99,0,0,0,,False,0,0,False,0,Depends in web/security.py
+Arm 2b,Lantr-Consulting/ai-stock-analyst,d9b9eb8f,S2,S2,23,0,0,0,,False,0,0,False,0,Depends in backend/main.py
+Arm 2b,Linxiushen/echoweave-rtc,3e4c1feb,S2,S2,3,0,2,0,,False,0,0,True,0,"Depends in services/soulx_api.py; ctor injection ['ConsentBoundAvatar', 'ConsentBoundTTS', 'DecisionStore', 'RealtimeSession', '_BoundedAuthenticatedBody']"
+Arm 2b,Lukyyyyy/KairoCLI,058f827b,S2,S2,40,0,0,0,,False,0,0,True,0,"Depends in src/kairocli/web_app.py; ctor injection ['Agent', 'AgentOrchestrator', 'BrowserGuard', 'ConversationCompactor', 'DurableTaskManager']"
+Arm 2b,MUSH2077/auto-gallery,ea691efb,S2,S2,207,0,0,0,,False,0,0,True,25,Depends in backend/app/api_docs.py; locator in backend/app/api/repositories.py; locator in backend/app/api/sources.py; locator in backend/app/api/system.py; locator in backend/app/api/admin/gallerydl.py; locator in backend/app/api/admin/settings.py
+Arm 2b,MarcosIbanezFandos/Fandance-PWA,d822aea6,S2,S2,7,0,0,0,,False,0,0,False,0,Depends in api/index.py
+Arm 2b,Mayconxzdev/ManutencaoEmCampo,35aeb0e0,S2,S2,169,0,0,0,,False,0,0,False,0,Depends in backend/app/main.py
+Arm 2b,Mikkey12/sprichblitz,d2a1d574,S2,S2,29,0,8,0,,False,0,0,True,0,"Depends in backend/src/sprichblitz_backend/auth.py; ctor injection ['BackendTab', 'BehaviourTab', 'KeyVault', 'ModesTab', 'Recorder']"
+Arm 2b,MoMoM101/RAG-ReActAgent,3c57e634,S2,S2,35,0,0,0,,False,1,0,True,0,"Depends in backend/main.py; ambient provider ['get_current_user'] in backend/security.py; ctor injection ['ServiceOutput', '_SizeLimitedReader']"
+Arm 2b,Mohamed-Abdelaziz3/wholesale-order-parser,cb6e8907,S2,S2,43,0,0,0,,False,4,0,True,0,"Depends in app/main.py; ambient provider ['_catalog_state', '_request_db_path', 'health_check', 'index'] in app/main.py; ctor injection ['HybridWithAttributes']"
+Arm 2b,MuhammetAliVarlik/FinwiseBackend,6340f6b1,S2,S2,6,0,0,0,,False,0,0,True,0,"Depends in finwise_scribe/backend/app/controllers/stock_controller.py; ctor injection ['BaseRepository', 'BaseService', 'StockService']"
+Arm 2b,MusheAbdulHakim/Yoma-Triage,69648fc0,S2,S2,14,0,0,0,,False,0,0,False,0,Depends in src/api/catalog.py
+Arm 2b,Mushkrot/ESIP,5e76094d,S2,S2,7,0,1,0,,False,0,0,True,0,"Depends in backend/app/dependencies.py; ctor injection ['ReplayRunner', 'UniversalStageTimings']"
+Arm 2b,NoorRattan/GitRoast.ai,eadb7c8c,S2,S2,29,0,0,0,,False,3,0,True,0,"ambient provider ['cache_client_dependency', 'github_client_dependency', 'rate_limiters_dependency'] in app/dependencies.py; Depends in app/core/security.py; ctor injection ['GitHubGraphQLClient']"
+Arm 2b,Nsh-GaMeS/Global-Vision,9daf5f55,S2,S2,8,0,0,5,,False,0,0,False,0,Depends in routers/auth.py
+Arm 2b,Peter-McCann-Strain/Personal_Execution_OS,00b8cef4,S2,S2,222,3,0,0,,False,1,0,True,1,"ambient provider ['get_mcp_manager'] in src/app/api/deps.py; Depends in src/app/api/routes/account.py; locator in src/app/domain/services/approval_callbacks.py; ctor injection ['AnthropicLLMProvider', 'ExactHostMiddleware', 'FatigueManager', 'TelegramService']"
+Arm 2b,Phobetore/Evermind,4d1a697a,S2,S2,48,0,0,0,,False,0,0,False,0,Depends in backend/app/routers/__init__.py
+Arm 2b,Pluton-Consulting/SYMBIOSE,4a0b7296,S2,S2,121,0,0,0,,False,0,0,False,0,Depends in symbiose-noa/backend/auth/dependencies.py
+Arm 2b,Project-Practicum-2026/Project-Practicum-Backend,85c439d8,S2,S2,12,0,8,0,,False,0,0,False,0,Depends in app/auth/dependencies.py
+Arm 2b,RB-PCTE/pcte,7c45df3b,S2,S2,22,0,0,0,,False,0,0,False,0,Depends in backend/app/auth.py
+Arm 2b,RESousa01/bmad-runtime-dev,f6a8453b,S2,S2,81,1,0,0,,False,8,0,True,15,locator in bmad-runtime-lib/_source_review/hermes-agent-main/hermes-agent-main/agent/system_prompt.py; locator in bmad-runtime-lib/_source_review/hermes-agent-main/hermes-agent-main/cron/scheduler.py; locator in bmad-runtime-lib/_source_review/hermes-agent-main/hermes-agent-main/gateway/authz_mixin.py; locator in bmad-runtime-lib/_source_review/hermes-agent-main/hermes-agent-main/gateway/config.py; locator in bmad-runtime-lib/_source_review/hermes-agent-main/hermes-agent-main/gateway/pairing.py; locator in bmad-runtime-lib/_source_review/hermes-agent-main/hermes-agent-main/gateway/run.py
+Arm 2b,Rolly93/Border_Crossin,147b2452,S2,S2,3,0,0,0,,False,0,0,True,0,"Depends in backend/routes/client_route.py; ctor injection ['BaseRepository', 'ClienteRepository', 'EmployeeRepository', 'ShipmentRepository', 'ShipmentService']"
+Arm 2b,Saatwik-ss/ML-Models,3b4a680c,S2,S2,26,0,0,0,,False,0,0,False,0,Depends in backend/main.py
+Arm 2b,SanjeevaRDodlapati/OmicsOracle,ebe26863,S2,S2,68,2,0,1,,False,0,0,True,0,"Depends in extras/auth_quotas/routes_quotas.py; ctor injection ['ArchitecturalAnalyzer', 'BiomarkerEmbedder', 'BiomarkerRecommender', 'EmbeddingCache', 'GEOCache']"
+Arm 2b,ShiBui2003/Type,0b975645,S2,S2,18,0,0,0,,False,0,0,False,0,Depends in backend/routers/forms.py
+Arm 2b,SouliyaPPS-Dev/template-full-stack,b2ed92f0,S2,S2,4,0,0,0,,False,0,0,False,0,Depends in services/auth-service/app/api/auth.py
+Arm 2b,SpectreDeath/Em-Cubed,755c8e8c,S2,S2,13,0,0,0,,False,0,0,True,1,"Depends in api/main.py; locator in src/em_cubed/plugin_manager.py; ctor injection ['CheckpointManager', 'DurableExecutionManager', 'FileCheckpointStorage', 'JSONFileRegistryStorage', 'RemoteSkillRegistry']"
+Arm 2b,Teraflop-Inc/twelve-labs-sponsor-spotlight,c0301ad1,S2,S2,9,0,0,0,,False,0,0,False,0,Depends in backend/routes/jockey_routes.py
+Arm 2b,TheRealKoller/photosort,643ca973,S2,S2,77,0,0,0,,False,0,0,False,0,Depends in backend/src/photosort/api/album_decisions.py
+Arm 2b,ThomasOttosson/ai-film-studio,db12ba4b,S2,S2,78,0,0,0,,False,0,0,False,0,Depends in backend/main.py
+Arm 2b,Tirthrajsinh28/cloudfileflow,79819432,S2,S2,22,0,4,0,,False,2,0,True,0,Depends in src/cloudfileflow/app.py; ambient provider ['get_storage'] in src/cloudfileflow/files.py; ambient provider ['get_settings'] in src/cloudfileflow/identity.py; ctor injection ['FileWorker']
+Arm 2b,WiredMind2/AnimeManager,9e606eb8,S2,S2,8,0,0,0,,False,0,0,True,0,"Depends in clients/torrent_daemon/app.py; ctor injection ['AnimeApplicationService', 'AnimeBrowserPresenter', 'AnimeBrowserView', 'AnimeDetailsDialog', 'AnimeHydrationAdapter']"
+Arm 2b,WonChung/beatfit,a50434b0,S2,S2,30,0,0,0,,False,1,0,True,0,"Depends in backend/app/apple_music_routes.py; ambient provider ['_state_request_id'] in backend/app/observability.py; ctor injection ['HttpAppleMusicCatalog', 'RequestBodyLimitMiddleware']"
+Arm 2b,acgs-ai/enhanced-agent-bus,e4ecaf56,S2,S2,141,7,4,0,,False,1,0,True,10,locator in dependency_bridge.py; locator in di_container.py; locator in langgraph_orchestrator.py; locator in transaction_coordinator_metrics.py; locator in _compat/di_container.py; Depends in api/dependencies.py
+Arm 2b,adammoore/llm-personal-assistant,cbb4b365,S2,S2,5,0,0,0,,False,0,0,False,0,Depends in legacy/backend/main.py
+Arm 2b,agustindborbon/Technica,12fe5cc0,S2,S2,68,0,9,0,,False,0,0,True,0,"Depends in TechnicaIsla2/app/api/routes/admin.py; ctor injection ['AnalysisRepository', 'AnalysisService', 'ConfirmationTokenRepository', 'EquipmentRepository', 'ExerciseRepository']"
+Arm 2b,ajccarlson/lm-atelier,df13d475,S2,S2,3,0,1,2,,False,1,0,True,1,"Depends in services/api/local_lm/api.py; ambient provider ['_services'] in services/api/local_lm/api.py; locator in services/api/local_lm/auxiliary_assets.py; ctor injection ['CatalogCacheStore', 'ConversationOrchestrator', 'DiagnosticBundleBuilder', 'DownloadManager', 'GuardedChatAdapter']"
+Arm 2b,alexruperez/amulio,a309f528,S2,S2,5,0,1,0,,False,7,0,False,0,"Depends in src/amulio/app.py; ambient provider ['_get_api', '_get_cache', '_get_metadata', '_get_profile_store', '_get_search_locks', '_settings', 'health'] in src/amulio/app.py"
+Arm 2b,alok-bhadauria/ascendrite,51700a19,S2,S2,361,0,0,0,,False,0,0,True,0,"Depends in platform/server/app/api/v1/dependencies.py; ctor injection ['AdministrationService', 'AssessmentContentService', 'AssessmentEvaluationService', 'AssessmentRuntimeService', 'AssetAttachmentService']"
+Arm 2b,amanjha7783/ai-crime-analytics-platform,516f9b3f,S2,S2,1,0,0,0,,False,0,0,False,0,Depends in backend/app/api/auth.py
+Arm 2b,anubhab-m02/BuFin,25babde0,S2,S2,113,0,0,0,,False,0,0,False,0,Depends in backend/routers/auth.py
+Arm 2b,ardasoyturk/passenger-demand-prediction,b8af4f1c,S2,S2,2,0,1,1,,False,1,0,False,0,Depends in inference/api/depends.py; ambient provider ['get_artifacts'] in inference/api/depends.py
+Arm 2b,atk0309/project_ContenderOS,7e5a877c,S2,S2,95,0,0,0,,False,0,0,False,0,Depends in backend/app/main.py
+Arm 2b,blancberger/guitar-workshop,3fa4b603,S2,S2,56,0,0,0,,False,0,0,False,0,Depends in backend/app/api/admin.py
+Arm 2b,bluesky/bluesky-httpserver,a8093be8,S2,S2,60,69,0,0,,False,1,0,True,0,"Depends in src/bluesky_httpserver/authentication.py; ambient provider ['json_or_msgpack'] in src/bluesky_httpserver/core.py; ctor injection ['DictionaryAuthenticator', 'WebSocketMonitor']"
+Arm 2b,brcampidelli/chimera-agent,91949b99,S2,S2,1,0,0,0,,False,0,0,True,1,"locator in bench/right_hand_governance/run_terminal_vs_governed.py; Depends in chimera/api/app.py; ctor injection ['A2AServer', 'AcpServer', 'Agent', 'AutoSkillEvolver', 'BackendDeltaProposer']"
+Arm 2b,brooksmcmillin/ai-review-attacks,f1703447,S2,S2,3,0,0,0,,False,0,0,False,0,Depends in attacks/01-context-files/01b-hidden-instructions/vulnerable_code.py
+Arm 2b,buabaj/open-ceiling,2a81e48a,S2,S2,23,0,0,0,,False,0,0,False,0,Depends in backend/app/main.py
+Arm 2b,celialecat/electraice_ai_p,63647249,S2,S2,13,0,0,0,,False,0,0,False,0,Depends in backend/app/routers/consumers.py
+Arm 2b,christian-meyndt/personal-finance-tracker,3bd54c73,S2,S2,56,0,11,0,,False,0,0,True,0,"Depends in backend/app/auth.py; ctor injection ['AnalyticsService', 'CategorizationService']"
+Arm 2b,coinexmarket/chatbucket_b2b_backend,1c1919cd,S2,S2,41,0,0,0,,False,0,0,False,0,Depends in app/deps.py
+Arm 2b,commercialbrainz/CommercialBrainz,8ff04462,S2,S2,278,0,0,0,,False,0,0,False,0,Depends in backend/app/api/v1/admin.py
+Arm 2b,constructorfleet/conduit,ffb376f7,S2,S2,38,0,0,0,,False,4,0,True,0,"Depends in services/instrumenta/audit.py; ambient provider ['_backend'] in services/instrumenta/audit.py; ambient provider ['_backend'] in services/instrumenta/items_router.py; ambient provider ['_backend', '_secret_box'] in services/instrumenta/servers_router.py; ctor injection ['Aggregator', 'AuditWriter', 'BuiltinBackend', 'ClipStore', 'LinkStore']"
+Arm 2b,dabeckham/beckham-share,c2236ddc,S2,S2,9,0,0,0,,False,0,0,False,0,Depends in app/main.py
+Arm 2b,darkspock/ddd_python_sample,a542d49b,S2,S2,11,0,0,1,,False,0,0,True,0,"Depends in adapters/http/api/bookings/routers/booking_router.py; ctor injection ['BookingController', 'BookingReadModelRepository', 'BookingRepository', 'CancelBookingHandler', 'ClientController']"
+Arm 2b,davealone69-gif/Builder,fe485c07,S2,S2,5,0,0,0,,False,0,0,False,0,Depends in todo-api/app.py
+Arm 2b,deodice/flowsight-ai-demo,0feb8c4b,S2,S2,75,0,0,0,,False,0,0,False,0,Depends in apps/api/app/dependencies.py
+Arm 2b,devastater8194/BroTell,5140250a,S2,S2,30,0,0,0,,False,0,0,False,0,Depends in backend/app/api/v1/auth.py
+Arm 2b,dgabriel/MysteryMixClub,1fcbc924,S2,S2,180,0,0,0,,False,0,0,True,0,"Depends in backend/app/api/routes/admin.py; ctor injection ['AppleMusicClient', 'RedirectingEmailSender']"
+Arm 2b,doshirush1901/brain-os,f011d139,S2,S2,0,2,0,0,,False,0,0,True,0,"ctor injection ['AgentLoop', 'AutonomousDripEngine', 'CRMEnricher', 'CirculatorySystem', 'DigestiveSystem']"
+Arm 2b,ed-is-ai/Agents.stocks,d3b3ae1b,S2,S2,40,0,8,0,,False,0,0,True,0,"Depends in app/api/routes/notifications.py; ctor injection ['BauRunEnvelopeStore', 'DataHubRosterSourceAdapter', 'GbpValuationService', 'HistoricalInitializationEngine', 'HistoricalScanReconstructor']"
+Arm 2b,end1989/tailored,7809c477,S2,S2,24,0,0,0,,False,0,0,False,0,Depends in backend/app/api/applications.py
+Arm 2b,ewilmoth23/grounded-pdf,ff056b66,S2,S2,37,0,0,0,,False,3,0,True,0,"ambient provider ['create_app', 'groundedpdf_error', 'validation_error'] in apps/api/app/main.py; Depends in apps/api/app/api/routes/conversations.py; ctor injection ['ChatService', 'IngestionService', 'RequestSizeLimitMiddleware', 'Retriever']"
+Arm 2b,fazulfi/mypapyr,fa69eebe,S2,S2,6,0,2,0,,False,0,0,True,0,"Depends in backend/app/health.py; ctor injection ['CasAppendMechanism', 'CasCancelMechanism', 'CasFairUseCounter', 'CleanupCoordinator', 'CleanupService']"
+Arm 2b,fi-res/smartlinkAPI,dfc759c0,S2,S2,21,0,0,0,,False,0,0,False,0,Depends in app/main.py
+Arm 2b,fjtsh24/search-game-service-from-gamemusic,800132b2,S2,S2,7,0,0,0,,False,0,0,False,0,Depends in api/app/routers/auth.py
+Arm 2b,flippinhutt/Knead-to-Know,0ab436d4,S2,S2,32,0,0,0,,False,0,0,False,0,Depends in backend/app/routers/bakes.py
+Arm 2b,fyfsxkh/TokBrain,e022d41b,S2,S2,51,1,0,0,,False,0,0,False,0,Depends in app/routers_v2/chat.py
+Arm 2b,ghifarullah19/smartai-tutor,caa874a5,S2,S2,20,0,0,0,,False,0,0,True,0,"Depends in backend/api/routers/auth_router.py; ctor injection ['AuthService', 'ChatService', 'UserService']"
+Arm 2b,giovanipaul/ThreatLens,53b562db,S2,S2,7,0,2,0,,False,2,0,False,0,"Depends in app/api/dependencies.py; ambient provider ['get_detection_settings', 'get_repository'] in app/api/dependencies.py"
+Arm 2b,gip-inclusion/autometa-jobs,d3c2fcb2,S2,S2,15,0,0,0,,False,0,0,False,1,Depends in orchestrator/src/orchestrator/routes/pipelines.py; locator in scripts/_resync_orchestrator_secrets.py
+Arm 2b,granules-india-limited/NYRA-Dev,ea78d125,S2,S2,232,1,0,0,,False,0,0,True,1,"Depends in backend/core/admin/admin_api.py; locator in backend/core/agentpress/prompt_caching.py; ctor injection ['Agent', 'AgentService', 'AsyncFastParse', 'CustomMCPHandler', 'GoogleDocsService']"
+Arm 2b,gzhu-team/deep-research,8c1a5381,S2,S2,44,0,0,0,,False,0,0,False,0,Depends in app/backend/router/admin_router.py
+Arm 2b,hacknitive/mscaptcha,f5329b9e,S2,S2,5,0,0,0,,False,1,0,False,0,Depends in src/image_captcha/router/v1/create.py; ambient provider ['get_redis_client'] in src/utility/database/get_redis_client.py
+Arm 2b,hamzaj4444/DevOps_Chess_App_1,172bbee9,S2,S2,2,0,0,0,,False,0,0,False,0,Depends in app/auth.py
+Arm 2b,hasabasa/adal-jumys,500541a8,S2,S2,9,0,3,0,,False,0,0,False,1,Depends in backend/app/api/deps.py; locator in backend/app/api/routes/companies.py
+Arm 2b,iamez/slomix,b30cbe66,S2,S2,280,0,0,0,,False,0,0,True,0,"Depends in website/backend/routers/api_helpers.py; ctor injection ['AchievementSystem', 'AdminCog', 'BOXScoringService', 'DatabaseMaintenance', 'EndstatsAggregator']"
+Arm 2b,imbus/testbench-ai-service,f41d1bab,S2,S2,21,2,0,1,,False,0,0,False,0,Depends in testbench_ai_service/auth.py
+Arm 2b,inclutalk/inclutalk-platform,6b91cf03,S2,S2,17,0,0,0,,False,0,0,False,0,Depends in backend/app/auth/middleware.py
+Arm 2b,itsdaibend/proth,79cfa346,S2,S2,38,0,0,0,,False,0,0,False,0,Depends in apps/api/app/main.py
+Arm 2b,iumaev/kofegor-vision-ai,743ff0f1,S2,S2,16,0,0,0,,False,0,0,True,0,"Depends in backend/app/api/analytics.py; ctor injection ['LatestFrameReader', 'LiveCameraWorker', 'StripPathPrefixMiddleware']"
+Arm 2b,jack101a/abb-bot,92720081,S2,S2,33,0,0,0,,False,0,0,False,0,Depends in app/routers/abs.py
+Arm 2b,jamabaiz/powtorki-online-api,26c22a16,S2,S2,25,0,0,0,,False,0,0,True,0,"Depends in app/auth/dependencies.py; ctor injection ['ItemLister', 'QuizEndpoint', 'TaxonomyLister']"
+Arm 2b,jccamargo94/gridforge,c277b950,S2,S2,18,0,0,9,,False,0,0,False,0,Depends in services/api/main.py
+Arm 2b,jeanslw/Devops_CD,e6b9c410,S2,S2,140,0,0,0,,False,0,0,True,0,"Depends in backend/auth.py; ctor injection ['CiService', 'DeployService', 'RegistryService', '_MysqlWrapper', '_SqliteWrapper']"
+Arm 2b,jjee33/netops-console,0f8bcf9c,S2,S2,3,0,1,0,,False,0,0,False,0,Depends in app/modules/auth/dependencies.py
+Arm 2b,jkelly-dev1/agentic-review-gate,7fa8a04c,S2,S2,2,0,0,0,,False,0,0,False,1,locator in app/graph.py; Depends in app/main.py
+Arm 2b,jm-sky/career-hub,0aa90da8,S2,S2,207,2,11,1,,False,0,0,True,0,"Depends in backend/app/api/router.py; ctor injection ['AchievementRepository', 'AchievementService', 'AdminRepository', 'AdminService', 'AuditEmailAdapter']"
+Arm 2b,jmyoon312/VLStudio,33ade7fa,S2,S2,656,1,0,1,,False,0,0,True,1,"Depends in apps/api/app/legacy_ddalkkak/api/auth.py; locator in apps/api/app/services/ml_pipeline.py; ctor injection ['AIVisionAgent', 'AdminDelegator', 'Analyst', 'AutomationOrchestrator', 'AutonomousRepairBroker']"
+Arm 2b,kibretmulugeta/personal-ai-assistant,932d0616,S2,S2,18,0,0,0,,False,0,0,False,0,Depends in apps/backend/app/api/deps.py
+Arm 2b,kingggg5/deployguardai,4cf9957d,S2,S2,120,0,5,0,,False,11,0,True,0,"Depends in backend/app/api.py; ambient provider ['github_webhook', 'health', 'health_live', 'reset_db', 'telemetry_ingest'] in backend/app/api.py; ambient provider ['github_install', 'github_repositories', 'github_repositories_sync', 'product_capabilities', 'publish_change_check'] in backend/app/provider_api.py; ambient provider ['get_legacy_scope'] in backend/app/tenant.py; ctor injection ['Database', 'OpenTelemetryMiddleware', 'RequestGuardMiddleware']"
+Arm 2b,koffiNti/Compass,ffe99ec4,S2,S2,60,0,0,0,,False,0,0,False,0,Depends in backend/app/api/deps.py
+Arm 2b,lazaruslinux/dailybread,ac253607,S2,S2,281,0,0,0,,False,0,0,False,0,Depends in backend/app/deps.py
+Arm 2b,linuxdecamoes/linuxdecamoes,ad296fa7,S2,S2,14,0,0,0,,False,0,0,False,0,Depends in backend/api/manuals.py
+Arm 2b,lyp1noff/champion-arena,efe1a72f,S2,S2,105,0,0,0,,False,0,0,False,0,Depends in arena/backend/src/routers/athletes.py
+Arm 2b,madziaar/suno-knowledge-base,a0675d06,S2,S2,34,0,0,2,,False,2,0,True,0,"Depends in projects/pseuno-ai/backend/app/deps.py; ambient provider ['get_http_client', 'get_song_agent'] in projects/pseuno-ai/backend/app/deps.py; ctor injection ['BubbleButton', 'DownloaderTab', 'Dropdown', 'FilterBar', 'FilterPopup']"
+Arm 2b,manuelbomi/Consulting-AI-Studio,f289491b,S2,S2,7,0,0,0,,False,0,0,False,0,Depends in app/main.py
+Arm 2b,manuelbomi/Google-ADK,c8da6b06,S2,S2,3,0,0,0,,False,0,0,False,0,Depends in src/app/api/customer_agent_routes.py
+Arm 2b,marinfrankovic/Kolektor,9cef3481,S2,S2,44,0,0,0,,False,0,0,False,0,Depends in backend/app/deps.py
+Arm 2b,microsoft/fsi-agentic-wealth-transfer,e8449568,S2,S2,58,0,4,0,,False,0,0,True,2,"locator in services/intake_api/infrastructure/synthetic_acats_lifecycle.py; locator in services/intake_api/infrastructure/synthetic_settlement_confirmations.py; Depends in services/intake_api/presentation/dependencies.py; ctor injection ['AcceptTransferCaseCandidateCommandHandler', 'AdvanceAcatsClockCommandHandler', 'AdvanceTransferLifecycleCommandHandler', 'ApplyTransferExceptionCorrectionCommandHandler', 'BlobSyntheticRuntimeStateStore']"
+Arm 2b,moranch/grok-register,39595f4a,S2,S2,34,0,0,0,,False,2,0,True,5,locator in apps/console/_vendor_aar/providers/registry.py; Depends in apps/console/api/captcha.py; locator in apps/console/core/_vendor_aar/any2api_sync.py; locator in vendor/grok2api/app/products/anthropic/router.py; locator in vendor/grok2api/app/products/openai/router.py; locator in vendor/grok2api/app/products/openai/video.py
+Arm 2b,mrhacker690/KlashAi,f95551c0,S2,S2,4,0,0,0,,False,0,0,False,0,Depends in backend/app/dependencies.py
+Arm 2b,nag-gude/forget-me-flow,528dc12d,S2,S2,11,0,1,0,,False,0,0,True,0,Depends in backend/app/api/routes.py; ctor injection ['CaseService']
+Arm 2b,nana4rider/face-detector,c2483503,S2,S2,1,0,1,0,,False,1,0,False,0,Depends in face_detector/api.py; ambient provider ['get_face_detector'] in face_detector/api.py
+Arm 2b,nandisudipta-git/dotBRO.in,fe0a91b1,S2,S2,26,0,0,2,,False,1,0,True,0,"Depends in backend/auth/app/api.py; ambient provider ['get_http'] in backend/gateway/app/dependencies.py; ctor injection ['AuthService', 'ControlPlaneClient', 'GatewayService', 'NodeRepository', 'RefreshSessionRepository']"
+Arm 2b,ndwcgz/Campus-Agent-Service-Platform,9a99c752,S2,S2,150,0,0,0,,False,0,0,False,0,Depends in backend/app/api/admin.py
+Arm 2b,nguyenlpn2015/NovaShop,83627bf4,S2,S2,10,0,0,0,,False,0,0,False,0,Depends in backend/app/api/routes/catalogue.py
+Arm 2b,nks0005/farm,cb8ea34f,S2,S2,11,0,0,0,,False,0,0,False,0,Depends in boto3/cloud-ops-web/app/auth.py
+Arm 2b,omnigam115/NOVA_AI_SSISTANT,7e12861f,S2,S2,6,0,0,0,,False,0,0,False,0,Depends in backend/app/api/deps.py
+Arm 2b,opin-novice/BCS-MindGraph,f194b589,S2,S2,11,0,0,0,,False,0,0,True,0,"Depends in src/bcs/api/auth.py; ctor injection ['BCSMetricsEvaluator', 'FactQualityGate']"
+Arm 2b,orkun-soylu/calivi,cba65686,S2,S2,59,0,0,0,,False,0,0,False,1,Depends in backend/app/auth.py; locator in backend/app/routers/chats.py
+Arm 2b,orlovRoman/flipoly,1dd3c1b2,S2,S2,165,1,0,0,,False,0,0,True,2,"locator in polyflip/ai_lab/executor.py; locator in polyflip/ai_lab/orchestrator.py; Depends in polyflip/api/ai_lab.py; ctor injection ['AILabAgent', 'BacktestRunner', 'CalibratedLightGBMModel', 'CryptoModelTrainer', 'CryptoRouteRewriteMiddleware']"
+Arm 2b,pafful/fastapi-app-main,439247f1,S2,S2,10,0,2,1,,False,0,0,False,0,Depends in backend/app/api/deps.py
+Arm 2b,paslaycorp/FAP-Core-v0.2.0,ee23ca28,S2,S2,3,0,0,0,,False,0,0,False,0,Depends in api.py
+Arm 2b,pavel-shyrko/MCP-Server,1dec570b,S2,S2,5,0,0,0,,False,0,0,False,0,Depends in app/router.py
+Arm 2b,pcedison/taiwan-flood-risk-open-map,0a2aa591,S2,S2,9,0,1,0,,False,0,0,True,0,"Depends in apps/api/app/api/routes/admin.py; ctor injection ['AssessmentService', 'NominatimDevelopmentFallbackProvider', 'OpenStreetMapProvider', 'WikimediaPoiFallbackProvider']"
+Arm 2b,pinnnthreetriples/JobOnline,e5ed2f95,S2,S2,2,0,1,0,,False,0,0,False,0,Depends in apps/backend/app/core/security.py
+Arm 2b,purser-io/purser,3b64c06d,S2,S2,10,0,0,0,,False,0,0,False,0,Depends in src/purser/api.py
+Arm 2b,pwr-ai/juddges-app,dcc225c9,S2,S2,142,2,0,0,,False,0,0,True,0,"Depends in backend/app/auth.py; ctor injection ['DocumentChunker', 'EmbeddingGenerator', 'InformationExtractor', 'JudgmentIngestionPipeline', 'SessionStore']"
+Arm 2b,quoeamaster/python_for_ai_prep,ab4cbabd,S2,S2,2,0,0,0,,False,0,0,False,0,Depends in fastapi-demo/backend/api/router.py
+Arm 2b,rajasahin2024-web/IINM,b6d1ee1d,S2,S2,815,0,0,0,,False,0,0,False,0,Depends in backend/main.py
+Arm 2b,ral-facilities/object-storage-api,bba72109,S2,S2,8,0,5,0,,False,0,0,False,0,Depends in object_storage_api/main.py
+Arm 2b,ranasl62/ehr-risk-framework,6cc79dc1,S2,S2,4,0,0,0,,False,0,0,False,0,Depends in api/framework_routes.py
+Arm 2b,rascalking56/msit-capstone-project,ab203091,S2,S2,84,0,0,14,,False,0,0,False,0,Depends in my_app/api/auth_routes.py
+Arm 2b,redinc23/cinema_mang,14005487,S2,S2,4,0,0,0,,False,0,0,False,0,Depends in src/cse_orchestrator/api/routers/jobs.py
+Arm 2b,renameAI/A2A,8d9080f7,S2,S2,36,0,0,0,,False,0,0,False,0,Depends in app/saas/auth.py
+Arm 2b,restujatisaputro/kasta,66e93951,S2,S2,75,0,26,0,,False,1,0,True,0,"Depends in apps/api/src/kasta_api/api/dependencies.py; ambient provider ['request_id_from'] in apps/api/src/kasta_api/core/errors.py; ctor injection ['AccountingRepository', 'AuthRepository', 'AuthService', 'BusinessRepository', 'BusinessService']"
+Arm 2b,rigauddev/permit_web_app,711d1d4f,S2,S2,91,0,0,0,,False,0,0,True,0,"Depends in permit_system/src/api/auth_routes.py; ctor injection ['AuthService', 'ContentService', 'PermitService', 'SecretariaService', 'UserRepository']"
+Arm 2b,ritivel/ritivel-word-addin-oss,4eb5d4ed,S2,S2,13,0,0,0,,False,0,0,False,0,Depends in server/regulatorySearch/regulatory-api/app/routers/admin.py
+Arm 2b,s-block/fastapi-langgraph-server,f588a3bf,S2,S2,5,0,1,0,,False,0,0,False,0,Depends in src/fastapi_langgraph_server/dependencies.py
+Arm 2b,samarthsb4real/propel-demo,6d368060,S2,S2,27,0,0,0,,False,1,0,False,0,Depends in backend/app/routers/faults.py; ambient provider ['_get_redis'] in backend/app/routers/ingest.py
+Arm 2b,sampathkore4444/khmer-real-estate-,7d936754,S2,S2,119,0,1,0,,False,0,0,True,0,"Depends in server/app/dependencies.py; ctor injection ['AnalyticsService', 'AuthService', 'InquiryService', 'ListingService', 'MediaService']"
+Arm 2b,sandraschi/calibremcp,6a7dc62c,S2,S2,24,0,0,0,,False,0,0,True,0,"Depends in mcpb/src/api/libraries.py; ctor injection ['BaseRepository', 'BaseService', 'BaseTool', 'CalibreAPIClient', 'CalibreIngestor']"
+Arm 2b,sary357/fastapi_grillme,7c1e6815,S2,S2,1,0,0,0,,False,0,0,False,0,Depends in app/routers/feedback.py
+Arm 2b,shuricksumy/frigate-yard-stats,e59dcd58,S2,S2,29,2,0,0,,False,0,0,False,0,Depends in frigate/ingest-worker/api.py
+Arm 2b,siddharthgaur1/stream-fraud-detector,6b7e061a,S2,S2,4,0,0,0,,False,0,0,False,0,Depends in api/main.py
+Arm 2b,sigmalionhub/LexLoom,3219451e,S2,S2,3,0,2,1,,False,1,0,False,0,Depends in backend/app/api/v1/auth.py; ambient provider ['jwks'] in backend/app/api/v1/auth.py
+Arm 2b,sil-ai/aqua-api,62466023,S2,S2,374,0,0,0,,False,0,0,False,0,Depends in agent_routes/v3/affix_routes.py
+Arm 2b,smshoib/diabetes-monitor-pwa,d44da53b,S2,S2,86,0,0,0,,False,1,0,False,0,ambient provider ['error_body'] in apps/api/app/main.py; Depends in apps/api/app/api/analytics_reports.py
+Arm 2b,soit-ai/soit,3a57ae14,S2,S2,637,0,21,0,,False,0,0,True,4,"Depends in server/app/api/v1/permissions.py; locator in server/app/modules/knowledge/infra/parsers/__init__.py; locator in server/app/modules/plugin/application/service.py; locator in server/app/modules/workflow/runtime/executors/__init__.py; locator in server/app/wiring/services.py; ctor injection ['AccountDeletionRequestRepository', 'AgentAppHandlers', 'AgentApplicationService', 'AgentBindingRepository', 'AgentExecutor']"
+Arm 2b,srimanchaudhuri/Momentum-AI,ee77098b,S2,S2,33,0,0,0,,False,0,0,False,0,Depends in middleware/auth.py
+Arm 2b,stanleysvk87/sindri,21038fa1,S2,S2,7,0,0,0,,False,0,0,False,0,Depends in backend/app/main.py
+Arm 2b,tallcyberguy/eksir,8349609c,S2,S2,600,0,36,0,,False,0,0,False,0,Depends in backend/isoc_api/auth/deps.py
+Arm 2b,timothy-voiuhy/AWE,3cef45ae,S2,S2,221,0,0,0,,False,0,0,True,0,"Depends in awe-backend/awe_backend/api.py; ctor injection ['ActionsWidget', 'AuthenticationMiddleware', 'AweHeader', 'AweSession', 'ComparerPage']"
+Arm 2b,tinocoh/azure-finops-agent,16e3fdc6,S2,S2,20,0,0,0,,False,0,0,False,0,Depends in finopsazure-analyzer/backend/app/api/analysis.py
+Arm 2b,toineenzo/tprint,ffb6d2cb,S2,S2,57,0,0,0,,False,0,0,False,0,Depends in app/routers/content.py
+Arm 2b,tramontano/fiap-ml-stock-price-prediction,2b545209,S2,S2,14,0,0,0,,False,0,0,True,0,"Depends in src/api/routes.py; ctor injection ['LoggingContext', 'StructuredLogger']"
+Arm 2b,trottomv/argus-sbomguard,77eb4c5b,S2,S2,43,1,0,0,,False,0,0,True,0,Depends in app/api/auth.py; ctor injection ['MCPAuthMiddleware']
+Arm 2b,tuanduong18/ultimate-tracker,4b33b898,S2,S2,31,0,0,0,,False,0,0,False,0,Depends in backend/app/api/v1/auth.py
+Arm 2b,vaibhav-dev-arch/aiops,b844ee64,S2,S2,40,0,0,0,,False,0,0,True,0,"Depends in Dev/tpra-agentic-mvp/backend/app/api/deps.py; ctor injection ['BaseRepository', 'FileService', 'ReviewerLogService', 'WorkspaceService']"
+Arm 2b,wamakologeorge-dev/amosclaude-clean,f7ac0631,S2,S2,297,0,0,0,,False,0,0,True,3,"Depends in app.py; locator in amoscloud_ai/api/routes/cloud_workspaces.py; locator in amoscloud_ai/api/routes/core.py; locator in amoscloud_ai/local_cloud/app.py; ctor injection ['Agent', 'AgentBuildGuard', 'AgentOperationsController', 'AgentRuntime', 'AmosclaudMetadataService']"
+Arm 2b,web4uai-cpu/socioauto,f7093362,S2,S2,73,0,1,0,,False,0,0,False,0,Depends in src/api/deps.py
+Arm 2b,whitebreadisu/hyperspacevault,b821a69e,S2,S2,48,0,0,1,,False,0,0,True,0,Depends in backend/app/auth.py; ctor injection ['_CountingWriter']
+Arm 2b,willcassell/scorched,70857cdf,S2,S2,60,0,0,0,,False,0,0,True,0,"Depends in src/scorched/api/broker_status.py; ctor injection ['AlpacaBroker', 'PaperBroker']"
+Arm 2b,wmy2981/connection-checker,2ee673ac,S2,S2,11,1,1,0,,False,6,0,True,0,"ambient provider ['get_security'] in backend/app/auth.py; Depends in backend/app/api/auth.py; ambient provider ['get_backups'] in backend/app/api/data.py; ambient provider ['_log_dir'] in backend/app/api/logs.py; ambient provider ['_get_config_store'] in backend/app/api/settings.py; ambient provider ['_get_config_store', '_get_scheduler'] in backend/app/api/targets.py"
+Arm 2b,wq147/bookmark-navigation,1044131d,S2,S2,52,0,9,0,,False,0,0,False,0,Depends in navigation/backend/app/dependencies.py
+Arm 2b,yabtsegaAschalew/AI-Driven-Construction-Intellegence-System,cd257a05,S2,S2,110,0,0,0,,False,0,0,False,0,Depends in backend/app/middleware/auth.py
+Arm 2b,yezz123/ormdantic,178d6fa2,S3,S2,0,0,0,0,,False,0,0,True,0,"ctor injection ['GenerateDialog', 'Inspector', 'NativeTransaction', 'OrmSerializer', 'Ormdantic']"
+Arm 2b,youki666/risk-intelligent-query-agent,51bc0edb,S2,S2,25,0,3,5,,False,0,0,True,0,"Depends in app/api/dependencies.py; ctor injection ['AuthService', 'ColumnQdrantRepository', 'DWMySQLRepository', 'EntityESRepository', 'EntityQdrantRepository']"
+Arm 2b,zayanit/PostForge,a53e0fab,S2,S2,9,0,5,0,,False,1,0,True,0,Depends in backend/app/auth.py; ambient provider ['get_validation_deadline'] in backend/app/main.py; ctor injection ['LoginGuard']
+Arm 2b,zm1990s/panw,86e2f610,S2,S2,33,0,0,0,,False,0,0,True,0,Depends in agent-identity-demo-v2-idira/api_service.py; ctor injection ['_MCPRouter']
+Arm 2b,zmustafa/AzureVMScheduler,1985bf08,S2,S2,210,0,0,0,,False,0,0,True,0,Depends in backend/app/access_routes.py; ctor injection ['ArmVmAdapter']
