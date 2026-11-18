@@ -64,6 +64,16 @@ class CallableClassDep(BaseModel):
     context_function: Optional[str] = None
 
 
+class ManualDiSite(BaseModel):
+    line: int
+    col: int = 0
+    kind: str
+    detail: str = ""
+    context_function: Optional[str] = None
+    evidence_type: str = ""
+    confidence: str = ""
+
+
 class FileReport(BaseModel):
     path: str
     is_test: bool = False
@@ -76,6 +86,11 @@ class FileReport(BaseModel):
     app_dep_calls: list[AppDepCall] = Field(default_factory=list)
     override_calls: list[OverrideCall] = Field(default_factory=list)
     callable_class_deps: list[CallableClassDep] = Field(default_factory=list)
+    manual_di_sites: list[ManualDiSite] = Field(default_factory=list)
+    ambient_state_providers: list[str] = Field(default_factory=list)
+    imported_modules: set[str] = Field(default_factory=set)
+    symbols_used: set[str] = Field(default_factory=set)
+    container_wiring_sites: list = Field(default_factory=list)
     function_defs_with_depends: list[str] = Field(default_factory=list)
     non_fastapi_depends_sources: dict[str, str] = Field(default_factory=dict)
     fastapi_app_count: int = 0

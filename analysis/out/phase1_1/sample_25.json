@@ -1,0 +1,228 @@
+[
+ {
+  "repo": "Iron-Triangle-Tech__Locus",
+  "old": "S1",
+  "new": "S3",
+  "new_forms": [
+   "constructor_injection"
+  ],
+  "old_forms": []
+ },
+ {
+  "repo": "hapax-systems__reins",
+  "old": "S1",
+  "new": "S3",
+  "new_forms": [
+   "constructor_injection"
+  ],
+  "old_forms": []
+ },
+ {
+  "repo": "hoshisora1__ai-resume-match",
+  "old": "S1",
+  "new": "S3",
+  "new_forms": [
+   "constructor_injection"
+  ],
+  "old_forms": []
+ },
+ {
+  "repo": "roshni2020__CivicTrace_SF",
+  "old": "S1",
+  "new": "S3",
+  "new_forms": [
+   "setter_injection"
+  ],
+  "old_forms": []
+ },
+ {
+  "repo": "zeroday0619__KotonohaInterpreter",
+  "old": "S1",
+  "new": "S3",
+  "new_forms": [
+   "constructor_injection"
+  ],
+  "old_forms": []
+ },
+ {
+  "repo": "iVGeek__bta",
+  "old": "S1",
+  "new": "S3",
+  "new_forms": [
+   "constructor_injection"
+  ],
+  "old_forms": []
+ },
+ {
+  "repo": "bossayan9999__aios-one-command-center",
+  "old": "S1",
+  "new": "S3",
+  "new_forms": [
+   "constructor_injection"
+  ],
+  "old_forms": []
+ },
+ {
+  "repo": "KyleHafner__helios-horizon",
+  "old": "S1",
+  "new": "S3",
+  "new_forms": [
+   "constructor_injection"
+  ],
+  "old_forms": []
+ },
+ {
+  "repo": "ClearGlassInc__Opal-Koboi",
+  "old": "S1",
+  "new": "S3",
+  "new_forms": [
+   "constructor_injection"
+  ],
+  "old_forms": []
+ },
+ {
+  "repo": "a-simeshin__librarian-lightrag",
+  "old": "S1",
+  "new": "S3",
+  "new_forms": [
+   "constructor_injection"
+  ],
+  "old_forms": []
+ },
+ {
+  "repo": "auraecosystem__Smart-Farming-app",
+  "old": "S1",
+  "new": "S3",
+  "new_forms": [
+   "constructor_injection"
+  ],
+  "old_forms": []
+ },
+ {
+  "repo": "F4TB0Yz__kirospan",
+  "old": "S1",
+  "new": "S3",
+  "new_forms": [
+   "constructor_injection"
+  ],
+  "old_forms": []
+ },
+ {
+  "repo": "manuelbomi__crew-ai-fraud",
+  "old": "S1",
+  "new": "S3",
+  "new_forms": [
+   "constructor_injection"
+  ],
+  "old_forms": []
+ },
+ {
+  "repo": "BigProject09__cultural-heritage-be",
+  "old": "S1",
+  "new": "S3",
+  "new_forms": [
+   "constructor_injection"
+  ],
+  "old_forms": []
+ },
+ {
+  "repo": "asadbutt64__OGS",
+  "old": "S1",
+  "new": "S3",
+  "new_forms": [
+   "constructor_injection"
+  ],
+  "old_forms": []
+ },
+ {
+  "repo": "localzet__caine-companion",
+  "old": "S1",
+  "new": "S3",
+  "new_forms": [
+   "constructor_injection"
+  ],
+  "old_forms": []
+ },
+ {
+  "repo": "pilotmain__AethOS",
+  "old": "S1",
+  "new": "S3",
+  "new_forms": [
+   "constructor_injection"
+  ],
+  "old_forms": []
+ },
+ {
+  "repo": "bupt20220407__compute-optical-orchestrator",
+  "old": "S1",
+  "new": "S3",
+  "new_forms": [
+   "constructor_injection"
+  ],
+  "old_forms": []
+ },
+ {
+  "repo": "sueun-dev__open-seed",
+  "old": "S1",
+  "new": "S3",
+  "new_forms": [
+   "constructor_injection"
+  ],
+  "old_forms": []
+ },
+ {
+  "repo": "DansiDanutz__SemeClaw",
+  "old": "S1",
+  "new": "S3",
+  "new_forms": [
+   "constructor_injection",
+   "setter_injection"
+  ],
+  "old_forms": []
+ },
+ {
+  "repo": "clausgf__nicepaper",
+  "old": "S1",
+  "new": "S3",
+  "new_forms": [
+   "constructor_injection"
+  ],
+  "old_forms": []
+ },
+ {
+  "repo": "MuhammadHassanminhas__DATA-CLEANING-DISTRIBUTED-SYSTEM",
+  "old": "S1",
+  "new": "S3",
+  "new_forms": [
+   "setter_injection"
+  ],
+  "old_forms": []
+ },
+ {
+  "repo": "DEVTKITS__devkitz-workspace",
+  "old": "S1",
+  "new": "S3",
+  "new_forms": [
+   "constructor_injection"
+  ],
+  "old_forms": []
+ },
+ {
+  "repo": "paperworkmg-arch__VOLT",
+  "old": "S1",
+  "new": "S3",
+  "new_forms": [
+   "constructor_injection"
+  ],
+  "old_forms": []
+ },
+ {
+  "repo": "almondsun__nutshellm",
+  "old": "S1",
+  "new": "S3",
+  "new_forms": [
+   "constructor_injection"
+  ],
+  "old_forms": []
+ }
+]

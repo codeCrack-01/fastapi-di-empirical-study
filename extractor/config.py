@@ -51,6 +51,16 @@ FASTAPI_MODULES_PREFIX = "fastapi."
 def is_fastapi_module(module_name: str) -> bool:
     return module_name == "fastapi" or module_name.startswith("fastapi.")
 
+
+def is_local_module(module_name: str, local_modules=None) -> bool:
+    if not module_name:
+        return False
+    local_modules = local_modules or set()
+    top = module_name.split(".")[0]
+    if top in local_modules:
+        return True
+    return module_name in local_modules
+
 FASTAPI_DI_NAMES = {"Depends", "Security"}
 
 FASTAPI_APP_NAMES = {"FastAPI"}
