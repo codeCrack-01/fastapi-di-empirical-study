@@ -154,7 +154,14 @@ def main():
     async_getter = ASYNC_GETTER_S2 if style == "s2" else ASYNC_GETTER_S4
     print(f"detected getter style: {style}")
 
-    if MODE == "async-inline":
+    if MODE == "sync-inline":
+        # sync getter stays sync; handler calls it inline (no Depends)
+        assert INLINE_OLD in src, "inline signature missing"
+        src = src.replace(INLINE_OLD, INLINE_SYNC)
+        src = src.replace("from fastapi import FastAPI, HTTPException, Depends, status",
+                          "from fastapi import FastAPI, HTTPException, status")
+
+    elif MODE == "async-inline":
         if sync_getter not in src:
             if async_getter in src:
                 print("getter already async, skipping getter replacement")

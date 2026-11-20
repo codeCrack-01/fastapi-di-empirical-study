@@ -41,7 +41,7 @@ COOLDOWN = 2000 if FAST else 10000
 REPS_DEFAULT = 1 if FAST else 10
 
 ARMS = {
-    "sync-inline":    "arm_s1",
+    "sync-inline":    "arm_2x2_sync-inline",
     "sync-depends":   "master",
     "async-inline":   "arm_2x2_async-inline",
     "async-depends":  "arm_2x2_async-depends",
