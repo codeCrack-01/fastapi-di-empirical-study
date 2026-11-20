@@ -43,8 +43,8 @@ REPS_DEFAULT = 1 if FAST else 10
 ARMS = {
     "sync-inline":    "arm_s1",
     "sync-depends":   "master",
-    "async-inline":   "arm_2x2_async_inline",
-    "async-depends":  "arm_2x2_async_depends",
+    "async-inline":   "arm_2x2_async-inline",
+    "async-depends":  "arm_2x2_async-depends",
     "wrapper":        "arm_2x2_wrapper",
     "limiter-200":    "arm_2x2_limiter_200",
     "limiter-1000":   "arm_2x2_limiter_1000",
