@@ -1,0 +1,884 @@
+repo,target,file,snippet,manual_blocking,notes
+warheart1984-ctrl__persistence-memory,require_memory_write,app/auth.py,"def require_memory_write() -> None:
+    if oauth_enabled():
+        principal = current_principal()
+        if principal is None or WRITE_SCOPE not in principal.scopes:
+            raise HTTPException(status_code=403, detail=""OAuth access token lacks required scope: memory.write"")
+    if not memory_write_enabled():
+        raise HTTPException(
+            status_code=403,
+            detail=""Memory writes are disabled on this deployment"",
+        )",,
+ImgoodWK__TeXTech-GTNH,current_user,integrations/astrbot/textech_persona_console/app/auth.py,"def current_user(
+    request: Request,
+    textech_session: str | None = Cookie(default=None, alias=settings.cookie_name),
+    authorization: str | None = Header(default=None),
+    x_api_token: str | None = Header(default=None),
+) -> dict[str, Any]:
+    if authorization and authorization.lower().startswith(""bearer ""):
+        token = authorization[7:].strip()
+        user = dbmod.find_user_by_api_token(token)
+        if user:
+            return attach_authenticated_user(request, user)
+    if x_api_token:
+        user = dbmod.find_user_by_api_token(x_api_token.strip())
+        if user:
+            return attach_authenticated_user(request, user)
+    if textech_session:
+        data = load_session(textech_session)
+        if data:
+            user = dbmod.get_user_by_id(int(data[""uid""]))
+            if user:
+                return attach_authenticated_user(request, user)
+    raise HTTPException(status_code=401, detail=""未登录"")",,
+AlphaHorizon-AI__Shogun,require_role,gensui/api/deps.py,"def require_role(*allowed_roles: str):
+    """"""Dependency factory that requires the admin to have one of the specified roles.""""""
+
+    async def _check(admin: dict = Depends(get_current_admin)) -> dict:
+        if admin[""role""] not in allowed_roles:
+            raise HTTPException(
+                status_code=403,
+                detail=f""Role '{admin['role']}' is not authorized for this operation. ""
+                       f""Required: {', '.join(allowed_roles)}"",
+            )
+        return admin
+
+    return _check",,
+Peter-McCann-Strain__Personal_Execution_OS,get_anthropic_client,src/app/api/deps.py,"def get_anthropic_client(request: Request) -> Any:
+    """"""Compatibility alias while route type hints migrate to LLMProvider.""""""
+    provider = getattr(request.app.state, ""llm_provider"", None)
+    if provider is not None:
+        return get_llm_provider(request)
+    client = getattr(request.app.state, ""anthropic_client"", None)
+    if client is None:
+        raise HTTPException(
+            status_code=503,
+            detail=(
+                ""This feature requires a model provider. Configure ANTHROPIC_API_KEY ""
+                ""and LLM_PROVIDER=anthropic, then restart the service.""
+            ),
+        )
+    return client",,
+MohammadHamidi__LightRAG,require_scope,entityrag/api/dependencies/request_context.py,"def require_scope(action: str):
+    async def _dep(ctx: RequestContext = Depends(get_request_context)) -> RequestContext:
+        try:
+            authorize(context=ctx, action=action)
+        except AuthorizationError as exc:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail={""code"": exc.code, ""message"": str(exc), ""action"": action},
+            ) from exc
+        return ctx
+
+    return _dep",,
+Nebur692__ha-login-approval,require_admin,app/routers/admin/_auth.py,"def require_admin(credentials: HTTPBasicCredentials = Depends(security)) -> str:
+    # Compared as bytes: on str, compare_digest raises TypeError the moment a
+    # credential contains a non-ASCII character, so a password with an accent
+    # in it would turn every login into a 500 instead of a 401.
+    user_ok = secrets.compare_digest(
+        credentials.username.encode(""utf-8""), settings.admin_username.encode(""utf-8"")
+    )
+    pass_ok = secrets.compare_digest(
+        credentials.password.encode(""utf-8""), settings.admin_password.encode(""utf-8"")
+    )
+    if not (user_ok and pass_ok):
+        raise HTTPException(status_code=401, detail=""Unauthorized"", headers={""WWW-Authenticate"": ""Basic""})
+    return credentials.username",,
+agustindborbon__Technica,get_ws_manager,TechnicaIsla2/app/core/dependencies.py,"def get_ws_manager() -> WebSocketManager:
+    return ws_manager",,
+TownShipCode__perfume,auth_rate_limit,backend/src/middleware/rate_limit.py,"def auth_rate_limit() -> Callable:
+    """"""Rate limit for auth + dashboard endpoints.""""""
+
+    async def dependency(request: Request) -> None:
+        client_ip = _client_ip(request)
+        if not _auth_limiter.is_allowed(client_ip):
+            raise HTTPException(429, detail=""Too many attempts. Wait and try again."")
+
+    return dependency",,
+NguyenHaiHung0510__microSched,get_session_store,backend/app/web/deps.py,"def get_session_store() -> SessionStore | None:
+    """"""Return the session store, or None when the database is not configured.
+
+    Constructing the store opens no connection, so this stays cheap enough to
+    resolve before the guard has decided whether a request is worth a lookup.
+    Tests override this with an in-memory double.
+    """"""
+    factory = get_sessionmaker()
+    if factory is None:
+        return None
+
+    return PostgresSessionStore(factory, get_settings().session_ttl_days)",,
+agustinpic72__alphawave-taskd,get_db,backend/app/core/db.py,"def get_db() -> Generator[Session, None, None]:
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()",,
+djimit__uitspraken,get_registry,search-platform/app/api/admin.py,"def get_registry() -> ContextRegistry:
+    if _registry is None:
+        raise HTTPException(status_code=503, detail=""Registry not initialized"")
+    return _registry",,
+CesarPantoja1__KOSMO,get_manage_ai_preferences_use_case,backend/src/kosmo/infrastructure/api/dependencies/ai_config.py,"def get_manage_ai_preferences_use_case(request: Request) -> ManageAIPreferencesUseCase:
+    container = get_container(request)
+    return ManageAIPreferencesUseCase(
+        config_repo=container.repos.user_ai_configs,
+        cipher=_resolve_cipher(request),
+        connection_tester=HttpAIConnectionTester(),
+    )",,
+ActiveInferenceInstitute__ActiveInferAnts,get_db,6_API/Knowledge_API.py,"def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()",,
+rmayen__cerberus,get_db,backend/app/database.py,"def get_db() -> Iterator[Session]:
+    """"""FastAPI dependency that yields a database session and always closes it.""""""
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()",,
+ald1897__aegisflow,get_settings,apps/agent-runtime/src/aegisflow_agent_runtime/config.py,"def get_settings() -> Settings:
+    return Settings()",,
+Tabsi1998__THE-LION_SQUAD-eSPORT-Webseite,require_admin,backend/auth.py,"def require_admin():
+    """"""Admin = tournament_admin | club_admin | superadmin.""""""
+    async def dep(user: dict = Depends(require_role(""tournament_admin"", ""club_admin"", ""superadmin""))) -> dict:
+        if not user.get(""mfa_enabled"") or not user.get(""auth_mfa_verified""):
+            raise HTTPException(status_code=403, detail=""Für den Adminbereich ist eine bestätigte Zwei-Faktor-Anmeldung erforderlich."")
+        return user
+    return dep",,
+Sthitadhi1__PharmaIQ,get_current_user,backend/app/routes/auth_routes.py,"def get_current_user(token: str = Depends(oauth2_scheme)):
+    payload = decode_token(token)
+    if not payload or payload.get('type') != 'access':
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid authentication token')
+    user = get_user(payload.get('sub'))
+    if user is None:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='User not found')
+    return user",,
+elieh999__MoneyPilot,get_db,services/api/src/money_pilot_api/database.py,"def get_db(request: Request) -> Generator[Session, None, None]:
+    database: Database = request.app.state.database
+    session = database.session_factory()
+    try:
+        yield session
+    except Exception:
+        session.rollback()
+        raise
+    finally:
+        session.close()",,
+pabooth__mnemosyne,get_settings,mnemo-core/mnemo_core/config.py,"def get_settings() -> Settings:
+    global _settings_cache
+    if _settings_override is not None:
+        return _settings_override
+    if _settings_cache is None:
+        _settings_cache = Settings()
+    return _settings_cache",,
+GRID-check__grid-oib-agent,_require_ingestor,frontends/aiq_api/src/aiq_api/routes/collections.py,"def _require_ingestor() -> BaseIngestor:
+    from aiq_agent.knowledge.factory import get_active_ingestor
+
+    ingestor = get_active_ingestor()
+    if ingestor is None:
+        raise HTTPException(status_code=503, detail=""Knowledge API not configured"")
+    return ingestor",,
+ghifarullah19__smartai-tutor,get_db,backend/core/database.py,"def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()",,
+rajasahin2024-web__IINM,get_db,backend/database.py,"def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()",,
+bluesky__bluesky-httpserver,get_settings,src/bluesky_httpserver/settings.py,"def get_settings():
+    return Settings()",,
+dorinaababii__le31_mmm3_research,get_session,backend/app/db.py,"def get_session() -> Session:
+    """"""FastAPI dependency that yields a per-request DB session.""""""
+    with Session(engine) as session:
+        yield session",,
+LawWeiTin__anlu-health,get_db,app/database.py,"def get_db() -> Generator[Session, None, None]:
+    db = session_factory()()
+    try:
+        yield db
+    finally:
+        db.close()",,
+GuilhermeLossio__Tech-Challange-FIAP-5,require_scopes,src/api/security.py,"def require_scopes(*required_scopes: str):
+    unknown = sorted(set(required_scopes) - AVAILABLE_SCOPES)
+    if unknown:
+        raise SecurityConfigurationError(f""Unknown API scopes configured: {unknown}"")
+
+    async def dependency(
+        security_scopes: SecurityScopes,
+        credentials: Annotated[
+            HTTPAuthorizationCredentials | None,
+            Security(bearer_scheme),
+        ],
+        settings: Annotated[Settings, Depends(_settings)],
+    ) -> Principal:
+        route_scopes = set(security_scopes.scopes) if security_scopes is not None else set()
+        all_required = set(required_scopes) | route_scopes
+        if settings.auth_mode == ""disabled"":
+            validate_security_settings(settings)
+            return Principal(subject=""local-dev"", scopes=frozenset(all_required), claims={})
+
+        if credentials is None or credentials.scheme.lower() != ""bearer"":
+            raise _auth_error(""Missing bearer token"")
+
+        principal = validate_entra_token(credentials.credentials, settings)
+        missing = sorted(all_required - principal.scopes)
+        if missing:
+            raise _auth_error(f""Missing required scopes: {missing}"", status_code=403)
+        ",,
+Troutman-Pepper-eMerge__lexora,get_db,app/database.py,"def get_db():
+    """"""FastAPI dependency.""""""
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()",,
+misterberns__kidschores,get_db,backend/app/database.py,"def get_db():
+    """"""Dependency to get database session.""""""
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()",,
+moranch__grok-register,verify_api_key,apps/console/platforms/_vendor_aar/tavily/browser_register.py,"def verify_api_key(api_key: str, timeout: int = 30) -> bool:
+    try:
+        response = requests.post(
+            ""https://api.tavily.com/search"",
+            json={
+                ""api_key"": api_key,
+                ""query"": ""api key verification"",
+                ""max_results"": 1,
+            },
+            timeout=timeout,
+        )
+    except Exception:
+        return False
+
+    return response.status_code == 200",,
+hector1-cloud__Bot_chat_autonomo,get_db,app/api/dependencies.py,"def get_db() -> Generator[Session, None, None]:
+    yield from _get_db()",,
+jm-sky__zbory-chwz,get_admin_repository,backend/app/modules/admin/router.py,"def get_admin_repository(db: AsyncSession = Depends(get_db)) -> AdminRepository:
+    """"""Dependency to get admin repository instance.""""""
+    return AdminRepository(db)",,
+huawei-noah__noah-research,require_scopes,MindMemOS/src/mindmemos/mindmemos/api/deps.py,"def require_scopes(*required_scopes: str):
+    async def dependency(ctx: AuthContext = Depends(get_request_context)) -> AuthContext:
+        ensure_scopes(ctx, required_scopes)
+        return ctx
+
+    return dependency",,
+Hardonian__truthcore,verify_api_key,src/truthcore/server.py,"def verify_api_key(
+    credentials: HTTPAuthorizationCredentials | None = SECURITY_BEARER_DEPENDENCY,
+    api_key: str | None = None,
+) -> bool:
+    """"""Verify API key authentication.
+
+    Args:
+        credentials: Bearer token from Authorization header
+        api_key: Optional API key from query parameter
+
+    Returns:
+        True if authentication successful or disabled
+
+    Raises:
+        AuthenticationError: If authentication fails and is required
+    """"""
+    # Get expected API key from environment
+    expected_key = os.environ.get(""TRUTHCORE_API_KEY"")
+
+    # If no API key configured, authentication is disabled (with warning)
+    if not expected_key:
+        return True
+
+    # Check for API key in header or query param
+    provided_key = None
+    if credentials and credentials.credentials:
+        provided_key = credentials.credentials
+    elif api_key:
+        provided_key = api_key
+
+    if not provided_key:
+        raise HTTPException(
+            status_code=http_status.HTTP_401_UNAUTHORIZED,
+            detail=""API key required. Provide via Authorization: Bearer *** header or ?api_key= query parameter"",
+            headers={""WWW-Authenticate"": ""Bearer""},
+        )
+
+    ",,
+kwal0203__agent-failure,get_token_verifier_from_request,apps/control_plane/src/interfaces/http/dependencies.py,"def get_token_verifier_from_request(request: Request) -> TokenVerifierPort:
+    verifier = getattr(request.app.state, ""token_verifier"", None)
+    if verifier is not None:
+        return verifier
+    return get_token_verifier()",,
+PetervanLunteren__AddaxAI,get_db,backend/app/db/base.py,"def get_db() -> Generator[Session, None, None]:
+    """"""
+    Dependency for FastAPI endpoints to get database session.
+
+    Usage:
+        @app.get(""/items"")
+        def get_items(db: Session = Depends(get_db)):
+            ...
+    """"""
+    SessionLocal = get_session_factory()
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()",,
+udr-w__platebridge-lk,get_db,backend/app/database.py,"def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()",,
+infinite2004__LastknownGood,get_db,apps/backend/app/db/session.py,"def get_db() -> Iterator[Session]:
+    session = get_session_factory()()
+    try:
+        yield session
+        session.commit()
+    except Exception:
+        session.rollback()
+        raise
+    finally:
+        session.close()",,
+Kirov-Dynamics-Technology__kirov-vulnerability-intelligence,get_current_user,backend/app/core/security.py,"def get_current_user(token: str = Depends(oauth2_scheme)) -> dict:
+    return decode_access_token(token)",,
+jm-sky__company-hub,get_db,app/db/database.py,"def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()",,
+liuhuanhuan0302-collab__Consultation_agent,get_db,backend/app/db/database.py,"def get_db() -> Generator[Session, None, None]:
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()",,
+nonooktk__rinaresuMVP,get_db,backend/app/database.py,"def get_db():
+    """"""FastAPIの依存性注入用DBセッションジェネレータ。""""""
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()",,
+orkun-soylu__calivi,get_db,backend/app/database.py,"def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()",,
+mizuwonomu__hust-regulations-bot,get_current_user_id,src/api/dependencies.py,"def get_current_user_id(
+    x_user_id: Annotated[str | None, Header(alias=""X-User-Id"")] = None,
+) -> str:
+    """"""Lấy user id hiện tại""""""
+    return x_user_id or DEFAULT_USER_ID",,
+Marvinjon__track-maintenance,get_traccar,backend/app/services/traccar.py,"def get_traccar() -> TraccarService:
+    settings = get_settings()
+    return TraccarService(settings.traccar_url)",,
+harsh-pandhe__airgapped-netops-ai,require_permission,backend/auth.py,"def require_permission(permission: str):
+    async def guard(user: TokenData = Depends(get_current_user)) -> TokenData:
+        if not ROLE_PERMISSIONS.get(user.role, {}).get(permission, False):
+            raise HTTPException(
+                status_code=403,
+                detail=f""Role '{user.role}' lacks permission '{permission}'""
+            )
+        return user
+    return guard",,
+EELE14__Raspberry-Pi-Dashboard,get_settings,Server/app/config.py,"def get_settings() -> Settings:
+    return Settings()",,
+Glitchedpixel-io__media-api,get_db_session,app/dependencies.py,"def get_db_session() -> Generator[Session, None, None]:
+    db = get_session_factory()()
+    try:
+        yield db
+    finally:
+        db.close()",,
+CognitiveCodeAI__rag-main-2,get_session,backend/app/db/session.py,"def get_session() -> Generator[Session, None, None]:
+    """"""Get a database session (dependency for FastAPI).""""""
+    session = SessionLocal()
+    try:
+        yield session
+    finally:
+        session.close()",,
+leerobber__leerobber,get_db,database.py,"def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()",,
+Danial36947112__rolloutguard-ai,get_db,backend/src/rolloutguard_api/db/session.py,"def get_db() -> Generator[Session, None, None]:
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()",,
+DevEatSleep__mudfastpwa,get_db,src/backend/app/database.py,"def get_db()->Generator[Session,None,None]:
+    """"""Fournit une session SQLAlchemy à une requête.""""""
+    with SessionLocal() as session: yield session",,
+wycliffRotich-dev__aethergrid,get_create_api_key_service,app/presentation/dependencies.py,"def get_create_api_key_service() -> CreateApiKeyService:
+    """"""
+    Return CreateApiKeyService.
+    """"""
+
+    return CreateApiKeyService(
+        api_key_repository=_api_key_repository,
+    )",,
+HardikKhandal01__AI-Receptionist-Pro-SaaS,get_db,backend/api/admin_routes.py,"def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()",,
+getfamulus__famulus,get_repo,backend/app/api/tasks.py,"def get_repo(session: AsyncSession = Depends(get_session)) -> TaskRepository:
+    return TaskRepository(session)",,
+Leo-Y-Zhang__FilingsLab,get_db,backend/app/core/database.py,"def get_db():
+    """"""FastAPI dependency providing a scoped database session.""""""
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()",,
+GautamChaudhri__Marquee,get_rate_limiter,marquee/api/deps.py,"def get_rate_limiter(request: Request) -> RateLimiter:
+    """"""Shared limiter for expensive endpoints (created in the app lifespan).""""""
+    return request.app.state.op_rate_limiter",,
+itsdaibend__proth,get_db,apps/api/app/database.py,"def get_db() -> Generator[Session, None, None]:
+    with SessionLocal() as session:
+        yield session",,
+Temp-orgo__AWS-Internship,require_api_key,ai_service/app.py,"def require_api_key(
+    x_ai_service_key: str | None = Header(default=None, alias=""X-AI-Service-Key""),
+) -> None:
+    if not AI_SERVICE_API_KEY:
+        return
+    if x_ai_service_key != AI_SERVICE_API_KEY:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail=""Invalid or missing AI service API key"",
+        )",,
+philippe-tressard__5hostachy,get_session,api/app/database.py,"def get_session():
+    """"""Dépendance FastAPI : session DB avec auto-reconnexion sur OperationalError.
+
+    Si SQLAlchemy détecte un I/O error (pool corrompu, inode obsolète après VACUUM
+    ou docker exec concurrent), on purge le pool et on retente une fois avant
+    de propager l'exception — qui sera capturée par le handler global dans main.py.
+    """"""
+    try:
+        with Session(engine) as session:
+            yield session
+    except OperationalError as exc:
+        logger.error(""DB OperationalError — purge du pool et reconnexion : %s"", exc)
+        engine.dispose()  # ferme toutes les connexions, force fresh connections
+        # La requête en cours échoue proprement ; le prochain appel repartira sain
+        raise",,
+samsarone__samsar,_require_auth,utils/vast-flux2/scripts/vast-flux2/server.py,"def _require_auth(request: Request) -> None:
+    if not AUTH_VALUE:
+        raise HTTPException(status_code=503, detail=""API authentication is not configured"")
+    supplied = request.headers.get(AUTH_HEADER, """")
+    if not hmac.compare_digest(supplied, AUTH_VALUE):
+        raise HTTPException(
+            status_code=401,
+            detail=""Invalid API credential"",
+            headers={""WWW-Authenticate"": ""Bearer""},
+        )",,
+iknowkungfubar__neur-os,get_store,backend/deps.py,"def get_store() -> DataStore:
+    global _store
+    if _store is None:
+        s = SqliteStore(DB_PATH)
+        s.init_schema()
+        s._seed_defaults()
+        _store = s
+    return _store",,
+notarobot63__excerpta,get_session,app/database.py,"def get_session():
+    with Session(engine) as session:
+        yield session",,
+vuhung16au__ACU-ITEC617,get_db,09.Postgres-pgvector-RAG/app/db.py,"def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()",,
+TryCaspian__caspian-sdk,get_session,server/src/comm_gateway/auth.py,"def get_session(request: Request) -> Iterator[Session]:
+    with request.app.state.session_factory() as session:
+        yield session",,
+ZUENS2020__mcp-relay,require_device,services/relay-api/app/main.py,"def require_device(
+    authorization: str | None = Header(default=None),
+    x_device_token: str | None = Header(default=None, alias=""X-Device-Token""),
+) -> sqlite3.Row:
+    token = _bearer_token(authorization, x_device_token)
+    if not token:
+        raise HTTPException(401, ""device token required"")
+    with db() as conn:
+        row = conn.execute(""SELECT * FROM devices WHERE device_token=?"", (token,)).fetchone()
+    if not row:
+        raise HTTPException(401, ""invalid device token"")
+    return row",,
+DMX-RGIT__DMX-Website-25,rate_limit_submit,backend/app/routers/gamescores.py,"def rate_limit_submit(request: Request):
+    ip = request.client.host if request.client else ""unknown""
+    now = time.time()
+    # Keep only requests from the last 60 seconds
+    ip_records[ip] = [t for t in ip_records[ip] if now - t < 60]
+    if len(ip_records[ip]) >= 10:
+        raise HTTPException(status_code=429, detail=""Too many score submissions. Please wait a minute."")
+    ip_records[ip].append(now)",,
+D3v4nshPat3l__ReconTitan,require_admin,backend/app/admin/deps.py,"def require_admin(request: Request) -> str:
+    """"""Authenticate an admin request or refuse it.
+
+    Every outcome is audited. An attack on the admin surface should be the
+    most visible thing in the trail, not the quietest.
+    """"""
+    source = audit.client_ip(request)
+
+    # Checked first, and deliberately before the lockout counter: a source that
+    # is not allowed to be here should not be able to consume another source's
+    # attempt budget, and should learn nothing about whether a token was close.
+    if not ip_allowed(source):
+        audit.record_security_event(ADMIN_IP_REFUSED, request, detail=""not in ADMIN_IP_ALLOWLIST"")
+        logger.warning(""[admin] refused %s: outside the allowlist"", source)
+        raise HTTPException(status_code=403, detail=auth.GENERIC_DENIAL)
+
+    remaining = auth.lockout_remaining(source)
+    if remaining > 0:
+        audit.record_security_event(ADMIN_LOCKED_OUT, request, detail=f""{remaining:.0f}s left"")
+        raise HTTPException(
+            status_code=429,
+            detail=auth.GENERIC_DENIAL,
+            headers={""Retry-After"": str(int(remaining) + 1)},
+        )
+
+    supplied = request.headers.get(auth.ADMIN_HEADER, """")
+    if not aut",,
+jack-dolan__arthur,require_user,app/routers/auth.py,"def require_user(request: Request) -> str:
+    """"""FastAPI dependency: return the signed-in allowlisted email, else redirect.
+
+    Re-checks the allowlist on every request, so removing an email from
+    config.yaml immediately revokes any live session.
+
+    A preview deployment holds placeholder Google OIDC credentials, so no real
+    sign-in can complete there and the dashboard — the thing worth showing —
+    would be unreachable. Preview mode therefore grants a fixed demo identity
+    to every visitor. That is only safe because a preview's data is entirely
+    fabricated, which app/preview.py's startup credential check guarantees.
+    """"""
+    if is_preview_mode():
+        return PREVIEW_USER
+    user = request.session.get(""user"")
+    if user and is_email_allowed(user):
+        return user
+    # 303 → the browser re-requests /login with GET (works for GET and POST).
+    raise HTTPException(
+        status_code=status.HTTP_303_SEE_OTHER,
+        headers={""Location"": ""/login""},
+    )",,
+timothy-voiuhy__AWE,get_settings,awe-backend/awe_backend/config.py,"def get_settings() -> Settings:
+    return Settings()",,
+Krishcalin__AWS-Security-Scanner,require,hub/cnapp_api.py,"def require(min_role: str):
+        def dep(principal: Principal = Depends(_effective_principal),
+                ws: str = Depends(workspace_ctx)):
+            role = principal.role_in(ws)            # None for a non-member -> rank 0 -> 403
+            if not _authorize(role, min_role):
+                raise HTTPException(status_code=403,
+                                    detail=f""requires {min_role} role"")
+            return Scope(principal=principal, workspace_id=ws, role=role)
+        return dep",,
+aivis-one__velo,get_ai_service,backend/app/modules/ai/interface.py,"def get_ai_service() -> AIServiceProtocol:
+    """"""FastAPI dependency -- returns the active AI service implementation.
+
+    Phase 9.1: always returns MockAIService.
+    Future: check settings.ai_provider and return the real client.
+    """"""
+    from app.modules.ai.mock import MockAIService  # noqa: PLC0415 -- lazy import
+    return MockAIService()",,
+magicmatt007__matched-runs,get_db,app/database.py,"def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()",,
+ailinone__collective-intelligence,_require_rate_limit,model-stack/serving/aggregation/coord_serving.py,"def _require_rate_limit(request: Request) -> None:
+    """"""FastAPI dependency: throttle per-IP via token bucket.
+
+    Disabled when COORD_RATE_LIMIT_RPS=0 (the default). Operator opts
+    in by setting it to a positive number. Burst defaults to 2*rps but
+    is independently configurable.
+
+    Rejected requests get 429 Too Many Requests with a `Retry-After`
+    header indicating ~1s (long enough to refill, short enough that
+    well-behaved clients converge quickly).
+    """"""
+    rps = float(os.environ.get(""COORD_RATE_LIMIT_RPS"", ""0""))
+    if rps <= 0:
+        return  # rate limiting disabled
+    burst = float(os.environ.get(""COORD_RATE_LIMIT_BURST"", str(rps * 2)))
+
+    # Trust the X-Forwarded-For header from the gateway when present
+    # (proxy_headers=True on uvicorn already populated request.client
+    # accordingly). Falls back to the direct client address.
+    client = request.client
+    key = client.host if client else ""unknown""
+
+    if not _RATE_LIMIT_REGISTRY.consume(key, rps=rps, burst=burst):
+        raise HTTPException(
+            status_code=429,
+            detail=""rate limit exceeded"",
+            headers={""Retry-After"": ""1""},
+        )",,
+IBM__docling-pipelines,get_jwt_config,src/docpipe/api/auth/dependencies.py,"def get_jwt_config() -> JWTConfig:
+    """"""Get JWT configuration.
+
+    Returns:
+        JWT configuration instance
+    """"""
+    return JWTConfig()",,
+RaymonDev__openfantasy,get_db,app/core/database.py,"def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()",,
+erhel-czc__asco2,get_db,backend/db.py,"def get_db() -> Generator[Session, None, None]:
+    """"""Yield a database session for request handlers.""""""
+    with Session(engine) as session:
+        yield session",,
+atpugneSnahsE__dino-ledger,get_db,backend/app/api/routes/auth.py,"def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()",,
+Forhath-Hosain-Ome__offline-dev-rag,get_create_user,examples/sample_fastapi/app/api/routes/users.py,"def get_create_user() -> CreateUser:
+    raise NotImplementedError",,
+quaresma870__perchtail,get_current_active_user,backend/app/api/auth.py,"def get_current_active_user(user: User = Depends(get_current_user)) -> User:
+    """"""Blocks every endpoint except login/me/change-password until an
+    admin-created account's forced password change is done.""""""
+    if user.must_change_password:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN, detail=""Password change required""
+        )
+    return user",,
+todescodev__Marcenaria-1,usuario_atual,backend/auth.py,"def usuario_atual(
+    creds: HTTPAuthorizationCredentials | None = Depends(security),
+) -> dict:
+    if not creds:
+        raise HTTPException(status_code=401, detail=""Não autenticado"")
+
+    try:
+        payload = jwt.decode(creds.credentials, SECRET, algorithms=[ALGORITHM])
+        user_id = payload[""sub""]
+    except jwt.PyJWTError:
+        raise HTTPException(status_code=401, detail=""Token inválido"")
+
+    usuario = obter_usuario(user_id)
+    if not usuario or not usuario.get(""ativo"", True):
+        raise HTTPException(status_code=401, detail=""Usuário não encontrado"")
+    if not usuario.get(""empresa_id""):
+        raise HTTPException(status_code=401, detail=""Usuário sem empresa vinculada"")
+    return usuario",,
+bensawadogo__DATAKEYS-FINANCE-MONITOR,get_db,backend/app/database.py,"def get_db():
+    """"""Dépendance FastAPI pour obtenir une session de base de données.""""""
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()",,
+kishan0-07__LLM-Gateway,get_completion_use_cases,app/api/deps.py,"def get_completion_use_cases() -> CompletionUseCases:
+    from app.infrastructure.providers.base import BaseProvider
+    from app.infrastructure.providers.groq import GroqProvider
+    from app.infrastructure.providers.openai import OpenAIProvider
+    from app.infrastructure.db.postgres_budget_store import PostgreSQLBudgetStore
+    from app.infrastructure.redis.circuit_breaker import CircuitBreaker
+    from app.infrastructure.redis.rate_limiter import RedisRateLimiter
+    from app.application.services.budget_authorizer import BudgetAuthorizer
+    from app.application.services.token_estimator import TokenEstimator
+    from app.application.services.routing_engine import RoutingEngine
+    from app.application.services.response_validator import ResponseValidator
+    from app.application.use_cases.execute_completion import ExecuteCompletion
+    from app.application.use_cases.stream_completion import StreamCompletion
+
+    providers: dict[str, BaseProvider] = {}
+    if settings.groq_api_key:
+        providers[""groq""] = GroqProvider(api_key=settings.groq_api_key)
+    if settings.openai_api_key:
+        providers[""openai""] = OpenAIProvider(api_key=settings.openai_api_key)
+
+    budget_store =",,
+glorden__OpenSOS,get_settings,app/config.py,"def get_settings() -> Settings:
+    return Settings()",,
+vitorjpg__FinPilot,get_db,backend/app/database/session.py,"def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()",,
+URBREATH__idra-ai-chatbot,require_admin_authorization,app/auth.py,"def require_admin_authorization(authorization: str | None = Header(default=None)) -> str:
+    """"""Validate admin token (simple Bearer token, not JWT).""""""
+    expected_token = os.getenv(""ADMIN_TOKEN"")
+    if not expected_token:
+        raise HTTPException(status_code=401, detail=""Admin token not configured"")
+    if not authorization or not authorization.startswith(""Bearer ""):
+        raise HTTPException(status_code=401, detail=""Missing or invalid Authorization header"")
+    token = authorization.removeprefix(""Bearer "").strip()
+    if token != expected_token:
+        raise HTTPException(status_code=403, detail=""Invalid admin token"")
+    return token",,
+erum007__TheBridgeSchool_Project,get_db,backend/dependencies.py,"def get_db() -> Generator[Session, None, None]:
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()",,
+Mooncore-inc__demon-cry,get_llm,core/dependencies.py,"def get_llm(
+        config: Config = Depends(get_config)
+        ) -> LLM:
+    return LLM(config=config, registry=registry, system_prompt=lazy_load())",,
+aghiedaroud-gif__syndicate-system,get_db,backend/app/db/session.py,"def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()",,
+iarjunganesh__bankers-wrapped,get_settings,backend/config.py,"def get_settings() -> Settings:
+    return Settings()",,
+jabbott-iii__python-practice,verify_api_key,ministral3_3b_API/app/app.py,"def verify_api_key(x_api_key: str = Header(None)): # Dependency to verify API key and check credits
+    credits = API_KEY_CREDITS.get(x_api_key, 0) # Get remaining credits for the provided API key
+    if credits <= 0:
+        raise HTTPException(status_code=401, detail=""API Key has exhausted its credits or is invalid."")
+    return x_api_key",,
+AfzalVE__PreSalesAIAgent,get_db,backend/app/api/v1/admin/admin_router.py,"def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()",,
+aws-samples__sample-agent-platform-with-agentcore,get_current_user,backend/app/dependencies.py,"def get_current_user(authorization: str = Header(default="""")) -> Principal:
+    """"""Resolve the caller's identity (username + roles).
+
+    Auth modes, in priority order:
+      1. Generic OIDC (``PLATFORM_OIDC_ISSUER`` set) — verify the Bearer
+         access token against the issuer's JWKS, identity =
+         ``preferred_username`` (falls back to ``sub``).
+      2. Cognito (``PLATFORM_COGNITO_POOL_ID`` set) — verify the Bearer ID
+         token, identity = the Cognito username.
+      3. Static token (``PLATFORM_API_TOKEN`` set) — exact Bearer match.
+      4. Open — local development only.
+
+    Admin role: membership of ``settings.admin_group`` in the token's group
+    claims, or the username appearing in ``settings.admin_users``. Super-admin
+    (``is_super_admin``): the same test against ``super_admin_group`` /
+    ``super_admin_users`` — the tier that may manage other users' schedules.
+    Modes 3/4
+    have no IdP and are development modes — the caller is treated as admin so
+    a local backend behaves like the pre-RBAC platform.
+    """"""
+    if settings.oidc_issuer:
+        if not authorization.startswith(""Bearer ""):
+            raise HTTPException(status_code=401, detail=""Missi",,
+apowerb__apowerb,basic_auth_enabled,src/apowerb/auth/router.py,"def basic_auth_enabled() -> None:
+    """"""Dependency: returns 404 when AUTH_BASIC_ENABLED is false.
+
+    Used to gate email/password login, registration and password reset.
+    OAuth flows must NOT depend on this — they are independent of basic auth.
+    """"""
+    if not get_settings().auth_basic_enabled:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=""Not Found""
+        )",,
+Maijied__FreqGhost,require_role,archive/v1/admin/auth.py,"def require_role(*roles: str):
+    """"""Factory for a FastAPI dependency that enforces role-based access.
+
+    Args:
+        *roles: Allowed role names (e.g. ``""admin""``, ``""operator""``).
+
+    Returns:
+        A dependency function that raises 403 if the user's role is not in the list.
+    """"""
+    async def _check(current_user: User = Depends(get_current_user)) -> User:
+        if current_user.role not in roles:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail=f""Requires one of: {', '.join(roles)}"",
+            )
+        return current_user
+    return _check",,
+sabihul2110__SplitEase,get_current_user,backend/core/dependencies.py,"def get_current_user(token: str = Depends(oauth2_scheme)) -> dict:
+    """"""
+    Decodes the JWT, then confirms the session hasn't been revoked:
+      - user still exists (catches admin_wipe_app / delete_user)
+      - token_version still matches (catches admin_wipe_app /
+        reset_user_data / change_password)
+    Cached per user for _CACHE_TTL_SECONDS to keep DB hits low.
+    """"""
+    payload = decode_token(token)
+    user_id = payload.get(""user_id"")
+    if user_id is None:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail=""Invalid token."",
+        )
+
+    now = time.time()
+    cached = _token_version_cache.get(user_id)
+
+    if cached is None or (now - cached[1]) > _CACHE_TTL_SECONDS:
+        auth_state = user_repository.fetch_user_auth_state(user_id)
+        if auth_state is None:
+            _token_version_cache.pop(user_id, None)
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail=""Session no longer valid. Please log in again."",
+            )
+        current_version = auth_state[""token_version""]
+        _token_version_cache[user_id] = (current_version, now)
+    else:",,
+cortechx-team__fakty-ai,get_current_user,app/auth/session.py,"def get_current_user(
+    request: Request,
+    db: Session = Depends(get_db),
+) -> User:
+    token = request.cookies.get(settings.session_cookie_name)
+    claims = _decode(token) if token else None
+    if not claims:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail={""error"": {""code"": ""not_authenticated"", ""message"": ""Login required""}},
+        )
+    user = db.get(User, UUID(claims[""sub""]))
+    if user is None:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail={""error"": {""code"": ""not_authenticated"", ""message"": ""Session user not found""}},
+        )
+    return user",,
+alethical-org__alethical,get_db,alethical/db/session.py,"def get_db():
+    db: Session = get_session_factory()()
+    try:
+        yield db
+    finally:
+        db.close()",,
+moy-boy__agenticdb-registry,get_app_state,app/state.py,"def get_app_state(request: Request) -> AppState:
+    return request.app.state.app_state",,
+sudetufan__mebidai,get_db,backend/app/api/dependencies.py,"def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()",,
+cj-valentine__jacer,get_repository,backend/jacer/deps.py,"def get_repository() -> Repository:
+    """"""Resolve the active Repository adapter.
+
+    Selected via the `JACER_REPOSITORY` env var:
+
+      - `markdown` (default) — persists to disk as markdown files. Data
+        directory is `JACER_DATA_DIR` (default `./data`).
+      - `memory` — ephemeral, in-process. Used in tests and dev-only.
+    """"""
+    global _repository
+    if _repository is None:
+        kind = os.environ.get(""JACER_REPOSITORY"", ""markdown"")
+        if kind == ""memory"":
+            _repository = InMemoryRepository()
+        elif kind == ""markdown"":
+            data_dir = Path(os.environ.get(""JACER_DATA_DIR"", ""./data""))
+            _repository = MarkdownRepository(data_dir)
+        else:
+            raise ValueError(f""Unknown JACER_REPOSITORY: {kind!r}"")
+    return _repository",,
